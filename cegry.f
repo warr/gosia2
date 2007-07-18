@@ -11,6 +11,7 @@ C Uses global variables:
 C      AGELI  - angles of the Ge detectors
 C      BETAR  - recoil beta
 C      CNOR   - normalization factors
+C      CNOR1  - normalization factors (added for gosia2)
 C      CORF   - internal correction factors
 C      DEV    -
 C      DYEX   - error on experimental yield
@@ -41,6 +42,7 @@ C      LNORM  - normalization constant control
 C      LP2    - maximum number of matrix elements (500)
 C      LP6    - 32
 C      LP10   - 600
+C      MCFIX  - fixing parameter (added for gosia2)
 C      NANG   - number of gamma-ray detectors for each experiment
 C      NDST   - number of data sets
 C      NEXPT  - number of experiments
@@ -115,7 +117,8 @@ C      Iredv  -
       COMMON /BREC  / BETAR(50)
       COMMON /DIMX  / DIX(4) , ODL(200)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
-      COMMON /CINIT / CNOR(32,75) , INNR
+      COMMON /CINIT / CNOR(32,75) , CNOR1(32,75) , CNOR2(32,75) ,
+     &                INNR, MCFIX
       COMMON /PRT   / IPRM(20)
       COMMON /LIFE  / NLIFT
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
@@ -536,6 +539,7 @@ C      Iredv  -
       DO jj = 1 , NEXPT
          k = NDST(jj)
          DO jk = 1 , k
+            IF ( MCFIX .EQ. 0) CNOR(jk,jj) = CNOR1(jk,jj)
             Chilo = Chilo + partl(jk,jj,1)*LOG(CNOR(jk,jj))
      &              **2 + partl(jk,jj,2)*2.*LOG(CNOR(jk,jj))
             Chisq = Chisq + CNOR(jk,jj)*CNOR(jk,jj)*part(jk,jj,1)
