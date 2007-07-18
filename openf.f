@@ -39,11 +39,11 @@ C     Now open the file as long as it is not unit 25 or 26
       ELSE
          k = 0
       ENDIF
-      IF ( k.EQ.0 ) WRITE (6,99002) 'OPENED ' , name
-99002 FORMAT (1X,2A)
-      WRITE (6,99003) ' IO-num = ' , i , opt1 , opt2
-99003 FORMAT (1X,A,I4,2(1x,A))
+c      IF ( k.EQ.0 ) WRITE (6,99002) 'OPENED ' , name
+c99002 FORMAT (1X,2A)
+c      WRITE (6,99003) ' IO-num = ' , i , opt1 , opt2
+c99003 FORMAT (1X,A,I4,2(1x,A))
       IF ( k.EQ.0 ) GOTO 100
-      WRITE (6,99004) 'PROBLEMS OPENING ' , name , k
-99004 FORMAT (A,A,I6)
+c      WRITE (6,99004) 'PROBLEMS OPENING ' , name , k
+c99004 FORMAT (A,A,I6)
       END
