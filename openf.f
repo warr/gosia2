@@ -30,7 +30,7 @@ C zero, the function returns. It keeps looping until a unit zero is reached.
       IF ( j.EQ.3 ) opt1 = 'UNKNOWN'
       IF ( k.EQ.1 ) opt2 = 'FORMATTED'
       IF ( k.EQ.2 ) opt2 = 'UNFORMATTED'
-      READ 99001 , name ! name of file
+      READ (JZB, 99001) name ! name of file
 99001 FORMAT (A)
 
 C     Now open the file
