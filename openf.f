@@ -33,8 +33,12 @@ C zero, the function returns. It keeps looping until a unit zero is reached.
       READ (JZB, 99001) name ! name of file
 99001 FORMAT (A)
 
-C     Now open the file
-      OPEN (i,IOSTAT=k,FILE=name,STATUS=opt1,FORM=opt2)
+C     Now open the file as long as it is not unit 25 or 26
+      IF ( i.NE.25 .AND. i.NE.26 ) THEN
+         OPEN (i,IOSTAT=k,FILE=name,STATUS=opt1,FORM=opt2)
+      ELSE
+         k = 0
+      ENDIF
       IF ( k.EQ.0 ) WRITE (6,99002) 'OPENED ' , name
 99002 FORMAT (1X,2A)
       WRITE (6,99003) ' IO-num = ' , i , opt1 , opt2
