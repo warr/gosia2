@@ -103,6 +103,7 @@ C      Iredv  -
       INTEGER*4 NDST , NEXPT , nf , nf1 , ni , ni1 , NICC , NLIFT , 
      &          NMAX , NMAX1 , Nwyr , NYLDE
       CHARACTER*4 wupl , war
+      CHARACTER*4 op2 ! For gosia2
       DIMENSION part(32,50,2) , lic(32) , lth(500) , cnr(32,50) , 
      &          partl(32,50,2)
       COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,500) , 
@@ -141,6 +142,7 @@ C      Iredv  -
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
       COMMON /CCCDS / NDST(50)
 
+      op2 = '    '
       ifxd = 0
       tetrc = TREP(IEXP)
       IF ( Icall.EQ.4 .AND. IPRM(13).EQ.-2 ) THEN
@@ -205,7 +207,7 @@ C      Iredv  -
                ifxd = 0
                fm = (fi0+fi1)/2.
                IF ( Icall.EQ.4 ) ifxd = 1
-               CALL ANGULA(YGN,Idr,ifxd,fi0,fi1,tetrc,gth,figl,k)
+               CALL ANGULA(YGN,Idr,ifxd,fi0,fi1,tetrc,gth,figl,k,op2)
                IF ( IFMO.NE.0 ) THEN
                   id = ITMA(IEXP,k)
                   d = ODL(id)
@@ -216,7 +218,7 @@ C      Iredv  -
                   sf = d*d/rl/rl
                   thc = TACOS(rz/rl)
                   fic = ATAN2(ry,rx)
-                  CALL ANGULA(YGP,Idr,ifxd,fi0,fi1,tetrc,thc,fic,k)
+                  CALL ANGULA(YGP,Idr,ifxd,fi0,fi1,tetrc,thc,fic,k,op2)
                   DO ixl = 1 , Idr
                      ixm = KSEQ(ixl,3) ! Initial level of ixl'th decay
                      tfac = TAU(ixm)
@@ -418,7 +420,7 @@ C      Iredv  -
                gth = AGELI(IEXP,k,1)
                figl = AGELI(IEXP,k,2)
                fm = (fi0+fi1)/2.
-               CALL ANGULA(YGN,Idr,ifxd,fi0,fi1,tetrc,gth,figl,k)
+               CALL ANGULA(YGN,Idr,ifxd,fi0,fi1,tetrc,gth,figl,k, op2)
                IF ( IFMO.NE.0 ) THEN
                   id = ITMA(IEXP,k)
                   d = ODL(id)
@@ -429,7 +431,7 @@ C      Iredv  -
                   sf = d*d/rl/rl
                   thc = TACOS(rz/rl)
                   fic = ATAN2(ry,rx)
-                  CALL ANGULA(YGP,Idr,ifxd,fi0,fi1,tetrc,thc,fic,k)
+                  CALL ANGULA(YGP,Idr,ifxd,fi0,fi1,tetrc,thc,fic,k,op2)
                   DO ixl = 1 , Idr
                      ixm = KSEQ(ixl,3) ! Initial level of ixl'th decay
                      tfac = TAU(ixm)
