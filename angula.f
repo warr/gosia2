@@ -10,6 +10,7 @@ C
 C Uses global variables:
 C      BETAR  - recoil beta
 C      DELLA  -
+C      DSIGS  -
 C      ENDEC  -
 C      ENZ    -
 C      FP     -
@@ -18,7 +19,8 @@ C      IEXP   - experiment number
 C      ITMA   - identify detectors according to OP,GDET
 C      ITTE   - thick target experiment flag
 C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
-C      TAU    - 
+C      TAU    -
+C      TLBDG  - theta of particle detector
 C      ZETA   - various coefficients
 C
 C Formal parameters:
@@ -31,18 +33,23 @@ C      Trec   -
 C      Gth    -
 C      Figl   -
 C      Ngl    - detector number
+C      Op2    - option (either 'INTG' or not).
       
-      SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl)
+      SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
       REAL*8 AGELI , alab , arg , at , attl , BETAR , bt , CC , DELLA , 
      &       DELTA , EG , ENDEC , ENZ , EPS , EROOT , f , Fi0 , fi01 , 
      &       Fi1 , fi11
       REAL*8 FIEX , Figl , FP , GKP , Gth , Q , qv , sm , TAU , Trec , 
      &       Ygn , ylmr , ZETA
+      REAL*8 ttx , dsig , TETACM , TREP , DSIGS , XA , XA1 , EP , ! For gosia2
+     &       TLBDG, VINF ! For gosia2
       INTEGER*4 IAXS , Idr , IEXP , ifn , Iful , ig , il , inat , inx1 , 
      &          ipd , is , ITMA , ITTE , iu , ixs , j , ji , jj , jm , k
       INTEGER*4 KLEC , kq , KSEQ , l , lf , lf1 , LZETA , mind , NANG , 
      &          Ngl , NICC , nlv
+      INTEGER*4 NEXPT, IZ, IZ1 ! For gosia2
+      CHARACTER*4 Op2 ! For gosia2
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
      &          Ygn(500)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
@@ -56,6 +63,9 @@ C      Ngl    - detector number
       COMMON /CATLF / FP(4,500,3) , GKP(4,500,2) , KLEC(75)
       COMMON /BREC  / BETAR(50)
       COMMON /THTAR / ITTE(50)
+      COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
+      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) ,
+     &                TLBDG(50) , VINF(50)
       
       DO l = 1 , Idr
          nlv = KSEQ(l,3) ! Level number of l'th decay
@@ -142,5 +152,13 @@ C      Ngl    - detector number
                Ygn(l) = Ygn(l) + sm*qv
             ENDDO
          ENDIF
+      ENDDO
+      
+      IF ( Op2.EQ.'INTG') RETURN
+
+      dsig = DSIGS(IEXP)
+      ttx = TLBDG(IEXP) / 57.2957795
+      DO j = 1, Idr
+         YGN(j) = YGN(j) * dsig * SIN(ttx)
       ENDDO
       END
