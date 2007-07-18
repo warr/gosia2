@@ -90,6 +90,7 @@ C      Iredv  -
      &       TREP , UPL , VACDP , VINF , wf , XA , XA1 , XNOR , YEXP , 
      &       YGN , YGP , YNRM
       REAL*8 ZPOL
+      REAL*8 CNOR1 , CNOR2 ! For gosia2
       INTEGER*4 iabc , IAXS , IBYP , Icall , ICLUST , id , idc , Idr , 
      &          IDRN , IEXP , ifdu , IFMO , ifxd , IGRD , ii , ILE , 
      &          ile2 , IMIN , inclus , INM
@@ -104,6 +105,7 @@ C      Iredv  -
      &          na , NANG , NDIM
       INTEGER*4 NDST , NEXPT , nf , nf1 , ni , ni1 , NICC , NLIFT , 
      &          NMAX , NMAX1 , Nwyr , NYLDE
+      INTEGER*4 MCFIX ! For gosia2
       CHARACTER*4 wupl , war
       CHARACTER*4 op2 ! For gosia2
       DIMENSION part(32,50,2) , lic(32) , lth(500) , cnr(32,50) , 
