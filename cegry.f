@@ -545,7 +545,7 @@ C      Iredv  -
       Chisq = Chisq + sumpr
       Chilo = Chilo + sum3
       RETURN
-99012 FORMAT (1X,1I2,2X,32(1E8.2,1X))
+99012 FORMAT (1X,1I2,2X,32(1E10.4,1X))
 99013 FORMAT (6X,1I2,5X,1I2,7X,1F4.1,6X,1F4.1,9X,1F6.4,6X,1E9.4,6X,
      &        1E9.4,3X,1F6.1,5X,1F4.1,10X,1A4)
       END
