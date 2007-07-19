@@ -194,8 +194,6 @@ C      NMAX   - number of levels
 C      NMAX1  -
 C      NYLDE  - number of yields
 C      ODL    - distance from target to front face of detector
-C      PART   -
-C      PARTL  -
 C      PARX   - [for maps]
 C      PARXM  - [for maps]
 C      POWER  - x (N.B. here it is G(7))
