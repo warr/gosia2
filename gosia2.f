@@ -317,7 +317,7 @@ C      ZV     -
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , NYLDE , nz
       INTEGER*4 MCFIX , mdupa , nawr ! For gosia2
       INTEGER*4 mmmm , kkkk , mres1 , m25 , m26 , mrepf  ! For gosia2
-      INTEGER*4 mret , mawr , jkmx , jkmy ! For gosia2
+      INTEGER*4 mret , mawr , jkmx ! For gosia2
       LOGICAL ERR
       COMPLEX*16 ARM , EXPO
       CHARACTER*4 oph , op1 , opcja , op2
@@ -2516,10 +2516,10 @@ C        gosia used unit 7, but gosia2 uses 7 and 27.
 C---- gosia2 changes end
 C---- gosia2 changes start
 C        Added for gosia2
-         jkmy = 12
-         IF ( IBPS.EQ.1 ) jkmy = 32
+         irix = 12
+         IF ( IBPS.EQ.1 ) irix = 32
          DO kuku = 1 , MEMAX
-            WRITE (jkmy,*) ELM(kuku)
+            WRITE (irix,*) ELM(kuku)
          ENDDO
 C---- gosia2 changes end
          DO jj = 1 , 2
