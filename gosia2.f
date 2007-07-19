@@ -315,9 +315,9 @@ C      ZV     -
      &          nmaxh , nmemx , nnl , nogeli , npce , npce1 , npct , 
      &          npct1 , npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , NYLDE , nz
-      INTEGER*4 MCFIX , mdupa , nawr ! For gosia2
+      INTEGER*4 MCFIX , nawr ! For gosia2
       INTEGER*4 mmmm , kkkk , mres1 , m25 , m26 , mrepf  ! For gosia2
-      INTEGER*4 mret , mawr , jkmx ! For gosia2
+      INTEGER*4 mret , mawr ! For gosia2
       LOGICAL ERR
       COMPLEX*16 ARM , EXPO
       CHARACTER*4 oph , op1 , opcja , op2
@@ -2493,27 +2493,23 @@ C---- gosia2 changes end
             ENDDO
             INTERV(IEXP) = intvh
          ENDDO
-         REWIND 7
-C---- gosia2 changes start
-C        gosia used unit 7, but gosia2 uses 7 and 27.
-         REWIND 27
-         mdupa = 7
-         IF ( IBPS.EQ.1 ) mdupa = 27
+         irix = 7
+         IF ( IBPS.EQ.1 ) irix = 27 ! gosia2 uses unit 7 for target, 27 for beam
+         REWIND irix
          DO iuy = 1 , 6
-            WRITE (mdupa,*) (XIR(iuy,jj),jj=1,NEXPT)
-            WRITE (mdupa,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
+            WRITE (irix,*) (XIR(iuy,jj),jj=1,NEXPT)
+            WRITE (irix,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
          ENDDO
          DO jj = 1 , NEXPT
             DO jk = 1 , 4
                DO kuku = 1 , 6
-                  WRITE (mdupa,*) (PARXM(jj,jk,jl,kuku),jl=1,10)
+                  WRITE (irix,*) (PARXM(jj,jk,jl,kuku),jl=1,10)
                ENDDO
             ENDDO
             DO jk = 1 , 12
-               WRITE (mdupa,*) (PARX(jj,jk,jl),jl=1,5)
+               WRITE (irix,*) (PARX(jj,jk,jl),jl=1,5)
             ENDDO
          ENDDO
-C---- gosia2 changes end
 C---- gosia2 changes start
 C        Added for gosia2
          irix = 12
@@ -2528,27 +2524,23 @@ C---- gosia2 changes end
             ENDDO
          ENDDO
       ELSE ! iobl .lt. 1
-         REWIND 7
-C---- gosia2 changes start
-C        gosia used unit 7, but gosia2 uses 7 and 27.
-         REWIND 27
-         jkmx = 7
-         IF ( IBPS.EQ.1 ) jkmx = 27
+         irix = 7
+         IF ( IBPS.EQ.1 ) irix = 27 ! gosia2 uses unit 7 for target, 27 for beam
+         REWIND irix
          DO iuy = 1 , 6
-            READ (jkmx,*) (XIR(iuy,jj),jj=1,NEXPT)
-            READ (jkmx,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
+            READ (irix,*) (XIR(iuy,jj),jj=1,NEXPT)
+            READ (irix,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
          ENDDO
          DO jj = 1 , NEXPT
             DO jk = 1 , 4
                DO kuku = 1 , 6
-                  READ (jkmx,*) (PARXM(jj,jk,jl,kuku),jl=1,10)
+                  READ (irix,*) (PARXM(jj,jk,jl,kuku),jl=1,10)
                ENDDO
             ENDDO
             DO jk = 1 , 12
-               READ (jkmx,*) (PARX(jj,jk,jl),jl=1,5)
+               READ (irix,*) (PARX(jj,jk,jl),jl=1,5)
             ENDDO
          ENDDO
-C---- gosia2 changes end
          DO jgs = 1 , MEMAX
             DO jgr = 1 , 7
                QAPR(jgs,1,jgr) = 0.
