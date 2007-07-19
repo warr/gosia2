@@ -84,7 +84,7 @@ C      CNOR2  - normalization factors for projectile (for gosia2)
 C      CORF   - internal correction factors
 C      DEVD   -
 C      DEVU   -
-C      DIPOL  - 
+C      DIPOL  - E1 polarization parameter
 C      DIX    - Ge parameters (inner & outer radius, length, distance)
 C      DLOCK  - limit derivative below which matrix element is fixed if LOCKS=1
 C      DS     -
