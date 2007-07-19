@@ -34,6 +34,7 @@ C      Bten   -
       DO i = 1 , ix
          ZETA(i) = 0.
       ENDDO
+
       DO i = 2 , NMAX
          DO kp = 1 , 7 , 2
             k = kp - 1
@@ -64,7 +65,7 @@ C      Bten   -
                      ENDDO ! Loop over lpp
                   ENDIF ! if iaxs .ne.0 .or. lp.eq.1
                ENDDO ! Loop over lp
-            ENDIF ! if k .eq. 0
+            ENDIF ! If k .eq. 0
          ENDDO ! Loop over kp
       ENDDO ! Loop over i
       END
