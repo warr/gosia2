@@ -378,7 +378,7 @@ c            WRITE (*,99010) Chisq
          ELMH(j) = ELM(j)
       ENDDO
 
-C     Find steppest gradient
+C     Find steepest gradient
       istec = istec + 1
       cmax = 0.
       INTR = 0
