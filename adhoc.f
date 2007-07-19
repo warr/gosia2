@@ -27,7 +27,7 @@ C      IPRM   - printing flags (see suboption PRT of OP,CONT)
 C      ITMA   - identify detectors according to OP,GDET
 C      ITS    -
 C      IVAR   - indicates a limit or correlation is set
-C      JZB    - unit to read from (was * for gosia1)
+C      JZB    - unit to read from
 C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
 C      LIFCT  - index for lifetimes
 C      MEMAX  - number of matrix elements
@@ -63,16 +63,15 @@ C Here we parse the input of the OP,YIEL command and store the values.
      &       EP , ODL , Q
       REAL*8 SPIN , TAU , TIMEL , TLBDG , UPL , VINF , wamx , wbra , 
      &       wdl , wlf , XA , XA1 , YEXP , YGN , YGP , YNRM , ZPOL
-      INTEGER*4 IAMX , IAMY , iax , IBRC , Idr , IDRN , iexp1 , IFMO , 
-     &          ILE , ilft , IMIX , iosr , ipri , IPRM , ISO , isrt1 , 
-     &          ITMA , ITS , iuf , IVAR
-      INTEGER*4 IY , Iyr , IZ , IZ1 , jic , jicc , juf , KSEQ , lb , 
-     &          li , licc , LIFCT , llia , LMAXE , lxt , MAGEXC , MEM , 
-     &          MEMAX , MEMX6 , n1
+      INTEGER*4 IAMX , IAMY , iax , IBPS , IBRC , Idr , IDRN , iexp1 ,
+     &          IFMO , ILE , ilft , IMIX , iosr , ipri , IPRM , ISO ,
+     &          isrt1 , ITMA , ITS , iuf , IVAR
+      INTEGER*4 IY , Iyr , IZ , IZ1 , jic , jicc , juf , JZB , KSEQ , 
+     &          lb , li , licc , LIFCT , llia , LMAXE , lxt , MAGEXC ,
+     &          MEM , MEMAX , MEMX6 , n1
       INTEGER*4 n2 , NAMX , NANG , NBRA , ndas , NDL , NDST , ndtp , 
      &          NEXPT , Nfd , NICC , nistr , NLIFT , ns1 , ns2 , ns3 , 
      &          ns4 , Ntap , nvare , NYLDE
-      INTEGER*4 IBPS, JZB ! For gosia2
       CHARACTER*4 Oph
       COMMON /CCCDS / NDST(50)
       COMMON /DIMX  / DIX(4) , ODL(200)
