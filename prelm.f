@@ -15,7 +15,7 @@ C      ELML   - lower limits on matrix elements
 C      ELMU   - upper limits on matrix elements
 C      IFAC   -
 C      IVAR   - indicates a limit or correlation is set
-C      JZB    - unit to read from (added for gosia2)
+C      JZB    - unit to read from
 C      LDNUM  - number of matrix elements with each multipolarity populating levels
 C      LEAD   - pair of levels involved in each matrix element
 C      MULTI  - number of matrix elements having a given multipolarity
@@ -27,14 +27,13 @@ C      Iop    - print flag (controls what is written to output).
  
       SUBROUTINE PRELM(Iop)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , b , DIPOL , ELM , ELML , ELMU , EN ,
-     &       pv , SA , SPIN , ste , ZPOL
+      REAL*8 ACCA , ACCUR , b , DIPOL , ELM , ELML , ELMU , EN , pv , 
+     &       SA , SPIN , ste , ZPOL
       REAL*8 ELM25 , ELM26 ! Added for gosia2
-      INTEGER*4 inx , Iop , ISO , isp , IVAR , j , k , kk , l , LAMDA , 
-     &          LAMMAX , LDNUM , LEAD , LMAXE , m , MAGEXC , MEMAX , 
-     &          MEMX6 , MULTI , NDIM
+      INTEGER*4 IBPS , inx , Iop , ISO , isp , IVAR , j , JZB , k , kk ,
+     &          l , LAMDA , LAMMAX , LDNUM , LEAD , LMAXE , m , MAGEXC ,
+     &          MEMAX , MEMX6 , MULTI , NDIM
       INTEGER*4 NMAX , NMAX1
-      INTEGER*4 IBPS , JZB ! Added for gosia2
       CHARACTER*3 wrn
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
@@ -43,8 +42,8 @@ C      Iop    - print flag (controls what is written to output).
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /SWITCH/ JZB , IBPS ! Added for gosia2
-      COMMON /RESC  / ELM25(500) , ELM26(500)
+      COMMON /SWITCH/ JZB , IBPS
+      COMMON /RESC  / ELM25(500) , ELM26(500) ! Added for gosia2
 
       inx = 0
       WRITE (22,99001)
