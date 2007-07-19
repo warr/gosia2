@@ -7,7 +7,7 @@ C
 C Purpose: open files to specified units.
 C
 C Uses global variables:
-C      JZB    - stream to read from
+C      JZB    - unit to read from
 C
 C The function reads three integers, the first of which is the unit to use for
 C the open statement. The second is 1 if the file is required to exist already,
@@ -18,19 +18,18 @@ C zero, the function returns. It keeps looping until a unit zero is reached.
  
       SUBROUTINE OPENF
       IMPLICIT NONE
-      INTEGER*4 i , j , k
-      INTEGER*4 IBPS , JZB ! For gosia2
+      INTEGER*4 i , IBPS , j , JZB , k
       CHARACTER name*60 , opt1*20 , opt2*20
       COMMON /SWITCH/ JZB , IBPS
 
- 100  READ (JZB, *) i , j , k ! unit, old/new/unknown, formatted/unformatted
+ 100  READ (JZB,*) i , j , k ! unit, old/new/unknown, formatted/unformatted
       IF ( i.EQ.0 ) RETURN
       IF ( j.EQ.1 ) opt1 = 'OLD'
       IF ( j.EQ.2 ) opt1 = 'NEW'
       IF ( j.EQ.3 ) opt1 = 'UNKNOWN'
       IF ( k.EQ.1 ) opt2 = 'FORMATTED'
       IF ( k.EQ.2 ) opt2 = 'UNFORMATTED'
-      READ (JZB, 99001) name ! name of file
+      READ (JZB,99001) name ! name of file
 99001 FORMAT (A)
 
 C     Now open the file as long as it is not unit 25 or 26
