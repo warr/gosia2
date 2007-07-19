@@ -106,8 +106,7 @@ C      Iredv  -
       INTEGER*4 NDST , NEXPT , nf , nf1 , ni , ni1 , NICC , NLIFT , 
      &          NMAX , NMAX1 , Nwyr , NYLDE
       INTEGER*4 MCFIX ! For gosia2
-      CHARACTER*4 wupl , war
-      CHARACTER*4 op2 ! For gosia2
+      CHARACTER*4 wupl , war , op2
       DIMENSION part(32,50,2) , lic(32) , lth(500) , cnr(32,50) , 
      &          partl(32,50,2)
       COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,500) , 
@@ -425,7 +424,7 @@ C      Iredv  -
                gth = AGELI(IEXP,k,1)
                figl = AGELI(IEXP,k,2)
                fm = (fi0+fi1)/2.
-               CALL ANGULA(YGN,Idr,ifxd,fi0,fi1,tetrc,gth,figl,k, op2)
+               CALL ANGULA(YGN,Idr,ifxd,fi0,fi1,tetrc,gth,figl,k,op2)
                IF ( IFMO.NE.0 ) THEN
                   id = ITMA(IEXP,k)
                   d = ODL(id)
