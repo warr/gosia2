@@ -67,7 +67,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
      &          IFMO , ILE , ilft , IMIX , iosr , ipri , IPRM , ISO ,
      &          isrt1 , ITMA , ITS , iuf , IVAR
       INTEGER*4 IY , Iyr , IZ , IZ1 , jic , jicc , juf , JZB , KSEQ , 
-     &          lb , li , licc , LIFCT , llia , LMAXE , lxt , MAGEXC ,
+     &          lb , li , licc , LIFCT , llia , LMAXE , lxt , MAGEXC , 
      &          MEM , MEMAX , MEMX6 , n1
       INTEGER*4 n2 , NAMX , NANG , NBRA , ndas , NDL , NDST , ndtp , 
      &          NEXPT , Nfd , NICC , nistr , NLIFT , ns1 , ns2 , ns3 , 
