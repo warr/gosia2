@@ -280,7 +280,7 @@ C      ZV     -
      &          iopri , iosr , IP , IPATH , ipd , iph
       INTEGER*4 IPI , ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
      &          ipri , IPRM , IPS1 , IRAWEX , irea , irep , irfix , 
-     &          ISEX , isip , iske , iskf , ISKIN
+     &          irix , ISEX , isip , iske , iskf , ISKIN
       INTEGER*4 isko , iskok , ISMAX , ISO , isoh , ispa , ispb , ITMA , 
      &          itno , itp , ITS , ITTE , iuy , iva , iva1 , IVAR , 
      &          ivarh , ivari , ivrh , IWF
@@ -315,7 +315,7 @@ C      ZV     -
      &          nmaxh , nmemx , nnl , nogeli , npce , npce1 , npct , 
      &          npct1 , npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , NYLDE , nz
-      INTEGER*4 MCFIX , irix , mdupa , nawr ! For gosia2
+      INTEGER*4 MCFIX , mdupa , nawr ! For gosia2
       INTEGER*4 mmmm , kkkk , mres1 , m25 , m26 , mrepf  ! For gosia2
       INTEGER*4 mret , mawr , jkmx , jkmy ! For gosia2
       LOGICAL ERR
@@ -746,15 +746,12 @@ C        Treat OP,TROU (troubleshooting)
 
 C        Treat OP,REST (restart)
          ELSEIF ( op2.EQ.'REST' ) THEN
-C---- gosia2 changes start
-C           gosia used unit 12, but gosia2 uses 12 and 32
             irix = 12
-            IF ( IBPS.EQ.1 ) irix = 32
+            IF ( IBPS.EQ.1 ) irix = 32 ! gosia2 uses unit 12 for target, unit 32 for beam
             REWIND irix
-C---- gosia2 changes end
             memax1 = MEMAX + 1
             DO lkj = 1 , MEMAX
-               READ (irix,*) ELM(lkj) ! changed from 12 to irix for gosia2
+               READ (irix,*) ELM(lkj)
             ENDDO
             DO lkj = 1 , memax1
                READ (JZB,*) lkj1 , xlk
@@ -914,7 +911,9 @@ C              Treat OP,MINI
 
 C              Treat OP,THEO
                ELSEIF ( op2.EQ.'THEO' ) THEN
-                  REWIND (12)
+                  irix = 12
+                  IF ( IBPS.EQ.1 ) irix = 32 ! gosia2 uses unit 12 for target, unit 32 for beam
+                  REWIND (irix)
                   ibaf = 1
                   DO jb = 1 , LP1 ! LP1 = 50
                      DO lb = 1 , 2
@@ -971,11 +970,9 @@ C              Treat OP,THEO
                         ELM(kb) = ELMT(xi1,xi2,lamd,nb1,nb2,xk1,xk2,xm1,
      &                            xm2,xm3)
                         IF ( ABS(ELM(kb)).LT.1E-6 ) ELM(kb) = 1.E-6
-C---- gosia2 changes start
                         irix = 12
-                        IF ( IBPS.EQ.1 ) irix = 32
+                        IF ( IBPS.EQ.1 ) irix = 32 ! gosia2 uses unit 12 for target, unit 32 for beam
                         WRITE (irix,*) ELM(kb)
-C---- gosia2 changes end
                      ENDIF
                   ENDDO
                   GOTO 100 ! End of OP,THEO
@@ -2625,15 +2622,12 @@ C---- gosia2 changes end
       DO iva = 1 , LP1 ! LP1 = 50
         JSKIP(iva) = 1
       ENDDO
-C---- gosia2 changes start
-C     gosia used unit 12, but gosia2 uses 12 and 32
       irix = 12
-      IF ( IBPS.EQ.2 ) irix = 32
+      IF ( IBPS.EQ.2 ) irix = 32 ! gosia2 uses unit 12 for target, unit 32 for beam
       REWIND irix
       DO lkj = 1 , MEMAX
          WRITE (irix,*) ELM(lkj)
       ENDDO
-C---- gosia2 changes end
       IF ( ifm.EQ.1 ) CALL PRELM(3)
       IF ( ifm.NE.1 ) GOTO 430 ! changed for gosia2
       GOTO 2000
