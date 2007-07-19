@@ -898,7 +898,7 @@ C              Treat OP,COUL
 
 C              Treat OP,EXIT
                IF ( op2.EQ.'EXIT' ) THEN
-                  GOTO 430 ! code moved out of if statement for gosia2
+                  GOTO 430 ! End of OP,EXIT
                  
 C              Treat OP,MINI
                ELSEIF ( op2.EQ.'MINI' ) THEN
@@ -2695,9 +2695,8 @@ C---- gosia2 changes end
  2000 WRITE (22,99047)
 99047 FORMAT (15X,'********* END OF EXECUTION **********')
 
+C     Handle OP,EXIT
 C---- gosia2 changes start
-C     This code was originally in the if op2 .eq. 'EXIT' section
-C     however, it has changed somewhat.
  430  IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
       IF ( mret.EQ.1 ) THEN
         IF ( mrepf.EQ.1 ) THEN
@@ -2715,6 +2714,7 @@ C     however, it has changed somewhat.
         STOP
       ENDIF
       IF ( IPRM(18).NE.0 ) CALL PTICC(idr)
+C---- gosia2 changes end
       IF ( oph.EQ.'GOSI' ) THEN
          IF ( lfagg.NE.1 ) THEN
             IF ( IMIN.NE.0 ) THEN
@@ -2776,7 +2776,6 @@ C     however, it has changed somewhat.
          ENDIF
       ENDIF
       GOTO 1900 ! End of OP,EXIT
-C---- gosia2 changes start
 
 99048 FORMAT (1X//50X,'CALCULATED YIELDS'//5X,'EXPERIMENT ',1I2,2X,
      &        'DETECTOR ',1I2/5X,'ENERGY ',1F10.3,1X,'MEV',2X,'THETA ',
