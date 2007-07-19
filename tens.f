@@ -59,12 +59,12 @@ C      Bten   -
                               lx = -lx
                               lxx = lx - 1
                               GOTO 2
-                           ENDIF
-                        ENDIF
-                     ENDDO
-                  ENDIF
-               ENDDO
-            ENDIF
-         ENDDO
-      ENDDO
+                           ENDIF ! if lx .ge. 0
+                        ENDIF ! if lpp .ne. 1
+                     ENDDO ! Loop over lpp
+                  ENDIF ! if iaxs .ne.0 .or. lp.eq.1
+               ENDDO ! Loop over lp
+            ENDIF ! if k .eq. 0
+         ENDDO ! Loop over kp
+      ENDDO ! Loop over i
       END
