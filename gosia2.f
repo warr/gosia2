@@ -2267,7 +2267,8 @@ C---- gosia2 changes end
             ENDIF
             GOTO 100
          ENDIF ! if (op2 .NE. 'GOSI') if statement
-      ENDIF ! if ( obl.LT.1 ) if statement
+      ENDIF ! if ( iobl.LT.1 ) if statement
+
  1300 IF ( iobl.GE.1 ) THEN
          ient = 1
          icg = 2
@@ -2556,6 +2557,8 @@ C---- gosia2 changes end
             ENDDO
          ENDDO
       ENDIF
+
+C     Handle map
       IF ( IPRM(12).NE.0 .OR. op2.EQ.'MAP ' ) THEN ! changed for gosia2
          IPRM(12) = 0
          DO jex = 1 , NEXPT
@@ -2641,6 +2644,8 @@ C---- gosia2 changes start
       mawr = mawr + 1
       IF ( JZB.EQ.25 ) ccch1 = chisq ! But we never use ccch1
       IF ( JZB.EQ.26 ) ccch2 = chisq ! But we never use ccch2
+      IF ( JZB.EQ.26 ) WRITE (*,*) 'ITER = ' , mawr/2 , ' CHISQ1 = ' ,
+     &                   ccch1 , ' CHISQ2 = ' , ccch2
       chir = chir + chisq
       IF ( JZB.EQ.26 ) cht = ABS(chir-chp)
       IF ( JZB.EQ.26 .AND. cht.LT.0.1 ) mret = 0
