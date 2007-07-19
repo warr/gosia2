@@ -114,6 +114,7 @@ C      HLMLM  -
 C      IAMX   -
 C      IAMY   -
 C      IAX    - axial symmetry flag
+C      IBPS   - target/projectile switch (for gosia2)
 C      ICLUST -
 C      ICS    -
 C      IDIVE  - number of subdivisions
@@ -132,7 +133,6 @@ C      IP     - table of prime numbers
 C      IPRM   - various flags to control output
 C      IPS1   - terminate after calculating and storing internal correction factors
 C      IRAWEX - flag to indicate raw uncorrected yield
-C      IBPS   - target/projectile switch
 C      ISEX   -
 C      ISKIN  - kinematic flag (0,1)
 C      ISMAX  -
