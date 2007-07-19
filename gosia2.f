@@ -256,9 +256,9 @@ C      ZV     -
       REAL*8 summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , test , 
      &       TETACM , tetrc , tfac , thc , THICK , TIMEL , title , 
      &       TLBDG , tmn , tmx , todfi , TREP
-      REAL*8 tta , tth , tting , ttttt , txx , u , UPL , VACDP , val , 
-     &       VINF , waga , wph , wpi , WSIXJ , wth , wthh , WTHREJ , 
-     &       XA , XA1
+      REAL*8 tta , tth , tting , ttttt , txx , u , UPL , VACDP , 
+     &       val , VINF , waga , wph , wpi , WSIXJ , wth , wthh , 
+     &       WTHREJ , XA , XA1
       REAL*8 xep , XI , xi1 , xi2 , XIR , xk1 , xk2 , xl1 , xlevb , 
      &       xlk , xm1 , xm2 , xm3 , XNOR , xtest , XV , xw , xx , xxi , 
      &       ycorr
@@ -341,7 +341,7 @@ C      ZV     -
       COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
      &                ENZ(200)
       COMMON /CINIT / CNOR(32,75) , CNOR1(32,75) , CNOR2(32,75) , INNR ,
-     &                MCFIX
+     &                MCFIX ! Changed in gosia2
       COMMON /XRA   / SE
       COMMON /HHH   / HLM(500)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
@@ -419,6 +419,7 @@ C      ZV     -
       DATA (tau2(k,7),k=1,10)/89.809 , 56.338 , 27.009 , 62.966 , 
      &      22.933 , 11.334 , 4.540 , 1.813 , .8020 , .5900/
 
+C---- gosia2 changes start
 C     Read target/projectile switch and first option from standard input
       READ (*,*) IBPS
       READ (*,99001) op1 , op2
@@ -460,6 +461,7 @@ C     Initialize normalization to 1.
       IBPS = IBPS - 1
       JZB = 25
       IF ( IBPS.EQ.1 ) JZB = 26
+C---- gosia2 changes end
 
 C     Initialise variables
       IBYP = 0
@@ -505,14 +507,14 @@ C     Initialise variables
       INTR = 0
       LNY = 0
       JENTR = 0
-      lp0 = 50000
+      lp0 = 50000 ! Size of ZETA array
       ICS = 0
       LP1 = 50 ! Maximum number of experiments
-      LP2 = 500
-      LP3 = 75
+      LP2 = 500 ! Maximum number of matrix elements
+      LP3 = 75 ! Maximum number of levels
       LP4 = 1500
       LP6 = 32
-      LP7 = lp0 - 4900
+      LP7 = lp0 - 4900 ! Start of collision coefficients in ZETA
       LP8 = LP3*28 + 1
       LP9 = lp0 - LP3*28
       LP10 = 600
@@ -520,6 +522,14 @@ C     Initialise variables
       LP12 = 365 ! Maximum number of steps of omega (dimension of ADB, SH, CH)
       LP13 = LP9 + 1
       LP14 = 4900
+C---- gosia2 changes start
+C     This initialisation is now done earlier
+C      DO i = 1 , LP3 ! LP3 = 75
+C         DO j = 1 , LP6 ! LP6 = 32
+C           CNOR(j,i) = 1.
+C         ENDDO
+C      ENDDO
+C---- gosia2 changes end
       DO i = 1 , LP1 ! LP1 = 50
          jpin(i) = 0
          iecd(i) = 0
@@ -547,14 +557,14 @@ C     Initialise variables
             CC(i,j) = 0.
          ENDDO
       ENDDO
-      IPRM(2) = 0
-      IPRM(4) = 0
-      IPRM(5) = 1
+      IPRM(2) = 0 ! added for gosia2
+      IPRM(4) = 0 ! changed from -2 to 0 for gosia2
+      IPRM(5) = 1 ! changed from 11111 to 1 for gosia2
       IPRM(6) = 11111
       IPRM(7) = 0
-      IPRM(11) = 0
-      IPRM(12) = 0
-      IPRM(14) = 0
+      IPRM(11) = 0 ! added for gosia2
+      IPRM(12) = 0 ! added for gosia2
+      IPRM(14) = 0 ! added for gosia2
       IPRM(16) = 0
       IPRM(17) = 0
       IPRM(18) = 0
@@ -646,6 +656,7 @@ C     Initialise variables
 
 C     Start reading input file.
  100  READ (JZB,99001) op1 , op2
+99001 FORMAT (1A3,1A4)
       
       IF ( op1.EQ.'OP, ' ) THEN
          IF ( op2.EQ.'GOSI' ) oph = op2
@@ -723,34 +734,39 @@ C         Treat OP,RAND (randomise matrix elements)
             WRITE (22,99007)
 99007       FORMAT (1X///5X,'MATRIX ELEMENTS RANDOMIZED...'///)
             CALL PRELM(2)
-            GOTO 100
+            GOTO 100 ! End of OP,RAND
 
 C        Treat OP,TROU (troubleshooting)
          ELSEIF ( op2.EQ.'TROU' ) THEN
             ITS = 1
             READ (JZB,*) kmat , rlr
-            GOTO 100
+            GOTO 100 ! End of OP,TROU
 
 C        Treat OP,REST (restart)
          ELSEIF ( op2.EQ.'REST' ) THEN
+C---- gosia2 changes start
+C           gosia used unit 12, but gosia2 uses 12 and 32
             irix = 12
             IF ( IBPS.EQ.1 ) irix = 32
             REWIND irix
+C---- gosia2 changes end
             memax1 = MEMAX + 1
             DO lkj = 1 , MEMAX
-               READ (irix,*) ELM(lkj)
+               READ (irix,*) ELM(lkj) ! changed from 12 to irix for gosia2
             ENDDO
             DO lkj = 1 , memax1
                READ (JZB,*) lkj1 , xlk
                IF ( lkj1.EQ.0 ) GOTO 120
-               IF ( mres1.EQ.0 ) ELM(lkj1) = xlk
+               IF ( mres1.EQ.0 ) ELM(lkj1) = xlk ! condition added for gosia2
             ENDDO
+C---- gosia2 changes start
  120        DO lkj = 1 , MEMAX
                IF ( mres1.EQ.0 .AND. JZB.EQ.25 ) ELM25(lkj) = ELM(lkj)
                IF ( mres1.EQ.0 .AND. JZB.EQ.26 ) ELM26(lkj) = ELM(lkj)
             ENDDO
             IF ( JZB.EQ.26 ) mres1 = 1
             WRITE (22,99008)
+C---- gosia2 changes end
 99008       FORMAT (1X///5X,'*****',2X,
      &              'RESTART-MATRIX ELEMENTS OVERWRITTEN',2X,'*****'///)
             DO kk = 1 , MEMAX
@@ -775,8 +791,8 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                   ENDIF
                ENDIF
             ENDDO
-            CALL PRELM(4)
-            GOTO 100
+            CALL PRELM(4) ! changed from 2 to 4 for gosia2
+            GOTO 100 ! End of OP,REST
 
 C        Treat other options
          ELSE
@@ -790,12 +806,14 @@ C           Treat OP,RE,F (release F)
 C           Treat OP,ERRO (calculate errors)
             IF ( op2.EQ.'ERRO' ) THEN
                READ (JZB,*) idf , ms , mend , irep , ifc , remax
+C---- gosia2 changes start
                MCFIX = 0
                DO mmmm = 1 , 32
                  DO kkkk = 1 , 50
                    READ (13,*) CNOR1(mmmm,kkkk)
                  ENDDO
                ENDDO
+C---- gosia2 changes end
                rem = LOG(remax)
                LOCKS = 0
                LOCKF = 0
@@ -828,6 +846,8 @@ C           Treat OP,ERRO (calculate errors)
                   ENDDO
                   inko = inn
                   IF ( irep.NE.2 ) THEN
+C---- gosia2 changes start
+C                    Unit changed from 3 to 33 in gosia2
                      WRITE (33,*) NMAX , MEMAX , inpo , inko
                      DO inn = 1 , NMAX
                         WRITE (33,*) inn , SPIN(inn) , EN(inn)
@@ -837,6 +857,7 @@ C           Treat OP,ERRO (calculate errors)
                      ENDDO
                      DO inn = 1 , MEMAX
                         WRITE (33,*) inn , ELM(inn)
+C---- gosia2 changes end
                      ENDDO
                   ENDIF
                ENDIF
@@ -852,13 +873,13 @@ C           Treat OP,ERRO (calculate errors)
                IF ( IMIN.EQ.0 ) CALL CMLAB(0,dsig,ttttt)
                IF ( ERR ) GOTO 2000
                IF ( IMIN.NE.0 ) GOTO 400
-               GOTO 1300
+               GOTO 1300 ! End of OP,ERRO
 
 C           Treat OP,RE,C (release C)
             ELSEIF ( op2.EQ.'RE,C' ) THEN
                jfre = 1
                irfix = 0
-               GOTO 1000
+               GOTO 1000 ! End of OP,RE,C
 
 C           Treat OP,TITL (title)
             ELSEIF ( op2.EQ.'TITL' ) THEN
@@ -866,7 +887,7 @@ C           Treat OP,TITL (title)
 99009          FORMAT (20A4)
                WRITE (22,99010) (title(k),k=1,20)
 99010          FORMAT (10X,20A4/10X,100('-'))
-               GOTO 100
+               GOTO 100 ! End of OP,TITL
 
             ELSE
 
@@ -878,7 +899,7 @@ C              Treat OP,COUL
 
 C              Treat OP,EXIT
                IF ( op2.EQ.'EXIT' ) THEN
-                  GOTO 430
+                  GOTO 430 ! code moved out of if statement for gosia2
                  
 C              Treat OP,MINI
                ELSEIF ( op2.EQ.'MINI' ) THEN
@@ -948,17 +969,19 @@ C              Treat OP,THEO
                         ELM(kb) = ELMT(xi1,xi2,lamd,nb1,nb2,xk1,xk2,xm1,
      &                            xm2,xm3)
                         IF ( ABS(ELM(kb)).LT.1E-6 ) ELM(kb) = 1.E-6
+C---- gosia2 changes start
                         irix = 12
                         IF ( IBPS.EQ.1 ) irix = 32
                         WRITE (irix,*) ELM(kb)
+C---- gosia2 changes end
                      ENDIF
                   ENDDO
-                  GOTO 100
+                  GOTO 100 ! End of OP,THEO
 
 C              Treat OP,YIEL
                ELSEIF ( op2.EQ.'YIEL' ) THEN
                   CALL ADHOC(oph,idr,nfd,ntap,iyr)
-                  GOTO 100
+                  GOTO 100 ! End of OP,YIEL
 
 C              Treat OP,INTG
                ELSEIF ( op2.EQ.'INTG' ) THEN
@@ -1069,7 +1092,7 @@ C              Treat OP,INTG
                                     fm = (fi0+fi1)/2.
                                     figl = AGELI(IEXP,ijan,2)
                                     CALL ANGULA(YGN,idr,1,fi0,fi1,tetrc,
-     &                                 gth,figl,ijan,op2)
+     &                                  gth,figl,ijan,op2) ! extra parameter for gosia2
                                     IF ( IFMO.NE.0 ) THEN
                                        id = ITMA(IEXP,ijan)
                                        d = ODL(id)
@@ -1083,7 +1106,7 @@ C              Treat OP,INTG
                                        thc = TACOS(rz/rl)
                                        fic = ATAN2(ry,rx)
                                        CALL ANGULA(YGP,idr,1,fi0,fi1,
-     &                                    tetrc,thc,fic,ijan,op2)
+     &                                    tetrc,thc,fic,ijan,op2) ! extra parameter for gosia2
                                        DO ixl = 1 , idr
                                          ixm = KSEQ(ixl,3)
                                          tfac = TAU(ixm)
@@ -1379,15 +1402,15 @@ C              Treat OP,INTG
                         ENDDO
                      ENDDO
                   ENDIF
-                  GOTO 100
+                  GOTO 100 ! End of OP,INTG
 
 C              Treat OP,CORR
                ELSEIF ( op2.EQ.'CORR' ) THEN
                   CALL READY(idr,ntap,0)
-                  REWIND 33
+                  REWIND 33 ! changed unit from 3 to 33 for gosia2
                   REWIND 15
                   REWIND 4
-                  GOTO 1200
+                  GOTO 1200 ! End of OP,CORR
                ELSE
 
 C                 Treat OP,POIN
@@ -1415,7 +1438,7 @@ C                 Treat OP,SIXJ
                            ENDDO
                         ENDDO
                      ENDDO
-                     GOTO 2000
+                     GOTO 2000 ! End of OP,SIXJ
 
 C                 Treat OP,RAW (raw uncorreected gamma yields)
                   ELSEIF ( op2.EQ.'RAW ' ) THEN
@@ -1467,7 +1490,7 @@ C                    Read input from standard input
 
 C                 Treat OP,MAP
                   ELSEIF ( op2.EQ.'MAP ' ) THEN
-                     GOTO 1200
+                     GOTO 1200 ! End of OP,MAP
                   ENDIF
                ENDIF
             ENDIF
@@ -1587,8 +1610,10 @@ C     Treat suboption ME (matrix elements)
             IF ( la.GT.LMAXE .AND. la.LE.6 ) LMAXE = la
  250     ENDDO
  300     MEMAX = indx
+C---- gosia2 changes start
          IF ( JZB.EQ.25 ) m25 = memax ! But we never use m25
          IF ( JZB.EQ.26 ) m26 = memax ! or m26
+C---- gosia2 changes end
          IF ( la.GT.6 ) MAGEXC = 1
          memx4 = MULTI(1) + MULTI(2) + MULTI(3) + MULTI(4)
          MEMX6 = memx4 + MULTI(5) + MULTI(6)
@@ -1727,7 +1752,8 @@ C     Else we don't recognize the suboption
          GOTO 2000
       ENDIF
       GOTO 200 ! Get next suboption
-      
+
+C     Handle OP,ERRO      
  400  IF ( ICS.EQ.1 ) THEN
          REWIND 11
          DO kh1 = 1 , LP4
@@ -1754,6 +1780,8 @@ C     Else we don't recognize the suboption
          IFBFL = 1
          IF ( irep.NE.2 ) GOTO 700
          IF ( iosr.EQ.0 ) GOTO 700
+C---- gosia2 changes start
+C        Unit changed from 3 to 33 for gosia2
          REWIND 33
          READ (33,*) ll , mm , kk , inn
          DO inn = 1 , ll
@@ -1772,6 +1800,7 @@ C     Else we don't recognize the suboption
          ELSE
             READ (33,*) kk , ll , yyy
             READ (33,*) (SA(mm),mm=1,MEMAX)
+C---- gosia2 changes end
             GOTO 450
          ENDIF
       ELSE
@@ -1890,8 +1919,11 @@ C     Else we don't recognize the suboption
 99033          FORMAT (10X,'ME=',1I3,5X,'NO FREE MATRIX ELEMENTS')
                IF ( mm.NE.0 ) THEN
                   KFERR = 1
+C---- gosia2 changes end
+C                 Unit changed from 3 to 33 for gosia2
                   IF ( iosr.EQ.1 ) WRITE (33,*) kh , kh
                   IF ( iosr.EQ.1 ) WRITE (33,*) kh , ij , ELM(kh)
+C---- gosia2 changes end
                   LOCKS = 1
                   DLOCK = .05
                   CALL MINI(chiss,-1.D0,2,.0001D0,1000,idr,100000.D0,0,
@@ -1918,7 +1950,7 @@ C     Else we don't recognize the suboption
       ENDIF
       IF ( iosr.NE.0 ) THEN
          im = 0
-         WRITE (33,*) im , im
+         WRITE (33,*) im , im ! Unit changed from 3 to 33 for gosia2
       ENDIF
       GOTO 600
 
@@ -2047,7 +2079,7 @@ C     Else we don't recognize the suboption
                      figl = AGELI(IEXP,jgl,2)
                      fm = (fi0+fi1)/2.
                      CALL ANGULA(YGN,idr,1,fi0,fi1,ttttt,gth,figl,jgl,
-     &                  op2)
+     &                  op2) ! extra parameter for gosia2
                      IF ( IFMO.NE.0 ) THEN
                         id = ITMA(IEXP,jgl)
                         d = ODL(id)
@@ -2061,7 +2093,7 @@ C     Else we don't recognize the suboption
                         sf = d*d/rl/rl
                         fic = ATAN2(ry,rx)
                         CALL ANGULA(YGP,idr,1,fi0,fi1,ttttt,thc,fic,jgl,
-     &                     op2)
+     &                     op2) ! extra parameter for gosia2
                         DO ixl = 1 , idr
                            ixm = KSEQ(ixl,3)
                            tfac = TAU(ixm)
@@ -2103,6 +2135,14 @@ C     Else we don't recognize the suboption
      &                    WRITE (22,99048) IEXP , jgl1 , EP(IEXP) , 
      &                    TLBDG(IEXP)
                      jmm = 0
+C---- gosia2 changes start
+C                    ttttx = TLBDG(IEXP)/57.2957795
+C                    YGN(IDRN) = YGN(IDRN)*dsig*SIN(ttttx)
+C                    DO jyi = 1 , idr
+C                      IF ( jyi.NE.IDRN ) YGN(jyi) = YGN(jyi)
+C     &                      *dsig*SIN(ttttx)
+C---- gosia2 changes end
+                     ENDDO
                      DO jyi = 1 , idr
                         ni = KSEQ(jyi,3)
                         nf = KSEQ(jyi,4)
@@ -2115,7 +2155,7 @@ C     Else we don't recognize the suboption
                               jmm = jmm + 1
                               CORF(jmm,1) = DBLE(ni)
                               CORF(jmm,2) = DBLE(nf)
-                              CORF(jmm,3) = YGN(jyi)
+                              CORF(jmm,3) = YGN(jyi) ! changed for gosia2
                               IF ( YGN(jyi).GE.YGN(IDRN) ) CORF(jmm,4)
      &                             = CORF(jmm,3)/20.
                               IF ( YGN(jyi).LT.YGN(IDRN) ) CORF(jmm,4)
@@ -2178,6 +2218,8 @@ C     Else we don't recognize the suboption
                            ENDIF
                         ENDIF
                         jgl1 = jgl1 + 1
+C---- gosia2 changes start
+C                       Unit changed from 3 to 33 in gosia2
                         READ (33,*) ne , na , zp , ap , xep , nval ,
      &                              waga
                         WRITE (4,*) ne , na , zp , ap , EP(IEXP) , 
@@ -2190,6 +2232,7 @@ C     Else we don't recognize the suboption
                         DO itp = 1 , nval
                            READ (33,*) ns1 , ns2 , fiex1(1,1,1) , 
      &                                fiex1(1,1,2)
+C---- gosia2 changes end
                            ltrn = IY(ile1+itp-1,jgl1)
                            IF ( ltrn.LT.1000 ) THEN
                               ns1 = KSEQ(ltrn,3)
@@ -2202,18 +2245,18 @@ C     Else we don't recognize the suboption
                               ns1 = ns1 + KSEQ(ltrn2,3)
                               ns2 = ns2 + KSEQ(ltrn2,4)
                            ENDIF
-                           ycorr = YEXP(jgl1,ile1+itp-1)
+                           ycorr = YEXP(jgl1,ile1+itp-1) ! gosia multiplied by cnst here, gosia2 does not
                            WRITE (4,*) ns1 , ns2 , ycorr , 
-     &                                 DYEX(jgl1,ile1+itp-1)
+     &                                 DYEX(jgl1,ile1+itp-1) ! gosia multiplied by cnst here, gosia2 does not
                            WRITE (22,99039) ns1 , ns2 , 
      &                            CORF(ile1+itp-1,jgl1) , ycorr , 
      &                            ycorr/CORF(ile1+itp-1,jgl1)
 99039                      FORMAT (5X,I4,5X,I4,3X,E8.3,4X,E8.3,4X,E8.3)
-                        ENDDO
- 1206                ENDDO
-                  ENDIF
+                        ENDDO ! Loop over itp
+ 1206                ENDDO ! Loop over jgl
+                  ENDIF ! if ( op2.EQ. 'CORR')
                ENDIF
-            ENDDO
+            ENDDO ! Loop over jexp
             IF ( op2.EQ.'STAR' ) oph = op2
             IF ( op2.NE.'STAR' ) THEN
                IF ( op2.EQ.'CORR' ) THEN
@@ -2223,8 +2266,8 @@ C     Else we don't recognize the suboption
                ENDIF
             ENDIF
             GOTO 100
-         ENDIF
-      ENDIF
+         ENDIF ! if (op2 .NE. 'GOSI') if statement
+      ENDIF ! if ( obl.LT.1 ) if statement
  1300 IF ( iobl.GE.1 ) THEN
          ient = 1
          icg = 2
@@ -2426,10 +2469,10 @@ C     Else we don't recognize the suboption
                            PARXM(IEXP,3,jk,kk) = acof*(2.*s22-51.*s21)
                            PARXM(IEXP,4,jk,kk) = bcof*(101.*s21-3.*s22)
                         ENDIF
-                     ENDDO
-                  ENDDO
+                     ENDDO ! Loop over jk
+                  ENDDO ! Loop over jd
                ENDIF
-            ENDDO
+            ENDDO ! Loop over kk
             EMMA(IEXP) = emhl1
             NMAX = nmaxh
             SPIN(1) = sh1
@@ -2452,6 +2495,8 @@ C     Else we don't recognize the suboption
             INTERV(IEXP) = intvh
          ENDDO
          REWIND 7
+C---- gosia2 changes start
+C        gosia used unit 7, but gosia2 uses 7 and 27.
          REWIND 27
          mdupa = 7
          IF ( IBPS.EQ.1 ) mdupa = 27
@@ -2469,18 +2514,24 @@ C     Else we don't recognize the suboption
                WRITE (mdupa,*) (PARX(jj,jk,jl),jl=1,5)
             ENDDO
          ENDDO
+C---- gosia2 changes end
+C---- gosia2 changes start
+C        Added for gosia2
          jkmy = 12
          IF ( IBPS.EQ.1 ) jkmy = 32
          DO kuku = 1 , MEMAX
             WRITE (jkmy,*) ELM(kuku)
          ENDDO
+C---- gosia2 changes end
          DO jj = 1 , 2
             DO jj1 = 1 , LP1 ! LP1 = 50
                IDIVE(jj1,jj) = 1
             ENDDO
          ENDDO
-      ELSE
+      ELSE ! iobl .lt. 1
          REWIND 7
+C---- gosia2 changes start
+C        gosia used unit 7, but gosia2 uses 7 and 27.
          REWIND 27
          jkmx = 7
          IF ( IBPS.EQ.1 ) jkmx = 27
@@ -2498,13 +2549,14 @@ C     Else we don't recognize the suboption
                READ (jkmx,*) (PARX(jj,jk,jl),jl=1,5)
             ENDDO
          ENDDO
+C---- gosia2 changes end
          DO jgs = 1 , MEMAX
             DO jgr = 1 , 7
                QAPR(jgs,1,jgr) = 0.
             ENDDO
          ENDDO
       ENDIF
-      IF ( IPRM(12).NE.0 .OR. op2.EQ.'MAP ' ) THEN
+      IF ( IPRM(12).NE.0 .OR. op2.EQ.'MAP ' ) THEN ! changed for gosia2
          IPRM(12) = 0
          DO jex = 1 , NEXPT
             DO lex = 1 , 6
@@ -2541,7 +2593,7 @@ C     Else we don't recognize the suboption
       IF ( op2.NE.'GOSI' .AND. op2.NE.'ERRO' ) GOTO 100
       IF ( op2.EQ.'ERRO' ) GOTO 400
 
- 1400 mret = ABS(mret)
+ 1400 mret = ABS(mret) ! Added for gosia2
       DO kh1 = 1 , MEMAX
          HLM(kh1) = ELM(kh1)
       ENDDO
@@ -2549,9 +2601,12 @@ C     Else we don't recognize the suboption
       DO kh1 = 1 , MEMAX
          IVAR(kh1) = ivarh(kh1)
       ENDDO
+C---- gosia2 changes start
       IF ( nawr.EQ.1 ) THEN
         MCFIX = 0
+C---- gosia2 changes end
         CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
+C---- gosia2 changes start
       IF ( IBPS.EQ.0 ) THEN
         JZB = 25
         mrepf = 1
@@ -2560,20 +2615,25 @@ C     Else we don't recognize the suboption
         IF ( IBPS.EQ.1 ) JZB = 26 ! But IBPS must be 2 here! Ooops!
         IF ( IBPS.EQ.1 ) GOTO 2200
       ENDIF
+C---- gosia2 changes end
       IF ( IPS1.EQ.0 ) GOTO 2000
       IMIN = IMIN + 1
       DO iva = 1 , LP1 ! LP1 = 50
         JSKIP(iva) = 1
       ENDDO
+C---- gosia2 changes start
+C     gosia used unit 12, but gosia2 uses 12 and 32
       irix = 12
       IF ( IBPS.EQ.2 ) irix = 32
       REWIND irix
       DO lkj = 1 , MEMAX
          WRITE (irix,*) ELM(lkj)
       ENDDO
+C---- gosia2 changes end
       IF ( ifm.EQ.1 ) CALL PRELM(3)
-      IF ( ifm.NE.1 ) GOTO 430
+      IF ( ifm.NE.1 ) GOTO 430 ! changed for gosia2
       GOTO 2000
+C---- gosia2 changes start
       ENDIF
 
       MCFIX = 1
@@ -2605,6 +2665,7 @@ C        Set CNOR1 to the average of CNOR1 and CNOR2
       IF ( IBPS.EQ.0 .AND. JZB.EQ.25 ) JZB = 26
       IF ( IBPS.NE.0 ) JZB = 25
       GOTO 2200 ! Back to beginning
+C---- gosia2 changes end
 
 
  1500 WRITE (22,99043)
@@ -2634,6 +2695,9 @@ C        Set CNOR1 to the average of CNOR1 and CNOR2
  2000 WRITE (22,99047)
 99047 FORMAT (15X,'********* END OF EXECUTION **********')
 
+C---- gosia2 changes start
+C     This code was originally in the if op2 .eq. 'EXIT' section
+C     however, it has changed somewhat.
  430  IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
       IF ( mret.EQ.1 ) THEN
         IF ( mrepf.EQ.1 ) THEN
@@ -2712,8 +2776,8 @@ C        Set CNOR1 to the average of CNOR1 and CNOR2
          ENDIF
       ENDIF
       GOTO 1900 ! End of OP,EXIT
+C---- gosia2 changes start
 
-99001 FORMAT (1A3,1A4)
 99048 FORMAT (1X//50X,'CALCULATED YIELDS'//5X,'EXPERIMENT ',1I2,2X,
      &        'DETECTOR ',1I2/5X,'ENERGY ',1F10.3,1X,'MEV',2X,'THETA ',
      &        1F7.3,1X,'DEG'//5X,'NI',5X,'NF',5X,'II',5X,'IF',5X,
