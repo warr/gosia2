@@ -2141,8 +2141,8 @@ C                    YGN(IDRN) = YGN(IDRN)*dsig*SIN(ttttx)
 C                    DO jyi = 1 , idr
 C                      IF ( jyi.NE.IDRN ) YGN(jyi) = YGN(jyi)
 C     &                      *dsig*SIN(ttttx)
+C                    ENDDO
 C---- gosia2 changes end
-                     ENDDO
                      DO jyi = 1 , idr
                         ni = KSEQ(jyi,3)
                         nf = KSEQ(jyi,4)
