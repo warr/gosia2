@@ -419,55 +419,7 @@ C      ZV     -
       DATA (tau2(k,7),k=1,10)/89.809 , 56.338 , 27.009 , 62.966 , 
      &      22.933 , 11.334 , 4.540 , 1.813 , .8020 , .5900/
 
-C     Initialise variables
-C---- gosia2 changes start
-      IUNIT3 = 33
-C     IBPS = 0
-C     JZB = 5
-C     Read target/projectile switch and first option from standard input
-      READ (*,*) IBPS
-      READ (*,99001) op1 , op2
-
-C     Open files
-      CALL OPENF1
-      nawr = 0
-
-C     Use input unit 25 for target and 26 for projectile
-      IBPS = IBPS - 1
-      JZB = 25
-      IF ( IBPS.EQ.1 ) JZB = 26
-
-C     Initialize normalization to 1.
-      DO i = 1 , 75
-        DO j = 1 , 32
-          CNOR1(j,i) = 1.
-          CNOR2(j,i) = 1.
-          CNOR(j,i) = 1.
-        ENDDO
-      ENDDO
-
-      MCFIX = 1
-      mres1 = 0
-      mrepf = 0
-      mret = -1
-      chir = 0.
-      mawr = 0
-
- 2200 DO i = 1 , 50
-        LIFCT(i) = 0
-      ENDDO
-
-      chp = chir
-      IF ( mret.EQ.1 .AND. JZB.EQ.26 ) chir = 0.
-      REWIND 25
-      REWIND 26
-      READ (JZB,*) IBPS
-      IBPS = IBPS - 1
-      JZB = 25
-      IF ( IBPS.EQ.1 ) JZB = 26
-C---- gosia2 changes end
-
-      IBYP = 0
+C     Initialize prime numbers
       IP(1) = 2
       IP(2) = 3
       IP(3) = 5
@@ -494,6 +446,73 @@ C---- gosia2 changes end
       IP(24) = 89
       IP(25) = 97
       IP(26) = 101
+
+C     Initialize pointers
+      lp0 = 50000 ! Size of ZETA array
+      LP1 = 50 ! Maximum number of experiments
+      LP2 = 500 ! Maximum number of matrix elements
+      LP3 = 75 ! Maximum number of levels
+      LP4 = 1500
+      LP6 = 32
+      LP7 = lp0 - 4900 ! Start of collision coefficients in ZETA
+      LP8 = LP3*28 + 1
+      LP9 = lp0 - LP3*28
+      LP10 = 600
+      LP11 = LP8 - 1
+      LP12 = 365 ! Maximum number of steps of omega (dimension of ADB, SH, CH)
+      LP13 = LP9 + 1
+      LP14 = 4900
+
+C---- gosia2 changes start
+      IUNIT3 = 33
+C     IBPS = 0
+C     JZB = 5
+C     Read target/projectile switch and first option from standard input
+      READ (*,*) IBPS
+      READ (*,99001) op1 , op2
+
+C     Open files
+      CALL OPENF1
+      nawr = 0
+
+C     Use input unit 25 for target and 26 for projectile
+      IBPS = IBPS - 1
+      JZB = 25
+      IF ( IBPS.EQ.1 ) JZB = 26
+C---- gosia2 changes end
+
+C     Initialize normalization to 1.
+      DO i = 1 , LP3 ! LP3 = 75
+        DO j = 1 , LP6 ! LP6 = 32
+          CNOR(j,i) = 1.
+          CNOR1(j,i) = 1. ! Added for gosia2
+          CNOR2(j,i) = 1. ! Added for gosia2
+        ENDDO
+      ENDDO
+
+C---- gosia2 changes start
+      MCFIX = 1
+      mres1 = 0
+      mrepf = 0
+      mret = -1
+      chir = 0.
+      mawr = 0
+
+ 2200 DO i = 1 , 50
+        LIFCT(i) = 0
+      ENDDO
+
+      chp = chir
+      IF ( mret.EQ.1 .AND. JZB.EQ.26 ) chir = 0.
+      REWIND 25
+      REWIND 26
+      READ (JZB,*) IBPS
+      IBPS = IBPS - 1
+      JZB = 25
+      IF ( IBPS.EQ.1 ) JZB = 26
+C---- gosia2 changes end
+
+      IBYP = 0
       INHB = 0
       BEQ = -983872.
       ipinf = 0
@@ -510,29 +529,8 @@ C---- gosia2 changes end
       INTR = 0
       LNY = 0
       JENTR = 0
-      lp0 = 50000 ! Size of ZETA array
       ICS = 0
-      LP1 = 50 ! Maximum number of experiments
-      LP2 = 500 ! Maximum number of matrix elements
-      LP3 = 75 ! Maximum number of levels
-      LP4 = 1500
-      LP6 = 32
-      LP7 = lp0 - 4900 ! Start of collision coefficients in ZETA
-      LP8 = LP3*28 + 1
-      LP9 = lp0 - LP3*28
-      LP10 = 600
-      LP11 = LP8 - 1
-      LP12 = 365 ! Maximum number of steps of omega (dimension of ADB, SH, CH)
-      LP13 = LP9 + 1
-      LP14 = 4900
-C---- gosia2 changes start
-C     This initialisation is now done earlier
-C      DO i = 1 , LP3 ! LP3 = 75
-C         DO j = 1 , LP6 ! LP6 = 32
-C           CNOR(j,i) = 1.
-C         ENDDO
-C      ENDDO
-C---- gosia2 changes end
+
       DO i = 1 , LP1 ! LP1 = 50
          jpin(i) = 0
          iecd(i) = 0
