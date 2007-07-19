@@ -2673,6 +2673,7 @@ C---- gosia2 changes end
       ENDIF
  2000 WRITE (22,99047)
 99047 FORMAT (15X,'********* END OF EXECUTION **********')
+      STOP
 
 C     Handle OP,EXIT
 C---- gosia2 changes start
