@@ -282,7 +282,7 @@ C      ZV     -
      &          ipri , IPRM , IPS1 , IRAWEX , irea , irep , irfix , 
      &          irix , ISEX , isip , iske , iskf , ISKIN
       INTEGER*4 isko , iskok , ISMAX , ISO , isoh , ispa , ispb , ITMA , 
-     &          itno , itp , ITS , ITTE , IUNIT3 , iuy , iva , iva1 ,
+     &          itno , itp , ITS , ITTE , IUNIT3 , iuy , iva , iva1 , 
      &          IVAR , ivarh , ivari , ivrh , IWF
       INTEGER*4 ixj , ixl , ixm , IY , iyr , IZ , IZ1 , izcap , j , ja , 
      &          jan , jan1 , jb , jb1 , jb2 , jd , jde , jdy , je , 
@@ -464,7 +464,6 @@ C     Initialize pointers
       LP14 = 4900 ! Maximum number of collision coefficients
 
 C---- gosia2 changes start
-      IUNIT3 = 33
 C     IBPS = 0
 C     JZB = 5
 C     Read target/projectile switch and first option from standard input
@@ -483,14 +482,15 @@ C---- gosia2 changes end
 
 C     Initialize normalization to 1.
       DO i = 1 , LP3 ! LP3 = 75
-        DO j = 1 , LP6 ! LP6 = 32
-          CNOR(j,i) = 1.
-          CNOR1(j,i) = 1. ! Added for gosia2
-          CNOR2(j,i) = 1. ! Added for gosia2
-        ENDDO
+         DO j = 1 , LP6 ! LP6 = 32
+            CNOR(j,i) = 1.
+            CNOR1(j,i) = 1. ! Added for gosia2
+            CNOR2(j,i) = 1. ! Added for gosia2
+         ENDDO
       ENDDO
 
 C---- gosia2 changes start
+      IUNIT3 = 33
       MCFIX = 1
       mres1 = 0
       mrepf = 0
@@ -895,7 +895,7 @@ C              Treat OP,COUL
 C              Treat OP,EXIT
                IF ( op2.EQ.'EXIT' ) THEN
                   GOTO 430 ! End of OP,EXIT
-                 
+
 C              Treat OP,MINI
                ELSEIF ( op2.EQ.'MINI' ) THEN
                   READ (JZB,*) imode , nptl , chiok , conu , xtest , 
@@ -908,7 +908,7 @@ C              Treat OP,MINI
 C              Treat OP,THEO
                ELSEIF ( op2.EQ.'THEO' ) THEN
                   irix = 12
-                  IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for target,  32 for beam
+                  IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for target, 32 for beam
                   REWIND (irix)
                   ibaf = 1
                   DO jb = 1 , LP1 ! LP1 = 50
@@ -967,7 +967,7 @@ C              Treat OP,THEO
      &                            xm2,xm3)
                         IF ( ABS(ELM(kb)).LT.1E-6 ) ELM(kb) = 1.E-6
                         irix = 12
-                        IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for target,  32 for beam
+                        IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for target, 32 for beam
                         WRITE (irix,*) ELM(kb)
                      ENDIF
                   ENDDO
@@ -993,7 +993,7 @@ C              Treat OP,INTG
                      enh = EP(lx)
                      DO mpin = 1 , lpin
                         IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
-                           READ (JZB,*) ne , ntt , emn , emx , wth ,
+                           READ (JZB,*) ne , ntt , emn , emx , wth , 
      &                          wph , wthh
                            mfla = 1
                            CALL COORD(wth,wph,wthh,ntt,0,pfi,wpi,tth,lx,
@@ -1087,7 +1087,7 @@ C              Treat OP,INTG
                                     fm = (fi0+fi1)/2.
                                     figl = AGELI(IEXP,ijan,2)
                                     CALL ANGULA(YGN,idr,1,fi0,fi1,tetrc,
-     &                                  gth,figl,ijan,op2)
+     &                                 gth,figl,ijan,op2)
                                     IF ( IFMO.NE.0 ) THEN
                                        id = ITMA(IEXP,ijan)
                                        d = ODL(id)
@@ -1234,8 +1234,8 @@ C              Treat OP,INTG
      &                       CALL COORD(wth,wph,wthh,npct1,1,pfi,wpi,
      &                       TLBDG(lx),lx,tmn,tmx)
                         IF ( iecd(lx).NE.1 ) THEN
-                             IF ( mfla.EQ.1 ) READ (JZB,*)
-     &                            (pfi(j),j=1,npct1)
+                           IF ( mfla.EQ.1 ) READ (JZB,*)
+     &                          (pfi(j),j=1,npct1)
                         ENDIF
                         het = het/57.2957795
                         DO j = 1 , npce1
@@ -1485,7 +1485,7 @@ C                    Read input from standard input
 
 C                 Treat OP,MAP
                   ELSEIF ( op2.EQ.'MAP ' ) THEN
-                     GOTO 1200 ! End of OP,MAP
+                     GOTO 1200 ! End of OP,MAP 
                   ENDIF
                ENDIF
             ENDIF
@@ -1509,7 +1509,7 @@ C     Treat suboption LEVE (levels)
      &           'ENERGY(MEV)')
          ndima = NDIM + 1
          DO k = 1 , ndima
-           READ (JZB,*) ipo1 , ipo2 , po2 , po1 ! leve number, parity, spin, energy
+            READ (JZB,*) ipo1 , ipo2 , po2 , po1 ! leve number, parity, spin, energy
             IF ( ipo1.EQ.0 ) GOTO 200
             IF ( ipo1.EQ.1 .AND. ABS(po2).LT.1.E-6 ) ISO = 0
             NMAX = NMAX + 1
@@ -1727,7 +1727,7 @@ C     Treat suboption EXPT
          G(7) = .6             ! POWER
          DO k = 1 , NEXPT ! Zn, An, E_p, THETA_lab, M_c, M_A, IAX, phi1, phi2, ikin, ln
             READ (JZB,*) IZ1(k) , XA1(k) , EP(k) , TLBDG(k) , EMMA(k) ,
-     &           MAGA(k) , IAXS(k) , fi0 , fi1 , ISKIN(k) , LNORM(k)         
+     &           MAGA(k) , IAXS(k) , fi0 , fi1 , ISKIN(k) , LNORM(k)
             ITTE(k) = 0
             IF ( XA1(k).LT.0. ) ITTE(k) = 1
             XA1(k) = ABS(XA1(k))
@@ -2216,7 +2216,7 @@ C---- gosia2 changes end
      &                          'YCOR',8X,'COR.F'/)
                         ile1 = ILE(jgl1)
                         DO itp = 1 , nval
-                           READ (IUNIT3,*) ns1 , ns2 , fiex1(1,1,1) ,
+                           READ (IUNIT3,*) ns1 , ns2 , fiex1(1,1,1) , 
      &                                     fiex1(1,1,2)
                            ltrn = IY(ile1+itp-1,jgl1)
                            IF ( ltrn.LT.1000 ) THEN
@@ -2599,7 +2599,7 @@ C---- gosia2 changes end
       IF ( IPS1.EQ.0 ) GOTO 2000
       IMIN = IMIN + 1
       DO iva = 1 , LP1 ! LP1 = 50
-        JSKIP(iva) = 1
+         JSKIP(iva) = 1
       ENDDO
       irix = 12
       IF ( IBPS.EQ.2 ) irix = 32 ! unit 12 for target, 32 for beam
@@ -2724,7 +2724,7 @@ C---- gosia2 changes end
                   WRITE (22,99012) iva , TAU(iva)
 99012             FORMAT (7X,1I2,7X,1E10.4)
                   GOTO 124
- 122              WRITE (22,99013) iva , TAU(iva) , TIMEL(1,iva1) ,
+ 122              WRITE (22,99013) iva , TAU(iva) , TIMEL(1,iva1) , 
      &                   TIMEL(2,iva1)
 99013             FORMAT (7X,1I2,7X,1E10.4,5X,1E10.4,4X,1E10.4)
  124              IF ( iva.EQ.NMAX ) THEN
@@ -2735,7 +2735,7 @@ C---- gosia2 changes end
      &         ,//)
                         WRITE (22,99015)
 99015                   FORMAT (5x,'NI ','NF ',' EXP. ME   ',
-     &                          'CURRENT ME','   SIGMA')
+     &                     'CURRENT ME','   SIGMA')
                         DO kq = 1 , NAMX
                            ni = IAMY(kq,1)
                            nf = IAMY(kq,2)
@@ -2744,9 +2744,9 @@ C---- gosia2 changes end
                            esd = EAMX(kq,1)
                            dsd = EAMX(kq,2)
                            WRITE (22,99016) ni , nf , esd , ess , 
-     &                            (ess-esd)/dsd
+     &                        (ess-esd)/dsd
 99016                      FORMAT (5x,1I2,1x,1I2,1x,1F9.4,1x,1F9.4,1x,
-     &                             1F9.4)
+     &                              1F9.4)
                         ENDDO
                      ENDIF
                   ENDIF
