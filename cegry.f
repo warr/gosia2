@@ -50,8 +50,6 @@ C      NLIFT  - number of lifetimes
 C      NMAX   - number of levels
 C      NYLDE  - number of yields
 C      ODL    - distance from target to front face of detector
-C      PART   -
-C      PARTL  -
 C      SPIN   - spin of level
 C      SUBCH1 -
 C      SUBCH2 -
