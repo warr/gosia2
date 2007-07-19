@@ -23,6 +23,7 @@ C      INTR   -
 C      IPRM   - printing flags (see suboption PRT of OP,CONT)
 C      IPS1   - terminate after calculating and writing correction factors
 C      ITAK2  -
+C      IUNIT3 - unit for TAPE3
 C      IVAR   - fixed, correlated or free flag
 C      JENTR  -
 C      KFERR  - error flag for minimization
@@ -65,12 +66,12 @@ C don't go outside the limits specified by the user.
      &       f2 , flt , GRAD
       REAL*8 gradp , HLMLM , ht , p , q , rfk , SA , sel , shl , sumg1 , 
      &       sumg2 , sumht , UPL , uxa , xkat , Xtest , YEXP , YNRM
-      INTEGER*4 i , icl1 , icl2 , icount , ICS , Idr , IDRN , IFBFL , 
-     &          iht , iin , ILE , Imode , indx1 , INM , inmx , ino , 
-     &          INTR , ipas , ipm , IPRM
-      INTEGER*4 Ips , IPS1 , Is , istec , ITAK2 , itf , IVAR , IY , j , 
-     &          jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , jnm , 
-     &          jpr , jsa , jst
+      INTEGER*4 i , IBPS , icl1 , icl2 , icount , ICS , Idr , IDRN , 
+     &          IFBFL , iht , iin , ILE , Imode , indx1 , INM , inmx , 
+     &          ino , INTR , ipas , ipm , IPRM
+      INTEGER*4 Ips , IPS1 , Is , istec , ITAK2 , itf , IUNIT3 , IVAR , 
+     &          IY , j , jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , 
+     &          jnm , jpr , jsa , jst , JZB
       INTEGER*4 KFERR , kh2 , kkk , KVAR , l , LFL , LFL1 , LFL2 , 
      &          LMAXE , lnm , LNY , LOCKF , LOCKS , LP1 , LP10 , LP11 , 
      &          LP12 , LP13 , LP14 , LP2
@@ -97,6 +98,7 @@ C don't go outside the limits specified by the user.
       COMMON /ERRAN / KFERR
       COMMON /LOGY  / LNY , INTR , IPS1
       COMMON /ERCAL / JENTR , ICS
+      COMMON /SWITCH/ JZB , IBPS , IUNIT3
 
 C     Initialise gradp to zero for each matrix element
       DO i = 1 , MEMAX
@@ -248,7 +250,7 @@ C     Write correction factors
          ENDDO
          IF ( KFERR.EQ.1 ) THEN
             GRAD(Jjh) = 0.
-            IF ( Is.EQ.1 .AND. icount.EQ.1 ) WRITE (33,*) ! gosia2 uses 33 where gosia used 3
+            IF ( Is.EQ.1 .AND. icount.EQ.1 ) WRITE (IUNIT3,*)
      &           (NWR*GRAD(jnm),jnm=1,MEMAX)
          ENDIF
          IF ( metf.EQ.1 .AND. ipas.EQ.2 ) THEN

@@ -18,9 +18,9 @@ C zero, the function returns. It keeps looping until a unit zero is reached.
  
       SUBROUTINE OPENF
       IMPLICIT NONE
-      INTEGER*4 i , IBPS , j , JZB , k
+      INTEGER*4 i , IBPS , IUNIT3 , j , JZB , k
       CHARACTER name*60 , opt1*20 , opt2*20
-      COMMON /SWITCH/ JZB , IBPS
+      COMMON /SWITCH/ JZB , IBPS , IUNIT3
 
  100  READ (JZB,*) i , j , k ! unit, old/new/unknown, formatted/unformatted
       IF ( i.EQ.0 ) RETURN

@@ -140,6 +140,7 @@ C      ISO    -
 C      ITMA   - identify detectors according to OP,GDET
 C      ITS    -
 C      ITTE   - thick target experiment flag
+C      IUNIT3 - unit for TAPE3
 C      IVAR   - indicates a limit or correlation is set
 C      IWF    -
 C      IY     - index for yields
@@ -282,8 +283,8 @@ C      ZV     -
      &          ipri , IPRM , IPS1 , IRAWEX , irea , irep , irfix , 
      &          irix , ISEX , isip , iske , iskf , ISKIN
       INTEGER*4 isko , iskok , ISMAX , ISO , isoh , ispa , ispb , ITMA , 
-     &          itno , itp , ITS , ITTE , iuy , iva , iva1 , IVAR , 
-     &          ivarh , ivari , ivrh , IWF
+     &          itno , itp , ITS , ITTE , IUNIT3 , iuy , iva , iva1 ,
+     &          IVAR , ivarh , ivari , ivrh , IWF
       INTEGER*4 ixj , ixl , ixm , IY , iyr , IZ , IZ1 , izcap , j , ja , 
      &          jan , jan1 , jb , jb1 , jb2 , jd , jde , jdy , je , 
      &          JENTR
@@ -398,7 +399,7 @@ C      ZV     -
       COMMON /ERCAL / JENTR , ICS
       COMMON /LOGY  / LNY , INTR , IPS1
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
-      COMMON /SWITCH/ JZB , IBPS
+      COMMON /SWITCH/ JZB , IBPS , IUNIT3
       COMMON /RESC  / ELM25(500) , ELM26(500) ! For gosia2
       DATA (eng(k),k=1,10)/.05 , .06 , .08 , .1 , .15 , .2 , .3 , .5 , 
      &      1. , 1.5/
@@ -421,6 +422,7 @@ C      ZV     -
 
 C     Initialise variables
 C---- gosia2 changes start
+      IUNIT3 = 33
 C     IBPS = 0
 C     JZB = 5
 C     Read target/projectile switch and first option from standard input
@@ -845,18 +847,15 @@ C---- gosia2 changes end
                   ENDDO
                   inko = inn
                   IF ( irep.NE.2 ) THEN
-C---- gosia2 changes start
-C                    Unit changed from 3 to 33 in gosia2
-                     WRITE (33,*) NMAX , MEMAX , inpo , inko
+                     WRITE (IUNIT3,*) NMAX , MEMAX , inpo , inko
                      DO inn = 1 , NMAX
-                        WRITE (33,*) inn , SPIN(inn) , EN(inn)
+                        WRITE (IUNIT3,*) inn , SPIN(inn) , EN(inn)
                      ENDDO
                      DO inn = 1 , MEMAX
-                        WRITE (33,*) inn , LEAD(1,inn) , LEAD(2,inn)
+                        WRITE (IUNIT3,*) inn , LEAD(1,inn) , LEAD(2,inn)
                      ENDDO
                      DO inn = 1 , MEMAX
-                        WRITE (33,*) inn , ELM(inn)
-C---- gosia2 changes end
+                        WRITE (IUNIT3,*) inn , ELM(inn)
                      ENDDO
                   ENDIF
                ENDIF
@@ -1406,7 +1405,7 @@ C              Treat OP,INTG
 C              Treat OP,CORR
                ELSEIF ( op2.EQ.'CORR' ) THEN
                   CALL READY(idr,ntap,0)
-                  REWIND 33 ! changed unit from 3 to 33 for gosia2
+                  REWIND IUNIT3
                   REWIND 15
                   REWIND 4
                   GOTO 1200 ! End of OP,CORR
@@ -1778,27 +1777,24 @@ C     Handle OP,ERRO
          IFBFL = 1
          IF ( irep.NE.2 ) GOTO 700
          IF ( iosr.EQ.0 ) GOTO 700
-C---- gosia2 changes start
-C        Unit changed from 3 to 33 for gosia2
-         REWIND 33
-         READ (33,*) ll , mm , kk , inn
+         REWIND IUNIT3
+         READ (IUNIT3,*) ll , mm , kk , inn
          DO inn = 1 , ll
-            READ (33,*) mm , yyy , zz
+            READ (IUNIT3,*) mm , yyy , zz
          ENDDO
          DO inn = 1 , MEMAX
-            READ (33,*) mm , ll , kk
+            READ (IUNIT3,*) mm , ll , kk
          ENDDO
          DO inn = 1 , MEMAX
-            READ (33,*) mm , yyy
+            READ (IUNIT3,*) mm , yyy
          ENDDO
- 450     READ (33,*) mm , ll
+ 450     READ (IUNIT3,*) mm , ll
          IF ( mm.EQ.0 ) THEN
-            BACKSPACE 33
+            BACKSPACE IUNIT3
             GOTO 700
          ELSE
-            READ (33,*) kk , ll , yyy
-            READ (33,*) (SA(mm),mm=1,MEMAX)
-C---- gosia2 changes end
+            READ (IUNIT3,*) kk , ll , yyy
+            READ (IUNIT3,*) (SA(mm),mm=1,MEMAX)
             GOTO 450
          ENDIF
       ELSE
@@ -1917,11 +1913,8 @@ C---- gosia2 changes end
 99033          FORMAT (10X,'ME=',1I3,5X,'NO FREE MATRIX ELEMENTS')
                IF ( mm.NE.0 ) THEN
                   KFERR = 1
-C---- gosia2 changes end
-C                 Unit changed from 3 to 33 for gosia2
-                  IF ( iosr.EQ.1 ) WRITE (33,*) kh , kh
-                  IF ( iosr.EQ.1 ) WRITE (33,*) kh , ij , ELM(kh)
-C---- gosia2 changes end
+                  IF ( iosr.EQ.1 ) WRITE (IUNIT3,*) kh , kh
+                  IF ( iosr.EQ.1 ) WRITE (IUNIT3,*) kh , ij , ELM(kh)
                   LOCKS = 1
                   DLOCK = .05
                   CALL MINI(chiss,-1.D0,2,.0001D0,1000,idr,100000.D0,0,
@@ -1948,7 +1941,7 @@ C---- gosia2 changes end
       ENDIF
       IF ( iosr.NE.0 ) THEN
          im = 0
-         WRITE (33,*) im , im ! Unit changed from 3 to 33 for gosia2
+         WRITE (IUNIT3,*) im , im
       ENDIF
       GOTO 600
 
@@ -2216,10 +2209,8 @@ C---- gosia2 changes end
                            ENDIF
                         ENDIF
                         jgl1 = jgl1 + 1
-C---- gosia2 changes start
-C                       Unit changed from 3 to 33 in gosia2
-                        READ (33,*) ne , na , zp , ap , xep , nval ,
-     &                              waga
+                        READ (IUNIT3,*) ne , na , zp , ap , xep , nval ,
+     &                                  waga
                         WRITE (4,*) ne , na , zp , ap , EP(IEXP) , 
      &                              nval , waga
                         WRITE (22,99038) IEXP , jgl1
@@ -2228,9 +2219,8 @@ C                       Unit changed from 3 to 33 in gosia2
      &                          'YCOR',8X,'COR.F'/)
                         ile1 = ILE(jgl1)
                         DO itp = 1 , nval
-                           READ (33,*) ns1 , ns2 , fiex1(1,1,1) , 
-     &                                fiex1(1,1,2)
-C---- gosia2 changes end
+                           READ (IUNIT3,*) ns1 , ns2 , fiex1(1,1,1) ,
+     &                                     fiex1(1,1,2)
                            ltrn = IY(ile1+itp-1,jgl1)
                            IF ( ltrn.LT.1000 ) THEN
                               ns1 = KSEQ(ltrn,3)

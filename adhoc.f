@@ -65,7 +65,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
      &       wdl , wlf , XA , XA1 , YEXP , YGN , YGP , YNRM , ZPOL
       INTEGER*4 IAMX , IAMY , iax , IBPS , IBRC , Idr , IDRN , iexp1 ,
      &          IFMO , ILE , ilft , IMIX , iosr , ipri , IPRM , ISO ,
-     &          isrt1 , ITMA , ITS , iuf , IVAR
+     &          isrt1 , ITMA , ITS , iuf , IUNIT3 , IVAR
       INTEGER*4 IY , Iyr , IZ , IZ1 , jic , jicc , juf , JZB , KSEQ , 
      &          lb , li , licc , LIFCT , llia , LMAXE , lxt , MAGEXC , 
      &          MEM , MEMAX , MEMX6 , n1
@@ -96,7 +96,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
       COMMON /PRT   / IPRM(20)
       COMMON /TRB   / ITS
-      COMMON /SWITCH/ JZB , IBPS
+      COMMON /SWITCH/ JZB , IBPS , IUNIT3
       
 C     Read OP,YIELD parameters
       iosr = 0
