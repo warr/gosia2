@@ -1092,7 +1092,7 @@ C              Treat OP,INTG
                                     fm = (fi0+fi1)/2.
                                     figl = AGELI(IEXP,ijan,2)
                                     CALL ANGULA(YGN,idr,1,fi0,fi1,tetrc,
-     &                                  gth,figl,ijan,op2) ! extra parameter for gosia2
+     &                                  gth,figl,ijan,op2)
                                     IF ( IFMO.NE.0 ) THEN
                                        id = ITMA(IEXP,ijan)
                                        d = ODL(id)
@@ -1106,7 +1106,7 @@ C              Treat OP,INTG
                                        thc = TACOS(rz/rl)
                                        fic = ATAN2(ry,rx)
                                        CALL ANGULA(YGP,idr,1,fi0,fi1,
-     &                                    tetrc,thc,fic,ijan,op2) ! extra parameter for gosia2
+     &                                    tetrc,thc,fic,ijan,op2)
                                        DO ixl = 1 , idr
                                          ixm = KSEQ(ixl,3)
                                          tfac = TAU(ixm)
@@ -2079,7 +2079,7 @@ C---- gosia2 changes end
                      figl = AGELI(IEXP,jgl,2)
                      fm = (fi0+fi1)/2.
                      CALL ANGULA(YGN,idr,1,fi0,fi1,ttttt,gth,figl,jgl,
-     &                  op2) ! extra parameter for gosia2
+     &                  op2)
                      IF ( IFMO.NE.0 ) THEN
                         id = ITMA(IEXP,jgl)
                         d = ODL(id)
@@ -2093,7 +2093,7 @@ C---- gosia2 changes end
                         sf = d*d/rl/rl
                         fic = ATAN2(ry,rx)
                         CALL ANGULA(YGP,idr,1,fi0,fi1,ttttt,thc,fic,jgl,
-     &                     op2) ! extra parameter for gosia2
+     &                     op2)
                         DO ixl = 1 , idr
                            ixm = KSEQ(ixl,3)
                            tfac = TAU(ixm)
