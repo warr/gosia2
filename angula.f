@@ -49,7 +49,7 @@ C      Op2    - option (either 'INTG' or not).
       INTEGER*4 KLEC , kq , KSEQ , l , lf , lf1 , LZETA , mind , NANG , 
      &          Ngl , NICC , nlv
       INTEGER*4 NEXPT, IZ, IZ1 ! For gosia2
-      CHARACTER*4 Op2 ! For gosia2
+      CHARACTER*4 Op2
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
      &          Ygn(500)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
