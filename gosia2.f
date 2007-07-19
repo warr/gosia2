@@ -461,7 +461,7 @@ C     Initialize pointers
       LP11 = LP8 - 1
       LP12 = 365 ! Maximum number of steps of omega (dimension of ADB, SH, CH)
       LP13 = LP9 + 1
-      LP14 = 4900
+      LP14 = 4900 ! Maximum number of collision coefficients
 
 C---- gosia2 changes start
       IUNIT3 = 33
