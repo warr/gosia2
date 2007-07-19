@@ -147,7 +147,7 @@ C      IZ     - Z of investigated nucleus
 C      IZ1    - Z of non-investigated nucleus
 C      JENTR  -
 C      JSKIP  -
-C      JZB    - unit to read from (for gosia2)
+C      JZB    - unit to read from
 C      KFERR  - error flag for minimization
 C      KSEQ   - index of level
 C      KVAR   -
@@ -267,8 +267,8 @@ C      ZV     -
       REAL*8 CNOR1 , CNOR2 , ELM25 , ELM26 , chir , chp , ccch1 ,
      &       ccch2 , cht ! For gosia2
       INTEGER*4 i , i122 , IAMX , IAMY , IAPR , iapx , IAXS , ib , 
-     &          ibaf , IBRC , IBYP , icg , icll , ICLUST , ICS , ict , 
-     &          ictl , id , idf , IDIVE
+     &          ibaf , IBPS , IBRC , IBYP , icg , icll , ICLUST , ICS ,
+     &          ict , ictl , id , idf , IDIVE
       INTEGER*4 idr , IDRN , iecd , ient , IEXP , IFAC , IFBFL , ifbp , 
      &          ifc , ifm , IFMO , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
      &          ihuj , ii , ij
@@ -291,8 +291,8 @@ C      ZV     -
      &          jj , jj1 , jjjj , jjlx , jjx , jk , jkloo , jktt , jl , 
      &          jmm , jmpin
       INTEGER*4 jp , jphd , jpin , jrls , js , JSKIP , jt , jtp , jyi , 
-     &          jyi1 , jyi2 , jyv , jz , k , kb , kclust , kerf , kex , 
-     &          KF , KFERR
+     &          jyi1 , jyi2 , jyv , jz , JZB , k , kb , kclust , kerf ,
+     &          kex , KF , KFERR
       INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kl , kloop , 
      &          kmat , kq , KSEQ , ktt , kuku , KVAR , l , la , la1 , 
      &          lam , lamd
@@ -315,7 +315,7 @@ C      ZV     -
      &          nmaxh , nmemx , nnl , nogeli , npce , npce1 , npct , 
      &          npct1 , npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , NYLDE , nz
-      INTEGER*4 IBPS , JZB , MCFIX , irix , mdupa , nawr ! For gosia2
+      INTEGER*4 MCFIX , irix , mdupa , nawr ! For gosia2
       INTEGER*4 mmmm , kkkk , mres1 , m25 , m26 , mrepf  ! For gosia2
       INTEGER*4 mret , mawr , jkmx , jkmy ! For gosia2
       LOGICAL ERR
@@ -398,7 +398,7 @@ C      ZV     -
       COMMON /ERCAL / JENTR , ICS
       COMMON /LOGY  / LNY , INTR , IPS1
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
-      COMMON /SWITCH/ JZB , IBPS ! For gosia2
+      COMMON /SWITCH/ JZB , IBPS
       COMMON /RESC  / ELM25(500) , ELM26(500) ! For gosia2
       DATA (eng(k),k=1,10)/.05 , .06 , .08 , .1 , .15 , .2 , .3 , .5 , 
      &      1. , 1.5/
@@ -419,7 +419,10 @@ C      ZV     -
       DATA (tau2(k,7),k=1,10)/89.809 , 56.338 , 27.009 , 62.966 , 
      &      22.933 , 11.334 , 4.540 , 1.813 , .8020 , .5900/
 
+C     Initialise variables
 C---- gosia2 changes start
+C     IBPS = 0
+C     JZB = 5
 C     Read target/projectile switch and first option from standard input
       READ (*,*) IBPS
       READ (*,99001) op1 , op2
@@ -463,7 +466,6 @@ C     Initialize normalization to 1.
       IF ( IBPS.EQ.1 ) JZB = 26
 C---- gosia2 changes end
 
-C     Initialise variables
       IBYP = 0
       IP(1) = 2
       IP(2) = 3
@@ -1732,8 +1734,7 @@ C     Treat suboption EXPT
          G(7) = .6             ! POWER
          DO k = 1 , NEXPT ! Zn, An, E_p, THETA_lab, M_c, M_A, IAX, phi1, phi2, ikin, ln
             READ (JZB,*) IZ1(k) , XA1(k) , EP(k) , TLBDG(k) , EMMA(k) ,
-     &                    MAGA(k) , IAXS(k) , fi0 , fi1 , ISKIN(k) ,
-     &                    LNORM(k)
+     &           MAGA(k) , IAXS(k) , fi0 , fi1 , ISKIN(k) , LNORM(k)         
             ITTE(k) = 0
             IF ( XA1(k).LT.0. ) ITTE(k) = 1
             XA1(k) = ABS(XA1(k))
