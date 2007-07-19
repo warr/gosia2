@@ -248,7 +248,7 @@ C     Write correction factors
          ENDDO
          IF ( KFERR.EQ.1 ) THEN
             GRAD(Jjh) = 0.
-            IF ( Is.EQ.1 .AND. icount.EQ.1 ) WRITE (33,*)
+            IF ( Is.EQ.1 .AND. icount.EQ.1 ) WRITE (33,*) ! gosia2 uses 33 where gosia used 3
      &           (NWR*GRAD(jnm),jnm=1,MEMAX)
          ENDIF
          IF ( metf.EQ.1 .AND. ipas.EQ.2 ) THEN
@@ -337,7 +337,7 @@ C     Write correction factors
          IF ( KFERR.NE.1 ) THEN
             IF ( MOD(icount,IPRM(5)).EQ.0 .OR. icount.EQ.1 )
      &           WRITE (22,99010) Chisq
-c            WRITE (*,99010) Chisq
+c            WRITE (*,99010) Chisq ! Commented out in gosia2
             IF ( MOD(icount,IPRM(6)).EQ.0 ) THEN
                WRITE (22,99002)
 99002          FORMAT (20X,'GRADIENT'//)
