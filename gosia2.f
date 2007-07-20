@@ -2588,29 +2588,29 @@ C---- gosia2 changes start
 C---- gosia2 changes end
         CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
 C---- gosia2 changes start
-      IF ( IBPS.EQ.0 ) THEN
-        JZB = 25
-        mrepf = 1
-      ELSE
-        IBPS = IBPS + 1
-        IF ( IBPS.EQ.1 ) JZB = 26 ! But IBPS must be 2 here! Ooops!
-        IF ( IBPS.EQ.1 ) GOTO 2200
-      ENDIF
+         IF ( IBPS.EQ.0 ) THEN
+           JZB = 25
+           mrepf = 1
+         ELSE
+           IBPS = IBPS + 1
+           IF ( IBPS.EQ.1 ) JZB = 26 ! But IBPS must be 2 here! Ooops!
+           IF ( IBPS.EQ.1 ) GOTO 2200
+         ENDIF
 C---- gosia2 changes end
-      IF ( IPS1.EQ.0 ) GOTO 2000
-      IMIN = IMIN + 1
-      DO iva = 1 , LP1 ! LP1 = 50
-         JSKIP(iva) = 1
-      ENDDO
-      irix = 12
-      IF ( IBPS.EQ.2 ) irix = 32 ! unit 12 for target, 32 for beam
-      REWIND irix
-      DO lkj = 1 , MEMAX
-         WRITE (irix,*) ELM(lkj)
-      ENDDO
-      IF ( ifm.EQ.1 ) CALL PRELM(3)
-      IF ( ifm.NE.1 ) GOTO 430 ! changed for gosia2
-      GOTO 2000
+         IF ( IPS1.EQ.0 ) GOTO 2000
+         IMIN = IMIN + 1
+         DO iva = 1 , LP1 ! LP1 = 50
+            JSKIP(iva) = 1
+         ENDDO
+         irix = 12
+         IF ( IBPS.EQ.2 ) irix = 32 ! unit 12 for target, 32 for beam
+         REWIND irix
+         DO lkj = 1 , MEMAX
+            WRITE (irix,*) ELM(lkj)
+         ENDDO
+         IF ( ifm.EQ.1 ) CALL PRELM(3)
+         IF ( ifm.NE.1 ) GOTO 430 ! changed for gosia2
+         GOTO 2000
 C---- gosia2 changes start
       ENDIF
 
