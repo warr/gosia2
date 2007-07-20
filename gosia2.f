@@ -256,7 +256,7 @@ C      ZV     -
       REAL*8 summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , test , 
      &       TETACM , tetrc , tfac , thc , THICK , TIMEL , title , 
      &       TLBDG , tmn , tmx , todfi , TREP
-      REAL*8 tta , tth , tting , ttttt , txx , u , UPL , VACDP , 
+      REAL*8 tta , tth , tting , ttttt , ttttx, txx , u , UPL , VACDP , 
      &       val , VINF , waga , wph , wpi , WSIXJ , wth , wthh , 
      &       WTHREJ , XA , XA1
       REAL*8 xep , XI , xi1 , xi2 , XIR , xk1 , xk2 , xl1 , xlevb , 
@@ -2125,12 +2125,12 @@ C     Handle OP,ERRO
      &                    TLBDG(IEXP)
                      jmm = 0
 C---- gosia2 changes start
-C                    ttttx = TLBDG(IEXP)/57.2957795
-C                    YGN(IDRN) = YGN(IDRN)*dsig*SIN(ttttx)
-C                    DO jyi = 1 , idr
-C                      IF ( jyi.NE.IDRN ) YGN(jyi) = YGN(jyi)
-C     &                      *dsig*SIN(ttttx)
-C                    ENDDO
+                     ttttx = TLBDG(IEXP)/57.2957795
+                     YGN(IDRN) = YGN(IDRN)*dsig*SIN(ttttx)
+                     DO jyi = 1 , idr
+                        IF ( jyi.NE.IDRN ) YGN(jyi) = YGN(jyi)
+     &                       *dsig*SIN(ttttx)
+                     ENDDO
 C---- gosia2 changes end
                      DO jyi = 1 , idr
                         ni = KSEQ(jyi,3)
@@ -2144,7 +2144,7 @@ C---- gosia2 changes end
                               jmm = jmm + 1
                               CORF(jmm,1) = DBLE(ni)
                               CORF(jmm,2) = DBLE(nf)
-                              CORF(jmm,3) = YGN(jyi) ! changed for gosia2
+                              CORF(jmm,3) = YGN(jyi)/sh1
                               IF ( YGN(jyi).GE.YGN(IDRN) ) CORF(jmm,4)
      &                             = CORF(jmm,3)/20.
                               IF ( YGN(jyi).LT.YGN(IDRN) ) CORF(jmm,4)
@@ -2174,7 +2174,7 @@ C---- gosia2 changes end
                               ENDIF
                               IF ( IEXP.EQ.1 .AND. lu.EQ.NYLDE(1,1)
      &                             .AND. jgl1.EQ.1 )
-     &                             cnst = yydd/YGN(jyi) ! Gosia1 used cnst, but gosia2 doesn't
+     &                             cnst = yydd/YGN(jyi)
                               CORF(lu,jgl1) = YEXP(jgl1,lu)
                               YEXP(jgl1,lu) = YEXP(jgl1,lu)
      &                           /yydd*YGN(jyi)
@@ -2231,9 +2231,9 @@ C---- gosia2 changes end
                               ns1 = ns1 + KSEQ(ltrn2,3)
                               ns2 = ns2 + KSEQ(ltrn2,4)
                            ENDIF
-                           ycorr = YEXP(jgl1,ile1+itp-1) ! gosia multiplied by cnst here, gosia2 does not
+                           ycorr = YEXP(jgl1,ile1+itp-1)*cnst
                            WRITE (4,*) ns1 , ns2 , ycorr , 
-     &                                 DYEX(jgl1,ile1+itp-1) ! gosia multiplied by cnst here, gosia2 does not
+     &                                 DYEX(jgl1,ile1+itp-1)*cnst
                            WRITE (22,99039) ns1 , ns2 , 
      &                            CORF(ile1+itp-1,jgl1) , ycorr , 
      &                            ycorr/CORF(ile1+itp-1,jgl1)
@@ -2587,6 +2587,11 @@ C---- gosia2 changes start
         MCFIX = 0 ! Calculate chisq using CNOR1 not CNOR
 C---- gosia2 changes end
         CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
+
+        IF ( JZB.EQ.25 ) ccch1 = chisq ! But we never use ccch1
+        IF ( JZB.EQ.26 ) ccch2 = chisq ! But we never use ccch2
+        WRITE (*,*) 'ITER = ' , mawr , ' CHISQ1 = ' , ccch1 , 
+     &              ' CHISQ2 = ' , ccch2
 C---- gosia2 changes start
          IF ( IBPS.EQ.0 ) THEN
            JZB = 25
@@ -2614,34 +2619,36 @@ C---- gosia2 changes end
 C---- gosia2 changes start
       ENDIF
 
+C     Calculate chi squared and normalization without minimizing
       MCFIX = 1
-      CALL MINI(chisq,1.D38,nptl,conu,imode,idr,xtest,0,0,0,bten)
+      CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
+      
+C     Set CNOR1 to the average of CNOR1 and CNOR2
+      DO kh1 = 1 , LP6 ! LP6 = 32
+        DO kh2 = 1 , LP3 ! LP3 = 75
+          IF ( JZB.EQ.25) THEN ! If it is the second nucleus
+            CNOR1(kh1,kh2) = CNOR(kh1,kh2)
+          ELSE
+            nawr = 1 ! Go through other branch next time
+            CNOR2(kh1,kh2) = CNOR(kh1,kh2)
+            CNOR1(kh1,kh2) = (CNOR1(kh1,kh2)+CNOR2(kh1,kh2))/2.
+          ENDIF
+        ENDDO
+      ENDDO
+      
+C     Increment iteration counter
       mawr = mawr + 1
+
+C     Decide whether to terminate here
       IF ( JZB.EQ.25 ) ccch1 = chisq ! But we never use ccch1
       IF ( JZB.EQ.26 ) ccch2 = chisq ! But we never use ccch2
-      IF ( JZB.EQ.26 ) WRITE (*,*) 'ITER = ' , mawr/2 , ' CHISQ1 = ' ,
-     &                   ccch1 , ' CHISQ2 = ' , ccch2
+      WRITE (*,*) 'ITER = ' , mawr , ' CHISQ1 = ' , ccch1 , 
+     &  ' CHISQ2 = ' , ccch2
       chir = chir + chisq
       IF ( JZB.EQ.26 ) cht = ABS(chir-chp)
       IF ( JZB.EQ.26 ) chp = chir
       IF ( JZB.EQ.26 .AND. cht.LT.0.1 ) mret = 0
       IF ( JZB.EQ.26 .AND. mawr.GE.20 ) mret = 0
-      IF ( JZB.EQ.26 ) nawr = 1
-      DO kh1 = 1 , 32
-         DO kh2 = 1 , lp3
-            IF ( JZB.EQ.25 ) CNOR1(kh1,kh2) = CNOR(kh1,kh2)
-            IF ( JZB.EQ.26 ) CNOR2(kh1,kh2) = CNOR(kh1,kh2)
-         ENDDO
-      ENDDO
-
-      IF ( JZB.EQ.26 ) THEN
-C        Set CNOR1 to the average of CNOR1 and CNOR2
-         DO kh1 = 1 , 32
-           DO kh2 = 1 , 75
-             CNOR1(kh1,kh2) = (CNOR1(kh1,kh2)+CNOR2(kh1,kh2))/2.
-           ENDDO
-         ENDDO
-      ENDIF
 
       IF ( IBPS.EQ.0 .AND. JZB.EQ.25 ) JZB = 26
       IF ( IBPS.NE.0 ) JZB = 25
