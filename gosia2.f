@@ -1553,6 +1553,8 @@ C     Treat suboption ME (matrix elements)
                      ipo3 = ipo1
                   ENDIF
                   ELM(indx) = po1
+                  IF ( JZB.EQ.25 ) ELM25(indx) = po1
+                  IF ( JZB.EQ.26 ) ELM26(indx) = po1
                   mlt(indx) = la
                   LEAD(1,indx) = ipo1
                   LEAD(2,indx) = ABS(ipo2)
