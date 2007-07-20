@@ -256,7 +256,7 @@ C      ZV     -
       REAL*8 summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , test , 
      &       TETACM , tetrc , tfac , thc , THICK , TIMEL , title , 
      &       TLBDG , tmn , tmx , todfi , TREP
-      REAL*8 tta , tth , tting , ttttt , ttttx, txx , u , UPL , VACDP , 
+      REAL*8 tta , tth , tting , ttttt , ttttx , txx , u , UPL , VACDP , 
      &       val , VINF , waga , wph , wpi , WSIXJ , wth , wthh , 
      &       WTHREJ , XA , XA1
       REAL*8 xep , XI , xi1 , xi2 , XIR , xk1 , xk2 , xl1 , xlevb , 
@@ -316,7 +316,7 @@ C      ZV     -
      &          npct1 , npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , NYLDE , nz
       INTEGER*4 MCFIX , nawr ! For gosia2
-      INTEGER*4 mmmm , kkkk , mres1 , m25 , m26 , mrepf  ! For gosia2
+      INTEGER*4 mmmm , kkkk , mres1 , mrepf  ! For gosia2
       INTEGER*4 mret , mawr ! For gosia2
       LOGICAL ERR
       COMPLEX*16 ARM , EXPO
@@ -1552,8 +1552,8 @@ C     Treat suboption ME (matrix elements)
                      ipo3 = ipo1
                   ENDIF
                   ELM(indx) = po1
-                  IF ( JZB.EQ.25 ) ELM25(indx) = po1
-                  IF ( JZB.EQ.26 ) ELM26(indx) = po1
+                  IF ( JZB.EQ.25 ) ELM25(indx) = po1 ! Added for gosia2
+                  IF ( JZB.EQ.26 ) ELM26(indx) = po1 ! Added for gosia2
                   mlt(indx) = la
                   LEAD(1,indx) = ipo1
                   LEAD(2,indx) = ABS(ipo2)
@@ -1606,10 +1606,6 @@ C     Treat suboption ME (matrix elements)
             IF ( la.GT.LMAXE .AND. la.LE.6 ) LMAXE = la
  250     ENDDO
  300     MEMAX = indx
-C---- gosia2 changes start
-         IF ( JZB.EQ.25 ) m25 = memax ! But we never use m25
-         IF ( JZB.EQ.26 ) m26 = memax ! or m26
-C---- gosia2 changes end
          IF ( la.GT.6 ) MAGEXC = 1
          memx4 = MULTI(1) + MULTI(2) + MULTI(3) + MULTI(4)
          MEMX6 = memx4 + MULTI(5) + MULTI(6)
@@ -2124,14 +2120,12 @@ C     Handle OP,ERRO
      &                    WRITE (22,99048) IEXP , jgl1 , EP(IEXP) , 
      &                    TLBDG(IEXP)
                      jmm = 0
-C---- gosia2 changes start
                      ttttx = TLBDG(IEXP)/57.2957795
                      YGN(IDRN) = YGN(IDRN)*dsig*SIN(ttttx)
                      DO jyi = 1 , idr
                         IF ( jyi.NE.IDRN ) YGN(jyi) = YGN(jyi)
      &                       *dsig*SIN(ttttx)
                      ENDDO
-C---- gosia2 changes end
                      DO jyi = 1 , idr
                         ni = KSEQ(jyi,3)
                         nf = KSEQ(jyi,4)
@@ -2585,14 +2579,12 @@ C     Handle map
 C---- gosia2 changes start
       IF ( nawr.EQ.1 ) THEN
         MCFIX = 0 ! Calculate chisq using CNOR1 not CNOR
-C---- gosia2 changes end
         CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
 
         IF ( JZB.EQ.25 ) ccch1 = chisq ! But we never use ccch1
         IF ( JZB.EQ.26 ) ccch2 = chisq ! But we never use ccch2
         WRITE (*,*) 'ITER = ' , mawr , ' CHISQ1 = ' , ccch1 , 
      &              ' CHISQ2 = ' , ccch2
-C---- gosia2 changes start
          IF ( IBPS.EQ.0 ) THEN
            JZB = 25
            mrepf = 1
@@ -2601,7 +2593,6 @@ C---- gosia2 changes start
            IF ( IBPS.EQ.1 ) JZB = 26 ! But IBPS must be 2 here! Ooops!
            IF ( IBPS.EQ.1 ) GOTO 2200
          ENDIF
-C---- gosia2 changes end
          IF ( IPS1.EQ.0 ) GOTO 2000
          IMIN = IMIN + 1
          DO iva = 1 , LP1 ! LP1 = 50
@@ -2616,13 +2607,14 @@ C---- gosia2 changes end
          IF ( ifm.EQ.1 ) CALL PRELM(3)
          IF ( ifm.NE.1 ) GOTO 430 ! changed for gosia2
          GOTO 2000
-C---- gosia2 changes start
       ENDIF
 
 C     Calculate chi squared and normalization without minimizing
       MCFIX = 1
+C---- gosia2 changes end
       CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
       
+C---- gosia2 changes start
 C     Set CNOR1 to the average of CNOR1 and CNOR2
       DO kh1 = 1 , LP6 ! LP6 = 32
         DO kh2 = 1 , LP3 ! LP3 = 75
