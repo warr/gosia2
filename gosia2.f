@@ -256,7 +256,7 @@ C      ZV     -
       REAL*8 summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , test , 
      &       TETACM , tetrc , tfac , thc , THICK , TIMEL , title , 
      &       TLBDG , tmn , tmx , todfi , TREP
-      REAL*8 tta , tth , tting , ttttt , txx , u , UPL , VACDP , 
+      REAL*8 tta , tth , tting , ttttt , ttttx , txx , u , UPL , VACDP , 
      &       val , VINF , waga , wph , wpi , WSIXJ , wth , wthh , 
      &       WTHREJ , XA , XA1
       REAL*8 xep , XI , xi1 , xi2 , XIR , xk1 , xk2 , xl1 , xlevb , 
@@ -316,7 +316,7 @@ C      ZV     -
      &          npct1 , npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , NYLDE , nz
       INTEGER*4 MCFIX , nawr ! For gosia2
-      INTEGER*4 mmmm , kkkk , mres1 , m25 , m26 , mrepf  ! For gosia2
+      INTEGER*4 mmmm , kkkk , mres1 , mrepf  ! For gosia2
       INTEGER*4 mret , mawr ! For gosia2
       LOGICAL ERR
       COMPLEX*16 ARM , EXPO
@@ -1605,10 +1605,6 @@ C     Treat suboption ME (matrix elements)
             IF ( la.GT.LMAXE .AND. la.LE.6 ) LMAXE = la
  250     ENDDO
  300     MEMAX = indx
-C---- gosia2 changes start
-         IF ( JZB.EQ.25 ) m25 = memax ! But we never use m25
-         IF ( JZB.EQ.26 ) m26 = memax ! or m26
-C---- gosia2 changes end
          IF ( la.GT.6 ) MAGEXC = 1
          memx4 = MULTI(1) + MULTI(2) + MULTI(3) + MULTI(4)
          MEMX6 = memx4 + MULTI(5) + MULTI(6)
@@ -2123,14 +2119,12 @@ C     Handle OP,ERRO
      &                    WRITE (22,99048) IEXP , jgl1 , EP(IEXP) , 
      &                    TLBDG(IEXP)
                      jmm = 0
-C---- gosia2 changes start
-C                    ttttx = TLBDG(IEXP)/57.2957795
-C                    YGN(IDRN) = YGN(IDRN)*dsig*SIN(ttttx)
-C                    DO jyi = 1 , idr
-C                      IF ( jyi.NE.IDRN ) YGN(jyi) = YGN(jyi)
-C     &                      *dsig*SIN(ttttx)
-C                    ENDDO
-C---- gosia2 changes end
+                     ttttx = TLBDG(IEXP)/57.2957795
+                     YGN(IDRN) = YGN(IDRN)*dsig*SIN(ttttx)
+                     DO jyi = 1 , idr
+                        IF ( jyi.NE.IDRN ) YGN(jyi) = YGN(jyi)
+     &                       *dsig*SIN(ttttx)
+                     ENDDO
                      DO jyi = 1 , idr
                         ni = KSEQ(jyi,3)
                         nf = KSEQ(jyi,4)
@@ -2143,7 +2137,7 @@ C---- gosia2 changes end
                               jmm = jmm + 1
                               CORF(jmm,1) = DBLE(ni)
                               CORF(jmm,2) = DBLE(nf)
-                              CORF(jmm,3) = YGN(jyi) ! changed for gosia2
+                              CORF(jmm,3) = YGN(jyi)/sh1
                               IF ( YGN(jyi).GE.YGN(IDRN) ) CORF(jmm,4)
      &                             = CORF(jmm,3)/20.
                               IF ( YGN(jyi).LT.YGN(IDRN) ) CORF(jmm,4)
@@ -2173,7 +2167,7 @@ C---- gosia2 changes end
                               ENDIF
                               IF ( IEXP.EQ.1 .AND. lu.EQ.NYLDE(1,1)
      &                             .AND. jgl1.EQ.1 )
-     &                             cnst = yydd/YGN(jyi) ! Gosia1 used cnst, but gosia2 doesn't
+     &                             cnst = yydd/YGN(jyi)
                               CORF(lu,jgl1) = YEXP(jgl1,lu)
                               YEXP(jgl1,lu) = YEXP(jgl1,lu)
      &                           /yydd*YGN(jyi)
@@ -2230,9 +2224,9 @@ C---- gosia2 changes end
                               ns1 = ns1 + KSEQ(ltrn2,3)
                               ns2 = ns2 + KSEQ(ltrn2,4)
                            ENDIF
-                           ycorr = YEXP(jgl1,ile1+itp-1) ! gosia multiplied by cnst here, gosia2 does not
+                           ycorr = YEXP(jgl1,ile1+itp-1)*cnst
                            WRITE (4,*) ns1 , ns2 , ycorr , 
-     &                                 DYEX(jgl1,ile1+itp-1) ! gosia multiplied by cnst here, gosia2 does not
+     &                                 DYEX(jgl1,ile1+itp-1)*cnst
                            WRITE (22,99039) ns1 , ns2 , 
      &                            CORF(ile1+itp-1,jgl1) , ycorr , 
      &                            ycorr/CORF(ile1+itp-1,jgl1)
