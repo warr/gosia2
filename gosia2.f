@@ -502,7 +502,6 @@ C---- gosia2 changes start
         LIFCT(i) = 0
       ENDDO
 
-      chp = chir
       IF ( mret.EQ.1 .AND. JZB.EQ.26 ) chir = 0.
       REWIND 25
       REWIND 26
@@ -2624,6 +2623,7 @@ C---- gosia2 changes start
      &                   ccch1 , ' CHISQ2 = ' , ccch2
       chir = chir + chisq
       IF ( JZB.EQ.26 ) cht = ABS(chir-chp)
+      IF ( JZB.EQ.26 ) chp = chir
       IF ( JZB.EQ.26 .AND. cht.LT.0.1 ) mret = 0
       IF ( JZB.EQ.26 .AND. mawr.GE.20 ) mret = 0
       IF ( JZB.EQ.26 ) nawr = 1
