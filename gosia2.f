@@ -178,7 +178,7 @@ C      LP8    - (104)
 C      LP9    - length of ZETA - 2100 (47900)
 C      MAGA   - number of magnetic substates in approximate calculation
 C      MAGEXC -
-C      MCFIX  - (for gosia2)
+C      MCFIX  - flag to say if normalization coefficient is fixed (for gosia2)
 C      MEMAX  - number of matrix elements
 C      MEMX6  - number of matrix elements with E1...6 multipolarity
 C      MULTI  - number of matrix elements having given multipolarity
@@ -2584,7 +2584,7 @@ C     Handle map
       ENDDO
 C---- gosia2 changes start
       IF ( nawr.EQ.1 ) THEN
-        MCFIX = 0
+        MCFIX = 0 ! Calculate chisq using CNOR1 not CNOR
 C---- gosia2 changes end
         CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
 C---- gosia2 changes start
