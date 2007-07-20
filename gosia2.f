@@ -178,7 +178,7 @@ C      LP8    - (104)
 C      LP9    - length of ZETA - 2100 (47900)
 C      MAGA   - number of magnetic substates in approximate calculation
 C      MAGEXC -
-C      MCFIX  - (for gosia2)
+C      MCFIX  - flag to say if normalization coefficient is fixed (for gosia2)
 C      MEMAX  - number of matrix elements
 C      MEMX6  - number of matrix elements with E1...6 multipolarity
 C      MULTI  - number of matrix elements having given multipolarity
@@ -502,7 +502,6 @@ C---- gosia2 changes start
         LIFCT(i) = 0
       ENDDO
 
-      chp = chir
       IF ( mret.EQ.1 .AND. JZB.EQ.26 ) chir = 0.
       REWIND 25
       REWIND 26
@@ -1553,6 +1552,8 @@ C     Treat suboption ME (matrix elements)
                      ipo3 = ipo1
                   ENDIF
                   ELM(indx) = po1
+                  IF ( JZB.EQ.25 ) ELM25(indx) = po1 ! Added for gosia2
+                  IF ( JZB.EQ.26 ) ELM26(indx) = po1 ! Added for gosia2
                   mlt(indx) = la
                   LEAD(1,indx) = ipo1
                   LEAD(2,indx) = ABS(ipo2)
@@ -2577,63 +2578,69 @@ C     Handle map
       ENDDO
 C---- gosia2 changes start
       IF ( nawr.EQ.1 ) THEN
-        MCFIX = 0
-C---- gosia2 changes end
+        MCFIX = 0 ! Calculate chisq using CNOR1 not CNOR
         CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
-C---- gosia2 changes start
-      IF ( IBPS.EQ.0 ) THEN
-        JZB = 25
-        mrepf = 1
-      ELSE
-        IBPS = IBPS + 1
-        IF ( IBPS.EQ.1 ) JZB = 26 ! But IBPS must be 2 here! Ooops!
-        IF ( IBPS.EQ.1 ) GOTO 2200
-      ENDIF
-C---- gosia2 changes end
-      IF ( IPS1.EQ.0 ) GOTO 2000
-      IMIN = IMIN + 1
-      DO iva = 1 , LP1 ! LP1 = 50
-         JSKIP(iva) = 1
-      ENDDO
-      irix = 12
-      IF ( IBPS.EQ.2 ) irix = 32 ! unit 12 for target, 32 for beam
-      REWIND irix
-      DO lkj = 1 , MEMAX
-         WRITE (irix,*) ELM(lkj)
-      ENDDO
-      IF ( ifm.EQ.1 ) CALL PRELM(3)
-      IF ( ifm.NE.1 ) GOTO 430 ! changed for gosia2
-      GOTO 2000
-C---- gosia2 changes start
+
+        IF ( JZB.EQ.25 ) ccch1 = chisq ! But we never use ccch1
+        IF ( JZB.EQ.26 ) ccch2 = chisq ! But we never use ccch2
+        WRITE (*,*) 'ITER = ' , mawr , ' CHISQ1 = ' , ccch1 , 
+     &              ' CHISQ2 = ' , ccch2
+         IF ( IBPS.EQ.0 ) THEN
+           JZB = 25
+           mrepf = 1
+         ELSE
+           IBPS = IBPS + 1
+           IF ( IBPS.EQ.1 ) JZB = 26 ! But IBPS must be 2 here! Ooops!
+           IF ( IBPS.EQ.1 ) GOTO 2200
+         ENDIF
+         IF ( IPS1.EQ.0 ) GOTO 2000
+         IMIN = IMIN + 1
+         DO iva = 1 , LP1 ! LP1 = 50
+            JSKIP(iva) = 1
+         ENDDO
+         irix = 12
+         IF ( IBPS.EQ.2 ) irix = 32 ! unit 12 for target, 32 for beam
+         REWIND irix
+         DO lkj = 1 , MEMAX
+            WRITE (irix,*) ELM(lkj)
+         ENDDO
+         IF ( ifm.EQ.1 ) CALL PRELM(3)
+         IF ( ifm.NE.1 ) GOTO 430 ! changed for gosia2
+         GOTO 2000
       ENDIF
 
+C     Calculate chi squared and normalization without minimizing
       MCFIX = 1
-      CALL MINI(chisq,1.D38,nptl,conu,imode,idr,xtest,0,0,0,bten)
+C---- gosia2 changes end
+      CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
+      
+C---- gosia2 changes start
+C     Set CNOR1 to the average of CNOR1 and CNOR2
+      DO kh1 = 1 , LP6 ! LP6 = 32
+        DO kh2 = 1 , LP3 ! LP3 = 75
+          IF ( JZB.EQ.25) THEN ! If it is the second nucleus
+            CNOR1(kh1,kh2) = CNOR(kh1,kh2)
+          ELSE
+            nawr = 1 ! Go through other branch next time
+            CNOR2(kh1,kh2) = CNOR(kh1,kh2)
+            CNOR1(kh1,kh2) = (CNOR1(kh1,kh2)+CNOR2(kh1,kh2))/2.
+          ENDIF
+        ENDDO
+      ENDDO
+      
+C     Increment iteration counter
       mawr = mawr + 1
+
+C     Decide whether to terminate here
       IF ( JZB.EQ.25 ) ccch1 = chisq ! But we never use ccch1
       IF ( JZB.EQ.26 ) ccch2 = chisq ! But we never use ccch2
-      IF ( JZB.EQ.26 ) WRITE (*,*) 'ITER = ' , mawr/2 , ' CHISQ1 = ' ,
-     &                   ccch1 , ' CHISQ2 = ' , ccch2
+      WRITE (*,*) 'ITER = ' , mawr , ' CHISQ1 = ' , ccch1 , 
+     &  ' CHISQ2 = ' , ccch2
       chir = chir + chisq
       IF ( JZB.EQ.26 ) cht = ABS(chir-chp)
+      IF ( JZB.EQ.26 ) chp = chir
       IF ( JZB.EQ.26 .AND. cht.LT.0.1 ) mret = 0
       IF ( JZB.EQ.26 .AND. mawr.GE.20 ) mret = 0
-      IF ( JZB.EQ.26 ) nawr = 1
-      DO kh1 = 1 , 32
-         DO kh2 = 1 , lp3
-            IF ( JZB.EQ.25 ) CNOR1(kh1,kh2) = CNOR(kh1,kh2)
-            IF ( JZB.EQ.26 ) CNOR2(kh1,kh2) = CNOR(kh1,kh2)
-         ENDDO
-      ENDDO
-
-      IF ( JZB.EQ.26 ) THEN
-C        Set CNOR1 to the average of CNOR1 and CNOR2
-         DO kh1 = 1 , 32
-           DO kh2 = 1 , 75
-             CNOR1(kh1,kh2) = (CNOR1(kh1,kh2)+CNOR2(kh1,kh2))/2.
-           ENDDO
-         ENDDO
-      ENDIF
 
       IF ( IBPS.EQ.0 .AND. JZB.EQ.25 ) JZB = 26
       IF ( IBPS.NE.0 ) JZB = 25
