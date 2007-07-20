@@ -1918,7 +1918,6 @@ C     Handle OP,ERRO
                   DLOCK = .05
                   CALL MINI(chiss,-1.D0,2,.0001D0,1000,idr,100000.D0,0,
      &                      iosr,kh,bten)
-                  WRITE(*,*) 'MINI1 : chisq = ',chiss, ' JZB = ', JZB
                   DO kh1 = 1 , MEMAX
                      SA(kh1) = (ELM(kh1)-HLM(kh1))/ABS(sh)
                   ENDDO
@@ -2589,7 +2588,6 @@ C---- gosia2 changes start
         MCFIX = 0
 C---- gosia2 changes end
         CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
-        WRITE(*,*) 'MINI2 : chisq = ',chisq, ' JZB = ', JZB
 C---- gosia2 changes start
       IF ( IBPS.EQ.0 ) THEN
         JZB = 25
@@ -2619,7 +2617,6 @@ C---- gosia2 changes start
 
       MCFIX = 1
       CALL MINI(chisq,1.D38,nptl,conu,imode,idr,xtest,0,0,0,bten)
-      WRITE(*,*) 'MINI3 : chisq = ',chisq, ' JZB = ', JZB
       mawr = mawr + 1
       IF ( JZB.EQ.25 ) ccch1 = chisq ! But we never use ccch1
       IF ( JZB.EQ.26 ) ccch2 = chisq ! But we never use ccch2
@@ -2715,7 +2712,6 @@ C---- gosia2 changes end
                   ENDIF
                   CALL MINI(chisq,chiok,+1,conu,2000,idr,xtest,2,0,0,
      &                      bten)
-                  WRITE(*,*) 'Final chisq = ', chisq, ' JZB = ', JZB
                ENDIF
             ENDIF
             CALL MIXR(iva,1,chisq,chilo)
