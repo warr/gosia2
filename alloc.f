@@ -78,8 +78,5 @@ C     And for M1, M2
       WRITE (22,99001)
 99001 FORMAT (5X,'NO SPACE FOR Q FUNCTIONS TABULATION'//5X,
      &        'SORRY,JOB WILL BE BRUTALLY TERMINATED!')
-      v = -1.        ! This is BAD BAD BAD. It tries to provoke a floating
-      u = LOG10(v)   ! point error, which on old systems brings the program
-      u = SIN(u)     ! to a halt, but on new ones, just gives NaN!
       STOP 'JOB TERMINATED BY ALLOC' ! Added N. Warr Jul2007
       END
