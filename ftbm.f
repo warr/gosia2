@@ -10,7 +10,7 @@ C Purpose: main routine to perform the calculation with a given set of matrix
 C          elements.
 C
 C Uses global variables:
-C      ACCA   -
+C      ACCA   - accuracy
 C      ACCUR  - accuracy required
 C      ARM    - the reduced matrix elements
 C      CAT    -
