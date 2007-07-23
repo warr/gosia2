@@ -98,7 +98,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       COMMON /TRB   / ITS
       COMMON /SWITCH/ JZB , IBPS , IUNIT3
       
-C     Read OP,YIELD parameters
+C     Read OP,YIEL parameters
       iosr = 0
       READ (JZB,*) IFMO ! IFLAG
       READ (JZB,*) NICC , nistr !N1, N2
