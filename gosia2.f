@@ -1434,7 +1434,7 @@ C                 Treat OP,SIXJ
                      ENDDO
                      GOTO 2000 ! End of OP,SIXJ
 
-C                 Treat OP,RAW (raw uncorreected gamma yields)
+C                 Treat OP,RAW (raw uncorrected gamma yields)
                   ELSEIF ( op2.EQ.'RAW ' ) THEN
 C                    Read absorber coefficients from unit 8
                      REWIND 8
