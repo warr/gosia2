@@ -47,6 +47,7 @@ C can cope with half-integers.
             Bten(i) = 0.
          ENDDO
       ENDIF
+
       DO i = 2 , NMAX
          ms = NSTART(i)
          IF ( ms.NE.0 ) THEN
@@ -95,9 +96,9 @@ C can cope with half-integers.
  6                   ENDDO
                      IF ( Icl.EQ.Lmax ) Bten(ind) = Bten(ind)
      &                    *ce/(2.*SPIN(1)+1.)
-                  ENDDO
-               ENDIF
-            ENDDO
-         ENDIF
-      ENDDO
+                  ENDDO ! Loop over lp
+               ENDIF ! If isi.GE.k
+            ENDDO ! Loop over kp
+         ENDIF ! If ms.NE.0
+      ENDDO ! Loop over i
       END
