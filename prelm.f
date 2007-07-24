@@ -119,7 +119,6 @@ C      Iop    - print flag (controls what is written to output).
                   ENDDO ! Loop on kk
                ENDIF ! If l .ne. 0
             ENDDO ! Loop on k
-
          ENDIF ! If m .ne. 0
       ENDDO ! Loop on j
 
