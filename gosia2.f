@@ -62,8 +62,8 @@ C PROGRAM GOSIA
 C
 C Calls: ADHOC, ALLOC, ANGULA, ARCCOS, ARCTG, CMLAB, COORD, DECAY, DJMM,
 C        EFFIX, ELMT, FAKP, FHIP, FTBM, INTG, KLOPOT, KONTUR, LAGRAN, LOAD,
-C        MINI, MIXR, MIXUP, OPEN, PATH, PRELM, PTICC, QFIT, READY, SETIN,
-C        SIMIN, SNAKE, STING, TACOS, TAPMA, TEMB, TENS, WSIXJ, WTHREJ
+C        MINI, MIXR, MIXUP, OPENF, OPENF2, PATH, PRELM, PTICC, QFIT, READY, 
+C        SETIN,SIMIN, SNAKE, STING, TACOS, TAPMA, TEMB, TENS, WSIXJ, WTHREJ
 C
 C Uses global variables:
 C      ABC    - absorption coefficients
@@ -466,13 +466,13 @@ C     Initialize pointers
 
 C---- gosia2 changes start
 C     IBPS = 0
-C     JZB = 5
+      JZB = 5
 C     Read target/projectile switch and first option from standard input
       READ (*,*) IBPS
       READ (*,99001) op1 , op2
 
 C     Open files
-      CALL OPENF1
+      CALL OPENF
       nawr = 0
 
 C     Use input unit 25 for target and 26 for projectile

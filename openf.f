@@ -1,12 +1,12 @@
  
 C----------------------------------------------------------------------
-C SUBROUTINE OPENF1
+C SUBROUTINE OPENF
 C
 C Called by: GOSIA
 C
 C Purpose: open files to specified units.
 C
-      SUBROUTINE OPENF1
+      SUBROUTINE OPENF
       IMPLICIT NONE
       INTEGER*4 i , j , k
       CHARACTER name*60 , opt1*20 , opt2*20
