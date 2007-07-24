@@ -1006,7 +1006,7 @@ C              Treat OP,INTG
                         jan = NANG(lx)
                         jan1 = NDST(lx)
                         IF ( IRAWEX(lx).EQ.0 ) jan1 = jan
-                        IF ( iecd(lx).EQ.1 ) THEN
+                        IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
                            WRITE (14,*) ne , ntt , emn , emx , tmn , 
      &                                  tmx , jan1 , wth , wph , wthh
                         ELSE
