@@ -21,7 +21,7 @@ C      ISHA   -
 C      ISMAX  -
 C      IZ     - Z of investigated nucleus
 C      IZ1    - Z of not-investated nucleus
-C      LAMBDA - list of multipolarities to calculate
+C      LAMDA  - list of multipolarities to calculate
 C      LAMMAX - number of multipolarities to calculate
 C      LDNUM  - number of matrix elements with each multipolarity populating level
 C      LEAD   - pair of levels involved in each matrix element
