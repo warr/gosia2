@@ -15,7 +15,7 @@ C 2 if it is required not to exist and 3 if it does not matter. The third is 1
 C if the file is formatted and 2 if it is unformatted. A second line is read,
 C which gives the name of the file to associate with that unit. If the unit is
 C zero, the function returns. It keeps looping until a unit zero is reached.
-
+ 
       SUBROUTINE OPENF
       IMPLICIT NONE
       INTEGER*4 i , IBPS , IUNIT3 , j , JZB , k
@@ -39,6 +39,6 @@ c99002 FORMAT (1X,2A)
 c      WRITE (6,99003) ' IO-num = ' , i , opt1 , opt2
 c99003 FORMAT (1X,A,I4,2(1x,A))
       IF ( k.EQ.0 ) GOTO 100
-c      WRITE (6,99004) 'PROBLEMS OPENING ' , name , k
-c99004 FORMAT (A,A,I6)
+      WRITE (6,99004) 'PROBLEMS OPENING ' , name , k
+99004 FORMAT (A,A,I6)
       END

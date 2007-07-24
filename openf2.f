@@ -43,6 +43,6 @@ c99002 FORMAT (1X,2A)
 c      WRITE (6,99003) ' IO-num = ' , i , opt1 , opt2
 c99003 FORMAT (1X,A,I4,2(1x,A))
       IF ( k.EQ.0 ) GOTO 100
-c      WRITE (6,99004) 'PROBLEMS OPENING ' , name , k
-c99004 FORMAT (A,A,I6)
+      WRITE (6,99004) 'PROBLEMS OPENING ' , name , k
+99004 FORMAT (A,A,I6)
       END
