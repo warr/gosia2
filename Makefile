@@ -79,7 +79,7 @@ OBJS += mixr.o
 OBJS += mixup.o
 OBJS += newcat.o
 OBJS += newlv.o
-OBJS += openf.o
+OBJS += openf2.o
 OBJS += openf1.o
 OBJS += path.o
 OBJS += podziel.o
@@ -151,5 +151,5 @@ single_file:
 	simin.f mixup.f fxis1.f fxis2.f podziel.f klopot.f \
 	mixr.f coord.f chmem.f pticc.f rndm.f kontur.f rk4.f \
 	qfit.f gamatt.f gcf.f tcexp.f tcabs.f tasin.f tacos.f \
-	openf.f effix.f adhoc.f elmt.f openf1.f > $(SINGLE_FILE)
+	openf2.f effix.f adhoc.f elmt.f openf1.f > $(SINGLE_FILE)
 

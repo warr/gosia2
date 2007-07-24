@@ -665,7 +665,7 @@ C     Start reading input file.
 
 C        Treat OP,FILE (attach files to fortran units)
          IF ( op2.EQ.'FILE' ) THEN
-           CALL OPENF
+           CALL OPENF2
            GOTO 100
          ENDIF
          

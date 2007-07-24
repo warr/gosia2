@@ -1,6 +1,6 @@
  
 C----------------------------------------------------------------------
-C SUBROUTINE OPENF
+C SUBROUTINE OPENF2
 C
 C Called by: GOSIA
 C
@@ -16,7 +16,7 @@ C if the file is formatted and 2 if it is unformatted. A second line is read,
 C which gives the name of the file to associate with that unit. If the unit is
 C zero, the function returns. It keeps looping until a unit zero is reached.
  
-      SUBROUTINE OPENF
+      SUBROUTINE OPENF2
       IMPLICIT NONE
       INTEGER*4 i , IBPS , IUNIT3 , j , JZB , k
       CHARACTER name*60 , opt1*20 , opt2*20
