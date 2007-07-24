@@ -316,8 +316,7 @@ C      ZV     -
      &          nmaxh , nmemx , nnl , nogeli , npce , npce1 , npct , 
      &          npct1 , npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , NYLDE , nz
-      INTEGER*4 MCFIX , nawr ! For gosia2
-      INTEGER*4 mmmm , kkkk , mres1 , mrepf  ! For gosia2
+      INTEGER*4 MCFIX , nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
       INTEGER*4 mret , mawr ! For gosia2
       LOGICAL ERR
       COMPLEX*16 ARM , EXPO
