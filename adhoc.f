@@ -48,11 +48,11 @@ C      UPL    - upper limits for all gamma detectors
 C      YNRM   - relative normalization factors for gamma detectors
 C
 C Formal parameters:
-C      Oph    -
+C      Oph    - this indicates the option (GOSI, STAR etc.)
 C      Idr    - number of decays
-C      Nfd    -
+C      Nfd    - number of physical detectors
 C      Ntap   - unit of yield file
-C      Iyr    -
+C      Iyr    - flag set here
 C
 C Here we parse the input of the OP,YIEL command and store the values.
  
