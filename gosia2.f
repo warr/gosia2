@@ -1401,7 +1401,7 @@ C              Treat OP,INTG
 C              Treat OP,CORR
                ELSEIF ( op2.EQ.'CORR' ) THEN
                   CALL READY(idr,ntap,0)
-                  REWIND IUNIT3
+                  REWIND 3
                   REWIND 15
                   REWIND 4
                   GOTO 1200 ! End of OP,CORR
@@ -2199,7 +2199,7 @@ C     Handle OP,ERRO
                            ENDIF
                         ENDIF
                         jgl1 = jgl1 + 1
-                        READ (IUNIT3,*) ne , na , zp , ap , xep , nval ,
+                        READ (3,*) ne , na , zp , ap , xep , nval ,
      &                                  waga
                         WRITE (4,*) ne , na , zp , ap , EP(IEXP) , 
      &                              nval , waga
@@ -2209,7 +2209,7 @@ C     Handle OP,ERRO
      &                          'YCOR',8X,'COR.F'/)
                         ile1 = ILE(jgl1)
                         DO itp = 1 , nval
-                           READ (IUNIT3,*) ns1 , ns2 , fiex1(1,1,1) , 
+                           READ (3,*) ns1 , ns2 , fiex1(1,1,1) , 
      &                                     fiex1(1,1,2)
                            ltrn = IY(ile1+itp-1,jgl1)
                            IF ( ltrn.LT.1000 ) THEN
