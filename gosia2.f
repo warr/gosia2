@@ -62,8 +62,8 @@ C PROGRAM GOSIA
 C
 C Calls: ADHOC, ALLOC, ANGULA, ARCCOS, ARCTG, CMLAB, COORD, DECAY, DJMM,
 C        EFFIX, ELMT, FAKP, FHIP, FTBM, INTG, KLOPOT, KONTUR, LAGRAN, LOAD,
-C        MINI, MIXR, MIXUP, OPENF, OPENF2, PATH, PRELM, PTICC, QFIT, READY, 
-C        SETIN,SIMIN, SNAKE, STING, TACOS, TAPMA, TEMB, TENS, WSIXJ, WTHREJ
+C        MINI, MIXR, MIXUP, OPENF, PATH, PRELM, PTICC, QFIT, READY, SETIN,
+C        SIMIN, SNAKE, STING, TACOS, TAPMA, TEMB, TENS, WSIXJ, WTHREJ
 C
 C Uses global variables:
 C      ABC    - absorption coefficients
@@ -664,7 +664,7 @@ C     Start reading input file.
 
 C        Treat OP,FILE (attach files to fortran units)
          IF ( op2.EQ.'FILE' ) THEN
-           CALL OPENF2
+           CALL OPENF
            GOTO 100
          ENDIF
          
