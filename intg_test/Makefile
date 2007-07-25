@@ -4,6 +4,8 @@ INP += ag109.yie
 INP += kr92.yie
 INP += miniball_gdet.f8
 INP += miniball_gdet.f9
+INP += ag109_intg.out.good
+INP += kr92_intg.out.good
 
 OUT += ag109.cor
 OUT += kr92.cor
