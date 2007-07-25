@@ -1724,7 +1724,8 @@ C     Treat suboption EXPT
          G(7) = .6             ! POWER
          DO k = 1 , NEXPT ! Zn, An, E_p, THETA_lab, M_c, M_A, IAX, phi1, phi2, ikin, ln
             READ (JZB,*) IZ1(k) , XA1(k) , EP(k) , TLBDG(k) , EMMA(k) ,
-     &           MAGA(k) , IAXS(k) , fi0 , fi1 , ISKIN(k) , LNORM(k)
+     &                   MAGA(k) , IAXS(k) , fi0 , fi1 , ISKIN(k) ,
+     &                   LNORM(k)
             ITTE(k) = 0
             IF ( XA1(k).LT.0. ) ITTE(k) = 1
             XA1(k) = ABS(XA1(k))
