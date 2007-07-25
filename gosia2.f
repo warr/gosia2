@@ -2582,8 +2582,6 @@ C---- gosia2 changes start
 
         IF ( JZB.EQ.25 ) ccch1 = chisq ! But we never use ccch1
         IF ( JZB.EQ.26 ) ccch2 = chisq ! But we never use ccch2
-        WRITE (*,*) 'ITER = ' , mawr , ' CHISQ1 = ' , ccch1 , 
-     &              ' CHISQ2 = ' , ccch2
          IF ( IBPS.EQ.0 ) THEN
            JZB = 25
            mrepf = 1
