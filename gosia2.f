@@ -2137,7 +2137,7 @@ C     Handle OP,ERRO
                               jmm = jmm + 1
                               CORF(jmm,1) = DBLE(ni)
                               CORF(jmm,2) = DBLE(nf)
-                              CORF(jmm,3) = YGN(jyi)/sh1
+                              CORF(jmm,3) = YGN(jyi) ! Was divided by sh1 in gosia
                               IF ( YGN(jyi).GE.YGN(IDRN) ) CORF(jmm,4)
      &                             = CORF(jmm,3)/20.
                               IF ( YGN(jyi).LT.YGN(IDRN) ) CORF(jmm,4)
