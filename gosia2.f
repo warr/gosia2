@@ -2610,15 +2610,14 @@ C     Calculate chi squared and normalization without minimizing
       MCFIX = 1
 C---- gosia2 changes end
       CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
-      
 C---- gosia2 changes start
+      
 C     Set CNOR1 to the average of CNOR1 and CNOR2
       DO kh1 = 1 , LP6 ! LP6 = 32
         DO kh2 = 1 , LP3 ! LP3 = 75
-          IF ( JZB.EQ.25) THEN ! If it is the second nucleus
+          IF ( JZB.EQ.25 ) THEN ! If it is the second nucleus
             CNOR1(kh1,kh2) = CNOR(kh1,kh2)
           ELSE
-            nawr = 1 ! Go through other branch next time
             CNOR2(kh1,kh2) = CNOR(kh1,kh2)
             CNOR1(kh1,kh2) = (CNOR1(kh1,kh2)+CNOR2(kh1,kh2))/2.
           ENDIF
@@ -2628,16 +2627,19 @@ C     Set CNOR1 to the average of CNOR1 and CNOR2
 C     Increment iteration counter
       mawr = mawr + 1
 
-C     Decide whether to terminate here
+C     Store chisq
       IF ( JZB.EQ.25 ) ccch1 = chisq ! But we never use ccch1
       IF ( JZB.EQ.26 ) ccch2 = chisq ! But we never use ccch2
       WRITE (*,*) 'ITER = ' , mawr , ' CHISQ1 = ' , ccch1 , 
      &  ' CHISQ2 = ' , ccch2
       chir = chir + chisq
+
+C     Decide whether to terminate here
       IF ( JZB.EQ.26 ) cht = ABS(chir-chp)
       IF ( JZB.EQ.26 ) chp = chir
       IF ( JZB.EQ.26 .AND. cht.LT.0.1 ) mret = 0
       IF ( JZB.EQ.26 .AND. mawr.GE.20 ) mret = 0
+      IF ( JZB.EQ.26 ) nawr = 1 ! Go through other branch next time
 
       IF ( IBPS.EQ.0 .AND. JZB.EQ.25 ) JZB = 26
       IF ( IBPS.NE.0 ) JZB = 25
@@ -2671,25 +2673,30 @@ C---- gosia2 changes end
       ENDIF
  2000 WRITE (22,99047)
 99047 FORMAT (15X,'********* END OF EXECUTION **********')
-      STOP
+      GOTO 3912
+
+c-----------------------
+ 3912 CONTINUE
+      IF ( mrepf.NE.1 ) GOTO 1911
+      mrepf = 2
+      JZB = 26
+      GOTO 2200
+
+ 1911 IF ( mret.EQ.1 ) JZB = 25
+      IF ( mret.EQ.1 ) GOTO 2200
+      DO mmmm = 1 , 32
+         DO kkkk = 1 , 50
+            WRITE (13,*) cnor1(mmmm,kkkk)
+         ENDDO
+      ENDDO
+      STOP 
+c-----------------------
 
 C     Handle OP,EXIT
 C---- gosia2 changes start
  430  IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
       IF ( mret.EQ.1 ) THEN
-        IF ( mrepf.EQ.1 ) THEN
-          mrepf = 2
-          JZB = 26
-          GOTO 2200
-        ENDIF
-        IF ( mret.EQ.1 ) JZB = 25
-        IF ( mret.EQ.1 ) GOTO 2200
-        DO mmmm = 1 , 32
-          DO kkkk = 1 , 50
-            WRITE (13,*) CNOR1(mmmm,kkkk)
-          ENDDO
-        ENDDO
-        STOP
+         GOTO 3912
       ENDIF
       IF ( IPRM(18).NE.0 ) CALL PTICC(idr)
 C---- gosia2 changes end
