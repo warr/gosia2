@@ -2674,24 +2674,30 @@ C---- gosia2 changes end
 
  2000 WRITE (22,99047)
 99047 FORMAT (15X,'********* END OF EXECUTION **********')
+
+C---- gosia2 addition start
       GOTO 2100
 
 C     Decide if we have to loop again for beam/projectile
- 2100 CONTINUE
-      IF ( mrepf.EQ.1 ) THEN
+ 2100 IF ( mrepf.EQ.1 ) THEN
          mrepf = 2
          JZB = 26
          GOTO 2200
       ENDIF
 
-      IF ( mret.EQ.1 ) JZB = 25
-      IF ( mret.EQ.1 ) GOTO 2200
+      IF ( mret.EQ.1 ) THEN
+         JZB = 25
+         GOTO 2200
+      ENDIF
+
+C     Write normalization coefficients
       DO mmmm = 1 , 32
          DO kkkk = 1 , 50
             WRITE (13,*) cnor1(mmmm,kkkk)
          ENDDO
       ENDDO
-      STOP ! Really stop : END of program
+C---- gosia2 addition end
+      STOP
 
 C     Handle OP,EXIT
 C---- gosia2 changes start
