@@ -19,7 +19,7 @@ OUT += ag109.me
 OUT += kr92.me
 OUT += cnor.dat
 
-all: ag109_mini0.out kr92_mini0.out
+all: compare
 
 $(GOSIA2DIR)/gosia2:
 	make -C $(GOSIA2DIR)
@@ -37,6 +37,9 @@ ag109_mini0.out: $(GOSIA2DIR)/gosia2 ag109_mini0.inp
 kr92_mini0.out: $(GOSIA2DIR)/gosia2 kr92_mini0.inp
 	$(GOSIA2DIR)/gosia2 < kr92_mini0.inp
 
+compare: ag109_mini0.out kr92_mini0.out
+	diff ag109_mini0.out ag109_mini0.out.good
+	diff kr92_mini0.out kr92_mini0.out.good
 
 clean:
 	rm -f *~ fort.* $(INP) $(OUT)
