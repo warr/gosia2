@@ -2671,26 +2671,27 @@ C---- gosia2 changes end
             CALL KLOPOT(kmat,rlr)
          ENDIF
       ENDIF
+
  2000 WRITE (22,99047)
 99047 FORMAT (15X,'********* END OF EXECUTION **********')
       GOTO 2100
 
-c-----------------------
+C     Decide if we have to loop again for beam/projectile
  2100 CONTINUE
-      IF ( mrepf.NE.1 ) GOTO 1911
-      mrepf = 2
-      JZB = 26
-      GOTO 2200
+      IF ( mrepf.EQ.1 ) THEN
+         mrepf = 2
+         JZB = 26
+         GOTO 2200
+      ENDIF
 
- 1911 IF ( mret.EQ.1 ) JZB = 25
+      IF ( mret.EQ.1 ) JZB = 25
       IF ( mret.EQ.1 ) GOTO 2200
       DO mmmm = 1 , 32
          DO kkkk = 1 , 50
             WRITE (13,*) cnor1(mmmm,kkkk)
          ENDDO
       ENDDO
-      STOP 
-c-----------------------
+      STOP ! Really stop : END of program
 
 C     Handle OP,EXIT
 C---- gosia2 changes start
