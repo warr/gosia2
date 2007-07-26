@@ -463,9 +463,10 @@ C     Initialize pointers
       LP13 = LP9 + 1
       LP14 = 4900 ! Maximum number of collision coefficients
 
+      JZB = 5
+
 C---- gosia2 changes start
 C     IBPS = 0
-      JZB = 5
 C     Read target/projectile switch and first option from standard input
       READ (*,*) IBPS
       READ (*,99001) op1 , op2
