@@ -14,7 +14,7 @@ OUT += kr92.me
 OUT += ag109_intg.out
 OUT += kr92_intg.out
 
-all: ag109_intg.out kr92_intg.out
+all: compare
 
 ag109_intg.inp: unpack
 
@@ -40,6 +40,9 @@ ag109_intg.out: ../gosia2 ag109_intg.inp
 kr92_intg.out: ../gosia2 kr92_intg.inp
 	../gosia2 < kr92_intg.inp
 
+compare: ag109_intg.out kr92_intg.out
+	diff a*out*
+	diff k*out*
 
 clean:
 	rm -f *~ fort.* $(INP) $(OUT)
