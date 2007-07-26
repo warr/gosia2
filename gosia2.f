@@ -499,12 +499,12 @@ C---- gosia2 changes start
       chir = 0.
       mawr = 0
 
- 2200 DO i = 1 , 50
+ 2200 DO i = 1 , 50 ! This is where we come back when we iterate over target/beam
         LIFCT(i) = 0
       ENDDO
 
       IF ( mret.EQ.1 .AND. JZB.EQ.26 ) chir = 0.
-      REWIND 25
+      REWIND 25 ! Rewind input files
       REWIND 26
       READ (JZB,*) IBPS
       IBPS = IBPS - 1
