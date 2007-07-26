@@ -2586,7 +2586,7 @@ C---- gosia2 changes start
          IF ( IBPS.EQ.0 ) THEN
            JZB = 25
            mrepf = 1
-         ELSE
+         ELSE ! i.e. IBPS is 1
            IBPS = IBPS + 1
            IF ( IBPS.EQ.1 ) JZB = 26 ! But IBPS must be 2 here! Ooops!
            IF ( IBPS.EQ.1 ) GOTO 2200
