@@ -2673,10 +2673,10 @@ C---- gosia2 changes end
       ENDIF
  2000 WRITE (22,99047)
 99047 FORMAT (15X,'********* END OF EXECUTION **********')
-      GOTO 3912
+      GOTO 2100
 
 c-----------------------
- 3912 CONTINUE
+ 2100 CONTINUE
       IF ( mrepf.NE.1 ) GOTO 1911
       mrepf = 2
       JZB = 26
@@ -2696,7 +2696,7 @@ C     Handle OP,EXIT
 C---- gosia2 changes start
  430  IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
       IF ( mret.EQ.1 ) THEN
-         GOTO 3912
+         GOTO 2100
       ENDIF
       IF ( IPRM(18).NE.0 ) CALL PTICC(idr)
 C---- gosia2 changes end
