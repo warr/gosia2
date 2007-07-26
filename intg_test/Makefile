@@ -41,8 +41,8 @@ kr92_intg.out: ../gosia2 kr92_intg.inp
 	../gosia2 < kr92_intg.inp
 
 compare: ag109_intg.out kr92_intg.out
-	diff a*out*
-	diff k*out*
+	diff ag109_intg.out ag109_intg.out.good
+	diff kr92_intg.out kr92_intg.out.good
 
 clean:
 	rm -f *~ fort.* $(INP) $(OUT)
