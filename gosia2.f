@@ -2201,8 +2201,7 @@ C     Handle OP,ERRO
                            ENDIF
                         ENDIF
                         jgl1 = jgl1 + 1
-                        READ (3,*) ne , na , zp , ap , xep , nval ,
-     &                                  waga
+                        READ (3,*) ne , na , zp , ap , xep , nval , waga
                         WRITE (4,*) ne , na , zp , ap , EP(IEXP) , 
      &                              nval , waga
                         WRITE (22,99038) IEXP , jgl1
