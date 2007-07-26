@@ -34,10 +34,13 @@ g2demo-targ.inp: unpack
 unpack: g2demo.tgz
 	tar zxvf g2demo.tgz
 
-g2demo-beam.out: g2demo-beam.inp
+$(GOSIA2DIR)/gosia2:
+	make -C $(GOSIA2DIR)
+
+g2demo-beam.out: $(GOSIA2DIR)/gosia2 g2demo-beam.inp
 	$(GOSIA2DIR)/gosia2 < g2demo-beam.inp
 
-g2demo-targ.out: g2demo-targ.inp
+g2demo-targ.out: $(GOSIA2DIR)/gosia2 g2demo-targ.inp
 	$(GOSIA2DIR)/gosia2 < g2demo-targ.inp
 
 compare: g2demo-beam.out g2demo-targ.out
