@@ -2581,8 +2581,6 @@ C---- gosia2 changes start
         MCFIX = 0 ! Calculate chisq using CNOR1 not CNOR
         CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
 
-        IF ( JZB.EQ.25 ) ccch1 = chisq ! But we never use ccch1
-        IF ( JZB.EQ.26 ) ccch2 = chisq ! But we never use ccch2
          IF ( IBPS.EQ.0 ) THEN
            JZB = 25
            mrepf = 1
