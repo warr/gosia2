@@ -2634,11 +2634,12 @@ C     Store chisq
       chir = chir + chisq
 
 C     Decide whether to terminate here
-      IF ( JZB.EQ.26 ) cht = ABS(chir-chp)
-      IF ( JZB.EQ.26 ) chp = chir
-      IF ( JZB.EQ.26 .AND. cht.LT.0.1 ) mret = 0
-      IF ( JZB.EQ.26 .AND. mawr.GE.20 ) mret = 0
-      IF ( JZB.EQ.26 ) nawr = 1 ! Go through other branch next time
+      IF ( JZB.EQ.26 ) THEN
+         cht = ABS(chir-chp) ! Difference in old and new chisq
+         chp = chir
+         IF ( cht.LT.0.1 .OR. mawr.GE.20) mret = 0 ! terminate
+         nawr = 1
+      ENDIF
 
       IF ( IBPS.EQ.0 .AND. JZB.EQ.25 ) JZB = 26
       IF ( IBPS.NE.0 ) JZB = 25
