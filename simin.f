@@ -4,7 +4,7 @@ C FUNCTION SIMIN
 C
 C Called by: GOSIA
 C
-C Purpose:
+C Purpose: Integrate under a curve defined by an array.
 C
 C Formal parameters:
 C      Np     - number of points in array Y
