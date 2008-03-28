@@ -27,7 +27,7 @@ C The value 0.012008 is v'/c, where v' is taken from Nikolaev and Dmitriev,
 C Phys. Lett. 82A, 277, to be 3.6 x 10^6 m/s. The 0.45 is the coefficient
 C alpha from the same paper. The power of 5/3 is 1/k = 1/0.6 from the same
 C paper.
- 
+
       SUBROUTINE XSTATIC(Iz,Ido,Iup,Beta)
       IMPLICIT NONE
       REAL*8 AKS , Beta , DQ , h , QCEN , VACDP , XNOR
