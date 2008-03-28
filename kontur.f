@@ -19,8 +19,8 @@ C      LNY    - use logs to calculate chi squared
 C      MEMAX  - number of matrix elements
 C      NWR    - number of datapoints used in fit
 C      SA     - ratio of elements for correlated elements
-C      XV     -
-C      YV     -
+C      XV     - energy meshpoints where we calculate exact Coulex
+C      YV     - scattering angle meshpoints where we calculate exact Coulex
 C
 C Formal parameters:
 C      Idr    -
