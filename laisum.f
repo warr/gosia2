@@ -23,6 +23,7 @@ C      LOCQ   - location of collision functions in ZETA array
 C      LP7    - start of collision functions in ZETA (45100)
 C      MSTORE -
 C      NDIV   -
+C      NPT    -
 C      NSTART -
 C      NSTOP  -
 C      ZETA   - various coefficients
