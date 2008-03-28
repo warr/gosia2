@@ -24,10 +24,10 @@ C
 C Formal parameters:
 C      Ygn    -
 C      Idr    - number of decays
-C      Iful   -
+C      Iful   - flag to select full basis or not
 C      Fi0    - phi_0
 C      Fi1    - phi_1
-C      Trec   -
+C      Trec   - Theta of recoiling nucleus
 C      Gth    -
 C      Figl   -
 C      Ngl    - detector number
