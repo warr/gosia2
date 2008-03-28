@@ -10,7 +10,7 @@ C Uses global variables:
 C      ARM    - reduced matrix elements
 C      DEV    -
 C      IEXP   - experiment number
-C      ITS    -
+C      ITS    - create tape 18 file (OP,CONT switch SEL,)
 C      KVAR   -
 C
 C Formal parameters:
