@@ -21,19 +21,19 @@ C      FIEX   - phi range of particle detector
 C      ICLUST -
 C      IDRN   -
 C      IEXP   - number of experiment
-C      IFMO
+C      IFMO   - include correction to angular distance for finite recoil distance.
 C      IGRD   -
 C      ILE    -
 C      IMIN   -
 C      INM    -
-C      INNR   -
+C      INNR   - independent normalisation switch (see OP,CONT INR,)
 C      IPRM   - printing flags (see suboption PRT of OP,CONT)
 C      IRAWEX -
 C      ITMA   - identify detectors according to OP,GDET
-C      ITS    -
+C      ITS    - create tape 18 file (OP,CONT switch SEL,)
 C      IWF    -
 C      IY     - index for yields
-C      JSKIP  -
+C      JSKIP  - Experiments to skip during minimisation.
 C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
 C      KVAR   -
 C      LASTCL -
@@ -49,7 +49,7 @@ C      NEXPT  - number of experiments
 C      NLIFT  - number of lifetimes
 C      NMAX   - number of levels
 C      NYLDE  - number of yields
-C      ODL    - distance from target to front face of detector
+C      ODL    - results of OP,GDET calculation
 C      SPIN   - spin of level
 C      SUBCH1 -
 C      SUBCH2 -
@@ -59,8 +59,8 @@ C      TREP   -
 C      UPL    - upper limits for all gamma detectors
 C      VACDP  -
 C      YEXP   - experimental yield
-C      YGN    -
-C      YGP    -
+C      YGN    - gamma yield calculated without correction to angular distribution from finite recoil distance
+C      YGP    - gamma yield calculated with correction to angular distribution from finite recoil distance
 C      YNRM   - relative normalization factors for gamma detectors
 C
 C Formal parameters:
