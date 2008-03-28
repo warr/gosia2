@@ -62,7 +62,7 @@ C      I57    - switch which is either 5 or 7.
       ISG1 = ISG
       IF ( NPT.EQ.1 ) ISG1 = ABS(ISG1)
       rsg = DBLE(ISG)
-      DO i1 = 1 , LAMMAX
+      DO i1 = 1 , LAMMAX ! Loop over lambda
          lam = LAMDA(i1)
          lax = lam
          nz = LZETA(lam)
