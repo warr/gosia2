@@ -111,8 +111,7 @@ c     JAERI calibration - TC, Nov.2000
          w = LOG(En/.511)
          Effi = EXP(AKAVKA(1,Ipd)+AKAVKA(2,Ipd)
      &          *w-EXP(AKAVKA(3,Ipd)+AKAVKA(4,Ipd)*w))
-         GOTO 99999
-      
+         GOTO 99999      
       ELSE
 c GREMLIN
          w = LOG(20.*En)
