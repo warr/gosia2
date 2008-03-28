@@ -4,7 +4,9 @@ C SUBROUTINE RESET
 C
 C Called by: INTG
 C
-C Purpose: to reset the step size for the integeration in INTG.
+C Purpose: to advance by one step. This means f(n-3) is set to the old value
+C          of f(n-2), f(n-2) is set to the old value of f(n-1) and f(n-1) is
+C          set to the old value of f(n).
 C
 C Uses global variables:
 C      ARM    - reduced matrix elements
