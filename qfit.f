@@ -5,16 +5,16 @@ C
 C Called by: GOSIA
 C Calls:     GAMATT
 C
-C Purpose: for OP,GDET, calculate effect of absorbers.
+C Purpose: for OP,GDET, fit attenuation by absorbers
 C
 C Formal parameters:
-C      Qui    -
+C      Qui    - attenuation coefficients
 C      Tau1   - absorption coefficients' table
 C      Tau2   - absorption coefficients' table
-C      Eng    -
-C      Xl1    -
-C      Cf     -
-C      Nl     -
+C      Eng    - gamma energy
+C      Xl1    - thickness of absorbers
+C      Cf     - coefficients of fit
+C      Nl     - number of types of absorber (7)
 C      Ind    - type of absorber
 C
 C Note the absorbers are: Al, C, Fe, Cu, Ag/Cd/Sn, Ta and Pb, respectively.
