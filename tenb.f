@@ -9,7 +9,7 @@ C Purpose: calculate the state of polarization of the decaying level
 C
 C Uses global variables:
 C      ARM    - reduced matrix elements
-C      CAT    -
+C      CAT    - Quantum numbers of states. CAT(n,3) is the M quantum number.
 C      NMAX   - number of levels
 C      NSTART -
 C      NSTOP  -
