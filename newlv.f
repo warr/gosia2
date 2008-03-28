@@ -11,7 +11,7 @@ C
 C Uses global variables:
 C      EXPO   - adiabatic exponential
 C      IFAC   -
-C      IFLG   -
+C      IFLG   - flag to determine whether to calculate exponential (so we don't calculate twice)
 C      ISG    -
 C      ISSTAR -
 C      ISSTO  -
