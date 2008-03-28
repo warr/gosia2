@@ -17,7 +17,7 @@ C      ELM    - matrix elements
 C      ELMH   -
 C      GRAD   - partial derivative of chi squared wrt. matrix element
 C      HLMLM  -
-C      ICS    - read correction factors from file rather than recalculating
+C      ICS    - read internal correction factors from file rather than recalculating
 C      IFBFL  - calculate derivatives with forward-backward method
 C      INTR   -
 C      IPRM   - printing flags (see suboption PRT of OP,CONT)
@@ -48,7 +48,7 @@ C      Imode  - mode of minimization
 C      Idr    -
 C      Xtest  -
 C      Ips    -
-C      Is     -
+C      Is     - generate input for sigma program flag
 C      Jjh    -
 C      Bten   -
 C
