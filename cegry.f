@@ -390,7 +390,7 @@ C      Iredv  -
                         IF ( IWF.NE.0 ) THEN
                            WRITE (22,99009) IEXP , ni , nf , 
      &                            ry/UPL(k9,IEXP)
-99009                      FORMAT (5X,'WARNINIG-EXP.',1I2,2X,'TRANS. ',
+99009                      FORMAT (5X,'WARNING-EXP.',1I2,2X,'TRANS. ',
      &                             1I2,'--',1I2,5X,
      &                             'EXCEEDS UPPER LIMIT (RATIO=',1E14.6,
      &                             ')')
