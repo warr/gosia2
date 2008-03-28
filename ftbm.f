@@ -28,7 +28,7 @@ C      ISMAX  -
 C      ISO    -
 C      ITAK2  -
 C      IY     - index of experimental yields
-C      JSKIP  -
+C      JSKIP  - Experiments to skip during minimisation.
 C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
 C      LFL    -
 C      LFL1   -
