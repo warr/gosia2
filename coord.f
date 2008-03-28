@@ -13,7 +13,7 @@ C      ISKIN  - kinematic flag
 C      IZ1    - Z of non-investigated nucleus
 C      XA     - A of investigated nucleus
 C      XA1    - A of non-investigated nucleus
-C      YV     -
+C      YV     - scattering angle meshpoints where we calculate exact Coulex
 C
 C Formal parameters:
 C      Wth    - theta of centre of detector
