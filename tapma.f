@@ -8,8 +8,8 @@ C Purpose: read parameters for sensitivity maps
 C
 C Uses global variables:
 C      DS     -
-C      XV     -
-C      YGN    -
+C      XV     - energy meshpoints where we calculate exact Coulex
+C      YGN    - gamma yield calculated without correction to angular distribution from finite recoil distance
 C      ZETA   - various coefficients
 C
 C Formal parameters:
