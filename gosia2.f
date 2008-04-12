@@ -899,7 +899,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
       CALL SNAKE(LX,ZPOL)
       CALL SETIN
       DO 475 J=1,LMAX
-      POLM=FLOAT(J-1)-SPIN(1)
+      POLM=REAL(J-1)-SPIN(1)
       CALL LOAD(LX,2,1,POLM,JJ)
       CALL STING(JJ)
       CALL PATH(JJ)
@@ -1360,7 +1360,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
       G(2)=.02
       G(3)=.0345
       G(4)=3.5
-      G(5)=FLOAT(IZ)/XA
+      G(5)=REAL(IZ)/XA
       G(6)=6.E-06
       G(7)=.6
       DO 840 K=1,NEXPT
@@ -1409,14 +1409,14 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
       CALL SNAKE(IEXP,ZPOL)
       CALL SETIN
       DO 799 J=1,LMAX
-      POLM=FLOAT(J-1)-SPIN(1)
+      POLM=REAL(J-1)-SPIN(1)
       CALL LOAD(IEXP,2,ICG,POLM,JJ)
       CALL STING(JJ)
       CALL PATH(JJ)
       CALL INTG(IEXP)
       CALL TENB(J,BTEN,LMAX)
       PR=0.
-      IF(OP2.EQ.'STAR'.OR.IPRM(19).EQ.1)WRITE(22,300)(FLOAT(J)-1.
+      IF(OP2.EQ.'STAR'.OR.IPRM(19).EQ.1)WRITE(22,300)(REAL(J)-1.
      *-SPIN(1)),IEXP
       DO 788 K=1,ISMAX
       PR=PR+REAL(ARM(K,5))**2+AIMAG(ARM(K,5))**2
@@ -1518,8 +1518,8 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
       IF((YGN(JYI)/YGN(IDRN)).LT.SLIM)GO TO 3211
       IF(JGL1.EQ.1)SH1=YGN(IDRN)
       JMM=JMM+1
-      CORF(JMM,1)=FLOAT(NI)
-      CORF(JMM,2)=FLOAT(NF)
+      CORF(JMM,1)=REAL(NI)
+      CORF(JMM,2)=REAL(NF)
       CORF(JMM,3)=YGN(JYI)
       IF(YGN(JYI).GE.YGN(IDRN))CORF(JMM,4)=CORF(JMM,3)/20.
       IF(YGN(JYI).LT.YGN(IDRN))CORF(JMM,4)=CORF(JMM,3)*
@@ -1649,7 +1649,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
       DO 2930 IUY=1,6
 2930  XIR(IUY,IEXP)=0.
       EMHL1=EMMA(IEXP)
-      EMMA(IEXP)=FLOAT(MAGA(IEXP))
+      EMMA(IEXP)=REAL(MAGA(IEXP))
       JDE=2
       IF(MAGA(IEXP).EQ.0)JDE=1
       DO 2931 IUY=1,6
@@ -1657,7 +1657,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
  2931 ZMIR(IUY,2,IEXP)=0.
       CALL LOAD(IEXP,1,2,0.,JJ)
       DO 631 JGS=1,LMAX
-      POLM=FLOAT(JGS-1)-SPIN(1)
+      POLM=REAL(JGS-1)-SPIN(1)
       CALL LOAD(IEXP,3,2,POLM,JJ)
       CALL PATH(JJ)
       CALL LOAD(IEXP,2,2,POLM,JJ)
@@ -1709,7 +1709,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
       IF(IHLM(KK).EQ.0)GO TO 633
       MULTI(KK)=1
       LAMDA(1)=KK
-      SPIN(2)=FLOAT(KK)
+      SPIN(2)=REAL(KK)
       IFAC(2)=1
       LDNUM(KK,1)=1
       ICG=1
@@ -2102,8 +2102,8 @@ c     *(ccch1+ccch2)
       ISPI=INT(SPIN(1)+.51)
       ISPO=INT(SPIN(1)+.49)
       IF(ISPI.NE.ISPO)ISHA=1
-      Z1=FLOAT(IABS(IZ1(IEXP)))
-      Z2=FLOAT(IZ)
+      Z1=REAL(IABS(IZ1(IEXP)))
+      Z2=REAL(IZ)
       A1=XA1(IEXP)
       A2=XA
       ZPOL=DIPOL*EP(IEXP)*A2/(Z2*Z2*(1.+A1/A2))
@@ -2162,7 +2162,7 @@ c     *(ccch1+ccch2)
       I2=I3
       I3=I3+1
       PP2=EP(IEXP)-PPP*EN(M2)
- 260  PSI(I2)=CPSI(LAM)*ZSQA*(PP1*PP2)**((2.*FLOAT(LAM1)-1.)/4.)
+ 260  PSI(I2)=CPSI(LAM)*ZSQA*(PP1*PP2)**((2.*REAL(LAM1)-1.)/4.)
  280  CONTINUE
  270  CONTINUE
       IF(IENT.EQ.1)RETURN
@@ -2175,8 +2175,8 @@ c     *(ccch1+ccch2)
       DO 380 N=1,NMAX
       WRT=POLM-EMMA(IEXP)
       WRTM=POLM+EMMA(IEXP)
-      IF(ICG.EQ.2)WRT=POLM-FLOAT(MAGA(IEXP))
-      IF(ICG.EQ.2)WRTM=POLM+FLOAT(MAGA(IEXP))
+      IF(ICG.EQ.2)WRT=POLM-REAL(MAGA(IEXP))
+      IF(ICG.EQ.2)WRTM=POLM+REAL(MAGA(IEXP))
       IF(WRTM.LT.-SPIN(N))GO TO 371
       IF(ABS(WRT).GT.SPIN(N))WRT=-SPIN(N)
       IF(WRTM.GT.SPIN(N))WRTM=SPIN(N)
@@ -2184,7 +2184,7 @@ c     *(ccch1+ccch2)
       DO 370 I=1,MSTOP
       CAT(IS,1)=N
       CAT(IS,2)=SPIN(N)
-      CAT(IS,3)=WRT+FLOAT(I-1)
+      CAT(IS,3)=WRT+REAL(I-1)
       IF(N.EQ.1.AND.abs(CAT(IS,3)-POLM).lt.1.e-6)JOJ=IS
       IS=IS+1
  370  CONTINUE
@@ -2213,7 +2213,7 @@ c     *(ccch1+ccch2)
       IF(ICG.EQ.2.AND.LAM.GT.6)GO TO 700
       LA=LAM
       IF(LAM.GT.6)LAM=LAM-6
-      RLAM=FLOAT(LAM)
+      RLAM=REAL(LAM)
       SSQRT=SQRT(2.*RLAM+1.)
       LZETA(LA)=NZ
       IR=0
@@ -2357,8 +2357,8 @@ c     *(ccch1+ccch2)
       IF(IZ1(LEXP).LT.0)A1=XA
       A2=XA
       IF(IZ1(LEXP).LT.0)A2=XA1(LEXP)
-      Z1=FLOAT(IABS(IZ1(LEXP)))
-      Z2=FLOAT(IZ)
+      Z1=REAL(IABS(IZ1(LEXP)))
+      Z2=REAL(IZ)
       IF(IPRM(1).NE.1)GO TO 2345
       IF(IZ1(LEXP).LT.0.AND.(II.EQ.0.AND.IPRM(10).EQ.1))WRITE(22,907)
      *IZ,XA,IABS(IZ1(LEXP)),XA1(LEXP)
@@ -2693,7 +2693,7 @@ c     *(ccch1+ccch2)
       LLOC(NLM)=KE
       IRL(NLM)=IRA(KE)
  3    CONTINUE
-      NLEND=INT((FLOAT(NLM)+1.1)/2.)
+      NLEND=INT((REAL(NLM)+1.1)/2.)
       DO 5 K=1,NLEND
       KE=NLM-K+1
       LS=LLOC(KE)
@@ -2746,7 +2746,7 @@ c     *(ccch1+ccch2)
  100  ARM(K,4)=(0.,0.)
       ISG1=ISG
       IF(NPT.EQ.1)ISG1=IABS(ISG1)
-      RSG=FLOAT(ISG)
+      RSG=REAL(ISG)
       DO 1 I1=1,LAMMAX
       LAM=LAMDA(I1)
       LAX=LAM
@@ -2833,8 +2833,8 @@ c     *(ccch1+ccch2)
       NZ=NZ+1
       Z=ZETA(NZ)
       Q=ZETA(INDQ+LP7)
-      IF(NDIV.NE.0)Q=ZETA(INDQ+LP7)+FLOAT(KDIV)*(ZETA(INDQ+LP7+ISG1)-
-     *ZETA(INDQ+LP7))/FLOAT(NDIV)
+      IF(NDIV.NE.0)Q=ZETA(INDQ+LP7)+REAL(KDIV)*(ZETA(INDQ+LP7+ISG1)-
+     *ZETA(INDQ+LP7))/REAL(NDIV)
       PAMP1=FAZA(LA,MUA,RMU,RSG)*Q*Z
       IF(ISO.EQ.0.AND.RMIR.GT..1)GO TO 545
       PAMP=PAMP1*ARM(IS,I57)+PAMP
@@ -2862,7 +2862,7 @@ c     *(ccch1+ccch2)
       EXPON=EXPOX
       IF(NDIV.EQ.0)GO TO 1
       EXPO1=TCEXP(CI*XI(INX)*ADB(NPT+ISG1)*ISG)
-      EXPON=EXPOX+FLOAT(KDIV)*(EXPO1-EXPOX)/FLOAT(NDIV)
+      EXPON=EXPOX+REAL(KDIV)*(EXPO1-EXPOX)/REAL(NDIV)
   1   CONTINUE
       RETURN
       END
@@ -3032,7 +3032,7 @@ c     *(ccch1+ccch2)
       IF(IEVEN)2,2,3
   2    DIS=-CI*IRS
       RETURN
- 3    DIS=CMPLX(-FLOAT(IRS),0.)
+ 3    DIS=CMPLX(-REAL(IRS),0.)
       RETURN
  4    DIS=-CI*IRS
       IF(RMU.LT.0.)DIS=-DIS
@@ -3255,7 +3255,7 @@ c     *(ccch1+ccch2)
       MIR=CAT(IR,3)
       IR1=IR-2*MIR
       ARM(IR1,7)=IFAC(N)*ARM(IR,7)
-      IF(FLOAT(MIR).LT.-0.1)GOTO 295
+      IF(REAL(MIR).LT.-0.1)GOTO 295
  300  CONTINUE
  305  CONTINUE
       NPT=NPT+NSW*ISG
@@ -3288,7 +3288,7 @@ c     *(ccch1+ccch2)
       MIR=CAT(IR,3)
       IR1=IR-2*MIR
       ARM(IR1,5)=IFAC(N)*ARM(IR,5)
-      IF(FLOAT(MIR).LT.-0.1)GOTO 320
+      IF(REAL(MIR).LT.-0.1)GOTO 320
  311  CONTINUE
  330  CONTINUE
       KAST=KAST+1
@@ -3313,7 +3313,7 @@ c     *(ccch1+ccch2)
       IF(F.LT.ACC50)GO TO 500
       CALL HALF(ISO)
       D2W=D2W/2.
-      NSW=(FLOAT(NSW)+.01)/2.
+      NSW=(REAL(NSW)+.01)/2.
       INTEND=2*INTEND
       IF(NSW.GE.1)GO TO 100
       NDIV=2*NDIV
@@ -3322,10 +3322,10 @@ c     *(ccch1+ccch2)
  500  CALL DOUBLE(ISO)
       D2W=2.*D2W
       NSW=2*NSW
-      INTEND=(FLOAT(INTEND)+.01)/2.
+      INTEND=(REAL(INTEND)+.01)/2.
       IF(INTEND.EQ.0)INTEND=1
       IF(NSW.GE.1)GO TO 100
-       NDIV=(FLOAT(NDIV)+.01)/2.
+       NDIV=(REAL(NDIV)+.01)/2.
       IF(NDIV.GE.2)GO TO 100
       NDIV=0
       NSW=1
@@ -3485,9 +3485,9 @@ c     *(ccch1+ccch2)
       ZT=ABS(ZT)
       XP=9.*XX
       NL=INT(XP)+1
-      WG=XP-FLOAT(NL-1)
+      WG=XP-REAL(NL-1)
       NG=NL+1
-      WL=FLOAT(NL)-XP
+      WL=REAL(NL)-XP
       A=WG*PARXM(IEXP,1,NG,KK)+WL*PARXM(IEXP,1,NL,KK)
       B=WG*PARXM(IEXP,2,NG,KK)+WL*PARXM(IEXP,2,NL,KK)
       Q1=A*ZT+B
@@ -3507,9 +3507,9 @@ c     *(ccch1+ccch2)
       ZT=ABS(ZT)
       XP=4.*XX
       NL=INT(XP)+1
-      WG=XP-FLOAT(NL-1)
+      WG=XP-REAL(NL-1)
       NG=NL+1
-      WL=FLOAT(NL)-XP
+      WL=REAL(NL)-XP
       Q1=WG*PARX(IEXP,2*KK-1,NG)+WL*PARX(IEXP,2*KK-1,NL)
       Q2=WG*PARX(IEXP,2*KK,NG)+WL*PARX(IEXP,2*KK,NL)
       QAPR(K,2,N)=QAPR(K,1,N)*Q2*FXIS2(K,N)
@@ -3657,7 +3657,7 @@ c     *(ccch1+ccch2)
       DO 2 I=2,NMAX
       DO 3 KP=1,7,2
       K=KP-1
-      K1=INT(FLOAT(K)/2.+.01)
+      K1=INT(REAL(K)/2.+.01)
       IF(K.EQ.0)GO TO 98
       DO 4 LP=1,KP
       IF(IAXS(IEXP).EQ.0.AND.LP.NE.1)GO TO 4
@@ -3667,7 +3667,7 @@ c     *(ccch1+ccch2)
       IND=K*K/4+LPP+(I-2)*16
       LX=LPP-1
       LXX=LX
-  13  IPH=(-1)**(L+INT(FLOAT(LXX)/2.))
+  13  IPH=(-1)**(L+INT(REAL(LXX)/2.))
       ZETA(INZ)=ZETA(INZ)+BTEN(IND)*IPH*DJMM(ARG,K,LX,L)
       IF(LPP.EQ.1)GO TO 5
       IF(LX.LT.0)GO TO 5
@@ -3691,7 +3691,7 @@ c     *(ccch1+ccch2)
       SAVE DJM
       IFZA=1
       IF(BETA.LT.0.)IFZA=(-1)**(KP+KPP)
-      SK=FLOAT(K)
+      SK=REAL(K)
       UL=SK*((SK-1.)*(4.*SK+7)/6.+1.)
       LCA=INT(UL+.1)
       LOC=LCA+(2*K+1)*KP+KPP+K+1
@@ -3830,9 +3830,9 @@ c     *(ccch1+ccch2)
       DO 2 K=1,LMAX
       FC=2.
       IF(K.EQ.LMAX)FC=1.
-      IF(FLOAT(INT(SPIN(1))).lt.SPIN(1))FC=2.
+      IF(REAL(INT(SPIN(1))).lt.SPIN(1))FC=2.
       LOC=0
-      POLM=FLOAT(K-1)-SPIN(1)
+      POLM=REAL(K-1)-SPIN(1)
        CALL LOAD(IEXP,3,2,POLM,JJ)
        CALL PATH(JJ)
        CALL LOAD(IEXP,2,2,POLM,JJ)
@@ -3875,7 +3875,7 @@ c     *(ccch1+ccch2)
       CALL SNAKE(IEXP,ZPOL)
       CALL SETIN
       DO 20 K=1,LMAX
-      POLM=FLOAT(K-1)-SPIN(1)
+      POLM=REAL(K-1)-SPIN(1)
       CALL LOAD(IEXP,2,1,POLM,KK)
        IF(IPRM(7).EQ.-1)WRITE(22,701)POLM,IEXP
       CALL STING(KK)
@@ -4803,7 +4803,7 @@ c      WRITE(*,54)CHISQ
       SUBROUTINE FAKP
       COMMON/FAKUL/IP(26),IPI(26),KF(101,26),PILOG(26)
       DO 99 I=1,26
-      X=FLOAT(IP(I))
+      X=REAL(IP(I))
       PILOG(I)=ALOG(X)
    99 CONTINUE
       DO 1 L=1,26
@@ -5304,9 +5304,9 @@ c      WRITE(*,54)CHISQ
       VALMI=SPIN-XJI
       IF(VALMI.LT.0.)VALMI=-VALMI
       DO 2 M=1,NCOUP
-      F=VALMI+FLOAT(M)-1.
+      F=VALMI+REAL(M)-1.
       DO 3 K=1,3
-      RK=2.*FLOAT(K)
+      RK=2.*REAL(K)
       IF2=F*2.+0.0001
       IRK2=RK*2.+0.0001
       ISPIN2=SPIN*2.+0.0001
@@ -5318,7 +5318,7 @@ c      WRITE(*,54)CHISQ
       DO 4 K=1,3
       K1=2*K-1
  4    AKS(K1,IL)=AKS(K1,IL)
-     *+SUM(K)*EXP(-((QCEN-FLOAT(J))/DQ)**2/2.)/XNOR
+     *+SUM(K)*EXP(-((QCEN-REAL(J))/DQ)**2/2.)/XNOR
       IF(IMEAN.EQ.0)GO TO 1
  11   DO 12 K=1,3
       K1=2*K
@@ -5363,14 +5363,14 @@ c      WRITE(*,54)CHISQ
       IF(IDO.LT.1)IDO=1
       XNOR=0.
       DO 1 LQ=IDO,IUP
-  1   XNOR=XNOR+EXP(-((QCEN-FLOAT(LQ))/DQ)**2/2.)
+  1   XNOR=XNOR+EXP(-((QCEN-REAL(LQ))/DQ)**2/2.)
       RETURN
       END
       FUNCTION ATS(N)
       IF(N.LE.0.OR.N.GT.96)GO TO 15
       X=N/2.+1
       M=N/2+1
-      XM=FLOAT(M)
+      XM=REAL(M)
       IF(abs(x-xm).lt.1.e-9)GO TO 100
       GO TO(2,2,2,3,3,2,2,3,3,2,3,5,9,5,2,2,3,3,2,3,5,9,5
      *,2,2,3,3,2,7,7,2,5,13,17,2,3,2,9,5,2,2,3,3,2,
@@ -5845,7 +5845,7 @@ c      WRITE(*,54)CHISQ
       C1=REAL(ARM(L1-1,JK))
       C2=AIMAG(ARM(L1-1,JK))
  2    ARM(L1,JK)=CMPLX(C1,C2)
-      RX=FLOAT(INDX)
+      RX=REAL(INDX)
       ARM(J,JK)=CMPLX(RX,AL)
       GO TO 11
  1    CONTINUE
@@ -6600,7 +6600,7 @@ c      WRITE(*,54)CHISQ
       P=SQRT(SQRT(SQRT(.1)))
       RXDM=(R-P)/(1.-P)
       RXDM=10.*RXDM
-      AI=FLOAT(INT(RXDM))
+      AI=REAL(INT(RXDM))
       RNDM=RXDM-AI
       RETURN
  1    SE=100.*T+.511
