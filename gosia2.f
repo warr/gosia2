@@ -2631,7 +2631,7 @@ c     *(ccch1+ccch2)
  12   FORMAT(5X,35HNO SPACE FOR Q FUNCTIONS TABULATION//
      *5X,38HSORRY,JOB WILL BE BRUTALLY TERMINATED!)
       V=-1.
-      U=ALOG10(V)
+      U=LOG10(V)
       u=sin(u)
       RETURN
       END
@@ -6367,7 +6367,7 @@ c      WRITE(*,54)CHISQ
       WRITE(22,217)
       DO 11 I=1,MEMAX
       IF(KVAR(I).EQ.0)GO TO 11
-      RL=ALOG10(ELMU(I)/ABS(ELM(I)))
+      RL=LOG10(ELMU(I)/ABS(ELM(I)))
       IF(RL.GE.RLR)ELML(I)=1.
       WRITE(22,112)I,RL,ELMU(I)/LNGT
  11   CONTINUE
@@ -6593,7 +6593,7 @@ c      WRITE(*,54)CHISQ
       FUNCTION RNDM(SE)
       IF(SE.GT.32000.)GO TO 1
  2    SE=SE*SE
-      U=ALOG10(SE)
+      U=LOG10(SE)
       I=INT(U)+1
       T=SE/(10.**I)
       R=SQRT(SQRT(SQRT(T)))
