@@ -3688,6 +3688,7 @@ c     *(ccch1+ccch2)
       DIMENSION DJM(525),ICZY(525)
       COMMON/IDENT/BEQ
       COMMON/CB/B(20)
+      SAVE DJM
       IFZA=1
       IF(BETA.LT.0.)IFZA=(-1)**(KP+KPP)
       SK=FLOAT(K)
