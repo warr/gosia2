@@ -809,7 +809,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                               CALL SNAKE(lx,ZPOL)
                               CALL SETIN
                               DO j = 1 , LMAX
-                                 polm = REAL(j-1) - SPIN(1)
+                                 polm = DBLE(j-1) - SPIN(1)
                                  CALL LOAD(lx,2,1,polm,jj)
                                  CALL STING(jj)
                                  CALL PATH(jj)
@@ -1179,7 +1179,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                      DO l = 1 , 8
                         READ (8,*) (ABC(l,j),j=1,10)
                         DO j = 1 , 10
-                           ABC(l,j) = ALOG(ABC(l,j))
+                           ABC(l,j) = LOG(ABC(l,j))
                         ENDDO
                      ENDDO
                      DO l = 1 , nfd
@@ -1443,7 +1443,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
          G(2) = .02
          G(3) = .0345
          G(4) = 3.5
-         G(5) = REAL(IZ)/XA
+         G(5) = DBLE(IZ)/XA
          G(6) = 6.E-06
          G(7) = .6
          DO k = 1 , NEXPT
@@ -1706,7 +1706,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                CALL SNAKE(IEXP,ZPOL)
                CALL SETIN
                DO j = 1 , LMAX
-                  polm = REAL(j-1) - SPIN(1)
+                  polm = DBLE(j-1) - SPIN(1)
                   CALL LOAD(IEXP,2,icg,polm,jj)
                   CALL STING(jj)
                   CALL PATH(jj)
@@ -1714,16 +1714,16 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                   CALL TENB(j,bten,LMAX)
                   pr = 0.
                   IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
-     &                 WRITE (22,99027) (REAL(j)-1.-SPIN(1)) , IEXP
+     &                 WRITE (22,99027) (DBLE(j)-1.-SPIN(1)) , IEXP
 99027             FORMAT (1X//40X,'EXCITATION AMPLITUDES'//10X,'M=',
      &                    1F5.1,5X,'EXPERIMENT',1X,1I2//5X,'LEVEL',2X,
      &                    'SPIN',2X,'M',5X,'REAL AMPLITUDE',2X,
      &                    'IMAGINARY AMPLITUDE'//)
                   DO k = 1 , ISMAX
-                     pr = pr + REAL(ARM(k,5))**2 + AIMAG(ARM(k,5))**2
+                     pr = pr + DBLE(ARM(k,5))**2 + AIMAG(ARM(k,5))**2
                      IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
      &                    WRITE (22,99028) INT(CAT(k,1)) , CAT(k,2) , 
-     &                    CAT(k,3) , REAL(ARM(k,5)) , AIMAG(ARM(k,5))
+     &                    CAT(k,3) , DBLE(ARM(k,5)) , AIMAG(ARM(k,5))
 99028                FORMAT (7X,1I2,3X,1F4.1,2X,1F5.1,2X,1E14.6,2X,
      &                       1E14.6)
                   ENDDO
@@ -1846,8 +1846,8 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                            IF ( (YGN(jyi)/YGN(IDRN)).GE.slim ) THEN
                               IF ( jgl1.EQ.1 ) sh1 = YGN(IDRN)
                               jmm = jmm + 1
-                              CORF(jmm,1) = REAL(ni)
-                              CORF(jmm,2) = REAL(nf)
+                              CORF(jmm,1) = DBLE(ni)
+                              CORF(jmm,2) = DBLE(nf)
                               CORF(jmm,3) = YGN(jyi)
                               IF ( YGN(jyi).GE.YGN(IDRN) ) CORF(jmm,4)
      &                             = CORF(jmm,3)/20.
@@ -1993,7 +1993,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                XIR(iuy,IEXP) = 0.
             ENDDO
             emhl1 = EMMA(IEXP)
-            EMMA(IEXP) = REAL(MAGA(IEXP))
+            EMMA(IEXP) = DBLE(MAGA(IEXP))
             jde = 2
             IF ( MAGA(IEXP).EQ.0 ) jde = 1
             DO iuy = 1 , 6
@@ -2002,7 +2002,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
             ENDDO
             CALL LOAD(IEXP,1,2,0.D0,jj)
             DO jgs = 1 , LMAX
-               polm = REAL(jgs-1) - SPIN(1)
+               polm = DBLE(jgs-1) - SPIN(1)
                CALL LOAD(IEXP,3,2,polm,jj)
                CALL PATH(jj)
                CALL LOAD(IEXP,2,2,polm,jj)
@@ -2060,7 +2060,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                IF ( ihlm(kk).NE.0 ) THEN
                   MULTI(kk) = 1
                   LAMDA(1) = kk
-                  SPIN(2) = REAL(kk)
+                  SPIN(2) = DBLE(kk)
                   IFAC(2) = 1
                   LDNUM(kk,1) = 1
                   icg = 1
@@ -2112,9 +2112,9 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                            CALL INTG(IEXP)
                            jp = 2
                            IF ( MAGA(IEXP).NE.0 .AND. jd.EQ.2 ) jp = 3
-                           p = REAL(ARM(1,5))
+                           p = DBLE(ARM(1,5))
                            r = AIMAG(ARM(1,5))
-                           qr = REAL(ARM(jp,5))
+                           qr = DBLE(ARM(jp,5))
                            s = AIMAG(ARM(jp,5))
                            test = p*p + r*r + qr*qr + s*s
                            p = p/SQRT(test)
@@ -2538,8 +2538,8 @@ c     *(ccch1+ccch2)
          ispi = INT(SPIN(1)+.51)
          ispo = INT(SPIN(1)+.49)
          IF ( ispi.NE.ispo ) ISHA = 1
-         z1 = REAL(ABS(IZ1(Iexp)))
-         z2 = REAL(IZ)
+         z1 = DBLE(ABS(IZ1(Iexp)))
+         z2 = DBLE(IZ)
          a1 = XA1(Iexp)
          a2 = XA
          ZPOL = DIPOL*EP(Iexp)*a2/(z2*z2*(1.+a1/a2))
@@ -2607,7 +2607,7 @@ c     *(ccch1+ccch2)
                      i3 = i3 + 1
                      pp2 = EP(Iexp) - ppp*EN(m2)
                      PSI(i2) = cpsi(lam)*zsqa*(pp1*pp2)
-     &                         **((2.*REAL(lam1)-1.)/4.)
+     &                         **((2.*DBLE(lam1)-1.)/4.)
                   ENDDO
                ENDIF
             ENDDO
@@ -2623,8 +2623,8 @@ c     *(ccch1+ccch2)
       DO n = 1 , NMAX
          wrt = Polm - EMMA(Iexp)
          wrtm = Polm + EMMA(Iexp)
-         IF ( Icg.EQ.2 ) wrt = Polm - REAL(MAGA(Iexp))
-         IF ( Icg.EQ.2 ) wrtm = Polm + REAL(MAGA(Iexp))
+         IF ( Icg.EQ.2 ) wrt = Polm - DBLE(MAGA(Iexp))
+         IF ( Icg.EQ.2 ) wrtm = Polm + DBLE(MAGA(Iexp))
          IF ( wrtm.LT.-SPIN(n) ) THEN
             NSTART(n) = 0
          ELSE
@@ -2634,7 +2634,7 @@ c     *(ccch1+ccch2)
             DO i = 1 , mstop
                CAT(is,1) = n
                CAT(is,2) = SPIN(n)
-               CAT(is,3) = wrt + REAL(i-1)
+               CAT(is,3) = wrt + DBLE(i-1)
                IF ( n.EQ.1 .AND. ABS(CAT(is,3)-Polm).LT.1.E-6 ) Joj = is
                is = is + 1
             ENDDO
@@ -2660,7 +2660,7 @@ c     *(ccch1+ccch2)
             IF ( Icg.NE.2 .OR. lam.LE.6 ) THEN
                la = lam
                IF ( lam.GT.6 ) lam = lam - 6
-               rlam = REAL(lam)
+               rlam = DBLE(lam)
                ssqrt = SQRT(2.*rlam+1.)
                LZETA(la) = nz
                ir = 0
@@ -2870,8 +2870,8 @@ c     *(ccch1+ccch2)
          IF ( IZ1(lexp).LT.0 ) a1 = XA
          a2 = XA
          IF ( IZ1(lexp).LT.0 ) a2 = XA1(lexp)
-         z1 = REAL(ABS(IZ1(lexp)))
-         z2 = REAL(IZ)
+         z1 = DBLE(ABS(IZ1(lexp)))
+         z2 = DBLE(IZ)
          IF ( IPRM(1).EQ.1 ) THEN
             IF ( IZ1(lexp).LT.0 .AND. (Ii.EQ.0 .AND. IPRM(10).EQ.1) )
      &           WRITE (22,99002) IZ , XA , ABS(IZ1(lexp)) , XA1(lexp)
@@ -3271,7 +3271,7 @@ c     *(ccch1+ccch2)
                Irl(Nlm) = IRA(ke)
             ENDIF
          ENDDO
-         nlend = INT((REAL(Nlm)+1.1)/2.)
+         nlend = INT((DBLE(Nlm)+1.1)/2.)
          DO k = 1 , nlend
             ke = Nlm - k + 1
             ls = Lloc(ke)
@@ -3340,7 +3340,7 @@ c     *(ccch1+ccch2)
       ENDDO
       ISG1 = ISG
       IF ( NPT.EQ.1 ) ISG1 = ABS(ISG1)
-      rsg = REAL(ISG)
+      rsg = DBLE(ISG)
       DO i1 = 1 , LAMMAX
          lam = LAMDA(i1)
          lax = lam
@@ -3449,9 +3449,9 @@ c     *(ccch1+ccch2)
                         Nz = Nz + 1
                         z = ZETA(Nz)
                         q = ZETA(indq+LP7)
-                        IF ( NDIV.NE.0 ) q = ZETA(indq+LP7) + REAL(KDIV)
+                        IF ( NDIV.NE.0 ) q = ZETA(indq+LP7) + DBLE(KDIV)
      &                       *(ZETA(indq+LP7+ISG1)-ZETA(indq+LP7))
-     &                       /REAL(NDIV)
+     &                       /DBLE(NDIV)
                         pamp1 = FAZA(la,mua,rmu,Rsg)*q*z
                         IF ( ISO.NE.0 .OR. rmir.LE..1 ) THEN
                            pamp = pamp1*ARM(is,I57) + pamp
@@ -3488,7 +3488,7 @@ c     *(ccch1+ccch2)
       EXPON = expox
       IF ( Ndiv.NE.0 ) THEN
          expo1 = TCEXP(ci*XI(Inx)*ADB(Npt+Isg1)*Isg)
-         EXPON = expox + REAL(Kdiv)*(expo1-expox)/REAL(Ndiv)
+         EXPON = expox + DBLE(Kdiv)*(expo1-expox)/DBLE(Ndiv)
       ENDIF
       END
       COMPLEX*16 FUNCTION FAZA(La,Mi,Rmu,Rsg)
@@ -3713,7 +3713,7 @@ c     *(ccch1+ccch2)
             RETURN
          ENDIF
       ENDIF
-      Dis = CMPLX(-REAL(irs),0.)
+      Dis = CMPLX(-DBLE(irs),0.)
       RETURN
 99999 END
       SUBROUTINE TRINT(Arg,Si,Ci)
@@ -3973,7 +3973,7 @@ c     *(ccch1+ccch2)
             mir = CAT(ir,3)
             ir1 = ir - 2*mir
             ARM(ir1,7) = IFAC(n)*ARM(ir,7)
-            IF ( REAL(mir).LT.-0.1 ) GOTO 120
+            IF ( DBLE(mir).LT.-0.1 ) GOTO 120
          ENDDO
       ELSE
          DO ir = 1 , ISMAX
@@ -4007,7 +4007,7 @@ c     *(ccch1+ccch2)
             mir = CAT(ir,3)
             ir1 = ir - 2*mir
             ARM(ir1,5) = IFAC(n)*ARM(ir,5)
-            IF ( REAL(mir).LT.-0.1 ) GOTO 220
+            IF ( DBLE(mir).LT.-0.1 ) GOTO 220
          ENDDO
       ELSE
          DO ir = 1 , ISMAX
@@ -4028,7 +4028,7 @@ c     *(ccch1+ccch2)
                ihold = IPATH(k)
                IF ( ihold.NE.0 ) THEN
                   hold = ARM(ihold,5) - ARM(ihold,7)
-                  rl = REAL(hold)
+                  rl = DBLE(hold)
                   rim = AIMAG(hold)
                   srt = rl*rl + rim*rim
                   f = MAX(f,srt)
@@ -4040,10 +4040,10 @@ c     *(ccch1+ccch2)
                   CALL DOUBLE(ISO)
                   D2W = 2.*D2W
                   NSW = 2*NSW
-                  intend = (REAL(intend)+.01)/2.
+                  intend = (DBLE(intend)+.01)/2.
                   IF ( intend.EQ.0 ) intend = 1
                   IF ( NSW.LT.1 ) THEN
-                     NDIV = (REAL(NDIV)+.01)/2.
+                     NDIV = (DBLE(NDIV)+.01)/2.
                      IF ( NDIV.LT.2 ) THEN
                         NDIV = 0
                         NSW = 1
@@ -4052,7 +4052,7 @@ c     *(ccch1+ccch2)
                ELSE
                   CALL HALF(ISO)
                   D2W = D2W/2.
-                  NSW = (REAL(NSW)+.01)/2.
+                  NSW = (DBLE(NSW)+.01)/2.
                   intend = 2*intend
                   IF ( NSW.LT.1 ) THEN
                      NDIV = 2*NDIV
@@ -4269,9 +4269,9 @@ c     *(ccch1+ccch2)
                      zt = ABS(zt)
                      xp = 9.*xx
                      nl = INT(xp) + 1
-                     wg = xp - REAL(nl-1)
+                     wg = xp - DBLE(nl-1)
                      ng = nl + 1
-                     wl = REAL(nl) - xp
+                     wl = DBLE(nl) - xp
                      a = wg*PARXM(Iexp,1,ng,kk) + wl*PARXM(Iexp,1,nl,kk)
                      b = wg*PARXM(Iexp,2,ng,kk) + wl*PARXM(Iexp,2,nl,kk)
                      q1 = a*zt + b
@@ -4293,9 +4293,9 @@ c     *(ccch1+ccch2)
                         zt = ABS(zt)
                         xp = 4.*xx
                         nl = INT(xp) + 1
-                        wg = xp - REAL(nl-1)
+                        wg = xp - DBLE(nl-1)
                         ng = nl + 1
-                        wl = REAL(nl) - xp
+                        wl = DBLE(nl) - xp
                         q1 = wg*PARX(Iexp,2*kk-1,ng)
      &                       + wl*PARX(Iexp,2*kk-1,nl)
                         q2 = wg*PARX(Iexp,2*kk,ng)
@@ -4429,11 +4429,11 @@ c     *(ccch1+ccch2)
                         jmp = -INT(2.01*CAT(mp,3))
                         fc = WTHREJ(isi,kk,isi,jmp,ll,jm)
                         ite = 1
- 2                      IF ( ila.EQ.1 ) x = REAL(ARM(mp,5))
-     &                       *REAL(ARM(mm,5)) + AIMAG(ARM(mp,5))
+ 2                      IF ( ila.EQ.1 ) x = DBLE(ARM(mp,5))
+     &                       *DBLE(ARM(mm,5)) + AIMAG(ARM(mp,5))
      &                       *AIMAG(ARM(mm,5))
-                        IF ( ila.NE.1 ) x = REAL(ARM(mp,5))
-     &                       *AIMAG(ARM(mm,5)) - REAL(ARM(mm,5))
+                        IF ( ila.NE.1 ) x = DBLE(ARM(mp,5))
+     &                       *AIMAG(ARM(mm,5)) - DBLE(ARM(mm,5))
      &                       *AIMAG(ARM(mp,5))
                         Bten(ind) = Bten(ind) + x*fc*ilg
                         IF ( ite.EQ.2 ) GOTO 6
@@ -4476,7 +4476,7 @@ c     *(ccch1+ccch2)
       DO i = 2 , NMAX
          DO kp = 1 , 7 , 2
             k = kp - 1
-            k1 = INT(REAL(k)/2.+.01)
+            k1 = INT(DBLE(k)/2.+.01)
             IF ( k.EQ.0 ) THEN
                ind = (i-2)*16 + 1
                inz = (i-1)*28 + 1
@@ -4490,7 +4490,7 @@ c     *(ccch1+ccch2)
                         ind = k*k/4 + lpp + (i-2)*16
                         lx = lpp - 1
                         lxx = lx
- 2                      iph = (-1)**(l+INT(REAL(lxx)/2.))
+ 2                      iph = (-1)**(l+INT(DBLE(lxx)/2.))
                         ZETA(inz) = ZETA(inz) + Bten(ind)
      &                              *iph*DJMM(arg,k,lx,l)
                         IF ( lpp.NE.1 ) THEN
@@ -4519,7 +4519,7 @@ c     *(ccch1+ccch2)
       SAVE djm
       ifza = 1
       IF ( Beta.LT.0. ) ifza = (-1)**(Kp+Kpp)
-      sk = REAL(K)
+      sk = DBLE(K)
       ul = sk*((sk-1.)*(4.*sk+7)/6.+1.)
       lca = INT(ul+.1)
       loc = lca + (2*K+1)*Kp + Kpp + K + 1
@@ -4693,9 +4693,9 @@ c     *(ccch1+ccch2)
          DO k = 1 , LMAX
             fc = 2.
             IF ( k.EQ.LMAX ) fc = 1.
-            IF ( REAL(INT(SPIN(1))).LT.SPIN(1) ) fc = 2.
+            IF ( DBLE(INT(SPIN(1))).LT.SPIN(1) ) fc = 2.
             loc = 0
-            polm = REAL(k-1) - SPIN(1)
+            polm = DBLE(k-1) - SPIN(1)
             CALL LOAD(IEXP,3,2,polm,jj)
             CALL PATH(jj)
             CALL LOAD(IEXP,2,2,polm,jj)
@@ -4714,8 +4714,8 @@ c     *(ccch1+ccch2)
      &                          - NSTART(i11) + 1
                            DO lpxd = 1 , lpx
                               kx = kx + 1
-                              ZETA(loc) = ZETA(loc) + fc*REAL(ARM(kx,5))
-     &                           *REAL(ARM(kx,6))
+                              ZETA(loc) = ZETA(loc) + fc*DBLE(ARM(kx,5))
+     &                           *DBLE(ARM(kx,6))
      &                           /fx + fc*AIMAG(ARM(kx,5))
      &                           *AIMAG(ARM(kx,6))/fx
                            ENDDO
@@ -4745,7 +4745,7 @@ c     *(ccch1+ccch2)
          CALL SNAKE(IEXP,ZPOL)
          CALL SETIN
          DO k = 1 , LMAX
-            polm = REAL(k-1) - SPIN(1)
+            polm = DBLE(k-1) - SPIN(1)
             CALL LOAD(IEXP,2,1,polm,kk)
             IF ( IPRM(7).EQ.-1 ) WRITE (22,99001) polm , IEXP
 99001       FORMAT (1X//40X,'EXCITATION AMPLITUDES'//10X,'M=',1F4.1,5X,
@@ -4758,7 +4758,7 @@ c     *(ccch1+ccch2)
             IF ( IPRM(7).EQ.-1 ) THEN
                DO j = 1 , ISMAX
                   WRITE (22,99002) INT(CAT(j,1)) , CAT(j,2) , CAT(j,3) , 
-     &                             REAL(ARM(j,5)) , AIMAG(ARM(j,5))
+     &                             DBLE(ARM(j,5)) , AIMAG(ARM(j,5))
 99002             FORMAT (7X,1I2,3X,1F4.1,2X,1F4.1,2X,1E14.6,2X,1E14.6)
                ENDDO
             ENDIF
@@ -4901,7 +4901,7 @@ c     *(ccch1+ccch2)
                      kk = luu - LP10*(jk-1)
                      kk6 = kk + 5
                      WRITE (22,99009) KSEQ(idec,3) , KSEQ(idec,4) , 
-     &                                (INT(REAL(ARM(kkx,jk))),
+     &                                (INT(DBLE(ARM(kkx,jk))),
      &                                AIMAG(ARM(kkx,jk)),kkx=kk,kk6)
 99009                FORMAT (2X,1I2,'--',1I2,5X,
      &                       6('(',1I3,2X,1E8.2,')',3X))
@@ -5850,7 +5850,7 @@ c      WRITE(*,54)CHISQ
       REAL*8 PILOG , x
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
       DO i = 1 , 26
-         x = REAL(IP(i))
+         x = DBLE(IP(i))
          PILOG(i) = LOG(x)
       ENDDO
       DO l = 1 , 26
@@ -6473,9 +6473,9 @@ c      WRITE(*,54)CHISQ
             valmi = Spin - xji
             IF ( valmi.LT.0. ) valmi = -valmi
             DO m = 1 , ncoup
-               f = valmi + REAL(m) - 1.
+               f = valmi + DBLE(m) - 1.
                DO k = 1 , 3
-                  rk = 2.*REAL(k)
+                  rk = 2.*DBLE(k)
                   if2 = f*2. + 0.0001
                   irk2 = rk*2. + 0.0001
                   ispin2 = Spin*2. + 0.0001
@@ -6489,7 +6489,7 @@ c      WRITE(*,54)CHISQ
                DO k = 1 , 3
                   k1 = 2*k - 1
                   AKS(k1,Il) = AKS(k1,Il) + SUM(k)
-     &                         *EXP(-((QCEN-REAL(j))/DQ)**2/2.)/XNOR
+     &                         *EXP(-((QCEN-DBLE(j))/DQ)**2/2.)/XNOR
                ENDDO
                IF ( imean.EQ.0 ) GOTO 100
             ENDIF
@@ -6539,7 +6539,7 @@ c      WRITE(*,54)CHISQ
       IF ( Ido.LT.1 ) Ido = 1
       XNOR = 0.
       DO lq = Ido , Iup
-         XNOR = XNOR + EXP(-((QCEN-REAL(lq))/DQ)**2/2.)
+         XNOR = XNOR + EXP(-((QCEN-DBLE(lq))/DQ)**2/2.)
       ENDDO
       END
       FUNCTION ATS(N)
@@ -6552,7 +6552,7 @@ c      WRITE(*,54)CHISQ
       ELSE
          x = N/2. + 1
          m = N/2 + 1
-         xm = REAL(m)
+         xm = DBLE(m)
          IF ( ABS(x-xm).GE.1.E-9 ) THEN
             IF ( m.EQ.1 .OR. m.EQ.2 .OR. m.EQ.3 .OR. m.EQ.6 .OR. 
      &           m.EQ.7 .OR. m.EQ.10 .OR. m.EQ.15 .OR. m.EQ.16 .OR. 
@@ -7136,11 +7136,11 @@ c      WRITE(*,54)CHISQ
             j1 = j + 1
             DO l = j1 , kk6
                l1 = kk6 + j1 - l
-               c1 = REAL(ARM(l1-1,Jk))
+               c1 = DBLE(ARM(l1-1,Jk))
                c2 = AIMAG(ARM(l1-1,Jk))
                ARM(l1,Jk) = CMPLX(c1,c2)
             ENDDO
-            rx = REAL(Indx)
+            rx = DBLE(Indx)
             ARM(j,Jk) = CMPLX(rx,al)
             GOTO 99999
          ENDIF
@@ -8032,7 +8032,7 @@ c      WRITE(*,54)CHISQ
       p = SQRT(SQRT(SQRT(.1)))
       rxdm = (r-p)/(1.-p)
       rxdm = 10.*rxdm
-      ai = REAL(INT(rxdm))
+      ai = DBLE(INT(rxdm))
       RNDM = rxdm - ai
       RETURN
       END
@@ -8309,7 +8309,7 @@ c      WRITE(*,54)CHISQ
       IMPLICIT NONE
       REAL*8 a , b , c , d
       COMPLEX*16 Z
-      a = REAL(Z)
+      a = DBLE(Z)
       b = AIMAG(Z)
       a = EXP(a)
       c = a*COS(b)
@@ -8320,7 +8320,7 @@ c      WRITE(*,54)CHISQ
       IMPLICIT NONE
       REAL*8 a , b , TCABS
       COMPLEX*16 Z
-      a = REAL(Z)
+      a = DBLE(Z)
       b = AIMAG(Z)
       IF ( ABS(a).LT.1.E-16 ) a = 0.
       IF ( ABS(b).LT.1.E-16 ) b = 0.
@@ -8379,7 +8379,7 @@ c 1020 FORMAT(A,A,I6)
       COMMON /EFCAL / ABC(8,10) , AKAVKA(8,200) , THICK(200,7)
       Effi = 1.E-6
       En = En + 1.E-24
-      enl = ALOG(En)
+      enl = LOG(En)
       DO i = 1 , 10
          ll = 11 - i
          j = ll
@@ -8430,7 +8430,7 @@ c FITEFF or GREMLIN check
 C     LEUVEN CALIBRATION
          Effi = AKAVKA(1,Ipd)
          enek = 1000.*En
-         w = ALOG(enek)
+         w = LOG(enek)
          DO ixi = 1 , 6
             Effi = Effi + AKAVKA(ixi+1,Ipd)*w**ixi
          ENDDO
@@ -8439,7 +8439,7 @@ C     LEUVEN CALIBRATION
       ELSEIF ( AKAVKA(5,Ipd).GT.0. .AND. AKAVKA(5,Ipd).LT.10. ) THEN
 c FITEFF eff. calib. by P.Olbratowski use
 c PJN@2000
-         w = ALOG(En/AKAVKA(5,Ipd))
+         w = LOG(En/AKAVKA(5,Ipd))
          pw = AKAVKA(2,Ipd)*w
          IF ( En.LT.AKAVKA(5,Ipd) ) pw = pw + 
      &        w*w*(AKAVKA(3,Ipd)+w*AKAVKA(4,Ipd))
@@ -8447,7 +8447,7 @@ c PJN@2000
          RETURN
       ELSEIF ( AKAVKA(5,Ipd).LT.10. ) THEN
 c GREMLIN
-         w = ALOG(20.*En)
+         w = LOG(20.*En)
          pw = AKAVKA(1,Ipd) + AKAVKA(2,Ipd)*w + AKAVKA(3,Ipd)
      &        *w*w + AKAVKA(4,Ipd)*w*w*w
          Effi = Effi*EXP(pw)
@@ -8466,7 +8466,7 @@ c GREMLIN
          RETURN
       ENDIF
 c     JAERI calibration - TC, Nov.2000
-      w = ALOG(En/.511)
+      w = LOG(En/.511)
       Effi = EXP(AKAVKA(1,Ipd)+AKAVKA(2,Ipd)
      &       *w-EXP(AKAVKA(3,Ipd)+AKAVKA(4,Ipd)*w))
       RETURN
