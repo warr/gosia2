@@ -1,6 +1,6 @@
-      FUNCTION ATS(N)
+      REAL*8 FUNCTION ATS(N)
       IMPLICIT NONE
-      REAL*8 ATS , x , xm
+      REAL*8 x , xm
       INTEGER*4 m , N
       IF ( N.LE.0 .OR. N.GT.96 ) THEN
          ATS = 0.
