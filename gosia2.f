@@ -1720,10 +1720,10 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
      &                    'SPIN',2X,'M',5X,'REAL AMPLITUDE',2X,
      &                    'IMAGINARY AMPLITUDE'//)
                   DO k = 1 , ISMAX
-                     pr = pr + DBLE(ARM(k,5))**2 + AIMAG(ARM(k,5))**2
+                     pr = pr + DBLE(ARM(k,5))**2 + IMAG(ARM(k,5))**2
                      IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
      &                    WRITE (22,99028) INT(CAT(k,1)) , CAT(k,2) , 
-     &                    CAT(k,3) , DBLE(ARM(k,5)) , AIMAG(ARM(k,5))
+     &                    CAT(k,3) , DBLE(ARM(k,5)) , IMAG(ARM(k,5))
 99028                FORMAT (7X,1I2,3X,1F4.1,2X,1F5.1,2X,1E14.6,2X,
      &                       1E14.6)
                   ENDDO
@@ -2113,9 +2113,9 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                            jp = 2
                            IF ( MAGA(IEXP).NE.0 .AND. jd.EQ.2 ) jp = 3
                            p = DBLE(ARM(1,5))
-                           r = AIMAG(ARM(1,5))
+                           r = IMAG(ARM(1,5))
                            qr = DBLE(ARM(jp,5))
-                           s = AIMAG(ARM(jp,5))
+                           s = IMAG(ARM(jp,5))
                            test = p*p + r*r + qr*qr + s*s
                            p = p/SQRT(test)
                            s = ABS(r/s)
@@ -4029,7 +4029,7 @@ c     *(ccch1+ccch2)
                IF ( ihold.NE.0 ) THEN
                   hold = ARM(ihold,5) - ARM(ihold,7)
                   rl = DBLE(hold)
-                  rim = AIMAG(hold)
+                  rim = IMAG(hold)
                   srt = rl*rl + rim*rim
                   f = MAX(f,srt)
                ENDIF
@@ -4430,11 +4430,11 @@ c     *(ccch1+ccch2)
                         fc = WTHREJ(isi,kk,isi,jmp,ll,jm)
                         ite = 1
  2                      IF ( ila.EQ.1 ) x = DBLE(ARM(mp,5))
-     &                       *DBLE(ARM(mm,5)) + AIMAG(ARM(mp,5))
-     &                       *AIMAG(ARM(mm,5))
+     &                       *DBLE(ARM(mm,5)) + IMAG(ARM(mp,5))
+     &                       *IMAG(ARM(mm,5))
                         IF ( ila.NE.1 ) x = DBLE(ARM(mp,5))
-     &                       *AIMAG(ARM(mm,5)) - DBLE(ARM(mm,5))
-     &                       *AIMAG(ARM(mp,5))
+     &                       *IMAG(ARM(mm,5)) - DBLE(ARM(mm,5))
+     &                       *IMAG(ARM(mp,5))
                         Bten(ind) = Bten(ind) + x*fc*ilg
                         IF ( ite.EQ.2 ) GOTO 6
  4                      IF ( iha.NE.1 .OR. Icl.NE.Lmax ) THEN
@@ -4716,8 +4716,8 @@ c     *(ccch1+ccch2)
                               kx = kx + 1
                               ZETA(loc) = ZETA(loc) + fc*DBLE(ARM(kx,5))
      &                           *DBLE(ARM(kx,6))
-     &                           /fx + fc*AIMAG(ARM(kx,5))
-     &                           *AIMAG(ARM(kx,6))/fx
+     &                           /fx + fc*IMAG(ARM(kx,5))
+     &                           *IMAG(ARM(kx,6))/fx
                            ENDDO
                         ENDIF
                      ENDDO
@@ -4758,7 +4758,7 @@ c     *(ccch1+ccch2)
             IF ( IPRM(7).EQ.-1 ) THEN
                DO j = 1 , ISMAX
                   WRITE (22,99002) INT(CAT(j,1)) , CAT(j,2) , CAT(j,3) , 
-     &                             DBLE(ARM(j,5)) , AIMAG(ARM(j,5))
+     &                             DBLE(ARM(j,5)) , IMAG(ARM(j,5))
 99002             FORMAT (7X,1I2,3X,1F4.1,2X,1F4.1,2X,1E14.6,2X,1E14.6)
                ENDDO
             ENDIF
@@ -4902,7 +4902,7 @@ c     *(ccch1+ccch2)
                      kk6 = kk + 5
                      WRITE (22,99009) KSEQ(idec,3) , KSEQ(idec,4) , 
      &                                (INT(DBLE(ARM(kkx,jk))),
-     &                                AIMAG(ARM(kkx,jk)),kkx=kk,kk6)
+     &                                IMAG(ARM(kkx,jk)),kkx=kk,kk6)
 99009                FORMAT (2X,1I2,'--',1I2,5X,
      &                       6('(',1I3,2X,1E8.2,')',3X))
                   ENDDO
@@ -7129,15 +7129,15 @@ c      WRITE(*,54)CHISQ
      &     IEXP , al/Em
       al1 = ABS(al)
       IF ( ITS.EQ.2 ) WRITE (18,*) Lu , Indx , IEXP , al1
-      IF ( al1.LE.ABS(AIMAG(ARM(kk6,Jk))) ) RETURN
+      IF ( al1.LE.ABS(IMAG(ARM(kk6,Jk))) ) RETURN
       DO j = Kk , kk6
-         a1 = ABS(AIMAG(ARM(j,Jk)))
+         a1 = ABS(IMAG(ARM(j,Jk)))
          IF ( al1.GT.a1 ) THEN
             j1 = j + 1
             DO l = j1 , kk6
                l1 = kk6 + j1 - l
                c1 = DBLE(ARM(l1-1,Jk))
-               c2 = AIMAG(ARM(l1-1,Jk))
+               c2 = IMAG(ARM(l1-1,Jk))
                ARM(l1,Jk) = CMPLX(c1,c2)
             ENDDO
             rx = DBLE(Indx)
@@ -8310,7 +8310,7 @@ c      WRITE(*,54)CHISQ
       REAL*8 a , b , c , d
       COMPLEX*16 Z
       a = DBLE(Z)
-      b = AIMAG(Z)
+      b = IMAG(Z)
       a = EXP(a)
       c = a*COS(b)
       d = a*SIN(b)
@@ -8321,7 +8321,7 @@ c      WRITE(*,54)CHISQ
       REAL*8 a , b , TCABS
       COMPLEX*16 Z
       a = DBLE(Z)
-      b = AIMAG(Z)
+      b = IMAG(Z)
       IF ( ABS(a).LT.1.E-16 ) a = 0.
       IF ( ABS(b).LT.1.E-16 ) b = 0.
       TCABS = SQRT(a*a+b*b)
