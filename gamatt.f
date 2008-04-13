@@ -1,0 +1,23 @@
+      SUBROUTINE GAMATT(Qui,Tau1,Tau2,Xl1,Nl)
+      IMPLICIT NONE
+      INTEGER*4 i , i1 , k , Nl
+      REAL*8 q , Qui , tau , Tau1 , Tau2 , thing , thing1 , thing3 , Xl1
+      DIMENSION Tau1(10) , Tau2(10,7) , Xl1(7) , thing3(10) , q(9) , 
+     &          Qui(8,10)
+      DO i = 1 , 10
+         i1 = 1
+         thing3(i) = 0.
+ 50      thing1 = -Tau2(i,i1)*Xl1(i1) + thing3(i)
+         i1 = i1 + 1
+         thing3(i) = thing1
+         IF ( i1.LE.Nl ) GOTO 50
+      ENDDO
+      DO i = 1 , 10
+         tau = Tau1(i)
+         thing = thing3(i)
+         CALL GCF(tau,thing,q)
+         DO k = 2 , 9
+            Qui(k-1,i) = q(k)
+         ENDDO
+      ENDDO
+      END
