@@ -1,6 +1,6 @@
-      FUNCTION F(K,Sji,Sjf,L1,L2)
+      REAL*8 FUNCTION F(K,Sji,Sjf,L1,L2)
       IMPLICIT NONE
-      REAL*8 F , phase , Sjf , Sji , WSIXJ , WTHREJ
+      REAL*8 phase , Sjf , Sji , WSIXJ , WTHREJ
       INTEGER*4 ix , jfz , jiz , K , kz , l , L1 , l1z , L2 , l2z
       F = 0.
       IF ( (L1*L2).EQ.0 ) RETURN
