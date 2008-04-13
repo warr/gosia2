@@ -1,6 +1,6 @@
-      FUNCTION SIMIN(Np,H,Y)
+      REAL*8 FUNCTION SIMIN(Np,H,Y)
       IMPLICIT NONE
-      REAL*8 ee , H , SIMIN , sm , Y
+      REAL*8 ee , H , sm , Y
       INTEGER*4 ik , in , Np
       DIMENSION Y(101)
       IF ( Np.GE.3 ) THEN
