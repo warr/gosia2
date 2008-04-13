@@ -1,3 +1,28 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE TENB
+C
+C Called by: FTBM, GOSIA
+C Calls:     WTHREJ
+C
+C Purpose: calculate the state of polarization of the decaying level
+C
+C Uses global variables:
+C      ARM    - reduced matrix elements
+C      CAT    - substates of levels (n_level, J, m)
+C      NMAX   - number of levels
+C      NSTART -
+C      NSTOP  -
+C      SPIN   - spin of level
+C
+C Formal parameters:
+C      Icl    -
+C      Bten   -
+C      Lmax   -
+C
+C Note that the parameters to WTHREJ are all doubled, so that this routine
+C can cope with half-integers.
+
       SUBROUTINE TENB(Icl,Bten,Lmax)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , Bten , CAT , ce , DIPOL , EN , fc , si , 
@@ -14,6 +39,7 @@
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /AZ    / ARM(600,7)
+      
       iha = (-1)**INT(2.*SPIN(1)+.01)
       IF ( Icl.EQ.1 ) THEN
          ms = 16*(NMAX-1)
@@ -21,6 +47,7 @@
             Bten(i) = 0.
          ENDDO
       ENDIF
+
       DO i = 2 , NMAX
          ms = NSTART(i)
          IF ( ms.NE.0 ) THEN
@@ -41,9 +68,9 @@
                      DO m = ms , msp
                         mm = m
                         mp = m + l
-                        jm = INT(2.01*CAT(mm,3))
+                        jm = INT(2.01*CAT(mm,3)) ! 2 * m quantum number of substate mm
                         IF ( mp.GT.NSTOP(i) ) GOTO 4
-                        ilg = (-1)**INT(si-CAT(mp,3))
+                        ilg = (-1)**INT(si-CAT(mp,3)) ! 2 * m quantum number of substate mp
                         jmp = -INT(2.01*CAT(mp,3))
                         fc = WTHREJ(isi,kk,isi,jmp,ll,jm)
                         ite = 1
@@ -59,7 +86,7 @@
                            ite = 2
                            mp = mp - 2*l
                            IF ( mp.GE.NSTART(i) ) THEN
-                              jmp = INT(2.01*CAT(mp,3))
+                              jmp = INT(2.01*CAT(mp,3)) ! 2 * m quantum number of substate mp
                               jm = -jm
                               fc = WTHREJ(isi,kk,isi,jmp,ll,jm)
                               ilg = (-1)**INT(si+CAT(mp,3))
@@ -69,9 +96,9 @@
  6                   ENDDO
                      IF ( Icl.EQ.Lmax ) Bten(ind) = Bten(ind)
      &                    *ce/(2.*SPIN(1)+1.)
-                  ENDDO
-               ENDIF
-            ENDDO
-         ENDIF
-      ENDDO
+                  ENDDO ! Loop over lp
+               ENDIF ! If isi.GE.k
+            ENDDO ! Loop over kp
+         ENDIF ! If ms.NE.0
+      ENDDO ! Loop over i
       END
