@@ -26,5 +26,5 @@ C      sign of xi
          FXIS1 = 1.
          GOTO 99999
       ENDIF
-      FXIS1 = -SIGN(1.,XI(I))
+      FXIS1 = -SIGN(1.D0,XI(I))
 99999 END
