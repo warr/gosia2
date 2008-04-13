@@ -8372,9 +8372,9 @@ c 1020 FORMAT(A,A,I6)
       END
       SUBROUTINE EFFIX(Ipd,En,Effi)
       IMPLICIT NONE
-      REAL ABC , AKAVKA , d , Effi , En , enek , enl , pw , s , t , 
+      REAL*8 ABC , AKAVKA , d , Effi , En , enek , enl , pw , s , t ,
      &     THICK , w , xx , yy
-      INTEGER i , Ipd , ixi , j , l , ll , n
+      INTEGER*4 i , Ipd , ixi , j , l , ll , n
       DIMENSION xx(51) , yy(51)
       COMMON /EFCAL / ABC(8,10) , AKAVKA(8,200) , THICK(200,7)
       Effi = 1.E-6
@@ -8695,10 +8695,10 @@ c     JAERI calibration - TC, Nov.2000
       END
       REAL*8 FUNCTION ELMT(Xi1,Xi2,Lam,Nb1,Nb2,Xk1,Xk2,Xm1,Xm2,Xm3)
       IMPLICIT NONE
-      REAL addt , ELMT , fac , fct , pha1 , pha2 , s1 , s2 , WTHREJ , 
+      REAL*8 addt , ELMT , fac , fct , pha1 , pha2 , s1 , s2 , WTHREJ ,
      &     Xi1 , Xi2 , Xk1 , Xk2 , xlam , Xm1 , Xm2 , Xm3 , xn
-      INTEGER i1 , i2 , ipha , k1 , k2 , l , la , Lam , llam , n , Nb1 , 
-     &        Nb2
+      INTEGER*4 i1 , i2 , ipha , k1 , k2 , l , la , Lam , llam , n , 
+     &        Nb1 ,Nb2
       la = Lam
       IF ( la.GT.6 ) la = la - 6
       xlam = FLOAT(la)
