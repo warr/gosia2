@@ -196,7 +196,7 @@ C**********************************************************************
      &                NICC , NANG(200)
       COMMON /GGG   / G(7)
       COMMON /AZ    / ARM(600,7)
-      COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
+      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /CXI   / XI(500)
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
@@ -2858,7 +2858,7 @@ c     *(ccch1+ccch2)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
-      COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
+      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
      &                ACCA
       lexp0 = 1
@@ -3079,7 +3079,7 @@ c     *(ccch1+ccch2)
       INTEGER*4 LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , LZETA , mimx , 
      &          Nexp , nind , nlm
       DIMENSION lloc(8) , cq(7) , irl(8)
-      COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
+      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
@@ -3543,7 +3543,7 @@ c     *(ccch1+ccch2)
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /HIPER / SH(365) , CH(365)
       COMMON /ADX   / ADB(365)
-      COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
+      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       DO k = 1 , LP12
          ADB(k) = EPS(IEXP)*SH(k) + .03*(k-1)
       ENDDO
@@ -3661,7 +3661,7 @@ c     *(ccch1+ccch2)
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
-      COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
+      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /CXI   / XI(500)
       ppp = 0.
       epsi = EPS(IEXP)
@@ -4501,7 +4501,7 @@ c     *(ccch1+ccch2)
       INTEGER*4 i , IAXS , IEXP , ind , inz , iph , ix , k , k1 , kp , 
      &          l , lp , lpp , lx , lxx , LZETA , NDIM , NMAX , NMAX1
       DIMENSION Bten(1200)
-      COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
+      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
@@ -4666,7 +4666,7 @@ c     *(ccch1+ccch2)
       COMMON /UWAGA / ITAK2
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
+      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
      &                YNRM(32,50) , IDRN , ILE(32)
@@ -5467,7 +5467,7 @@ c      WRITE(*,54)CHISQ
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
      &                YNRM(32,50) , IDRN , ILE(32)
-      COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
+      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
      &                ACCA
@@ -6468,7 +6468,7 @@ c      WRITE(*,54)CHISQ
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       COMMON /GVAC  / GKI(3) , SUM(3)
-      COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
+      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
      &                ACCA
@@ -6677,7 +6677,7 @@ c      WRITE(*,54)CHISQ
       IMPLICIT NONE
       REAL*4 ct , ctsq , EPS , EROOT , FIEX , st , Theta , Ylmr
       INTEGER*4 i , IAXS , IEXP , j , l , lf , m
-      COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
+      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       DIMENSION Ylmr(9,9) , st(7)
       ct = COS(Theta)
       ctsq = ct*ct
@@ -6736,7 +6736,7 @@ c      WRITE(*,54)CHISQ
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
-      COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
+      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /CATLF / FP(4,500,3) , GKP(4,500,2) , KLEC(75)
       COMMON /LCDL  / DELLA(500,3)
       DIMENSION gk(4)
@@ -6844,7 +6844,7 @@ c      WRITE(*,54)CHISQ
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
      &                NICC , NANG(200)
-      COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
+      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /LCDL  / DELLA(500,3)
       COMMON /CATLF / FP(4,500,3) , GKP(4,500,2) , KLEC(75)
       COMMON /BREC  / BETAR(50)
@@ -7183,7 +7183,7 @@ c      WRITE(*,54)CHISQ
       COMPLEX ARM
       COMMON /AZ    / ARM(600,7)
       COMMON /ODCH  / DEV(500)
-      COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
+      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /TRB   / ITS
       COMMON /SEL   / KVAR(500)
       kk6 = Kk + 5
@@ -7967,7 +7967,7 @@ c      WRITE(*,54)CHISQ
      &          NEXPT
       DIMENSION Pfi(101) , Wpi(11,2)
       COMMON /VLIN  / XV(51) , YV(51) , ZV(20) , DSG(20) , DSE(20) , DS
-      COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
+      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       COMMON /SECK  / ISKIN(50)
