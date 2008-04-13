@@ -1,3 +1,37 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE STING
+C
+C Called by: FTBM, GOSIA
+C Calls:     LAIAMP, LAISUM, NEWLV
+C
+C Purpose: calculate and store reduced matrix elements.
+C
+C Uses global variables:
+C      ARM    - reduced matrix elements
+C      ELM    - matrix elements
+C      EXPO   - adiabatic exponential
+C      IFAC   -
+C      IFLG   - flag to determine whether to calculate exponential (so we don't calculate twice)
+C      IRA    - limit of omega for integration for each multipolarity
+C      ISG    -
+C      ISMAX  -
+C      ISSTAR -
+C      ISSTO  -
+C      KDIV   -
+C      LAMDA  - list of multipolarities to calculate
+C      LAMMAY - number of multipolarities to calculate
+C      LAMR   -
+C      LDNUM  - number of matrix elements with each multipolarity populating levels
+C      LZETA  - index in ZETA to coupling coefficients for a given multipolarity
+C      MAXLA  -
+C      MSTORE -
+C      NDIV   -
+C      NPT    -
+C
+C Formal parameters:
+C      Irld   - index into ARM array
+ 
       SUBROUTINE STING(Irld)
       IMPLICIT NONE
       REAL*8 CAT , D2W , ELM , ELML , ELMU , rsg , SA , w0 , ZETA
@@ -19,12 +53,13 @@
      &                ISG1
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /RNG   / IRA(8) , MAXLA
+
       maxh = MAXLA
  100  ISG = -1
       n = 1
       rsg = -1.
       IFLG = 1
-      w0 = IRA(MAXLA)*.03 + .03
+      w0 = IRA(MAXLA)*.03 + .03 ! Steps of 0.03 in omega
       DO j = 1 , ISMAX
          DO jj = 1 , 6
             ARM(j,jj) = (0.,0.)
@@ -48,11 +83,13 @@
          DO j1 = 1 , LAMMAX
             lam = LAMDA(j1)
             IF ( LAMR(lam).NE.0 ) THEN
+C              Calculate and store exponentials
                CALL NEWLV(n,ld,lam)
                IF ( ld.NE.0 ) THEN
                   nz = LZETA(lam)
                   ld = LDNUM(lam,1)
                   i57 = 5
+C                 Calculate sum over matrix elements
                   CALL LAISUM(Irld,n,rsg,lam,ld,nz,i57)
                   DO mm = 1 , ld
                      indx = MSTORE(2,mm)
@@ -81,6 +118,8 @@
             ARM(i,4) = (0.,0.)
          ENDDO
       ENDDO
+
+C     Calculate amplitude
  200  CALL LAIAMP(Irld,w0)
       MAXLA = maxh
       DO jj = 1 , 8
