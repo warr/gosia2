@@ -2449,7 +2449,6 @@ c     *(ccch1+ccch2)
 99054 FORMAT (2X,1F6.4,3X,1E8.2,2X,1E8.2,6X,1E8.2,2X,1E8.2)
 99055 FORMAT (1A3,1A4)
       END
-!*==arccos.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION ARCCOS(A,F,Pi)
       IMPLICIT NONE
       REAL*8 A , an , ARCCOS , F , Pi , q , qa , qap , TACOS
@@ -2471,7 +2470,6 @@ c     *(ccch1+ccch2)
  100  ARCCOS = qa
       IF ( (qa-F).GT.Pi/2. ) ARCCOS = qap
       END
-!*==arctg.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION ARCTG(A,F,Pi)
       IMPLICIT NONE
       REAL*8 A , an , ARCTG , F , Pi , q , qa , qap
@@ -2493,7 +2491,6 @@ c     *(ccch1+ccch2)
  100  ARCTG = qa
       IF ( (qa-F).GT.Pi/4. ) ARCTG = qap
       END
-!*==load.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LOAD(Iexp,Ient,Icg,Polm,Joj)
       IMPLICIT NONE
       REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ACCA , ACCUR , ah , CAT , 
@@ -2699,7 +2696,6 @@ c     *(ccch1+ccch2)
       ERR = .TRUE.
       RETURN
       END
-!*==lsloop.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LSLOOP(Ir,N,Nz,Ld,Lam,La,Ssqrt,Icg,Iexp)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , CAT , DIPOL , ELM , ELML , ELMU , EN , phz , 
@@ -2784,7 +2780,6 @@ c     *(ccch1+ccch2)
          ENDIF
       ENDDO
       END
-!*==leadf.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION LEADF(N1,N2,N3)
       IMPLICIT NONE
       INTEGER*4 k , LAMDA , LAMMAX , LDNUM , LEAD , LEADF , lsum , 
@@ -2807,7 +2802,6 @@ c     *(ccch1+ccch2)
       n1m = lsum + N2
       LEADF = LEAD(2,n1m)
       END
-!*==mem.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION MEM(N1,N2,N3)
       IMPLICIT NONE
       INTEGER*4 k , LAMDA , LAMMAX , LDNUM , LEAD , MEM , msum , MULTI , 
@@ -2835,7 +2829,6 @@ c     *(ccch1+ccch2)
       ENDDO
  100  MEM = msum
       END
-!*==cmlab.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE CMLAB(Ii,Dsig,Tetrn)
       IMPLICIT NONE
       REAL*8 a1 , a2 , ACCA , ACCUR , ared , BETAR , d2a , DIPOL , 
@@ -3005,7 +2998,6 @@ c     *(ccch1+ccch2)
  200  ERR = .TRUE.
       RETURN
       END
-!*==qe.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE QE(C,D,B2,C2,D2,B4,B6,D3,B8,C4,D4,B10,D5,B12,D6,Lmda,
      &              Pol,Cq)
       IMPLICIT NONE
@@ -3053,7 +3045,6 @@ c     *(ccch1+ccch2)
       Cq(2) = -0.35355339*D/B2
       RETURN
 99999 END
-!*==qm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE QM(C,D,B2,B4,Ert,Lmda,Cq)
       IMPLICIT NONE
       REAL*8 B2 , B4 , C , Cq , D , Ert
@@ -3067,7 +3058,6 @@ c     *(ccch1+ccch2)
       Cq(1) = -.3535533905*Ert/B2
       RETURN
 99999 END
-!*==snake.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SNAKE(Nexp,Zpol)
       IMPLICIT NONE
       REAL*8 b10 , b12 , b2 , b4 , b6 , b8 , c , c2 , c4 , c6 , CH , 
@@ -3157,7 +3147,6 @@ c     *(ccch1+ccch2)
       ENDDO
       GOTO 100
       END
-!*==fhip.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FHIP
       IMPLICIT NONE
       REAL*8 CH , er , ex , SH , w
@@ -3175,7 +3164,6 @@ c     *(ccch1+ccch2)
          CH(j) = (ex+er)/2.
       ENDDO
       END
-!*==alloc.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE ALLOC(Accur)
       IMPLICIT NONE
       REAL*8 Accur , u , v
@@ -3217,7 +3205,6 @@ c     *(ccch1+ccch2)
       u = LOG10(v)
       u = SIN(u)
       END
-!*==rangel.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE RANGEL(Acc1)
       IMPLICIT NONE
       REAL*8 Acc1 , ACC50 , acl , w
@@ -3252,7 +3239,6 @@ c     *(ccch1+ccch2)
       IF ( IRA(7).NE.0 ) IRA(7) = IRA(7) + 1
       IF ( IRA(8).NE.0 ) IRA(8) = IRA(8) + 1
       END
-!*==qrange.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE QRANGE(Icnt,Nlm,Lloc,Ibm,Icm,Idm,Irl)
       IMPLICIT NONE
       INTEGER*4 Ibm , Icm , Icnt , Idm , IRA , Irl , is , k , ke , km , 
@@ -3326,7 +3312,6 @@ c     *(ccch1+ccch2)
          Idm = l
       ENDIF
       END
-!*==ampder.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE AMPDER(I57)
       IMPLICIT NONE
       REAL*8 CAT , D2W , ELM , ELML , ELMU , rsg , SA , ZETA
@@ -3404,7 +3389,6 @@ c     *(ccch1+ccch2)
          ENDIF
  100  ENDDO
       END
-!*==laisum.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LAISUM(Ir,N,Rsg,Lam,Ld,Nz,I57)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , CAT , D2W , DIPOL , ELM , ELML , ELMU , EN , 
@@ -3492,7 +3476,6 @@ c     *(ccch1+ccch2)
       ENDDO
       Lam = la
       END
-!*==expon.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       COMPLEX*16 FUNCTION EXPON(Inx,Npt,Isg,Isg1,Ndiv,Kdiv)
       IMPLICIT NONE
       REAL*8 ADB , XI
@@ -3508,7 +3491,6 @@ c     *(ccch1+ccch2)
          EXPON = expox + REAL(Kdiv)*(expo1-expox)/REAL(Ndiv)
       ENDIF
       END
-!*==faza.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       COMPLEX*16 FUNCTION FAZA(La,Mi,Rmu,Rsg)
       IMPLICIT NONE
       INTEGER*4 ieven , La , Mi
@@ -3533,7 +3515,6 @@ c     *(ccch1+ccch2)
       FAZA = CMPLX(Rsg,0.)
       RETURN
 99999 END
-!*==setin.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SETIN
       IMPLICIT NONE
       REAL*8 ADB , CH , EPS , EROOT , FIEX , SH
@@ -3548,7 +3529,6 @@ c     *(ccch1+ccch2)
          ADB(k) = EPS(IEXP)*SH(k) + .03*(k-1)
       ENDDO
       END
-!*==sting.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE STING(Irld)
       IMPLICIT NONE
       REAL*8 CAT , D2W , ELM , ELML , ELMU , rsg , SA , w0 , ZETA
@@ -3638,7 +3618,6 @@ c     *(ccch1+ccch2)
          IRA(jj) = ABS(IRA(jj))
       ENDDO
       END
-!*==laiamp.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LAIAMP(Ir,W0)
       IMPLICIT NONE
       REAL*8 CAT , D2W , ELM , ELML , ELMU , EPS , epsi , EROOT , errt , 
@@ -3716,7 +3695,6 @@ c     *(ccch1+ccch2)
       ENDDO
       ARM(Ir,5) = CMPLX(SQRT(1.-ppp),0.)
       END
-!*==faza1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FAZA1(La,Mi,Rmir,Rmis,Dis,Rmu)
       IMPLICIT NONE
       INTEGER*4 ieven , irs , La , Mi
@@ -3738,7 +3716,6 @@ c     *(ccch1+ccch2)
       Dis = CMPLX(-REAL(irs),0.)
       RETURN
 99999 END
-!*==trint.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE TRINT(Arg,Si,Ci)
       IMPLICIT NONE
       REAL*8 a , Arg , c , Ci , f , g , POL4 , s , Si
@@ -3760,7 +3737,6 @@ c     *(ccch1+ccch2)
       Ci = g*c - f*s
       RETURN
 99999 END
-!*==pol4.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION POL4(C0,C1,C2,C3,C4,A)
       IMPLICIT NONE
       REAL*8 A , C0 , C1 , C2 , C3 , C4 , POL4
@@ -3768,7 +3744,6 @@ c     *(ccch1+ccch2)
       IF ( ABS(A).GT.1.E+9 ) RETURN
       POL4 = C4 + A*(C3+A*(C2+A*(C1+A*C0)))
       END
-!*==stamp.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       COMPLEX*16 FUNCTION STAMP(Epsi,Errt,Xiv,Dw,W0,Lmda,Mua)
       IMPLICIT NONE
       REAL*8 a , axi , b , bic , bic2 , bis , bis2 , ca , cb , cia , 
@@ -3837,7 +3812,6 @@ c     *(ccch1+ccch2)
       STAMP = STAMP*fct
       STAMP = CONJG(STAMP)
       END
-!*==reset.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE RESET(Iso)
       IMPLICIT NONE
       REAL*8 CAT
@@ -3866,7 +3840,6 @@ c     *(ccch1+ccch2)
       ENDDO
       RETURN
 99999 END
-!*==half.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE HALF(Iso)
       IMPLICIT NONE
       REAL*8 CAT
@@ -3899,7 +3872,6 @@ c     *(ccch1+ccch2)
       ENDDO
       RETURN
 99999 END
-!*==double.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE DOUBLE(Iso)
       IMPLICIT NONE
       REAL*8 CAT
@@ -3931,7 +3903,6 @@ c     *(ccch1+ccch2)
       ENDDO
       RETURN
 99999 END
-!*==path.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE PATH(Irld)
       IMPLICIT NONE
       REAL*8 CAT , spm , vl
@@ -3957,7 +3928,6 @@ c     *(ccch1+ccch2)
  100  ENDDO
       IPATH(1) = Irld
       END
-!*==intg.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE INTG(Ien)
       IMPLICIT NONE
       REAL*8 ACC50 , ACCA , ACCUR , CAT , D2W , DIPOL , EN , f , rim , 
@@ -4094,7 +4064,6 @@ c     *(ccch1+ccch2)
       ENDIF
       GOTO 100
       END
-!*==newlv.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE NEWLV(N,Ld,La)
       IMPLICIT NONE
       REAL*8 D2W
@@ -4126,7 +4095,6 @@ c     *(ccch1+ccch2)
          ENDIF
       ENDDO
       END
-!*==code7.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE CODE7(Ir,Is,N,Mt,Inqa,Indx)
       IMPLICIT NONE
       INTEGER*4 IAPR , idm , idn , Indx , Inqa , IPATH , Ir , Is , 
@@ -4162,7 +4130,6 @@ c     *(ccch1+ccch2)
       Inqa = 7
       RETURN
 99999 END
-!*==apram.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE APRAM(Iexp,Inc,Indx,Irld,Acca)
       IMPLICIT NONE
       REAL*8 Acca , accah , ELM , ELML , ELMU , QAPR , SA , uwa
@@ -4272,7 +4239,6 @@ c     *(ccch1+ccch2)
       ENDDO
       GOTO 200
 99999 END
-!*==newcat.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE NEWCAT(Iexp,Jidim)
       IMPLICIT NONE
       REAL*8 a , b , FXIS1 , FXIS2 , PARX , PARXM , q1 , q2 , QAPR , 
@@ -4344,7 +4310,6 @@ c     *(ccch1+ccch2)
          ENDIF
       ENDDO
       END
-!*==pomnoz.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE POMNOZ(Acca,L,Iw,Ktoto,Img,Jidim)
       IMPLICIT NONE
       REAL*8 Acca , QAPR , sig , TCABS , test , u
@@ -4415,7 +4380,6 @@ c     *(ccch1+ccch2)
       ENDDO
       IF ( INHB.NE.1 ) LERF = 1
 99999 END
-!*==tenb.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE TENB(Icl,Bten,Lmax)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , Bten , CAT , ce , DIPOL , EN , fc , si , 
@@ -4493,7 +4457,6 @@ c     *(ccch1+ccch2)
          ENDIF
       ENDDO
       END
-!*==tens.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE TENS(Bten)
       IMPLICIT NONE
       REAL*8 arg , Bten , DJMM , DSIGS , EPS , EROOT , FIEX , TETACM , 
@@ -4544,7 +4507,6 @@ c     *(ccch1+ccch2)
          ENDDO
       ENDDO
       END
-!*==djmm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION DJMM(Beta,K,Kpp,Kp)
       IMPLICIT NONE
       REAL*8 B , b1 , b2 , be , BEQ , Beta , cb , ctb , djm , DJMM , f , 
@@ -4624,7 +4586,6 @@ c     *(ccch1+ccch2)
       iczy(loc) = 1
       RETURN
 99999 END
-!*==ftbm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FTBM(Icll,Chisq,Idr,Ncall,Chilo,Bten)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AGELI , aval , Bten , CAT , CC , Chilo , 
@@ -4968,7 +4929,6 @@ c     *(ccch1+ccch2)
       ENDIF
       RETURN
       END
-!*==mini.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE MINI(Chisq,Chiok,Nptl,Conv,Imode,Idr,Xtest,Ips,Is,Jjh,
      &                Bten)
       IMPLICIT NONE
@@ -5406,7 +5366,6 @@ c      WRITE(*,54)CHISQ
 99010 FORMAT (5X,'*** CHISQ=',1E14.6,1X,'***')
 99011 FORMAT (1X/5X,'MATRIX ELEMENT',1X,1I3,1X,'LOCKED!')
       END
-!*==cegry.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE CEGRY(Chisq,Itemp,Chilo,Idr,Nwyr,Icall,Issp,Iredv)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AGELI , AKS , BETAR , CC , ccc , ccd , 
@@ -5885,7 +5844,6 @@ c      WRITE(*,54)CHISQ
 99013 FORMAT (6X,1I2,5X,1I2,7X,1F4.1,6X,1F4.1,9X,1F6.4,6X,1E9.4,6X,
      &        1E9.4,3X,1F6.1,5X,1F4.1,10X,1A4)
       END
-!*==fakp.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FAKP
       IMPLICIT NONE
       INTEGER*4 i , IP , IPI , k , KF , l
@@ -5906,7 +5864,6 @@ c      WRITE(*,54)CHISQ
          ENDDO
       ENDDO
       END
-!*==prim.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE PRIM(N)
       IMPLICIT NONE
       INTEGER*4 i , IP , IPI , KF , N , nni , nnk
@@ -5924,7 +5881,6 @@ c      WRITE(*,54)CHISQ
          ENDIF
       ENDDO
       END
-!*==seq.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SEQ(Idr)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , CONV , DELTA , DIPOL , ega , egs , emax , 
@@ -6115,7 +6071,6 @@ c      WRITE(*,54)CHISQ
          IF ( KLEC(n).NE.0 ) NMAX1 = NMAX1 + 1
       ENDDO
       END
-!*==gf.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION GF(K,Sji,Sjf,L)
       IMPLICIT NONE
       REAL*8 GF , phase , Sjf , Sji , WSIXJ
@@ -6132,7 +6087,6 @@ c      WRITE(*,54)CHISQ
       lz = L*2
       GF = phase*SQRT((jiz+1.)*(jfz+1.))*WSIXJ(jiz,jiz,kz,jfz,jfz,lz)
       END
-!*==f.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION F(K,Sji,Sjf,L1,L2)
       IMPLICIT NONE
       REAL*8 F , phase , Sjf , Sji , WSIXJ , WTHREJ
@@ -6151,7 +6105,6 @@ c      WRITE(*,54)CHISQ
       F = phase*SQRT((l1z+1.)*(l2z+1.)*(jiz+1.)*(kz+1.))
      &    *WTHREJ(l1z,l2z,kz,2,-2,0)*WSIXJ(jiz,jiz,kz,l2z,l1z,jfz)
       END
-!*==conv.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION CONV(Ega,N)
       IMPLICIT NONE
       REAL*8 AGELI , CC , CONV , cpo , cpo1 , cv , EG , Ega , Q
@@ -6184,7 +6137,6 @@ c      WRITE(*,54)CHISQ
          RETURN
       ENDIF
       END
-!*==wthrej.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION WTHREJ(J1,J2,J3,M1,M2,M3)
       IMPLICIT NONE
       INTEGER*4 IP , IPI , iz , iza , izb , izc , izd , ize , izexp , 
@@ -6284,7 +6236,6 @@ c      WRITE(*,54)CHISQ
       ENDIF
       WTHREJ = wthrep
 99999 END
-!*==wsixj.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION WSIXJ(J1,J2,J3,L1,L2,L3)
       IMPLICIT NONE
       INTEGER*4 IP , IPI , irj , irl , isa , isb , isc , isumfa , iva , 
@@ -6381,7 +6332,6 @@ c      WRITE(*,54)CHISQ
       ENDIF
  100  WSIXJ = wsixp
       END
-!*==lagran.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LAGRAN(X,Y,Ndata,Ipc,Xx,Yy,Iscal,Irc)
       IMPLICIT NONE
       REAL*8 arh , FUNC , FUNC1 , t , w , X , Xx , Y , y1 , Yy
@@ -6421,7 +6371,6 @@ c      WRITE(*,54)CHISQ
       ENDDO
       Yy = FUNC1(Yy,Iscal)
       END
-!*==func.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION FUNC(Y,I)
       IMPLICIT NONE
       REAL*8 FUNC , Y
@@ -6437,7 +6386,6 @@ c      WRITE(*,54)CHISQ
       FUNC = Y
       RETURN
 99999 END
-!*==func1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION FUNC1(Y,I)
       IMPLICIT NONE
       REAL*8 FUNC1 , Y
@@ -6452,7 +6400,6 @@ c      WRITE(*,54)CHISQ
       FUNC1 = Y
       RETURN
 99999 END
-!*==gkvac.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE GKVAC(Il)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AKS , AVJI , beta , BETAR , DIPOL , DQ , 
@@ -6490,7 +6437,6 @@ c      WRITE(*,54)CHISQ
       ENDDO
       RETURN
 99999 END
-!*==gkk.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE GKK(Iz,Beta,Spin,Time,Il)
       IMPLICIT NONE
       REAL*8 AKS , alp , ATS , AVJI , Beta , ccf , down , DQ , dwc , f , 
@@ -6579,7 +6525,6 @@ c      WRITE(*,54)CHISQ
          GKI(k) = GKI(k)*ccf
       ENDDO
       END
-!*==xstatic.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE XSTATIC(Iz,Ido,Iup,Beta)
       IMPLICIT NONE
       REAL*8 AKS , Beta , DQ , h , QCEN , VACDP , XNOR
@@ -6597,7 +6542,6 @@ c      WRITE(*,54)CHISQ
          XNOR = XNOR + EXP(-((QCEN-REAL(lq))/DQ)**2/2.)
       ENDDO
       END
-!*==ats.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION ATS(N)
       IMPLICIT NONE
       REAL*8 ATS , x , xm
@@ -6672,7 +6616,6 @@ c      WRITE(*,54)CHISQ
       ATS = 1.
       RETURN
 99999 END
-!*==ylm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE YLM(Theta,Ylmr)
       IMPLICIT NONE
       REAL*8 ct , ctsq , EPS , EROOT , FIEX , st , Theta , Ylmr
@@ -6715,7 +6658,6 @@ c      WRITE(*,54)CHISQ
       ENDDO
       RETURN
 99999 END
-!*==decay.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE DECAY(Chisq,Nlift,Chilo)
       IMPLICIT NONE
       REAL*8 AKS , bsum , Chilo , Chisq , DELLA , DELTA , df , DQ , 
@@ -6820,7 +6762,6 @@ c      WRITE(*,54)CHISQ
          ENDIF
       ENDDO
       END
-!*==angula.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
       REAL*8 AGELI , alab , arg , at , attl , BETAR , bt , CC , DELLA , 
@@ -6945,7 +6886,6 @@ c      WRITE(*,54)CHISQ
          Ygn(j) = Ygn(j)*dsig*SIN(ttx)
       ENDDO
       END
-!*==ready.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE READY(Idr,Ntap,Ipri)
       IMPLICIT NONE
       REAL*8 ap , CORF , DYEX , EP , TAU , TLBDG , u , UPL , VINF , w , 
@@ -7038,7 +6978,6 @@ c      WRITE(*,54)CHISQ
 99005 FORMAT (1X///5X,'ERROR-NO MATRIX ELEMENT BETWEEN STATES',1X,1I2,
      &        ' AND ',1I2,/10X,'THIS TRANSITION IGNORED',//)
       END
-!*==branr.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE BRANR(Chisq,Nwyr,Chilo)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , BRAT , ch1 , ch2 , Chilo , Chisq , CONV , 
@@ -7115,7 +7054,6 @@ c      WRITE(*,54)CHISQ
       IF ( IPRM(3).EQ.-1 ) IPRM(3) = 0
       RETURN
       END
-!*==limits.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LIMITS
       IMPLICIT NONE
       REAL*8 ELM , ELML , ELMU , SA
@@ -7137,7 +7075,6 @@ c      WRITE(*,54)CHISQ
       ENDDO
 99001 FORMAT (2X,'Warning - matrix element ',1I3,' reset to ',1F10.6)
       END
-!*==szereg.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SZEREG(Lst,Ls,L)
       IMPLICIT NONE
       REAL*8 CORF , DYEX , dyh , UPL , YEXP , yh , YNRM
@@ -7173,7 +7110,6 @@ c      WRITE(*,54)CHISQ
       IF ( lst1.GT.lsp ) RETURN
       GOTO 100
       END
-!*==sixel.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SIXEL(Rik,Rv,Em,Jk,Kk,Indx,Lu)
       IMPLICIT NONE
       REAL*8 a1 , al , al1 , c1 , c2 , DEV , Em , EPS , EROOT , FIEX , 
@@ -7210,7 +7146,6 @@ c      WRITE(*,54)CHISQ
          ENDIF
       ENDDO
 99999 END
-!*==prelm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE PRELM(Iop)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , b , DIPOL , ELM , ELM25 , ELM26 , ELML , 
@@ -7299,7 +7234,6 @@ c      WRITE(*,54)CHISQ
       ENDDO
 99009 FORMAT (5X,1I3,5X,1I2,5X,1I2,3(5X,1F10.5),1A3)
       END
-!*==recoil.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE RECOIL(Alab,Attl,Beta,Theta)
       IMPLICIT NONE
       REAL*8 Alab , atemp , Attl , Beta , betasq , dum , hold , test , 
@@ -7394,7 +7328,6 @@ c      WRITE(*,54)CHISQ
       ENDIF
       RETURN
       END
-!*==rotate.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE ROTATE(Alab,Attl,Theta,K2,Kd)
       IMPLICIT NONE
       REAL*8 Alab , Attl , djarg , DJMM , dkkk , sum , Theta
@@ -7431,7 +7364,6 @@ c      WRITE(*,54)CHISQ
       ENDDO
       RETURN
 99999 END
-!*==ylm1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE YLM1(Theta,Ylmr)
       IMPLICIT NONE
       REAL*8 ct , ctsq , st , Theta , Ylmr
@@ -7506,7 +7438,6 @@ c      WRITE(*,54)CHISQ
          ENDDO
       ENDDO
       END
-!*==fiint.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FIINT(Fi0,Fi1,At,Ixs)
       IMPLICIT NONE
       REAL*8 At , Fi0 , Fi1 , wsp
@@ -7531,7 +7462,6 @@ c      WRITE(*,54)CHISQ
          At(js) = At(js)*wsp
       ENDDO
       END
-!*==fiint1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FIINT1(Fi0,Fi1,Alab,Ixs)
       IMPLICIT NONE
       REAL*8 Alab , Fi0 , Fi1 , wsp
@@ -7552,7 +7482,6 @@ c      WRITE(*,54)CHISQ
          Alab(j,1) = Alab(j,1)*wsp
       ENDDO
       END
-!*==tapma.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE TAPMA(Lx,Iske,Isko,Iskf,Nflr,Idr,Nco,Nft,Enb)
       IMPLICIT NONE
       REAL*8 DS , DSE , DSG , emn , emx , en0 , Enb , tmn , tmx , tta , 
@@ -7602,7 +7531,6 @@ c      WRITE(*,54)CHISQ
  100  WRITE (22,99001)
 99001 FORMAT (10X///10X,'TAPE READ ERROR'/10X,'JOB ABORTED')
       END
-!*==simin.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION SIMIN(Np,H,Y)
       IMPLICIT NONE
       REAL*8 ee , H , SIMIN , sm , Y
@@ -7624,7 +7552,6 @@ c      WRITE(*,54)CHISQ
       SIMIN = (Y(1)+Y(2))*H/2.
       RETURN
 99999 END
-!*==mixup.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE MIXUP
       IMPLICIT NONE
       REAL*8 ELM , ELML , ELMU , RNDM , SA , SE
@@ -7647,7 +7574,6 @@ c      WRITE(*,54)CHISQ
          ENDIF
       ENDDO
       END
-!*==fxis1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION FXIS1(I,N)
       IMPLICIT NONE
       REAL*8 FXIS1 , XI
@@ -7660,7 +7586,6 @@ c      WRITE(*,54)CHISQ
       FXIS1 = -SIGN(1.,XI(I))
       RETURN
 99999 END
-!*==fxis2.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION FXIS2(I,N)
       IMPLICIT NONE
       REAL*8 FXIS2 , XI
@@ -7673,7 +7598,6 @@ c      WRITE(*,54)CHISQ
       FXIS2 = 1.
       RETURN
 99999 END
-!*==podziel.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE PODZIEL(I,J)
       IMPLICIT NONE
       INTEGER*4 I , IAPR , IDIVE , ISEX , J , k , l , l1 , l2 , LERF , 
@@ -7717,7 +7641,6 @@ c      WRITE(*,54)CHISQ
      &        'EXPERIMENT',1X,1I2,3X,'NEW SUBDIVISION',1X,'(',1I1,',',
      &        1I1,')')
       END
-!*==klopot.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE KLOPOT(K,Rlr)
       IMPLICIT NONE
       REAL*8 a , al , al1 , b , c , ch , CORF , d , dy , DYEX , e , 
@@ -7917,7 +7840,6 @@ c      WRITE(*,54)CHISQ
          GOTO 500
       ENDIF
       END
-!*==mixr.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE MIXR(Nw,Ipsw,Chi,Chilo)
       IMPLICIT NONE
       REAL*8 Chi , Chilo , dl , DMIX , DMIXE , ELM , ELML , ELMU , SA , 
@@ -7955,7 +7877,6 @@ c      WRITE(*,54)CHISQ
       ENDDO
       RETURN
       END
-!*==coord.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE COORD(Wth,Wph,Wthh,Naa,Ifw,Pfi,Wpi,Wtlb,Lz,Tyy,Tzz)
       IMPLICIT NONE
       REAL*8 DS , DSE , DSG , EP , EPS , EROOT , FIEX , ga , gi , Pfi , 
@@ -8040,7 +7961,6 @@ c      WRITE(*,54)CHISQ
          ENDDO
       ENDIF
       END
-!*==chmem.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE CHMEM(Nw,Chi,Chilo)
       IMPLICIT NONE
       REAL*8 Chi , Chilo , di , EAMX , ELM , ELML , ELMU , SA
@@ -8066,7 +7986,6 @@ c      WRITE(*,54)CHISQ
          ENDIF
       ENDDO
       END
-!*==pticc.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE PTICC(Idr)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , cone1 , cone2 , conm1 , CONV , DIPOL , EN , 
@@ -8100,7 +8019,6 @@ c      WRITE(*,54)CHISQ
      &           E9.4)
       ENDDO
       END
-!*==rndm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION RNDM(Se)
       IMPLICIT NONE
       REAL*8 ai , p , r , RNDM , rxdm , Se , t , u
@@ -8118,7 +8036,6 @@ c      WRITE(*,54)CHISQ
       RNDM = rxdm - ai
       RETURN
       END
-!*==kontur.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE KONTUR(Idr,Chis0,Chil,Ifbf,Inpo,Jj,Sh,Bten,Rem)
       IMPLICIT NONE
       REAL*8 ac , Bten , c , Chil , chilo , Chis0 , chis1 , chis2 , d1 , 
@@ -8267,14 +8184,12 @@ c      WRITE(*,54)CHISQ
 99004 FORMAT (10X,'BETTER POINT FOUND...MATRIX ELEMENTS WRITTEN ON 17',
      &        3X,'CHISQ=',1E12.4)
       END
-!*==rk4.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION RK4(Y,H,F)
       IMPLICIT NONE
       REAL*8 F , H , RK4 , Y
       DIMENSION F(3)
       RK4 = Y + H*(F(1)+4.*F(2)+F(3))/6.
       END
-!*==qfit.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE QFIT(Qui,Tau1,Tau2,Eng,Xl1,Cf,Nl,Ind)
       IMPLICIT NONE
       REAL*8 ca , cb , Cf , cm , cn , co , d , d1 , d2 , Eng , Qui , 
@@ -8299,7 +8214,6 @@ c      WRITE(*,54)CHISQ
          Cf(k,2) = d2/d
       ENDDO
       END
-!*==gamatt.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE GAMATT(Qui,Tau1,Tau2,Xl1,Nl)
       IMPLICIT NONE
       INTEGER*4 i , i1 , k , Nl
@@ -8323,7 +8237,6 @@ c      WRITE(*,54)CHISQ
          ENDDO
       ENDDO
       END
-!*==gcf.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE GCF(Tau,Thing,Q)
       IMPLICIT NONE
       REAL*8 A , b , D , dl , ev , ex , f , fint , od , ODL , Q , R , 
@@ -8392,7 +8305,6 @@ c      WRITE(*,54)CHISQ
       ENDDO
       Q(1) = Q(1)/2.
       END
-!*==tcexp.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       COMPLEX*16 FUNCTION TCEXP(Z)
       IMPLICIT NONE
       REAL*8 a , b , c , d
@@ -8404,7 +8316,6 @@ c      WRITE(*,54)CHISQ
       d = a*SIN(b)
       TCEXP = CMPLX(c,d)
       END
-!*==tcabs.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION TCABS(Z)
       IMPLICIT NONE
       REAL*8 a , b , TCABS
@@ -8415,7 +8326,6 @@ c      WRITE(*,54)CHISQ
       IF ( ABS(b).LT.1.E-16 ) b = 0.
       TCABS = SQRT(a*a+b*b)
       END
-!*==tasin.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION TASIN(X)
       IMPLICIT NONE
       REAL*8 dol , TASIN , test , war , X
@@ -8430,13 +8340,11 @@ c      WRITE(*,54)CHISQ
       TASIN = ATAN(war)
       RETURN
 99999 END
-!*==tacos.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION TACOS(X)
       IMPLICIT NONE
       REAL*8 TACOS , TASIN , X
       TACOS = 1.570796327 - TASIN(X)
       END
-!*==openf.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE OPENF
       IMPLICIT NONE
       INTEGER*4 i , IBPS , j , JZB , k
@@ -8462,7 +8370,6 @@ c 1010 FORMAT (1X,A,I4,2(1x,A))
 c      WRITE (6,1020) 'PROBLEMS OPENING ',NAME,K
 c 1020 FORMAT(A,A,I6)
       END
-!*==effix.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE EFFIX(Ipd,En,Effi)
       IMPLICIT NONE
       REAL ABC , AKAVKA , d , Effi , En , enek , enl , pw , s , t , 
@@ -8564,7 +8471,6 @@ c     JAERI calibration - TC, Nov.2000
      &       *w-EXP(AKAVKA(3,Ipd)+AKAVKA(4,Ipd)*w))
       RETURN
 99999 END
-!*==adhoc.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE ADHOC(Oph,Idr,Nfd,Ntap,Iyr)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AGELI , BRAT , CC , CORF , DELTA , DIPOL , 
@@ -8787,7 +8693,6 @@ c     JAERI calibration - TC, Nov.2000
 99011 FORMAT (/10X,' MATRIX ELEMENT(S) ARE TAKEN WITH WEIGHT',2X,1E14.6)
 99012 FORMAT (10X,1I2,'---',1I2,14X,1F9.4,8X,1F9.4)
       END
-!*==elmt.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION ELMT(Xi1,Xi2,Lam,Nb1,Nb2,Xk1,Xk2,Xm1,Xm2,Xm3)
       IMPLICIT NONE
       REAL addt , ELMT , fac , fct , pha1 , pha2 , s1 , s2 , WTHREJ , 
@@ -8859,7 +8764,6 @@ C-----In band, K.ne.0
          RETURN
       ENDIF
       END
-!*==openf1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE OPENF1
       IMPLICIT NONE
       INTEGER*4 i , j , k
