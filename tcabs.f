@@ -1,6 +1,6 @@
-      FUNCTION TCABS(Z)
+      REAL*8 FUNCTION TCABS(Z)
       IMPLICIT NONE
-      REAL*8 a , b , TCABS
+      REAL*8 a , b
       COMPLEX*16 Z
       a = DBLE(Z)
       b = IMAG(Z)
