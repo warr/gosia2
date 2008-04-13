@@ -1,3 +1,32 @@
+ 
+C----------------------------------------------------------------------
+C FUNCTION WSIXJ
+C
+C Called by: F, GF, GKK, GOSIA
+C
+C Purpose: evaluates a Wigner 6-j symbol.
+C
+C Uses global variables:
+C      IP     - table of prime numbers
+C      KF     - sum of factors of primes
+C      PILOG  - table of natural logs of primes
+C
+C Formal parameters:
+C      J1     - twice the value of J1
+C      J2     - twice the value of J2
+C      J3     - twice the value of J3
+C      L1     - twice the value of L1
+C      L2     - twice the value of L2
+C      L3     - twice the value of L3
+C
+C Return value:
+C      The value of the 6-j symbol
+C
+C Note that the values of the parameters are doubled, so that this function
+C can handle half-integers. In other words if you want to evaluate
+C \sixj(J1 J2 J3 L1 L2 L3) you need to use call the function as:
+C WSIXJ(2 * J1, 2 * J2, 2 * J3, 2 * L1, 2 * L2, 2 * L3).
+ 
       REAL*8 FUNCTION WSIXJ(J1,J2,J3,L1,L2,L3)
       IMPLICIT NONE
       INTEGER*4 IP , IPI , irj , irl , isa , isb , isc , isumfa , iva , 
@@ -11,6 +40,7 @@
       REAL*8 PILOG , qsumfa , qsumlo , sumlo , vorz , wsixp , zusix
       DIMENSION isumfa(26) , ivorfa(26)
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
+      
       wsixp = 0.E+00
       IF ( ((J1+J2-J3).GE.0) .AND. ((J1-J2+J3).GE.0) .AND. 
      &     ((-J1+J2+J3).GE.0) ) THEN
