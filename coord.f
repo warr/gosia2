@@ -1,3 +1,33 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE COORD
+C
+C Called by: GOSIA
+C Calls:     TACOS, TASIN
+C
+C Purpose: calculate geometry for circular detector
+C
+C Uses global variables:
+C      FIEX   - phi range of particle detector
+C      ISKIN  - kinematic flag
+C      IZ1    - Z of non-investigated nucleus
+C      XA     - A of investigated nucleus
+C      XA1    - A of non-investigated nucleus
+C      YV     - scattering angle meshpoints where we calculate exact Coulex
+C
+C Formal parameters:
+C      Wth    - theta of centre of detector
+C      Wph    - phi of centre of detector
+C      Wthh   - half angle subtended
+C      Naa    - number of mesh points
+C      Ifw    - flag
+C      Pfi    -
+C      Wpi    -
+C      Wtlb   -
+C      Lz     - experiment number
+C      Tyy    -
+C      Tzz    -
+ 
       SUBROUTINE COORD(Wth,Wph,Wthh,Naa,Ifw,Pfi,Wpi,Wtlb,Lz,Tyy,Tzz)
       IMPLICIT NONE
       REAL*8 DS , DSE , DSG , EP , EPS , EROOT , FIEX , ga , gi , Pfi , 
@@ -13,7 +43,8 @@
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       COMMON /SECK  / ISKIN(50)
-      DATA rade/57.2957795/
+      DATA rade/57.2957795/ ! pi / 2
+
       IF ( Ifw.EQ.0 ) THEN
          Tyy = Wth - Wthh
          Tzz = Wth + Wthh
