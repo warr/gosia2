@@ -1629,8 +1629,8 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                   IF ( iosr.EQ.1 ) WRITE (33,*) kh , ij , ELM(kh)
                   LOCKS = 1
                   DLOCK = .05
-                  CALL MINI(chiss,-1.,2,.0001,1000,idr,100000.,0,iosr,
-     &                      kh,bten)
+                  CALL MINI(chiss,-1.D0,2,.0001D0,1000,idr,100000.D0,0,
+     &              iosr,kh,bten)
                   DO kh1 = 1 , MEMAX
                      SA(kh1) = (ELM(kh1)-HLM(kh1))/ABS(sh)
                   ENDDO
@@ -2305,7 +2305,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
          GOTO 2200
       ELSE
          MCFIX = 1
-         CALL MINI(chisq,1.E+38,nptl,conu,imode,idr,xtest,0,0,0,bten)
+         CALL MINI(chisq,1.D+38,nptl,conu,imode,idr,xtest,0,0,0,bten)
          mawr = mawr + 1
          IF ( JZB.EQ.25 ) ccch1 = chisq
          IF ( JZB.EQ.26 ) ccch2 = chisq
