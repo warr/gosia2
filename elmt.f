@@ -34,7 +34,7 @@ C integers.
 
       la = Lam
       IF ( la.GT.6 ) la = la - 6
-      xlam = FLOAT(la)
+      xlam = DBLE(la)
       i1 = INT(2.*Xi1)
       i2 = INT(2.*Xi2)
       llam = 2*la
@@ -60,8 +60,8 @@ C-----Forbidden and K1-K2=lambda, Mikhailov formula
                s1 = Xi1 - Xk1
                s2 = Xi1 + Xk1 + 1.
                DO l = 1 , n
-                  s1 = s1*(Xi1-Xk1-FLOAT(l))
-                  s2 = s2*(Xi1+Xk2+1.+FLOAT(l))
+                  s1 = s1*(Xi1-Xk1-DBLE(l))
+                  s2 = s2*(Xi1+Xk2+1.+DBLE(l))
                ENDDO
                fct = SQRT(s1*s2)
             ENDIF
