@@ -1,8 +1,25 @@
+ 
+C----------------------------------------------------------------------
+C FUNCTION SIMIN
+C
+C Called by: GOSIA
+C
+C Purpose: Integrate under a curve defined by an array.
+C
+C Formal parameters:
+C      Np     - number of points in array Y
+C      H      - step between points
+C      Y      - array of points
+C
+C Return value:
+C
+ 
       REAL*8 FUNCTION SIMIN(Np,H,Y)
       IMPLICIT NONE
       REAL*8 ee , H , sm , Y
       INTEGER*4 ik , in , Np
       DIMENSION Y(101)
+
       IF ( Np.GE.3 ) THEN
          ik = Np - 2
          sm = Y(1) + Y(Np)
