@@ -1,3 +1,22 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE TENS
+C
+C Called by: FTBM, GOSIA
+C Calls:     DJMM
+C
+C Purpose:
+C
+C Uses global variables:
+C      IAXS   - axial symmetry flag
+C      IEXP   - experiment number
+C      NMAX   - number of levels
+C      TETACM - theta of particle detector in center of mass frame
+C      ZETA   - various coefficients
+C
+C Formal parameter:
+C      Bten   - 
+ 
       SUBROUTINE TENS(Bten)
       IMPLICIT NONE
       REAL*8 arg , Bten , DJMM , DSIGS , EPS , EROOT , FIEX , TETACM , 
@@ -9,11 +28,13 @@
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
+
       ix = NMAX*28
       arg = 1.570796327 + TETACM(IEXP)/2.
       DO i = 1 , ix
          ZETA(i) = 0.
       ENDDO
+
       DO i = 2 , NMAX
          DO kp = 1 , 7 , 2
             k = kp - 1
@@ -39,12 +60,12 @@
                               lx = -lx
                               lxx = lx - 1
                               GOTO 2
-                           ENDIF
-                        ENDIF
-                     ENDDO
-                  ENDIF
-               ENDDO
-            ENDIF
-         ENDDO
-      ENDDO
+                           ENDIF ! if lx .ge. 0
+                        ENDIF ! if lpp .ne. 1
+                     ENDDO ! Loop over lpp
+                  ENDIF ! if iaxs .ne.0 .or. lp.eq.1
+               ENDDO ! Loop over lp
+            ENDIF ! If k .eq. 0
+         ENDDO ! Loop over kp
+      ENDDO ! Loop over i
       END
