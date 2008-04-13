@@ -1,6 +1,6 @@
-      FUNCTION FUNC(Y,I)
+      REAL*8 FUNCTION FUNC(Y,I)
       IMPLICIT NONE
-      REAL*8 FUNC , Y
+      REAL*8 Y
       INTEGER*4 I
       IF ( I.EQ.2 ) THEN
          IF ( Y.LT.1.E-12 ) Y = 1.E-12
