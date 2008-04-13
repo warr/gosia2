@@ -1,6 +1,6 @@
-      FUNCTION ARCTG(A,F,Pi)
+      REAL*8 FUNCTION ARCTG(A,F,Pi)
       IMPLICIT NONE
-      REAL*8 A , an , ARCTG , F , Pi , q , qa , qap
+      REAL*8 A , an , F , Pi , q , qa , qap
       INTEGER*4 ie , j , k
       q = ATAN(A)
       qa = q
