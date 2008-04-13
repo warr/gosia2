@@ -1,6 +1,6 @@
-      FUNCTION TASIN(X)
+      REAL*8 FUNCTION TASIN(X)
       IMPLICIT NONE
-      REAL*8 dol , TASIN , test , war , X
+      REAL*8 dol , test , war , X
       test = ABS(X) - 1.
       IF ( ABS(test).LT.1.E-9 ) THEN
          TASIN = 1.570796327
