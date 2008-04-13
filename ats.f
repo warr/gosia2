@@ -1,7 +1,22 @@
+ 
+C----------------------------------------------------------------------
+C FUNCTION ATS
+C
+C Called by: GKK
+C
+C Purpose: determine the atomic ground-state spin
+C
+C Formal parameters:
+C      N      - Z of nucleus
+C
+C Return value:
+C      truncation point
+ 
       REAL*8 FUNCTION ATS(N)
       IMPLICIT NONE
-      REAL*8 x , xm
       INTEGER*4 m , N
+      REAL*8 x , xm
+      
       IF ( N.LE.0 .OR. N.GT.96 ) THEN
          ATS = 0.
          RETURN
