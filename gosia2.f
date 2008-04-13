@@ -60,41 +60,41 @@ C
 C**********************************************************************
       PROGRAM GOSIA2
       IMPLICIT NONE
-      REAL*4 ABC , ACCA , ACCUR , acof , AGELI , AKAVKA , AKS , ap , 
+      REAL*8 ABC , ACCA , ACCUR , acof , AGELI , AKAVKA , AKS , ap , 
      &       ARCCOS , ARCTG , arg , ax , B , bcof , be2 , be2a , be2b , 
      &       be2c , BEQ , BETAR
-      REAL*4 bk , bl , bm , bmx , BRAT , bten , bu , CAT , CC , ccc , 
+      REAL*8 bk , bl , bm , bmx , BRAT , bten , bu , CAT , CC , ccc , 
      &       ccch1 , ccch2 , ccd , cf , chilo , chiok , chir , chis0 , 
      &       chisl , chisq
-      REAL*4 chiss , chp , cht , CNOR , CNOR1 , CNOR2 , cnst , cocos , 
+      REAL*8 chiss , chp , cht , CNOR , CNOR1 , CNOR2 , cnst , cocos , 
      &       conu , CORF , d , decen , dedx , DELTA , DEVD , DEVU , 
      &       DIPOL , DIX , DLOCK , DQ
-      REAL*4 DS , dsd , DSE , DSG , dsig , DSIGS , dst , dsx , dsxm , 
+      REAL*8 DS , dsd , DSE , DSG , dsig , DSIGS , dst , dsx , dsxm , 
      &       DYEX , EAMX , effi , EG , eh1 , ELM , ELM25 , ELM26 , 
      &       ELMH , elmi , ELML
-      REAL*4 ELMT , ELMU , emhl1 , EMMA , emn , emx , EN , enb , ENDEC , 
+      REAL*8 ELMT , ELMU , emhl1 , EMMA , emn , emx , EN , enb , ENDEC , 
      &       eng , enh , ENZ , EP , EPS , EROOT , esd , esp , ess , 
      &       fi0 , fi1
-      REAL*4 fic , FIEX , fiex1 , figl , fipo1 , fm , G , GRAD , gth , 
+      REAL*8 fic , FIEX , fiex1 , figl , fipo1 , fm , G , GRAD , gth , 
      &       hen , het , HLM , HLMLM , ODL , p , PARX , PARXM , pfi , 
      &       ph1 , ph2
-      REAL*4 pi , PILOG , po1 , po2 , polm , pop1 , pr , pv , Q , q1 , 
+      REAL*8 pi , PILOG , po1 , po2 , polm , pop1 , pr , pv , Q , q1 , 
      &       q2 , QAPR , qc , QCEN , qfac , qr , qui , r , r1 , r2
-      REAL*4 r3 , r4 , rem , remax , rl , rlr , rm , rx , ry , rz , s , 
+      REAL*8 r3 , r4 , rem , remax , rl , rlr , rm , rx , ry , rz , s , 
      &       s11 , s12 , s21 , s22 , SA , sbe , SE , sf , SGW
-      REAL*4 sh , sh1 , sh2 , SIMIN , slim , SPIN , SUBCH1 , SUBCH2 , 
+      REAL*8 sh , sh1 , sh2 , SIMIN , slim , SPIN , SUBCH1 , SUBCH2 , 
      &       SUMCL , summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , 
      &       test , TETACM , tetrc , tfac
-      REAL*4 thc , THICK , TIMEL , title , TLBDG , tmn , tmx , todfi , 
+      REAL*8 thc , THICK , TIMEL , title , TLBDG , tmn , tmx , todfi , 
      &       TREP , tta , tth , tting , ttttt , txx , u , UPL , VACDP , 
      &       val , VINF , waga
-      REAL*4 wph , wpi , WSIXJ , wth , wthh , WTHREJ , XA , XA1 , xep , 
+      REAL*8 wph , wpi , WSIXJ , wth , wthh , WTHREJ , XA , XA1 , xep , 
      &       XI , xi1 , xi2 , XIR , xk1 , xk2 , xl1 , xlevb , xlk , 
      &       xm1 , xm2
-      REAL*4 xm3 , XNOR , xtest , XV , xw , xx , xxi , ycorr , YEXP , 
+      REAL*8 xm3 , XNOR , xtest , XV , xw , xx , xxi , ycorr , YEXP , 
      &       YGN , YGP , YNRM , YV , yy , yyd1 , yydd , yyy , ZETA , 
      &       zmir , zp
-      REAL*4 ZPOL , ZV , zz
+      REAL*8 ZPOL , ZV , zz
       INTEGER*4 i , i122 , IAMX , IAMY , IAPR , iapx , IAXS , ib , 
      &          ibaf , IBPS , IBRC , IBYP , icg , icll , ICLUST , ICS , 
      &          ict , ictl , id , idf
@@ -148,7 +148,7 @@ C**********************************************************************
      &          nptx , ns1 , ns2 , ntap , ntt , numcl
       INTEGER*4 nval , NYLDE , nz
       LOGICAL ERR
-      COMPLEX ARM , EXPO
+      COMPLEX*16 ARM , EXPO
       CHARACTER*4 oph , op1 , opcja , op2
       CHARACTER*1 prp
       DIMENSION ihlm(32) , esp(20) , dedx(20) , bten(1200) , 
@@ -2452,7 +2452,7 @@ c     *(ccch1+ccch2)
 !*==arccos.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION ARCCOS(A,F,Pi)
       IMPLICIT NONE
-      REAL*4 A , an , ARCCOS , F , Pi , q , qa , qap , TACOS
+      REAL*8 A , an , ARCCOS , F , Pi , q , qa , qap , TACOS
       INTEGER*4 ie , j , k
       q = TACOS(A)
       qa = q
@@ -2474,7 +2474,7 @@ c     *(ccch1+ccch2)
 !*==arctg.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION ARCTG(A,F,Pi)
       IMPLICIT NONE
-      REAL*4 A , an , ARCTG , F , Pi , q , qa , qap
+      REAL*8 A , an , ARCTG , F , Pi , q , qa , qap
       INTEGER*4 ie , j , k
       q = ATAN(A)
       qa = q
@@ -2496,10 +2496,10 @@ c     *(ccch1+ccch2)
 !*==load.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LOAD(Iexp,Ient,Icg,Polm,Joj)
       IMPLICIT NONE
-      REAL*4 a1 , a2 , aaz2 , aaz3 , aazz , ACCA , ACCUR , ah , CAT , 
+      REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ACCA , ACCUR , ah , CAT , 
      &       cpsi , dep , DIPOL , EMMA , EN , EP , eta , etan , Polm , 
      &       pp1 , pp2
-      REAL*4 ppp , PSI , QAPR , rlam , SPIN , ssqrt , szet , TLBDG , 
+      REAL*8 ppp , PSI , QAPR , rlam , SPIN , ssqrt , szet , TLBDG , 
      &       VINF , wrt , wrtm , XA , XA1 , XI , z1 , z2 , zet , ZETA , 
      &       ZPOL , zsqa
       INTEGER*4 i , i1 , i2 , i3 , IAPR , Icg , Ient , Iexp , IPATH , 
@@ -2702,7 +2702,7 @@ c     *(ccch1+ccch2)
 !*==lsloop.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LSLOOP(Ir,N,Nz,Ld,Lam,La,Ssqrt,Icg,Iexp)
       IMPLICIT NONE
-      REAL*4 ACCA , ACCUR , CAT , DIPOL , ELM , ELML , ELMU , EN , phz , 
+      REAL*8 ACCA , ACCUR , CAT , DIPOL , ELM , ELML , ELMU , EN , phz , 
      &       PSI , QAPR , rmir , rmis , SA , SPIN , Ssqrt , WTHREJ , 
      &       ZETA , ZPOL
       INTEGER*4 i2 , i3 , IAPR , Icg , Iexp , IFAC , iiex , indx , 
@@ -2838,16 +2838,16 @@ c     *(ccch1+ccch2)
 !*==cmlab.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE CMLAB(Ii,Dsig,Tetrn)
       IMPLICIT NONE
-      REAL*4 a1 , a2 , ACCA , ACCUR , ared , BETAR , d2a , DIPOL , 
+      REAL*8 a1 , a2 , ACCA , ACCUR , ared , BETAR , d2a , DIPOL , 
      &       dista , dists , Dsig , DSIGS , emax , EMMA , EN , EP , 
      &       epmin , EPS , EROOT , FIEX
       INTEGER*4 IAXS , IEXP , iflaa , Ii , IPRM , ISKIN , ISO , IZ , 
      &          IZ1 , lexp , lexp0 , lexp1 , n , NCM , NDIM , NEXPT , 
      &          NMAX , NMAX1
-      REAL*4 r3 , SPIN , TASIN , tau , taup , tcmdg , tcmrad , TETACM , 
+      REAL*8 r3 , SPIN , TASIN , tau , taup , tcmdg , tcmrad , TETACM , 
      &       Tetrn , TLBDG , tlbrad , tmxdg , TREP , VINF , XA , XA1 , 
      &       z1 , z2 , zcmdg , zcmrad
-      REAL*4 zlbrad , ZPOL
+      REAL*8 zlbrad , ZPOL
       LOGICAL ERR
       COMMON /CLCOM9/ ERR
       COMMON /SECK  / ISKIN(50)
@@ -3009,7 +3009,7 @@ c     *(ccch1+ccch2)
       SUBROUTINE QE(C,D,B2,C2,D2,B4,B6,D3,B8,C4,D4,B10,D5,B12,D6,Lmda,
      &              Pol,Cq)
       IMPLICIT NONE
-      REAL*4 B10 , B12 , B2 , B4 , B6 , B8 , C , C2 , C4 , Cq , D , D2 , 
+      REAL*8 B10 , B12 , B2 , B4 , B6 , B8 , C , C2 , C4 , Cq , D , D2 , 
      &       D3 , D4 , D5 , D6 , Pol
       INTEGER*4 Lmda
       DIMENSION Cq(7)
@@ -3056,7 +3056,7 @@ c     *(ccch1+ccch2)
 !*==qm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE QM(C,D,B2,B4,Ert,Lmda,Cq)
       IMPLICIT NONE
-      REAL*4 B2 , B4 , C , Cq , D , Ert
+      REAL*8 B2 , B4 , C , Cq , D , Ert
       INTEGER*4 Lmda
       DIMENSION Cq(7)
       IF ( Lmda.EQ.8 ) THEN
@@ -3070,9 +3070,9 @@ c     *(ccch1+ccch2)
 !*==snake.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SNAKE(Nexp,Zpol)
       IMPLICIT NONE
-      REAL*4 b10 , b12 , b2 , b4 , b6 , b8 , c , c2 , c4 , c6 , CH , 
+      REAL*8 b10 , b12 , b2 , b4 , b6 , b8 , c , c2 , c4 , c6 , CH , 
      &       chi , cq , d , d2 , d3 , d4 , d5 , d6 , EPS
-      REAL*4 EROOT , ert , FIEX , pol , SH , shi , ZETA , Zpol
+      REAL*8 EROOT , ert , FIEX , pol , SH , shi , ZETA , Zpol
       INTEGER*4 IAXS , ibm , icm , icnt , idm , IEXP , irl , j , k , 
      &          lloc , lmd , lmda , LOCQ , LP1 , LP10 , LP11 , LP12 , 
      &          LP13 , LP14 , LP2
@@ -3160,7 +3160,7 @@ c     *(ccch1+ccch2)
 !*==fhip.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FHIP
       IMPLICIT NONE
-      REAL*4 CH , er , ex , SH , w
+      REAL*8 CH , er , ex , SH , w
       INTEGER*4 j , LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , 
      &          LP4 , LP6 , LP7 , LP8 , LP9
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
@@ -3178,7 +3178,7 @@ c     *(ccch1+ccch2)
 !*==alloc.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE ALLOC(Accur)
       IMPLICIT NONE
-      REAL*4 Accur , u , v
+      REAL*8 Accur , u , v
       INTEGER*4 iflag , IRA , j , k , k1 , load , LOCQ , LP1 , LP10 , 
      &          LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , LP4 , LP6 , 
      &          LP7 , LP8 , LP9
@@ -3220,7 +3220,7 @@ c     *(ccch1+ccch2)
 !*==rangel.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE RANGEL(Acc1)
       IMPLICIT NONE
-      REAL*4 Acc1 , ACC50 , acl , w
+      REAL*8 Acc1 , ACC50 , acl , w
       INTEGER*4 i , IRA , LAMDA , LAMMAX , LDNUM , LEAD , MAXLA , MULTI
       COMMON /A50   / ACC50
       COMMON /RNG   / IRA(8) , MAXLA
@@ -3329,14 +3329,14 @@ c     *(ccch1+ccch2)
 !*==ampder.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE AMPDER(I57)
       IMPLICIT NONE
-      REAL*4 CAT , D2W , ELM , ELML , ELMU , rsg , SA , ZETA
+      REAL*8 CAT , D2W , ELM , ELML , ELMU , rsg , SA , ZETA
       INTEGER*4 i1 , I57 , ibg , iend , iflg , indx , ir , is2 , ISG , 
      &          ISG1 , ISMAX , ISSTAR , ISSTO , k , KDIV , lam , LAMDA , 
      &          LAMMAX , LAMR , lax
       INTEGER*4 ld , LDNUM , LEAD , LZETA , m , mm , MSTORE , MULTI , 
      &          n , NDIM , NDIV , nhold , NMAX , NMAX1 , NPT , NSTART , 
      &          NSTOP , NSW , nz
-      COMPLEX ARM , EXPO
+      COMPLEX*16 ARM , EXPO
       COMMON /AZ    / ARM(600,7)
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
@@ -3407,7 +3407,7 @@ c     *(ccch1+ccch2)
 !*==laisum.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LAISUM(Ir,N,Rsg,Lam,Ld,Nz,I57)
       IMPLICIT NONE
-      REAL*4 ACCA , ACCUR , CAT , D2W , DIPOL , ELM , ELML , ELMU , EN , 
+      REAL*8 ACCA , ACCUR , CAT , D2W , DIPOL , ELM , ELML , ELMU , EN , 
      &       q , rmir , rmis , rmu , Rsg , SA , SPIN , z , ZETA , ZPOL
       INTEGER*4 i2 , i3 , I57 , iii , indq , indx , Ir , irs , is , 
      &          is1 , is2 , ISG , ISG1 , ISHA , ISMAX , ismin , ISO , 
@@ -3417,7 +3417,7 @@ c     *(ccch1+ccch2)
      &          LP9 , LZETA
       INTEGER*4 m , mrange , MSTORE , mua , N , NDIV , NPT , NSTART , 
      &          NSTOP , NSW , Nz
-      COMPLEX ARM , FAZA , pamp , EXPO , pamp1
+      COMPLEX*16 ARM , FAZA , pamp , EXPO , pamp1
       COMMON /PSPIN / ISHA
       COMMON /AZ    / ARM(600,7)
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
@@ -3493,11 +3493,11 @@ c     *(ccch1+ccch2)
       Lam = la
       END
 !*==expon.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
-      COMPLEX FUNCTION EXPON(Inx,Npt,Isg,Isg1,Ndiv,Kdiv)
+      COMPLEX*16 FUNCTION EXPON(Inx,Npt,Isg,Isg1,Ndiv,Kdiv)
       IMPLICIT NONE
-      REAL*4 ADB , XI
+      REAL*8 ADB , XI
       INTEGER*4 Inx , Isg , Isg1 , Kdiv , Ndiv , Npt
-      COMPLEX expo1 , ci , expox , TCEXP
+      COMPLEX*16 expo1 , ci , expox , TCEXP
       COMMON /ADX   / ADB(365)
       COMMON /CXI   / XI(500)
       DATA ci/(0.,1.)/
@@ -3509,11 +3509,11 @@ c     *(ccch1+ccch2)
       ENDIF
       END
 !*==faza.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
-      COMPLEX FUNCTION FAZA(La,Mi,Rmu,Rsg)
+      COMPLEX*16 FUNCTION FAZA(La,Mi,Rmu,Rsg)
       IMPLICIT NONE
       INTEGER*4 ieven , La , Mi
-      REAL*4 Rmu , Rsg
-      COMPLEX ci
+      REAL*8 Rmu , Rsg
+      COMPLEX*16 ci
       DATA ci/(0.,1.)/
       IF ( La.GT.6 ) THEN
          FAZA = -ci
@@ -3536,7 +3536,7 @@ c     *(ccch1+ccch2)
 !*==setin.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SETIN
       IMPLICIT NONE
-      REAL*4 ADB , CH , EPS , EROOT , FIEX , SH
+      REAL*8 ADB , CH , EPS , EROOT , FIEX , SH
       INTEGER*4 IAXS , IEXP , k , LP1 , LP10 , LP11 , LP12 , LP13 , 
      &          LP14 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
@@ -3551,13 +3551,13 @@ c     *(ccch1+ccch2)
 !*==sting.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE STING(Irld)
       IMPLICIT NONE
-      REAL*4 CAT , D2W , ELM , ELML , ELMU , rsg , SA , w0 , ZETA
+      REAL*8 CAT , D2W , ELM , ELML , ELMU , rsg , SA , w0 , ZETA
       INTEGER*4 i , i57 , ibg , iend , IFLG , indx , IRA , Irld , is2 , 
      &          ISG , ISG1 , ISMAX , ISSTAR , ISSTO , j , j1 , jj , 
      &          KDIV , lam , LAMDA
       INTEGER*4 LAMMAX , LAMR , ld , LDNUM , LEAD , LZETA , maxh , 
      &          MAXLA , mm , MSTORE , MULTI , n , NDIV , NPT , NSW , nz
-      COMPLEX ARM , EXPO
+      COMPLEX*16 ARM , EXPO
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /AZ    / ARM(600,7)
@@ -3641,17 +3641,17 @@ c     *(ccch1+ccch2)
 !*==laiamp.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LAIAMP(Ir,W0)
       IMPLICIT NONE
-      REAL*4 CAT , D2W , ELM , ELML , ELMU , EPS , epsi , EROOT , errt , 
+      REAL*8 CAT , D2W , ELM , ELML , ELMU , EPS , epsi , EROOT , errt , 
      &       FIEX , pm , ppp , rmir , rmis , rmu , SA , TCABS , W0 , 
      &       XI , xiv
-      REAL*4 z , ZETA
+      REAL*8 z , ZETA
       INTEGER*4 i1 , i2 , i3 , IAXS , IEXP , indx , Ir , is , is1 , 
      &          is2 , ISG , ISG1 , ISMAX , ismin , isplus , KDIV , la , 
      &          lam , LAMDA , LAMMAX
       INTEGER*4 LAMR , ld , LDNUM , LEAD , LEADF , LZETA , m , MEM , 
      &          mrange , mua , MULTI , NDIV , NPT , NSTART , NSTOP , 
      &          NSW , nz
-      COMPLEX ARM , STAMP , dis , uhuj
+      COMPLEX*16 ARM , STAMP , dis , uhuj
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /AZ    / ARM(600,7)
@@ -3720,8 +3720,8 @@ c     *(ccch1+ccch2)
       SUBROUTINE FAZA1(La,Mi,Rmir,Rmis,Dis,Rmu)
       IMPLICIT NONE
       INTEGER*4 ieven , irs , La , Mi
-      REAL*4 Rmir , Rmis , Rmu
-      COMPLEX Dis , ci
+      REAL*8 Rmir , Rmis , Rmu
+      COMPLEX*16 Dis , ci
       DATA ci/(0.,1.)/
       irs = (-1)**INT(Rmir+Rmis)
       IF ( La.EQ.7 ) THEN
@@ -3741,7 +3741,7 @@ c     *(ccch1+ccch2)
 !*==trint.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE TRINT(Arg,Si,Ci)
       IMPLICIT NONE
-      REAL*4 a , Arg , c , Ci , f , g , POL4 , s , Si
+      REAL*8 a , Arg , c , Ci , f , g , POL4 , s , Si
       a = Arg*Arg
       IF ( Arg.LT.1. ) THEN
          Si = POL4(0.,2.83446712E-5,-1.66666667E-3,.055555555,-1.,a)
@@ -3763,18 +3763,18 @@ c     *(ccch1+ccch2)
 !*==pol4.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION POL4(C0,C1,C2,C3,C4,A)
       IMPLICIT NONE
-      REAL*4 A , C0 , C1 , C2 , C3 , C4 , POL4
+      REAL*8 A , C0 , C1 , C2 , C3 , C4 , POL4
       POL4 = 1.
       IF ( ABS(A).GT.1.E+9 ) RETURN
       POL4 = C4 + A*(C3+A*(C2+A*(C1+A*C0)))
       END
 !*==stamp.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
-      COMPLEX FUNCTION STAMP(Epsi,Errt,Xiv,Dw,W0,Lmda,Mua)
+      COMPLEX*16 FUNCTION STAMP(Epsi,Errt,Xiv,Dw,W0,Lmda,Mua)
       IMPLICIT NONE
-      REAL*4 a , axi , b , bic , bic2 , bis , bis2 , ca , cb , cia , 
+      REAL*8 a , axi , b , bic , bic2 , bis , bis2 , ca , cb , cia , 
      &       cib , cic , cis , Dw , dwi , Epsi , Errt , ex , exa , fct
       INTEGER*4 la , Lmda , mi , Mua
-      REAL*4 sa , sb , sia , sib , W0 , Xiv
+      REAL*8 sa , sb , sia , sib , W0 , Xiv
       mi = Mua - 1
       axi = ABS(Xiv)
       la = Lmda
@@ -3840,10 +3840,10 @@ c     *(ccch1+ccch2)
 !*==reset.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE RESET(Iso)
       IMPLICIT NONE
-      REAL*4 CAT
+      REAL*8 CAT
       INTEGER*4 ir , ISMAX , Iso , j , NDIM , NMAX , NMAX1 , NSTART , 
      &          NSTOP
-      COMPLEX ARM
+      COMPLEX*16 ARM
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /AZ    / ARM(600,7)
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
@@ -3869,10 +3869,10 @@ c     *(ccch1+ccch2)
 !*==half.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE HALF(Iso)
       IMPLICIT NONE
-      REAL*4 CAT
+      REAL*8 CAT
       INTEGER*4 ir , ISMAX , Iso , j , NDIM , NMAX , NMAX1 , NSTART , 
      &          NSTOP
-      COMPLEX ARM , fpom
+      COMPLEX*16 ARM , fpom
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /AZ    / ARM(600,7)
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
@@ -3902,10 +3902,10 @@ c     *(ccch1+ccch2)
 !*==double.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE DOUBLE(Iso)
       IMPLICIT NONE
-      REAL*4 CAT
+      REAL*8 CAT
       INTEGER*4 ir , ISMAX , Iso , j , NDIM , NMAX , NMAX1 , NSTART , 
      &          NSTOP
-      COMPLEX ARM , fpom
+      COMPLEX*16 ARM , fpom
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /AZ    / ARM(600,7)
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
@@ -3934,7 +3934,7 @@ c     *(ccch1+ccch2)
 !*==path.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE PATH(Irld)
       IMPLICIT NONE
-      REAL*4 CAT , spm , vl
+      REAL*8 CAT , spm , vl
       INTEGER*4 i , IPATH , Irld , ISMAX , isp , ist , j , MAGA , NDIM , 
      &          NMAX , NMAX1 , NSTART , NSTOP
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
@@ -3960,14 +3960,14 @@ c     *(ccch1+ccch2)
 !*==intg.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE INTG(Ien)
       IMPLICIT NONE
-      REAL*4 ACC50 , ACCA , ACCUR , CAT , D2W , DIPOL , EN , f , rim , 
+      REAL*8 ACC50 , ACCA , ACCUR , CAT , D2W , DIPOL , EN , f , rim , 
      &       rl , SPIN , srt , ZPOL
       INTEGER*4 i , i57 , Ien , IFAC , IFLG , ihold , intend , INTERV , 
      &          IPATH , ir , ir1 , IRA , ISG , ISG1 , ISMAX , ISO , k , 
      &          kast , KDIV , LAMR
       INTEGER*4 MAGA , MAXLA , mir , n , NDIM , NDIV , NMAX , NMAX1 , 
      &          NPT , NSTART , NSTOP , NSW
-      COMPLEX ARM , hold
+      COMPLEX*16 ARM , hold
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
      &                ISO
       COMMON /AZ    / ARM(600,7)
@@ -4097,12 +4097,12 @@ c     *(ccch1+ccch2)
 !*==newlv.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE NEWLV(N,Ld,La)
       IMPLICIT NONE
-      REAL*4 D2W
+      REAL*8 D2W
       INTEGER*4 i2 , IFLG , indx , ISG , ISG1 , ISSTAR , ISSTO , KDIV , 
      &          La , LAMDA , LAMMAX , LAMR , Ld , LDNUM , LEAD , LEADF , 
      &          m , MEM , MSTORE , MULTI
       INTEGER*4 N , NDIV , NPT , NSTART , NSTOP , NSW
-      COMPLEX EXPO , EXPON
+      COMPLEX*16 EXPO , EXPON
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
@@ -4131,7 +4131,7 @@ c     *(ccch1+ccch2)
       IMPLICIT NONE
       INTEGER*4 IAPR , idm , idn , Indx , Inqa , IPATH , Ir , Is , 
      &          ISEX , ism , MAGA , Mt , N
-      REAL*4 QAPR
+      REAL*8 QAPR
       COMMON /PTH   / IPATH(75) , MAGA(75)
       COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
       IAPR(Indx,1) = N
@@ -4165,13 +4165,13 @@ c     *(ccch1+ccch2)
 !*==apram.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE APRAM(Iexp,Inc,Indx,Irld,Acca)
       IMPLICIT NONE
-      REAL*4 Acca , accah , ELM , ELML , ELMU , QAPR , SA , uwa
+      REAL*8 Acca , accah , ELM , ELML , ELMU , QAPR , SA , uwa
       INTEGER*4 i1 , i56 , i7 , IAPR , IDIVE , Iexp , img , Inc , Indx , 
      &          IPATH , Irld , ISEX , itm , IVAR , j , jidim , jj , k , 
      &          ktoto , l
       INTEGER*4 l1 , l2 , l3 , LERF , LMAXE , m , MAGA , MAGEXC , 
      &          MEMAX , MEMX6
-      COMPLEX ARM
+      COMPLEX*16 ARM
       COMMON /AZ    / ARM(600,7)
       COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)
@@ -4275,7 +4275,7 @@ c     *(ccch1+ccch2)
 !*==newcat.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE NEWCAT(Iexp,Jidim)
       IMPLICIT NONE
-      REAL*4 a , b , FXIS1 , FXIS2 , PARX , PARXM , q1 , q2 , QAPR , 
+      REAL*8 a , b , FXIS1 , FXIS2 , PARX , PARXM , q1 , q2 , QAPR , 
      &       wg , wl , XI , XIR , xp , xx , zt
       INTEGER*4 IAPR , Iexp , IPATH , ISEX , ist , istop , Jidim , k , 
      &          kk , LAMDA , LAMMAX , LDNUM , LEAD , MAGA , MULTI , n , 
@@ -4347,12 +4347,12 @@ c     *(ccch1+ccch2)
 !*==pomnoz.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE POMNOZ(Acca,L,Iw,Ktoto,Img,Jidim)
       IMPLICIT NONE
-      REAL*4 Acca , QAPR , sig , TCABS , test , u
+      REAL*8 Acca , QAPR , sig , TCABS , test , u
       INTEGER*4 IAPR , IDIVE , Img , INHB , IPATH , ISEX , IVAR , Iw , 
      &          Jidim , k , kk , Ktoto , L , LERF , LMAXE , m , MAGA , 
      &          MAGEXC , mc , mc1
       INTEGER*4 MEMAX , MEMX6 , mw , mw1
-      COMPLEX ARM , ci
+      COMPLEX*16 ARM , ci
       COMMON /INHI  / INHB
       COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)
@@ -4418,13 +4418,13 @@ c     *(ccch1+ccch2)
 !*==tenb.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE TENB(Icl,Bten,Lmax)
       IMPLICIT NONE
-      REAL*4 ACCA , ACCUR , Bten , CAT , ce , DIPOL , EN , fc , si , 
+      REAL*8 ACCA , ACCUR , Bten , CAT , ce , DIPOL , EN , fc , si , 
      &       SPIN , WTHREJ , x , ZPOL
       INTEGER*4 i , Icl , iha , ila , ilg , ind , isi , ISMAX , ISO , 
      &          ite , jm , jmp , k , kk , kp , l , ll , Lmax , lp , m
       INTEGER*4 mm , mp , ms , msp , NDIM , NMAX , NMAX1 , NSTART , 
      &          NSTOP
-      COMPLEX ARM
+      COMPLEX*16 ARM
       DIMENSION Bten(1200)
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
      &                ISO
@@ -4496,7 +4496,7 @@ c     *(ccch1+ccch2)
 !*==tens.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE TENS(Bten)
       IMPLICIT NONE
-      REAL*4 arg , Bten , DJMM , DSIGS , EPS , EROOT , FIEX , TETACM , 
+      REAL*8 arg , Bten , DJMM , DSIGS , EPS , EROOT , FIEX , TETACM , 
      &       TREP , ZETA
       INTEGER*4 i , IAXS , IEXP , ind , inz , iph , ix , k , k1 , kp , 
      &          l , lp , lpp , lx , lxx , LZETA , NDIM , NMAX , NMAX1
@@ -4547,7 +4547,7 @@ c     *(ccch1+ccch2)
 !*==djmm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION DJMM(Beta,K,Kpp,Kp)
       IMPLICIT NONE
-      REAL*4 B , b1 , b2 , be , BEQ , Beta , cb , ctb , djm , DJMM , f , 
+      REAL*8 B , b1 , b2 , be , BEQ , Beta , cb , ctb , djm , DJMM , f , 
      &       g , sb , sk , ul
       INTEGER*4 iczy , ifla , ifza , ill , j , ja , jb , jc , jd , K , 
      &          Kp , Kpp , lca , loc , mas , mis
@@ -4627,13 +4627,13 @@ c     *(ccch1+ccch2)
 !*==ftbm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FTBM(Icll,Chisq,Idr,Ncall,Chilo,Bten)
       IMPLICIT NONE
-      REAL*4 ACCA , ACCUR , AGELI , aval , Bten , CAT , CC , Chilo , 
+      REAL*8 ACCA , ACCUR , AGELI , aval , Bten , CAT , CC , Chilo , 
      &       chis1 , CHIS11 , chish , Chisq , chisx , chx , CORF , 
      &       DIPOL , DYEX , EG , ELM , ELML
-      REAL*4 ELMU , EMH , EN , EP , EPS , EROOT , fc , FIEX , fx , 
+      REAL*8 ELMU , EMH , EN , EP , EPS , EROOT , fc , FIEX , fx , 
      &       polm , pr , prop , Q , SA , SPIN , TAU , TLBDG , UPL , 
      &       val , VINF
-      REAL*4 wz , XA , XA1 , YEXP , YNRM , ZETA , ZPOL
+      REAL*8 wz , XA , XA1 , YEXP , YNRM , ZETA , ZPOL
       INTEGER*4 i1 , i11 , iapx , IAXS , Icll , idec , Idr , IDRN , 
      &          IEXP , iflg , IGRD , ii , ILE , ile1 , ile2 , ile3 , 
      &          ilin , indx , inko , INM
@@ -4652,7 +4652,7 @@ c     *(ccch1+ccch2)
      &          NANG , Ncall , NDIM , NEXPT , NICC , NLIFT , nlin , 
      &          NMAX , NMAX1 , nowr , npoz , nrest , NSTART
       INTEGER*4 NSTOP , NWR , nwyr , NYLDE
-      COMPLEX ARM
+      COMPLEX*16 ARM
       DIMENSION jmte(6) , prop(6) , Bten(1200)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
@@ -4972,13 +4972,13 @@ c     *(ccch1+ccch2)
       SUBROUTINE MINI(Chisq,Chiok,Nptl,Conv,Imode,Idr,Xtest,Ips,Is,Jjh,
      &                Bten)
       IMPLICIT NONE
-      REAL*4 a , a0 , a1 , b , Bten , c , ccd , chd , chil , chilo , 
+      REAL*8 a , a0 , a1 , b , Bten , c , ccd , chd , chil , chilo , 
      &       Chiok , chirf , CHIS11 , chis12 , chis13 , chisf , chisp , 
      &       Chisq , chiss , chl
-      REAL*4 chx , cmax , Conv , CORF , crit , DEVD , DEVU , dl , 
+      REAL*8 chx , cmax , Conv , CORF , crit , DEVD , DEVU , dl , 
      &       DLOCK , dm , DYEX , ELM , ELMH , ELML , ELMU , EMH , f1 , 
      &       f2 , flt , GRAD
-      REAL*4 gradp , HLMLM , ht , p , q , rfk , SA , sel , shl , sumg1 , 
+      REAL*8 gradp , HLMLM , ht , p , q , rfk , SA , sel , shl , sumg1 , 
      &       sumg2 , sumht , UPL , uxa , xkat , Xtest , YEXP , YNRM
       INTEGER*4 i , icl1 , icl2 , icount , ICS , Idr , IDRN , IFBFL , 
      &          iht , iin , ILE , Imode , indx1 , INM , inmx , ino , 
@@ -5409,19 +5409,19 @@ c      WRITE(*,54)CHISQ
 !*==cegry.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE CEGRY(Chisq,Itemp,Chilo,Idr,Nwyr,Icall,Issp,Iredv)
       IMPLICIT NONE
-      REAL*4 ACCA , ACCUR , AGELI , AKS , BETAR , CC , ccc , ccd , 
+      REAL*8 ACCA , ACCUR , AGELI , AKS , BETAR , CC , ccc , ccd , 
      &       Chilo , Chisq , CNOR , CNOR1 , CNOR2 , cnr , cocos , CORF , 
      &       d , decen , DELTA , DEV
-      REAL*4 DIPOL , DIX , dl , DQ , DSIGS , DYEX , effi , EG , EMH , 
+      REAL*8 DIPOL , DIX , dl , DQ , DSIGS , DYEX , effi , EG , EMH , 
      &       EN , ENDEC , ENZ , EP , EPS , EROOT , fi0 , fi1 , fic , 
      &       FIEX , figl
-      REAL*4 fm , g , gth , ODL , PART , PARTL , Q , QCEN , rik , rl , 
+      REAL*8 fm , g , gth , ODL , PART , PARTL , Q , QCEN , rik , rl , 
      &       rx , ry , rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , 
      &       SUBCH2
-      REAL*4 sum3 , SUMCL , sumpr , TACOS , TAU , TETACM , tetrc , 
+      REAL*8 sum3 , SUMCL , sumpr , TACOS , TAU , TETACM , tetrc , 
      &       tfac , thc , TLBDG , TREP , UPL , VACDP , VINF , wf , XA , 
      &       XA1 , XNOR , YEXP , YGN
-      REAL*4 YGP , YNRM , ZPOL
+      REAL*8 YGP , YNRM , ZPOL
       INTEGER*4 iabc , IAXS , IBYP , Icall , ICLUST , id , idc , Idr , 
      &          IDRN , IEXP , ifdu , IFMO , ifxd , IGRD , ii , ILE , 
      &          ile2 , IMIN , inclus , INM
@@ -5889,7 +5889,7 @@ c      WRITE(*,54)CHISQ
       SUBROUTINE FAKP
       IMPLICIT NONE
       INTEGER*4 i , IP , IPI , k , KF , l
-      REAL*4 PILOG , x
+      REAL*8 PILOG , x
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
       DO i = 1 , 26
          x = REAL(IP(i))
@@ -5910,7 +5910,7 @@ c      WRITE(*,54)CHISQ
       SUBROUTINE PRIM(N)
       IMPLICIT NONE
       INTEGER*4 i , IP , IPI , KF , N , nni , nnk
-      REAL*4 PILOG
+      REAL*8 PILOG
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
       nnk = N
       DO i = 1 , 26
@@ -5927,10 +5927,10 @@ c      WRITE(*,54)CHISQ
 !*==seq.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SEQ(Idr)
       IMPLICIT NONE
-      REAL*4 ACCA , ACCUR , CONV , DELTA , DIPOL , ega , egs , emax , 
+      REAL*8 ACCA , ACCUR , CONV , DELTA , DIPOL , ega , egs , emax , 
      &       EN , ENDEC , ENZ , F , FP , GF , GKP , SPIN , spinf , 
      &       spini , TAU , twoi
-      REAL*4 ZPOL
+      REAL*8 ZPOL
       INTEGER*4 idecay , Idr , indx , inx , inx1 , ir , is , ISO , 
      &          istr1 , istr2 , ITMA , j , js , jsave , k , KLEC , kpa , 
      &          KSEQ , l , la
@@ -6118,7 +6118,7 @@ c      WRITE(*,54)CHISQ
 !*==gf.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION GF(K,Sji,Sjf,L)
       IMPLICIT NONE
-      REAL*4 GF , phase , Sjf , Sji , WSIXJ
+      REAL*8 GF , phase , Sjf , Sji , WSIXJ
       INTEGER*4 i , ix , jfz , jiz , K , kz , L , lz
       GF = 0.
       IF ( L.EQ.0 ) RETURN
@@ -6135,7 +6135,7 @@ c      WRITE(*,54)CHISQ
 !*==f.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION F(K,Sji,Sjf,L1,L2)
       IMPLICIT NONE
-      REAL*4 F , phase , Sjf , Sji , WSIXJ , WTHREJ
+      REAL*8 F , phase , Sjf , Sji , WSIXJ , WTHREJ
       INTEGER*4 ix , jfz , jiz , K , kz , l , L1 , l1z , L2 , l2z
       F = 0.
       IF ( (L1*L2).EQ.0 ) RETURN
@@ -6154,7 +6154,7 @@ c      WRITE(*,54)CHISQ
 !*==conv.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION CONV(Ega,N)
       IMPLICIT NONE
-      REAL*4 AGELI , CC , CONV , cpo , cpo1 , cv , EG , Ega , Q
+      REAL*8 AGELI , CC , CONV , cpo , cpo1 , cv , EG , Ega , Q
       INTEGER*4 j , N , n1 , NANG , nen , NICC
       DIMENSION cpo(51) , cpo1(51)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
@@ -6194,7 +6194,7 @@ c      WRITE(*,54)CHISQ
      &          jmb , jmc , jmd , jme , jmf , jta , jtb , jtc , jvo , 
      &          jvora , KF , M1
       INTEGER*4 M2 , M3 , mm1 , mm2 , mm3 , n , nmax
-      REAL*4 PILOG , qsumlo , sumlo , vorz , WTHREJ , wthrep , zuthre
+      REAL*8 PILOG , qsumlo , sumlo , vorz , WTHREJ , wthrep , zuthre
       DIMENSION jvora(26)
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
       wthrep = 0.E+00
@@ -6295,7 +6295,7 @@ c      WRITE(*,54)CHISQ
      &          ksc , ksd
       INTEGER*4 kta , ktb , ktc , ktd , kua , kub , kuc , L1 , L2 , L3 , 
      &          n , nmax
-      REAL*4 PILOG , qsumfa , qsumlo , sumlo , vorz , WSIXJ , wsixp , 
+      REAL*8 PILOG , qsumfa , qsumlo , sumlo , vorz , WSIXJ , wsixp , 
      &       zusix
       DIMENSION isumfa(26) , ivorfa(26)
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
@@ -6384,7 +6384,7 @@ c      WRITE(*,54)CHISQ
 !*==lagran.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LAGRAN(X,Y,Ndata,Ipc,Xx,Yy,Iscal,Irc)
       IMPLICIT NONE
-      REAL*4 arh , FUNC , FUNC1 , t , w , X , Xx , Y , y1 , Yy
+      REAL*8 arh , FUNC , FUNC1 , t , w , X , Xx , Y , y1 , Yy
       INTEGER*4 i , Ipc , Irc , Iscal , j , Ndata
       DIMENSION X(51) , Y(51) , w(51) , arh(51,51)
       IF ( Irc.EQ.2 ) THEN
@@ -6424,7 +6424,7 @@ c      WRITE(*,54)CHISQ
 !*==func.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION FUNC(Y,I)
       IMPLICIT NONE
-      REAL*4 FUNC , Y
+      REAL*8 FUNC , Y
       INTEGER*4 I
       IF ( I.EQ.2 ) THEN
          IF ( Y.LT.1.E-12 ) Y = 1.E-12
@@ -6440,7 +6440,7 @@ c      WRITE(*,54)CHISQ
 !*==func1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION FUNC1(Y,I)
       IMPLICIT NONE
-      REAL*4 FUNC1 , Y
+      REAL*8 FUNC1 , Y
       INTEGER*4 I
       IF ( I.EQ.2 ) THEN
          FUNC1 = EXP(Y)
@@ -6455,10 +6455,10 @@ c      WRITE(*,54)CHISQ
 !*==gkvac.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE GKVAC(Il)
       IMPLICIT NONE
-      REAL*4 ACCA , ACCUR , AKS , AVJI , beta , BETAR , DIPOL , DQ , 
+      REAL*8 ACCA , ACCUR , AKS , AVJI , beta , BETAR , DIPOL , DQ , 
      &       EN , EP , EPS , EROOT , FIEL , FIEX , GAMMA , GFAC , GKI , 
      &       POWER , QCEN , sp
-      REAL*4 SPIN , SUM , TAU , time , TIMEC , TLBDG , VACDP , VINF , 
+      REAL*8 SPIN , SUM , TAU , time , TIMEC , TLBDG , VACDP , VINF , 
      &       XA , XA1 , XLAMB , XNOR , ZPOL
       INTEGER*4 i , IAXS , IBYP , IEXP , Il , ISO , ITTE , IZ , IZ1 , 
      &          KSEQ , NEXPT
@@ -6493,10 +6493,10 @@ c      WRITE(*,54)CHISQ
 !*==gkk.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE GKK(Iz,Beta,Spin,Time,Il)
       IMPLICIT NONE
-      REAL*4 AKS , alp , ATS , AVJI , Beta , ccf , down , DQ , dwc , f , 
+      REAL*8 AKS , alp , ATS , AVJI , Beta , ccf , down , DQ , dwc , f , 
      &       FIEL , GAMMA , GFAC , GKI , hmean , POWER , QCEN , rk , 
      &       sm , Spin
-      REAL*4 SUM , Time , TIMEC , up , upc , VACDP , valmi , w2 , wrt , 
+      REAL*8 SUM , Time , TIMEC , up , upc , VACDP , valmi , w2 , wrt , 
      &       WSIXJ , wsp , xji , xlam , XLAMB , XNOR
       INTEGER*4 i , IBYP , if2 , ifq , Il , imean , inq , irk2 , 
      &          ispin2 , ixji2 , Iz , j , k , k1 , k2 , l , m , ncoup , 
@@ -6582,7 +6582,7 @@ c      WRITE(*,54)CHISQ
 !*==xstatic.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE XSTATIC(Iz,Ido,Iup,Beta)
       IMPLICIT NONE
-      REAL*4 AKS , Beta , DQ , h , QCEN , VACDP , XNOR
+      REAL*8 AKS , Beta , DQ , h , QCEN , VACDP , XNOR
       INTEGER*4 IBYP , Ido , Iup , Iz , lq
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
       h = 1./(1.+(Iz**.45*.012008/Beta)**1.666667)
@@ -6600,7 +6600,7 @@ c      WRITE(*,54)CHISQ
 !*==ats.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION ATS(N)
       IMPLICIT NONE
-      REAL*4 ATS , x , xm
+      REAL*8 ATS , x , xm
       INTEGER*4 m , N
       IF ( N.LE.0 .OR. N.GT.96 ) THEN
          ATS = 0.
@@ -6675,7 +6675,7 @@ c      WRITE(*,54)CHISQ
 !*==ylm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE YLM(Theta,Ylmr)
       IMPLICIT NONE
-      REAL*4 ct , ctsq , EPS , EROOT , FIEX , st , Theta , Ylmr
+      REAL*8 ct , ctsq , EPS , EROOT , FIEX , st , Theta , Ylmr
       INTEGER*4 i , IAXS , IEXP , j , l , lf , m
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       DIMENSION Ylmr(9,9) , st(7)
@@ -6718,10 +6718,10 @@ c      WRITE(*,54)CHISQ
 !*==decay.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE DECAY(Chisq,Nlift,Chilo)
       IMPLICIT NONE
-      REAL*4 AKS , bsum , Chilo , Chisq , DELLA , DELTA , df , DQ , 
+      REAL*8 AKS , bsum , Chilo , Chisq , DELLA , DELTA , df , DQ , 
      &       el1 , ELM , ELML , ELMU , emt , emt1 , ENDEC , ENZ , EPS , 
      &       EROOT , FIEX , FP
-      REAL*4 gk , GKP , QCEN , SA , TAU , TIMEL , VACDP , vcd , XNOR , 
+      REAL*8 gk , GKP , QCEN , SA , TAU , TIMEL , VACDP , vcd , XNOR , 
      &       ZETA
       INTEGER*4 i , IAXS , ibra , IBYP , idr , idrh , IEXP , ifn , il , 
      &          inx , inx1 , ITMA , iu , j , jlt , k , kl , KLEC , kq , 
@@ -6823,13 +6823,13 @@ c      WRITE(*,54)CHISQ
 !*==angula.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
-      REAL*4 AGELI , alab , arg , at , attl , BETAR , bt , CC , DELLA , 
+      REAL*8 AGELI , alab , arg , at , attl , BETAR , bt , CC , DELLA , 
      &       DELTA , dsig , DSIGS , EG , ENDEC , ENZ , EP , EPS , 
      &       EROOT , f , Fi0
-      REAL*4 fi01 , Fi1 , fi11 , FIEX , Figl , FP , GKP , Gth , Q , qv , 
+      REAL*8 fi01 , Fi1 , fi11 , FIEX , Figl , FP , GKP , Gth , Q , qv , 
      &       sm , TAU , TETACM , TLBDG , Trec , TREP , ttx , VINF , XA , 
      &       XA1
-      REAL*4 Ygn , ylmr , ZETA
+      REAL*8 Ygn , ylmr , ZETA
       INTEGER*4 IAXS , Idr , IEXP , ifn , Iful , ig , il , inat , inx1 , 
      &          ipd , is , ITMA , ITTE , iu , ixs , IZ , IZ1 , j , ji , 
      &          jj
@@ -6948,7 +6948,7 @@ c      WRITE(*,54)CHISQ
 !*==ready.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE READY(Idr,Ntap,Ipri)
       IMPLICIT NONE
-      REAL*4 ap , CORF , DYEX , EP , TAU , TLBDG , u , UPL , VINF , w , 
+      REAL*8 ap , CORF , DYEX , EP , TAU , TLBDG , u , UPL , VINF , w , 
      &       waga , XA , XA1 , xep , YEXP , YNRM , zp
       INTEGER*4 idc , idc1 , idcx , Idr , IDRN , ii , ILE , Ipri , IY , 
      &          iytot , iytt , IZ , IZ1 , j , k , kk , kkl , KSEQ , 
@@ -7041,10 +7041,10 @@ c      WRITE(*,54)CHISQ
 !*==branr.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE BRANR(Chisq,Nwyr,Chilo)
       IMPLICIT NONE
-      REAL*4 ACCA , ACCUR , BRAT , ch1 , ch2 , Chilo , Chisq , CONV , 
+      REAL*8 ACCA , ACCUR , BRAT , ch1 , ch2 , Chilo , Chisq , CONV , 
      &       DELTA , DIPOL , ELM , ELML , ELMU , EN , ENDEC , eng1 , 
      &       eng2 , ENZ , SA , SPIN
-      REAL*4 TAU , u , ZPOL
+      REAL*8 TAU , u , ZPOL
       INTEGER*4 i1 , i2 , IBRC , iflg , iout , IPRM , ISO , ITMA , itt , 
      &          j1 , j2 , k , KSEQ , lab1 , lab2 , LAMDA , LAMMAX , 
      &          LDNUM , LEAD , mul2
@@ -7118,7 +7118,7 @@ c      WRITE(*,54)CHISQ
 !*==limits.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LIMITS
       IMPLICIT NONE
-      REAL*4 ELM , ELML , ELMU , SA
+      REAL*8 ELM , ELML , ELMU , SA
       INTEGER*4 IVAR , j , LMAXE , MAGEXC , MEMAX , MEMX6
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
@@ -7140,7 +7140,7 @@ c      WRITE(*,54)CHISQ
 !*==szereg.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SZEREG(Lst,Ls,L)
       IMPLICIT NONE
-      REAL*4 CORF , DYEX , dyh , UPL , YEXP , yh , YNRM
+      REAL*8 CORF , DYEX , dyh , UPL , YEXP , yh , YNRM
       INTEGER*4 ia , ib , IDRN , ih , ILE , inx , IY , k , L , Ls , 
      &          lsp , Lst , lst1 , NYLDE
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
@@ -7176,11 +7176,11 @@ c      WRITE(*,54)CHISQ
 !*==sixel.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SIXEL(Rik,Rv,Em,Jk,Kk,Indx,Lu)
       IMPLICIT NONE
-      REAL*4 a1 , al , al1 , c1 , c2 , DEV , Em , EPS , EROOT , FIEX , 
+      REAL*8 a1 , al , al1 , c1 , c2 , DEV , Em , EPS , EROOT , FIEX , 
      &       Rik , rn , Rv , rx
       INTEGER*4 IAXS , IEXP , Indx , ITS , j , j1 , Jk , Kk , kk6 , 
      &          KVAR , l , l1 , Lu
-      COMPLEX ARM
+      COMPLEX*16 ARM
       COMMON /AZ    / ARM(600,7)
       COMMON /ODCH  / DEV(500)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
@@ -7213,7 +7213,7 @@ c      WRITE(*,54)CHISQ
 !*==prelm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE PRELM(Iop)
       IMPLICIT NONE
-      REAL*4 ACCA , ACCUR , b , DIPOL , ELM , ELM25 , ELM26 , ELML , 
+      REAL*8 ACCA , ACCUR , b , DIPOL , ELM , ELM25 , ELM26 , ELML , 
      &       ELMU , EN , pv , SA , SPIN , ste , ZPOL
       INTEGER*4 IBPS , inx , Iop , ISO , isp , IVAR , j , JZB , k , kk , 
      &          l , LAMDA , LAMMAX , LDNUM , LEAD , LMAXE , m , MAGEXC , 
@@ -7302,7 +7302,7 @@ c      WRITE(*,54)CHISQ
 !*==recoil.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE RECOIL(Alab,Attl,Beta,Theta)
       IMPLICIT NONE
-      REAL*4 Alab , atemp , Attl , Beta , betasq , dum , hold , test , 
+      REAL*8 Alab , atemp , Attl , Beta , betasq , dum , hold , test , 
      &       Theta
       INTEGER*4 i , i1 , j , l , m
       DIMENSION Alab(9,9) , Attl(9,9) , atemp(16)
@@ -7397,7 +7397,7 @@ c      WRITE(*,54)CHISQ
 !*==rotate.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE ROTATE(Alab,Attl,Theta,K2,Kd)
       IMPLICIT NONE
-      REAL*4 Alab , Attl , djarg , DJMM , dkkk , sum , Theta
+      REAL*8 Alab , Attl , djarg , DJMM , dkkk , sum , Theta
       INTEGER*4 idj , idm , idmp , j , k , K2 , ka , kappa , kapri , Kd
       DIMENSION Alab(9,9) , Attl(9,9)
       IF ( ABS(Theta).GT..01 ) THEN
@@ -7434,7 +7434,7 @@ c      WRITE(*,54)CHISQ
 !*==ylm1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE YLM1(Theta,Ylmr)
       IMPLICIT NONE
-      REAL*4 ct , ctsq , st , Theta , Ylmr
+      REAL*8 ct , ctsq , st , Theta , Ylmr
       INTEGER*4 i , j , l , m
       DIMENSION Ylmr(9,9) , st(9)
       ct = COS(Theta)
@@ -7509,7 +7509,7 @@ c      WRITE(*,54)CHISQ
 !*==fiint.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FIINT(Fi0,Fi1,At,Ixs)
       IMPLICIT NONE
-      REAL*4 At , Fi0 , Fi1 , wsp
+      REAL*8 At , Fi0 , Fi1 , wsp
       INTEGER*4 Ixs , j , jf , js , m , mm
       DIMENSION At(28)
       IF ( Ixs.NE.0 ) THEN
@@ -7534,7 +7534,7 @@ c      WRITE(*,54)CHISQ
 !*==fiint1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FIINT1(Fi0,Fi1,Alab,Ixs)
       IMPLICIT NONE
-      REAL*4 Alab , Fi0 , Fi1 , wsp
+      REAL*8 Alab , Fi0 , Fi1 , wsp
       INTEGER*4 Ixs , j , m , mm
       DIMENSION Alab(9,9)
       IF ( Ixs.NE.0 ) THEN
@@ -7555,7 +7555,7 @@ c      WRITE(*,54)CHISQ
 !*==tapma.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE TAPMA(Lx,Iske,Isko,Iskf,Nflr,Idr,Nco,Nft,Enb)
       IMPLICIT NONE
-      REAL*4 DS , DSE , DSG , emn , emx , en0 , Enb , tmn , tmx , tta , 
+      REAL*8 DS , DSE , DSG , emn , emx , en0 , Enb , tmn , tmx , tta , 
      &       XV , YGN , YGP , YV , ZETA , ZV
       INTEGER*4 Idr , IFMO , Iske , Iskf , Isko , j , jf , jj , js , k , 
      &          Lx , lx1 , LZETA , na , Nco , ne , nfil , nfilt , Nflr , 
@@ -7605,7 +7605,7 @@ c      WRITE(*,54)CHISQ
 !*==simin.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION SIMIN(Np,H,Y)
       IMPLICIT NONE
-      REAL*4 ee , H , SIMIN , sm , Y
+      REAL*8 ee , H , SIMIN , sm , Y
       INTEGER*4 ik , in , Np
       DIMENSION Y(101)
       IF ( Np.GE.3 ) THEN
@@ -7627,7 +7627,7 @@ c      WRITE(*,54)CHISQ
 !*==mixup.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE MIXUP
       IMPLICIT NONE
-      REAL*4 ELM , ELML , ELMU , RNDM , SA , SE
+      REAL*8 ELM , ELML , ELMU , RNDM , SA , SE
       INTEGER*4 IVAR , k , k1 , LMAXE , MAGEXC , MEMAX , MEMX6
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
@@ -7650,7 +7650,7 @@ c      WRITE(*,54)CHISQ
 !*==fxis1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION FXIS1(I,N)
       IMPLICIT NONE
-      REAL*4 FXIS1 , XI
+      REAL*8 FXIS1 , XI
       INTEGER*4 I , N
       COMMON /CXI   / XI(500)
       IF ( N.EQ.2 .OR. N.EQ.3 .OR. N.EQ.5 .OR. N.EQ.6 ) THEN
@@ -7663,7 +7663,7 @@ c      WRITE(*,54)CHISQ
 !*==fxis2.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION FXIS2(I,N)
       IMPLICIT NONE
-      REAL*4 FXIS2 , XI
+      REAL*8 FXIS2 , XI
       INTEGER*4 I , N
       COMMON /CXI   / XI(500)
       IF ( N.EQ.2 .OR. N.EQ.3 .OR. N.EQ.5 .OR. N.EQ.6 ) THEN
@@ -7680,7 +7680,7 @@ c      WRITE(*,54)CHISQ
      &          LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , 
      &          LP4 , LP6
       INTEGER*4 LP7 , LP8 , LP9
-      REAL*4 QAPR
+      REAL*8 QAPR
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
@@ -7720,9 +7720,9 @@ c      WRITE(*,54)CHISQ
 !*==klopot.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE KLOPOT(K,Rlr)
       IMPLICIT NONE
-      REAL*4 a , al , al1 , b , c , ch , CORF , d , dy , DYEX , e , 
+      REAL*8 a , al , al1 , b , c , ch , CORF , d , dy , DYEX , e , 
      &       ELM , ELML , ELMU , EP , g , g1 , g2 , rl , Rlr
-      REAL*4 SA , sgm , TLBDG , u , umm , ump , UPL , ux , VINF , XA , 
+      REAL*8 SA , sgm , TLBDG , u , umm , ump , UPL , ux , VINF , XA , 
      &       XA1 , YEXP , YNRM , ZETA
       INTEGER*4 i , IDRN , iex , iexh , iexp , ILE , indx , inh , ipf , 
      &          IVAR , IY , IZ , IZ1 , j , jm , jp , K , KVAR , l , lc
@@ -7920,7 +7920,7 @@ c      WRITE(*,54)CHISQ
 !*==mixr.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE MIXR(Nw,Ipsw,Chi,Chilo)
       IMPLICIT NONE
-      REAL*4 Chi , Chilo , dl , DMIX , DMIXE , ELM , ELML , ELMU , SA , 
+      REAL*8 Chi , Chilo , dl , DMIX , DMIXE , ELM , ELML , ELMU , SA , 
      &       TAU
       INTEGER*4 i , IMIX , INTR , inx , inx1 , IPS1 , Ipsw , it , KSEQ , 
      &          LNY , NDL , Nw
@@ -7958,10 +7958,10 @@ c      WRITE(*,54)CHISQ
 !*==coord.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE COORD(Wth,Wph,Wthh,Naa,Ifw,Pfi,Wpi,Wtlb,Lz,Tyy,Tzz)
       IMPLICIT NONE
-      REAL*4 DS , DSE , DSG , EP , EPS , EROOT , FIEX , ga , gi , Pfi , 
+      REAL*8 DS , DSE , DSG , EP , EPS , EROOT , FIEX , ga , gi , Pfi , 
      &       rade , rmass , TACOS , TASIN , thetb , TLBDG , ttcm , Tyy , 
      &       Tzz , VINF
-      REAL*4 wpa , Wph , Wpi , ws , Wth , Wthh , Wtlb , XA , XA1 , xaa , 
+      REAL*8 wpa , Wph , Wpi , ws , Wth , Wthh , Wtlb , XA , XA1 , xaa , 
      &       xph , xth , xthh , XV , YV , za , za1 , zb , zl , ZV
       INTEGER*4 i , IAXS , IEXP , Ifw , ISKIN , IZ , IZ1 , Lz , Naa , 
      &          NEXPT
@@ -8043,7 +8043,7 @@ c      WRITE(*,54)CHISQ
 !*==chmem.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE CHMEM(Nw,Chi,Chilo)
       IMPLICIT NONE
-      REAL*4 Chi , Chilo , di , EAMX , ELM , ELML , ELMU , SA
+      REAL*8 Chi , Chilo , di , EAMX , ELM , ELML , ELMU , SA
       INTEGER*4 ia , IAMX , IAMY , ib , NAMX , Nw
       COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
@@ -8069,7 +8069,7 @@ c      WRITE(*,54)CHISQ
 !*==pticc.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE PTICC(Idr)
       IMPLICIT NONE
-      REAL*4 ACCA , ACCUR , cone1 , cone2 , conm1 , CONV , DIPOL , EN , 
+      REAL*8 ACCA , ACCUR , cone1 , cone2 , conm1 , CONV , DIPOL , EN , 
      &       enet , SPIN , TAU , ZPOL
       INTEGER*4 Idr , iinx , ISO , KSEQ , l , LAMDA , LAMMAX , LDNUM , 
      &          LEAD , MULTI , nf , ni
@@ -8103,7 +8103,7 @@ c      WRITE(*,54)CHISQ
 !*==rndm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION RNDM(Se)
       IMPLICIT NONE
-      REAL*4 ai , p , r , RNDM , rxdm , Se , t , u
+      REAL*8 ai , p , r , RNDM , rxdm , Se , t , u
       INTEGER*4 i
       IF ( Se.GT.32000. ) Se = 100.*t + .511
       Se = Se*Se
@@ -8121,10 +8121,10 @@ c      WRITE(*,54)CHISQ
 !*==kontur.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE KONTUR(Idr,Chis0,Chil,Ifbf,Inpo,Jj,Sh,Bten,Rem)
       IMPLICIT NONE
-      REAL*4 ac , Bten , c , Chil , chilo , Chis0 , chis1 , chis2 , d1 , 
+      REAL*8 ac , Bten , c , Chil , chilo , Chis0 , chis1 , chis2 , d1 , 
      &       d2 , DEVD , DEVU , DS , DSE , DSG , ELM , ELML , ELMU , f , 
      &       h
-      REAL*4 HLM , Rem , RK4 , SA , sajj , Sh , t , v , ww , x , XV , 
+      REAL*8 HLM , Rem , RK4 , SA , sajj , Sh , t , v , ww , x , XV , 
      &       y , YV , ZV
       INTEGER*4 i , Idr , Ifbf , Inpo , INTR , IPS1 , itl , IVAR , ix , 
      &          j , Jj , l , LMAXE , LNY , m , MAGEXC , MEMAX , MEMX6 , 
@@ -8270,14 +8270,14 @@ c      WRITE(*,54)CHISQ
 !*==rk4.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION RK4(Y,H,F)
       IMPLICIT NONE
-      REAL*4 F , H , RK4 , Y
+      REAL*8 F , H , RK4 , Y
       DIMENSION F(3)
       RK4 = Y + H*(F(1)+4.*F(2)+F(3))/6.
       END
 !*==qfit.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE QFIT(Qui,Tau1,Tau2,Eng,Xl1,Cf,Nl,Ind)
       IMPLICIT NONE
-      REAL*4 ca , cb , Cf , cm , cn , co , d , d1 , d2 , Eng , Qui , 
+      REAL*8 ca , cb , Cf , cm , cn , co , d , d1 , d2 , Eng , Qui , 
      &       Tau1 , Tau2 , Xl1
       INTEGER*4 Ind , ind1 , k , Nl
       DIMENSION Tau1(10) , Eng(10) , Tau2(10,7) , Xl1(7) , Qui(8,10) , 
@@ -8303,7 +8303,7 @@ c      WRITE(*,54)CHISQ
       SUBROUTINE GAMATT(Qui,Tau1,Tau2,Xl1,Nl)
       IMPLICIT NONE
       INTEGER*4 i , i1 , k , Nl
-      REAL*4 q , Qui , tau , Tau1 , Tau2 , thing , thing1 , thing3 , Xl1
+      REAL*8 q , Qui , tau , Tau1 , Tau2 , thing , thing1 , thing3 , Xl1
       DIMENSION Tau1(10) , Tau2(10,7) , Xl1(7) , thing3(10) , q(9) , 
      &          Qui(8,10)
       DO i = 1 , 10
@@ -8326,7 +8326,7 @@ c      WRITE(*,54)CHISQ
 !*==gcf.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE GCF(Tau,Thing,Q)
       IMPLICIT NONE
-      REAL*4 A , b , D , dl , ev , ex , f , fint , od , ODL , Q , R , 
+      REAL*8 A , b , D , dl , ev , ex , f , fint , od , ODL , Q , R , 
      &       Tau , Thing , XL , xm , yl , yu
       INTEGER*4 i , j , k , m
       COMMON /DIMX  / A , R , XL , D , ODL(200)
@@ -8393,10 +8393,10 @@ c      WRITE(*,54)CHISQ
       Q(1) = Q(1)/2.
       END
 !*==tcexp.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
-      COMPLEX FUNCTION TCEXP(Z)
+      COMPLEX*16 FUNCTION TCEXP(Z)
       IMPLICIT NONE
-      REAL*4 a , b , c , d
-      COMPLEX Z
+      REAL*8 a , b , c , d
+      COMPLEX*16 Z
       a = REAL(Z)
       b = AIMAG(Z)
       a = EXP(a)
@@ -8407,8 +8407,8 @@ c      WRITE(*,54)CHISQ
 !*==tcabs.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION TCABS(Z)
       IMPLICIT NONE
-      REAL*4 a , b , TCABS
-      COMPLEX Z
+      REAL*8 a , b , TCABS
+      COMPLEX*16 Z
       a = REAL(Z)
       b = AIMAG(Z)
       IF ( ABS(a).LT.1.E-16 ) a = 0.
@@ -8418,7 +8418,7 @@ c      WRITE(*,54)CHISQ
 !*==tasin.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION TASIN(X)
       IMPLICIT NONE
-      REAL*4 dol , TASIN , test , war , X
+      REAL*8 dol , TASIN , test , war , X
       test = ABS(X) - 1.
       IF ( ABS(test).LT.1.E-9 ) THEN
          TASIN = 1.570796327
@@ -8433,7 +8433,7 @@ c      WRITE(*,54)CHISQ
 !*==tacos.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION TACOS(X)
       IMPLICIT NONE
-      REAL*4 TACOS , TASIN , X
+      REAL*8 TACOS , TASIN , X
       TACOS = 1.570796327 - TASIN(X)
       END
 !*==openf.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
@@ -8567,10 +8567,10 @@ c     JAERI calibration - TC, Nov.2000
 !*==adhoc.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE ADHOC(Oph,Idr,Nfd,Ntap,Iyr)
       IMPLICIT NONE
-      REAL*4 ACCA , ACCUR , AGELI , BRAT , CC , CORF , DELTA , DIPOL , 
+      REAL*8 ACCA , ACCUR , AGELI , BRAT , CC , CORF , DELTA , DIPOL , 
      &       DIX , DMIX , DMIXE , DYEX , EAMX , EG , EN , ENDEC , ENZ , 
      &       EP , ODL , Q
-      REAL*4 SPIN , TAU , TIMEL , TLBDG , UPL , VINF , wamx , wbra , 
+      REAL*8 SPIN , TAU , TIMEL , TLBDG , UPL , VINF , wamx , wbra , 
      &       wdl , wlf , XA , XA1 , YEXP , YGN , YGP , YNRM , ZPOL
       INTEGER*4 IAMX , IAMY , iax , IBPS , IBRC , Idr , IDRN , iexp1 , 
      &          IFMO , ILE , ilft , IMIX , iosr , ipri , IPRM , ISO , 
