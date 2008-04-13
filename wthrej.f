@@ -1,4 +1,4 @@
-      FUNCTION WTHREJ(J1,J2,J3,M1,M2,M3)
+      REAL*8 FUNCTION WTHREJ(J1,J2,J3,M1,M2,M3)
       IMPLICIT NONE
       INTEGER*4 IP , IPI , iz , iza , izb , izc , izd , ize , izexp , 
      &          izf , izmax , izmin , J1 , J2 , J3 , jabc , jabm , 
@@ -7,7 +7,7 @@
      &          jmb , jmc , jmd , jme , jmf , jta , jtb , jtc , jvo , 
      &          jvora , KF , M1
       INTEGER*4 M2 , M3 , mm1 , mm2 , mm3 , n , nmax
-      REAL*8 PILOG , qsumlo , sumlo , vorz , WTHREJ , wthrep , zuthre
+      REAL*8 PILOG , qsumlo , sumlo , vorz , wthrep , zuthre
       DIMENSION jvora(26)
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
       wthrep = 0.E+00
