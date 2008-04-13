@@ -1,3 +1,34 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE DECAY
+C
+C Called by: CEGRY, GOSIA, READY, SEQ
+C Calls:     GKVAC
+C
+C Purpose: Calculate the gamma decay following excitation.
+C
+C Uses global variables:
+C      DELLA  -
+C      DELTA  -
+C      GKP    -
+C      IAXS   - axial symmetry flag
+C      IBYP   -
+C      IEXP   - experiment number
+C      KLEC   -
+C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
+C      LIFCT  - index for lifetimes
+C      NMAX   - number of levels
+C      NMAX1  -
+C      TAU    -
+C      TIMEL  - lifetimes and their errors
+C      VACDP  -
+C      ZETA   - various coefficients
+C
+C Formal parameters:
+C      Chisq  - chi squared
+C      Nlift  - number of lifetimes
+C      Chilo  - chi squared of logs
+      
       SUBROUTINE DECAY(Chisq,Nlift,Chilo)
       IMPLICIT NONE
       REAL*8 AKS , bsum , Chilo , Chisq , DELLA , DELTA , df , DQ , 
@@ -22,16 +53,17 @@
       COMMON /CATLF / FP(4,500,3) , GKP(4,500,2) , KLEC(75)
       COMMON /LCDL  / DELLA(500,3)
       DIMENSION gk(4)
+
       idr = 1
       DO il = 1 , NMAX1
-         l = KSEQ(idr,3)
+         l = KSEQ(idr,3) ! Initial level of idr'th decay
          n1 = 28*(l-1)
          ibra = KLEC(l)
          bsum = 0.
          idrh = idr
          DO j = 1 , ibra
-            inx = KSEQ(idr,1)
-            inx1 = KSEQ(idr,2)
+            inx = KSEQ(idr,1) ! Index 1 of idr'th decay
+            inx1 = KSEQ(idr,2) ! Index 2 of idr'th decay
             el1 = 0.
             IF ( inx.NE.0 ) el1 = ELM(inx)
             emt = el1*el1
@@ -49,9 +81,9 @@
          TAU(l) = 1./bsum
          CALL GKVAC(l)
          DO j = 1 , ibra
-            l1 = KSEQ(idr,4)
+            l1 = KSEQ(idr,4) ! Final energy of idr'th decay
             n2 = 28*(l1-1)
-            inx1 = KSEQ(idr,2)
+            inx1 = KSEQ(idr,2) ! Index 2 of idr'th decay
             DO i = 1 , 4
                gk(i) = GKP(i,idr,1)*DELLA(idr,1)
             ENDDO
