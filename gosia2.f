@@ -200,8 +200,8 @@ C**********************************************************************
       COMMON /CXI   / XI(500)
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       COMMON /MINNI / IMIN , LNORM(50)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
@@ -2517,8 +2517,8 @@ c     *(ccch1+ccch2)
      &                MULTI(8)
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       COMMON /PSPIN / ISHA
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
       COMMON /PCOM  / PSI(500)
@@ -2713,8 +2713,8 @@ c     *(ccch1+ccch2)
      &          LP3 , LP4 , LP6 , LP7
       INTEGER*4 LP8 , LP9 , LZETA , m , MAGA , MEM , mrange , mt , N , 
      &          NSTART , NSTOP , Nz
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       COMMON /PCOM  / PSI(500)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
@@ -2859,8 +2859,8 @@ c     *(ccch1+ccch2)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       lexp0 = 1
       lexp1 = NEXPT
       IF ( Ii.NE.0 ) lexp0 = Ii
@@ -3420,8 +3420,8 @@ c     *(ccch1+ccch2)
       COMPLEX ARM , FAZA , pamp , EXPO , pamp1
       COMMON /PSPIN / ISHA
       COMMON /AZ    / ARM(600,7)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
      &                ISG1
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
@@ -3968,8 +3968,8 @@ c     *(ccch1+ccch2)
       INTEGER*4 MAGA , MAXLA , mir , n , NDIM , NDIV , NMAX , NMAX1 , 
      &          NPT , NSTART , NSTOP , NSW
       COMPLEX ARM , hold
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       COMMON /AZ    / ARM(600,7)
       COMMON /RNG   / IRA(8) , MAXLA
       COMMON /A50   / ACC50
@@ -4426,8 +4426,8 @@ c     *(ccch1+ccch2)
      &          NSTOP
       COMPLEX ARM
       DIMENSION Bten(1200)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
@@ -4672,8 +4672,8 @@ c     *(ccch1+ccch2)
      &                YNRM(32,50) , IDRN , ILE(32)
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /CLM   / LMAX
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /AZ    / ARM(600,7)
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
@@ -5469,8 +5469,8 @@ c      WRITE(*,54)CHISQ
      &                YNRM(32,50) , IDRN , ILE(32)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       COMMON /SKP   / JSKIP(50)
       COMMON /TRB   / ITS
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
@@ -5946,8 +5946,8 @@ c      WRITE(*,54)CHISQ
      &                MULTI(8)
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
       COMMON /CATLF / FP(4,500,3) , GKP(4,500,2) , KLEC(75)
       m6 = 0
@@ -6470,8 +6470,8 @@ c      WRITE(*,54)CHISQ
       COMMON /GVAC  / GKI(3) , SUM(3)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       COMMON /THTAR / ITTE(50)
       IF ( ABS(XLAMB).GE.1.E-9 ) THEN
          IF ( ITTE(IEXP).EQ.0 ) THEN
@@ -7051,8 +7051,8 @@ c      WRITE(*,54)CHISQ
       INTEGER*4 MULTI , n1 , n2 , NBRA , Nwyr
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       COMMON /BRNCH / BRAT(50,2) , IBRC(2,50) , NBRA
       COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
      &                ENZ(200)
@@ -7223,8 +7223,8 @@ c      WRITE(*,54)CHISQ
       COMMON /SWITCH/ JZB , IBPS
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
@@ -8075,8 +8075,8 @@ c      WRITE(*,54)CHISQ
      &          LEAD , MULTI , nf , ni
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
       WRITE (22,99001)
 99001 FORMAT (1X//20X,'CALCULATED INTERNAL CONVERSION ',
@@ -8600,8 +8600,8 @@ c     JAERI calibration - TC, Nov.2000
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
      &                NICC , NANG(200)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
-     &                ACCA
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
+     &                ISO
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
