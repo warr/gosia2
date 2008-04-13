@@ -60,7 +60,6 @@ C
 C**********************************************************************
       PROGRAM GOSIA2
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ABC , ACCA , ACCUR , acof , AGELI , AKAVKA , AKS , ap , 
      &       ARCCOS , ARCTG , arg , ax , B , bcof , be2 , be2a , be2b , 
      &       be2c , BEQ , BETAR
@@ -148,7 +147,6 @@ C*** Start of declarations inserted by SPAG
      &          nogeli , npce , npce1 , npct , npct1 , npt , nptl , 
      &          nptx , ns1 , ns2 , ntap , ntt , numcl
       INTEGER*4 nval , NYLDE , nz
-C*** End of declarations inserted by SPAG
       LOGICAL ERR
       COMPLEX ARM , EXPO
       CHARACTER*4 oph , op1 , opcja , op2
@@ -2454,10 +2452,8 @@ c     *(ccch1+ccch2)
 !*==arccos.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION ARCCOS(A,F,Pi)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 A , an , ARCCOS , F , Pi , q , qa , qap , TACOS
       INTEGER*4 ie , j , k
-C*** End of declarations inserted by SPAG
       q = TACOS(A)
       qa = q
       qap = q
@@ -2478,10 +2474,8 @@ C*** End of declarations inserted by SPAG
 !*==arctg.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION ARCTG(A,F,Pi)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 A , an , ARCTG , F , Pi , q , qa , qap
       INTEGER*4 ie , j , k
-C*** End of declarations inserted by SPAG
       q = ATAN(A)
       qa = q
       qap = q
@@ -2502,7 +2496,6 @@ C*** End of declarations inserted by SPAG
 !*==load.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LOAD(Iexp,Ient,Icg,Polm,Joj)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 a1 , a2 , aaz2 , aaz3 , aazz , ACCA , ACCUR , ah , CAT , 
      &       cpsi , dep , DIPOL , EMMA , EN , EP , eta , etan , Polm , 
      &       pp1 , pp2
@@ -2519,7 +2512,6 @@ C*** Start of declarations inserted by SPAG
      &          m2 , MAGA , MAGEXC , MEMAX , MEMX6 , mstop , MULTI , n , 
      &          n2 , n3 , NCM
       INTEGER*4 NDIM , NEXPT , NMAX , NMAX1 , nn , NSTART , NSTOP , nz
-C*** End of declarations inserted by SPAG
       LOGICAL ERR
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
@@ -2710,7 +2702,6 @@ C*** End of declarations inserted by SPAG
 !*==lsloop.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LSLOOP(Ir,N,Nz,Ld,Lam,La,Ssqrt,Icg,Iexp)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ACCA , ACCUR , CAT , DIPOL , ELM , ELML , ELMU , EN , phz , 
      &       PSI , QAPR , rmir , rmis , SA , SPIN , Ssqrt , WTHREJ , 
      &       ZETA , ZPOL
@@ -2722,7 +2713,6 @@ C*** Start of declarations inserted by SPAG
      &          LP3 , LP4 , LP6 , LP7
       INTEGER*4 LP8 , LP9 , LZETA , m , MAGA , MEM , mrange , mt , N , 
      &          NSTART , NSTOP , Nz
-C*** End of declarations inserted by SPAG
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
      &                ACCA
       COMMON /PCOM  / PSI(500)
@@ -2797,10 +2787,8 @@ C*** End of declarations inserted by SPAG
 !*==leadf.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION LEADF(N1,N2,N3)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       INTEGER*4 k , LAMDA , LAMMAX , LDNUM , LEAD , LEADF , lsum , 
      &          MULTI , N1 , n1m , N2 , N3 , n3m
-C*** End of declarations inserted by SPAG
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       lsum = 0
@@ -2822,10 +2810,8 @@ C*** End of declarations inserted by SPAG
 !*==mem.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION MEM(N1,N2,N3)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       INTEGER*4 k , LAMDA , LAMMAX , LDNUM , LEAD , MEM , msum , MULTI , 
      &          N1 , n1m , N2 , N3 , n3m
-C*** End of declarations inserted by SPAG
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       msum = 0
@@ -2852,7 +2838,6 @@ C*** End of declarations inserted by SPAG
 !*==cmlab.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE CMLAB(Ii,Dsig,Tetrn)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 a1 , a2 , ACCA , ACCUR , ared , BETAR , d2a , DIPOL , 
      &       dista , dists , Dsig , DSIGS , emax , EMMA , EN , EP , 
      &       epmin , EPS , EROOT , FIEX
@@ -2863,7 +2848,6 @@ C*** Start of declarations inserted by SPAG
      &       Tetrn , TLBDG , tlbrad , tmxdg , TREP , VINF , XA , XA1 , 
      &       z1 , z2 , zcmdg , zcmrad
       REAL*4 zlbrad , ZPOL
-C*** End of declarations inserted by SPAG
       LOGICAL ERR
       COMMON /CLCOM9/ ERR
       COMMON /SECK  / ISKIN(50)
@@ -3025,11 +3009,9 @@ C*** End of declarations inserted by SPAG
       SUBROUTINE QE(C,D,B2,C2,D2,B4,B6,D3,B8,C4,D4,B10,D5,B12,D6,Lmda,
      &              Pol,Cq)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 B10 , B12 , B2 , B4 , B6 , B8 , C , C2 , C4 , Cq , D , D2 , 
      &       D3 , D4 , D5 , D6 , Pol
       INTEGER*4 Lmda
-C*** End of declarations inserted by SPAG
       DIMENSION Cq(7)
       IF ( Lmda.EQ.2 ) THEN
          Cq(1) = 0.75*(2.0*C2-D2)/B4*Pol
@@ -3074,10 +3056,8 @@ C*** End of declarations inserted by SPAG
 !*==qm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE QM(C,D,B2,B4,Ert,Lmda,Cq)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 B2 , B4 , C , Cq , D , Ert
       INTEGER*4 Lmda
-C*** End of declarations inserted by SPAG
       DIMENSION Cq(7)
       IF ( Lmda.EQ.8 ) THEN
          Cq(1) = -.9185586536*C*Ert/B4
@@ -3090,7 +3070,6 @@ C*** End of declarations inserted by SPAG
 !*==snake.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SNAKE(Nexp,Zpol)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 b10 , b12 , b2 , b4 , b6 , b8 , c , c2 , c4 , c6 , CH , 
      &       chi , cq , d , d2 , d3 , d4 , d5 , d6 , EPS
       REAL*4 EROOT , ert , FIEX , pol , SH , shi , ZETA , Zpol
@@ -3099,7 +3078,6 @@ C*** Start of declarations inserted by SPAG
      &          LP13 , LP14 , LP2
       INTEGER*4 LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , LZETA , mimx , 
      &          Nexp , nind , nlm
-C*** End of declarations inserted by SPAG
       DIMENSION lloc(8) , cq(7) , irl(8)
       COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
@@ -3182,11 +3160,9 @@ C*** End of declarations inserted by SPAG
 !*==fhip.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FHIP
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 CH , er , ex , SH , w
       INTEGER*4 j , LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , 
      &          LP4 , LP6 , LP7 , LP8 , LP9
-C*** End of declarations inserted by SPAG
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /HIPER / SH(365) , CH(365)
@@ -3202,13 +3178,11 @@ C*** End of declarations inserted by SPAG
 !*==alloc.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE ALLOC(Accur)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 Accur , u , v
       INTEGER*4 iflag , IRA , j , k , k1 , load , LOCQ , LP1 , LP10 , 
      &          LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , LP4 , LP6 , 
      &          LP7 , LP8 , LP9
       INTEGER*4 MAXLA
-C*** End of declarations inserted by SPAG
       COMMON /ALLC  / LOCQ(8,7)
       COMMON /RNG   / IRA(8) , MAXLA
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
@@ -3246,10 +3220,8 @@ C*** End of declarations inserted by SPAG
 !*==rangel.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE RANGEL(Acc1)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 Acc1 , ACC50 , acl , w
       INTEGER*4 i , IRA , LAMDA , LAMMAX , LDNUM , LEAD , MAXLA , MULTI
-C*** End of declarations inserted by SPAG
       COMMON /A50   / ACC50
       COMMON /RNG   / IRA(8) , MAXLA
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
@@ -3283,12 +3255,10 @@ C*** End of declarations inserted by SPAG
 !*==qrange.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE QRANGE(Icnt,Nlm,Lloc,Ibm,Icm,Idm,Irl)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       INTEGER*4 Ibm , Icm , Icnt , Idm , IRA , Irl , is , k , ke , km , 
      &          l , LAMDA , LAMMAX , ld , LDNUM , LEAD , Lloc , ls , 
      &          MAXLA , MULTI
       INTEGER*4 nlend , Nlm
-C*** End of declarations inserted by SPAG
       DIMENSION Lloc(8) , Irl(8)
       COMMON /RNG   / IRA(8) , MAXLA
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
@@ -3359,7 +3329,6 @@ C*** End of declarations inserted by SPAG
 !*==ampder.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE AMPDER(I57)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 CAT , D2W , ELM , ELML , ELMU , rsg , SA , ZETA
       INTEGER*4 i1 , I57 , ibg , iend , iflg , indx , ir , is2 , ISG , 
      &          ISG1 , ISMAX , ISSTAR , ISSTO , k , KDIV , lam , LAMDA , 
@@ -3367,7 +3336,6 @@ C*** Start of declarations inserted by SPAG
       INTEGER*4 ld , LDNUM , LEAD , LZETA , m , mm , MSTORE , MULTI , 
      &          n , NDIM , NDIV , nhold , NMAX , NMAX1 , NPT , NSTART , 
      &          NSTOP , NSW , nz
-C*** End of declarations inserted by SPAG
       COMPLEX ARM , EXPO
       COMMON /AZ    / ARM(600,7)
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
@@ -3439,7 +3407,6 @@ C*** End of declarations inserted by SPAG
 !*==laisum.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LAISUM(Ir,N,Rsg,Lam,Ld,Nz,I57)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ACCA , ACCUR , CAT , D2W , DIPOL , ELM , ELML , ELMU , EN , 
      &       q , rmir , rmis , rmu , Rsg , SA , SPIN , z , ZETA , ZPOL
       INTEGER*4 i2 , i3 , I57 , iii , indq , indx , Ir , irs , is , 
@@ -3450,7 +3417,6 @@ C*** Start of declarations inserted by SPAG
      &          LP9 , LZETA
       INTEGER*4 m , mrange , MSTORE , mua , N , NDIV , NPT , NSTART , 
      &          NSTOP , NSW , Nz
-C*** End of declarations inserted by SPAG
       COMPLEX ARM , FAZA , pamp , EXPO , pamp1
       COMMON /PSPIN / ISHA
       COMMON /AZ    / ARM(600,7)
@@ -3529,10 +3495,8 @@ C*** End of declarations inserted by SPAG
 !*==expon.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       COMPLEX FUNCTION EXPON(Inx,Npt,Isg,Isg1,Ndiv,Kdiv)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ADB , XI
       INTEGER*4 Inx , Isg , Isg1 , Kdiv , Ndiv , Npt
-C*** End of declarations inserted by SPAG
       COMPLEX expo1 , ci , expox , TCEXP
       COMMON /ADX   / ADB(365)
       COMMON /CXI   / XI(500)
@@ -3547,10 +3511,8 @@ C*** End of declarations inserted by SPAG
 !*==faza.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       COMPLEX FUNCTION FAZA(La,Mi,Rmu,Rsg)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       INTEGER*4 ieven , La , Mi
       REAL*4 Rmu , Rsg
-C*** End of declarations inserted by SPAG
       COMPLEX ci
       DATA ci/(0.,1.)/
       IF ( La.GT.6 ) THEN
@@ -3574,11 +3536,9 @@ C*** End of declarations inserted by SPAG
 !*==setin.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SETIN
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ADB , CH , EPS , EROOT , FIEX , SH
       INTEGER*4 IAXS , IEXP , k , LP1 , LP10 , LP11 , LP12 , LP13 , 
      &          LP14 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9
-C*** End of declarations inserted by SPAG
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /HIPER / SH(365) , CH(365)
@@ -3591,14 +3551,12 @@ C*** End of declarations inserted by SPAG
 !*==sting.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE STING(Irld)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 CAT , D2W , ELM , ELML , ELMU , rsg , SA , w0 , ZETA
       INTEGER*4 i , i57 , ibg , iend , IFLG , indx , IRA , Irld , is2 , 
      &          ISG , ISG1 , ISMAX , ISSTAR , ISSTO , j , j1 , jj , 
      &          KDIV , lam , LAMDA
       INTEGER*4 LAMMAX , LAMR , ld , LDNUM , LEAD , LZETA , maxh , 
      &          MAXLA , mm , MSTORE , MULTI , n , NDIV , NPT , NSW , nz
-C*** End of declarations inserted by SPAG
       COMPLEX ARM , EXPO
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
@@ -3683,7 +3641,6 @@ C*** End of declarations inserted by SPAG
 !*==laiamp.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LAIAMP(Ir,W0)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 CAT , D2W , ELM , ELML , ELMU , EPS , epsi , EROOT , errt , 
      &       FIEX , pm , ppp , rmir , rmis , rmu , SA , TCABS , W0 , 
      &       XI , xiv
@@ -3694,7 +3651,6 @@ C*** Start of declarations inserted by SPAG
       INTEGER*4 LAMR , ld , LDNUM , LEAD , LEADF , LZETA , m , MEM , 
      &          mrange , mua , MULTI , NDIV , NPT , NSTART , NSTOP , 
      &          NSW , nz
-C*** End of declarations inserted by SPAG
       COMPLEX ARM , STAMP , dis , uhuj
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
@@ -3763,10 +3719,8 @@ C*** End of declarations inserted by SPAG
 !*==faza1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FAZA1(La,Mi,Rmir,Rmis,Dis,Rmu)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       INTEGER*4 ieven , irs , La , Mi
       REAL*4 Rmir , Rmis , Rmu
-C*** End of declarations inserted by SPAG
       COMPLEX Dis , ci
       DATA ci/(0.,1.)/
       irs = (-1)**INT(Rmir+Rmis)
@@ -3787,9 +3741,7 @@ C*** End of declarations inserted by SPAG
 !*==trint.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE TRINT(Arg,Si,Ci)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 a , Arg , c , Ci , f , g , POL4 , s , Si
-C*** End of declarations inserted by SPAG
       a = Arg*Arg
       IF ( Arg.LT.1. ) THEN
          Si = POL4(0.,2.83446712E-5,-1.66666667E-3,.055555555,-1.,a)
@@ -3811,9 +3763,7 @@ C*** End of declarations inserted by SPAG
 !*==pol4.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION POL4(C0,C1,C2,C3,C4,A)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 A , C0 , C1 , C2 , C3 , C4 , POL4
-C*** End of declarations inserted by SPAG
       POL4 = 1.
       IF ( ABS(A).GT.1.E+9 ) RETURN
       POL4 = C4 + A*(C3+A*(C2+A*(C1+A*C0)))
@@ -3821,12 +3771,10 @@ C*** End of declarations inserted by SPAG
 !*==stamp.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       COMPLEX FUNCTION STAMP(Epsi,Errt,Xiv,Dw,W0,Lmda,Mua)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 a , axi , b , bic , bic2 , bis , bis2 , ca , cb , cia , 
      &       cib , cic , cis , Dw , dwi , Epsi , Errt , ex , exa , fct
       INTEGER*4 la , Lmda , mi , Mua
       REAL*4 sa , sb , sia , sib , W0 , Xiv
-C*** End of declarations inserted by SPAG
       mi = Mua - 1
       axi = ABS(Xiv)
       la = Lmda
@@ -3892,11 +3840,9 @@ C*** End of declarations inserted by SPAG
 !*==reset.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE RESET(Iso)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 CAT
       INTEGER*4 ir , ISMAX , Iso , j , NDIM , NMAX , NMAX1 , NSTART , 
      &          NSTOP
-C*** End of declarations inserted by SPAG
       COMPLEX ARM
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /AZ    / ARM(600,7)
@@ -3923,11 +3869,9 @@ C*** End of declarations inserted by SPAG
 !*==half.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE HALF(Iso)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 CAT
       INTEGER*4 ir , ISMAX , Iso , j , NDIM , NMAX , NMAX1 , NSTART , 
      &          NSTOP
-C*** End of declarations inserted by SPAG
       COMPLEX ARM , fpom
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /AZ    / ARM(600,7)
@@ -3958,11 +3902,9 @@ C*** End of declarations inserted by SPAG
 !*==double.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE DOUBLE(Iso)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 CAT
       INTEGER*4 ir , ISMAX , Iso , j , NDIM , NMAX , NMAX1 , NSTART , 
      &          NSTOP
-C*** End of declarations inserted by SPAG
       COMPLEX ARM , fpom
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /AZ    / ARM(600,7)
@@ -3992,11 +3934,9 @@ C*** End of declarations inserted by SPAG
 !*==path.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE PATH(Irld)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 CAT , spm , vl
       INTEGER*4 i , IPATH , Irld , ISMAX , isp , ist , j , MAGA , NDIM , 
      &          NMAX , NMAX1 , NSTART , NSTOP
-C*** End of declarations inserted by SPAG
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
@@ -4020,7 +3960,6 @@ C*** End of declarations inserted by SPAG
 !*==intg.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE INTG(Ien)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ACC50 , ACCA , ACCUR , CAT , D2W , DIPOL , EN , f , rim , 
      &       rl , SPIN , srt , ZPOL
       INTEGER*4 i , i57 , Ien , IFAC , IFLG , ihold , intend , INTERV , 
@@ -4028,7 +3967,6 @@ C*** Start of declarations inserted by SPAG
      &          kast , KDIV , LAMR
       INTEGER*4 MAGA , MAXLA , mir , n , NDIM , NDIV , NMAX , NMAX1 , 
      &          NPT , NSTART , NSTOP , NSW
-C*** End of declarations inserted by SPAG
       COMPLEX ARM , hold
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
      &                ACCA
@@ -4159,13 +4097,11 @@ C*** End of declarations inserted by SPAG
 !*==newlv.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE NEWLV(N,Ld,La)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 D2W
       INTEGER*4 i2 , IFLG , indx , ISG , ISG1 , ISSTAR , ISSTO , KDIV , 
      &          La , LAMDA , LAMMAX , LAMR , Ld , LDNUM , LEAD , LEADF , 
      &          m , MEM , MSTORE , MULTI
       INTEGER*4 N , NDIV , NPT , NSTART , NSTOP , NSW
-C*** End of declarations inserted by SPAG
       COMPLEX EXPO , EXPON
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
@@ -4193,11 +4129,9 @@ C*** End of declarations inserted by SPAG
 !*==code7.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE CODE7(Ir,Is,N,Mt,Inqa,Indx)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       INTEGER*4 IAPR , idm , idn , Indx , Inqa , IPATH , Ir , Is , 
      &          ISEX , ism , MAGA , Mt , N
       REAL*4 QAPR
-C*** End of declarations inserted by SPAG
       COMMON /PTH   / IPATH(75) , MAGA(75)
       COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
       IAPR(Indx,1) = N
@@ -4231,14 +4165,12 @@ C*** End of declarations inserted by SPAG
 !*==apram.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE APRAM(Iexp,Inc,Indx,Irld,Acca)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 Acca , accah , ELM , ELML , ELMU , QAPR , SA , uwa
       INTEGER*4 i1 , i56 , i7 , IAPR , IDIVE , Iexp , img , Inc , Indx , 
      &          IPATH , Irld , ISEX , itm , IVAR , j , jidim , jj , k , 
      &          ktoto , l
       INTEGER*4 l1 , l2 , l3 , LERF , LMAXE , m , MAGA , MAGEXC , 
      &          MEMAX , MEMX6
-C*** End of declarations inserted by SPAG
       COMPLEX ARM
       COMMON /AZ    / ARM(600,7)
       COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
@@ -4343,14 +4275,12 @@ C*** End of declarations inserted by SPAG
 !*==newcat.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE NEWCAT(Iexp,Jidim)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 a , b , FXIS1 , FXIS2 , PARX , PARXM , q1 , q2 , QAPR , 
      &       wg , wl , XI , XIR , xp , xx , zt
       INTEGER*4 IAPR , Iexp , IPATH , ISEX , ist , istop , Jidim , k , 
      &          kk , LAMDA , LAMMAX , LDNUM , LEAD , MAGA , MULTI , n , 
      &          NDIM , ng , nl , NMAX
       INTEGER*4 NMAX1
-C*** End of declarations inserted by SPAG
       COMMON /MAP   / PARX(50,12,5) , PARXM(50,4,10,6) , XIR(6,50)
       COMMON /CXI   / XI(500)
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
@@ -4417,13 +4347,11 @@ C*** End of declarations inserted by SPAG
 !*==pomnoz.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE POMNOZ(Acca,L,Iw,Ktoto,Img,Jidim)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 Acca , QAPR , sig , TCABS , test , u
       INTEGER*4 IAPR , IDIVE , Img , INHB , IPATH , ISEX , IVAR , Iw , 
      &          Jidim , k , kk , Ktoto , L , LERF , LMAXE , m , MAGA , 
      &          MAGEXC , mc , mc1
       INTEGER*4 MEMAX , MEMX6 , mw , mw1
-C*** End of declarations inserted by SPAG
       COMPLEX ARM , ci
       COMMON /INHI  / INHB
       COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
@@ -4490,14 +4418,12 @@ C*** End of declarations inserted by SPAG
 !*==tenb.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE TENB(Icl,Bten,Lmax)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ACCA , ACCUR , Bten , CAT , ce , DIPOL , EN , fc , si , 
      &       SPIN , WTHREJ , x , ZPOL
       INTEGER*4 i , Icl , iha , ila , ilg , ind , isi , ISMAX , ISO , 
      &          ite , jm , jmp , k , kk , kp , l , ll , Lmax , lp , m
       INTEGER*4 mm , mp , ms , msp , NDIM , NMAX , NMAX1 , NSTART , 
      &          NSTOP
-C*** End of declarations inserted by SPAG
       COMPLEX ARM
       DIMENSION Bten(1200)
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
@@ -4570,12 +4496,10 @@ C*** End of declarations inserted by SPAG
 !*==tens.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE TENS(Bten)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 arg , Bten , DJMM , DSIGS , EPS , EROOT , FIEX , TETACM , 
      &       TREP , ZETA
       INTEGER*4 i , IAXS , IEXP , ind , inz , iph , ix , k , k1 , kp , 
      &          l , lp , lpp , lx , lxx , LZETA , NDIM , NMAX , NMAX1
-C*** End of declarations inserted by SPAG
       DIMENSION Bten(1200)
       COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
@@ -4623,12 +4547,10 @@ C*** End of declarations inserted by SPAG
 !*==djmm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION DJMM(Beta,K,Kpp,Kp)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 B , b1 , b2 , be , BEQ , Beta , cb , ctb , djm , DJMM , f , 
      &       g , sb , sk , ul
       INTEGER*4 iczy , ifla , ifza , ill , j , ja , jb , jc , jd , K , 
      &          Kp , Kpp , lca , loc , mas , mis
-C*** End of declarations inserted by SPAG
       DIMENSION djm(525) , iczy(525)
       COMMON /IDENT / BEQ
       COMMON /CB    / B(20)
@@ -4705,7 +4627,6 @@ C*** End of declarations inserted by SPAG
 !*==ftbm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FTBM(Icll,Chisq,Idr,Ncall,Chilo,Bten)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ACCA , ACCUR , AGELI , aval , Bten , CAT , CC , Chilo , 
      &       chis1 , CHIS11 , chish , Chisq , chisx , chx , CORF , 
      &       DIPOL , DYEX , EG , ELM , ELML
@@ -4731,7 +4652,6 @@ C*** Start of declarations inserted by SPAG
      &          NANG , Ncall , NDIM , NEXPT , NICC , NLIFT , nlin , 
      &          NMAX , NMAX1 , nowr , npoz , nrest , NSTART
       INTEGER*4 NSTOP , NWR , nwyr , NYLDE
-C*** End of declarations inserted by SPAG
       COMPLEX ARM
       DIMENSION jmte(6) , prop(6) , Bten(1200)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
@@ -5052,7 +4972,6 @@ C*** End of declarations inserted by SPAG
       SUBROUTINE MINI(Chisq,Chiok,Nptl,Conv,Imode,Idr,Xtest,Ips,Is,Jjh,
      &                Bten)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 a , a0 , a1 , b , Bten , c , ccd , chd , chil , chilo , 
      &       Chiok , chirf , CHIS11 , chis12 , chis13 , chisf , chisp , 
      &       Chisq , chiss , chl
@@ -5073,7 +4992,6 @@ C*** Start of declarations inserted by SPAG
       INTEGER*4 LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , MAGEXC , MEMAX , 
      &          MEMX6 , metf , mvfl , ncall , nlinn , NLOCK , noflg , 
      &          Nptl , NWR , NYLDE
-C*** End of declarations inserted by SPAG
       DIMENSION ipm(10) , Bten(1200) , gradp(500)
       COMMON /DUMM  / GRAD(500) , HLMLM(500) , ELMH(500)
       COMMON /ILEWY / NWR
@@ -5491,7 +5409,6 @@ c      WRITE(*,54)CHISQ
 !*==cegry.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE CEGRY(Chisq,Itemp,Chilo,Idr,Nwyr,Icall,Issp,Iredv)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ACCA , ACCUR , AGELI , AKS , BETAR , CC , ccc , ccd , 
      &       Chilo , Chisq , CNOR , CNOR1 , CNOR2 , cnr , cocos , CORF , 
      &       d , decen , DELTA , DEV
@@ -5519,7 +5436,6 @@ C*** Start of declarations inserted by SPAG
      &          MCFIX , na , NANG
       INTEGER*4 NDIM , NDST , NEXPT , nf , nf1 , ni , ni1 , NICC , 
      &          NLIFT , NMAX , NMAX1 , Nwyr , NYLDE
-C*** End of declarations inserted by SPAG
       CHARACTER*4 wupl , war , op2
       DIMENSION lic(32) , lth(500) , cnr(32,50)
       COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,500) , 
@@ -5972,10 +5888,8 @@ C*** End of declarations inserted by SPAG
 !*==fakp.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FAKP
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       INTEGER*4 i , IP , IPI , k , KF , l
       REAL*4 PILOG , x
-C*** End of declarations inserted by SPAG
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
       DO i = 1 , 26
          x = REAL(IP(i))
@@ -5995,10 +5909,8 @@ C*** End of declarations inserted by SPAG
 !*==prim.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE PRIM(N)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       INTEGER*4 i , IP , IPI , KF , N , nni , nnk
       REAL*4 PILOG
-C*** End of declarations inserted by SPAG
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
       nnk = N
       DO i = 1 , 26
@@ -6015,7 +5927,6 @@ C*** End of declarations inserted by SPAG
 !*==seq.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SEQ(Idr)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ACCA , ACCUR , CONV , DELTA , DIPOL , ega , egs , emax , 
      &       EN , ENDEC , ENZ , F , FP , GF , GKP , SPIN , spinf , 
      &       spini , TAU , twoi
@@ -6028,7 +5939,6 @@ C*** Start of declarations inserted by SPAG
      &          LP6 , LP7 , LP8 , LP9
       INTEGER*4 m , m1 , m6 , MEM , mk , mule , mulm , MULTI , n , n1 , 
      &          NDIM , NMAX , NMAX1 , nob
-C*** End of declarations inserted by SPAG
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
      &                ENZ(200)
@@ -6208,10 +6118,8 @@ C*** End of declarations inserted by SPAG
 !*==gf.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION GF(K,Sji,Sjf,L)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 GF , phase , Sjf , Sji , WSIXJ
       INTEGER*4 i , ix , jfz , jiz , K , kz , L , lz
-C*** End of declarations inserted by SPAG
       GF = 0.
       IF ( L.EQ.0 ) RETURN
       ix = INT(Sji+Sjf+.0001)
@@ -6227,10 +6135,8 @@ C*** End of declarations inserted by SPAG
 !*==f.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION F(K,Sji,Sjf,L1,L2)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 F , phase , Sjf , Sji , WSIXJ , WTHREJ
       INTEGER*4 ix , jfz , jiz , K , kz , l , L1 , l1z , L2 , l2z
-C*** End of declarations inserted by SPAG
       F = 0.
       IF ( (L1*L2).EQ.0 ) RETURN
       ix = INT(Sji+Sjf+.0001)
@@ -6248,10 +6154,8 @@ C*** End of declarations inserted by SPAG
 !*==conv.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION CONV(Ega,N)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 AGELI , CC , CONV , cpo , cpo1 , cv , EG , Ega , Q
       INTEGER*4 j , N , n1 , NANG , nen , NICC
-C*** End of declarations inserted by SPAG
       DIMENSION cpo(51) , cpo1(51)
       COMMON /CCC   / EG(50) , CC(50,5) , NANG(200) , Q(3,200,8) , 
      &                NICC , AGELI(50,200,2)
@@ -6283,7 +6187,6 @@ C*** End of declarations inserted by SPAG
 !*==wthrej.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION WTHREJ(J1,J2,J3,M1,M2,M3)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       INTEGER*4 IP , IPI , iz , iza , izb , izc , izd , ize , izexp , 
      &          izf , izmax , izmin , J1 , J2 , J3 , jabc , jabm , 
      &          jbma , jj1 , jj2
@@ -6292,7 +6195,6 @@ C*** Start of declarations inserted by SPAG
      &          jvora , KF , M1
       INTEGER*4 M2 , M3 , mm1 , mm2 , mm3 , n , nmax
       REAL*4 PILOG , qsumlo , sumlo , vorz , WTHREJ , wthrep , zuthre
-C*** End of declarations inserted by SPAG
       DIMENSION jvora(26)
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
       wthrep = 0.E+00
@@ -6385,7 +6287,6 @@ C*** End of declarations inserted by SPAG
 !*==wsixj.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION WSIXJ(J1,J2,J3,L1,L2,L3)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       INTEGER*4 IP , IPI , irj , irl , isa , isb , isc , isumfa , iva , 
      &          ivb , ivc , ivd , ivorfa , iz , iza , izb , izc , izd , 
      &          ize , izf
@@ -6396,7 +6297,6 @@ C*** Start of declarations inserted by SPAG
      &          n , nmax
       REAL*4 PILOG , qsumfa , qsumlo , sumlo , vorz , WSIXJ , wsixp , 
      &       zusix
-C*** End of declarations inserted by SPAG
       DIMENSION isumfa(26) , ivorfa(26)
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
       wsixp = 0.E+00
@@ -6484,10 +6384,8 @@ C*** End of declarations inserted by SPAG
 !*==lagran.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LAGRAN(X,Y,Ndata,Ipc,Xx,Yy,Iscal,Irc)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 arh , FUNC , FUNC1 , t , w , X , Xx , Y , y1 , Yy
       INTEGER*4 i , Ipc , Irc , Iscal , j , Ndata
-C*** End of declarations inserted by SPAG
       DIMENSION X(51) , Y(51) , w(51) , arh(51,51)
       IF ( Irc.EQ.2 ) THEN
       ELSEIF ( Irc.EQ.3 ) THEN
@@ -6526,10 +6424,8 @@ C*** End of declarations inserted by SPAG
 !*==func.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION FUNC(Y,I)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 FUNC , Y
       INTEGER*4 I
-C*** End of declarations inserted by SPAG
       IF ( I.EQ.2 ) THEN
          IF ( Y.LT.1.E-12 ) Y = 1.E-12
          FUNC = LOG(Y)
@@ -6544,10 +6440,8 @@ C*** End of declarations inserted by SPAG
 !*==func1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION FUNC1(Y,I)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 FUNC1 , Y
       INTEGER*4 I
-C*** End of declarations inserted by SPAG
       IF ( I.EQ.2 ) THEN
          FUNC1 = EXP(Y)
          RETURN
@@ -6561,7 +6455,6 @@ C*** End of declarations inserted by SPAG
 !*==gkvac.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE GKVAC(Il)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ACCA , ACCUR , AKS , AVJI , beta , BETAR , DIPOL , DQ , 
      &       EN , EP , EPS , EROOT , FIEL , FIEX , GAMMA , GFAC , GKI , 
      &       POWER , QCEN , sp
@@ -6569,7 +6462,6 @@ C*** Start of declarations inserted by SPAG
      &       XA , XA1 , XLAMB , XNOR , ZPOL
       INTEGER*4 i , IAXS , IBYP , IEXP , Il , ISO , ITTE , IZ , IZ1 , 
      &          KSEQ , NEXPT
-C*** End of declarations inserted by SPAG
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
       COMMON /BREC  / BETAR(50)
       COMMON /GGG   / AVJI , GAMMA , XLAMB , TIMEC , GFAC , FIEL , POWER
@@ -6601,7 +6493,6 @@ C*** End of declarations inserted by SPAG
 !*==gkk.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE GKK(Iz,Beta,Spin,Time,Il)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 AKS , alp , ATS , AVJI , Beta , ccf , down , DQ , dwc , f , 
      &       FIEL , GAMMA , GFAC , GKI , hmean , POWER , QCEN , rk , 
      &       sm , Spin
@@ -6610,7 +6501,6 @@ C*** Start of declarations inserted by SPAG
       INTEGER*4 i , IBYP , if2 , ifq , Il , imean , inq , irk2 , 
      &          ispin2 , ixji2 , Iz , j , k , k1 , k2 , l , m , ncoup , 
      &          nz
-C*** End of declarations inserted by SPAG
       COMMON /GVAC  / GKI(3) , SUM(3)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
       COMMON /GGG   / AVJI , GAMMA , XLAMB , TIMEC , GFAC , FIEL , POWER
@@ -6692,10 +6582,8 @@ C*** End of declarations inserted by SPAG
 !*==xstatic.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE XSTATIC(Iz,Ido,Iup,Beta)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 AKS , Beta , DQ , h , QCEN , VACDP , XNOR
       INTEGER*4 IBYP , Ido , Iup , Iz , lq
-C*** End of declarations inserted by SPAG
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
       h = 1./(1.+(Iz**.45*.012008/Beta)**1.666667)
       QCEN = Iz*h**.6
@@ -6712,10 +6600,8 @@ C*** End of declarations inserted by SPAG
 !*==ats.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION ATS(N)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ATS , x , xm
       INTEGER*4 m , N
-C*** End of declarations inserted by SPAG
       IF ( N.LE.0 .OR. N.GT.96 ) THEN
          ATS = 0.
          RETURN
@@ -6789,10 +6675,8 @@ C*** End of declarations inserted by SPAG
 !*==ylm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE YLM(Theta,Ylmr)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ct , ctsq , EPS , EROOT , FIEX , st , Theta , Ylmr
       INTEGER*4 i , IAXS , IEXP , j , l , lf , m
-C*** End of declarations inserted by SPAG
       COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
       DIMENSION Ylmr(9,9) , st(7)
       ct = COS(Theta)
@@ -6834,7 +6718,6 @@ C*** End of declarations inserted by SPAG
 !*==decay.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE DECAY(Chisq,Nlift,Chilo)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 AKS , bsum , Chilo , Chisq , DELLA , DELTA , df , DQ , 
      &       el1 , ELM , ELML , ELMU , emt , emt1 , ENDEC , ENZ , EPS , 
      &       EROOT , FIEX , FP
@@ -6845,7 +6728,6 @@ C*** Start of declarations inserted by SPAG
      &          KSEQ
       INTEGER*4 l , l1 , lc1 , lc2 , LIFCT , LZETA , n1 , n2 , NDIM , 
      &          Nlift , NMAX , NMAX1
-C*** End of declarations inserted by SPAG
       COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
      &                ENZ(200)
       COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
@@ -6941,7 +6823,6 @@ C*** End of declarations inserted by SPAG
 !*==angula.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 AGELI , alab , arg , at , attl , BETAR , bt , CC , DELLA , 
      &       DELTA , dsig , DSIGS , EG , ENDEC , ENZ , EP , EPS , 
      &       EROOT , f , Fi0
@@ -6954,7 +6835,6 @@ C*** Start of declarations inserted by SPAG
      &          jj
       INTEGER*4 jm , k , KLEC , kq , KSEQ , l , lf , lf1 , LZETA , 
      &          mind , NANG , NEXPT , Ngl , NICC , nlv
-C*** End of declarations inserted by SPAG
       CHARACTER*4 Op2
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
      &          Ygn(500)
@@ -7068,7 +6948,6 @@ C*** End of declarations inserted by SPAG
 !*==ready.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE READY(Idr,Ntap,Ipri)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ap , CORF , DYEX , EP , TAU , TLBDG , u , UPL , VINF , w , 
      &       waga , XA , XA1 , xep , YEXP , YNRM , zp
       INTEGER*4 idc , idc1 , idcx , Idr , IDRN , ii , ILE , Ipri , IY , 
@@ -7078,7 +6957,6 @@ C*** Start of declarations inserted by SPAG
      &          LP6 , LP7 , LP8 , LP9 , lxp , nanx , nde , nde1 , NDST , 
      &          ne , NEXPT , ns1
       INTEGER*4 ns2 , ns3 , ns4 , nsxh , nsyh , Ntap , nval , NYLDE
-C*** End of declarations inserted by SPAG
       DIMENSION iytot(32)
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
@@ -7163,7 +7041,6 @@ C*** End of declarations inserted by SPAG
 !*==branr.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE BRANR(Chisq,Nwyr,Chilo)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ACCA , ACCUR , BRAT , ch1 , ch2 , Chilo , Chisq , CONV , 
      &       DELTA , DIPOL , ELM , ELML , ELMU , EN , ENDEC , eng1 , 
      &       eng2 , ENZ , SA , SPIN
@@ -7172,7 +7049,6 @@ C*** Start of declarations inserted by SPAG
      &          j1 , j2 , k , KSEQ , lab1 , lab2 , LAMDA , LAMMAX , 
      &          LDNUM , LEAD , mul2
       INTEGER*4 MULTI , n1 , n2 , NBRA , Nwyr
-C*** End of declarations inserted by SPAG
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
@@ -7242,10 +7118,8 @@ C*** End of declarations inserted by SPAG
 !*==limits.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE LIMITS
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ELM , ELML , ELMU , SA
       INTEGER*4 IVAR , j , LMAXE , MAGEXC , MEMAX , MEMX6
-C*** End of declarations inserted by SPAG
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       DO j = 1 , MEMAX
@@ -7266,11 +7140,9 @@ C*** End of declarations inserted by SPAG
 !*==szereg.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SZEREG(Lst,Ls,L)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 CORF , DYEX , dyh , UPL , YEXP , yh , YNRM
       INTEGER*4 ia , ib , IDRN , ih , ILE , inx , IY , k , L , Ls , 
      &          lsp , Lst , lst1 , NYLDE
-C*** End of declarations inserted by SPAG
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
      &                YNRM(32,50) , IDRN , ILE(32)
@@ -7304,12 +7176,10 @@ C*** End of declarations inserted by SPAG
 !*==sixel.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE SIXEL(Rik,Rv,Em,Jk,Kk,Indx,Lu)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 a1 , al , al1 , c1 , c2 , DEV , Em , EPS , EROOT , FIEX , 
      &       Rik , rn , Rv , rx
       INTEGER*4 IAXS , IEXP , Indx , ITS , j , j1 , Jk , Kk , kk6 , 
      &          KVAR , l , l1 , Lu
-C*** End of declarations inserted by SPAG
       COMPLEX ARM
       COMMON /AZ    / ARM(600,7)
       COMMON /ODCH  / DEV(500)
@@ -7343,14 +7213,12 @@ C*** End of declarations inserted by SPAG
 !*==prelm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE PRELM(Iop)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ACCA , ACCUR , b , DIPOL , ELM , ELM25 , ELM26 , ELML , 
      &       ELMU , EN , pv , SA , SPIN , ste , ZPOL
       INTEGER*4 IBPS , inx , Iop , ISO , isp , IVAR , j , JZB , k , kk , 
      &          l , LAMDA , LAMMAX , LDNUM , LEAD , LMAXE , m , MAGEXC , 
      &          MEMAX , MEMX6
       INTEGER*4 MULTI , NDIM , NMAX , NMAX1
-C*** End of declarations inserted by SPAG
       CHARACTER*3 wrn
       COMMON /SWITCH/ JZB , IBPS
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
@@ -7434,11 +7302,9 @@ C*** End of declarations inserted by SPAG
 !*==recoil.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE RECOIL(Alab,Attl,Beta,Theta)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 Alab , atemp , Attl , Beta , betasq , dum , hold , test , 
      &       Theta
       INTEGER*4 i , i1 , j , l , m
-C*** End of declarations inserted by SPAG
       DIMENSION Alab(9,9) , Attl(9,9) , atemp(16)
       hold = Alab(1,1)
       IF ( ABS(hold).LT.1.E-9 ) RETURN
@@ -7531,10 +7397,8 @@ C*** End of declarations inserted by SPAG
 !*==rotate.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE ROTATE(Alab,Attl,Theta,K2,Kd)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 Alab , Attl , djarg , DJMM , dkkk , sum , Theta
       INTEGER*4 idj , idm , idmp , j , k , K2 , ka , kappa , kapri , Kd
-C*** End of declarations inserted by SPAG
       DIMENSION Alab(9,9) , Attl(9,9)
       IF ( ABS(Theta).GT..01 ) THEN
          djarg = Theta
@@ -7570,10 +7434,8 @@ C*** End of declarations inserted by SPAG
 !*==ylm1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE YLM1(Theta,Ylmr)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ct , ctsq , st , Theta , Ylmr
       INTEGER*4 i , j , l , m
-C*** End of declarations inserted by SPAG
       DIMENSION Ylmr(9,9) , st(9)
       ct = COS(Theta)
       ctsq = ct*ct
@@ -7647,10 +7509,8 @@ C*** End of declarations inserted by SPAG
 !*==fiint.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FIINT(Fi0,Fi1,At,Ixs)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 At , Fi0 , Fi1 , wsp
       INTEGER*4 Ixs , j , jf , js , m , mm
-C*** End of declarations inserted by SPAG
       DIMENSION At(28)
       IF ( Ixs.NE.0 ) THEN
          DO m = 2 , 7
@@ -7674,10 +7534,8 @@ C*** End of declarations inserted by SPAG
 !*==fiint1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE FIINT1(Fi0,Fi1,Alab,Ixs)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 Alab , Fi0 , Fi1 , wsp
       INTEGER*4 Ixs , j , m , mm
-C*** End of declarations inserted by SPAG
       DIMENSION Alab(9,9)
       IF ( Ixs.NE.0 ) THEN
          DO m = 2 , 9
@@ -7697,14 +7555,12 @@ C*** End of declarations inserted by SPAG
 !*==tapma.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE TAPMA(Lx,Iske,Isko,Iskf,Nflr,Idr,Nco,Nft,Enb)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 DS , DSE , DSG , emn , emx , en0 , Enb , tmn , tmx , tta , 
      &       XV , YGN , YGP , YV , ZETA , ZV
       INTEGER*4 Idr , IFMO , Iske , Iskf , Isko , j , jf , jj , js , k , 
      &          Lx , lx1 , LZETA , na , Nco , ne , nfil , nfilt , Nflr , 
      &          Nft
       INTEGER*4 ng , ng1 , ntt
-C*** End of declarations inserted by SPAG
       COMMON /VLIN  / XV(51) , YV(51) , ZV(20) , DSG(20) , DSE(20) , DS
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /YTEOR / YGN(500) , YGP(500) , IFMO
@@ -7749,10 +7605,8 @@ C*** End of declarations inserted by SPAG
 !*==simin.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION SIMIN(Np,H,Y)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ee , H , SIMIN , sm , Y
       INTEGER*4 ik , in , Np
-C*** End of declarations inserted by SPAG
       DIMENSION Y(101)
       IF ( Np.GE.3 ) THEN
          ik = Np - 2
@@ -7773,10 +7627,8 @@ C*** End of declarations inserted by SPAG
 !*==mixup.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE MIXUP
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ELM , ELML , ELMU , RNDM , SA , SE
       INTEGER*4 IVAR , k , k1 , LMAXE , MAGEXC , MEMAX , MEMX6
-C*** End of declarations inserted by SPAG
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
       COMMON /XRA   / SE
@@ -7798,10 +7650,8 @@ C*** End of declarations inserted by SPAG
 !*==fxis1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION FXIS1(I,N)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 FXIS1 , XI
       INTEGER*4 I , N
-C*** End of declarations inserted by SPAG
       COMMON /CXI   / XI(500)
       IF ( N.EQ.2 .OR. N.EQ.3 .OR. N.EQ.5 .OR. N.EQ.6 ) THEN
          FXIS1 = 1.
@@ -7813,10 +7663,8 @@ C*** End of declarations inserted by SPAG
 !*==fxis2.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION FXIS2(I,N)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 FXIS2 , XI
       INTEGER*4 I , N
-C*** End of declarations inserted by SPAG
       COMMON /CXI   / XI(500)
       IF ( N.EQ.2 .OR. N.EQ.3 .OR. N.EQ.5 .OR. N.EQ.6 ) THEN
          FXIS2 = -SIGN(1.,XI(I))
@@ -7828,13 +7676,11 @@ C*** End of declarations inserted by SPAG
 !*==podziel.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE PODZIEL(I,J)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       INTEGER*4 I , IAPR , IDIVE , ISEX , J , k , l , l1 , l2 , LERF , 
      &          LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , 
      &          LP4 , LP6
       INTEGER*4 LP7 , LP8 , LP9
       REAL*4 QAPR
-C*** End of declarations inserted by SPAG
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
@@ -7874,7 +7720,6 @@ C*** End of declarations inserted by SPAG
 !*==klopot.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE KLOPOT(K,Rlr)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 a , al , al1 , b , c , ch , CORF , d , dy , DYEX , e , 
      &       ELM , ELML , ELMU , EP , g , g1 , g2 , rl , Rlr
       REAL*4 SA , sgm , TLBDG , u , umm , ump , UPL , ux , VINF , XA , 
@@ -7885,7 +7730,6 @@ C*** Start of declarations inserted by SPAG
      &          LP13 , LP14 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &          lu , LZETA , MAGEXC
       INTEGER*4 MEMAX , MEMX6 , NEXPT , nf , ni , nm , np , NYLDE
-C*** End of declarations inserted by SPAG
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
@@ -8076,12 +7920,10 @@ C*** End of declarations inserted by SPAG
 !*==mixr.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE MIXR(Nw,Ipsw,Chi,Chilo)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 Chi , Chilo , dl , DMIX , DMIXE , ELM , ELML , ELMU , SA , 
      &       TAU
       INTEGER*4 i , IMIX , INTR , inx , inx1 , IPS1 , Ipsw , it , KSEQ , 
      &          LNY , NDL , Nw
-C*** End of declarations inserted by SPAG
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /MIXD  / DMIXE(20,2) , DMIX(20) , IMIX(20) , NDL
@@ -8116,7 +7958,6 @@ C*** End of declarations inserted by SPAG
 !*==coord.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE COORD(Wth,Wph,Wthh,Naa,Ifw,Pfi,Wpi,Wtlb,Lz,Tyy,Tzz)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 DS , DSE , DSG , EP , EPS , EROOT , FIEX , ga , gi , Pfi , 
      &       rade , rmass , TACOS , TASIN , thetb , TLBDG , ttcm , Tyy , 
      &       Tzz , VINF
@@ -8124,7 +7965,6 @@ C*** Start of declarations inserted by SPAG
      &       xph , xth , xthh , XV , YV , za , za1 , zb , zl , ZV
       INTEGER*4 i , IAXS , IEXP , Ifw , ISKIN , IZ , IZ1 , Lz , Naa , 
      &          NEXPT
-C*** End of declarations inserted by SPAG
       DIMENSION Pfi(101) , Wpi(11,2)
       COMMON /VLIN  / XV(51) , YV(51) , ZV(20) , DSG(20) , DSE(20) , DS
       COMMON /KIN   / EPS(50) , EROOT(50) , IEXP , IAXS(50) , FIEX(50,2)
@@ -8203,10 +8043,8 @@ C*** End of declarations inserted by SPAG
 !*==chmem.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE CHMEM(Nw,Chi,Chilo)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 Chi , Chilo , di , EAMX , ELM , ELML , ELMU , SA
       INTEGER*4 ia , IAMX , IAMY , ib , NAMX , Nw
-C*** End of declarations inserted by SPAG
       COMMON /ME2D  / NAMX , IAMX(100) , IAMY(100,2) , EAMX(100,2)
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       IF ( NAMX.EQ.0 ) RETURN
@@ -8231,12 +8069,10 @@ C*** End of declarations inserted by SPAG
 !*==pticc.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE PTICC(Idr)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ACCA , ACCUR , cone1 , cone2 , conm1 , CONV , DIPOL , EN , 
      &       enet , SPIN , TAU , ZPOL
       INTEGER*4 Idr , iinx , ISO , KSEQ , l , LAMDA , LAMMAX , LDNUM , 
      &          LEAD , MULTI , nf , ni
-C*** End of declarations inserted by SPAG
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ISO , 
@@ -8267,10 +8103,8 @@ C*** End of declarations inserted by SPAG
 !*==rndm.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION RNDM(Se)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ai , p , r , RNDM , rxdm , Se , t , u
       INTEGER*4 i
-C*** End of declarations inserted by SPAG
       IF ( Se.GT.32000. ) Se = 100.*t + .511
       Se = Se*Se
       u = LOG10(Se)
@@ -8287,7 +8121,6 @@ C*** End of declarations inserted by SPAG
 !*==kontur.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE KONTUR(Idr,Chis0,Chil,Ifbf,Inpo,Jj,Sh,Bten,Rem)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ac , Bten , c , Chil , chilo , Chis0 , chis1 , chis2 , d1 , 
      &       d2 , DEVD , DEVU , DS , DSE , DSG , ELM , ELML , ELMU , f , 
      &       h
@@ -8296,7 +8129,6 @@ C*** Start of declarations inserted by SPAG
       INTEGER*4 i , Idr , Ifbf , Inpo , INTR , IPS1 , itl , IVAR , ix , 
      &          j , Jj , l , LMAXE , LNY , m , MAGEXC , MEMAX , MEMX6 , 
      &          NWR
-C*** End of declarations inserted by SPAG
       DIMENSION f(3) , Bten(1200)
       COMMON /VLIN  / XV(51) , YV(51) , ZV(20) , DSG(20) , DSE(20) , DS
       COMMON /DFTB  / DEVD(500) , DEVU(500)
@@ -8438,20 +8270,16 @@ C*** End of declarations inserted by SPAG
 !*==rk4.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION RK4(Y,H,F)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 F , H , RK4 , Y
-C*** End of declarations inserted by SPAG
       DIMENSION F(3)
       RK4 = Y + H*(F(1)+4.*F(2)+F(3))/6.
       END
 !*==qfit.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE QFIT(Qui,Tau1,Tau2,Eng,Xl1,Cf,Nl,Ind)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ca , cb , Cf , cm , cn , co , d , d1 , d2 , Eng , Qui , 
      &       Tau1 , Tau2 , Xl1
       INTEGER*4 Ind , ind1 , k , Nl
-C*** End of declarations inserted by SPAG
       DIMENSION Tau1(10) , Eng(10) , Tau2(10,7) , Xl1(7) , Qui(8,10) , 
      &          Cf(8,2)
       CALL GAMATT(Qui,Tau1,Tau2,Xl1,Nl)
@@ -8474,10 +8302,8 @@ C*** End of declarations inserted by SPAG
 !*==gamatt.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE GAMATT(Qui,Tau1,Tau2,Xl1,Nl)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       INTEGER*4 i , i1 , k , Nl
       REAL*4 q , Qui , tau , Tau1 , Tau2 , thing , thing1 , thing3 , Xl1
-C*** End of declarations inserted by SPAG
       DIMENSION Tau1(10) , Tau2(10,7) , Xl1(7) , thing3(10) , q(9) , 
      &          Qui(8,10)
       DO i = 1 , 10
@@ -8500,11 +8326,9 @@ C*** End of declarations inserted by SPAG
 !*==gcf.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE GCF(Tau,Thing,Q)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 A , b , D , dl , ev , ex , f , fint , od , ODL , Q , R , 
      &       Tau , Thing , XL , xm , yl , yu
       INTEGER*4 i , j , k , m
-C*** End of declarations inserted by SPAG
       COMMON /DIMX  / A , R , XL , D , ODL(200)
       DIMENSION f(101) , b(4) , Q(9)
       b(1) = ATAN2(A,D+XL)
@@ -8571,9 +8395,7 @@ C*** End of declarations inserted by SPAG
 !*==tcexp.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       COMPLEX FUNCTION TCEXP(Z)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 a , b , c , d
-C*** End of declarations inserted by SPAG
       COMPLEX Z
       a = REAL(Z)
       b = AIMAG(Z)
@@ -8585,9 +8407,7 @@ C*** End of declarations inserted by SPAG
 !*==tcabs.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION TCABS(Z)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 a , b , TCABS
-C*** End of declarations inserted by SPAG
       COMPLEX Z
       a = REAL(Z)
       b = AIMAG(Z)
@@ -8598,9 +8418,7 @@ C*** End of declarations inserted by SPAG
 !*==tasin.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION TASIN(X)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 dol , TASIN , test , war , X
-C*** End of declarations inserted by SPAG
       test = ABS(X) - 1.
       IF ( ABS(test).LT.1.E-9 ) THEN
          TASIN = 1.570796327
@@ -8615,17 +8433,13 @@ C*** End of declarations inserted by SPAG
 !*==tacos.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION TACOS(X)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 TACOS , TASIN , X
-C*** End of declarations inserted by SPAG
       TACOS = 1.570796327 - TASIN(X)
       END
 !*==openf.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE OPENF
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       INTEGER*4 i , IBPS , j , JZB , k
-C*** End of declarations inserted by SPAG
       CHARACTER name*60 , opt1*20 , opt2*20
       COMMON /SWITCH/ JZB , IBPS
  100  READ (JZB,*) i , j , k
@@ -8651,11 +8465,9 @@ c 1020 FORMAT(A,A,I6)
 !*==effix.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE EFFIX(Ipd,En,Effi)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL ABC , AKAVKA , d , Effi , En , enek , enl , pw , s , t , 
      &     THICK , w , xx , yy
       INTEGER i , Ipd , ixi , j , l , ll , n
-C*** End of declarations inserted by SPAG
       DIMENSION xx(51) , yy(51)
       COMMON /EFCAL / ABC(8,10) , AKAVKA(8,200) , THICK(200,7)
       Effi = 1.E-6
@@ -8755,7 +8567,6 @@ c     JAERI calibration - TC, Nov.2000
 !*==adhoc.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE ADHOC(Oph,Idr,Nfd,Ntap,Iyr)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL*4 ACCA , ACCUR , AGELI , BRAT , CC , CORF , DELTA , DIPOL , 
      &       DIX , DMIX , DMIXE , DYEX , EAMX , EG , EN , ENDEC , ENZ , 
      &       EP , ODL , Q
@@ -8771,7 +8582,6 @@ C*** Start of declarations inserted by SPAG
      &          NDST , ndtp , NEXPT , Nfd , NICC , nistr , NLIFT , ns1 , 
      &          ns2 , ns3 , ns4 , Ntap
       INTEGER*4 nvare , NYLDE
-C*** End of declarations inserted by SPAG
       CHARACTER*4 Oph
       COMMON /SWITCH/ JZB , IBPS
       COMMON /CCCDS / NDST(50)
@@ -8980,12 +8790,10 @@ C*** End of declarations inserted by SPAG
 !*==elmt.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       FUNCTION ELMT(Xi1,Xi2,Lam,Nb1,Nb2,Xk1,Xk2,Xm1,Xm2,Xm3)
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       REAL addt , ELMT , fac , fct , pha1 , pha2 , s1 , s2 , WTHREJ , 
      &     Xi1 , Xi2 , Xk1 , Xk2 , xlam , Xm1 , Xm2 , Xm3 , xn
       INTEGER i1 , i2 , ipha , k1 , k2 , l , la , Lam , llam , n , Nb1 , 
      &        Nb2
-C*** End of declarations inserted by SPAG
       la = Lam
       IF ( la.GT.6 ) la = la - 6
       xlam = FLOAT(la)
@@ -9054,9 +8862,7 @@ C-----In band, K.ne.0
 !*==openf1.spg  processed by SPAG 6.50Rc at 09:04 on 13 Apr 2008
       SUBROUTINE OPENF1
       IMPLICIT NONE
-C*** Start of declarations inserted by SPAG
       INTEGER*4 i , j , k
-C*** End of declarations inserted by SPAG
       CHARACTER name*60 , opt1*20 , opt2*20
  100  READ * , i , j , k
       IF ( i.EQ.0 ) RETURN
