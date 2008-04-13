@@ -710,8 +710,8 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                         xi1 = SPIN(ind1)
                         xi2 = SPIN(ind2)
                         lamd = mlt(kb)
-                        nb1 = IFIX(xlevb(ind1,1)+.1)
-                        nb2 = IFIX(xlevb(ind2,1)+.1)
+                        nb1 = INT(xlevb(ind1,1)+.1)
+                        nb2 = INT(xlevb(ind2,1)+.1)
                         xk1 = xlevb(ind1,2)
                         xk2 = xlevb(ind2,2)
                         xm1 = bm(lamd,nb1,nb2,1)
@@ -8452,7 +8452,7 @@ c GREMLIN
      &        *w*w + AKAVKA(4,Ipd)*w*w*w
          Effi = Effi*EXP(pw)
          IF ( ABS(AKAVKA(5,Ipd)).GE.1.E-9 ) THEN
-            n = IFIX(AKAVKA(6,Ipd)+.1)
+            n = INT(AKAVKA(6,Ipd)+.1)
             pw = w**n
             w = AKAVKA(5,Ipd)/pw
             Effi = Effi*EXP(w)
@@ -8702,11 +8702,11 @@ c     JAERI calibration - TC, Nov.2000
       la = Lam
       IF ( la.GT.6 ) la = la - 6
       xlam = FLOAT(la)
-      i1 = IFIX(2.*Xi1)
-      i2 = IFIX(2.*Xi2)
+      i1 = INT(2.*Xi1)
+      i2 = INT(2.*Xi2)
       llam = 2*la
-      k1 = IFIX(2.*Xk1)
-      k2 = IFIX(2.*Xk2)
+      k1 = INT(2.*Xk1)
+      k2 = INT(2.*Xk2)
       fac = SQRT(2.*Xi1+1.)*SQRT(2.*Xi2+1.)
 C-----In-band matrix element
       IF ( Nb1.NE.Nb2 ) THEN
@@ -8717,7 +8717,7 @@ C-----Forbidden and K1-K2=lambda, Mikhailov formula
             addt = 0.
             IF ( k1.EQ.1 ) addt = (-1.)**((i1+1)/2)*(i1+1)/2.*Xm3
             xn = ABS(Xk1-Xk2) - xlam
-            n = IFIX(xn+.1)
+            n = INT(xn+.1)
             IF ( n.EQ.0 ) THEN
                fct = 1.
             ELSEIF ( n.EQ.1 ) THEN
@@ -8731,7 +8731,7 @@ C-----Forbidden and K1-K2=lambda, Mikhailov formula
                ENDDO
                fct = SQRT(s1*s2)
             ENDIF
-            pha1 = (-1.)**IFIX((Xi1-xlam+Xk2)+.1)
+            pha1 = (-1.)**INT((Xi1-xlam+Xk2)+.1)
             ELMT = fac*pha1*fct*WTHREJ(i1,llam,i2,k2-llam,llam,-k2)
      &             *(Xm1+Xm2*(Xi2*(Xi2+1.)-Xi1*(Xi1+1.))+addt)
          ELSEIF ( k1.NE.0 .AND. k2.NE.0 ) THEN
