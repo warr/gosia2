@@ -1,6 +1,6 @@
-      FUNCTION CONV(Ega,N)
+      REAL*8 FUNCTION CONV(Ega,N)
       IMPLICIT NONE
-      REAL*8 AGELI , CC , CONV , cpo , cpo1 , cv , EG , Ega , Q
+      REAL*8 AGELI , CC , cpo , cpo1 , cv , EG , Ega , Q
       INTEGER*4 j , N , n1 , NANG , nen , NICC
       DIMENSION cpo(51) , cpo1(51)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
