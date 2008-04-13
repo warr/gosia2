@@ -804,7 +804,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                               IF ( ERR ) GOTO 2200
                               tting = TLBDG(lx)
                               IF ( ERR ) GOTO 2100
-                              CALL LOAD(lx,1,1,0.,jj)
+                              CALL LOAD(lx,1,1,0.D0,jj)
                               CALL ALLOC(ACCUR)
                               CALL SNAKE(lx,ZPOL)
                               CALL SETIN
@@ -1701,7 +1701,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                ENDIF
                fi0 = FIEX(IEXP,1)
                fi1 = FIEX(IEXP,2)
-               CALL LOAD(IEXP,1,icg,0.,jj)
+               CALL LOAD(IEXP,1,icg,0.D0,jj)
                CALL ALLOC(ACCUR)
                CALL SNAKE(IEXP,ZPOL)
                CALL SETIN
@@ -2000,7 +2000,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                zmir(iuy,1,IEXP) = 0.
                zmir(iuy,2,IEXP) = 0.
             ENDDO
-            CALL LOAD(IEXP,1,2,0.,jj)
+            CALL LOAD(IEXP,1,2,0.D0,jj)
             DO jgs = 1 , LMAX
                polm = REAL(jgs-1) - SPIN(1)
                CALL LOAD(IEXP,3,2,polm,jj)
@@ -2064,8 +2064,8 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                   IFAC(2) = 1
                   LDNUM(kk,1) = 1
                   icg = 1
-                  CALL LOAD(IEXP,1,icg,0.,jj)
-                  CALL LOAD(IEXP,2,icg,0.,jj)
+                  CALL LOAD(IEXP,1,icg,0.D0,jj)
+                  CALL LOAD(IEXP,2,icg,0.D0,jj)
                   CALL PATH(1)
                   sz1 = MIN(zmir(kk,1,IEXP),10.)
                   sz2 = zmir(kk,2,IEXP)/50.
@@ -4689,7 +4689,7 @@ c     *(ccch1+ccch2)
          DO k = 1 , loch
             ZETA(k) = 0.
          ENDDO
-         CALL LOAD(IEXP,1,2,0.,jj)
+         CALL LOAD(IEXP,1,2,0.D0,jj)
          DO k = 1 , LMAX
             fc = 2.
             IF ( k.EQ.LMAX ) fc = 1.
@@ -4740,7 +4740,7 @@ c     *(ccch1+ccch2)
          IF ( Icll.NE.1 ) GOTO 200
  100     iapx = 0
          issp = 1
-         CALL LOAD(IEXP,1,1,0.,jj)
+         CALL LOAD(IEXP,1,1,0.D0,jj)
          CALL ALLOC(ACCUR)
          CALL SNAKE(IEXP,ZPOL)
          CALL SETIN
