@@ -1,7 +1,7 @@
-      FUNCTION FUNC1(Y,I)
+      REAL*8 FUNCTION FUNC1(Y,I)
       IMPLICIT NONE
-      REAL*8 FUNC1 , Y
       INTEGER*4 I
+      REAL*8 Y
       IF ( I.EQ.2 ) THEN
          FUNC1 = EXP(Y)
          RETURN
