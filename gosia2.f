@@ -8693,7 +8693,7 @@ c     JAERI calibration - TC, Nov.2000
 99011 FORMAT (/10X,' MATRIX ELEMENT(S) ARE TAKEN WITH WEIGHT',2X,1E14.6)
 99012 FORMAT (10X,1I2,'---',1I2,14X,1F9.4,8X,1F9.4)
       END
-      FUNCTION ELMT(Xi1,Xi2,Lam,Nb1,Nb2,Xk1,Xk2,Xm1,Xm2,Xm3)
+      REAL*8 FUNCTION ELMT(Xi1,Xi2,Lam,Nb1,Nb2,Xk1,Xk2,Xm1,Xm2,Xm3)
       IMPLICIT NONE
       REAL addt , ELMT , fac , fct , pha1 , pha2 , s1 , s2 , WTHREJ , 
      &     Xi1 , Xi2 , Xk1 , Xk2 , xlam , Xm1 , Xm2 , Xm3 , xn
