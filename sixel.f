@@ -1,3 +1,27 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE SIXEL
+C
+C Called by: CEGRY
+C
+C Purpose:
+C
+C Uses global variables:
+C      ARM    - reduced matrix elements
+C      DEV    -
+C      IEXP   - experiment number
+C      ITS    - create tape 18 file (OP,CONT switch SEL,)
+C      KVAR   -
+C
+C Formal parameters:
+C      Rik    -
+C      Rv     -
+C      Em     -
+C      Jk     -
+C      Kk     -
+C      Indx   -
+C      Lu     -
+ 
       SUBROUTINE SIXEL(Rik,Rv,Em,Jk,Kk,Indx,Lu)
       IMPLICIT NONE
       REAL*8 a1 , al , al1 , c1 , c2 , DEV , Em , EPS , EROOT , FIEX , 
@@ -10,6 +34,7 @@
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /TRB   / ITS
       COMMON /SEL   / KVAR(500)
+
       kk6 = Kk + 5
       rn = DEV(Lu)
       al = (Rv-rn)*20./Rik
@@ -18,6 +43,7 @@
       al1 = ABS(al)
       IF ( ITS.EQ.2 ) WRITE (18,*) Lu , Indx , IEXP , al1
       IF ( al1.LE.ABS(IMAG(ARM(kk6,Jk))) ) RETURN
+
       DO j = Kk , kk6
          a1 = ABS(IMAG(ARM(j,Jk)))
          IF ( al1.GT.a1 ) THEN
@@ -33,4 +59,5 @@
             GOTO 99999
          ENDIF
       ENDDO
+
 99999 END
