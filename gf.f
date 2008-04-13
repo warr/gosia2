@@ -1,7 +1,7 @@
-      FUNCTION GF(K,Sji,Sjf,L)
+      REAL*8 FUNCTION GF(K,Sji,Sjf,L)
       IMPLICIT NONE
-      REAL*8 GF , phase , Sjf , Sji , WSIXJ
       INTEGER*4 i , ix , jfz , jiz , K , kz , L , lz
+      REAL*8 phase , Sjf , Sji , WSIXJ
       GF = 0.
       IF ( L.EQ.0 ) RETURN
       ix = INT(Sji+Sjf+.0001)
