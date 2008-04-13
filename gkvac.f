@@ -1,3 +1,26 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE GKVAC
+C
+C Called from: DECAY
+C Calls:       GKK
+C
+C Purpose: calculate the nuclear deorientation and store the results in the
+C GKI array of common GVAC
+C
+C Uses global variables:
+C      BETAR  - recoil beta
+C      GKI    - G_k
+C      IEXP   - experiment number
+C      ITTE   - thick target experiment flag
+C      SPIN   - spin of level
+C      TAU    -
+C      VACDP  -
+C      XLAMB  - Lambda*       (this is G(3) in GOSIA)
+C
+C Formal parameters:
+C      Il     -
+ 
       SUBROUTINE GKVAC(Il)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AKS , AVJI , beta , BETAR , DIPOL , DQ , 
@@ -18,6 +41,7 @@
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
       COMMON /THTAR / ITTE(50)
+
       IF ( ABS(XLAMB).GE.1.E-9 ) THEN
          IF ( ITTE(IEXP).EQ.0 ) THEN
             sp = SPIN(Il)
