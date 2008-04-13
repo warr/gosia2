@@ -3681,7 +3681,8 @@ c     *(ccch1+ccch2)
                            IF ( lam.LE.6 .OR. mua.NE.1 ) THEN
                               CALL FAZA1(la,mua,rmir,rmis,dis,rmu)
                               pm = ELM(indx)*z
-                              uhuj = STAMP(epsi,errt,xiv,.03,W0,lam,mua)
+                              uhuj = STAMP(epsi,errt,xiv,.03D0,W0,lam,
+     &                          mua)
                               ARM(is,5) = dis*pm*uhuj
                               ppp = ppp + TCABS(ARM(is,5))
      &                              *TCABS(ARM(is,5))
