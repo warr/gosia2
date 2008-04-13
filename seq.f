@@ -1,3 +1,41 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE SEQ
+C
+C Called by: ADHOC
+C Calls:     CONV, DECAY, F, GF, LEADF, MEM
+C
+C Purpose: in order to calculate the yields, we need to start with the highest
+C level and calculate its yield, so as to work out the feeding for the lower
+C levels and take this into account, gradually working our way down to the
+C ground state.
+C
+C Uses global variables:
+C      DELTA  - 
+C      EN     - energy of level
+C      ENDEC  -
+C      FP     -
+C      GKP    -
+C      IFAC   -
+C      KLEC   -
+C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
+C      LDNUM  - number of matrix elements with each multipolarity populating levels
+C      LP2    - maximum number of matrix elements (500)
+C      LP3    - maximum number of levels (75)
+C      MULTI  - number of matrix elements having a given multipolarity
+C      NMAX   - number of levels
+C      NMAX1  - 
+C      SPIN   - spin of level
+C      TAU    -
+C
+C Formal parameters:
+C      Idr    - returns number of items in KSEQ array.
+C
+C We store the order in the KSEQ array of common block LEV.
+C
+C Note that in the code, a multipolarity 1 = E1, 2 = E2 ... 6 = E6, 7 = M1,
+C 8 = M2.
+ 
       SUBROUTINE SEQ(Idr)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , CONV , DELTA , DIPOL , ega , egs , emax , 
@@ -23,6 +61,7 @@
      &                ISO
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
       COMMON /CATLF / FP(4,500,3) , GKP(4,500,2) , KLEC(75)
+      
       m6 = 0
       DO l = 1 , 6
          m6 = m6 + MULTI(l)
@@ -83,6 +122,9 @@
          ENDDO
          TAU(jsave) = -1.
       ENDDO
+
+C     Now for each decay, calculate transition amplitudes for each
+C     multipolarity
       DO l = 1 , idecay
          istr1 = 0
          IF ( KSEQ(l,4).LT.10 ) GOTO 200
@@ -91,11 +133,11 @@
          m = KSEQ(l,2)
          inx = KSEQ(l,3)
          la = KSEQ(l,4) - 10
-         ega = EN(n) - EN(m)
+         ega = EN(n) - EN(m)    ! ega = E_\gamma
          twoi = 1./SQRT(2.*SPIN(n)+1.)
          spini = SPIN(n) + .001
          spinf = SPIN(m) + .001
-         egs = SQRT(ega)*twoi
+         egs = SQRT(ega)*twoi   ! egs = \sqrt{E_\gamma \over 2 I_1 + 1}
          js = l + 1
          la1 = 0
          inx1 = 0
@@ -117,15 +159,15 @@
          nob = 1
  50      IF ( la.LE.3 ) THEN
             IF ( la.EQ.1 ) THEN
-               DELTA(Idr,1) = 399.05*ega*egs
+               DELTA(Idr,1) = 399.05*ega*egs ! E1
                mule = 1
                istr1 = 1
             ELSEIF ( la.EQ.2 ) THEN
-               DELTA(Idr,1) = 3.4928*egs*ega*ega
+               DELTA(Idr,1) = 3.4928*egs*ega*ega ! E2
                mule = 2
                istr1 = 2
             ELSEIF ( la.EQ.3 ) THEN
-               DELTA(Idr,1) = .02391*ega*ega*ega*egs
+               DELTA(Idr,1) = .02391*ega*ega*ega*egs ! E3
                mule = 3
                istr1 = 3
             ELSE
@@ -135,11 +177,11 @@
          ENDIF
  100     la = la - 6
          IF ( la.EQ.2 ) THEN
-            DELTA(Idr,2) = .0368*ega*ega*egs
+            DELTA(Idr,2) = .0368*ega*ega*egs ! M2
             mulm = 2
             istr2 = 5
          ELSE
-            DELTA(Idr,2) = 4.1952*ega*egs
+            DELTA(Idr,2) = 4.1952*ega*egs ! M1
             mulm = 1
             istr2 = 4
          ENDIF
