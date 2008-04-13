@@ -1,7 +1,7 @@
-      FUNCTION DJMM(Beta,K,Kpp,Kp)
+      REAL*8 FUNCTION DJMM(Beta,K,Kpp,Kp)
       IMPLICIT NONE
-      REAL*8 B , b1 , b2 , be , BEQ , Beta , cb , ctb , djm , DJMM , f , 
-     &       g , sb , sk , ul
+      REAL*8 B , b1 , b2 , be , BEQ , Beta , cb , ctb , djm , f , g , 
+     &       sb , sk , ul
       INTEGER*4 iczy , ifla , ifza , ill , j , ja , jb , jc , jd , K , 
      &          Kp , Kpp , lca , loc , mas , mis
       DIMENSION djm(525) , iczy(525)
