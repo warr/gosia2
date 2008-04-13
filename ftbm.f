@@ -1,3 +1,70 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE FTBM
+C
+C Called by: GOSIA, KONTUR, MINI
+C Calls:     ALLOC, APRAM, BRANR, CEGRY, CHMEM, INTG, LOAD, MIXR, SETIN, SNAKE
+C            STING, TENB, TENS
+C
+C Purpose: main routine to perform the calculation with a given set of matrix
+C          elements.
+C
+C Uses global variables:
+C      ACCA   - accuracy
+C      ACCUR  - accuracy required
+C      ARM    - the reduced matrix elements
+C      CAT    - substates of levels (n_level, J, m)
+C      CHIS11 - 
+C      ELM    - matrix elements given by user
+C      EMH    -
+C      IAXS   - axial symmetry flag
+C      IEXP   - experiment number
+C      IGRD   -
+C      ILE    -
+C      INM    -
+C      INTR   -
+C      IPRM   - printing flags (see suboption PRT of OP,CONT)
+C      ISMAX  -
+C      ISO    -
+C      ITAK2  -
+C      IY     - index of experimental yields
+C      JSKIP  - Experiments to skip during minimisation.
+C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
+C      LFL    -
+C      LFL1   -
+C      LFL2   -
+C      LMAX   -
+C      LP3    - maximum number of levels (75)
+C      LP6    - (32)
+C      LP8    - (104)
+C      LP9    - last 2100 words of ZETA array (47900)
+C      LP10   - (600)
+C      LP11   - LP8 - 1 (103)
+C      LP13   - LP9 + 1 (47901)
+C      LP14   - maximum space for collision functions (4900)
+C      MEMAX  - number of matrix elements
+C      MEMX6  - number of matrix elements with E1...6 multipolarity
+C      NANG   - number of gamma-ray detectors for each experiment
+C      NDIM   - maximum number of levels (75)
+C      NEXPT  - number of experiments
+C      NLIFT  - number of lifetimes
+C      NMAX   - number of levels
+C      NSTART -
+C      NSTOP  - 
+C      NWR    - number of datapoints used in fit
+C      NYLDE  -
+C      SPIN   - spin of level
+C      ZETA   - the coupling constants
+C      ZPOL   -
+C
+C Formal parameters:
+C      Icll   -
+C      Chisq  - chi square
+C      Idr    - number of decays
+C      Ncall  -
+C      Chilo  - chi square of logs
+C      Bten   -
+
       SUBROUTINE FTBM(Icll,Chisq,Idr,Ncall,Chilo,Bten)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AGELI , aval , Bten , CAT , CC , Chilo , 
@@ -58,6 +125,7 @@
       COMMON /SKP   / JSKIP(50)
       COMMON /LIFE  / NLIFT
       COMMON /LOGY  / LNY , INTR , IPS1
+
       issp = 0
       Chilo = 0.
       fx = 2.*SPIN(1) + 1.
@@ -114,10 +182,10 @@
             CALL APRAM(IEXP,1,1,jj,ACCA)
             IF ( Ncall.NE.0 ) THEN
                IF ( Icll.NE.3 ) THEN
-                  DO indx = 1 , MEMX6
+                  DO indx = 1 , MEMX6 ! Loop over E1...6 matrix elements
                      CALL APRAM(IEXP,0,indx,jj,ACCA)
                      kx = 0
-                     DO i11 = 1 , NMAX
+                     DO i11 = 1 , NMAX ! Loop over levels
                         IF ( NSTART(i11).NE.0 ) THEN
                            loc = LP3*(indx-1) + i11 + LP11
                            jpp = INT(2.*SPIN(i11)+1.)
@@ -130,14 +198,14 @@
      &                           *DBLE(ARM(kx,6))
      &                           /fx + fc*IMAG(ARM(kx,5))
      &                           *IMAG(ARM(kx,6))/fx
-                           ENDDO
-                        ENDIF
-                     ENDDO
-                  ENDDO
-               ENDIF
-            ENDIF
+                           ENDDO ! Loop on lpxd
+                        ENDIF ! IF ( NSTART(i11).NE.0 )
+                     ENDDO ! Loop over levels
+                  ENDDO ! Loop on E1...6 matrix elements
+               ENDIF ! IF ( Icll.NE.3 )
+            ENDIF ! Loop on Ncall
             CALL TENB(k,Bten,LMAX)
-         ENDDO
+         ENDDO ! Loop on k
          IF ( loc.NE.0 ) THEN
             REWIND 14
             WRITE (14,*) (ZETA(i11),i11=LP8,loch)
@@ -152,10 +220,10 @@
          IF ( Icll.NE.1 ) GOTO 200
  100     iapx = 0
          issp = 1
-         CALL LOAD(IEXP,1,1,0.D0,jj)
-         CALL ALLOC(ACCUR)
-         CALL SNAKE(IEXP,ZPOL)
-         CALL SETIN
+         CALL LOAD(IEXP,1,1,0.D0,jj) ! Calculate parameters
+         CALL ALLOC(ACCUR)           ! Calculate ranges
+         CALL SNAKE(IEXP,ZPOL)       ! Calculate collision functions
+         CALL SETIN                  ! Calculate adiabatic parameters
          DO k = 1 , LMAX
             polm = DBLE(k-1) - SPIN(1)
             CALL LOAD(IEXP,2,1,polm,kk)
@@ -163,9 +231,9 @@
 99001       FORMAT (1X//40X,'EXCITATION AMPLITUDES'//10X,'M=',1F4.1,5X,
      &              'EXPERIMENT',1X,1I2//5X,'LEVEL',2X,'SPIN',2X,'M',5X,
      &              'REAL AMPLITUDE',2X,'IMAGINARY AMPLITUDE'//)
-            CALL STING(kk)
+            CALL STING(kk) ! Calculate reduced matrix elements
             CALL PATH(kk)
-            CALL INTG(IEXP)
+            CALL INTG(IEXP) ! Integrate
             CALL TENB(k,Bten,LMAX)
             IF ( IPRM(7).EQ.-1 ) THEN
                DO j = 1 , ISMAX
@@ -173,8 +241,8 @@
      &                             DBLE(ARM(j,5)) , IMAG(ARM(j,5))
 99002             FORMAT (7X,1I2,3X,1F4.1,2X,1F4.1,2X,1E14.6,2X,1E14.6)
                ENDDO
-            ENDIF
-         ENDDO
+            ENDIF ! IF ( IPRM(7).EQ.-1 )
+         ENDDO ! Loop on k
          CALL TENS(Bten)
          IF ( IPRM(7).EQ.-1 ) THEN
             DO jjgg = 2 , NMAX
@@ -312,16 +380,16 @@
                      jk = (luu-1)/LP10 + 1
                      kk = luu - LP10*(jk-1)
                      kk6 = kk + 5
-                     WRITE (22,99009) KSEQ(idec,3) , KSEQ(idec,4) , 
+                     WRITE (22,99009) KSEQ(idec,3) , KSEQ(idec,4) , ! Level numbers
      &                                (INT(DBLE(ARM(kkx,jk))),
      &                                IMAG(ARM(kkx,jk)),kkx=kk,kk6)
 99009                FORMAT (2X,1I2,'--',1I2,5X,
      &                       6('(',1I3,2X,1E8.2,')',3X))
-                  ENDDO
-               ENDIF
-            ENDIF
-         ENDIF
- 300  ENDDO
+                  ENDDO ! Loop on ile2
+               ENDIF ! IF ( ITAK2.EQ.-1 .AND. LFL1.NE.0 )
+            ENDIF ! IF ( Icll.LE.2 .AND. JSKIP(jkl).NE.0 )
+         ENDIF ! ELSE of IF ( Ncall.EQ.0 .AND. JSKIP(jkl).NE.0 )
+ 300  ENDDO ! Loop on experiments
       IF ( ITAK2.EQ.-1 .AND. Icll.LT.2 ) ITAK2 = 0
       IF ( Ncall.NE.0 ) THEN
          IF ( Icll.LE.2 ) THEN
