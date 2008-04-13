@@ -1,6 +1,6 @@
       REAL*8 FUNCTION ARCCOS(A,F,Pi)
       IMPLICIT NONE
-      REAL*8 A , an , ARCCOS , F , Pi , q , qa , qap , TACOS
+      REAL*8 A , an , F , Pi , q , qa , qap , TACOS
       INTEGER*4 ie , j , k
       q = TACOS(A)
       qa = q
