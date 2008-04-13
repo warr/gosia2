@@ -175,7 +175,7 @@ C**********************************************************************
       COMMON /XRA   / SE
       COMMON /HHH   / HLM(500)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
-      COMMON /ME2D  / NAMX , IAMX(100) , IAMY(100,2) , EAMX(100,2)
+      COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
       COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
       COMMON /DFTB  / DEVD(500) , DEVU(500)
       COMMON /ERRAN / KFERR
@@ -8045,7 +8045,7 @@ c      WRITE(*,54)CHISQ
       IMPLICIT NONE
       REAL*4 Chi , Chilo , di , EAMX , ELM , ELML , ELMU , SA
       INTEGER*4 ia , IAMX , IAMY , ib , NAMX , Nw
-      COMMON /ME2D  / NAMX , IAMX(100) , IAMY(100,2) , EAMX(100,2)
+      COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       IF ( NAMX.EQ.0 ) RETURN
       Nw = Nw + NAMX
@@ -8590,7 +8590,7 @@ c     JAERI calibration - TC, Nov.2000
      &                ENZ(200)
       COMMON /LIFE  / NLIFT
       COMMON /MIXD  / DMIXE(20,2) , DMIX(20) , IMIX(20) , NDL
-      COMMON /ME2D  / NAMX , IAMX(100) , IAMY(100,2) , EAMX(100,2)
+      COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
       COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
       COMMON /BRNCH / BRAT(50,2) , IBRC(2,50) , NBRA
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
