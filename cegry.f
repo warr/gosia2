@@ -1,3 +1,78 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE CEGRY
+C
+C Called by: FTBM
+C Calls:     ANGULA, DECAY, EFFIX, SIXEL, TACOS
+C
+C Purpose: calculate the gamma-ray deexcitation.
+C
+C Uses global variables:
+C      AGELI  - angles of the Ge detectors
+C      BETAR  - recoil beta
+C      CNOR   - normalization factors
+C      CNOR1  - normalization factors (added for gosia2)
+C      CORF   - internal correction factors
+C      DEV    -
+C      DYEX   - error on experimental yield
+C      EMH    -
+C      ENDEC  -
+C      FIEX   - phi range of particle detector
+C      ICLUST -
+C      IDRN   -
+C      IEXP   - number of experiment
+C      IFMO   - include correction to angular distance for finite recoil distance.
+C      IGRD   -
+C      ILE    -
+C      IMIN   -
+C      INM    -
+C      INNR   - independent normalisation switch (see OP,CONT INR,)
+C      IPRM   - printing flags (see suboption PRT of OP,CONT)
+C      IRAWEX -
+C      ITMA   - identify detectors according to OP,GDET
+C      ITS    - create tape 18 file (OP,CONT switch SEL,)
+C      IWF    -
+C      IY     - index for yields
+C      JSKIP  - Experiments to skip during minimisation.
+C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
+C      KVAR   -
+C      LASTCL -
+C      LFL    -
+C      LNORM  - normalization constant control
+C      LP2    - maximum number of matrix elements (500)
+C      LP6    - 32
+C      LP10   - 600
+C      MCFIX  - fixing parameter (added for gosia2)
+C      NANG   - number of gamma-ray detectors for each experiment
+C      NDST   - number of data sets
+C      NEXPT  - number of experiments
+C      NLIFT  - number of lifetimes
+C      NMAX   - number of levels
+C      NYLDE  - number of yields
+C      ODL    - results of OP,GDET calculation
+C      SPIN   - spin of level
+C      SUBCH1 -
+C      SUBCH2 -
+C      SUMCL  -
+C      TAU    -
+C      TREP   -
+C      UPL    - upper limits for all gamma detectors
+C      VACDP  -
+C      YEXP   - experimental yield
+C      YGN    - gamma yield calculated without correction to angular distribution from finite recoil distance
+C      YGP    - gamma yield calculated with correction to angular distribution from finite recoil distance
+C      YNRM   - relative normalization factors for gamma detectors
+C
+C Formal parameters:
+C      Chisq  - chi squared
+C      Itemp  -
+C      Chilo  - chi squared of logs
+C      Idr    - number of decays
+C      Nwyr   - number of data points contributing to chi squared
+C      Icall  -
+C      Issp   -
+C      Iredv  -
+ 
       SUBROUTINE CEGRY(Chisq,Itemp,Chilo,Idr,Nwyr,Icall,Issp,Iredv)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AGELI , AKS , BETAR , CC , ccc , ccd , 
@@ -66,9 +141,17 @@
       COMMON /TRB   / ITS
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
       COMMON /CCCDS / NDST(50)
+
       op2 = '    '
       ifxd = 0
       tetrc = TREP(IEXP)
+
+C     If the user set print flag 13 to +1, it is set to -1 by OP,EXIT and then
+C     if it is -1, it is set to -2 in MINI, which is called from there, which
+C     in turn calls FTBM, which calls this function. In other words, this
+C     routine is called with IPRM(13) set to -2 if the user sets IPRM(13) to 1
+C     with CONT:PRT, and then does OP,EXIT
+
       IF ( Icall.EQ.4 .AND. IPRM(13).EQ.-2 ) THEN
          IPRM(13) = 0
          WRITE (22,99001)
@@ -85,11 +168,13 @@
             IF ( ABS(cnr(1,jpc)).LT.1.E-9 ) cnr(1,jpc) = 1.
             k = NDST(jpc)
             WRITE (22,99012) jpc , (cnr(l,jpc)/cnr(1,jpc),l=1,k)
-         ENDDO
-      ENDIF
+         ENDDO ! Loop on experiments
+      ENDIF ! if Icall.EQ.4 .AND. IPRM(13).EQ.-2
+
       DO jpc = 1 , LP6
          lic(jpc) = 0
       ENDDO
+
       IF ( Icall.NE.7 ) THEN
          IF ( Itemp.EQ.0 ) THEN
             Nwyr = 0
@@ -144,7 +229,7 @@
                   fic = ATAN2(ry,rx)
                   CALL ANGULA(YGP,Idr,ifxd,fi0,fi1,tetrc,thc,fic,k,op2)
                   DO ixl = 1 , Idr
-                     ixm = KSEQ(ixl,3)
+                     ixm = KSEQ(ixl,3) ! Initial level of ixl'th decay
                      tfac = TAU(ixm)
                      YGN(ixl) = YGN(ixl) + .01199182*tfac*BETAR(IEXP)
      &                          *(sf*YGP(ixl)-YGN(ixl))
@@ -185,8 +270,8 @@
                   lth(iabc) = 0
                ENDDO
                DO l = 1 , Idr
-                  ni = KSEQ(l,3)
-                  nf = KSEQ(l,4)
+                  ni = KSEQ(l,3) ! Intial level of l'th decay
+                  nf = KSEQ(l,4) ! Final level of l'th decay
                   IF ( l.EQ.IY(lu,k9) .OR. l.EQ.(IY(lu,k9)/1000) ) THEN
                      ifdu = 0
                      lic(k9) = lic(k9) + 1
@@ -206,8 +291,8 @@
                            sgm = (YEXP(k9,lu)-YGN(l)*CNOR(k9,IEXP))
      &                           /DYEX(k9,lu)
                            IF ( ABS(sgm).GE.SGW ) war = '*?!*'
-                           ni1 = KSEQ(l1,3)
-                           nf1 = KSEQ(l1,4)
+                           ni1 = KSEQ(l1,3) ! Initial level of l1'th decay
+                           nf1 = KSEQ(l1,4) ! Final level of l1'th decay
                            WRITE (22,99007) ni , ni1 , nf , nf1 , 
      &                            SPIN(ni) , SPIN(ni1) , SPIN(nf) , 
      &                            SPIN(nf1) , ENDEC(l) , ENDEC(l1) , 
@@ -310,7 +395,7 @@
                         IF ( IWF.NE.0 ) THEN
                            WRITE (22,99009) IEXP , ni , nf , 
      &                            ry/UPL(k9,IEXP)
-99009                      FORMAT (5X,'WARNINIG-EXP.',1I2,2X,'TRANS. ',
+99009                      FORMAT (5X,'WARNING-EXP.',1I2,2X,'TRANS. ',
      &                             1I2,'--',1I2,5X,
      &                             'EXCEEDS UPPER LIMIT (RATIO=',1E14.6,
      &                             ')')
@@ -359,7 +444,7 @@
                   fic = ATAN2(ry,rx)
                   CALL ANGULA(YGP,Idr,ifxd,fi0,fi1,tetrc,thc,fic,k,op2)
                   DO ixl = 1 , Idr
-                     ixm = KSEQ(ixl,3)
+                     ixm = KSEQ(ixl,3) ! Initial level of ixl'th decay
                      tfac = TAU(ixm)
                      IF ( tfac.GT.1.E+4 ) GOTO 25
                      YGN(ixl) = YGN(ixl) + .01199182*tfac*BETAR(IEXP)
@@ -411,18 +496,19 @@
      &                       = YEXP(k9,l)/YGN(idc)
                      ENDIF
                   ENDIF
-               ENDDO
- 40         ENDDO
+               ENDDO ! Loop on l
+ 40         ENDDO ! Loop on k
             RETURN
-         ENDIF
-      ENDIF
+         ENDIF ! if Itemp.EQ.0
+      ENDIF ! if Icall.NE.7
+
       DO jj = 1 , NEXPT
          IF ( JSKIP(jj).NE.0 ) THEN
             kc = NDST(jj)
             DO jk = 1 , kc
                cnr(jk,jj) = -.5*PART(jk,jj,2)/PART(jk,jj,1)
                IF ( INNR.NE.0 ) CNOR(jk,jj) = cnr(jk,jj)
-            ENDDO
+            ENDDO ! Loop on datasets
             IF ( INNR.NE.1 ) THEN
                d = 0.
                g = 0.
@@ -432,21 +518,22 @@
                      DO jk = 1 , k
                         d = d + YNRM(jk,jj1)*PART(jk,jj1,1)*YNRM(jk,jj1)
                         g = g - .5*YNRM(jk,jj1)*PART(jk,jj1,2)
-                     ENDDO
-                  ENDIF
-               ENDDO
+                     ENDDO ! Loop on datasets
+                  ENDIF ! IF ( LNORM(jj1).EQ.jj )
+               ENDDO ! Loop on experiment
                IF ( LNORM(jj).EQ.jj ) THEN
                   CNOR(1,jj) = g*YNRM(1,jj)/d
                   k = NDST(jj)
                   IF ( k.NE.1 ) THEN
                      DO jk = 2 , k
                         CNOR(jk,jj) = YNRM(jk,jj)*CNOR(1,jj)/YNRM(1,jj)
-                     ENDDO
-                  ENDIF
-               ENDIF
-            ENDIF
-         ENDIF
-      ENDDO
+                     ENDDO ! Loop on jk
+                  ENDIF ! IF ( k.NE.1 )
+               ENDIF ! IF ( LNORM(jj).EQ.jj )
+            ENDIF ! IF ( INNR.NE.1 )
+         ENDIF ! IF ( JSKIP(jj).NE.0 )
+      ENDDO ! Loop on experiment
+
       IF ( INNR.NE.1 ) THEN
          DO jj = 1 , NEXPT
             IF ( LNORM(jj).NE.jj ) THEN
@@ -454,10 +541,13 @@
                k = NDST(jj)
                DO jk = 1 , k
                   CNOR(jk,jj) = CNOR(1,iw)*YNRM(jk,jj)/YNRM(1,iw)
-               ENDDO
-            ENDIF
-         ENDDO
-      ENDIF
+               ENDDO ! Loop on datasets
+            ENDIF ! IF ( LNORM(jj).NE.jj )
+         ENDDO ! Loop on experiment
+      ENDIF ! IF ( INNR.NE.1 )
+
+C     Calculate chi squared
+
       IF ( Icall.EQ.7 ) Chisq = 0.
       DO jj = 1 , NEXPT
          k = NDST(jj)
@@ -467,8 +557,9 @@
      &              **2 + PARTL(jk,jj,2)*2.*LOG(CNOR(jk,jj))
             Chisq = Chisq + CNOR(jk,jj)*CNOR(jk,jj)*PART(jk,jj,1)
      &              + CNOR(jk,jj)*PART(jk,jj,2)
-         ENDDO
-      ENDDO
+         ENDDO ! Loop on datasets
+      ENDDO ! Loop on experiment
+
       Chisq = Chisq + sumpr
       Chilo = Chilo + sum3
       RETURN
