@@ -1,3 +1,60 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE GKK
+C
+C Called by: GKVAC
+C Calls:     ATS, WSIXJ, XSTATIC
+C
+C Purpose: calculate time-dependent deorientation coefficients
+C
+C Uses global variables:
+C      AKS    -
+C      AVJI   - average J  (this is G(1) in GOSIA)
+C      DQ     - width of gaussian distribution
+C      FILE   - K          (this is G(6) in GOSIA)
+C      GAMMA  - Gamma      (this is G(2) in GOSIA)
+C      GFAC   - g          (this is G(5) in GOSIA)
+C      GKI    - G_k
+C      IBYP   -
+C      POWER  - x          (this is G(7) in GOSIA)
+C      QCEN   - center of gaussian distribution
+C      SUM    - sum over 6-j symbol squared
+C      TIMEC  - Tau_C      (this is G(4) in GOSIA)
+C      XLAMB  - Lambda*    (this is G(3) in GOSIA)
+C      XNOR   - normalisation factor
+C
+C Formal parameters:
+C      Iz     - Z of nucleus
+C      Beta   - v/c
+C      Spin   - spin of state
+C      Time   - lifetime of state
+C      Il     - index into AKS array
+C
+C We start by calling XSTATIC to calculate the static part. This calculates
+C QCEN (the centre of the gaussian charge state distribution), DQ (the
+C gaussian width of this distribution) and XNOR (the normalization parameter
+C such that the sum over probabilities is one).
+C
+C We calculate:
+C <a_k> = \sum_l p(J_1) \sum_F {(2 F + 1)^2 \over 2 J_1 + 1} *
+C                              {\sixj{F F k I I J_1}}^2.
+C
+C We include a correction to take into account the effect of nuclear lifetimes
+C which are comparable to the mean time between random reorientations \tau_c.
+C
+C Note that certain values have defaults:
+C AVJI = 3, GAMMA = 0.02, XLAMB = 0.0345, TIMEC = 3.5, GFAC = Z/A,
+C FIEL = 6E-6 and POWER = 0.7, which are set in GOSIA, where they are treated
+C as an array called G in the order of the values in the GGG common block.
+C However, the user may change them using the VAC suboption of the CONT option
+C of OP,COUL or OP,GOSI.
+C
+C Note that WSIXJ requires all its parameters to be doubled, so it can handle
+C half-integers properly.
+C
+C The function ATS is used to determine the ground-state spin for a given
+C element.
+
       SUBROUTINE GKK(Iz,Beta,Spin,Time,Il)
       IMPLICIT NONE
       REAL*8 AKS , alp , ATS , AVJI , Beta , ccf , down , DQ , dwc , f , 
@@ -11,19 +68,21 @@
       COMMON /GVAC  / GKI(3) , SUM(3)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
       COMMON /GGG   / AVJI , GAMMA , XLAMB , TIMEC , GFAC , FIEL , POWER
+      
       IF ( IBYP.NE.1 ) THEN
          imean = 0
-         CALL XSTATIC(Iz,inq,ifq,Beta)
+         CALL XSTATIC(Iz,inq,ifq,Beta) ! inq and ifq are range of integral
          l = 0
          DO i = 1 , 6
             AKS(i,Il) = 0.
          ENDDO
  50      IF ( imean.EQ.1 ) inq = 1
          IF ( imean.EQ.1 ) ifq = 1
+
          DO j = inq , ifq
             l = l + 1
             nz = Iz - j
-            xji = ATS(nz)
+            xji = ATS(nz) ! Ground-state spin of atom
             sm = Spin
             IF ( imean.EQ.1 ) xji = AVJI
             IF ( Spin.GT.xji ) sm = xji
@@ -58,12 +117,12 @@
                k1 = 2*k
                AKS(k1,Il) = AKS(k1,Il) + SUM(k)
             ENDDO
- 100     ENDDO
+ 100     ENDDO ! Loop on j
          imean = imean + 1
          IF ( imean.EQ.1 ) GOTO 50
       ENDIF
-      hmean = FIEL*Iz*(Beta**POWER)
-      wsp = 4789.*GFAC*hmean/AVJI
+      hmean = FIEL*Iz*(Beta**POWER) ! Mean magnetic field in fluctuating state
+      wsp = 4789.*GFAC*hmean/AVJI ! 4789 is the nuclear magneton
       wsp = wsp*TIMEC
       wsp = wsp*wsp*AVJI*(AVJI+1.)/3.
       DO k = 1 , 3
@@ -74,15 +133,15 @@
          wrt = -wrt/(1.-AKS(k2,Il))
          xlam = (1.-AKS(k2,Il))*(1.-EXP(wrt))/TIMEC
          up = (GAMMA*Time*AKS(k1,Il)+1.)/(Time*GAMMA+1.)
-         up = up*XLAMB*Time + 1.
-         down = Time*(xlam+XLAMB) + 1.
+         up = up*XLAMB*Time + 1.       ! numerator
+         down = Time*(xlam+XLAMB) + 1. ! denominator = r
          GKI(k) = up/down
          alp = 9.*xlam*xlam + 8.*xlam*TIMEC*(w2-xlam*xlam)
          alp = SQRT(alp) - 3.*xlam
-         alp = alp/4./xlam/TIMEC
-         upc = xlam*Time*(down-2.*alp*alp*Time*TIMEC)
-         dwc = (down+alp*Time)*(down+2.*alp*Time)
-         ccf = 1. + upc/dwc
+         alp = alp/4./xlam/TIMEC                      ! alp is p
+         upc = xlam*Time*(down-2.*alp*alp*Time*TIMEC) ! numerator
+         dwc = (down+alp*Time)*(down+2.*alp*Time)     ! denominator
+         ccf = 1. + upc/dwc                           ! ccf is correction factor
          GKI(k) = GKI(k)*ccf
       ENDDO
       END
