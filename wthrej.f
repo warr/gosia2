@@ -1,3 +1,32 @@
+ 
+C----------------------------------------------------------------------
+C FUNCTION WTHREJ
+C
+C Called by: ELMT, F, GOSIA, LSLOOP, TENB
+C
+C Purpose: evaluates a Wigner 3-j symbol.
+C
+C Uses global variables:
+C      IP     - table of prime numbers
+C      KF     - sum of factors of primes
+C      PILOG  - table of natural logs of primes
+C
+C Formal parameters:
+C      J1     - twice the value of J1
+C      J2     - twice the value of J2
+C      J3     - twice the value of J3
+C      M1     - twice the value of M1
+C      M2     - twice the value of M2
+C      M3     - twice the value of M3
+C
+C Return value:
+C      The value of the 3-j symbol
+C
+C Note that the values of the parameters are doubled, so that this function
+C can handle half-integers. In other words if you want to evaluate
+C \threej(J1 J2 J3 M1 M2 M3) you need to use call the function as:
+C WTHREJ(2 * J1, 2 * J2, 2 * J3, 2 * M1, 2 * M2, 2 * M3).
+ 
       REAL*8 FUNCTION WTHREJ(J1,J2,J3,M1,M2,M3)
       IMPLICIT NONE
       INTEGER*4 IP , IPI , iz , iza , izb , izc , izd , ize , izexp , 
@@ -10,10 +39,12 @@
       REAL*8 PILOG , qsumlo , sumlo , vorz , wthrep , zuthre
       DIMENSION jvora(26)
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
+      
       wthrep = 0.E+00
       jjha = (J1+J2-J3)/2 + 1
       jjhb = (J1-J2+J3)/2 + 1
       jjhc = (-J1+J2+J3)/2 + 1
+
       IF ( (jjha.LT.1) .OR. (jjhb.LT.1) .OR. (jjhc.LT.1) .OR. 
      &     ((M1+M2+M3).NE.0) ) THEN
          WTHREJ = wthrep
@@ -64,12 +95,14 @@
       ENDDO
       WTHREJ = wthrep
       GOTO 99999
+
  200  DO jlp = 1 , n
          jta = KF(jjha,jlp) + KF(jjhb,jlp) + KF(jjhc,jlp) - KF(jjhd,jlp)
          jtb = KF(jma+1,jlp) + KF(jmb+1,jlp) + KF(jmc+1,jlp)
          jtc = KF(jmd+1,jlp) + KF(jme+1,jlp) + KF(jmf+1,jlp)
          jvora(jlp) = jta + jtb + jtc
       ENDDO
+
       vorz = -1.E+00
       IF ( 2*(izmin/2).EQ.izmin ) vorz = +1.E+00
       IF ( izmin.LE.izmax ) THEN
