@@ -1,4 +1,4 @@
-      FUNCTION WSIXJ(J1,J2,J3,L1,L2,L3)
+      REAL*8 FUNCTION WSIXJ(J1,J2,J3,L1,L2,L3)
       IMPLICIT NONE
       INTEGER*4 IP , IPI , irj , irl , isa , isb , isc , isumfa , iva , 
      &          ivb , ivc , ivd , ivorfa , iz , iza , izb , izc , izd , 
@@ -8,8 +8,7 @@
      &          ksc , ksd
       INTEGER*4 kta , ktb , ktc , ktd , kua , kub , kuc , L1 , L2 , L3 , 
      &          n , nmax
-      REAL*8 PILOG , qsumfa , qsumlo , sumlo , vorz , WSIXJ , wsixp , 
-     &       zusix
+      REAL*8 PILOG , qsumfa , qsumlo , sumlo , vorz , wsixp , zusix
       DIMENSION isumfa(26) , ivorfa(26)
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
       wsixp = 0.E+00
