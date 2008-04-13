@@ -216,7 +216,7 @@ C**********************************************************************
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /CEXC9 / INTERV(50)
-      COMMON /CAUX0 / NCM , EMMA(75)
+      COMMON /CAUX0 / EMMA(75) , NCM
       COMMON /PTH   / IPATH(75) , MAGA(75)
       COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
       COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
@@ -2531,7 +2531,7 @@ c     *(ccch1+ccch2)
      &                TLBDG(50) , VINF(50)
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /CXI   / XI(500)
-      COMMON /CAUX0 / NCM , EMMA(75)
+      COMMON /CAUX0 / EMMA(75) , NCM
       COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)
       DIMENSION etan(75) , cpsi(8)
@@ -2854,7 +2854,7 @@ c     *(ccch1+ccch2)
       COMMON /PRT   / IPRM(20)
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
       COMMON /BREC  / BETAR(50)
-      COMMON /CAUX0 / NCM , EMMA(75)
+      COMMON /CAUX0 / EMMA(75) , NCM
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
