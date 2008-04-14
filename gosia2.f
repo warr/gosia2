@@ -318,7 +318,6 @@ C      ZV     - energy meshpoints
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , NYLDE , nz
       INTEGER*4 MCFIX , nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
       INTEGER*4 mret , mawr ! For gosia2
-      INTEGER*4 m25 , m26 ! For gosia2
       LOGICAL ERR
       COMPLEX*16 ARM , EXPO
       CHARACTER*4 oph , op1 , opcja , op2
@@ -1608,8 +1607,6 @@ C     Treat suboption ME (matrix elements)
             IF ( la.GT.LMAXE .AND. la.LE.6 ) LMAXE = la
  250     ENDDO
  300     MEMAX = indx
-         IF ( JZB.EQ.25 ) m25 = MEMAX
-         IF ( JZB.EQ.26 ) m26 = MEMAX
          IF ( la.GT.6 ) MAGEXC = 1
          memx4 = MULTI(1) + MULTI(2) + MULTI(3) + MULTI(4)
          MEMX6 = memx4 + MULTI(5) + MULTI(6)
