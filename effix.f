@@ -32,8 +32,8 @@ C     AKAVKA(8) = c
       
       SUBROUTINE EFFIX(Ipd,En,Effi)
       IMPLICIT NONE
-      REAL*8 ABC , AKAVKA , d , Effi , En , enl , pw , s , t , 
-     &       THICK , w , xx , yy
+      REAL*8 ABC , AKAVKA , d , Effi , En , enl , pw , s , t , THICK , 
+     &       w , xx , yy
       INTEGER*4 i , Ipd , j , l , ll , n
       DIMENSION xx(51) , yy(51)
       COMMON /EFCAL / ABC(8,10) , AKAVKA(8,200) , THICK(200,7)
@@ -106,7 +106,13 @@ c PJN@2000
      &        w*w*(AKAVKA(3,Ipd)+w*AKAVKA(4,Ipd))
          Effi = Effi*EXP(pw)*AKAVKA(1,Ipd)
          RETURN
-      ELSEIF ( AKAVKA(5,Ipd).LT.10. ) THEN
+      ELSEIF ( AKAVKA(5,Ipd).GE.10. ) THEN
+c     JAERI calibration - TC, Nov.2000
+         w = LOG(En/.511)
+         Effi = EXP(AKAVKA(1,Ipd)+AKAVKA(2,Ipd)
+     &          *w-EXP(AKAVKA(3,Ipd)+AKAVKA(4,Ipd)*w))
+         GOTO 99999
+      ELSE
 c GREMLIN
          w = LOG(20.*En)
          pw = AKAVKA(1,Ipd) + AKAVKA(2,Ipd)*w + AKAVKA(3,Ipd)
@@ -118,17 +124,12 @@ c GREMLIN
             w = AKAVKA(5,Ipd)/pw
             Effi = Effi*EXP(w)
          ENDIF
-
-         IF ( ABS(AKAVKA(8,Ipd)).LT.1.E-9 ) RETURN
-         w = (AKAVKA(7,Ipd)-1000.*En)/AKAVKA(8,Ipd)
-         pw = EXP(w)
-         IF ( ABS(pw-1.).LT.1.E-6 ) WRITE (22,99001)
-99001    FORMAT (5x,'***** CRASH - EFFIX *****')
-         Effi = Effi/(1.-pw)
-         RETURN
       ENDIF
-c     JAERI calibration - TC, Nov.2000
-      w = LOG(En/.511)
-      Effi = EXP(AKAVKA(1,Ipd)+AKAVKA(2,Ipd)
-     &       *w-EXP(AKAVKA(3,Ipd)+AKAVKA(4,Ipd)*w))
+
+      IF ( ABS(AKAVKA(8,Ipd)).LT.1.E-9 ) RETURN
+      w = (AKAVKA(7,Ipd)-1000.*En)/AKAVKA(8,Ipd)
+      pw = EXP(w)
+      IF ( ABS(pw-1.).LT.1.E-6 ) WRITE (22,99001)
+99001 FORMAT (5x,'***** CRASH - EFFIX *****')
+      Effi = Effi/(1.-pw)
 99999 END
