@@ -1,3 +1,31 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE POMNOZ
+C
+C Called by: APRAM
+C Calls:     TCABS
+C
+C Purpose: perform the expansion to calculate the approximate Coulomb
+C          amplitudes
+C
+C Uses global variables:
+C      ARM    - reduced matrix elements
+C      IAPR   -
+C      INHB   - inhibit error flag setting (LERF)
+C      IPATH  -
+C      ISEX   -
+C      LERF   - error flag which is set here and used in APRAM
+C      MEMX6  - number of matrix elements with E1...6 multipolarity
+C      QAPR   - approximate Coulomb amplitudes
+C
+C Formal parameters:
+C      Acca   - accuracy required
+C      L
+C      Iw
+C      Img
+C      Jidim
+C      Ktoto  - number of iterations needed
+ 
       SUBROUTINE POMNOZ(Acca,L,Iw,Ktoto,Img,Jidim)
       IMPLICIT NONE
       REAL*8 Acca , QAPR , sig , TCABS , test , u
@@ -12,15 +40,17 @@
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
       COMMON /AZ    / ARM(600,7)
       COMMON /APRX  / LERF , IDIVE(50,2)
-      DATA ci/(0.,-1.)/
+      DATA ci/(0.,-1.)/ ! -sqrt(-1)
+
       sig = 1.
       IF ( L.NE.2 ) sig = -1.
       DO kk = 1 , Jidim
          ARM(kk,1) = ARM(kk,Iw)
       ENDDO
-      DO k = 1 , 100
+
+      DO k = 1 , 100 ! Perform up to 100 iterations
          Ktoto = Ktoto + 1
-         DO m = 1 , MEMX6
+         DO m = 1 , MEMX6 ! Matrix elements for E1...6
             mw1 = IAPR(m,1)
             mc1 = IAPR(m,2)
             IF ( IPATH(mw1).NE.0 .AND. IPATH(mc1).NE.0 ) THEN
@@ -53,6 +83,8 @@
                ENDIF
             ENDIF
          ENDDO
+
+C        Calculate accuracy we have achieved
          test = 0.
          DO m = 1 , Jidim
             ARM(m,1) = ARM(m,2)/k
@@ -64,7 +96,9 @@
                test = test + u*u
             ENDIF
          ENDDO
-         IF ( ABS(test-1.).LT.Acca ) GOTO 99999
-      ENDDO
-      IF ( INHB.NE.1 ) LERF = 1
+C        Test to see if we have achieved required accuracy
+         IF ( ABS(test-1.).LT.Acca ) GOTO 99999 ! Accuracy OK, so end
+      ENDDO ! Iteration loop
+
+      IF ( INHB.NE.1 ) LERF = 1 ! Accuracy not achieved, so set error flag
 99999 END
