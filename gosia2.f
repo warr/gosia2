@@ -911,7 +911,8 @@ C              Treat OP,MINI
 
 C              Treat OP,THEO
                ELSEIF ( op2.EQ.'THEO' ) THEN
-                  REWIND (12)
+                  irix = 12
+                  REWIND (irix)
                   ibaf = 1
                   DO jb = 1 , LP1 ! LP1 = 50
                      DO lb = 1 , 2
@@ -2577,9 +2578,11 @@ C---- gosia2 changes start
       IF ( nawr.EQ.1 ) THEN
          MCFIX = 0 ! Calculate chisq using CNOR1 not CNOR
          CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
-         IF ( IBPS.EQ.0 ) JZB = 25
-         IF ( IBPS.EQ.0 ) mrepf = 1
-         IF ( IBPS.NE.0 ) THEN
+
+         IF ( IBPS.EQ.0 ) THEN
+            JZB = 25
+            mrepf = 1
+         ELSE ! i.e. IBPS is 1
             IBPS = IBPS + 1
             IF ( IBPS.EQ.1 ) JZB = 26 ! But IBPS must be 2 here! Ooops!
             IF ( IBPS.EQ.1 ) GOTO 2200
