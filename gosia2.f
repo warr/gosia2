@@ -673,12 +673,13 @@ C        Treat OP,FILE (attach files to fortran units)
             CALL OPENF
             GOTO 100 ! Back to input loop
          ENDIF
-         IF ( jphd.EQ.1 ) WRITE (22,99101)
-99101    FORMAT ('1'/1X,125('*')/1X,125('*')/1X,50('*'),25X,50('*')/1X,
+
+         IF ( jphd.EQ.1 ) WRITE (22,99002)
+99002    FORMAT ('1'/1X,125('*')/1X,125('*')/1X,50('*'),25X,50('*')/1X,
      &           50('*'),10X,'GOSIA2',10X,50('*')/1X,50('*'),25X,50('*')
      &           /1X,125('*')/1X,125('*')////)
-         IF ( jphd.EQ.1 ) WRITE (22,99002)
-99002    FORMAT (1X/20X,'ROCHESTER COULOMB EXCITATION DATA ANALYSIS ',
+         IF ( jphd.EQ.1 ) WRITE (22,99003)
+99003    FORMAT (1X/20X,'ROCHESTER COULOMB EXCITATION DATA ANALYSIS ',
      &           'CODE BY T.CZOSNYKA,D.CLINE AND C.Y.WU'/50X,
      &           'LATEST REVISION- JUNE  2006'//////)
          jphd = 0
@@ -713,20 +714,20 @@ C           attenuation coefficients
                IF ( xl1(7).GT.0. ) ind = 5
                WRITE (9,*) eng(ind)
                CALL QFIT(qui,tau1,tau2,eng,xl1,cf,nl,ind)
-               WRITE (22,99003) i
-99003          FORMAT (10X,'DETECTOR',1X,1I2)
+               WRITE (22,99004) i
+99004          FORMAT (10X,'DETECTOR',1X,1I2)
                DO k = 1 , 8
-                  WRITE (22,99004) k , cf(k,1) , cf(k,2)
-99004             FORMAT (1X,//5X,'K=',1I1,2X,'C1=',1E14.6,2X,'C2=',
+                  WRITE (22,99005) k , cf(k,1) , cf(k,2)
+99005             FORMAT (1X,//5X,'K=',1I1,2X,'C1=',1E14.6,2X,'C2=',
      &                    1E14.6/5X,'ENERGY(MEV)',5X,'FITTED QK',5X,
      &                    'CALC.QK',5X,'PC.DIFF.'/)
                   WRITE (9,*) cf(k,1) , cf(k,2) , qui(k,ind)
                   DO l = 1 , 10
                      arg = (eng(l)-eng(ind))**2
                      qc = (qui(k,ind)*cf(k,2)+cf(k,1)*arg)/(cf(k,2)+arg)
-                     WRITE (22,99005) eng(l) , qc , qui(k,l) , 
+                     WRITE (22,99006) eng(l) , qc , qui(k,l) , 
      &                                100.*(qc-qui(k,l))/qui(k,l)
-99005                FORMAT (8X,1F4.2,6X,1F9.4,5X,1F9.4,3X,1E10.2)
+99006                FORMAT (8X,1F4.2,6X,1F9.4,5X,1F9.4,3X,1E10.2)
                   ENDDO
                ENDDO
             ENDDO
@@ -736,8 +737,8 @@ C         Treat OP,RAND (randomise matrix elements)
          ELSEIF ( op2.EQ.'RAND' ) THEN
             READ (JZB,*) SE ! Seed for random number generator
             CALL MIXUP
-            WRITE (22,99006)
-99006       FORMAT (1X///5X,'MATRIX ELEMENTS RANDOMIZED...'///)
+            WRITE (22,99007)
+99007       FORMAT (1X///5X,'MATRIX ELEMENTS RANDOMIZED...'///)
             CALL PRELM(2)
             GOTO 100 ! End of OP,RAND
 
@@ -767,9 +768,9 @@ C---- gosia2 changes start
                IF ( mres1.EQ.0 .AND. JZB.EQ.26 ) ELM26(lkj) = ELM(lkj)
             ENDDO
             IF ( JZB.EQ.26 ) mres1 = 1
-            WRITE (22,99007)
+            WRITE (22,99008)
 C---- gosia2 changes end
-99007       FORMAT (1X///5X,'*****',2X,
+99008       FORMAT (1X///5X,'*****',2X,
      &              'RESTART-MATRIX ELEMENTS OVERWRITTEN',2X,'*****'///)
             DO kk = 1 , MEMAX
                la = mlt(kk)
@@ -882,10 +883,10 @@ C           Treat OP,RE,C (release C)
 
 C           Treat OP,TITL (title)
             ELSEIF ( op2.EQ.'TITL' ) THEN
-               READ (JZB,99008) (title(k),k=1,20)
-99008          FORMAT (20A4)
-               WRITE (22,99009) (title(k),k=1,20)
-99009          FORMAT (10X,20A4/10X,100('-'))
+               READ (JZB,99009) (title(k),k=1,20)
+99009          FORMAT (20A4)
+               WRITE (22,99010) (title(k),k=1,20)
+99010          FORMAT (10X,20A4/10X,100('-'))
                GOTO 100 ! End of OP,TITL
 
             ELSE
@@ -1158,9 +1159,9 @@ C              Treat OP,INTG
                                  IF ( IPRM(11).EQ.1 ) THEN
                                     WRITE (22,99048) lx , ija0 , enb , 
      &                                 tta
-                                    IF ( tta.LT.0. ) WRITE (22,99010)
+                                    IF ( tta.LT.0. ) WRITE (22,99017)
      &                                 tting
-99010                               FORMAT (5X,
+99017                               FORMAT (5X,
      &                             'RESPECTIVE TARGET SCATTERING ANGLE='
      &                             ,1F7.3,1X,'DEG'/)
                                     DO jyi = 1 , idr
@@ -1306,13 +1307,13 @@ C              Treat OP,INTG
                               GRAD(jd) = SIMIN(npce1,hen,XI)
                            ENDDO
                            IF ( ja.EQ.1 ) dst = dst + DS
-                           IF ( ja.EQ.1 ) WRITE (22,99111) DS , lx
-99111                      FORMAT (1X/////5X,
+                           IF ( ja.EQ.1 ) WRITE (22,99018) DS , lx
+99018                      FORMAT (1X/////5X,
      &                            'INTEGRATED RUTHERFORD CROSS SECTION='
      &                            ,1E9.4,2X,'FOR EXP.',1I2///)
-                           WRITE (22,99112) lx , ja , emn , emx , tmn , 
+                           WRITE (22,99019) lx , ja , emn , emx , tmn , 
      &                            tmx
-99112                      FORMAT (1X,//50X,'INTEGRATED YIELDS'//5X,
+99019                      FORMAT (1X,//50X,'INTEGRATED YIELDS'//5X,
      &                             'EXPERIMENT ',1I2,2X,'DETECTOR ',
      &                             1I2/5X,'ENERGY RANGE ',1F8.3,'---',
      &                             1F8.3,1X,'MEV',3X,
@@ -1335,9 +1336,9 @@ C              Treat OP,INTG
                            IF ( jpin(lx).EQ.0 ) THEN
                               CALL COORD(wth,wph,wthh,1,2,pfi,wpi,
      &                           TLBDG(lx),lx,txx,txx)
-                              WRITE (22,99113) FIEX(lx,1)*57.2957795 , 
+                              WRITE (22,99020) FIEX(lx,1)*57.2957795 , 
      &                               FIEX(lx,2)*57.2957795 , lx
-99113                         FORMAT (//5X,
+99020                         FORMAT (//5X,
      &                          'WARNING: THE PHI ANGLE WAS REPLACED BY'
      &                          ,1X,F8.3,1X,'TO',F8.3,3X,
      &                          'FOR EXPERIMENT',2X,I3)
@@ -1349,8 +1350,8 @@ C              Treat OP,INTG
                         ENDIF
                         iske = iske + ne*ntt*naa
                      ENDDO
-                     IF ( mpin.GT.1 ) WRITE (22,99114) dst , lx
-99114                FORMAT (1x//2x,
+                     IF ( mpin.GT.1 ) WRITE (22,99021) dst , lx
+99021                FORMAT (1x//2x,
      &                      'Total integrated Rutherford cross section='
      &                      ,1E8.3,' for exp. ',1I2/)
                   ENDDO
@@ -1490,20 +1491,20 @@ C                 Treat OP,MAP
          ENDIF
       ENDIF ! End of if (op1.eq."OP, ") if statement
 
-      WRITE (22,99115) op1 , op2
-99115 FORMAT (5X,'UNRECOGNIZED OPTION',1X,1A3,1A4)
+      WRITE (22,99022) op1 , op2
+99022 FORMAT (5X,'UNRECOGNIZED OPTION',1X,1A3,1A4)
       GOTO 2000
 
 C     Treat suboptions of OP,COUL and OP,GOSI
- 300  READ (JZB,99116) op1 ! Read the suboption
-99116 FORMAT (1A4)
+ 300  READ (JZB,99023) op1 ! Read the suboption
+99023 FORMAT (1A4)
       IF ( op1.EQ.'    ' ) GOTO 100
 
 C     Treat suboption LEVE (levels)
       IF ( op1.EQ.'LEVE' ) THEN
          NMAX = 0
-         IF ( ABS(IPRM(1)).EQ.1 ) WRITE (22,99017)
-99017    FORMAT (1X/40X,'LEVELS',//5X,'INDEX',5X,'PARITY',9X,'SPIN',11X,
+         IF ( ABS(IPRM(1)).EQ.1 ) WRITE (22,99024)
+99024    FORMAT (1X/40X,'LEVELS',//5X,'INDEX',5X,'PARITY',9X,'SPIN',11X,
      &           'ENERGY(MEV)')
          ndima = NDIM + 1
          DO k = 1 , ndima
@@ -1519,9 +1520,9 @@ C     Treat suboption LEVE (levels)
             EN(ipo1) = po1
             prp = '+'
             IF ( ipo2.EQ.-1 ) prp = '-'
-            IF ( ABS(IPRM(1)).EQ.1 ) WRITE (22,99018) ipo1 , prp , 
+            IF ( ABS(IPRM(1)).EQ.1 ) WRITE (22,99025) ipo1 , prp , 
      &           SPIN(ipo1) , EN(ipo1)
-99018       FORMAT (6X,1I2,11X,1A1,10X,1F4.1,8X,1F10.4)
+99025       FORMAT (6X,1I2,11X,1A1,10X,1F4.1,8X,1F10.4)
          ENDDO
       ELSEIF ( op1.EQ.'ME  ' ) THEN
          DO k = 1 , nmemx
@@ -1613,8 +1614,8 @@ C     Treat suboption LEVE (levels)
             ivarh(kh) = IVAR(kh)
          ENDDO
       ELSEIF ( op1.EQ.'CONT' ) THEN
- 450     READ (JZB,99019) op1 , fipo1
-99019    FORMAT (1A4,1F7.1)
+ 450     READ (JZB,99026) op1 , fipo1
+99026    FORMAT (1A4,1F7.1)
          ipo1 = INT(fipo1)
          IF ( op1.EQ.'ACP,' ) ACCA = 10.**(-fipo1)
          IF ( op1.EQ.'SEL,' ) ITS = 2
@@ -1729,8 +1730,8 @@ C     Treat suboption LEVE (levels)
             ENDIF
          ENDDO
       ELSE
-         WRITE (22,99020) op1
-99020    FORMAT (5X,'UNRECOGNIZED SUBOPTION',1X,1A4)
+         WRITE (22,99027) op1
+99027    FORMAT (5X,'UNRECOGNIZED SUBOPTION',1X,1A4)
          GOTO 2000
       ENDIF
       GOTO 300
@@ -1748,8 +1749,8 @@ C     Treat suboption LEVE (levels)
       ENDIF
       CALL FTBM(3,chiss,idr,1,chilo,bten)
       chis0 = chiss
-      WRITE (22,99021) chis0
-99021 FORMAT (1X///10X,'***** CENTRAL CHISQ=',1E12.4,1X,'*****'//)
+      WRITE (22,99028) chis0
+99028 FORMAT (1X///10X,'***** CENTRAL CHISQ=',1E12.4,1X,'*****'//)
       INHB = 1
       chisl = chiss
       DO kh = 1 , MEMAX
@@ -1809,29 +1810,29 @@ C     Treat suboption LEVE (levels)
          DO lkj = 1 , MEMAX
             READ (17,*) ELM(lkj)
          ENDDO
-         WRITE (22,99022)
-99022    FORMAT (1X///20X,'*** BEST POINT FOUND (TAPE17) ***'///)
+         WRITE (22,99029)
+99029    FORMAT (1X///20X,'*** BEST POINT FOUND (TAPE17) ***'///)
          CALL PRELM(3)
       ENDIF
       IF ( naxfl.EQ.0 ) WRITE (22,99051)
       IF ( naxfl.NE.0 ) WRITE (22,99050)
-      WRITE (22,99023)
-99023 FORMAT (40X,'ESTIMATED ERRORS'//5X,'INDEX',5X,'NI',5X,'NF',5X,
+      WRITE (22,99030)
+99030 FORMAT (40X,'ESTIMATED ERRORS'//5X,'INDEX',5X,'NI',5X,'NF',5X,
      &        'ME AND ERRORS'//)
       DO kh1 = 1 , MEMAX
          IF ( IVAR(kh1).NE.0 .AND. IVAR(kh1).LE.999 ) THEN
-            WRITE (22,99024) kh1 , LEAD(1,kh1) , LEAD(2,kh1) , HLM(kh1)
+            WRITE (22,99031) kh1 , LEAD(1,kh1) , LEAD(2,kh1) , HLM(kh1)
      &                       , DEVD(kh1) , DEVU(kh1) , DEVD(kh1)
      &                       *100./ABS(HLM(kh1)) , DEVU(kh1)
      &                       *100./ABS(HLM(kh1))
-99024       FORMAT (6X,1I3,6X,1I2,5X,1I2,5X,1F9.5,2X,'(',1F9.5,' ,',
+99031       FORMAT (6X,1I3,6X,1I2,5X,1I2,5X,1F9.5,2X,'(',1F9.5,' ,',
      &              1F9.5,')','......',1F7.1,' ,',1F7.1,1X,'PC')
          ENDIF
       ENDDO
       IF ( naxfl.NE.0 ) WRITE (22,99050)
       IF ( naxfl.EQ.0 ) WRITE (22,99051)
-      WRITE (22,99025)
-99025 FORMAT (40X,'ESTIMATED ERRORS',//5X,'INDEX',5X,'NI',5X,'NF',5X,
+      WRITE (22,99032)
+99032 FORMAT (40X,'ESTIMATED ERRORS',//5X,'INDEX',5X,'NI',5X,'NF',5X,
      &        'B(E,ML)(OR QUADRUPOLE MOMENT)',' AND ERRORS'//)
       DO kh2 = 1 , MEMAX
          IF ( IVAR(kh2).NE.0 .AND. IVAR(kh2).LE.999 ) THEN
@@ -1889,8 +1890,8 @@ C     Treat suboption LEVE (levels)
                   IF ( ifc.EQ.1 ) KVAR(kh1) = IVAR(kh1)
                   mm = mm + IVAR(kh1)
                ENDDO
-               IF ( mm.EQ.0 ) WRITE (22,99026) kh
-99026          FORMAT (10X,'ME=',1I3,5X,'NO FREE MATRIX ELEMENTS')
+               IF ( mm.EQ.0 ) WRITE (22,99033) kh
+99033          FORMAT (10X,'ME=',1I3,5X,'NO FREE MATRIX ELEMENTS')
                IF ( mm.NE.0 ) THEN
                   KFERR = 1
                   IF ( iosr.EQ.1 ) WRITE (33,*) kh , kh
@@ -1984,22 +1985,22 @@ C     Treat suboption LEVE (levels)
                   CALL TENB(j,bten,LMAX)
                   pr = 0.
                   IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
-     &                 WRITE (22,99027) (DBLE(j)-1.-SPIN(1)) , IEXP
-99027             FORMAT (1X//40X,'EXCITATION AMPLITUDES'//10X,'M=',
+     &                 WRITE (22,99034) (DBLE(j)-1.-SPIN(1)) , IEXP
+99034             FORMAT (1X//40X,'EXCITATION AMPLITUDES'//10X,'M=',
      &                    1F5.1,5X,'EXPERIMENT',1X,1I2//5X,'LEVEL',2X,
      &                    'SPIN',2X,'M',5X,'REAL AMPLITUDE',2X,
      &                    'IMAGINARY AMPLITUDE'//)
                   DO k = 1 , ISMAX
                      pr = pr + DBLE(ARM(k,5))**2 + IMAG(ARM(k,5))**2
                      IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
-     &                    WRITE (22,99028) INT(CAT(k,1)) , CAT(k,2) , 
+     &                    WRITE (22,99035) INT(CAT(k,1)) , CAT(k,2) , 
      &                    CAT(k,3) , DBLE(ARM(k,5)) , IMAG(ARM(k,5))
-99028                FORMAT (7X,1I2,3X,1F4.1,2X,1F5.1,2X,1E14.6,2X,
+99035                FORMAT (7X,1I2,3X,1F4.1,2X,1F5.1,2X,1E14.6,2X,
      &                       1E14.6)
                   ENDDO
                   IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
-     &                 WRITE (22,99029) pr
-99029             FORMAT (1X/5X,'SUM OF PROBABILITIES=',1E14.6)
+     &                 WRITE (22,99643) pr
+99643             FORMAT (1X/5X,'SUM OF PROBABILITIES=',1E14.6)
                ENDDO
                CALL TENS(bten)
                IF ( itno.NE.0 ) THEN
@@ -2038,9 +2039,9 @@ C     Treat suboption LEVE (levels)
                   DO jgl = 1 , nogeli
                      IF ( IRAWEX(IEXP).NE.0 ) THEN
                         IF ( op2.EQ.'POIN' .AND. IPRM(20).EQ.1 )
-     &                       WRITE (23,99030) IEXP , jgl , EP(IEXP) , 
+     &                       WRITE (23,99037) IEXP , jgl , EP(IEXP) , 
      &                       TLBDG(IEXP)
-99030                   FORMAT (1x//50x,'CALCULATED YIELDS'//5x,
+99037                   FORMAT (1x//50x,'CALCULATED YIELDS'//5x,
      &                          'EXPERIMENT ',1I2,2x,'DETECTOR ',1I2/5x,
      &                          'ENERGY ',1F10.3,1x,'MEV',2x,'THETA ',
      &                          1F7.3,1x,'DEG'//5x,'NI',5x,'NF',5x,'II',
@@ -2184,8 +2185,8 @@ C     Treat suboption LEVE (levels)
                         READ (3,*) ne , na , zp , ap , xep , nval , waga
                         WRITE (4,*) ne , na , zp , ap , EP(IEXP) , 
      &                              nval , waga
-                        WRITE (22,99031) IEXP , jgl1
-99031                   FORMAT (///10X,'EXPERIMENT',1X,I2,8X,'DETECTOR',
+                        WRITE (22,99038) IEXP , jgl1
+99038                   FORMAT (///10X,'EXPERIMENT',1X,I2,8X,'DETECTOR',
      &                          1X,I2,//9X,'NI',5X,'NF',5X,'YEXP',8X,
      &                          'YCOR',8X,'COR.F'/)
                         ile1 = ILE(jgl1)
@@ -2207,10 +2208,10 @@ C     Treat suboption LEVE (levels)
                            ycorr = YEXP(jgl1,ile1+itp-1)
                            WRITE (4,*) ns1 , ns2 , ycorr , 
      &                                 DYEX(jgl1,ile1+itp-1)
-                           WRITE (22,99032) ns1 , ns2 , 
+                           WRITE (22,99039) ns1 , ns2 , 
      &                            CORF(ile1+itp-1,jgl1) , ycorr , 
      &                            ycorr/CORF(ile1+itp-1,jgl1)
-99032                      FORMAT (5X,I4,5X,I4,3X,E8.3,4X,E8.3,4X,E8.3)
+99039                      FORMAT (5X,I4,5X,I4,3X,E8.3,4X,E8.3,4X,E8.3)
                         ENDDO ! Loop over itp
  1306                ENDDO ! Loop over jgl
                   ENDIF ! if ( op2.EQ. 'CORR')
