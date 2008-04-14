@@ -467,6 +467,7 @@ C     Initialize pointers
       LP13 = LP9 + 1
       LP14 = 4900 ! Maximum number of collision coefficients
 
+C---- gosia2 changes start
 C     Read target/projectile switch and first option from standard input
       READ (*,*) IBPS
       READ (*,99056) op1 , op2
@@ -479,13 +480,17 @@ C     Use input unit 25 for target and 26 for projectile
       IBPS = IBPS - 1
       JZB = 25
       IF ( IBPS.EQ.1 ) JZB = 26
-      DO i = 1 , 75
-         DO j = 1 , 32
-            CNOR1(j,i) = 1.
-            CNOR2(j,i) = 1.
+C---- gosia2 changes end
+
+C     Initialize normalization to 1.
+      DO i = 1 , LP3 ! LP3 = 75
+        DO j = 1 , LP6 ! LP6 = 32
             CNOR(j,i) = 1.
+            CNOR1(j,i) = 1. ! Added for gosia2
+            CNOR2(j,i) = 1. ! Added for gosia2
          ENDDO
       ENDDO
+
       MCFIX = 1
       mres1 = 0
       mrepf = 0
@@ -499,7 +504,7 @@ C     Use input unit 25 for target and 26 for projectile
 
       chp = chir
       IF ( mret.EQ.1 .AND. JZB.EQ.26 ) chir = 0.
-      REWIND 25
+      REWIND 25 ! Rewind input files
       REWIND 26
       READ (JZB,*) IBPS
       IBPS = IBPS - 1
