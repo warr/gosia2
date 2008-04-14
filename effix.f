@@ -97,7 +97,7 @@ C        LEUVEN CALIBRATION
             Effi = Effi + AKAVKA(ixi+1,Ipd)*w**ixi
          ENDDO
          Effi = EXP(Effi)
-         GOTO 99999
+         RETURN
       ELSEIF ( AKAVKA(5,Ipd).GT.0. .AND. AKAVKA(5,Ipd).LT.10. ) THEN
 c FITEFF eff. calib. by P.Olbratowski use
 c PJN@2000
