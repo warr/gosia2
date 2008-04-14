@@ -872,8 +872,8 @@ C---- gosia2 changes end
                ENDIF
                IF ( IMIN.EQ.0 ) CALL CMLAB(0,dsig,ttttt)
                IF ( ERR ) GOTO 2000
-               IF ( IMIN.EQ.0 ) GOTO 1300
-               GOTO 400 ! End of OP,ERRO
+               IF ( IMIN.NE.0 ) GOTO 400
+               GOTO 1300 ! End of OP,ERRO
 
 C           Treat OP,RE,C (release C)
             ELSEIF ( op2.EQ.'RE,C' ) THEN
