@@ -1689,8 +1689,8 @@ C     Treat suboption CONT (control)
                               ENDDO
                               GOTO 450
                            ELSE
-                              IF ( op1.EQ.'END,' ) GOTO 300
-                              GOTO 450
+                              IF ( op1.NE.'END,' ) GOTO 450
+                              GOTO 300
                            ENDIF
                         ENDIF
                      ENDIF
