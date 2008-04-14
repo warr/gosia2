@@ -257,7 +257,7 @@ C      ZV     - energy meshpoints
       REAL*8 summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , test , 
      &       TETACM , tetrc , tfac , thc , THICK , TIMEL , title , 
      &       TLBDG , tmn , tmx , todfi , TREP
-      REAL*8 tta , tth , tting , ttttt , ttttx , txx , u , UPL , VACDP , 
+      REAL*8 tta , tth , tting , ttttt , txx , u , UPL , VACDP , 
      &       val , VINF , waga , wph , wpi , WSIXJ , wth , wthh , 
      &       WTHREJ , XA , XA1
       REAL*8 xep , XI , xi1 , xi2 , XIR , xk1 , xk2 , xl1 , xlevb , 
