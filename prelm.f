@@ -1,3 +1,30 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE PRELM
+C
+C Called by: GOSIA
+C Calls:     KONTUR, MINI
+C
+C Purpose: print matrix elements
+C
+C Uses global variables:
+C      ELM    - matrix elements
+C      ELM25  - storage for matrix elements for target (added for gosia2)
+C      ELM26  - storage for matrix elements for projectile (added for gosia2)
+C      ELML   - lower limits on matrix elements
+C      ELMU   - upper limits on matrix elements
+C      IFAC   -
+C      IVAR   - indicates a limit or correlation is set
+C      JZB    - unit to read from
+C      LDNUM  - number of matrix elements with each multipolarity populating levels
+C      LEAD   - pair of levels involved in each matrix element
+C      MULTI  - number of matrix elements having a given multipolarity
+C      NMAX   - number of levels
+C      SPIN   - spin of level
+C
+C Formal parameters:
+C      Iop    - print flag (controls what is written to output).
+ 
       SUBROUTINE PRELM(Iop)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , b , DIPOL , ELM , ELM25 , ELM26 , ELML , 
@@ -16,6 +43,7 @@
      &                MULTI(8)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /RESC  / ELM25(500) , ELM26(500)
+
       inx = 0
       WRITE (22,99001)
 99001 FORMAT (2X/40X,'MATRIX ELEMENTS',//)
@@ -81,10 +109,11 @@
      &                       inx , LEAD(1,inx) , LEAD(2,inx) , 
      &                       ELM26(inx) , ELML(inx) , ELMU(inx)
                      ENDIF
- 5                ENDDO
-               ENDIF
-            ENDDO
-         ENDIF
-      ENDDO
+ 5                ENDDO ! Loop on kk
+               ENDIF ! If l .ne. 0
+            ENDDO ! Loop on k
+         ENDIF ! If m .ne. 0
+      ENDDO ! Loop on j
+
 99009 FORMAT (5X,1I3,5X,1I2,5X,1I2,3(5X,1F10.5),1A3)
       END
