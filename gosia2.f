@@ -289,7 +289,7 @@ C      ZV     - energy meshpoints
      &          jde , jdy
       INTEGER*4 je , JENTR , jex , jexp , jfi , jfre , jgd , jgl , 
      &          jgl1 , jgr , jgs , jj , jj1 , jjjj , jjlx , jjx , jk , 
-     &          jkloo , jkmx , jkmy
+     &          jkloo , jkmy
       INTEGER*4 jktt , jl , jmm , jmpin , jp , jphd , jpin , jrls , js , 
      &          JSKIP , jt , jtp , jyi , jyi1 , jyi2 , jyv , jz , JZB , 
      &          k , kb
@@ -2471,20 +2471,20 @@ C     Handle OP,ERRO
          ENDDO
          REWIND 7
          REWIND 27
-         jkmx = 7
-         IF ( IBPS.EQ.1 ) jkmx = 27
+         irix = 7
+         IF ( IBPS.EQ.1 ) irix = 27
          DO iuy = 1 , 6
-            WRITE (jkmx,*) (XIR(iuy,jj),jj=1,NEXPT)
-            WRITE (jkmx,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
+            WRITE (irix,*) (XIR(iuy,jj),jj=1,NEXPT)
+            WRITE (irix,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
          ENDDO
          DO jj = 1 , NEXPT
             DO jk = 1 , 4
                DO kuku = 1 , 6
-                  WRITE (jkmx,*) (PARXM(jj,jk,jl,kuku),jl=1,10)
+                  WRITE (irix,*) (PARXM(jj,jk,jl,kuku),jl=1,10)
                ENDDO
             ENDDO
             DO jk = 1 , 12
-               WRITE (jkmx,*) (PARX(jj,jk,jl),jl=1,5)
+               WRITE (irix,*) (PARX(jj,jk,jl),jl=1,5)
             ENDDO
          ENDDO
          jkmy = 12
