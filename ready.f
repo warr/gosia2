@@ -1,3 +1,30 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE READY
+C
+C Called by: ADHOC
+C Calls:     DECAY, SZEREG
+C
+C Purpose: To read experimental yields from a file.
+C
+C Uses global variables:
+C      DYEX   - error on experimental yield
+C      IY     - index of experimental yields
+C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
+C      LP6    - 32
+C      NDST   - number of data sets
+C      NEXPT  - number of experiments
+C      NYLDE  - number of yields
+C      YEXP   - experimental yield
+C
+C Formal parameters:
+C      Idr    -
+C      Ntap   - unit for yield file
+C      Ipri   - printing flag (Ipri=1 gives additional output)
+C
+C NTAP is the unit number of the file from which we should read the
+C experimental yields
+ 
       SUBROUTINE READY(Idr,Ntap,Ipri)
       IMPLICIT NONE
       REAL*8 ap , CORF , DYEX , EP , TAU , TLBDG , u , UPL , VINF , w , 
@@ -19,6 +46,7 @@
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /CCCDS / NDST(50)
+      
       REWIND Ntap
       DO k = 1 , LP6
          iytot(k) = 0
@@ -30,7 +58,7 @@
             NYLDE(lxp,kkl) = 0
          ENDDO
          ii = NDST(lxp)
-         DO kk = 1 , ii
+         DO kk = 1 , ii ! iexp, ng, zp, ag, ep, nd, wt
             READ (Ntap,*) ne , nanx , zp , ap , xep , nval , waga
             IF ( Ipri.EQ.1 ) WRITE (22,99002) ne , zp , ap , xep , 
      &                              NDST(ne) , waga
@@ -42,7 +70,7 @@
 99003       FORMAT (4X,'DECAY',1X,'IS',2X,'IF',1(9X,'YIELD+/-ERROR',9X)
      &              /)
             DO j = 1 , nval
-               READ (Ntap,*) ns1 , ns2 , u , w
+               READ (Ntap,*) ns1 , ns2 , u , w ! ii, if, y, dy
                nsxh = ns1
                nsyh = ns2
                IF ( ns1.GE.100 ) THEN
