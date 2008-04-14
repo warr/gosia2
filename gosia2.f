@@ -491,6 +491,8 @@ C     Initialize normalization to 1.
          ENDDO
       ENDDO
 
+C---- gosia2 changes start
+      IUNIT3 = 33
       MCFIX = 1
       mres1 = 0
       mrepf = 0
@@ -510,8 +512,9 @@ C     Initialize normalization to 1.
       IBPS = IBPS - 1
       JZB = 25
       IF ( IBPS.EQ.1 ) JZB = 26
-      IBYP = 0
+C---- gosia2 changes end
 
+      IBYP = 0
       INHB = 0
       BEQ = -983872.
       ipinf = 0
@@ -530,7 +533,7 @@ C     Initialize normalization to 1.
       JENTR = 0
       ICS = 0
 
-      DO i = 1 , LP1
+      DO i = 1 , LP1 ! LP1 = 50
          jpin(i) = 0
          iecd(i) = 0
       ENDDO
@@ -539,7 +542,7 @@ C     Initialize normalization to 1.
       SGW = 3.
       SUBCH1 = 0.
       SUBCH2 = 0.
-      ITS = 0
+      ITS = 0 ! Create tape 18 flag
       iosr = 0
       LOCKS = 0
       DLOCK = 1.1
@@ -547,8 +550,8 @@ C     Initialize normalization to 1.
       IFBFL = 0
       NLOCK = 0
       LOCKF = 0
-      DO i = 1 , LP4
-         DO j = 1 , LP6
+      DO i = 1 , LP4 ! LP4 = 1500
+         DO j = 1 , LP6 ! LP6 = 32
             CORF(i,j) = 1.
          ENDDO
       ENDDO
@@ -558,20 +561,20 @@ C     Initialize normalization to 1.
             CC(i,j) = 0.
          ENDDO
       ENDDO
-      IPRM(2) = 0
-      IPRM(4) = 0
-      IPRM(5) = 1
+      IPRM(2) = 0 ! changed from 1 to 0 for gosia2
+      IPRM(4) = 0 ! changed from -2 to 0 for gosia2
+      IPRM(5) = 1 ! changed from 11111 to 1 for gosia2
       IPRM(6) = 11111
       IPRM(7) = 0
+      IPRM(11) = 0 ! changed from 1 to 0 for gosia2
+      IPRM(12) = 0 ! changed from 1 to 0 for gosia2
+      IPRM(14) = 0 ! changed from 1 to 0 for gosia2
       IPRM(16) = 0
       IPRM(17) = 0
       IPRM(18) = 0
       IPRM(19) = 0
       IPRM(20) = 0
-      IPRM(11) = 0
-      IPRM(12) = 0
-      IPRM(14) = 0
-      DO i = 1 , LP1
+      DO i = 1 , LP1 ! LP1 = 50
          DO j = 1 , 5
             IF ( j.NE.5 ) THEN
                DO k = 1 , 10
@@ -585,7 +588,7 @@ C     Initialize normalization to 1.
             ENDDO
          ENDDO
       ENDDO
-      DO k = 1 , LP1
+      DO k = 1 , LP1 ! LP1 = 50
          IDIVE(k,1) = 1
          IDIVE(k,2) = 1
          DO iuy = 1 , 6
@@ -596,7 +599,7 @@ C     Initialize normalization to 1.
       lfagg = 0
       izcap = 12800
       KFERR = 0
-      NDIM = LP3
+      NDIM = LP3 ! LP3 = 75
       ISO = 1
       B(1) = 1.
       DO i = 2 , 20
@@ -605,8 +608,8 @@ C     Initialize normalization to 1.
       LMAXE = 0
       CALL FAKP
       CALL FHIP
-      NCM = 2
-      DO ijx = 1 , LP1
+      NCM = 2 ! Default final spin for kinematics calculation (OP,CONT NCM,)
+      DO ijx = 1 , LP1 ! LP1 = 50
          INTERV(ijx) = 1
       ENDDO
       la = 0
@@ -620,32 +623,32 @@ C     Initialize normalization to 1.
       MAGEXC = 0
       LAMMAX = 0
       DO lam = 1 , 8
-         DO lexp = 1 , LP3
+         DO lexp = 1 , LP3 ! LP3 = 75
             LDNUM(lam,lexp) = 0
          ENDDO
          MULTI(lam) = 0
          LAMDA(lam) = 0
       ENDDO
-      DO j = 1 , LP2
+      DO j = 1 , LP2 ! LP2 = 500
          EXPO(j) = (1.,0.)
          KVAR(j) = 1
          ELM(j) = 0.
       ENDDO
-      DO j = 1 , LP1
+      DO j = 1 , LP1 ! LP1 = 50
          JSKIP(j) = 1
          ISKIN(j) = 0
       ENDDO
-      DO j = 1 , LP3
+      DO j = 1 , LP3 ! LP3 = 75
          ISEX(j) = 1111
       ENDDO
       ISEX(1) = 0
       ACCA = .00001
       oph = '    '
-      nmemx = LP2 + 9
+      nmemx = LP2 + 9 ! LP2 = 500
       IEXP = 1
       IMIN = 0
       i122 = 0
-      DO j = 1 , LP2
+      DO j = 1 , LP2 ! LP2 = 500
          DO k = 1 , 2
             DO l = 1 , 7
                QAPR(j,k,l) = 0.
@@ -653,7 +656,9 @@ C     Initialize normalization to 1.
          ENDDO
       ENDDO
       ERR = .FALSE.
-      intend = 0
+      intend = 0 ! End of initialization
+
+C     Start reading input file.
  200  READ (JZB,99056) op1 , op2
       IF ( op1.EQ.'OP, ' ) THEN
          IF ( op2.EQ.'GOSI' ) oph = op2
