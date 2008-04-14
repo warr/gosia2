@@ -1,4 +1,4 @@
-GOSIA2DIR=/home/warr/devel/gosia2
+GOSIA2DIR=/home/warr/devel/gosia2_new
 
 INP += g2demo-beam.inp
 INP += g2demo-targ.inp
