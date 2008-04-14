@@ -56,7 +56,7 @@ C
 C            REF.----   UR/NSRL REPORT 308/1986
 C
 C************************  VERSION FROM JUNE, 2006  *******************
-rC
+C
 C**********************************************************************
 C PROGRAM GOSIA2
 C
@@ -801,10 +801,10 @@ C        Treat other options
          ELSE
 
 C           Treat OP,RE,A (release A)
-            IF ( op2.EQ.'RE,A' ) GOTO 1000
+            IF ( op2.EQ.'RE,A' ) GOTO 900
            
 C           Treat OP,RE,F (release F)
-            IF ( op2.EQ.'RE,F' ) GOTO 1000
+            IF ( op2.EQ.'RE,F' ) GOTO 900
 
 C           Treat OP,ERRO (calculate errors)
             IF ( op2.EQ.'ERRO' ) THEN
@@ -872,14 +872,14 @@ C---- gosia2 changes end
                ENDIF
                IF ( IMIN.EQ.0 ) CALL CMLAB(0,dsig,ttttt)
                IF ( ERR ) GOTO 2000
-               IF ( IMIN.EQ.0 ) GOTO 2400
-               GOTO 500 ! End of OP,ERRO
+               IF ( IMIN.EQ.0 ) GOTO 1300
+               GOTO 400 ! End of OP,ERRO
 
 C           Treat OP,RE,C (release C)
             ELSEIF ( op2.EQ.'RE,C' ) THEN
                jfre = 1
                irfix = 0
-               GOTO 1100 ! End of OP,RE,C
+               GOTO 1000 ! End of OP,RE,C
 
 C           Treat OP,TITL (title)
             ELSEIF ( op2.EQ.'TITL' ) THEN
@@ -905,7 +905,7 @@ C              Treat OP,MINI
      &                         LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
                   op2 = opcja
                   IMIN = IMIN + 1
-                  IF ( IMIN.EQ.1 ) GOTO 1300
+                  IF ( IMIN.EQ.1 ) GOTO 1200
                   GOTO 1400 ! End of OP,MINI
 
 C              Treat OP,THEO
@@ -1406,17 +1406,17 @@ C              Treat OP,CORR
                   REWIND 3
                   REWIND 15
                   REWIND 4
-                  GOTO 1300 ! End of OP,CORR
+                  GOTO 1200 ! End of OP,CORR
                ELSE
 
 C                 Treat OP,POIN
-                  IF ( op2.EQ.'POIN' ) GOTO 1300
+                  IF ( op2.EQ.'POIN' ) GOTO 1200
 
 C                 Treat OP,MAP
                   IF ( op2.EQ.'MAP ' ) iobl = 1
 
 C                 Treat OP,STAR
-                  IF ( op2.EQ.'STAR' ) GOTO 1300
+                  IF ( op2.EQ.'STAR' ) GOTO 1200
 
 C                 Treat OP,SIXJ
                   IF ( op2.EQ.'SIXJ' ) THEN
@@ -1486,7 +1486,7 @@ C                    Read input from standard input
 
 C                 Treat OP,MAP
                   ELSEIF ( op2.EQ.'MAP ' ) THEN
-                     GOTO 1300 ! End of OP,MAP 
+                     GOTO 1200 ! End of OP,MAP 
                   ENDIF
                ENDIF
             ENDIF
@@ -1601,11 +1601,11 @@ C     Treat suboption ME (matrix elements)
                   ENDIF
                ENDIF
             ENDDO
-            IF ( ipo1.EQ.0 ) GOTO 400
+            IF ( ipo1.EQ.0 ) GOTO 2400
  320        la = ipo1
             IF ( la.GT.LMAXE .AND. la.LE.6 ) LMAXE = la
  350     ENDDO
- 400     MEMAX = indx
+2400     MEMAX = indx
          IF ( JZB.EQ.25 ) m25 = MEMAX
          IF ( JZB.EQ.26 ) m26 = MEMAX
          IF ( la.GT.6 ) MAGEXC = 1
@@ -1748,7 +1748,7 @@ C     Else we don't recognize the suboption
       GOTO 300 ! Get next suboption
 
 C     Handle OP,ERRO      
- 500  IF ( ICS.EQ.1 ) THEN
+ 400  IF ( ICS.EQ.1 ) THEN
          REWIND 11
          DO kh1 = 1 , LP4
             READ (11) (CORF(kh1,kh2),kh2=1,LP6)
@@ -1771,8 +1771,8 @@ C     Handle OP,ERRO
       ENDDO
       IF ( idf.EQ.1 ) THEN
          IFBFL = 1
-         IF ( irep.NE.2 ) GOTO 800
-         IF ( iosr.EQ.0 ) GOTO 800
+         IF ( irep.NE.2 ) GOTO 2900
+         IF ( iosr.EQ.0 ) GOTO 2900
          REWIND IUNIT3
          READ (IUNIT3,*) ll , mm , kk , inn
          DO inn = 1 , ll
@@ -1787,7 +1787,7 @@ C     Handle OP,ERRO
  550     READ (IUNIT3,*) mm , ll
          IF ( mm.EQ.0 ) THEN
             BACKSPACE IUNIT3
-            GOTO 800
+            GOTO 2900
          ELSE
             READ (IUNIT3,*) kk , ll , yyy
             READ (IUNIT3,*) (SA(mm),mm=1,MEMAX)
@@ -1805,7 +1805,7 @@ C     Handle OP,ERRO
                      DO kh1 = 1 , MEMAX
                         SA(kh1) = 0.
                      ENDDO
-                     IF ( IVAR(kh).EQ.0 ) GOTO 600
+                     IF ( IVAR(kh).EQ.0 ) GOTO 500
                      SA(kh) = 1.*(-1)**ij
                      kh1 = kh
                      CALL KONTUR(idr,chis0,chisl,ifbp,-1,kh1,sh,bten,
@@ -1816,9 +1816,9 @@ C     Handle OP,ERRO
             ENDDO
             REWIND 15
             WRITE (15,*) (DEVD(ij),DEVU(ij),ij=1,MEMAX)
- 600     ENDDO
+ 500     ENDDO
       ENDIF
- 700  IF ( ifbp.EQ.1 ) THEN
+ 600  IF ( ifbp.EQ.1 ) THEN
          REWIND 17
          DO lkj = 1 , MEMAX
             READ (17,*) ELM(lkj)
@@ -1874,11 +1874,11 @@ C     Handle OP,ERRO
          ENDIF
       ENDDO
       GOTO 2000
- 800  irea = 0
+ 2900 irea = 0
       IF ( ms.LT.0 ) irea = 1
       IF ( ms.EQ.0 ) mend = MEMAX
       IF ( ms.EQ.0 ) ms = 1
- 900  naxfl = 1
+ 800  naxfl = 1
       IF ( irea.EQ.1 ) READ (JZB,*) ms , mend
       IF ( ms.NE.0 ) THEN
          DO kh = ms , mend
@@ -1931,34 +1931,34 @@ C     Handle OP,ERRO
             REWIND 15
             WRITE (15,*) (DEVD(kh1),DEVU(kh1),kh1=1,MEMAX)
          ENDDO
-         IF ( irea.EQ.1 ) GOTO 900
+         IF ( irea.EQ.1 ) GOTO 800
       ENDIF
       IF ( iosr.NE.0 ) THEN
          im = 0
          WRITE (IUNIT3,*) im , im
       ENDIF
-      GOTO 700
+      GOTO 600
 
- 1000 jfre = 0
+  900 jfre = 0
       irfix = 0
       IF ( op2.EQ.'RE,F' ) irfix = 1
- 1100 DO jrls = 1 , MEMAX
+ 1000 DO jrls = 1 , MEMAX
          IF ( IVAR(jrls).NE.0 .OR. irfix.NE.1 ) THEN
             IF ( IVAR(jrls).GT.999 ) THEN
-               IF ( jfre.EQ.1 ) GOTO 1200
+               IF ( jfre.EQ.1 ) GOTO 1100
             ENDIF
             IVAR(jrls) = 2
             ELML(jrls) = -ABS(ELML(jrls))
             ELMU(jrls) = ABS(ELMU(jrls))
             IF ( jrls.GT.MEMX6 ) IVAR(jrls) = 1
          ENDIF
- 1200 ENDDO
+ 1100 ENDDO
       DO jrls = 1 , MEMAX
          ivarh(jrls) = IVAR(jrls)
       ENDDO
       GOTO 100
 
- 1300 CALL CMLAB(0,dsig,ttttt)
+ 1200 CALL CMLAB(0,dsig,ttttt)
       IF ( ERR ) GOTO 2000
       IF ( op2.EQ.'POIN' ) READ (JZB,*) ifwd , slim
       ient = 1
@@ -2108,7 +2108,7 @@ C     Handle OP,ERRO
                               SUMCL(inclus,jyi) = SUMCL(inclus,jyi)
      &                           + YGN(jyi)
                            ENDDO
-                           IF ( jgl.NE.LASTCL(IEXP,inclus) ) GOTO 1305
+                           IF ( jgl.NE.LASTCL(IEXP,inclus) ) GOTO 1205
                            DO jyi = 1 , idr
                               YGN(jyi) = SUMCL(inclus,jyi)
                            ENDDO
@@ -2132,7 +2132,7 @@ C     Handle OP,ERRO
                               jmm = jmm + 1
                               CORF(jmm,1) = DBLE(ni)
                               CORF(jmm,2) = DBLE(nf)
-                              CORF(jmm,3) = YGN(jyi)
+                              CORF(jmm,3) = YGN(jyi) ! Was divided by sh1 in gosia
                               IF ( YGN(jyi).GE.YGN(IDRN) ) CORF(jmm,4)
      &                             = CORF(jmm,3)/20.
                               IF ( YGN(jyi).LT.YGN(IDRN) ) CORF(jmm,4)
@@ -2149,7 +2149,7 @@ C     Handle OP,ERRO
      &                          jyi1.EQ.jyi ) THEN
                               IF ( IY(lu,jgl1).GE.1000 ) THEN
                                  jyi2 = jyi1 - jjjj
-                                 IF ( jyi2.LE.0 ) GOTO 1302
+                                 IF ( jyi2.LE.0 ) GOTO 1202
                                  DO ihuj = 1 , jyi2
                                     READ (15,*) yyd1
                                  ENDDO
@@ -2171,7 +2171,7 @@ C     Handle OP,ERRO
                               lu = lu + 1
                            ENDIF
                         ENDIF
- 1302                ENDDO
+ 1202                ENDDO
                      IF ( ifwd.EQ.1 ) THEN
                         xw = 1.
                         WRITE (4,*) IEXP , jgl1 , ABS(IZ1(IEXP)) , 
@@ -2183,7 +2183,7 @@ C     Handle OP,ERRO
      &                                 CORF(jyi,4)
                         ENDDO
                      ENDIF
- 1305             ENDDO
+ 1205             ENDDO
                   IF ( op2.EQ.'CORR' ) THEN
                      jgl1 = 0
                      DO jgl = 1 , nogeli
@@ -2191,7 +2191,7 @@ C     Handle OP,ERRO
                            inclus = ICLUST(jexp,jgl)
                            IF ( inclus.NE.0 ) THEN
                               IF ( jgl.NE.LASTCL(jexp,inclus) )
-     &                             GOTO 1306
+     &                             GOTO 1206
                            ENDIF
                         ENDIF
                         jgl1 = jgl1 + 1
@@ -2226,7 +2226,7 @@ C     Handle OP,ERRO
      &                            ycorr/CORF(ile1+itp-1,jgl1)
 99039                      FORMAT (5X,I4,5X,I4,3X,E8.3,4X,E8.3,4X,E8.3)
                         ENDDO ! Loop over itp
- 1306                ENDDO ! Loop over jgl
+ 1206                ENDDO ! Loop over jgl
                   ENDIF ! if ( op2.EQ. 'CORR')
                ENDIF
             ENDDO ! Loop over jexp
@@ -2242,7 +2242,7 @@ C     Handle OP,ERRO
          ENDIF ! if (op2 .NE. 'GOSI') if statement
       ENDIF ! if ( iobl.LT.1 ) if statement
 
- 2400 IF ( iobl.GE.1 ) THEN
+ 1300 IF ( iobl.GE.1 ) THEN
          ient = 1
          icg = 2
          nmaxh = NMAX
@@ -2556,7 +2556,7 @@ C     Handle OP,ERRO
       ENDIF ! IPRM(12).ne.0 .or. op2.eq.'MAP '
 
       IF ( op2.NE.'GOSI' .AND. op2.NE.'ERRO' ) GOTO 100
-      IF ( op2.EQ.'ERRO' ) GOTO 500
+      IF ( op2.EQ.'ERRO' ) GOTO 400
 
  1400 mret = ABS(mret) ! Added for gosia2
       DO kh1 = 1 , MEMAX
