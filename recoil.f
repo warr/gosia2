@@ -1,12 +1,35 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE RECOIL
+C
+C Called by: ANGULA, CMLAB
+C Calls:     ROTATE
+C
+C Purpose: correct for relativistic effects of recoiling nucleus.
+C
+C Formal parameters:
+C      Alab   - matrix of (l,m) pairs in lab frame
+C      Attl   - matrix of (l,m) pairs in rotated frame
+C      Beta   - beta of recoil
+C      Theta  - angle to rotate
+C
+C We transform into the frame of the recoiling nucleus, correct according to
+C the method of Lesser and then rotate back to the laboratory frame.
+ 
       SUBROUTINE RECOIL(Alab,Attl,Beta,Theta)
       IMPLICIT NONE
       REAL*8 Alab , atemp , Attl , Beta , betasq , dum , hold , test , 
      &       Theta
       INTEGER*4 i , i1 , j , l , m
       DIMENSION Alab(9,9) , Attl(9,9) , atemp(16)
+      
       hold = Alab(1,1)
       IF ( ABS(hold).LT.1.E-9 ) RETURN
+
+C     Rotate into frame of recoiling nucleus
       CALL ROTATE(Alab,Attl,-Theta,7,2)
+
+C     Correct for relativistic effects
       Attl(2,1) = (2./SQRT(15.))*(SQRT(5.)*Attl(1,1)-Attl(3,1))
       Attl(2,2) = -Attl(3,2)/SQRT(5.)
       Attl(4,1) = (4./SQRT(35.))*(3.*Attl(3,1)-SQRT(5.)*Attl(5,1))
@@ -84,6 +107,8 @@
          Attl(9,6) = (72./5.)*SQRT(2./17.)*atemp(15)*betasq
          Attl(9,7) = (24./5.)*SQRT(7./17.)*atemp(16)*betasq
       ENDIF
+
+C     Rotate back into laboratory frame
       CALL ROTATE(Attl,Alab,Theta,9,1)
       test = ABS(1.0-Alab(1,1)/hold)
       IF ( test.GT.1.0E-07 ) THEN
