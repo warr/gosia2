@@ -745,10 +745,12 @@ C        Treat OP,TROU (troubleshooting)
          ELSEIF ( op2.EQ.'TROU' ) THEN
             ITS = 1
             READ (JZB,*) kmat , rlr
-            GOTO 100
+            GOTO 100 ! Back to input loop
+
+C        Treat OP,REST (restart)
          ELSEIF ( op2.EQ.'REST' ) THEN
             irix = 12
-            IF ( IBPS.EQ.1 ) irix = 32
+            IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for target, 32 for beam
             REWIND irix
             memax1 = MEMAX + 1
             DO lkj = 1 , MEMAX
@@ -757,14 +759,16 @@ C        Treat OP,TROU (troubleshooting)
             DO lkj = 1 , memax1
                READ (JZB,*) lkj1 , xlk
                IF ( lkj1.EQ.0 ) GOTO 220
-               IF ( mres1.EQ.0 ) ELM(lkj1) = xlk
+               IF ( mres1.EQ.0 ) ELM(lkj1) = xlk ! condition added for gosia2
             ENDDO
+C---- gosia2 changes start
  220        DO lkj = 1 , MEMAX
                IF ( mres1.EQ.0 .AND. JZB.EQ.25 ) ELM25(lkj) = ELM(lkj)
                IF ( mres1.EQ.0 .AND. JZB.EQ.26 ) ELM26(lkj) = ELM(lkj)
             ENDDO
             IF ( JZB.EQ.26 ) mres1 = 1
             WRITE (22,99007)
+C---- gosia2 changes end
 99007       FORMAT (1X///5X,'*****',2X,
      &              'RESTART-MATRIX ELEMENTS OVERWRITTEN',2X,'*****'///)
             DO kk = 1 , MEMAX
@@ -789,19 +793,29 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                   ENDIF
                ENDIF
             ENDDO
-            CALL PRELM(4)
-            GOTO 100
+            CALL PRELM(4) ! changed from 2 to 4 for gosia2
+            GOTO 100 ! End of OP,REST
+
+C        Treat other options
          ELSE
+
+C           Treat OP,RE,A (release A)
             IF ( op2.EQ.'RE,A' ) GOTO 1000
+           
+C           Treat OP,RE,F (release F)
             IF ( op2.EQ.'RE,F' ) GOTO 1000
+
+C           Treat OP,ERRO (calculate errors)
             IF ( op2.EQ.'ERRO' ) THEN
                READ (JZB,*) idf , ms , mend , irep , ifc , remax
+C---- gosia2 changes start
                MCFIX = 0
                DO mmmm = 1 , 32
                   DO kkkk = 1 , 50
                      READ (13,*) CNOR1(mmmm,kkkk)
                   ENDDO
                ENDDO
+C---- gosia2 changes end
                rem = LOG(remax)
                LOCKS = 0
                LOCKF = 0
