@@ -669,8 +669,10 @@ C     Start reading input file.
          IF ( op2.EQ.'GOSI' ) opcja = op2
 
 C        Treat OP,FILE (attach files to fortran units)
-         IF ( op2.EQ.'FILE' ) CALL OPENF
-         IF ( op2.EQ.'FILE' ) GOTO 200 ! Back to input loop
+         IF ( op2.EQ.'FILE' ) THEN
+            CALL OPENF
+            GOTO 100 ! Back to input loop
+         ENDIF
          IF ( jphd.EQ.1 ) WRITE (22,99101)
 99101    FORMAT ('1'/1X,125('*')/1X,125('*')/1X,50('*'),25X,50('*')/1X,
      &           50('*'),10X,'GOSIA2',10X,50('*')/1X,50('*'),25X,50('*')
