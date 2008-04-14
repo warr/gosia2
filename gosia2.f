@@ -906,8 +906,8 @@ C              Treat OP,MINI
      &                         LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
                   op2 = opcja
                   IMIN = IMIN + 1
-                  IF ( IMIN.EQ.1 ) GOTO 1200
-                  GOTO 1400 ! End of OP,MINI
+                  IF ( IMIN.NE.1 ) GOTO 1400
+                  GOTO 1200 ! End of OP,MINI
 
 C              Treat OP,THEO
                ELSEIF ( op2.EQ.'THEO' ) THEN
