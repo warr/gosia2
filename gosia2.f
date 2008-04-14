@@ -503,7 +503,7 @@ C---- gosia2 changes start
       mawr = 0
 
  2200 DO i = 1 , 50 ! This is where we come back when we iterate over target/beam
-         LIFCT(i) = 0
+        LIFCT(i) = 0
       ENDDO
 
       chp = chir
@@ -539,7 +539,6 @@ C---- gosia2 changes end
          jpin(i) = 0
          iecd(i) = 0
       ENDDO
-
       txx = 0.
       SGW = 3.
       SUBCH1 = 0.
@@ -663,7 +662,7 @@ C---- gosia2 changes end
 C     Start reading input file.
  100  READ (JZB,99001) op1 , op2
 99001 FORMAT (1A3,1A4)
-
+      
       IF ( op1.EQ.'OP, ' ) THEN
          IF ( op2.EQ.'GOSI' ) oph = op2
          IF ( op2.EQ.'GOSI' ) opcja = op2
@@ -673,7 +672,7 @@ C        Treat OP,FILE (attach files to fortran units)
             CALL OPENF
             GOTO 100 ! Back to input loop
          ENDIF
-
+         
          IF ( jphd.EQ.1 ) WRITE (22,99002)
 99002    FORMAT ('1'/1X,125('*')/1X,125('*')/1X,50('*'),25X,50('*')/1X,
      &           50('*'),10X,'GOSIA2',10X,50('*')/1X,50('*'),25X,50('*')
@@ -733,7 +732,7 @@ C           attenuation coefficients
             ENDDO
             GOTO 100 ! Back to input loop
 
-C         Treat OP,RAND (randomise matrix elements)
+C        Treat OP,RAND (randomise matrix elements)
          ELSEIF ( op2.EQ.'RAND' ) THEN
             READ (JZB,*) SE ! Seed for random number generator
             CALL MIXUP
@@ -890,6 +889,7 @@ C           Treat OP,TITL (title)
                GOTO 100 ! End of OP,TITL
 
             ELSE
+
 C              Treat OP,GOSI
                IF ( op2.EQ.'GOSI' ) GOTO 200
 
@@ -903,7 +903,7 @@ C              Treat OP,EXIT
 C              Treat OP,MINI
                ELSEIF ( op2.EQ.'MINI' ) THEN
                   READ (JZB,*) imode , nptl , chiok , conu , xtest , 
-     &                         LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
+     &                 LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
                   op2 = opcja
                   IMIN = IMIN + 1
                   IF ( IMIN.NE.1 ) GOTO 1400
@@ -996,7 +996,7 @@ C              Treat OP,INTG
                      DO mpin = 1 , lpin
                         IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
                            READ (JZB,*) ne , ntt , emn , emx , wth , 
-     &                                  wph , wthh
+     &                          wph , wthh
                            mfla = 1
                            CALL COORD(wth,wph,wthh,ntt,0,pfi,wpi,tth,lx,
      &                                tmn,tmx)
@@ -1030,7 +1030,7 @@ C              Treat OP,INTG
                                  IF ( iecd(lx).NE.1 ) THEN
                                     IF ( kloop.EQ.1 ) THEN
                                        READ (JZB,*) nfi
-                                       READ (JZB,*)
+                                       READ (JZB,*) 
      &                                    (fiex1(ktt,jfi,1),fiex1(ktt,
      &                                    jfi,2),jfi=1,nfi)
                                        IF ( tth.LT.0. ) THEN
@@ -1089,7 +1089,7 @@ C              Treat OP,INTG
                                     fm = (fi0+fi1)/2.
                                     figl = AGELI(IEXP,ijan,2)
                                     CALL ANGULA(YGN,idr,1,fi0,fi1,tetrc,
-     &                                 gth,figl,ijan,op2)
+     &                                gth,figl,ijan,op2)
                                     IF ( IFMO.NE.0 ) THEN
                                        id = ITMA(IEXP,ijan)
                                        d = ODL(id)
@@ -1726,8 +1726,8 @@ C     Treat suboption EXPT
          G(6) = 6.E-06         ! FIEL
          G(7) = .6             ! POWER
          DO k = 1 , NEXPT ! Zn, An, E_p, THETA_lab, M_c, M_A, IAX, phi1, phi2, ikin, ln
-            READ (JZB,*) IZ1(k) , XA1(k) , EP(k) , TLBDG(k) , EMMA(k) , 
-     &                   MAGA(k) , IAXS(k) , fi0 , fi1 , ISKIN(k) , 
+            READ (JZB,*) IZ1(k) , XA1(k) , EP(k) , TLBDG(k) , EMMA(k) ,
+     &                   MAGA(k) , IAXS(k) , fi0 , fi1 , ISKIN(k) ,
      &                   LNORM(k)
             ITTE(k) = 0
             IF ( XA1(k).LT.0. ) ITTE(k) = 1
@@ -1761,6 +1761,7 @@ C     Handle OP,ERRO
             WRITE (11) (CORF(kh1,kh2),kh2=1,LP6)
          ENDDO
       ENDIF
+
       CALL FTBM(3,chiss,idr,1,chilo,bten)
       chis0 = chiss
       WRITE (22,99028) chis0
@@ -1848,6 +1849,7 @@ C     Handle OP,ERRO
       WRITE (22,99032)
 99032 FORMAT (40X,'ESTIMATED ERRORS',//5X,'INDEX',5X,'NI',5X,'NF',5X,
      &        'B(E,ML)(OR QUADRUPOLE MOMENT)',' AND ERRORS'//)
+
       DO kh2 = 1 , MEMAX
          IF ( IVAR(kh2).NE.0 .AND. IVAR(kh2).LE.999 ) THEN
             ispa = LEAD(2,kh2)
@@ -1875,6 +1877,7 @@ C     Handle OP,ERRO
          ENDIF
       ENDDO
       GOTO 2000
+
  700  irea = 0
       IF ( ms.LT.0 ) irea = 1
       IF ( ms.EQ.0 ) mend = MEMAX
@@ -1940,7 +1943,7 @@ C     Handle OP,ERRO
       ENDIF
       GOTO 600
 
-  900 jfre = 0
+ 900  jfre = 0
       irfix = 0
       IF ( op2.EQ.'RE,F' ) irfix = 1
  1000 DO jrls = 1 , MEMAX
@@ -2013,7 +2016,7 @@ C     Handle OP,ERRO
      &                       1E14.6)
                   ENDDO
                   IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
-     &                 WRITE (22,99643) pr
+     &               WRITE (22,99643) pr
 99643             FORMAT (1X/5X,'SUM OF PROBABILITIES=',1E14.6)
                ENDDO
                CALL TENS(bten)
@@ -2065,7 +2068,7 @@ C     Handle OP,ERRO
                      figl = AGELI(IEXP,jgl,2)
                      fm = (fi0+fi1)/2.
                      CALL ANGULA(YGN,idr,1,fi0,fi1,ttttt,gth,figl,jgl,
-     &                           op2)
+     &                 op2)
                      IF ( IFMO.NE.0 ) THEN
                         id = ITMA(IEXP,jgl)
                         d = ODL(id)
@@ -2079,7 +2082,7 @@ C     Handle OP,ERRO
                         sf = d*d/rl/rl
                         fic = ATAN2(ry,rx)
                         CALL ANGULA(YGP,idr,1,fi0,fi1,ttttt,thc,fic,jgl,
-     &                              op2)
+     &                    op2)
                         DO ixl = 1 , idr
                            ixm = KSEQ(ixl,3)
                            tfac = TAU(ixm)
@@ -2206,7 +2209,7 @@ C     Handle OP,ERRO
                         ile1 = ILE(jgl1)
                         DO itp = 1 , nval
                            READ (3,*) ns1 , ns2 , fiex1(1,1,1) , 
-     &                                fiex1(1,1,2)
+     &                                     fiex1(1,1,2)
                            ltrn = IY(ile1+itp-1,jgl1)
                            IF ( ltrn.LT.1000 ) THEN
                               ns1 = KSEQ(ltrn,3)
@@ -2673,7 +2676,7 @@ C     Write normalization coefficients
 
 C     Handle OP,EXIT
 C---- gosia2 changes start
-  430 IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
+ 430  IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
       IF ( mret.EQ.1 ) GOTO 2100
       IF ( IPRM(18).NE.0 ) CALL PTICC(idr)
 C---- gosia2 changes end
@@ -2707,17 +2710,17 @@ C---- gosia2 changes end
 99012             FORMAT (7X,1I2,7X,1E10.4)
                   GOTO 124
  122              WRITE (22,99013) iva , TAU(iva) , TIMEL(1,iva1) , 
-     &                             TIMEL(2,iva1)
+     &                   TIMEL(2,iva1)
 99013             FORMAT (7X,1I2,7X,1E10.4,5X,1E10.4,4X,1E10.4)
  124              IF ( iva.EQ.NMAX ) THEN
                      IF ( NAMX.GE.1 ) THEN
                         WRITE (22,99014)
 99014                   FORMAT (5x,//,
-     &                     'CALCULATED AND EXPERIMENTAL MATRIX ELEMENTS'
-     &                     ,//)
+     &         'CALCULATED AND EXPERIMENTAL MATRIX ELEMENTS'
+     &         ,//)
                         WRITE (22,99015)
 99015                   FORMAT (5x,'NI ','NF ',' EXP. ME   ',
-     &                          'CURRENT ME','   SIGMA')
+     &                     'CURRENT ME','   SIGMA')
                         DO kq = 1 , NAMX
                            ni = IAMY(kq,1)
                            nf = IAMY(kq,2)
@@ -2726,9 +2729,9 @@ C---- gosia2 changes end
                            esd = EAMX(kq,1)
                            dsd = EAMX(kq,2)
                            WRITE (22,99016) ni , nf , esd , ess , 
-     &                            (ess-esd)/dsd
+     &                        (ess-esd)/dsd
 99016                      FORMAT (5x,1I2,1x,1I2,1x,1F9.4,1x,1F9.4,1x,
-     &                             1F9.4)
+     &                              1F9.4)
                         ENDDO
                      ENDIF
                   ENDIF
@@ -2752,4 +2755,5 @@ C---- gosia2 changes end
 99054 FORMAT (5X,'XI',13X,'Q1',22X,'Q2'///13X,'SLOPE',2X,'INTERCEPT',7X,
      &        'SLOPE',5X,'INTERCEPT'//)
 99055 FORMAT (2X,1F6.4,3X,1E8.2,2X,1E8.2,6X,1E8.2,2X,1E8.2)
+
       END
