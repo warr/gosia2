@@ -289,7 +289,7 @@ C      ZV     - energy meshpoints
      &          jde , jdy
       INTEGER*4 je , JENTR , jex , jexp , jfi , jfre , jgd , jgl , 
      &          jgl1 , jgr , jgs , jj , jj1 , jjjj , jjlx , jjx , jk , 
-     &          jkloo , jkmy
+     &          jkloo
       INTEGER*4 jktt , jl , jmm , jmpin , jp , jphd , jpin , jrls , js , 
      &          JSKIP , jt , jtp , jyi , jyi1 , jyi2 , jyv , jz , JZB , 
      &          k , kb
@@ -2489,10 +2489,10 @@ C     Handle OP,ERRO
          ENDDO
 C---- gosia2 changes start
 C        Added for gosia2
-         jkmy = 12
-         IF ( IBPS.EQ.1 ) jkmy = 32
+         irix = 12
+         IF ( IBPS.EQ.1 ) irix = 32
          DO kuku = 1 , MEMAX
-            WRITE (jkmy,*) ELM(kuku)
+            WRITE (irix,*) ELM(kuku)
          ENDDO
          DO jj = 1 , 2
             DO jj1 = 1 , LP1 ! LP1 = 50
