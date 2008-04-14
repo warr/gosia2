@@ -72,8 +72,8 @@ C      I57    - switch which is either 5 or 7.
  20         CALL NEWLV(nhold,ld,lam)
             IF ( ld.EQ.0 ) THEN
  30            nhold = nhold + 1
-               IF ( NSTART(nhold).EQ.0 ) GOTO 30
-               GOTO 20
+               IF ( NSTART(nhold).NE.0 ) GOTO 20
+               GOTO 30
             ELSE
                ir = NSTART(nhold) - 1
  40            ir = ir + 1
