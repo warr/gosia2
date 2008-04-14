@@ -1,3 +1,36 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE NEWLV
+C
+C Called by: AMPDER, STING
+C Calls:     EXPON, LEADF, MEM
+C
+C Purpose: calculate and store the exponential:
+C       exp(i \xi_{kn} (\epsilon \sinh(\omega) + \omega))
+C
+C Uses global variables:
+C      EXPO   - adiabatic exponential
+C      IFAC   -
+C      IFLG   - flag to determine whether to calculate exponential (so we don't calculate twice)
+C      ISG    -
+C      ISSTAR -
+C      ISSTO  -
+C      KDIV   -
+C      LDNUM  - number of matrix elements with each multipolarity populating level
+C      MSTORE -
+C      NDIV   -
+C      NPT    -
+C      NSTART -
+C      NSTOP  -
+C
+C Formal parameters:
+C      N      - level number
+C      Ld     -
+C      La     - multipolarity
+C
+C Note that the exponential is calculated by EXPON. This file does the
+C storage part.
+      
       SUBROUTINE NEWLV(N,Ld,La)
       IMPLICIT NONE
       REAL*8 D2W
@@ -14,6 +47,7 @@
       COMMON /ADBXI / EXPO(500)
       COMMON /FLA   / IFLG
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
+
       Ld = LDNUM(La,N)
       IF ( Ld.EQ.0 ) RETURN
       DO i2 = 1 , Ld
