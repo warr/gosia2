@@ -467,10 +467,12 @@ C     Initialize pointers
       LP13 = LP9 + 1
       LP14 = 4900 ! Maximum number of collision coefficients
 
+      JZB = 5
+
 C---- gosia2 changes start
 C     Read target/projectile switch and first option from standard input
       READ (*,*) IBPS
-      READ (*,99056) op1 , op2
+      READ (*,99001) op1 , op2
 
 C     Open files
       CALL OPENF1
@@ -659,14 +661,18 @@ C---- gosia2 changes end
       intend = 0 ! End of initialization
 
 C     Start reading input file.
- 200  READ (JZB,99056) op1 , op2
+ 100  READ (JZB,99001) op1 , op2
+99001 FORMAT (1A3,1A4)
+
       IF ( op1.EQ.'OP, ' ) THEN
          IF ( op2.EQ.'GOSI' ) oph = op2
          IF ( op2.EQ.'GOSI' ) opcja = op2
+
+C        Treat OP,FILE (attach files to fortran units)
          IF ( op2.EQ.'FILE' ) CALL OPENF
-         IF ( op2.EQ.'FILE' ) GOTO 200
-         IF ( jphd.EQ.1 ) WRITE (22,99001)
-99001    FORMAT ('1'/1X,125('*')/1X,125('*')/1X,50('*'),25X,50('*')/1X,
+         IF ( op2.EQ.'FILE' ) GOTO 200 ! Back to input loop
+         IF ( jphd.EQ.1 ) WRITE (22,99101)
+99101    FORMAT ('1'/1X,125('*')/1X,125('*')/1X,50('*'),25X,50('*')/1X,
      &           50('*'),10X,'GOSIA2',10X,50('*')/1X,50('*'),25X,50('*')
      &           /1X,125('*')/1X,125('*')////)
          IF ( jphd.EQ.1 ) WRITE (22,99002)
@@ -716,18 +722,18 @@ C     Start reading input file.
                   ENDDO
                ENDDO
             ENDDO
-            GOTO 200
+            GOTO 100
          ELSEIF ( op2.EQ.'RAND' ) THEN
             READ (JZB,*) SE
             CALL MIXUP
             WRITE (22,99006)
 99006       FORMAT (1X///5X,'MATRIX ELEMENTS RANDOMIZED...'///)
             CALL PRELM(2)
-            GOTO 200
+            GOTO 100
          ELSEIF ( op2.EQ.'TROU' ) THEN
             ITS = 1
             READ (JZB,*) kmat , rlr
-            GOTO 200
+            GOTO 100
          ELSEIF ( op2.EQ.'REST' ) THEN
             irix = 12
             IF ( IBPS.EQ.1 ) irix = 32
@@ -772,7 +778,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                ENDIF
             ENDDO
             CALL PRELM(4)
-            GOTO 200
+            GOTO 100
          ELSE
             IF ( op2.EQ.'RE,A' ) GOTO 1000
             IF ( op2.EQ.'RE,F' ) GOTO 1000
@@ -850,7 +856,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
 99008          FORMAT (20A4)
                WRITE (22,99009) (title(k),k=1,20)
 99009          FORMAT (10X,20A4/10X,100('-'))
-               GOTO 200
+               GOTO 100
             ELSE
                IF ( op2.EQ.'GOSI' ) GOTO 300
                IF ( op2.EQ.'COUL' ) GOTO 300
@@ -925,10 +931,10 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                         WRITE (irix,*) ELM(kb)
                      ENDIF
                   ENDDO
-                  GOTO 200
+                  GOTO 100
                ELSEIF ( op2.EQ.'YIEL' ) THEN
                   CALL ADHOC(oph,idr,nfd,ntap,iyr)
-                  GOTO 200
+                  GOTO 100
                ELSEIF ( op2.EQ.'INTG' ) THEN
                   REWIND 14
                   lfagg = 1
@@ -1347,7 +1353,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                         ENDDO
                      ENDDO
                   ENDIF
-                  GOTO 200
+                  GOTO 100
                ELSEIF ( op2.EQ.'CORR' ) THEN
                   CALL READY(idr,ntap,0)
                   REWIND 3
@@ -1396,7 +1402,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                      ENDDO
                      DO l = 1 , LP1
                         READ (JZB,*) mexl
-                        IF ( mexl.EQ.0 ) GOTO 200
+                        IF ( mexl.EQ.0 ) GOTO 100
                         IRAWEX(mexl) = 1
                         n = NANG(mexl)
                         DO j = 1 , n
@@ -1416,7 +1422,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                            ENDDO
                         ENDIF
                      ENDDO
-                     GOTO 200
+                     GOTO 100
                   ELSEIF ( op2.EQ.'MAP ' ) THEN
                      GOTO 1300
                   ENDIF
@@ -1429,7 +1435,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
       GOTO 2000
  300  READ (JZB,99116) op1
 99116 FORMAT (1A4)
-      IF ( op1.EQ.'    ' ) GOTO 200
+      IF ( op1.EQ.'    ' ) GOTO 100
       IF ( op1.EQ.'LEVE' ) THEN
          NMAX = 0
          IF ( ABS(IPRM(1)).EQ.1 ) WRITE (22,99017)
@@ -1872,7 +1878,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
       DO jrls = 1 , MEMAX
          ivarh(jrls) = IVAR(jrls)
       ENDDO
-      GOTO 200
+      GOTO 100
 
  1300 CALL CMLAB(0,dsig,ttttt)
       IF ( ERR ) GOTO 2000
@@ -2154,7 +2160,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                   REWIND ntap
                ENDIF
             ENDIF
-            GOTO 200
+            GOTO 100
          ENDIF ! if (op2 .NE. 'GOSI') if statement
       ENDIF ! if ( iobl.LT.1 ) if statement
 
@@ -2471,7 +2477,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
          ENDDO ! Loop on jex
       ENDIF ! IPRM(12).ne.0 .or. op2.eq.'MAP '
 
-      IF ( op2.NE.'GOSI' .AND. op2.NE.'ERRO' ) GOTO 200
+      IF ( op2.NE.'GOSI' .AND. op2.NE.'ERRO' ) GOTO 100
       IF ( op2.EQ.'ERRO' ) GOTO 500
 
  1400 mret = ABS(mret) ! Added for gosia2
@@ -2660,5 +2666,4 @@ C     Decide if we have to loop again for beam/projectile
 99054 FORMAT (5X,'XI',13X,'Q1',22X,'Q2'///13X,'SLOPE',2X,'INTERCEPT',7X,
      &        'SLOPE',5X,'INTERCEPT'//)
 99055 FORMAT (2X,1F6.4,3X,1E8.2,2X,1E8.2,6X,1E8.2,2X,1E8.2)
-99056 FORMAT (1A3,1A4)
       END
