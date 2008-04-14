@@ -1739,9 +1739,9 @@ C     Treat suboption EXPT
                FIEX(k,2) = FIEX(k,2) + 3.14159265
             ENDIF
          ENDDO
-      ELSE
 
 C     Else we don't recognize the suboption
+      ELSE
          WRITE (22,99027) op1
 99027    FORMAT (5X,'UNRECOGNIZED SUBOPTION',1X,1A4)
          GOTO 2000
