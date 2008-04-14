@@ -1,3 +1,56 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE LOAD
+C
+C Called by: FTBM, GOSIA
+C Calls:     LSLOOP
+C
+C Purpose: calculates various parameters, xi, psi which are stored in
+C variables XI (common CXI) and PSI (common PCOM).
+C
+C Uses global variables:
+C      CAT    - substates of levels (n_level, J, m)
+C      DIPOL  -
+C      EMMA   - Controls number of magnetic substates in full coulex calc.
+C      EN     - energy of level
+C      EP     - bombarding energy
+C      ERR    -
+C      IFAC   -
+C      IPATH  -
+C      ISHA   -
+C      ISMAX  -
+C      IZ     - Z of investigated nucleus
+C      IZ1    - Z of not-investated nucleus
+C      LAMDA  - list of multipolarities to calculate
+C      LAMMAX - number of multipolarities to calculate
+C      LDNUM  - number of matrix elements with each multipolarity populating level
+C      LEAD   - pair of levels involved in each matrix element
+C      LMAX   -
+C      LMAXE  - maximum multipolarity needed for calculation
+C      LP7    - maximum number of zeta coefficients (45100)
+C      LP10   - 600
+C      LZETA  - index into ZETA array for zeta for a given multipolarity
+C      MAGA   - number of magnetic substates in approximate calculation
+C      MAGEXC -
+C      MEMAX  - number of matrix elements
+C      NSTART -
+C      NSTOP  -
+C      PSI    - psi coefficients
+C      QAPR   -
+C      SPIN   - spin of level
+C      VINF   - speed of projectile at infinity
+C      XA     - A of investigated nucleus
+C      XA1    - A of not-investated nucleus
+C      XI     - xi coupling constants
+C      ZPOL   -
+C
+C Formal parameters:
+C      Iexp   - Number of experiment
+C      Ient   - Flag : 1, 2, 3 (read only)
+C      Icg    - Flag : 1, 2 (read only)
+C      Polm   - (read only)
+C      Joj    - index of substate (write only)
+ 
       SUBROUTINE LOAD(Iexp,Ient,Icg,Polm,Joj)
       IMPLICIT NONE
       REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ACCA , ACCUR , ah , CAT , 
@@ -39,6 +92,7 @@
       COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)
       DIMENSION etan(75) , cpsi(8)
+      
       LMAX = INT(SPIN(1)+1.1)
       IF ( Ient.EQ.1 ) THEN
          ISHA = 0
@@ -57,6 +111,10 @@
             a1 = a2
             a2 = ah
          ENDIF
+
+C        Calculate xi and store it in XI in common CXI
+C        The value 6.349770 is 197.33/1.44*sqrt(2/931.49).
+C        i.e. hbar c / e^2 * sqrt(2 / amu).
          eta = z1*z2*SQRT(a1/EP(Iexp))/6.349770
          DO m = 1 , NMAX
             dep = (1.0+a1/a2)*EN(m)
@@ -69,6 +127,8 @@
             i2 = LEAD(2,n)
             XI(n) = etan(i1) - etan(i2)
          ENDDO
+
+C        Calculate C_\lambda \over (s Z_1 Z_2)^\lambda 
          aazz = 1./(1.+a1/a2)/z1/z2
          cpsi(1) = 5.169286*aazz
          IF ( LMAXE.NE.1 ) THEN
@@ -96,6 +156,8 @@
             cpsi(7) = aazz*cpsi(1)
             IF ( LAMMAX.NE.8 ) cpsi(8) = aazz*cpsi(2)
          ENDIF
+
+C        Calculate psi and store in PSI in common PCOM
          zsqa = z1*SQRT(a1)
          i3 = 1
          ppp = 1. + a1/a2
@@ -121,10 +183,13 @@
          ENDDO
          IF ( Ient.EQ.1 ) RETURN
       ENDIF
+
+C     Initialise NSTART and NSTOP arrays
       DO n = 1 , NMAX
          NSTART(n) = 0
          NSTOP(n) = 0
       ENDDO
+
       is = 1
       NSTART(1) = 1
       DO n = 1 , NMAX
@@ -139,9 +204,9 @@
             IF ( wrtm.GT.SPIN(n) ) wrtm = SPIN(n)
             mstop = INT(wrtm-wrt+1.01)
             DO i = 1 , mstop
-               CAT(is,1) = n
-               CAT(is,2) = SPIN(n)
-               CAT(is,3) = wrt + DBLE(i-1)
+               CAT(is,1) = n               ! Number of level
+               CAT(is,2) = SPIN(n)         ! Spin of level
+               CAT(is,3) = wrt + DBLE(i-1) ! m quantum number of substate
                IF ( n.EQ.1 .AND. ABS(CAT(is,3)-Polm).LT.1.E-6 ) Joj = is
                is = is + 1
             ENDDO
@@ -149,8 +214,9 @@
          NSTART(n+1) = is
          NSTOP(n) = is - 1
       ENDDO
+
       ISMAX = is - 1
-      IF ( ISMAX.LE.LP10 ) THEN
+      IF ( ISMAX.LE.LP10 ) THEN ! LP10 is max. number of substates (600)
          IF ( Ient.EQ.3 ) RETURN
          nz = 0
          DO jj = 1 , 7
@@ -159,9 +225,12 @@
                QAPR(jjj,2,jj) = 0.
             ENDDO
          ENDDO
+
+C        Initialise pointers to ZETA array
          DO i = 1 , 8
             LZETA(i) = 0
          ENDDO
+
          DO i1 = 1 , LAMMAX
             lam = LAMDA(i1)
             IF ( Icg.NE.2 .OR. lam.LE.6 ) THEN
@@ -173,7 +242,7 @@
                ir = 0
  10            ir = ir + 1
                IF ( ir.LE.ISMAX ) THEN
-                  n = CAT(ir,1)
+                  n = CAT(ir,1) ! number of level for substate ir
                   IF ( Icg.NE.1 ) THEN
                      IF ( MAGA(Iexp).EQ.0 .AND. ir.NE.IPATH(n) ) GOTO 10
                      IF ( ABS(ir-IPATH(n)).GT.1 ) GOTO 10
@@ -187,7 +256,8 @@
                   GOTO 10
                ENDIF
             ENDIF
-         ENDDO
+         ENDDO ! Loop over multipolarity
+          
          IF ( nz.GT.LP7 ) THEN
             WRITE (22,99001) LP7
 99001       FORMAT (1x,
@@ -200,5 +270,6 @@
          WRITE (22,99002) LP10
 99002    FORMAT (' ERROR-ISMAX EXCEEDS MAGMAX',5X,'(MAGMAX =',I4,')')
       ENDIF
+
       ERR = .TRUE.
       END
