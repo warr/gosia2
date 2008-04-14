@@ -872,8 +872,8 @@ C---- gosia2 changes end
                ENDIF
                IF ( IMIN.EQ.0 ) CALL CMLAB(0,dsig,ttttt)
                IF ( ERR ) GOTO 2000
-               IF ( IMIN.EQ.0 ) GOTO 400
-               GOTO 1300 ! End of OP,ERRO
+               IF ( IMIN.EQ.0 ) GOTO 1300
+               GOTO 400 ! End of OP,ERRO
 
 C           Treat OP,RE,C (release C)
             ELSEIF ( op2.EQ.'RE,C' ) THEN
@@ -1749,7 +1749,7 @@ C     Else we don't recognize the suboption
       GOTO 200 ! Get next suboption
 
 C     Handle OP,ERRO      
- 1300  IF ( ICS.EQ.1 ) THEN
+ 400  IF ( ICS.EQ.1 ) THEN
          REWIND 11
          DO kh1 = 1 , LP4
             READ (11) (CORF(kh1,kh2),kh2=1,LP6)
@@ -2243,7 +2243,7 @@ C     Handle OP,ERRO
          ENDIF ! if (op2 .NE. 'GOSI') if statement
       ENDIF ! if ( iobl.LT.1 ) if statement
 
-  400 IF ( iobl.GE.1 ) THEN
+ 1300 IF ( iobl.GE.1 ) THEN
          ient = 1
          icg = 2
          nmaxh = NMAX
@@ -2559,7 +2559,7 @@ C     Handle map
       ENDIF ! IPRM(12).ne.0 .or. op2.eq.'MAP '
 
       IF ( op2.NE.'GOSI' .AND. op2.NE.'ERRO' ) GOTO 100
-      IF ( op2.EQ.'ERRO' ) GOTO 1300
+      IF ( op2.EQ.'ERRO' ) GOTO 400
 
  1400 mret = ABS(mret) ! Added for gosia2
       DO kh1 = 1 , MEMAX
