@@ -661,7 +661,7 @@ C     Initialize pointers
          IF ( op2.EQ.'GDET' ) THEN
             nl = 7
             READ (JZB,*) nfdd
-            nfd = IABS(nfdd)
+            nfd = ABS(nfdd)
             IF ( nfdd.LE.0 ) THEN
                REWIND 8
                DO i = 1 , nl
@@ -856,7 +856,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                   ENDDO
                   READ (JZB,*) nbands
                   IF ( nbands.LE.0 ) ibaf = 0
-                  nbands = IABS(nbands)
+                  nbands = ABS(nbands)
                   DO nl = 1 , 8
                      DO jb = 1 , nbands
                         DO jl = 1 , nbands
@@ -2458,7 +2458,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
       IF ( op2.NE.'GOSI' .AND. op2.NE.'ERRO' ) GOTO 200
       IF ( op2.EQ.'ERRO' ) GOTO 500
 
- 1400 mret = IABS(mret) ! Added for gosia2
+ 1400 mret = ABS(mret) ! Added for gosia2
       DO kh1 = 1 , MEMAX
          HLM(kh1) = ELM(kh1)
       ENDDO
