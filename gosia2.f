@@ -2494,6 +2494,7 @@ C        Added for gosia2
          DO kuku = 1 , MEMAX
             WRITE (irix,*) ELM(kuku)
          ENDDO
+C---- gosia2 changes end
          DO jj = 1 , 2
             DO jj1 = 1 , LP1 ! LP1 = 50
                IDIVE(jj1,jj) = 1
