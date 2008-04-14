@@ -491,8 +491,6 @@ C     Required chi square achieved
          IF ( Ips.EQ.0 ) WRITE (22,99007) icount , crit
 99007    FORMAT (5X,'AT STEP',1X,1I5,'CONVERGENCE ACHIEVED(',1E14.6,')')
          IF ( Ips.EQ.0 ) WRITE (22,99010) MIN(chil,Chisq)
-         INTR = 0
-         RETURN
       ELSE ! Fix most significant chi squared derivatives
          DO kkk = 1 , NLOCK ! NLOCK is number of derivatives to fix
             a = 0.
@@ -523,9 +521,9 @@ C     Required chi square achieved
          WRITE (22,99009)
 99009    FORMAT (1X/////5X,'*****',2X,'ALL MATRIX ELEMENTS LOCKED!',2X,
      &           '*****'/////)
-         INTR = 0
-         RETURN
       ENDIF
+      INTR = 0
+      RETURN
        
 99010 FORMAT (5X,'*** CHISQ=',1E14.6,1X,'***')
 99011 FORMAT (1X/5X,'MATRIX ELEMENT',1X,1I3,1X,'LOCKED!')
