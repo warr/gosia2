@@ -467,12 +467,17 @@ C     Initialize pointers
       LP13 = LP9 + 1
       LP14 = 4900 ! Maximum number of collision coefficients
 
-      READ * , IBPS
-      READ 99056 , op1 , op2
+C     Read target/projectile switch and first option from standard input
+      READ (*,*) IBPS
+      READ (*,99056) op1 , op2
+
+C     Open files
       CALL OPENF1
+      nawr = 0
+
+C     Use input unit 25 for target and 26 for projectile
       IBPS = IBPS - 1
       JZB = 25
-      nawr = 0
       IF ( IBPS.EQ.1 ) JZB = 26
       DO i = 1 , 75
          DO j = 1 , 32
