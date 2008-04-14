@@ -63,18 +63,16 @@ C Here we parse the input of the OP,YIEL command and store the values.
      &       EP , ODL , Q
       REAL*8 SPIN , TAU , TIMEL , TLBDG , UPL , VINF , wamx , wbra , 
      &       wdl , wlf , XA , XA1 , YEXP , YGN , YGP , YNRM , ZPOL
-      INTEGER*4 IAMX , IAMY , iax , IBPS , IBRC , Idr , IDRN , iexp1 , 
-     &          IFMO , ILE , ilft , IMIX , iosr , ipri , IPRM , ISO , 
-     &          isrt1 , ITMA , ITS , iuf
-      INTEGER*4 IVAR , IY , Iyr , IZ , IZ1 , jic , jicc , juf , JZB , 
-     &          KSEQ , lb , li , licc , LIFCT , llia , LMAXE , lxt , 
-     &          MAGEXC , MEM , MEMAX
-      INTEGER*4 MEMX6 , n1 , n2 , NAMX , NANG , NBRA , ndas , NDL , 
-     &          NDST , ndtp , NEXPT , Nfd , NICC , nistr , NLIFT , ns1 , 
-     &          ns2 , ns3 , ns4 , Ntap
-      INTEGER*4 nvare , NYLDE
+      INTEGER*4 IAMX , IAMY , iax , IBPS , IBRC , Idr , IDRN , iexp1 ,
+     &          IFMO , ILE , ilft , IMIX , iosr , ipri , IPRM , ISO ,
+     &          isrt1 , ITMA , ITS , iuf , IUNIT3 , IVAR
+      INTEGER*4 IY , Iyr , IZ , IZ1 , jic , jicc , juf , JZB , KSEQ , 
+     &          lb , li , licc , LIFCT , llia , LMAXE , lxt , MAGEXC , 
+     &          MEM , MEMAX , MEMX6 , n1
+      INTEGER*4 n2 , NAMX , NANG , NBRA , ndas , NDL , NDST , ndtp , 
+     &          NEXPT , Nfd , NICC , nistr , NLIFT , ns1 , ns2 , ns3 , 
+     &          ns4 , Ntap , nvare , NYLDE
       CHARACTER*4 Oph
-      COMMON /SWITCH/ JZB , IBPS
       COMMON /CCCDS / NDST(50)
       COMMON /DIMX  / DIX(4) , ODL(200)
       COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
@@ -98,6 +96,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
       COMMON /PRT   / IPRM(20)
       COMMON /TRB   / ITS
+      COMMON /SWITCH/ JZB , IBPS , IUNIT3
       
 C     Read OP,YIEL parameters
       iosr = 0
@@ -123,6 +122,7 @@ C     coefficients Q
             READ (9,*) (Q(licc,jicc,isrt1),licc=1,3)
          ENDDO
       ENDDO
+
       DO jic = 1 , NEXPT
          juf = NANG(jic)
          IF ( juf.LT.0 ) THEN
@@ -143,6 +143,7 @@ C     coefficients Q
 C     Call SEQ to calculate "chronological" order of levels, so we can
 C     account for feeding
       CALL SEQ(Idr)
+      
       DO jic = 1 , NEXPT
          juf = NANG(jic)
          juf = ABS(juf)

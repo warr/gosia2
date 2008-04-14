@@ -111,8 +111,8 @@ C**********************************************************************
      &          iprc , ipri , IPRM , IPS1 , IRAWEX , irea , irep , 
      &          irfix , irix , ISEX , isip , iske
       INTEGER*4 iskf , ISKIN , isko , iskok , ISMAX , ISO , isoh , 
-     &          ispa , ispb , ITMA , itno , itp , ITS , ITTE , iuy , 
-     &          iva , iva1 , IVAR , ivarh , ivari
+     &          ispa , ispb , ITMA , itno , itp , ITS , ITTE , IUNIT3 ,
+     &          iuy , iva , iva1 , IVAR , ivarh , ivari
       INTEGER*4 ivrh , IWF , ixj , ixl , ixm , IY , iyr , IZ , IZ1 , 
      &          izcap , j , ja , jan , jan1 , jb , jb1 , jb2 , jd , 
      &          jde , jdy
@@ -160,7 +160,7 @@ C**********************************************************************
       COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,500) , 
      &                IRAWEX(50)
       COMMON /CCCDS / NDST(50)
-      COMMON /SWITCH/ JZB , IBPS
+      COMMON /SWITCH/ JZB , IBPS , IUNIT3
       COMMON /INHI  / INHB
       COMMON /IDENT / BEQ
       COMMON /EFCAL / ABC(8,10) , AKAVKA(8,200) , THICK(200,7)
