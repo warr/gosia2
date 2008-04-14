@@ -2658,20 +2658,23 @@ C---- gosia2 changes end
 
 C---- gosia2 addition start
 C     Decide if we have to loop again for beam/projectile
- 2100 IF ( mrepf.NE.1 ) THEN
-         IF ( mret.EQ.1 ) JZB = 25
-         IF ( mret.EQ.1 ) GOTO 2200
-C     Write normalization coefficients
-         DO mmmm = 1 , 32
-            DO kkkk = 1 , 50
-               WRITE (13,*) CNOR1(mmmm,kkkk)
-            ENDDO
-         ENDDO
-      ELSE
+ 2100 IF ( mrepf.EQ.1 ) THEN
          mrepf = 2
          JZB = 26
          GOTO 2200
       ENDIF
+
+      IF ( mret.EQ.1 ) THEN
+         JZB = 25
+         GOTO 2200
+      ENDIF
+
+C     Write normalization coefficients
+      DO mmmm = 1 , 32
+        DO kkkk = 1 , 50
+          WRITE (13,*) CNOR1(mmmm,kkkk)
+        ENDDO
+      ENDDO
       STOP
 
 C     Handle OP,EXIT
