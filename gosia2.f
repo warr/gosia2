@@ -1332,7 +1332,7 @@ C              Treat OP,INTG
      &                               /GRAD(IDRN)
                            ENDDO
                         ENDDO
-                        IF ( iecd(lx).EQ.1 ) THEN
+                        IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
                            IF ( jpin(lx).EQ.0 ) THEN
                               CALL COORD(wth,wph,wthh,1,2,pfi,wpi,
      &                           TLBDG(lx),lx,txx,txx)
@@ -1398,13 +1398,15 @@ C              Treat OP,INTG
                         ENDDO
                      ENDDO
                   ENDIF
-                  GOTO 100
+                  GOTO 100 ! End of OP,INTG
+
+C              Treat OP,CORR
                ELSEIF ( op2.EQ.'CORR' ) THEN
                   CALL READY(idr,ntap,0)
                   REWIND 3
                   REWIND 15
                   REWIND 4
-                  GOTO 1300
+                  GOTO 1300 ! End of OP,CORR
                ELSE
 
 C                 Treat OP,POIN
@@ -1467,7 +1469,7 @@ C                    Read input from standard input
                            jj = ITMA(mexl,j)
                            READ (JZB,*) (AKAVKA(k,jj),k=1,8) ! efficiency curve parameters
                         ENDDO
-                        READ (JZB,*) kclust
+                        READ (JZB,*) kclust ! number of clusters
                         IF ( kclust.NE.0 ) THEN
                            DO j = 1 , kclust
                               READ (JZB,*) numcl ! Number of detectors for this cluster
@@ -1508,7 +1510,7 @@ C     Treat suboption LEVE (levels)
      &           'ENERGY(MEV)')
          ndima = NDIM + 1
          DO k = 1 , ndima
-            READ (JZB,*) ipo1 , ipo2 , po2 , po1
+            READ (JZB,*) ipo1 , ipo2 , po2 , po1 ! level number, parity, spin, energy
             IF ( ipo1.EQ.0 ) GOTO 300
             IF ( ipo1.EQ.1 .AND. ABS(po2).LT.1.E-6 ) ISO = 0
             NMAX = NMAX + 1
@@ -1524,15 +1526,17 @@ C     Treat suboption LEVE (levels)
      &           SPIN(ipo1) , EN(ipo1)
 99025       FORMAT (6X,1I2,11X,1A1,10X,1F4.1,8X,1F10.4)
          ENDDO
+
+C     Treat suboption ME (matrix elements)
       ELSEIF ( op1.EQ.'ME  ' ) THEN
          DO k = 1 , nmemx
             IF ( op2.EQ.'GOSI' ) THEN
-               READ (JZB,*) ipo1 , ipo2 , po1 , bl , bu
+               READ (JZB,*) ipo1 , ipo2 , po1 , bl , bu ! lamda, 0, 0, 0, 0 OR ind1, ind2, me, lo, hi
                iopri = 2
                icg = 2
             ELSE
                iopri = 1
-               READ (JZB,*) ipo1 , ipo2 , po1
+               READ (JZB,*) ipo1 , ipo2 , po1 ! lambda, 0, 0 OR ind1, ind2, me
             ENDIF
             IF ( ipo1.NE.0 ) THEN
                IF ( ipo2.EQ.0 ) THEN
@@ -1555,13 +1559,14 @@ C     Treat suboption LEVE (levels)
                   LEAD(2,indx) = ABS(ipo2)
                   LDNUM(la,ipo1) = LDNUM(la,ipo1) + 1
                   IF ( op2.EQ.'GOSI' ) THEN
-                     IF ( ipo2.LT.0 ) THEN
+                     IF ( ipo2.LT.0 ) THEN ! If negative, bl and bu are indices
+                                           ! to which we fix this element
                         IVAR(indx) = 10000*INT(bl) + INT(bu)
-                     ELSE
+                     ELSE                 ! Otherwise they are limits
                         ELMU(indx) = bu
                         ELML(indx) = bl
                         IF ( ABS(bl-bu).LT.1.E-6 ) THEN
-                           IVAR(indx) = 0
+                           IVAR(indx) = 0 ! Fixed
                         ELSE
                            IVAR(indx) = 2
                            IF ( la.GT.4 ) IVAR(indx) = 1
@@ -1575,7 +1580,7 @@ C     Treat suboption LEVE (levels)
             ENDIF
             DO kk = 1 , indx
                IF ( ABS(ELM(kk)).LE.1.E-6 ) ELM(kk) = 1.E-6
-               IF ( IVAR(kk).GE.10000 ) THEN
+               IF ( IVAR(kk).GE.10000 ) THEN ! Correlated
                   kk1 = IVAR(kk)/10000
                   kk2 = IVAR(kk) - 10000*kk1
                   la1 = la
@@ -1613,6 +1618,8 @@ C     Treat suboption LEVE (levels)
          DO kh = 1 , MEMAX
             ivarh(kh) = IVAR(kh)
          ENDDO
+
+C     Treat suboption CONT (control)
       ELSEIF ( op1.EQ.'CONT' ) THEN
  450     READ (JZB,99026) op1 , fipo1
 99026    FORMAT (1A4,1F7.1)
@@ -1706,23 +1713,25 @@ C     Treat suboption LEVE (levels)
             ENDDO
          ENDIF
          GOTO 450
+
+C     Treat suboption EXPT
       ELSEIF ( op1.EQ.'EXPT' ) THEN
          READ (JZB,*) NEXPT , IZ , XA
-         G(1) = 3.
-         G(2) = .02
-         G(3) = .0345
-         G(4) = 3.5
-         G(5) = DBLE(IZ)/XA
-         G(6) = 6.E-06
-         G(7) = .6
-         DO k = 1 , NEXPT
+         G(1) = 3.             ! AVJI
+         G(2) = .02            ! GAMMA
+         G(3) = .0345          ! XLAMB
+         G(4) = 3.5            ! TIMEC
+         G(5) = DBLE(IZ)/XA    ! GFAC
+         G(6) = 6.E-06         ! FIEL
+         G(7) = .6             ! POWER
+         DO k = 1 , NEXPT ! Zn, An, E_p, THETA_lab, M_c, M_A, IAX, phi1, phi2, ikin, ln
             READ (JZB,*) IZ1(k) , XA1(k) , EP(k) , TLBDG(k) , EMMA(k) , 
      &                   MAGA(k) , IAXS(k) , fi0 , fi1 , ISKIN(k) , 
      &                   LNORM(k)
             ITTE(k) = 0
             IF ( XA1(k).LT.0. ) ITTE(k) = 1
             XA1(k) = ABS(XA1(k))
-            FIEX(k,1) = fi0/57.2957795
+            FIEX(k,1) = fi0/57.2957795 ! Convert to radians
             FIEX(k,2) = fi1/57.2957795
             IF ( TLBDG(k).LT.0. ) THEN
                FIEX(k,1) = FIEX(k,1) + 3.14159265
@@ -1730,11 +1739,15 @@ C     Treat suboption LEVE (levels)
             ENDIF
          ENDDO
       ELSE
+
+C     Else we don't recognize the suboption
          WRITE (22,99027) op1
 99027    FORMAT (5X,'UNRECOGNIZED SUBOPTION',1X,1A4)
          GOTO 2000
       ENDIF
-      GOTO 300
+      GOTO 300 ! Get next suboption
+
+C     Handle OP,ERRO      
  500  IF ( ICS.EQ.1 ) THEN
          REWIND 11
          DO kh1 = 1 , LP4
