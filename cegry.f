@@ -76,18 +76,19 @@ C      Iredv  -
       SUBROUTINE CEGRY(Chisq,Itemp,Chilo,Idr,Nwyr,Icall,Issp,Iredv)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AGELI , AKS , BETAR , CC , ccc , ccd , 
-     &       Chilo , Chisq , CNOR , CNOR1 , CNOR2 , cnr , cocos , CORF , 
-     &       d , decen , DELTA , DEV
-      REAL*8 DIPOL , DIX , dl , DQ , DSIGS , DYEX , effi , EG , EMH , 
-     &       EN , ENDEC , ENZ , EP , EPS , EROOT , fi0 , fi1 , fic , 
-     &       FIEX , figl
-      REAL*8 fm , g , gth , ODL , PART , PARTL , Q , QCEN , rik , rl , 
-     &       rx , ry , rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , 
-     &       SUBCH2
-      REAL*8 sum3 , SUMCL , sumpr , TACOS , TAU , TETACM , tetrc , 
-     &       tfac , thc , TLBDG , TREP , UPL , VACDP , VINF , wf , XA , 
-     &       XA1 , XNOR , YEXP , YGN
-      REAL*8 YGP , YNRM , ZPOL
+     &       Chilo , Chisq , CNOR , cnr , cocos , CORF , d , decen , 
+     &       DELTA , DEV , DIPOL , DIX
+      REAL*8 dl , DQ , DSIGS , DYEX , effi , EG , EMH , EN , ENDEC , 
+     &       ENZ , EP , EPS , EROOT , fi0 , fi1 , fic , FIEX , figl , 
+     &       fm , g
+      REAL*8 gth , ODL , PART , PARTL , Q , QCEN , rik , rl , rx , ry , 
+     &       rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , SUBCH2 , sum3 , 
+     &       SUMCL
+      REAL*8 sumpr , TACOS , TAU , TETACM , tetrc , tfac , thc , TLBDG , 
+     &       TREP , UPL , VACDP , VINF , wf , XA , XA1 , XNOR , YEXP , 
+     &       YGN , YGP , YNRM
+      REAL*8 ZPOL
+      REAL*8 CNOR1 , CNOR2 ! For gosia2
       INTEGER*4 iabc , IAXS , IBYP , Icall , ICLUST , id , idc , Idr , 
      &          IDRN , IEXP , ifdu , IFMO , ifxd , IGRD , ii , ILE , 
      &          ile2 , IMIN , inclus , INM
