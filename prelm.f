@@ -82,22 +82,17 @@ C      Iop    - print flag (controls what is written to output).
                         ELSEIF ( Iop.EQ.4 ) THEN
                            GOTO 2
                         ELSE
-                           WRITE (22,99006) inx , LEAD(1,inx) , 
+                           WRITE (22,99008) inx , LEAD(1,inx) , 
      &                            LEAD(2,inx) , ELM(inx)
-99006                      FORMAT (5X,1I3,5X,1I2,5X,1I2,5X,1F10.5)
                         ENDIF
                         GOTO 5
                      ENDIF
  2                   IF ( IVAR(inx).EQ.0 ) THEN
-                        WRITE (22,99007) inx , LEAD(1,inx) , LEAD(2,inx)
+                        WRITE (22,99006) inx , LEAD(1,inx) , LEAD(2,inx)
      &                         , ELM(inx)
-99007                   FORMAT (5X,1I3,5X,1I2,5X,1I2,5X,1F10.5,5X,
-     &                          'FIXED')
                      ELSEIF ( IVAR(inx).GT.1000 ) THEN
-                        WRITE (22,99008) inx , LEAD(1,inx) , LEAD(2,inx)
+                        WRITE (22,99007) inx , LEAD(1,inx) , LEAD(2,inx)
      &                         , ELM(inx) , (IVAR(inx)-1000)
-99008                   FORMAT (5X,1I3,5X,1I2,5X,1I2,5X,1F10.5,5X,
-     &                          'COUPLED TO',1X,1I3)
                      ELSE
                         IF ( Iop.EQ.2 ) WRITE (22,99009) inx , 
      &                       LEAD(1,inx) , LEAD(2,inx) , ELM(inx) , 
@@ -115,5 +110,8 @@ C      Iop    - print flag (controls what is written to output).
          ENDIF ! If m .ne. 0
       ENDDO ! Loop on j
 
+99006 FORMAT (5X,1I3,5X,1I2,5X,1I2,5X,1F10.5,5X,'FIXED')
+99007 FORMAT (5X,1I3,5X,1I2,5X,1I2,5X,1F10.5,5X,'COUPLED TO',1X,1I3)
+99008 FORMAT (5X,1I3,5X,1I2,5X,1I2,5X,1F10.5)
 99009 FORMAT (5X,1I3,5X,1I2,5X,1I2,3(5X,1F10.5),1A3)
       END
