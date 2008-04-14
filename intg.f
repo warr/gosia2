@@ -1,3 +1,71 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE INTG
+C
+C Called by: FTBM, GOSIA
+C Calls:     AMPDER, DOUBLE, HALF, RESET
+C
+C Purpose: the main integration routine.
+C
+C Uses global variables:
+C      ACC50  - accuracy required for integration
+C      ARM    - reduced matrix elements
+C      CAT    - substates of levels (n_level, J, m)
+C      D2W    - step in omega (= 0.03)
+C      IFLG   - flag to determine whether to calculate exponential (so we don't calculate twice)
+C      INTERV - default accuracy check parameter (see OP,CONT:INT)
+C      IPATH  -
+C      IRA    - limit of omega for integration for each multipolarity
+C      ISG    -
+C      ISMAX  -
+C      ISO    -
+C      KDIV   -
+C      LAMR   -
+C      MAXLA  -
+C      NDIV   -
+C      NMAX   - number of levels
+C      NPT    -
+C      NSTART -
+C      NSW    -
+C
+C Formal parameters:
+C      Ien    - experiment number
+C
+C Note that if it finds that the step size for the integral is too small, it
+C calls DOUBLE to increase it by a factor of two, or if it finds that the
+C step size is too big, it decreases it by a factor of two by calling HALF.
+C
+C We use the the 4th order Adams-Moulton predictor-corrector method for
+C solving an ordinary differential equation. We use an adaptive version, which
+C can change the step size (increase or decrease) in order to get the desired
+C accuracy.
+C
+C The predictor is given as:
+C
+C y(n+1)_p = y(n) + h/24 * {55*f(n) - 59*f(n-1) + 37*f(n-2) - 9*f(n-3)}
+C
+C and the corrector is:
+C
+C y(n+1)_c = y(n) * h/24 * {9*f_p(n+1) + 19*f(n) - 5*f(n-1) + f(n-2)}
+C
+C The error is |E(n+1)| ~ 19/270 * {y_p(n+1) - y_c(n+1)}
+C
+C In this function:
+C                   D2W        = h
+C                   ARM(ir, 1) = f(n-3)
+C                   ARM(ir, 2) = f(n-2)
+C                   ARM(ir, 3) = f(n-1)
+C                   ARM(ir, 4) = f(n)
+C                   ARM(ir, 5) = y(n) initially
+C                   ARM(ir, 5) = y_c(n+1) finally
+C                   ARM(ir, 6) is not used
+C                   ARM(ir, 7) = y_p(n+1)
+C
+C The function RESET is called to advance n by one. i.e. f(n-3) is set to the
+C old value of f(n-2), f(n-2) to the old value of f(n-1) and f(n-1) to the old
+C value of f(n).
+
+ 
       SUBROUTINE INTG(Ien)
       IMPLICIT NONE
       REAL*8 ACC50 , ACCA , ACCUR , CAT , D2W , DIPOL , EN , f , rim , 
@@ -22,8 +90,9 @@
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)
       COMMON /CEXC9 / INTERV(50)
-      intend = INTERV(Ien)
-      D2W = .03
+      
+      intend = INTERV(Ien) ! Default accuracy set by INT option of OP,CONT
+      D2W = .03 ! We use steps of 0.03 in omega
       NSW = 1
       kast = 0
       NDIV = 0
@@ -33,6 +102,7 @@
          LAMR(i) = 0
          IF ( (NPT+NSW).LT.IRA(i) ) LAMR(i) = 1
       ENDDO
+C     Predictor 
       IF ( ISO.EQ.0 ) THEN
          DO n = 1 , NMAX
             ir = NSTART(n) - 1
@@ -40,7 +110,7 @@
             ARM(ir,7) = ARM(ir,5)
      &                  + D2W/24.*(55.0*ARM(ir,4)-59.0*ARM(ir,3)
      &                  +37.0*ARM(ir,2)-9.0*ARM(ir,1))
-            mir = CAT(ir,3)
+            mir = CAT(ir,3) ! m quantum number of substate ir
             ir1 = ir - 2*mir
             ARM(ir1,7) = IFAC(n)*ARM(ir,7)
             IF ( DBLE(mir).LT.-0.1 ) GOTO 120
@@ -66,7 +136,11 @@
  200  CALL RESET(ISO)
       IFLG = 1
       i57 = 7
+
+C     Calculate derivatives of amplitudes
       CALL AMPDER(i57)
+      
+C     Corrector
       IF ( ISO.EQ.0 ) THEN
          DO n = 1 , NMAX
             ir = NSTART(n) - 1
@@ -74,7 +148,7 @@
             ARM(ir,5) = ARM(ir,5)
      &                  + D2W/24.*(9.0*ARM(ir,4)+19.0*ARM(ir,3)
      &                  -5.0*ARM(ir,2)+ARM(ir,1))
-            mir = CAT(ir,3)
+            mir = CAT(ir,3) ! m quantum number of substate ir
             ir1 = ir - 2*mir
             ARM(ir1,5) = IFAC(n)*ARM(ir,5)
             IF ( DBLE(mir).LT.-0.1 ) GOTO 220
@@ -89,6 +163,8 @@
       kast = kast + 1
       IFLG = 0
       i57 = 5
+
+C     Calculate derivatives of amplitudes
       CALL AMPDER(i57)
       IF ( (LAMR(2)+LAMR(3)).NE.0 ) THEN
          IF ( kast.GE.intend ) THEN
@@ -104,10 +180,14 @@
                   f = MAX(f,srt)
                ENDIF
             ENDDO
+
+C           Decide if we have appropriate accuracy (strictly it should be
+C           f = SQRT(f)*19./270. but the difference is not all that large).
+C
             f = SQRT(f)/14.
             IF ( f.GT.ACCUR .OR. f.LT.ACC50 ) THEN
                IF ( f.LT.ACC50 ) THEN
-                  CALL DOUBLE(ISO)
+                  CALL DOUBLE(ISO) ! Double step size
                   D2W = 2.*D2W
                   NSW = 2*NSW
                   intend = (DBLE(intend)+.01)/2.
@@ -120,7 +200,7 @@
                      ENDIF
                   ENDIF
                ELSE
-                  CALL HALF(ISO)
+                  CALL HALF(ISO) ! Halve step size
                   D2W = D2W/2.
                   NSW = (DBLE(NSW)+.01)/2.
                   intend = 2*intend
@@ -130,6 +210,7 @@
                   ENDIF
                ENDIF
             ENDIF
+             
          ENDIF
       ENDIF
       GOTO 100
