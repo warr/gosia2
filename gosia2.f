@@ -897,10 +897,11 @@ C              Treat OP,COUL
                IF ( op2.EQ.'COUL' ) GOTO 200
 
 C              Treat OP,EXIT
-               IF ( op2.EQ.'EXIT' ) GOTO 430 ! End of OP,EXIT
+               IF ( op2.EQ.'EXIT' ) THEN
+                  GOTO 430 ! End of OP,EXIT
 
 C              Treat OP,MINI
-               IF ( op2.EQ.'MINI' ) THEN
+               ELSEIF ( op2.EQ.'MINI' ) THEN
                   READ (JZB,*) imode , nptl , chiok , conu , xtest , 
      &                         LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
                   op2 = opcja
