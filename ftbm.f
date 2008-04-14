@@ -390,6 +390,7 @@ C      Bten   -
             ENDIF ! IF ( Icll.LE.2 .AND. JSKIP(jkl).NE.0 )
          ENDIF ! ELSE of IF ( Ncall.EQ.0 .AND. JSKIP(jkl).NE.0 )
  300  ENDDO ! Loop on experiments
+
       IF ( ITAK2.EQ.-1 .AND. Icll.LT.2 ) ITAK2 = 0
       IF ( Ncall.NE.0 ) THEN
          IF ( Icll.LE.2 ) THEN
