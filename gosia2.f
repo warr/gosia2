@@ -2670,11 +2670,12 @@ C     Decide if we have to loop again for beam/projectile
       ENDIF
 
 C     Write normalization coefficients
-      DO mmmm = 1 , 32
-        DO kkkk = 1 , 50
-          WRITE (13,*) CNOR1(mmmm,kkkk)
-        ENDDO
+      DO mmmm = 1 , LP6 ! LP6 is 32
+         DO kkkk = 1 , LP1 ! LP1 is 50
+            WRITE (13,*) CNOR1(mmmm,kkkk)
+         ENDDO
       ENDDO
+C---- gosia2 addition end
       STOP
 
 C     Handle OP,EXIT
