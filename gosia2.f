@@ -2492,7 +2492,7 @@ C     Handle OP,ERRO
             WRITE (jkmy,*) ELM(kuku)
          ENDDO
          DO jj = 1 , 2
-            DO jj1 = 1 , LP1
+            DO jj1 = 1 , LP1 ! LP1 = 50
                IDIVE(jj1,jj) = 1
             ENDDO
          ENDDO
@@ -2521,7 +2521,9 @@ C     Handle OP,ERRO
             ENDDO
          ENDDO
       ENDIF
-      IF ( IPRM(12).NE.0 .OR. op2.EQ.'MAP ' ) THEN
+
+C     Handle map
+      IF ( IPRM(12).NE.0 .OR. op2.EQ.'MAP ' ) THEN ! changed for gosia2
          IPRM(12) = 0
          DO jex = 1 , NEXPT
             DO lex = 1 , 6
@@ -2566,6 +2568,7 @@ C     Handle OP,ERRO
       DO kh1 = 1 , MEMAX
          IVAR(kh1) = ivarh(kh1)
       ENDDO
+C---- gosia2 changes start
       IF ( nawr.EQ.1 ) THEN
          MCFIX = 0 ! Calculate chisq using CNOR1 not CNOR
          CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
@@ -2620,7 +2623,8 @@ c     *(ccch1+ccch2)
          ENDIF
          IF ( IBPS.EQ.0 .AND. JZB.EQ.25 ) JZB = 26
          IF ( IBPS.NE.0 ) JZB = 25
-         GOTO 2200
+         GOTO 2200 ! Back to beginning
+C---- gosia2 changes end
       ENDIF
 
  1500 WRITE (22,99043)
@@ -2640,9 +2644,12 @@ c     *(ccch1+ccch2)
      &        'ATION')
       GOTO 1900
 
+C     Handle OP,EXIT
+C---- gosia2 changes start
  3000 IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
       IF ( mret.EQ.1 ) GOTO 2300
       IF ( IPRM(18).NE.0 ) CALL PTICC(idr)
+C---- gosia2 changes end
       IF ( oph.EQ.'GOSI' ) THEN
          IF ( lfagg.NE.1 ) THEN
             IF ( IMIN.NE.0 ) THEN
@@ -2720,6 +2727,7 @@ C     Decide if we have to loop again for beam/projectile
  2300 IF ( mrepf.NE.1 ) THEN
          IF ( mret.EQ.1 ) JZB = 25
          IF ( mret.EQ.1 ) GOTO 2200
+C     Write normalization coefficients
          DO mmmm = 1 , 32
             DO kkkk = 1 , 50
                WRITE (13,*) CNOR1(mmmm,kkkk)
