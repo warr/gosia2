@@ -823,7 +823,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                ENDIF
                IF ( IMIN.EQ.0 ) CALL CMLAB(0,dsig,ttttt)
                IF ( ERR ) GOTO 2200
-               IF ( IMIN.EQ.0 ) GOTO 1400
+               IF ( IMIN.EQ.0 ) GOTO 2400
                GOTO 500
             ELSEIF ( op2.EQ.'RE,C' ) THEN
                jfre = 1
@@ -845,7 +845,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                   op2 = opcja
                   IMIN = IMIN + 1
                   IF ( IMIN.EQ.1 ) GOTO 1300
-                  GOTO 2500
+                  GOTO 1400
                ELSEIF ( op2.EQ.'THEO' ) THEN
                   REWIND (12)
                   ibaf = 1
@@ -2142,7 +2142,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
          ENDIF ! if (op2 .NE. 'GOSI') if statement
       ENDIF ! if ( iobl.LT.1 ) if statement
 
- 1400 IF ( iobl.GE.1 ) THEN
+ 2400 IF ( iobl.GE.1 ) THEN
          ient = 1
          icg = 2
          nmaxh = NMAX
@@ -2458,7 +2458,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
       IF ( op2.NE.'GOSI' .AND. op2.NE.'ERRO' ) GOTO 200
       IF ( op2.EQ.'ERRO' ) GOTO 500
 
- 2500 mret = IABS(mret)
+ 1400 mret = IABS(mret) ! Added for gosia2
       DO kh1 = 1 , MEMAX
          HLM(kh1) = ELM(kh1)
       ENDDO
@@ -2467,28 +2467,28 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
          IVAR(kh1) = ivarh(kh1)
       ENDDO
       IF ( nawr.EQ.1 ) THEN
-         MCFIX = 0
+         MCFIX = 0 ! Calculate chisq using CNOR1 not CNOR
          CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
          IF ( IBPS.EQ.0 ) JZB = 25
          IF ( IBPS.EQ.0 ) mrepf = 1
          IF ( IBPS.NE.0 ) THEN
             IBPS = IBPS + 1
-            IF ( IBPS.EQ.1 ) JZB = 26
+            IF ( IBPS.EQ.1 ) JZB = 26 ! But IBPS must be 2 here! Ooops!
             IF ( IBPS.EQ.1 ) GOTO 100
          ENDIF
          IF ( IPS1.EQ.0 ) GOTO 2200
          IMIN = IMIN + 1
-         DO iva = 1 , LP1
+         DO iva = 1 , LP1 ! LP1 = 50
             JSKIP(iva) = 1
          ENDDO
          irix = 12
-         IF ( IBPS.EQ.2 ) irix = 32
+         IF ( IBPS.EQ.2 ) irix = 32 ! unit 12 for target, 32 for beam
          REWIND irix
          DO lkj = 1 , MEMAX
             WRITE (irix,*) ELM(lkj)
          ENDDO
          IF ( ifm.EQ.1 ) CALL PRELM(3)
-         IF ( ifm.EQ.1 ) GOTO 2200
+         IF ( ifm.EQ.1 ) GOTO 2200 ! changed for gosia2
          GOTO 2000
       ELSE
          MCFIX = 1
