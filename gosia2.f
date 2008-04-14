@@ -2472,7 +2472,7 @@ C     Handle OP,ERRO
          REWIND 7
          REWIND 27
          irix = 7
-         IF ( IBPS.EQ.1 ) irix = 27
+         IF ( IBPS.EQ.1 ) irix = 27 ! unit 7 for target, 27 for beam
          DO iuy = 1 , 6
             WRITE (irix,*) (XIR(iuy,jj),jj=1,NEXPT)
             WRITE (irix,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
@@ -2487,6 +2487,8 @@ C     Handle OP,ERRO
                WRITE (irix,*) (PARX(jj,jk,jl),jl=1,5)
             ENDDO
          ENDDO
+C---- gosia2 changes start
+C        Added for gosia2
          jkmy = 12
          IF ( IBPS.EQ.1 ) jkmy = 32
          DO kuku = 1 , MEMAX
@@ -2501,7 +2503,7 @@ C     Handle OP,ERRO
          REWIND 7
          REWIND 27
          mdupa = 7
-         IF ( IBPS.EQ.1 ) mdupa = 27
+         IF ( IBPS.EQ.1 ) mdupa = 27 ! unit 7 for target, 27 for beam
          DO iuy = 1 , 6
             READ (mdupa,*) (XIR(iuy,jj),jj=1,NEXPT)
             READ (mdupa,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
