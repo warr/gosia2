@@ -451,6 +451,22 @@ C     Initialize prime numbers
       IP(25) = 97
       IP(26) = 101
 
+C     Initialize pointers
+      lp0 = 50000 ! Size of ZETA array
+      LP1 = 50 ! Maximum number of experiments
+      LP2 = 500 ! Maximum number of matrix elements
+      LP3 = 75 ! Maximum number of levels
+      LP4 = 1500 ! Start of collision coefficients in ZETA
+      LP6 = 32
+      LP7 = lp0 - 4900
+      LP8 = LP3*28 + 1
+      LP9 = lp0 - LP3*28
+      LP10 = 600
+      LP11 = LP8 - 1
+      LP12 = 365 ! Maximum number of steps of omega (dimension of ADB, SH, CH)
+      LP13 = LP9 + 1
+      LP14 = 4900 ! Maximum number of collision coefficients
+
       READ * , IBPS
       READ 99056 , op1 , op2
       CALL OPENF1
@@ -502,23 +518,7 @@ C     Initialize prime numbers
       INTR = 0
       LNY = 0
       JENTR = 0
-
-C     Initialize pointers
-      lp0 = 50000 ! Size of ZETA array
       ICS = 0
-      LP1 = 50 ! Maximum number of experiments
-      LP2 = 500 ! Maximum number of matrix elements
-      LP3 = 75 ! Maximum number of levels
-      LP4 = 1500 ! Start of collision coefficients in ZETA
-      LP6 = 32
-      LP7 = lp0 - 4900
-      LP8 = LP3*28 + 1
-      LP9 = lp0 - LP3*28
-      LP10 = 600
-      LP11 = LP8 - 1
-      LP12 = 365 ! Maximum number of steps of omega (dimension of ADB, SH, CH)
-      LP13 = LP9 + 1
-      LP14 = 4900 ! Maximum number of collision coefficients
 
       DO i = 1 , LP1
          jpin(i) = 0
