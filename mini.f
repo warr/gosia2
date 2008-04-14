@@ -469,8 +469,8 @@ C     Find steepest gradient
          IF ( crit.LT.Conv ) GOTO 700
          IF ( Chisq.GE.Chiok ) THEN
             rfk = chirf/Chisq
-            IF ( rfk.GT.Xtest .AND. icount.LT.Nptl ) GOTO 100
-            GOTO 300
+            IF ( rfk.LE.Xtest .OR. icount.GE.Nptl ) GOTO 300
+            GOTO 100
          ENDIF
       ENDIF
 
