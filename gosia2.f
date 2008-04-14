@@ -759,11 +759,11 @@ C        Treat OP,REST (restart)
             ENDDO
             DO lkj = 1 , memax1
                READ (JZB,*) lkj1 , xlk
-               IF ( lkj1.EQ.0 ) GOTO 220
+               IF ( lkj1.EQ.0 ) GOTO 120
                IF ( mres1.EQ.0 ) ELM(lkj1) = xlk ! condition added for gosia2
             ENDDO
 C---- gosia2 changes start
- 220        DO lkj = 1 , MEMAX
+ 120        DO lkj = 1 , MEMAX
                IF ( mres1.EQ.0 .AND. JZB.EQ.25 ) ELM25(lkj) = ELM(lkj)
                IF ( mres1.EQ.0 .AND. JZB.EQ.26 ) ELM26(lkj) = ELM(lkj)
             ENDDO
@@ -872,8 +872,8 @@ C---- gosia2 changes end
                ENDIF
                IF ( IMIN.EQ.0 ) CALL CMLAB(0,dsig,ttttt)
                IF ( ERR ) GOTO 2000
-               IF ( IMIN.EQ.0 ) GOTO 1300
-               GOTO 400 ! End of OP,ERRO
+               IF ( IMIN.EQ.0 ) GOTO 400
+               GOTO 1300 ! End of OP,ERRO
 
 C           Treat OP,RE,C (release C)
             ELSEIF ( op2.EQ.'RE,C' ) THEN
@@ -891,13 +891,13 @@ C           Treat OP,TITL (title)
 
             ELSE
 C              Treat OP,GOSI
-               IF ( op2.EQ.'GOSI' ) GOTO 300
+               IF ( op2.EQ.'GOSI' ) GOTO 200
 
 C              Treat OP,COUL
-               IF ( op2.EQ.'COUL' ) GOTO 300
+               IF ( op2.EQ.'COUL' ) GOTO 200
 
 C              Treat OP,EXIT
-               IF ( op2.EQ.'EXIT' ) GOTO 3000 ! End of OP,EXIT
+               IF ( op2.EQ.'EXIT' ) GOTO 430 ! End of OP,EXIT
 
 C              Treat OP,MINI
                IF ( op2.EQ.'MINI' ) THEN
@@ -940,17 +940,17 @@ C              Treat OP,THEO
                   ENDDO
                   DO nl = 1 , 8
                      READ (JZB,*) nnl ! Multipolarity
- 222                 IF ( nnl.LE.0 ) GOTO 225
+ 126                 IF ( nnl.LE.0 ) GOTO 130
                      READ (JZB,*) jb1 , jb2 ! band indices
                      IF ( jb1.NE.0 ) THEN
                         READ (JZB,*) (bm(nnl,jb1,jb2,j),j=1,3) ! intrinsic moments
                         DO j = 1 , 3
                            bm(nnl,jb2,jb1,j) = bm(nnl,jb1,jb2,j)
                         ENDDO
-                        GOTO 222
+                        GOTO 126
                      ENDIF
                   ENDDO
- 225              DO kb = 1 , MEMAX
+ 130              DO kb = 1 , MEMAX
                      IF ( ibaf.NE.0 ) THEN
                         ind1 = LEAD(1,kb)
                         ind2 = LEAD(2,kb)
@@ -1133,7 +1133,7 @@ C              Treat OP,INTG
      &                                      + YGN(jyi)
                                          ENDDO
                                          IF ( ijan.NE.LASTCL(lx,inclus)
-     &                                      ) GOTO 226
+     &                                      ) GOTO 132
                                          DO jyi = 1 , idr
                                          YGN(jyi) = SUMCL(inclus,jyi)
                                          ENDDO
@@ -1173,7 +1173,7 @@ C              Treat OP,INTG
      &                                    /GRAD(IDRN)
                                     ENDDO
                                  ENDIF
- 226                          ENDDO
+ 132                          ENDDO
                            ENDDO
                         ENDDO
                      ENDDO
@@ -1190,11 +1190,11 @@ C              Treat OP,INTG
                   DO lx = 1 , NEXPT
                      REWIND 17
                      DO ijaja = 1 , 300000
-                        READ (17,*,END=228) jjlx , jmpin , jkloo , 
+                        READ (17,*,END=134) jjlx , jmpin , jkloo , 
      &                        jktt , dsx
                         IF ( jjlx.EQ.lx ) dsxm(jmpin,jkloo,jktt) = dsx
                      ENDDO
- 228                 na = NANG(lx)
+ 134                 na = NANG(lx)
                      IF ( lx.NE.1 ) THEN
                         DO na1 = 1 , LP6
                            ILE(na1) = ILE(na1) + NYLDE(lx-1,na1)
@@ -1498,7 +1498,7 @@ C                 Treat OP,MAP
       GOTO 2000
 
 C     Treat suboptions of OP,COUL and OP,GOSI
- 300  READ (JZB,99023) op1 ! Read the suboption
+ 200  READ (JZB,99023) op1 ! Read the suboption
 99023 FORMAT (1A4)
       IF ( op1.EQ.'    ' ) GOTO 100
 
@@ -1511,7 +1511,7 @@ C     Treat suboption LEVE (levels)
          ndima = NDIM + 1
          DO k = 1 , ndima
             READ (JZB,*) ipo1 , ipo2 , po2 , po1 ! level number, parity, spin, energy
-            IF ( ipo1.EQ.0 ) GOTO 300
+            IF ( ipo1.EQ.0 ) GOTO 200
             IF ( ipo1.EQ.1 .AND. ABS(po2).LT.1.E-6 ) ISO = 0
             NMAX = NMAX + 1
             SPIN(ipo1) = po2
@@ -1544,7 +1544,7 @@ C     Treat suboption ME (matrix elements)
                   LAMMAX = LAMMAX + 1
                   LAMDA(LAMMAX) = ipo1
                   ipo3 = 0
-                  IF ( indx.EQ.0 ) GOTO 320
+                  IF ( indx.EQ.0 ) GOTO 220
                ELSE
                   MULTI(la) = MULTI(la) + 1
                   indx = indx + 1
@@ -1575,7 +1575,7 @@ C     Treat suboption ME (matrix elements)
                      isip = ISEX(ipo1) + 1
                      ISEX(ABS(ipo2)) = MIN(isip,ISEX(ABS(ipo2)))
                   ENDIF
-                  GOTO 350
+                  GOTO 250
                ENDIF
             ENDIF
             DO kk = 1 , indx
@@ -1601,11 +1601,11 @@ C     Treat suboption ME (matrix elements)
                   ENDIF
                ENDIF
             ENDDO
-            IF ( ipo1.EQ.0 ) GOTO 2400
- 320        la = ipo1
+            IF ( ipo1.EQ.0 ) GOTO 300
+ 220        la = ipo1
             IF ( la.GT.LMAXE .AND. la.LE.6 ) LMAXE = la
- 350     ENDDO
-2400     MEMAX = indx
+ 250     ENDDO
+ 300     MEMAX = indx
          IF ( JZB.EQ.25 ) m25 = MEMAX
          IF ( JZB.EQ.26 ) m26 = MEMAX
          IF ( la.GT.6 ) MAGEXC = 1
@@ -1621,7 +1621,7 @@ C     Treat suboption ME (matrix elements)
 
 C     Treat suboption CONT (control)
       ELSEIF ( op1.EQ.'CONT' ) THEN
- 450     READ (JZB,99026) op1 , fipo1
+ 350     READ (JZB,99026) op1 , fipo1
 99026    FORMAT (1A4,1F7.1)
          ipo1 = INT(fipo1)
          IF ( op1.EQ.'ACP,' ) ACCA = 10.**(-fipo1)
@@ -1640,7 +1640,7 @@ C     Treat suboption CONT (control)
             IF ( op1.EQ.'VAC,' ) THEN
                DO jjx = 1 , 7
                   READ (JZB,*) ijx , val
-                  IF ( ijx.EQ.0 ) GOTO 450
+                  IF ( ijx.EQ.0 ) GOTO 350
                   G(ijx) = val
                ENDDO
             ELSE
@@ -1649,27 +1649,27 @@ C     Treat suboption CONT (control)
                IF ( op1.EQ.'PRT,' ) THEN
                   DO jjx = 1 , 20
                      READ (JZB,*) inm1 , inm2
-                     IF ( inm1.EQ.0 ) GOTO 450
+                     IF ( inm1.EQ.0 ) GOTO 350
                      IPRM(inm1) = inm2
                   ENDDO
-                  GOTO 450
+                  GOTO 350
                ELSEIF ( op1.NE.'FIX,' ) THEN
                   IF ( op1.EQ.'SKP,' ) THEN
                      DO jjx = 1 , ipo1
                         READ (JZB,*) ijx
                         JSKIP(ijx) = 0
                      ENDDO
-                     GOTO 450
+                     GOTO 350
                   ELSE
                      IF ( op1.EQ.'CRF,' ) ICS = 1
                      IF ( op1.EQ.'LCK,' ) THEN
- 452                    READ (JZB,*) lck1 , lck2
-                        IF ( lck1.EQ.0 ) GOTO 450
+ 352                    READ (JZB,*) lck1 , lck2
+                        IF ( lck1.EQ.0 ) GOTO 350
                         DO jjx = lck1 , lck2
                            ivarh(jjx) = 0
                            IVAR(jjx) = 0
                         ENDDO
-                        GOTO 452
+                        GOTO 352
                      ELSE
                         IF ( op1.EQ.'INR,' ) INNR = 1
                         IF ( op1.EQ.'CRD,' ) THEN
@@ -1677,7 +1677,7 @@ C     Treat suboption CONT (control)
                               READ (JZB,*) ipo2
                               iecd(ipo2) = 1
                            ENDDO
-                           GOTO 450
+                           GOTO 350
                         ELSE
                            IF ( op1.EQ.'CCF,' ) IPS1 = ipo1
                            IF ( op1.EQ.'PIN,' ) ipine = ipo1
@@ -1687,10 +1687,10 @@ C     Treat suboption CONT (control)
                                  READ (JZB,*) ig1 , ig2
                                  jpin(ig1) = ig2
                               ENDDO
-                              GOTO 450
+                              GOTO 350
                            ELSE
-                              IF ( op1.NE.'END,' ) GOTO 450
-                              GOTO 300
+                              IF ( op1.NE.'END,' ) GOTO 350
+                              GOTO 200
                            ENDIF
                         ENDIF
                      ENDIF
@@ -1712,7 +1712,7 @@ C     Treat suboption CONT (control)
                ivarh(jjx) = IVAR(jjx)
             ENDDO
          ENDIF
-         GOTO 450
+         GOTO 350
 
 C     Treat suboption EXPT
       ELSEIF ( op1.EQ.'EXPT' ) THEN
@@ -1745,10 +1745,10 @@ C     Else we don't recognize the suboption
 99027    FORMAT (5X,'UNRECOGNIZED SUBOPTION',1X,1A4)
          GOTO 2000
       ENDIF
-      GOTO 300 ! Get next suboption
+      GOTO 200 ! Get next suboption
 
 C     Handle OP,ERRO      
- 400  IF ( ICS.EQ.1 ) THEN
+ 1300  IF ( ICS.EQ.1 ) THEN
          REWIND 11
          DO kh1 = 1 , LP4
             READ (11) (CORF(kh1,kh2),kh2=1,LP6)
@@ -1771,8 +1771,8 @@ C     Handle OP,ERRO
       ENDDO
       IF ( idf.EQ.1 ) THEN
          IFBFL = 1
-         IF ( irep.NE.2 ) GOTO 2900
-         IF ( iosr.EQ.0 ) GOTO 2900
+         IF ( irep.NE.2 ) GOTO 700
+         IF ( iosr.EQ.0 ) GOTO 700
          REWIND IUNIT3
          READ (IUNIT3,*) ll , mm , kk , inn
          DO inn = 1 , ll
@@ -1784,14 +1784,14 @@ C     Handle OP,ERRO
          DO inn = 1 , MEMAX
             READ (IUNIT3,*) mm , yyy
          ENDDO
- 550     READ (IUNIT3,*) mm , ll
+ 450     READ (IUNIT3,*) mm , ll
          IF ( mm.EQ.0 ) THEN
             BACKSPACE IUNIT3
-            GOTO 2900
+            GOTO 700
          ELSE
             READ (IUNIT3,*) kk , ll , yyy
             READ (IUNIT3,*) (SA(mm),mm=1,MEMAX)
-            GOTO 550
+            GOTO 450
          ENDIF
       ELSE
          naxfl = 0
@@ -1874,7 +1874,7 @@ C     Handle OP,ERRO
          ENDIF
       ENDDO
       GOTO 2000
- 2900 irea = 0
+ 700  irea = 0
       IF ( ms.LT.0 ) irea = 1
       IF ( ms.EQ.0 ) mend = MEMAX
       IF ( ms.EQ.0 ) ms = 1
@@ -2242,7 +2242,7 @@ C     Handle OP,ERRO
          ENDIF ! if (op2 .NE. 'GOSI') if statement
       ENDIF ! if ( iobl.LT.1 ) if statement
 
- 1300 IF ( iobl.GE.1 ) THEN
+  400 IF ( iobl.GE.1 ) THEN
          ient = 1
          icg = 2
          nmaxh = NMAX
@@ -2558,7 +2558,7 @@ C     Handle map
       ENDIF ! IPRM(12).ne.0 .or. op2.eq.'MAP '
 
       IF ( op2.NE.'GOSI' .AND. op2.NE.'ERRO' ) GOTO 100
-      IF ( op2.EQ.'ERRO' ) GOTO 400
+      IF ( op2.EQ.'ERRO' ) GOTO 1300
 
  1400 mret = ABS(mret) ! Added for gosia2
       DO kh1 = 1 , MEMAX
@@ -2592,7 +2592,7 @@ C---- gosia2 changes start
          ENDDO
          IF ( ifm.EQ.1 ) CALL PRELM(3)
          IF ( ifm.EQ.1 ) GOTO 2000 ! changed for gosia2
-         GOTO 3000
+         GOTO 430
       ELSE
          MCFIX = 1
          CALL MINI(chisq,1.D+38,nptl,conu,imode,idr,xtest,0,0,0,bten)
@@ -2646,7 +2646,7 @@ C---- gosia2 changes end
 
 C     Handle OP,EXIT
 C---- gosia2 changes start
- 3000 IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
+  430 IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
       IF ( mret.EQ.1 ) GOTO 2300
       IF ( IPRM(18).NE.0 ) CALL PTICC(idr)
 C---- gosia2 changes end
