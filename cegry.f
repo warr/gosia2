@@ -99,9 +99,10 @@ C      Iredv  -
      &          licz , ll1
       INTEGER*4 LNORM , LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , 
      &          LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , lth , lu , luu , 
-     &          MCFIX , na , NANG
-      INTEGER*4 NDIM , NDST , NEXPT , nf , nf1 , ni , ni1 , NICC , 
-     &          NLIFT , NMAX , NMAX1 , Nwyr , NYLDE
+     &          na , NANG , NDIM
+      INTEGER*4 NDST , NEXPT , nf , nf1 , ni , ni1 , NICC , NLIFT , 
+     &          NMAX , NMAX1 , Nwyr , NYLDE
+      INTEGER*4 MCFIX ! For gosia2
       CHARACTER*4 wupl , war , op2
       DIMENSION lic(32) , lth(500) , cnr(32,50)
       COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,500) , 
