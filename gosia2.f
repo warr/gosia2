@@ -2677,7 +2677,9 @@ C     Write normalization coefficients
 C     Handle OP,EXIT
 C---- gosia2 changes start
  430  IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
-      IF ( mret.EQ.1 ) GOTO 2100
+      IF ( mret.EQ.1 ) THEN
+         GOTO 2100
+      ENDIF
       IF ( IPRM(18).NE.0 ) CALL PTICC(idr)
 C---- gosia2 changes end
       IF ( oph.EQ.'GOSI' ) THEN
