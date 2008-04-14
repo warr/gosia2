@@ -456,9 +456,9 @@ C     Initialize pointers
       LP1 = 50 ! Maximum number of experiments
       LP2 = 500 ! Maximum number of matrix elements
       LP3 = 75 ! Maximum number of levels
-      LP4 = 1500 ! Start of collision coefficients in ZETA
+      LP4 = 1500
       LP6 = 32
-      LP7 = lp0 - 4900
+      LP7 = lp0 - 4900 ! Start of collision coefficients in ZETA
       LP8 = LP3*28 + 1
       LP9 = lp0 - LP3*28
       LP10 = 600
