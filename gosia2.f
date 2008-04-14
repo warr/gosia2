@@ -1773,24 +1773,24 @@ C     Handle OP,ERRO
          IFBFL = 1
          IF ( irep.NE.2 ) GOTO 800
          IF ( iosr.EQ.0 ) GOTO 800
-         REWIND 33
-         READ (33,*) ll , mm , kk , inn
+         REWIND IUNIT3
+         READ (IUNIT3,*) ll , mm , kk , inn
          DO inn = 1 , ll
-            READ (33,*) mm , yyy , zz
+            READ (IUNIT3,*) mm , yyy , zz
          ENDDO
          DO inn = 1 , MEMAX
-            READ (33,*) mm , ll , kk
+            READ (IUNIT3,*) mm , ll , kk
          ENDDO
          DO inn = 1 , MEMAX
-            READ (33,*) mm , yyy
+            READ (IUNIT3,*) mm , yyy
          ENDDO
- 550     READ (33,*) mm , ll
+ 550     READ (IUNIT3,*) mm , ll
          IF ( mm.EQ.0 ) THEN
-            BACKSPACE 33
+            BACKSPACE IUNIT3
             GOTO 800
          ELSE
-            READ (33,*) kk , ll , yyy
-            READ (33,*) (SA(mm),mm=1,MEMAX)
+            READ (IUNIT3,*) kk , ll , yyy
+            READ (IUNIT3,*) (SA(mm),mm=1,MEMAX)
             GOTO 550
          ENDIF
       ELSE
