@@ -475,7 +475,7 @@ C     Read target/projectile switch and first option from standard input
       READ (*,99001) op1 , op2
 
 C     Open files
-      CALL OPENF1
+      CALL OPENF
       nawr = 0
 
 C     Use input unit 25 for target and 26 for projectile

@@ -33,7 +33,7 @@ C zero, the function returns. It keeps looping until a unit zero is reached.
 99001 FORMAT (A)
 
 C     If it is for unit 25 or 26 and we are not reading from unit 5, ignore it
-      IF ( i.EQ.25 .OR. i.EQ.26 ) GOTO 100
+      IF ( JZB.NE.5 .AND. (i.EQ.25 .OR. i.EQ.26) ) GOTO 100
 
 C     Now open the file
       OPEN (i,IOSTAT=k,FILE=name,STATUS=opt1,FORM=opt2)
