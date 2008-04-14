@@ -1,6 +1,6 @@
-      FUNCTION RNDM(Se)
+      REAL*8 FUNCTION RNDM(Se)
       IMPLICIT NONE
-      REAL*8 ai , p , r , RNDM , rxdm , Se , t , u
+      REAL*8 ai , p , r , rxdm , Se , t , u
       INTEGER*4 i
       IF ( Se.GT.32000. ) Se = 100.*t + .511
       Se = Se*Se
