@@ -1,3 +1,36 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE QE
+C
+C Called by: SNAKE
+C
+C Purpose: calculate Qe values
+C
+C Formal parameters:
+C      C     - cosh(omega) + epsilon
+C      D     - sqrt(epsilon^2 - a) * epsilon / C
+C      B2    - B^2
+C      C2    - C^2
+C      D2    - D^2
+C      B4    - B^4
+C      B6    - B^6
+C      D3    - D^3
+C      B8    - B^8
+C      C4    - C^4
+C      D4    - D^4
+C      B10   - B^10
+C      D5    - D^5
+C      B12   - B^12
+C      D6    - D^6
+C      Lmda  - lambda
+C      Pol   - polarisation
+C      Cq    - array where the results are returned
+C
+C We used different formulae depending on lambda (see the table of electric
+C collision functions in the gosia manual).
+C
+C Lmda = lambda (1 = E1, 2 = E2... 6 = E6)
+ 
       SUBROUTINE QE(C,D,B2,C2,D2,B4,B6,D3,B8,C4,D4,B10,D5,B12,D6,Lmda,
      &              Pol,Cq)
       IMPLICIT NONE
@@ -5,6 +38,7 @@
      &       D3 , D4 , D5 , D6 , Pol
       INTEGER*4 Lmda
       DIMENSION Cq(7)
+
       IF ( Lmda.EQ.2 ) THEN
          Cq(1) = 0.75*(2.0*C2-D2)/B4*Pol
          Cq(2) = -1.83711730*C*D/B4*Pol
