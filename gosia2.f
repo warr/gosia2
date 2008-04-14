@@ -235,89 +235,91 @@ C      ZV     - energy meshpoints
      &       ARCCOS , ARCTG , arg , ax , B , bcof , be2 , be2a , be2b , 
      &       be2c , BEQ , BETAR
       REAL*8 bk , bl , bm , bmx , BRAT , bten , bu , CAT , CC , ccc , 
-     &       ccd , cf , chilo , chiok , chir , chis0 , 
-     &       chisl , chisq
-      REAL*8 chiss , chp , cht , CNOR , CNOR1 , CNOR2 , cnst , cocos , 
-     &       conu , CORF , d , decen , dedx , DELTA , DEVD , DEVU , 
-     &       DIPOL , DIX , DLOCK , DQ
-      REAL*8 DS , dsd , DSE , DSG , dsig , DSIGS , dst , dsx , dsxm , 
-     &       DYEX , EAMX , effi , EG , eh1 , ELM , ELM25 , ELM26 , 
-     &       ELMH , elmi , ELML
-      REAL*8 ELMT , ELMU , emhl1 , EMMA , emn , emx , EN , enb , ENDEC , 
-     &       eng , enh , ENZ , EP , EPS , EROOT , esd , esp , ess , 
-     &       fi0 , fi1
-      REAL*8 fic , FIEX , fiex1 , figl , fipo1 , fm , G , GRAD , gth , 
-     &       hen , het , HLM , HLMLM , ODL , p , PARX , PARXM , pfi , 
-     &       ph1 , ph2
-      REAL*8 pi , PILOG , po1 , po2 , polm , pop1 , pr , pv , Q , q1 , 
-     &       q2 , QAPR , qc , QCEN , qfac , qr , qui , r , r1 , r2
-      REAL*8 r3 , r4 , rem , remax , rl , rlr , rm , rx , ry , rz , s , 
-     &       s11 , s12 , s21 , s22 , SA , sbe , SE , sf , SGW
-      REAL*8 sh , sh1 , sh2 , SIMIN , slim , SPIN , SUBCH1 , SUBCH2 , 
-     &       SUMCL , summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , 
-     &       test , TETACM , tetrc , tfac
-      REAL*8 thc , THICK , TIMEL , title , TLBDG , tmn , tmx , todfi , 
-     &       TREP , tta , tth , tting , ttttt , txx , u , UPL , VACDP , 
-     &       val , VINF , waga
-      REAL*8 wph , wpi , WSIXJ , wth , wthh , WTHREJ , XA , XA1 , xep , 
-     &       XI , xi1 , xi2 , XIR , xk1 , xk2 , xl1 , xlevb , xlk , 
-     &       xm1 , xm2
-      REAL*8 xm3 , XNOR , xtest , XV , xw , xx , xxi , ycorr , YEXP , 
-     &       YGN , YGP , YNRM , YV , yy , yyd1 , yydd , yyy , ZETA , 
-     &       zmir , zp
-      REAL*8 ZPOL , ZV , zz
+     &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
+     &       CNOR , cnst
+      REAL*8 cocos , conu , CORF , d , decen , dedx , DELTA , DEVD , 
+     &       DEVU , DIPOL , DIX , DLOCK , DQ , DS , dsd , DSE , DSG , 
+     &       dsig , DSIGS , dst
+      REAL*8 dsx , dsxm , DYEX , EAMX , effi , EG , eh1 , ELM , ELMH , 
+     &       elmi , ELML , ELMT , ELMU , emhl1 , EMMA , emn , emx , EN , 
+     &       enb , ENDEC
+      REAL*8 eng , enh , ENZ , EP , EPS , EROOT , esd , esp , ess , 
+     &       fi0 , fi1 , fic , FIEX , fiex1 , figl , fipo1 , fm , G , 
+     &       GRAD , gth
+      REAL*8 hen , het , HLM , HLMLM , ODL , p , PARX , PARXM , pfi , 
+     &       ph1 , ph2 , pi , PILOG , po1 , po2 , polm , pop1 , pr , 
+     &       pv , Q
+      REAL*8 q1 , q2 , QAPR , qc , QCEN , qfac , qr , qui , r , r1 , 
+     &       r2 , r3 , r4 , rem , remax , rl , rlr , rm , rx , ry
+      REAL*8 rz , s , s11 , s12 , s21 , s22 , SA , sbe , SE , sf , SGW , 
+     &       sh , sh1 , sh2 , SIMIN , slim , SPIN , SUBCH1 , SUBCH2 , 
+     &       SUMCL
+      REAL*8 summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , test , 
+     &       TETACM , tetrc , tfac , thc , THICK , TIMEL , title , 
+     &       TLBDG , tmn , tmx , todfi , TREP
+      REAL*8 tta , tth , tting , ttttt , ttttx , txx , u , UPL , VACDP , 
+     &       val , VINF , waga , wph , wpi , WSIXJ , wth , wthh , 
+     &       WTHREJ , XA , XA1
+      REAL*8 xep , XI , xi1 , xi2 , XIR , xk1 , xk2 , xl1 , xlevb , 
+     &       xlk , xm1 , xm2 , xm3 , XNOR , xtest , XV , xw , xx , xxi , 
+     &       ycorr
+      REAL*8 YEXP , YGN , YGP , YNRM , YV , yy , yyd1 , yydd , yyy , 
+     &       ZETA , zmir , zp , ZPOL , ZV , zz
+      REAL*8 CNOR1 , CNOR2 , ELM25 , ELM26 , chir , chp , ccch1 ,
+     &       ccch2 , cht ! For gosia2
+      REAL*8 cnst
       INTEGER*4 i , i122 , IAMX , IAMY , IAPR , iapx , IAXS , ib , 
-     &          ibaf , IBPS , IBRC , IBYP , icg , icll , ICLUST , ICS , 
-     &          ict , ictl , id , idf
-      INTEGER*4 IDIVE , idr , IDRN , iecd , ient , IEXP , IFAC , IFBFL , 
-     &          ifbp , ifc , ifm , IFMO , ifwd , ig1 , ig2 , ih1 , ih2 , 
-     &          ihlm , ihuj , ii
-      INTEGER*4 ij , ija0 , ijaja , ijan , ijk , ijx , ILE , ile1 , 
-     &          ilevls , ilx , im , IMIN , imode , in1 , in2 , inclus , 
-     &          ind , ind1 , ind2 , indx
-      INTEGER*4 INHB , inko , inm1 , inm2 , inn , INNR , inpo , intend , 
+     &          ibaf , IBPS , IBRC , IBYP , icg , icll , ICLUST , ICS ,
+     &          ict , ictl , id , idf , IDIVE
+      INTEGER*4 idr , IDRN , iecd , ient , IEXP , IFAC , IFBFL , ifbp , 
+     &          ifc , ifm , IFMO , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
+     &          ihuj , ii , ij
+      INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ILE , ile1 , ilevls , 
+     &          ilx , im , IMIN , imode , in1 , in2 , inclus , ind , 
+     &          ind1 , ind2 , indx , INHB
+      INTEGER*4 inko , inm1 , inm2 , inn , INNR , inpo , intend , 
      &          INTERV , INTR , intvh , inva , inx1 , iobl , iocc , 
-     &          iopri , iosr , IP , IPATH , ipd
-      INTEGER*4 iph , IPI , ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , 
-     &          iprc , ipri , IPRM , IPS1 , IRAWEX , irea , irep , 
-     &          irfix , irix , ISEX , isip , iske
-      INTEGER*4 iskf , ISKIN , isko , iskok , ISMAX , ISO , isoh , 
-     &          ispa , ispb , ITMA , itno , itp , ITS , ITTE , IUNIT3 ,
-     &          iuy , iva , iva1 , IVAR , ivarh , ivari
-      INTEGER*4 ivrh , IWF , ixj , ixl , ixm , IY , iyr , IZ , IZ1 , 
-     &          izcap , j , ja , jan , jan1 , jb , jb1 , jb2 , jd , 
-     &          jde , jdy
-      INTEGER*4 je , JENTR , jex , jexp , jfi , jfre , jgd , jgl , 
-     &          jgl1 , jgr , jgs , jj , jj1 , jjjj , jjlx , jjx , jk , 
-     &          jkloo
-      INTEGER*4 jktt , jl , jmm , jmpin , jp , jphd , jpin , jrls , js , 
-     &          JSKIP , jt , jtp , jyi , jyi1 , jyi2 , jyv , jz , JZB , 
-     &          k , kb
-      INTEGER*4 kclust , kerf , kex , KF , KFERR , kh , kh1 , kh2 , kk , 
-     &          kk1 , kk2 , kkk , kkkk , kl , kloop , kmat , kq , KSEQ , 
-     &          ktt , kuku
-      INTEGER*4 KVAR , l , la , la1 , lam , lamd , LAMDA , lamh , 
-     &          LAMMAX , LASTCL , lb , lck1 , lck2 , LDNUM , LEAD , 
-     &          LERF , levl , lex , lexp , lfagg
-      INTEGER*4 lfini , lh1 , lh2 , LIFCT , liscl , lkj , lkj1 , ll , 
-     &          lli , lll , LMAX , lmax1 , LMAXE , lmaxh , LNORM , LNY , 
-     &          locat , LOCKF , LOCKS , loct
-      INTEGER*4 lp0 , LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , 
-     &          LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , lpin , ltrn , 
-     &          ltrn1 , ltrn2 , lu , lx
-      INTEGER*4 lxd , LZETA , m25 , m26 , MAGA , MAGEXC , magh , mawr , 
-     &          MCFIX , MEM , MEMAX , memax1 , memh , memx4 , 
-     &          MEMX6 , mend , mexl , mfla , mlt
-      INTEGER*4 mm , mmmm , mpin , mrepf , mres1 , mret , ms , MULTI , 
-     &          n , na , na1 , naa , nallow , NAMX , NANG , nawr , 
-     &          naxfl , nb1 , nb2 , nbands
-      INTEGER*4 NBRA , nch , NCM , NDIM , ndima , NDST , ndum , ne , 
-     &          NEXPT , nf , nfd , nfdd , nfi , nflr , nft , nged , 
-     &          ngpr , ni , NICC , nksi
-      INTEGER*4 nl , NLOCK , NMAX , NMAX1 , nmaxh , nmemx , nnl , 
-     &          nogeli , npce , npce1 , npct , npct1 , npt , nptl , 
-     &          nptx , ns1 , ns2 , ntap , ntt , numcl
-      INTEGER*4 nval , NYLDE , nz
+     &          iopri , iosr , IP , IPATH , ipd , iph
+      INTEGER*4 IPI , ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
+     &          ipri , IPRM , IPS1 , IRAWEX , irea , irep , irfix , 
+     &          irix , ISEX , isip , iske , iskf , ISKIN
+      INTEGER*4 isko , iskok , ISMAX , ISO , isoh , ispa , ispb , ITMA , 
+     &          itno , itp , ITS , ITTE , IUNIT3 , iuy , iva , iva1 , 
+     &          IVAR , ivarh , ivari , ivrh , IWF
+      INTEGER*4 ixj , ixl , ixm , IY , iyr , IZ , IZ1 , izcap , j , ja , 
+     &          jan , jan1 , jb , jb1 , jb2 , jd , jde , jdy , je , 
+     &          JENTR
+      INTEGER*4 jex , jexp , jfi , jfre , jgd , jgl , jgl1 , jgr , jgs , 
+     &          jj , jj1 , jjjj , jjlx , jjx , jk , jkloo , jktt , jl , 
+     &          jmm , jmpin
+      INTEGER*4 jp , jphd , jpin , jrls , js , JSKIP , jt , jtp , jyi , 
+     &          jyi1 , jyi2 , jyv , jz , JZB , k , kb , kclust , kerf ,
+     &          kex , KF , KFERR
+      INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kl , kloop , 
+     &          kmat , kq , KSEQ , ktt , kuku , KVAR , l , la , la1 , 
+     &          lam , lamd
+      INTEGER*4 LAMDA , lamh , LAMMAX , LASTCL , lb , lck1 , lck2 , 
+     &          LDNUM , LEAD , LERF , levl , lex , lexp , lfagg , 
+     &          lfini , lh1 , lh2 , LIFCT , liscl , lkj
+      INTEGER*4 lkj1 , ll , lli , lll , LMAX , lmax1 , LMAXE , lmaxh , 
+     &          LNORM , LNY , locat , LOCKF , LOCKS , loct , lp0 , LP1 , 
+     &          LP10 , LP11 , LP12 , LP13
+      INTEGER*4 LP14 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , lpin , 
+     &          ltrn , ltrn1 , ltrn2 , lu , lx , lxd , LZETA , MAGA , 
+     &          MAGEXC , magh , MEM
+      INTEGER*4 MEMAX , memax1 , memh , memx4 , MEMX6 , mend , mexl , 
+     &          mfla , mlt , mm , mpin , ms , MULTI , n , na , na1 , 
+     &          naa , nallow , NAMX , NANG
+      INTEGER*4 naxfl , nb1 , nb2 , nbands , NBRA , nch , NCM , NDIM , 
+     &          ndima , NDST , ndum , ne , NEXPT , nf , nfd , nfdd , 
+     &          nfi , nflr , nft , nged
+      INTEGER*4 ngpr , ni , NICC , nksi , nl , NLOCK , NMAX , NMAX1 , 
+     &          nmaxh , nmemx , nnl , nogeli , npce , npce1 , npct , 
+     &          npct1 , npt , nptl , nptx , ns1
+      INTEGER*4 ns2 , ntap , ntt , numcl , nval , NYLDE , nz
+      INTEGER*4 MCFIX , nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
+      INTEGER*4 mret , mawr ! For gosia2
+      INTEGER*4 m25 , m26 ! For gosia2
       LOGICAL ERR
       COMPLEX*16 ARM , EXPO
       CHARACTER*4 oph , op1 , opcja , op2
