@@ -38,7 +38,7 @@ C      Op2    - The part after the OP, for the option we are processing
       REAL*8 AGELI , alab , arg , at , attl , BETAR , bt , CC , DELLA , 
      &       DELTA , dsig , DSIGS , EG , ENDEC , ENZ , EP , EPS , 
      &       EROOT , f , Fi0 , fi01 , Fi1 , fi11
-      REAL*8 FIEX , Figl , FP , GKP , Gth , Q , qv , sm , TAU
+      REAL*8 FIEX , Figl , FP , GKP , Gth , Q , qv , sm , TAU , 
      &       TETACM , TLBDG , Trec , TREP , ttx , VINF , XA , 
      &       XA1 , Ygn , ylmr , ZETA
       INTEGER*4 IAXS , Idr , IEXP , ifn , Iful , ig , il , inat , inx1 , 
