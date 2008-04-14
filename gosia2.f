@@ -848,15 +848,15 @@ C---- gosia2 changes end
                   ENDDO
                   inko = inn
                   IF ( irep.NE.2 ) THEN
-                     WRITE (33,*) NMAX , MEMAX , inpo , inko
+                     WRITE (IUNIT3,*) NMAX , MEMAX , inpo , inko
                      DO inn = 1 , NMAX
-                        WRITE (33,*) inn , SPIN(inn) , EN(inn)
+                        WRITE (IUNIT3,*) inn , SPIN(inn) , EN(inn)
                      ENDDO
                      DO inn = 1 , MEMAX
-                        WRITE (33,*) inn , LEAD(1,inn) , LEAD(2,inn)
+                        WRITE (IUNIT3,*) inn , LEAD(1,inn) , LEAD(2,inn)
                      ENDDO
                      DO inn = 1 , MEMAX
-                        WRITE (33,*) inn , ELM(inn)
+                        WRITE (IUNIT3,*) inn , ELM(inn)
                      ENDDO
                   ENDIF
                ENDIF
