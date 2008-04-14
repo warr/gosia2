@@ -1,3 +1,38 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE KONTUR
+C
+C Called by: GOSIA
+C Calls:     FTBM, LIMITS, RK4
+C
+C Purpose:
+C
+C Uses global variables:
+C      DEVU   -
+C      ELM    - matrix elements
+C      ELML   - lower limit on matrix elements
+C      ELMU   - upper limit on matrix elements
+C      HLM    -
+C      INTR   -
+C      IPS1   - terminate after calculating and writing correction factors
+C      LNY    - use logs to calculate chi squared
+C      MEMAX  - number of matrix elements
+C      NWR    - number of datapoints used in fit
+C      SA     - ratio of elements for correlated elements
+C      XV     - energy meshpoints where we calculate exact Coulex
+C      YV     - scattering angle meshpoints where we calculate exact Coulex
+C
+C Formal parameters:
+C      Idr    -
+C      Chis0  -
+C      Chil   -
+C      Ifbf   -
+C      Inpo   -
+C      Jj     -
+C      Sh     -
+C      Bten   -
+C      Rem    -
+ 
       SUBROUTINE KONTUR(Idr,Chis0,Chil,Ifbf,Inpo,Jj,Sh,Bten,Rem)
       IMPLICIT NONE
       REAL*8 ac , Bten , c , Chil , chilo , Chis0 , chis1 , chis2 , d1 , 
@@ -16,6 +51,7 @@
       COMMON /HHH   / HLM(500)
       COMMON /ILEWY / NWR
       COMMON /LOGY  / LNY , INTR , IPS1
+
       LNY = 0
       h = .05*ABS(HLM(Jj))
       IF ( Inpo.NE.-1 ) h = ABS(Sh)
