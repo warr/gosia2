@@ -872,37 +872,51 @@ C---- gosia2 changes end
                IF ( IMIN.EQ.0 ) CALL CMLAB(0,dsig,ttttt)
                IF ( ERR ) GOTO 2000
                IF ( IMIN.EQ.0 ) GOTO 2400
-               GOTO 500
+               GOTO 500 ! End of OP,ERRO
+
+C           Treat OP,RE,C (release C)
             ELSEIF ( op2.EQ.'RE,C' ) THEN
                jfre = 1
                irfix = 0
-               GOTO 1100
+               GOTO 1100 ! End of OP,RE,C
+
+C           Treat OP,TITL (title)
             ELSEIF ( op2.EQ.'TITL' ) THEN
                READ (JZB,99008) (title(k),k=1,20)
 99008          FORMAT (20A4)
                WRITE (22,99009) (title(k),k=1,20)
 99009          FORMAT (10X,20A4/10X,100('-'))
-               GOTO 100
+               GOTO 100 ! End of OP,TITL
+
             ELSE
+C              Treat OP,GOSI
                IF ( op2.EQ.'GOSI' ) GOTO 300
+
+C              Treat OP,COUL
                IF ( op2.EQ.'COUL' ) GOTO 300
-               IF ( op2.EQ.'EXIT' ) GOTO 3000
+
+C              Treat OP,EXIT
+               IF ( op2.EQ.'EXIT' ) GOTO 3000 ! End of OP,EXIT
+
+C              Treat OP,MINI
                IF ( op2.EQ.'MINI' ) THEN
                   READ (JZB,*) imode , nptl , chiok , conu , xtest , 
      &                         LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
                   op2 = opcja
                   IMIN = IMIN + 1
                   IF ( IMIN.EQ.1 ) GOTO 1300
-                  GOTO 1400
+                  GOTO 1400 ! End of OP,MINI
+
+C              Treat OP,THEO
                ELSEIF ( op2.EQ.'THEO' ) THEN
                   REWIND (12)
                   ibaf = 1
-                  DO jb = 1 , LP1
+                  DO jb = 1 , LP1 ! LP1 = 50
                      DO lb = 1 , 2
                         xlevb(jb,lb) = 0
                      ENDDO
                   ENDDO
-                  READ (JZB,*) nbands
+                  READ (JZB,*) nbands ! Number of bands
                   IF ( nbands.LE.0 ) ibaf = 0
                   nbands = ABS(nbands)
                   DO nl = 1 , 8
@@ -915,8 +929,8 @@ C---- gosia2 changes end
                      ENDDO
                   ENDDO
                   DO jb = 1 , nbands
-                     READ (JZB,*) bk , ilevls
-                     READ (JZB,*) (levl(ib),ib=1,ilevls)
+                     READ (JZB,*) bk , ilevls ! K of band, number of levels in band
+                     READ (JZB,*) (levl(ib),ib=1,ilevls) ! Level list for band
                      DO kb = 1 , ilevls
                         inva = levl(kb)
                         xlevb(inva,2) = bk
@@ -924,11 +938,11 @@ C---- gosia2 changes end
                      ENDDO
                   ENDDO
                   DO nl = 1 , 8
-                     READ (JZB,*) nnl
+                     READ (JZB,*) nnl ! Multipolarity
  222                 IF ( nnl.LE.0 ) GOTO 225
-                     READ (JZB,*) jb1 , jb2
+                     READ (JZB,*) jb1 , jb2 ! band indices
                      IF ( jb1.NE.0 ) THEN
-                        READ (JZB,*) (bm(nnl,jb1,jb2,j),j=1,3)
+                        READ (JZB,*) (bm(nnl,jb1,jb2,j),j=1,3) ! intrinsic moments
                         DO j = 1 , 3
                            bm(nnl,jb2,jb1,j) = bm(nnl,jb1,jb2,j)
                         ENDDO
@@ -957,10 +971,14 @@ C---- gosia2 changes end
                         WRITE (irix,*) ELM(kb)
                      ENDIF
                   ENDDO
-                  GOTO 100
+                  GOTO 100 ! End of OP,THEO
+
+C              Treat OP,YIEL
                ELSEIF ( op2.EQ.'YIEL' ) THEN
                   CALL ADHOC(oph,idr,nfd,ntap,iyr)
-                  GOTO 100
+                  GOTO 100 ! End of OP,YIEL
+
+C              Treat OP,INTG
                ELSEIF ( op2.EQ.'INTG' ) THEN
                   REWIND 14
                   lfagg = 1
@@ -974,7 +992,7 @@ C---- gosia2 changes end
                      tth = TLBDG(lx)
                      enh = EP(lx)
                      DO mpin = 1 , lpin
-                        IF ( iecd(lx).EQ.1 ) THEN
+                        IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
                            READ (JZB,*) ne , ntt , emn , emx , wth , 
      &                                  wph , wthh
                            mfla = 1
@@ -989,7 +1007,7 @@ C---- gosia2 changes end
                         jan = NANG(lx)
                         jan1 = NDST(lx)
                         IF ( IRAWEX(lx).EQ.0 ) jan1 = jan
-                        IF ( iecd(lx).EQ.1 ) THEN
+                        IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
                            WRITE (14,*) ne , ntt , emn , emx , tmn , 
      &                                  tmx , jan1 , wth , wph , wthh
                         ELSE
@@ -1212,7 +1230,7 @@ C---- gosia2 changes end
                         npce1 = npce + 1
                         het = (tmx-tmn)/npct
                         npct1 = npct + 1
-                        IF ( iecd(lx).EQ.1 )
+                        IF ( iecd(lx).EQ.1 ) ! Circular detector
      &                       CALL COORD(wth,wph,wthh,npct1,1,pfi,wpi,
      &                       TLBDG(lx),lx,tmn,tmx)
                         IF ( iecd(lx).NE.1 ) THEN
