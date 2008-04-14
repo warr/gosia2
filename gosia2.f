@@ -682,10 +682,13 @@ C        Treat OP,FILE (attach files to fortran units)
      &           'CODE BY T.CZOSNYKA,D.CLINE AND C.Y.WU'/50X,
      &           'LATEST REVISION- JUNE  2006'//////)
          jphd = 0
+
+C        Handle OP,GDET (germanium detectors)
          IF ( op2.EQ.'GDET' ) THEN
             nl = 7
-            READ (JZB,*) nfdd
-            nfd = ABS(nfdd)
+            READ (JZB,*) nfdd ! number of physical detectors
+
+            nfd = ABS(nfdd) ! Negative value means graded absorber
             IF ( nfdd.LE.0 ) THEN
                REWIND 8
                DO i = 1 , nl
@@ -693,11 +696,14 @@ C        Treat OP,FILE (attach files to fortran units)
                ENDDO
                WRITE (8,*) (eng(l),l=1,10)
             ENDIF
+
+C           Write file for gamma-ray energy dependence of Ge solid-angle
+C           attenuation coefficients
             REWIND 9
             WRITE (9,*) nfd
-            DO i = 1 , nfd
-               READ (JZB,*) (DIX(k),k=1,4)
-               READ (JZB,*) (xl1(k),k=1,nl)
+            DO i = 1 , nfd ! For each detector
+               READ (JZB,*) (DIX(k),k=1,4) ! radius of core, outer radius, length, distance
+               READ (JZB,*) (xl1(k),k=1,nl) ! thicknesses of 7 kinds of absorber
                IF ( DIX(1).LE.0. ) DIX(1) = .01
                WRITE (9,*) DIX(4)
                IF ( nfdd.LE.0 ) WRITE (8,*) (xl1(k),k=1,nl)
@@ -724,14 +730,18 @@ C        Treat OP,FILE (attach files to fortran units)
                   ENDDO
                ENDDO
             ENDDO
-            GOTO 100
+            GOTO 100 ! Back to input loop
+
+C         Treat OP,RAND (randomise matrix elements)
          ELSEIF ( op2.EQ.'RAND' ) THEN
-            READ (JZB,*) SE
+            READ (JZB,*) SE ! Seed for random number generator
             CALL MIXUP
             WRITE (22,99006)
 99006       FORMAT (1X///5X,'MATRIX ELEMENTS RANDOMIZED...'///)
             CALL PRELM(2)
-            GOTO 100
+            GOTO 100 ! End of OP,RAND
+
+C        Treat OP,TROU (troubleshooting)
          ELSEIF ( op2.EQ.'TROU' ) THEN
             ITS = 1
             READ (JZB,*) kmat , rlr
