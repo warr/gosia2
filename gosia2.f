@@ -2601,32 +2601,44 @@ C---- gosia2 changes start
          IF ( ifm.EQ.1 ) CALL PRELM(3)
          IF ( ifm.NE.1 ) GOTO 430 ! changed for gosia2
          GOTO 2000
-      ELSE
-         MCFIX = 1
-         CALL MINI(chisq,1.D+38,nptl,conu,imode,idr,xtest,0,0,0,bten)
-         mawr = mawr + 1
-         chir = chir + chisq
-         IF ( JZB.EQ.26 ) cht = ABS(chir-chp)
-         IF ( JZB.EQ.26 .AND. cht.LT.0.1 ) mret = 0
-         IF ( JZB.EQ.26 .AND. mawr.GE.20 ) mret = 0
-         IF ( JZB.EQ.26 ) nawr = 1
-         DO kh1 = 1 , 32
-            DO kh2 = 1 , LP3
-               IF ( JZB.EQ.26 ) CNOR2(kh1,kh2) = CNOR(kh1,kh2)
-               IF ( JZB.EQ.25 ) CNOR1(kh1,kh2) = CNOR(kh1,kh2)
-            ENDDO
-         ENDDO
-         IF ( JZB.EQ.26 ) THEN
-            DO kh1 = 1 , 32
-               DO kh2 = 1 , 75
-                  CNOR1(kh1,kh2) = (CNOR1(kh1,kh2)+CNOR2(kh1,kh2))/2.
-               ENDDO
-            ENDDO
-         ENDIF
-         IF ( IBPS.EQ.0 .AND. JZB.EQ.25 ) JZB = 26
-         IF ( IBPS.NE.0 ) JZB = 25
-         GOTO 2200 ! Back to beginning
       ENDIF
+C     Calculate chi squared and normalization without minimizing
+      MCFIX = 1
+C---- gosia2 changes end
+      CALL MINI(chisq,1.D+38,nptl,conu,imode,idr,xtest,0,0,0,bten)
+C---- gosia2 changes start
+
+C     Set CNOR1 to the average of CNOR1 and CNOR2
+      DO kh1 = 1 , LP6 ! LP6 = 32
+         DO kh2 = 1 , LP3 ! LP3 = 75
+           IF ( JZB.EQ.25 ) THEN ! If it is the second nucleus
+               CNOR1(kh1,kh2) = CNOR(kh1,kh2)
+           ELSE
+               CNOR2(kh1,kh2) = CNOR(kh1,kh2)
+               CNOR1(kh1,kh2) = (CNOR1(kh1,kh2)+CNOR2(kh1,kh2))/2.
+           ENDIF
+         ENDDO
+      ENDDO
+      
+C     Increment iteration counter
+      mawr = mawr + 1
+
+C     Store chisq
+      IF ( JZB.EQ.25 ) ccch1 = chisq ! But we never use ccch1
+      IF ( JZB.EQ.26 ) ccch2 = chisq ! But we never use ccch2
+      WRITE (*,*) 'ITER = ' , mawr , ' CHISQ1 = ' , ccch1 , 
+     &  ' CHISQ2 = ' , ccch2
+      chir = chir + chisq
+
+C     Decide whether to terminate here
+      IF ( JZB.EQ.26 ) THEN
+        cht = ABS(chir-chp) ! Difference in old and new chisq
+        IF ( cht.LT.0.1 .OR. mawr.GE.20 ) mret = 0 ! terminate
+        nawr = 1
+      ENDIF
+      IF ( IBPS.EQ.0 .AND. JZB.EQ.25 ) JZB = 26
+      IF ( IBPS.NE.0 ) JZB = 25
+      GOTO 2200 ! Back to beginning
 C---- gosia2 changes end
 
 
