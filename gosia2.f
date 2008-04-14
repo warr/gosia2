@@ -1,5 +1,4 @@
-C
-C       PROGRAM GOSIA2(INPUT,OUTPUT,TAPE6=OUTPUT,TAPE3,TAPE14,TAPE1,
+C      PROGRAM GOSIA2(INPUT,OUTPUT,TAPE6=OUTPUT,TAPE3,TAPE14,TAPE1,
 C        *TAPE15,TAPE17,TAPE18,TAPE4,TAPE2,TAPE7,TAPE9)
 C************************
 C HANDLES SIMULTANEOUS PROJECTILE/TARGET EXCITATION
@@ -35,6 +34,7 @@ C LAMDA, NS1, NS2, ME, DME
 C************************
 C            GOSIA HAS BEEN DEVELOPED BY T.CZOSNYKA,D.CLINE AND C.Y.WU
 C            AT NUCLEAR STRUCTURE RESEARCH LABORATORY,UNIV. OF ROCHESTER
+C
 C            SOME CONCEPTS USED COME FROM 1978 WINTHER/DE BOER CODE
 C            C O U L E X AND FROM NSRL DEEXCITATION CODE C E G R Y.
 C            HOWEVER,THE PARTS TAKEN FROM BOTH CODES ARE IN MOST
@@ -50,14 +50,185 @@ C
 C            FOR INFORMATION,PLEASE CONTACT:
 C            TOMASZ CZOSNYKA,SLCJ, WARSAW UNIVERSITY, WARSZAWA, POLAND
 C            02-297 WARSZAWA, BANACHA 4-----PHONE (22)-222-123
-C            DOUGLAS CLINE,NSRL,THE UNIVERSITY OF ROCHESTER
-C            ROCHESTER,NY14627,USA------PHONE(716)275-4943
+C            DOUGLAS CLINE,DEPARTMENT OF PHYSICS,THE UNIVERSITY OF ROCHESTER
+C            ROCHESTER,NY14627,USA------PHONE(585)275-4943
 C
 C            REF.----   UR/NSRL REPORT 308/1986
 C
 C************************  VERSION FROM SEPT, 2005  *******************
 C
 C**********************************************************************
+C PROGRAM GOSIA2
+C
+C Calls: ADHOC, ALLOC, ANGULA, ARCCOS, ARCTG, CMLAB, COORD, DECAY, DJMM,
+C        EFFIX, ELMT, FAKP, FHIP, FTBM, INTG, KLOPOT, KONTUR, LAGRAN, LOAD,
+C        MINI, MIXR, MIXUP, OPENF, PATH, PRELM, PTICC, QFIT, READY, SETIN,
+C        SIMIN, SNAKE, STING, TACOS, TAPMA, TEMB, TENS, WSIXJ, WTHREJ
+C
+C Uses global variables:
+C      ABC    - absorption coefficients
+C      ACCA   - accuracy
+C      ACCUR  - accuracy required
+C      AGELI  - angles of Ge detectors
+C      AKAVKA - efficiency curve parameters
+C      ARM    - reduced matrix elements
+C      AVJI   - average J (N.B. here it is G(1))
+C      B      - table of factorials
+C      BEQ    - beta
+C      BETAR  - recoil beta
+C      CAT    - substates of levels (n_level, J, m)
+C      CC     - conversion coefficients
+C      CNOR   - normalization factors
+C      CNOR1  - normalization factors for target (for gosia2)
+C      CNOR2  - normalization factors for projectile (for gosia2)
+C      CORF   - internal correction factors
+C      DEVD   -
+C      DEVU   -
+C      DIPOL  - E1 polarization parameter
+C      DIX    - Ge parameters (inner & outer radius, length, distance)
+C      DLOCK  - limit derivative below which matrix element is fixed if LOCKS=1
+C      DS     - integrated rutherford cross-section
+C      DSE    - rutherford cross section at given energy integrated over angles
+C      DSG    - differential gamma-ray yield at meshpoints
+C      DSIGS  -
+C      DYEX   - error on experimental yield
+C      EAMX   - known matrix elements and their errors
+C      ELM    - matrix elements
+C      ELM25  - matrix elements storage for target (for gosia2)
+C      ELM26  - matrix elements storage for projectile (for gosia2)
+C      ELMH   -
+C      ELML   - lower limit on matrix elements
+C      ELMU   - upper limit on matrix elements
+C      EMMA   - Controls number of magnetic substates in full coulex calc.
+C      EN     - energy of level
+C      EP     - bombarding energy
+C      ERR    - error flag
+C      EXPO   - adiabatic exponential
+C      FIEL   - K (N.B. here it is G(6))
+C      FIEX   - phi range of particle detector
+C      GAMMA  - Gamma (N.B. here it is G(2))
+C      GFAC   - g (N.B. here it is G(5))
+C      GRAD   - partial derivative of chi squared wrt. each matrix element
+C      HLM    -
+C      HLMLM  -
+C      IAMX   -
+C      IAMY   -
+C      IAX    - axial symmetry flag
+C      IBPS   - target/projectile switch
+C      ICLUST -
+C      ICS    - read internal correction factors flag (OP,CONT switch CRF,)
+C      IDIVE  - number of subdivisions
+C      IDRN   - normalising transition for yields
+C      IEXP   - experiment number
+C      IFAC   -
+C      IFBFL  - calculate derivatives with forward-backward method
+C      IFMO   - include correction to angular distance for finite recoil distance.
+C      ILE    -
+C      IMIN   -
+C      INHB   - inhibit error flag (LERF) setting in POMNOZ
+C      INNR   - independent normalisation switch (see OP,CONT INR,)
+C      INTERV - default accuracy check parameter for Adams-Moulton (see OP,CONT:INT)
+C      INTR   -
+C      IP     - table of prime numbers
+C      IPRM   - various flags to control output
+C      IPS1   - terminate after calculating and storing internal correction factors
+C      IRAWEX - flag to indicate raw uncorrected yield
+C      ISEX   -
+C      ISKIN  - kinematic flag (0,1)
+C      ISMAX  -
+C      ISO    -
+C      ITMA   - identify detectors according to OP,GDET
+C      ITS    - create tape 18 file (OP,CONT switch SEL,)
+C      ITTE   - thick target experiment flag
+C      IUNIT3 - unit for TAPE3
+C      IVAR   - indicates a limit or correlation is set
+C      IWF    -
+C      IY     - index for yields
+C      IZ     - Z of investigated nucleus
+C      IZ1    - Z of non-investigated nucleus
+C      JENTR  -
+C      JSKIP  - Experiments to skip during minimisation.
+C      JZB    - unit to read from
+C      KFERR  - error flag for minimization
+C      KSEQ   - index of level
+C      KVAR   -
+C      LAMAX  - number of multipolarities to calculate
+C      LAMBDA - list of multipolarities to calculate
+C      LASTCL -
+C      LDNUM  - number of matrix elements with each multipolarity populating each level
+C      LEAD   - pair of levels involved in each matrix element
+C      LIFCT  - index for lifetimes
+C      LMAX   -
+C      LMAXE  - maxmium multipolarity needed for calculation
+C      LNORM  - normalisation constant control
+C      LNY    - use logs to calculate chi squared
+C      LOCKF  - flag to fix matrix elements with most significant derivative
+C      LOCKS  - lock flag. If LOCKS=1, fix at first stage of minimization
+C      LP1    - maximum number of experiments (50)
+C      LP10   - maximum number of reduced matrix elements (600)
+C      LP11   - LP8 - 1 (103)
+C      LP12   - number of steps of omega (365)
+C      LP13   - LP9 + 1 (47901)
+C      LP14   - maximum space for collision functions (4900)
+C      LP2    - maximum number of matrix elements (500)
+C      LP3    - maximum number of levels (75)
+C      LP4    - maximum number of yields (1500)
+C      LP6    - maximum number of gamma detectors (32)
+C      LP7    - start of collision functions (45100)
+C      LP8    - (104)
+C      LP9    - length of ZETA - 2100 (47900)
+C      MAGA   - number of magnetic substates in approximate calculation
+C      MAGEXC -
+C      MCFIX  - flag to say if normalization coefficient is fixed (for gosia2)
+C      MEMAX  - number of matrix elements
+C      MEMX6  - number of matrix elements with E1...6 multipolarity
+C      MULTI  - number of matrix elements having given multipolarity
+C      NAMX   - number of known matrix elements
+C      NANG   - number of gamma-ray detectors for each experiment
+C      NBRA   - number of branching ratios
+C      NCM    - calculate kinematics assuming this spin for final state (default = 2.0)
+C      NDIM   - maximum number of levels
+C      NDST   - number of data sets
+C      NEXPT  - number of experiments
+C      NLOCK  - number of elemnts to fix if LOCKF=1
+C      NMAX   - number of levels
+C      NMAX1  -
+C      NYLDE  - number of yields
+C      ODL    - results of OP,GDET calculation
+C      PARX   - [for maps]
+C      PARXM  - [for maps]
+C      POWER  - x (N.B. here it is G(7))
+C      QAPR   - approximate Coulomb amplitudes
+C      SA     - ratio of matrix elements for correlated elements
+C      SE     -
+C      SPIN   - spin of level
+C      SUBCH1 -
+C      SUBCH2 -
+C      SUMCL  -
+C      SWG    -
+C      TAU    - 
+C      THICK  - thickness of each absorber type
+C      TIMEC  - Tau_C (N.B. here it is G(4))
+C      TIMEL  - lifetimes and their errors
+C      TLBGD  - theta of particle detector
+C      TREP   - theta of recoiling nucleus
+C      UPL    - upper limits for all gamma detectors
+C      VINF   - speed of projectile at infinty
+C      XA     - A of investigated nucleus
+C      XA1    - A of non-investigated nucleus
+C      XI     - xi coupling coefficients
+C      XIR    - [for maps]
+C      XLAMB  - Lambda* (N.B. here it is G(3))
+C      XV     - energy meshpoints where we calculate exact Coulex
+C      YEXP   - experimental yields
+C      YGN    - gamma yield calculated without correction to angular distribution from finite recoil distance
+C      YGP    - gamma yield calculated with correction to angular distribution from finite recoil distance
+C      YNRM   - relative normalisation for gamma detectors
+C      YV     - scattering angle meshpoints where we calculate exact Coulex
+C      ZETA   - various coefficients
+C      ZPOL   -
+C      ZV     - energy meshpoints
+
       PROGRAM GOSIA2
       IMPLICIT NONE
       REAL*8 ABC , ACCA , ACCUR , acof , AGELI , AKAVKA , AKS , ap , 
@@ -160,7 +331,6 @@ C**********************************************************************
       COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,500) , 
      &                IRAWEX(50)
       COMMON /CCCDS / NDST(50)
-      COMMON /SWITCH/ JZB , IBPS , IUNIT3
       COMMON /INHI  / INHB
       COMMON /IDENT / BEQ
       COMMON /EFCAL / ABC(8,10) , AKAVKA(8,200) , THICK(200,7)
@@ -179,7 +349,6 @@ C**********************************************************************
       COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
       COMMON /DFTB  / DEVD(500) , DEVU(500)
       COMMON /ERRAN / KFERR
-      COMMON /RESC  / ELM25(500) , ELM26(500)
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /SECK  / ISKIN(50)
@@ -229,10 +398,16 @@ C**********************************************************************
       COMMON /ERCAL / JENTR , ICS
       COMMON /LOGY  / LNY , INTR , IPS1
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
+      COMMON /SWITCH/ JZB , IBPS , IUNIT3
+      COMMON /RESC  / ELM25(500) , ELM26(500) ! For gosia2
       DATA (eng(k),k=1,10)/.05 , .06 , .08 , .1 , .15 , .2 , .3 , .5 , 
      &      1. , 1.5/
+C     Absorption coefficients in units of 1/cm for Ge
       DATA (tau1(k),k=1,10)/17.656 , 10.726 , 5.076 , 2.931 , 1.3065 , 
      &      .8828 , .5959 , .4357 , .3041 , .2472/
+C     Absorption coefficients in units of 1/cm for Al, C, Fe, Cu, Ag/Cd/Sn, Ta
+C     and Pb at the energies 0.05, 0.06, 0.08, 0.1, 0.15, 0.2, 0.3, 0.5, 1, 1.5
+C     MeV
       DATA (tau2(k,1),k=1,10)/.9883 , .7473 , .5442 , .4592 , .3718 , 
      &      .3302 , .2814 , .2278 , .1657 , .1350/
       DATA (tau2(k,2),k=1,10)/1.014 , .7443 , .5195 , .4261 , .3362 , 
@@ -247,6 +422,7 @@ C**********************************************************************
      &      25.302 , 12.541 , 5.193 , 2.215 , 1.077 , .8176/
       DATA (tau2(k,7),k=1,10)/89.809 , 56.338 , 27.009 , 62.966 , 
      &      22.933 , 11.334 , 4.540 , 1.813 , .8020 , .5900/
+
       READ * , IBPS
       READ 99055 , op1 , op2
       CALL OPENF1
@@ -267,9 +443,11 @@ C**********************************************************************
       mret = -1
       chir = 0.
       mawr = 0
- 100  DO i = 1 , 50
+
+ 100  DO i = 1 , 50 ! This is where we come back when we iterate over target/beam
          LIFCT(i) = 0
       ENDDO
+
       chp = chir
       IF ( mret.EQ.1 .AND. JZB.EQ.26 ) chir = 0.
       REWIND 25
@@ -279,6 +457,8 @@ C**********************************************************************
       JZB = 25
       IF ( IBPS.EQ.1 ) JZB = 26
       IBYP = 0
+
+C     Initialize prime numbers
       IP(1) = 2
       IP(2) = 3
       IP(3) = 5
@@ -315,31 +495,35 @@ C**********************************************************************
       chisq = 0.
       chilo = 0.
       IWF = 1
-      ifm = 0
+      ifm = 0 ! Fast minimisation switch off by default
       IPS1 = 11
       ifwd = -1
       INTR = 0
       LNY = 0
       JENTR = 0
-      lp0 = 50000
+
+C     Initialize pointers
+      lp0 = 50000 ! Size of ZETA array
       ICS = 0
-      LP1 = 50
-      LP2 = 500
-      LP3 = 75
-      LP4 = 1500
+      LP1 = 50 ! Maximum number of experiments
+      LP2 = 500 ! Maximum number of matrix elements
+      LP3 = 75 ! Maximum number of levels
+      LP4 = 1500 ! Start of collision coefficients in ZETA
       LP6 = 32
       LP7 = lp0 - 4900
       LP8 = LP3*28 + 1
       LP9 = lp0 - LP3*28
       LP10 = 600
       LP11 = LP8 - 1
-      LP12 = 365
+      LP12 = 365 ! Maximum number of steps of omega (dimension of ADB, SH, CH)
       LP13 = LP9 + 1
-      LP14 = 4900
+      LP14 = 4900 ! Maximum number of collision coefficients
+
       DO i = 1 , LP1
          jpin(i) = 0
          iecd(i) = 0
       ENDDO
+
       txx = 0.
       SGW = 3.
       SUBCH1 = 0.
@@ -1654,6 +1838,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
          WRITE (33,*) im , im
       ENDIF
       GOTO 700
+
  1000 jfre = 0
       irfix = 0
       IF ( op2.EQ.'RE,F' ) irfix = 1
@@ -1672,6 +1857,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
          ivarh(jrls) = IVAR(jrls)
       ENDDO
       GOTO 200
+
  1300 CALL CMLAB(0,dsig,ttttt)
       IF ( ERR ) GOTO 2200
       IF ( op2.EQ.'POIN' ) READ (JZB,*) ifwd , slim
@@ -1939,11 +2125,11 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
      &                            CORF(ile1+itp-1,jgl1) , ycorr , 
      &                            ycorr/CORF(ile1+itp-1,jgl1)
 99032                      FORMAT (5X,I4,5X,I4,3X,E8.3,4X,E8.3,4X,E8.3)
-                        ENDDO
- 1306                ENDDO
-                  ENDIF
+                        ENDDO ! Loop over itp
+ 1306                ENDDO ! Loop over jgl
+                  ENDIF ! if ( op2.EQ. 'CORR')
                ENDIF
-            ENDDO
+            ENDDO ! Loop over jexp
             IF ( op2.EQ.'STAR' ) oph = op2
             IF ( op2.NE.'STAR' ) THEN
                IF ( op2.EQ.'CORR' ) THEN
@@ -1953,8 +2139,9 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                ENDIF
             ENDIF
             GOTO 200
-         ENDIF
-      ENDIF
+         ENDIF ! if (op2 .NE. 'GOSI') if statement
+      ENDIF ! if ( iobl.LT.1 ) if statement
+
  1400 IF ( iobl.GE.1 ) THEN
          ient = 1
          icg = 2
@@ -2156,10 +2343,10 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                            PARXM(IEXP,3,jk,kk) = acof*(2.*s22-51.*s21)
                            PARXM(IEXP,4,jk,kk) = bcof*(101.*s21-3.*s22)
                         ENDIF
-                     ENDDO
-                  ENDDO
+                     ENDDO ! Loop over jk
+                  ENDDO ! Loop over jd
                ENDIF
-            ENDDO
+            ENDDO ! Loop over kk
             EMMA(IEXP) = emhl1
             NMAX = nmaxh
             SPIN(1) = sh1
@@ -2261,14 +2448,16 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                         u = 0.
                         WRITE (22,99054) xxi , u , PARX(jex,2*lex-1,kex)
      &                         , u , PARX(jex,2*lex,kex)
-                     ENDDO
-                  ENDIF
-               ENDIF
-            ENDDO
-         ENDDO
-      ENDIF
+                     ENDDO ! Loop on kex
+                  ENDIF ! if maga(jex).ne.0
+               ENDIF ! if multi(lex).ne.0
+            ENDDO ! Loop on lex
+         ENDDO ! Loop on jex
+      ENDIF ! IPRM(12).ne.0 .or. op2.eq.'MAP '
+
       IF ( op2.NE.'GOSI' .AND. op2.NE.'ERRO' ) GOTO 200
       IF ( op2.EQ.'ERRO' ) GOTO 500
+
  1500 mret = IABS(mret)
       DO kh1 = 1 , MEMAX
          HLM(kh1) = ELM(kh1)
@@ -2432,6 +2621,7 @@ c     *(ccch1+ccch2)
          JZB = 26
          GOTO 100
       ENDIF
+
 99047 FORMAT (1X//50X,'CALCULATED YIELDS'//5X,'EXPERIMENT ',1I2,2X,
      &        'DETECTOR ',1I2/5X,'ENERGY ',1F10.3,1X,'MEV',2X,'THETA ',
      &        1F7.3,1X,'DEG'//5X,'NI',5X,'NF',5X,'II',5X,'IF',5X,
