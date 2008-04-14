@@ -2594,8 +2594,8 @@ C---- gosia2 changes start
             WRITE (irix,*) ELM(lkj)
          ENDDO
          IF ( ifm.EQ.1 ) CALL PRELM(3)
-         IF ( ifm.EQ.1 ) GOTO 2000 ! changed for gosia2
-         GOTO 430
+         IF ( ifm.NE.1 ) GOTO 430 ! changed for gosia2
+         GOTO 2000
       ELSE
          MCFIX = 1
          CALL MINI(chisq,1.D+38,nptl,conu,imode,idr,xtest,0,0,0,bten)
