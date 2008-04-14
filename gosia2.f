@@ -987,7 +987,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                               CALL CMLAB(lx,dsig,tetrc)
                               IF ( ERR ) GOTO 2200
                               tting = TLBDG(lx)
-                              IF ( ERR ) GOTO 2100
+                              IF ( ERR ) GOTO 1900
                               CALL LOAD(lx,1,1,0.D0,jj)
                               CALL ALLOC(ACCUR)
                               CALL SNAKE(lx,ZPOL)
@@ -1159,7 +1159,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                         READ (14,*) ne , ntt , emn , emx , tmn , tmx , 
      &                              jan , wth , wph , wthh
                         iocc = (ne+ntt)*idr
-                        IF ( iocc.GT.izcap ) GOTO 1900
+                        IF ( iocc.GT.izcap ) GOTO 1800
                         hen = (emx-emn)/npce
                         npce1 = npce + 1
                         het = (tmx-tmn)/npct
@@ -1187,7 +1187,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                               isko = (je-1)*naa*ntt + ja - 1
                               CALL TAPMA(lx,iske,isko,iskf,ntt,idr,1,
      &                           nft,enb)
-                              IF ( nft.EQ.1 ) GOTO 2100
+                              IF ( nft.EQ.1 ) GOTO 1900
                               DO jd = 1 , idr
                                  DO jtp = 1 , ntt
                                     IF ( jd.EQ.1 .AND. ja.EQ.1 )
@@ -1449,7 +1449,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
             ENDIF
             IF ( ipo1.NE.0 ) THEN
                IF ( ipo2.EQ.0 ) THEN
-                  IF ( ipo1.LE.la ) GOTO 1700
+                  IF ( ipo1.LE.la ) GOTO 1600
                   LAMMAX = LAMMAX + 1
                   LAMDA(LAMMAX) = ipo1
                   ipo3 = 0
@@ -1457,9 +1457,9 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                ELSE
                   MULTI(la) = MULTI(la) + 1
                   indx = indx + 1
-                  IF ( ipo1.GT.ABS(ipo2) ) GOTO 1600
+                  IF ( ipo1.GT.ABS(ipo2) ) GOTO 1500
                   IF ( ipo1.NE.ipo3 ) THEN
-                     IF ( ipo1.LT.ipo3 ) GOTO 1800
+                     IF ( ipo1.LT.ipo3 ) GOTO 1700
                      ipo3 = ipo1
                   ENDIF
                   ELM(indx) = po1
@@ -2523,22 +2523,22 @@ c     *(ccch1+ccch2)
          GOTO 100
       ENDIF
 
- 1600 WRITE (22,99036)
-99036 FORMAT (5X,'ERROR-M.E. DOES NOT BELONG TO THE UPPER TRIANGLE')
-      GOTO 2100
+ 1500 WRITE (22,99043)
+99043 FORMAT (5X,'ERROR-M.E. DOES NOT BELONG TO THE UPPER TRIANGLE')
+      GOTO 1900
 
- 1700 WRITE (22,99044)
+ 1600 WRITE (22,99044)
 99044 FORMAT (5X,'ERROR-WRONG SEQUENCE OF MULTIPOLARITIES')
-      GOTO 2100
+      GOTO 1900
 
- 1800 WRITE (22,99045)
+ 1700 WRITE (22,99045)
 99045 FORMAT (5X,'ERROR-REPEATED APPEARANCE OF THE STATE')
-      GOTO 2100
+      GOTO 1900
 
- 1900 WRITE (22,99046)
+ 1800 WRITE (22,99046)
 99046 FORMAT (1X///10X,'ERROR-INSUFFICIENT SPACE FOR E-THETA INTEGR ',
      &        'ATION')
-      GOTO 2100
+      GOTO 1900
 
  2000 IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
       IF ( mret.EQ.1 ) GOTO 2300
@@ -2567,15 +2567,15 @@ c     *(ccch1+ccch2)
      &                 'LIFETIME(PSEC)',5X,'EXP',8X,'ERROR'/)
                DO iva = 2 , NMAX
                   DO iva1 = 1 , 10
-                     IF ( LIFCT(iva1).EQ.iva ) GOTO 2005
+                     IF ( LIFCT(iva1).EQ.iva ) GOTO 122
                   ENDDO
                   WRITE (22,99012) iva , TAU(iva)
 99012             FORMAT (7X,1I2,7X,1E10.4)
-                  GOTO 2010
- 2005             WRITE (22,99013) iva , TAU(iva) , TIMEL(1,iva1) , 
+                  GOTO 124
+ 122              WRITE (22,99013) iva , TAU(iva) , TIMEL(1,iva1) , 
      &                             TIMEL(2,iva1)
 99013             FORMAT (7X,1I2,7X,1E10.4,5X,1E10.4,4X,1E10.4)
- 2010             IF ( iva.EQ.NMAX ) THEN
+ 124              IF ( iva.EQ.NMAX ) THEN
                      IF ( NAMX.GE.1 ) THEN
                         WRITE (22,99014)
 99014                   FORMAT (5x,//,
@@ -2604,7 +2604,7 @@ c     *(ccch1+ccch2)
          ENDIF
       ENDIF
 
- 2100 IF ( ITS.NE.0 ) THEN
+ 1900 IF ( ITS.NE.0 ) THEN
          iva = 0
          WRITE (18,*) iva , iva , iva , chisq
          IF ( ITS.NE.2 ) THEN
