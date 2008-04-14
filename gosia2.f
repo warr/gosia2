@@ -2626,8 +2626,9 @@ C---- gosia2 changes start
          IF ( IBPS.EQ.0 .AND. JZB.EQ.25 ) JZB = 26
          IF ( IBPS.NE.0 ) JZB = 25
          GOTO 2200 ! Back to beginning
-C---- gosia2 changes end
       ENDIF
+C---- gosia2 changes end
+
 
  1500 WRITE (22,99043)
 99043 FORMAT (5X,'ERROR-M.E. DOES NOT BELONG TO THE UPPER TRIANGLE')
