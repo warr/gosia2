@@ -235,7 +235,7 @@ C      ZV     - energy meshpoints
      &       ARCCOS , ARCTG , arg , ax , B , bcof , be2 , be2a , be2b , 
      &       be2c , BEQ , BETAR
       REAL*8 bk , bl , bm , bmx , BRAT , bten , bu , CAT , CC , ccc , 
-     &       ccch1 , ccch2 , ccd , cf , chilo , chiok , chir , chis0 , 
+     &       ccd , cf , chilo , chiok , chir , chis0 , 
      &       chisl , chisq
       REAL*8 chiss , chp , cht , CNOR , CNOR1 , CNOR2 , cnst , cocos , 
      &       conu , CORF , d , decen , dedx , DELTA , DEVD , DEVU , 
@@ -2601,8 +2601,6 @@ C---- gosia2 changes start
          MCFIX = 1
          CALL MINI(chisq,1.D+38,nptl,conu,imode,idr,xtest,0,0,0,bten)
          mawr = mawr + 1
-         IF ( JZB.EQ.25 ) ccch1 = chisq
-         IF ( JZB.EQ.26 ) ccch2 = chisq
          chir = chir + chisq
          IF ( JZB.EQ.26 ) cht = ABS(chir-chp)
          IF ( JZB.EQ.26 .AND. cht.LT.0.1 ) mret = 0
@@ -2617,10 +2615,6 @@ C---- gosia2 changes start
          IF ( JZB.EQ.26 ) THEN
             DO kh1 = 1 , 32
                DO kh2 = 1 , 75
-c	cnor1(kh1,kh2)=cnor1(kh1,kh2)*cnor2(kh1,kh2)*2/(cnor1(kh1,kh2)
-c     *+cnor2(kh1,kh2))
-c      cnor1(kh1,kh2)=(cnor1(kh1,kh2)*ccch1+cnor2(kh1,kh2)*ccch2)/
-c     *(ccch1+ccch2)
                   CNOR1(kh1,kh2) = (CNOR1(kh1,kh2)+CNOR2(kh1,kh2))/2.
                ENDDO
             ENDDO
