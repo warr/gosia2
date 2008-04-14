@@ -1,3 +1,22 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE PTICC
+C
+C Called by: GOSIA
+C Calls:     CONV
+C
+C Purpose: print the conversion coefficients
+C
+C Uses global variables:
+C      EN     - energy of level
+C      IFAC   -
+C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
+C      MULTI  - number of matrix elements having a given multipolarity
+C      SPIN   - spin of level
+C
+C Formal parameters:
+C      Idr    - number of decays
+
       SUBROUTINE PTICC(Idr)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , cone1 , cone2 , conm1 , CONV , DIPOL , EN , 
@@ -9,15 +28,16 @@
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
+
       WRITE (22,99001)
 99001 FORMAT (1X//20X,'CALCULATED INTERNAL CONVERSION ',
      &        'COEFFICIENTS FOR E1,E2 AND M1'//5X,'NI',5X,'NF',7X,'II',
      &        8X,'IF',9X,'ENERGY(MEV)',6X,'ICC(E1)',8X,'ICC(E2)',8X,
      &        'ICC(M1)')
       DO l = 1 , Idr
-         iinx = KSEQ(l,1)
-         ni = KSEQ(l,3)
-         nf = KSEQ(l,4)
+         iinx = KSEQ(l,1) ! Index of l'th decay
+         ni = KSEQ(l,3) ! Initial level of l'th decay
+         nf = KSEQ(l,4) ! Final level of l'th decay
          enet = EN(ni) - EN(nf)
          cone2 = CONV(enet,2)
          IF ( ABS(SPIN(ni)-SPIN(nf)).GT.2. ) cone2 = 0.
