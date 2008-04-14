@@ -675,7 +675,7 @@ C        Treat OP,FILE (attach files to fortran units)
          
          IF ( jphd.EQ.1 ) WRITE (22,99002)
 99002    FORMAT ('1'/1X,125('*')/1X,125('*')/1X,50('*'),25X,50('*')/1X,
-     &           50('*'),10X,'GOSIA2',10X,50('*')/1X,50('*'),25X,50('*')
+     &           50('*'),10X,'GOSIA2',9X,50('*')/1X,50('*'),25X,50('*')
      &           /1X,125('*')/1X,125('*')////)
          IF ( jphd.EQ.1 ) WRITE (22,99003)
 99003    FORMAT (1X/20X,'ROCHESTER COULOMB EXCITATION DATA ANALYSIS ',
