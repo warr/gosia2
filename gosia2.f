@@ -934,7 +934,7 @@ C              Treat OP,THEO
                      DO kb = 1 , ilevls
                         inva = levl(kb)
                         xlevb(inva,2) = bk
-                        xlevb(inva,1) = FLOAT(jb)
+                        xlevb(inva,1) = DBLE(jb)
                      ENDDO
                   ENDDO
                   DO nl = 1 , 8
