@@ -49,35 +49,36 @@ C WTHREJ(2 * J1, 2 * J2, 2 * J3, 2 * M1, 2 * M2, 2 * M3).
      &     ((M1+M2+M3).NE.0) ) THEN
          WTHREJ = wthrep
          GOTO 99999
-      ELSE
-         jjhd = (J1+J2+J3+4)/2
-         jmax = MAX(J1,J2,J3)
-         IF ( jmax.NE.J1 ) THEN
-            IF ( jmax.EQ.J2 ) THEN
-               jj1 = J3
-               jj2 = J1
-               jj3 = J2
-               mm1 = M3
-               mm2 = M1
-               mm3 = M2
-               GOTO 100
-            ELSEIF ( jmax.EQ.J3 ) THEN
-               jj1 = J1
-               jj2 = J2
-               jj3 = J3
-               mm1 = M1
-               mm2 = M2
-               mm3 = M3
-               GOTO 100
-            ENDIF
-         ENDIF
-         jj1 = J2
-         jj2 = J3
-         jj3 = J1
-         mm1 = M2
-         mm2 = M3
-         mm3 = M1
       ENDIF
+
+      jjhd = (J1+J2+J3+4)/2
+      jmax = MAX(J1,J2,J3)
+      IF ( jmax.NE.J1 ) THEN
+         IF ( jmax.EQ.J2 ) THEN
+            jj1 = J3
+            jj2 = J1
+            jj3 = J2
+            mm1 = M3
+            mm2 = M1
+            mm3 = M2
+            GOTO 100
+         ELSEIF ( jmax.EQ.J3 ) THEN
+            jj1 = J1
+            jj2 = J2
+            jj3 = J3
+            mm1 = M1
+            mm2 = M2
+            mm3 = M3
+            GOTO 100
+         ENDIF
+      ENDIF
+      jj1 = J2
+      jj2 = J3
+      jj3 = J1
+      mm1 = M2
+      mm2 = M3
+      mm3 = M1
+
  100  jma = (jj1+mm1)/2
       jmb = (jj1-mm1)/2
       jmc = (jj2+mm2)/2
