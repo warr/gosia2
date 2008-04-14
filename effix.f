@@ -32,9 +32,9 @@ C     AKAVKA(8) = c
       
       SUBROUTINE EFFIX(Ipd,En,Effi)
       IMPLICIT NONE
-      REAL*8 ABC , AKAVKA , d , Effi , En , enek , enl , pw , s , t , 
+      REAL*8 ABC , AKAVKA , d , Effi , En , enl , pw , s , t , 
      &       THICK , w , xx , yy
-      INTEGER*4 i , Ipd , ixi , j , l , ll , n
+      INTEGER*4 i , Ipd , j , l , ll , n
       DIMENSION xx(51) , yy(51)
       COMMON /EFCAL / ABC(8,10) , AKAVKA(8,200) , THICK(200,7)
       
@@ -91,10 +91,9 @@ c FITEFF or GREMLIN check
       IF ( AKAVKA(8,Ipd).LE.-999. ) THEN
 C        LEUVEN CALIBRATION
          Effi = AKAVKA(1,Ipd)
-         enek = 1000.*En
-         w = LOG(enek)
-         DO ixi = 1 , 6
-            Effi = Effi + AKAVKA(ixi+1,Ipd)*w**ixi
+         w = LOG(1000.*En)
+         DO i = 1 , 6
+            Effi = Effi + AKAVKA(i+1,Ipd)*w**i
          ENDDO
          Effi = EXP(Effi)
          RETURN
