@@ -2407,24 +2407,24 @@ C     Handle OP,ERRO
                            IF ( jk.EQ.1 ) THEN
                               IF ( MAGA(IEXP).EQ.0 ) THEN
                                  q1 = 0.
-                                 GOTO 1402
+                                 GOTO 1302
                               ELSEIF ( jd.EQ.2 .OR. MAGA(IEXP).EQ.0 )
      &                                 THEN
                                  q1 = 0.
-                                 GOTO 1402
+                                 GOTO 1302
                               ENDIF
                            ENDIF
                            q1 = ARCTG(s,ph1,pi)
                            ph1 = q1
- 1402                      IF ( jk.EQ.1 ) THEN
+ 1302                      IF ( jk.EQ.1 ) THEN
                               IF ( jd.EQ.1 .AND. MAGA(IEXP).NE.0 ) THEN
                                  q2 = 0.
-                                 GOTO 1404
+                                 GOTO 1304
                               ENDIF
                            ENDIF
                            q2 = ARCCOS(p,ph2,pi)
                            ph2 = q2
- 1404                      q1 = q1/ZETA(jd)/2.
+ 1304                      q1 = q1/ZETA(jd)/2.
                            q2 = q2/ZETA(jd)
                            IF ( jd.EQ.1 .AND. MAGA(IEXP).NE.0 ) q2 = -q2
                            IF ( jd.NE.1 .OR. MAGA(IEXP).EQ.0 ) THEN
