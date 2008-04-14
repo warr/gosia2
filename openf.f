@@ -38,11 +38,11 @@ C     If it is for unit 25 or 26 and we are not reading from unit 5, ignore it
 C     Now open the file
      &     OPEN (i,IOSTAT=k,FILE=name,STATUS=opt1,FORM=opt2)
       IF ( i.EQ.25 .OR. i.EQ.26 ) k = 0
-c      IF (K.EQ.0) WRITE(6,1030) 'OPENED ',NAME
-c 1030 FORMAT (1X,2A)
-c      WRITE(6,1010) ' IO-num = ',I,OPT1,OPT2
-c 1010 FORMAT (1X,A,I4,2(1x,A))
+c      IF ( k.EQ.0 ) WRITE (6,99002) 'OPENED ' , name
+c99002 FORMAT (1X,2A)
+c      WRITE (6,99003) ' IO-num = ' , i , opt1 , opt2
+c99003 FORMAT (1X,A,I4,2(1x,A))
       IF ( k.EQ.0 ) GOTO 100
-c      WRITE (6,1020) 'PROBLEMS OPENING ',NAME,K
-c 1020 FORMAT(A,A,I6)
+      WRITE (6,99004) 'PROBLEMS OPENING ' , name , k
+99004 FORMAT (A,A,I6)
       END
