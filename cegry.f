@@ -552,7 +552,7 @@ C     Calculate chi squared
       DO jj = 1 , NEXPT
          k = NDST(jj)
          DO jk = 1 , k
-            IF ( MCFIX.EQ.0 ) CNOR(jk,jj) = CNOR1(jk,jj)
+            IF ( MCFIX .EQ. 0) CNOR(jk,jj) = CNOR1(jk,jj)
             Chilo = Chilo + PARTL(jk,jj,1)*LOG(CNOR(jk,jj))
      &              **2 + PARTL(jk,jj,2)*2.*LOG(CNOR(jk,jj))
             Chisq = Chisq + CNOR(jk,jj)*CNOR(jk,jj)*PART(jk,jj,1)
