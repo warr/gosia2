@@ -1,7 +1,7 @@
-      FUNCTION LEADF(N1,N2,N3)
+      INTEGER*4 FUNCTION LEADF(N1,N2,N3)
       IMPLICIT NONE
-      INTEGER*4 k , LAMDA , LAMMAX , LDNUM , LEAD , LEADF , lsum , 
-     &          MULTI , N1 , n1m , N2 , N3 , n3m
+      INTEGER*4 k , LAMDA , LAMMAX , LDNUM , LEAD , lsum , MULTI , N1 , 
+     &          n1m , N2 , N3 , n3m
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       lsum = 0
