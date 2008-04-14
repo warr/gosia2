@@ -845,7 +845,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                   op2 = opcja
                   IMIN = IMIN + 1
                   IF ( IMIN.EQ.1 ) GOTO 1300
-                  GOTO 1500
+                  GOTO 2500
                ELSEIF ( op2.EQ.'THEO' ) THEN
                   REWIND (12)
                   ibaf = 1
@@ -2458,7 +2458,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
       IF ( op2.NE.'GOSI' .AND. op2.NE.'ERRO' ) GOTO 200
       IF ( op2.EQ.'ERRO' ) GOTO 500
 
- 1500 mret = IABS(mret)
+ 2500 mret = IABS(mret)
       DO kh1 = 1 , MEMAX
          HLM(kh1) = ELM(kh1)
       ENDDO
@@ -2522,19 +2522,24 @@ c     *(ccch1+ccch2)
          IF ( IBPS.NE.0 ) JZB = 25
          GOTO 100
       ENDIF
+
  1600 WRITE (22,99036)
 99036 FORMAT (5X,'ERROR-M.E. DOES NOT BELONG TO THE UPPER TRIANGLE')
       GOTO 2100
+
  1700 WRITE (22,99044)
 99044 FORMAT (5X,'ERROR-WRONG SEQUENCE OF MULTIPOLARITIES')
       GOTO 2100
+
  1800 WRITE (22,99045)
 99045 FORMAT (5X,'ERROR-REPEATED APPEARANCE OF THE STATE')
       GOTO 2100
+
  1900 WRITE (22,99046)
 99046 FORMAT (1X///10X,'ERROR-INSUFFICIENT SPACE FOR E-THETA INTEGR ',
      &        'ATION')
       GOTO 2100
+
  2000 IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
       IF ( mret.EQ.1 ) GOTO 2300
       IF ( IPRM(18).NE.0 ) CALL PTICC(idr)
@@ -2598,6 +2603,7 @@ c     *(ccch1+ccch2)
             IF ( IMIN.NE.0 ) CALL PRELM(3)
          ENDIF
       ENDIF
+
  2100 IF ( ITS.NE.0 ) THEN
          iva = 0
          WRITE (18,*) iva , iva , iva , chisq
@@ -2606,8 +2612,10 @@ c     *(ccch1+ccch2)
             CALL KLOPOT(kmat,rlr)
          ENDIF
       ENDIF
+
  2200 WRITE (22,99047)
 99047 FORMAT (15X,'********* END OF EXECUTION **********')
+
  2300 IF ( mrepf.NE.1 ) THEN
          IF ( mret.EQ.1 ) JZB = 25
          IF ( mret.EQ.1 ) GOTO 100
