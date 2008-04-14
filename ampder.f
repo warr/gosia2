@@ -54,6 +54,7 @@ C      I57    - switch which is either 5 or 7.
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
+
       DO k = 1 , ISMAX
          ARM(k,6) = (0.,0.)
          ARM(k,4) = (0.,0.)
