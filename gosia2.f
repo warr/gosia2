@@ -2645,12 +2645,40 @@ C---- gosia2 changes end
  1800 WRITE (22,99046)
 99046 FORMAT (1X///10X,'ERROR-INSUFFICIENT SPACE FOR E-THETA INTEGR ',
      &        'ATION')
-      GOTO 1900
+
+ 1900 IF ( ITS.NE.0 ) THEN
+         iva = 0
+         WRITE (18,*) iva , iva , iva , chisq
+         IF ( ITS.NE.2 ) THEN
+            WRITE (15,*) iva , chisq , chisq , chisq , chisq
+            CALL KLOPOT(kmat,rlr)
+         ENDIF
+      ENDIF
+
+ 2000 WRITE (22,99047)
+99047 FORMAT (15X,'********* END OF EXECUTION **********')
+
+C     Decide if we have to loop again for beam/projectile
+ 2100 IF ( mrepf.NE.1 ) THEN
+         IF ( mret.EQ.1 ) JZB = 25
+         IF ( mret.EQ.1 ) GOTO 2200
+C     Write normalization coefficients
+         DO mmmm = 1 , 32
+            DO kkkk = 1 , 50
+               WRITE (13,*) CNOR1(mmmm,kkkk)
+            ENDDO
+         ENDDO
+      ELSE
+         mrepf = 2
+         JZB = 26
+         GOTO 2200
+      ENDIF
+      STOP 'HERE'
 
 C     Handle OP,EXIT
 C---- gosia2 changes start
   430 IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
-      IF ( mret.EQ.1 ) GOTO 2300
+      IF ( mret.EQ.1 ) GOTO 2100
       IF ( IPRM(18).NE.0 ) CALL PTICC(idr)
 C---- gosia2 changes end
       IF ( oph.EQ.'GOSI' ) THEN
@@ -2713,34 +2741,7 @@ C---- gosia2 changes end
             IF ( IMIN.NE.0 ) CALL PRELM(3)
          ENDIF
       ENDIF
-
- 1900 IF ( ITS.NE.0 ) THEN
-         iva = 0
-         WRITE (18,*) iva , iva , iva , chisq
-         IF ( ITS.NE.2 ) THEN
-            WRITE (15,*) iva , chisq , chisq , chisq , chisq
-            CALL KLOPOT(kmat,rlr)
-         ENDIF
-      ENDIF
-
- 2000 WRITE (22,99047)
-99047 FORMAT (15X,'********* END OF EXECUTION **********')
-
-C     Decide if we have to loop again for beam/projectile
- 2300 IF ( mrepf.NE.1 ) THEN
-         IF ( mret.EQ.1 ) JZB = 25
-         IF ( mret.EQ.1 ) GOTO 2200
-C     Write normalization coefficients
-         DO mmmm = 1 , 32
-            DO kkkk = 1 , 50
-               WRITE (13,*) CNOR1(mmmm,kkkk)
-            ENDDO
-         ENDDO
-      ELSE
-         mrepf = 2
-         JZB = 26
-         GOTO 2200
-      ENDIF
+      GOTO 1900 ! End of OP,EXIT
 
 99048 FORMAT (1X//50X,'CALCULATED YIELDS'//5X,'EXPERIMENT ',1I2,2X,
      &        'DETECTOR ',1I2/5X,'ENERGY ',1F10.3,1X,'MEV',2X,'THETA ',
