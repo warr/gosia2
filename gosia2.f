@@ -2426,11 +2426,11 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
          DO jex = 1 , NEXPT
             DO lex = 1 , 6
                IF ( MULTI(lex).NE.0 ) THEN
-                  WRITE (22,99033) jex , XIR(lex,jex)
-99033             FORMAT (1X//30X,'EXPERIMENT',1X,1I2,10X,'MAX.XI=',
+                  WRITE (22,99040) jex , XIR(lex,jex)
+99040             FORMAT (1X//30X,'EXPERIMENT',1X,1I2,10X,'MAX.XI=',
      &                    1F6.4)
-                  WRITE (22,99034) lex , zmir(lex,2,jex)
-99034             FORMAT (1X/30X,'E',1I1,8X,'MI=0',5X,'MAX.ZETA=',
+                  WRITE (22,99041) lex , zmir(lex,2,jex)
+99041             FORMAT (1X/30X,'E',1I1,8X,'MI=0',5X,'MAX.ZETA=',
      &                    1F6.3//)
                   WRITE (22,99054)
                   DO kex = 1 , 10
@@ -2439,8 +2439,8 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
      &                                (PARXM(jex,ilx,kex,lex),ilx=1,4)
                   ENDDO
                   IF ( MAGA(jex).NE.0 ) THEN
-                     WRITE (22,99035) lex , zmir(lex,1,jex)
-99035                FORMAT (1X//30X,'E',1I1,8X,'MI=+/-1',5X,
+                     WRITE (22,99042) lex , zmir(lex,1,jex)
+99042                FORMAT (1X//30X,'E',1I1,8X,'MI=+/-1',5X,
      &                       'MAX.ZETA=',1F6.3//)
                      WRITE (22,99054)
                      DO kex = 1 , 5
