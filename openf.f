@@ -33,18 +33,14 @@ C zero, the function returns. It keeps looping until a unit zero is reached.
 99001 FORMAT (A)
 
 C     If it is for unit 25 or 26 and we are not reading from unit 5, ignore it
-      IF ( i.EQ.25 .OR. i.EQ.26 ) THEN
-        GOTO 100
-      ELSE
+      IF ( i.EQ.25 .OR. i.EQ.26 ) GOTO 100
 
 C     Now open the file
-        OPEN (i,IOSTAT=k,FILE=name,STATUS=opt1,FORM=opt2)
-        IF ( i.EQ.25 .OR. i.EQ.26 ) k = 0
+      OPEN (i,IOSTAT=k,FILE=name,STATUS=opt1,FORM=opt2)
 c      IF ( k.EQ.0 ) WRITE (6,99002) 'OPENED ' , name
 c99002 FORMAT (1X,2A)
 c      WRITE (6,99003) ' IO-num = ' , i , opt1 , opt2
 c99003 FORMAT (1X,A,I4,2(1x,A))
-      ENDIF
       IF ( k.EQ.0 ) GOTO 100
       WRITE (6,99004) 'PROBLEMS OPENING ' , name , k
 99004 FORMAT (A,A,I6)
