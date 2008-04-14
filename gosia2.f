@@ -1907,8 +1907,8 @@ C     Handle OP,ERRO
 99033          FORMAT (10X,'ME=',1I3,5X,'NO FREE MATRIX ELEMENTS')
                IF ( mm.NE.0 ) THEN
                   KFERR = 1
-                  IF ( iosr.EQ.1 ) WRITE (33,*) kh , kh
-                  IF ( iosr.EQ.1 ) WRITE (33,*) kh , ij , ELM(kh)
+                  IF ( iosr.EQ.1 ) WRITE (IUNIT3,*) kh , kh
+                  IF ( iosr.EQ.1 ) WRITE (IUNIT3,*) kh , ij , ELM(kh)
                   LOCKS = 1
                   DLOCK = .05
                   CALL MINI(chiss,-1.D0,2,.0001D0,1000,idr,100000.D0,0,
@@ -1935,7 +1935,7 @@ C     Handle OP,ERRO
       ENDIF
       IF ( iosr.NE.0 ) THEN
          im = 0
-         WRITE (33,*) im , im
+         WRITE (IUNIT3,*) im , im
       ENDIF
       GOTO 700
 
