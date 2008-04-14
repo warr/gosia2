@@ -34,7 +34,6 @@ C      Iop    - print flag (controls what is written to output).
      &          MAGEXC , MEMAX , MEMX6
       INTEGER*4 MULTI , NDIM , NMAX , NMAX1
       CHARACTER*3 wrn
-      COMMON /SWITCH/ JZB , IBPS , IUNIT3
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
@@ -42,6 +41,7 @@ C      Iop    - print flag (controls what is written to output).
       COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
+      COMMON /SWITCH/ JZB , IBPS , IUNIT3
       COMMON /RESC  / ELM25(500) , ELM26(500) ! Added for gosia2
 
       inx = 0
