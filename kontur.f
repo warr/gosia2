@@ -161,8 +161,8 @@ C      Rem    -
          WRITE (17,*) ELM(l)
       ENDDO
       IF ( ix.EQ.1 ) GOTO 300
-      IF ( ix.EQ.2 ) GOTO 400
-      GOTO 200
+      IF ( ix.NE.2 ) GOTO 200
+      GOTO 400
  600  c = YV(i)
       m = 0
       DO l = 1 , i
