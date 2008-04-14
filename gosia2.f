@@ -444,7 +444,7 @@ C     MeV
       chir = 0.
       mawr = 0
 
- 100  DO i = 1 , 50 ! This is where we come back when we iterate over target/beam
+ 2200 DO i = 1 , 50 ! This is where we come back when we iterate over target/beam
          LIFCT(i) = 0
       ENDDO
 
@@ -822,7 +822,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                   ENDDO
                ENDIF
                IF ( IMIN.EQ.0 ) CALL CMLAB(0,dsig,ttttt)
-               IF ( ERR ) GOTO 2200
+               IF ( ERR ) GOTO 2000
                IF ( IMIN.EQ.0 ) GOTO 2400
                GOTO 500
             ELSEIF ( op2.EQ.'RE,C' ) THEN
@@ -838,7 +838,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
             ELSE
                IF ( op2.EQ.'GOSI' ) GOTO 300
                IF ( op2.EQ.'COUL' ) GOTO 300
-               IF ( op2.EQ.'EXIT' ) GOTO 2000
+               IF ( op2.EQ.'EXIT' ) GOTO 3000
                IF ( op2.EQ.'MINI' ) THEN
                   READ (JZB,*) imode , nptl , chiok , conu , xtest , 
      &                         LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
@@ -985,7 +985,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                                  ENDIF
                               ENDIF
                               CALL CMLAB(lx,dsig,tetrc)
-                              IF ( ERR ) GOTO 2200
+                              IF ( ERR ) GOTO 2000
                               tting = TLBDG(lx)
                               IF ( ERR ) GOTO 1900
                               CALL LOAD(lx,1,1,0.D0,jj)
@@ -1357,7 +1357,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                            ENDDO
                         ENDDO
                      ENDDO
-                     GOTO 2200
+                     GOTO 2000
                   ELSEIF ( op2.EQ.'RAW ' ) THEN
                      REWIND 8
                      DO l = 1 , 8
@@ -1410,7 +1410,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
       ENDIF
       WRITE (22,99115) op1 , op2
 99115 FORMAT (5X,'UNRECOGNIZED OPTION',1X,1A3,1A4)
-      GOTO 2200
+      GOTO 2000
  300  READ (JZB,99116) op1
 99116 FORMAT (1A4)
       IF ( op1.EQ.'    ' ) GOTO 200
@@ -1645,7 +1645,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
       ELSE
          WRITE (22,99020) op1
 99020    FORMAT (5X,'UNRECOGNIZED SUBOPTION',1X,1A4)
-         GOTO 2200
+         GOTO 2000
       ENDIF
       GOTO 300
  500  IF ( ICS.EQ.1 ) THEN
@@ -1773,7 +1773,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
             ENDIF
          ENDIF
       ENDDO
-      GOTO 2200
+      GOTO 2000
  800  irea = 0
       IF ( ms.LT.0 ) irea = 1
       IF ( ms.EQ.0 ) mend = MEMAX
@@ -1859,7 +1859,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
       GOTO 200
 
  1300 CALL CMLAB(0,dsig,ttttt)
-      IF ( ERR ) GOTO 2200
+      IF ( ERR ) GOTO 2000
       IF ( op2.EQ.'POIN' ) READ (JZB,*) ifwd , slim
       ient = 1
       icg = 1
@@ -2474,9 +2474,9 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
          IF ( IBPS.NE.0 ) THEN
             IBPS = IBPS + 1
             IF ( IBPS.EQ.1 ) JZB = 26 ! But IBPS must be 2 here! Ooops!
-            IF ( IBPS.EQ.1 ) GOTO 100
+            IF ( IBPS.EQ.1 ) GOTO 2200
          ENDIF
-         IF ( IPS1.EQ.0 ) GOTO 2200
+         IF ( IPS1.EQ.0 ) GOTO 2000
          IMIN = IMIN + 1
          DO iva = 1 , LP1 ! LP1 = 50
             JSKIP(iva) = 1
@@ -2488,8 +2488,8 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
             WRITE (irix,*) ELM(lkj)
          ENDDO
          IF ( ifm.EQ.1 ) CALL PRELM(3)
-         IF ( ifm.EQ.1 ) GOTO 2200 ! changed for gosia2
-         GOTO 2000
+         IF ( ifm.EQ.1 ) GOTO 2000 ! changed for gosia2
+         GOTO 3000
       ELSE
          MCFIX = 1
          CALL MINI(chisq,1.D+38,nptl,conu,imode,idr,xtest,0,0,0,bten)
@@ -2520,7 +2520,7 @@ c     *(ccch1+ccch2)
          ENDIF
          IF ( IBPS.EQ.0 .AND. JZB.EQ.25 ) JZB = 26
          IF ( IBPS.NE.0 ) JZB = 25
-         GOTO 100
+         GOTO 2200
       ENDIF
 
  1500 WRITE (22,99043)
@@ -2540,7 +2540,7 @@ c     *(ccch1+ccch2)
      &        'ATION')
       GOTO 1900
 
- 2000 IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
+ 3000 IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
       IF ( mret.EQ.1 ) GOTO 2300
       IF ( IPRM(18).NE.0 ) CALL PTICC(idr)
       IF ( oph.EQ.'GOSI' ) THEN
@@ -2613,12 +2613,13 @@ c     *(ccch1+ccch2)
          ENDIF
       ENDIF
 
- 2200 WRITE (22,99047)
+ 2000 WRITE (22,99047)
 99047 FORMAT (15X,'********* END OF EXECUTION **********')
 
+C     Decide if we have to loop again for beam/projectile
  2300 IF ( mrepf.NE.1 ) THEN
          IF ( mret.EQ.1 ) JZB = 25
-         IF ( mret.EQ.1 ) GOTO 100
+         IF ( mret.EQ.1 ) GOTO 2200
          DO mmmm = 1 , 32
             DO kkkk = 1 , 50
                WRITE (13,*) CNOR1(mmmm,kkkk)
@@ -2627,7 +2628,7 @@ c     *(ccch1+ccch2)
       ELSE
          mrepf = 2
          JZB = 26
-         GOTO 100
+         GOTO 2200
       ENDIF
 
 99048 FORMAT (1X//50X,'CALCULATED YIELDS'//5X,'EXPERIMENT ',1I2,2X,
