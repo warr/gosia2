@@ -97,8 +97,8 @@ C      I57    - switch which is either 5 or 7.
                      IF ( ld.EQ.0 ) THEN
                         ir = ir + NSTOP(n) - NSTART(n) + 1
                         n = n + 1
-                        IF ( n.GT.NMAX ) GOTO 100
-                        GOTO 42
+                        IF ( n.LE.NMAX ) GOTO 42
+                        GOTO 100
                      ELSE
                         nhold = n
                      ENDIF
