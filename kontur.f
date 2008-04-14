@@ -154,8 +154,8 @@ C      Rem    -
       XV(i) = ELM(Jj)
       IF ( NWR*(chis2-Chis0).LT.2. .AND. Inpo.EQ.-1 ) h = 2.*h
       IF ( itl.EQ.1 ) GOTO 600
-      IF ( f(3).LT.1.E-3 ) GOTO 600
-      GOTO 200
+      IF ( f(3).GE.1.E-3 ) GOTO 200
+      GOTO 600
  500  REWIND 17
       DO l = 1 , MEMAX
          WRITE (17,*) ELM(l)
