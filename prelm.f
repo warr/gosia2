@@ -67,47 +67,61 @@ C      Iop    - print flag (controls what is written to output).
                IF ( l.NE.0 ) THEN
                   DO kk = 1 , l
                      inx = inx + 1
-                     IF ( Iop.NE.2 ) THEN
-                        IF ( Iop.EQ.3 ) THEN
-                           isp = LEAD(2,inx)
-                           pv = (ELMU(inx)-ELML(inx))/100.
-                           wrn = '   '
-                           IF ( (ELM(inx)-ELML(inx)).LT.pv ) wrn = '*?*'
-                           IF ( (ELMU(inx)-ELM(inx)).LT.pv ) wrn = '*?*'
-                           IF ( JZB.EQ.25 ) ste = ELM25(inx)
-                           IF ( JZB.EQ.26 ) ste = ELM26(inx)
-                           b = ELM(inx)*ELM(inx)/(2.*SPIN(isp)+1.)
-                           IF ( LEAD(1,inx).EQ.LEAD(2,inx) )
-     &                          b = 9999999.
-                           WRITE (22,99009) inx , LEAD(1,inx) , 
-     &                            LEAD(2,inx) , ELM(inx) , 
-     &                            100.*(ELM(inx)-ste)/ste , b , wrn
-                        ELSEIF ( Iop.EQ.4 ) THEN
-                           GOTO 2
-                        ELSE
-                           WRITE (22,99008) inx , LEAD(1,inx) , 
+
+                     IF ( Iop.EQ.2 ) THEN ! Iop is 2
+                        IF ( IVAR(inx).EQ.0 ) THEN ! Fixed
+                           WRITE (22,99006) inx , LEAD(1,inx) , 
      &                            LEAD(2,inx) , ELM(inx)
+                        ELSEIF ( IVAR(inx).GT.1000 ) THEN ! Correlation
+                           WRITE (22,99007) inx , LEAD(1,inx) , 
+     &                            LEAD(2,inx) , ELM(inx) , 
+     &                            (IVAR(inx)-1000)
+                        ELSE ! Limit
+                           WRITE (22,99009) inx , LEAD(1,inx) , 
+     &                            LEAD(2,inx) , ELM(inx) , ELML(inx) , 
+     &                            ELMU(inx)
                         ENDIF
-                        GOTO 5
-                     ENDIF
- 2                   IF ( IVAR(inx).EQ.0 ) THEN
-                        WRITE (22,99006) inx , LEAD(1,inx) , LEAD(2,inx)
+
+                     ELSEIF ( Iop.EQ.3 ) THEN ! Iop is 3
+                        isp = LEAD(2,inx)
+                        pv = (ELMU(inx)-ELML(inx))/100.
+                        wrn = '   '
+                        IF ( (ELM(inx)-ELML(inx)).LT.pv ) wrn = '*?*'
+                        IF ( (ELMU(inx)-ELM(inx)).LT.pv ) wrn = '*?*'
+                        IF ( JZB.EQ.25 ) ste = ELM25(inx)
+                        IF ( JZB.EQ.26 ) ste = ELM26(inx)
+                        b = ELM(inx)*ELM(inx)/(2.*SPIN(isp)+1.)
+                        IF ( LEAD(1,inx).EQ.LEAD(2,inx) ) b = 9999999.
+                        WRITE (22,99009) inx , LEAD(1,inx) , LEAD(2,inx)
+     &                         , ELM(inx) , 100.*(ELM(inx)-ste)/ste , 
+     &                         b , wrn
+
+                     ELSEIF ( Iop.EQ.4 ) THEN ! Iop is 4
+                        IF ( IVAR(inx).EQ.0 ) THEN ! Fixed
+                           WRITE (22,99006) inx , LEAD(1,inx) , 
+     &                            LEAD(2,inx) , ELM(inx)
+                        ELSEIF ( IVAR(inx).GT.1000 ) THEN ! Correlation
+                           WRITE (22,99007) inx , LEAD(1,inx) , 
+     &                            LEAD(2,inx) , ELM(inx) , 
+     &                            (IVAR(inx)-1000)
+                        ELSE ! Limit
+                           IF ( JZB.EQ.25 ) THEN
+                             WRITE (22,99009) inx , LEAD(1,inx) , 
+     &                           LEAD(2,inx) , ELM25(inx) , ELML(inx) ,
+     &                           ELMU(inx)
+                           ELSEIF ( JZB.EQ.26 ) THEN
+                             WRITE (22,99009) inx , LEAD(1,inx) , 
+     &                           LEAD(2,inx) , ELM26(inx) , ELML(inx) , 
+     &                           ELMU(inx)
+                           ENDIF
+                       ENDIF
+
+                     ELSE ! Iop is 1
+                        WRITE (22,99008) inx , LEAD(1,inx) , LEAD(2,inx)
      &                         , ELM(inx)
-                     ELSEIF ( IVAR(inx).GT.1000 ) THEN
-                        WRITE (22,99007) inx , LEAD(1,inx) , LEAD(2,inx)
-     &                         , ELM(inx) , (IVAR(inx)-1000)
-                     ELSE
-                        IF ( Iop.EQ.2 ) WRITE (22,99009) inx , 
-     &                       LEAD(1,inx) , LEAD(2,inx) , ELM(inx) , 
-     &                       ELML(inx) , ELMU(inx)
-                        IF ( Iop.EQ.4 .AND. JZB.EQ.25 ) WRITE (22,99009)
-     &                       inx , LEAD(1,inx) , LEAD(2,inx) , 
-     &                       ELM25(inx) , ELML(inx) , ELMU(inx)
-                        IF ( Iop.EQ.4 .AND. JZB.EQ.26 ) WRITE (22,99009)
-     &                       inx , LEAD(1,inx) , LEAD(2,inx) , 
-     &                       ELM26(inx) , ELML(inx) , ELMU(inx)
                      ENDIF
- 5                ENDDO ! Loop on kk
+
+                  ENDDO ! Loop on kk
                ENDIF ! If l .ne. 0
             ENDDO ! Loop on k
          ENDIF ! If m .ne. 0
