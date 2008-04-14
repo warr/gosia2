@@ -967,7 +967,7 @@ C              Treat OP,THEO
      &                            xm2,xm3)
                         IF ( ABS(ELM(kb)).LT.1E-6 ) ELM(kb) = 1.E-6
                         irix = 12
-                        IF ( IBPS.EQ.1 ) irix = 32
+                        IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for target, 32 for beam
                         WRITE (irix,*) ELM(kb)
                      ENDIF
                   ENDDO
@@ -1405,9 +1405,17 @@ C              Treat OP,INTG
                   REWIND 4
                   GOTO 1300
                ELSE
+
+C                 Treat OP,POIN
                   IF ( op2.EQ.'POIN' ) GOTO 1300
+
+C                 Treat OP,MAP
                   IF ( op2.EQ.'MAP ' ) iobl = 1
+
+C                 Treat OP,STAR
                   IF ( op2.EQ.'STAR' ) GOTO 1300
+
+C                 Treat OP,SIXJ
                   IF ( op2.EQ.'SIXJ' ) THEN
                      DO k = 1 , 2
                         l = 4*k
@@ -1423,19 +1431,22 @@ C              Treat OP,INTG
                            ENDDO
                         ENDDO
                      ENDDO
-                     GOTO 2000
+                     GOTO 2000 ! End of OP,SIXJ
+
+C                 Treat OP,RAW (raw uncorrected gamma yields)
                   ELSEIF ( op2.EQ.'RAW ' ) THEN
+C                    Read absorber coefficients from unit 8
                      REWIND 8
                      DO l = 1 , 8
-                        READ (8,*) (ABC(l,j),j=1,10)
+                        READ (8,*) (ABC(l,j),j=1,10) ! Absorption coefficients
                         DO j = 1 , 10
                            ABC(l,j) = LOG(ABC(l,j))
                         ENDDO
                      ENDDO
                      DO l = 1 , nfd
-                        READ (8,*) (THICK(l,j),j=1,7)
+                        READ (8,*) (THICK(l,j),j=1,7) ! thickness of absorbers
                      ENDDO
-                     DO l = 1 , LP1
+                     DO l = 1 , LP1 ! LP1 = 50
                         DO j = 1 , 200
                            ICLUST(l,j) = 0
                         ENDDO
@@ -1444,20 +1455,22 @@ C              Treat OP,INTG
                         ENDDO
                         IRAWEX(l) = 0
                      ENDDO
-                     DO l = 1 , LP1
-                        READ (JZB,*) mexl
+
+C                    Read input from standard input
+                     DO l = 1 , LP1 ! LP1 = 50
+                        READ (JZB,*) mexl ! experiment number
                         IF ( mexl.EQ.0 ) GOTO 100
                         IRAWEX(mexl) = 1
                         n = NANG(mexl)
                         DO j = 1 , n
                            jj = ITMA(mexl,j)
-                           READ (JZB,*) (AKAVKA(k,jj),k=1,8)
+                           READ (JZB,*) (AKAVKA(k,jj),k=1,8) ! efficiency curve parameters
                         ENDDO
                         READ (JZB,*) kclust
                         IF ( kclust.NE.0 ) THEN
                            DO j = 1 , kclust
-                              READ (JZB,*) numcl
-                              READ (JZB,*) (liscl(k),k=1,numcl)
+                              READ (JZB,*) numcl ! Number of detectors for this cluster
+                              READ (JZB,*) (liscl(k),k=1,numcl) ! Indices of logical detectors
                               LASTCL(l,j) = liscl(numcl)
                               DO k = 1 , numcl
                                  kk = liscl(k)
@@ -1466,20 +1479,27 @@ C              Treat OP,INTG
                            ENDDO
                         ENDIF
                      ENDDO
-                     GOTO 100
+                     GOTO 100 ! End of OP,RAW
+
+C                 Treat OP,MAP
                   ELSEIF ( op2.EQ.'MAP ' ) THEN
-                     GOTO 1300
+                     GOTO 1300 ! End of OP,MAP 
                   ENDIF
                ENDIF
             ENDIF
          ENDIF
-      ENDIF
+      ENDIF ! End of if (op1.eq."OP, ") if statement
+
       WRITE (22,99115) op1 , op2
 99115 FORMAT (5X,'UNRECOGNIZED OPTION',1X,1A3,1A4)
       GOTO 2000
- 300  READ (JZB,99116) op1
+
+C     Treat suboptions of OP,COUL and OP,GOSI
+ 300  READ (JZB,99116) op1 ! Read the suboption
 99116 FORMAT (1A4)
       IF ( op1.EQ.'    ' ) GOTO 100
+
+C     Treat suboption LEVE (levels)
       IF ( op1.EQ.'LEVE' ) THEN
          NMAX = 0
          IF ( ABS(IPRM(1)).EQ.1 ) WRITE (22,99017)
