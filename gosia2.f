@@ -267,7 +267,6 @@ C      ZV     - energy meshpoints
      &       ZETA , zmir , zp , ZPOL , ZV , zz
       REAL*8 CNOR1 , CNOR2 , ELM25 , ELM26 , chir , chp , ccch1 ,
      &       ccch2 , cht ! For gosia2
-      REAL*8 cnst
       INTEGER*4 i , i122 , IAMX , IAMY , IAPR , iapx , IAXS , ib , 
      &          ibaf , IBPS , IBRC , IBYP , icg , icll , ICLUST , ICS ,
      &          ict , ictl , id , idf , IDIVE
