@@ -1,3 +1,31 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE KLOPOT
+C
+C Called by: GOSIA
+C
+C Purpose: trouble shooting (see OP,TROU)
+C
+C Uses global variables:
+C      CORF   - internal correction factors
+C      ELM    - matrix elements
+C      ELML   - lower limit on matrix elements
+C      ELMU   - upper limit on matrix elements
+C      EP     - bombarding energy
+C      IY     - index of experimental yields
+C      KVAR   -
+C      LP2    - maximum number of matrix elements (500)
+C      MEMAX  - number of matrix elements
+C      NEXPT  - number of experiments
+C      TLBDG  - theta of particle detector
+C      ZETA   - various coefficients
+C      VINF   - speed of projectile at infinity
+C
+C Formal parameters:
+C      K      - number of experimental yields giving largest and positive
+C               components of the derivative of chi squared.
+C      Rlr    - print out if matrix element exceeds Rlr.
+
       SUBROUTINE KLOPOT(K,Rlr)
       IMPLICIT NONE
       REAL*8 a , al , al1 , b , c , ch , CORF , d , dy , DYEX , e , 
@@ -21,6 +49,7 @@
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       COMMON /SEL   / KVAR(500)
+
       REWIND 14
       REWIND 18
       ipf = 1
@@ -73,7 +102,7 @@
             GOTO 400
          ENDIF
       ENDIF
-      loc = (iexh-1)*LP2 + inh
+      loc = (iexh-1)*LP2 + inh ! LP2 = 500
       ipf = 0
       ZETA(loc) = (VINF(iexh)*g1+TLBDG(iexh)*g2)/VINF(iexh)/VINF(iexh)
       inh = indx
