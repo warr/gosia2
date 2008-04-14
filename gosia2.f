@@ -306,7 +306,7 @@ C      ZV     - energy meshpoints
      &          LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , lpin , ltrn , 
      &          ltrn1 , ltrn2 , lu , lx
       INTEGER*4 lxd , LZETA , m25 , m26 , MAGA , MAGEXC , magh , mawr , 
-     &          MCFIX , mdupa , MEM , MEMAX , memax1 , memh , memx4 , 
+     &          MCFIX , MEM , MEMAX , memax1 , memh , memx4 , 
      &          MEMX6 , mend , mexl , mfla , mlt
       INTEGER*4 mm , mmmm , mpin , mrepf , mres1 , mret , ms , MULTI , 
      &          n , na , na1 , naa , nallow , NAMX , NANG , nawr , 
@@ -2502,20 +2502,20 @@ C        Added for gosia2
       ELSE
          REWIND 7
          REWIND 27
-         mdupa = 7
-         IF ( IBPS.EQ.1 ) mdupa = 27 ! unit 7 for target, 27 for beam
+         irix = 7
+         IF ( IBPS.EQ.1 ) irix = 27 ! unit 7 for target, 27 for beam
          DO iuy = 1 , 6
-            READ (mdupa,*) (XIR(iuy,jj),jj=1,NEXPT)
-            READ (mdupa,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
+            READ (irix,*) (XIR(iuy,jj),jj=1,NEXPT)
+            READ (irix,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
          ENDDO
          DO jj = 1 , NEXPT
             DO jk = 1 , 4
                DO kuku = 1 , 6
-                  READ (mdupa,*) (PARXM(jj,jk,jl,kuku),jl=1,10)
+                  READ (irix,*) (PARXM(jj,jk,jl,kuku),jl=1,10)
                ENDDO
             ENDDO
             DO jk = 1 , 12
-               READ (mdupa,*) (PARX(jj,jk,jl),jl=1,5)
+               READ (irix,*) (PARX(jj,jk,jl),jl=1,5)
             ENDDO
          ENDDO
          DO jgs = 1 , MEMAX
