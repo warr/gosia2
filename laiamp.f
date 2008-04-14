@@ -1,3 +1,35 @@
+ 
+C----------------------------------------------------------------------
+C SUBROUTINE LAIAMP
+C
+C Called by: STING
+C Calls:     FAZA1, LEADF, STAMP, TCABS
+C
+C Purpose: calculate reduced matrix element
+C
+C Uses global variables:
+C      ARM    - reduced matrix elements
+C      CAT    - substates of levels (n_level, J, m)
+C      ELM    - matrix elements
+C      EPS    - epsilon
+C      EROOT  - sqrt(epsilon^2 - 1)
+C      IEXP   - number of experiment
+C      IFAC   -
+C      ISG    -
+C      LAMDA  - list of multipolarities to calculate
+C      LAMMAX - number of multipolarities to calculate
+C      LAMR   -
+C      LDNUM  - number of matrix elements with each multipolarity populating levels
+C      LZETA  - index in ZETA to coupling coefficients for given multipolarity
+C      NSTART -
+C      NSTOP  -
+C      XI     - xi coupling coefficients
+C      ZETA   - various coefficients
+C
+C Formal parameters:
+C      Ir     - index into ARM array
+C      W0     - omega
+      
       SUBROUTINE LAIAMP(Ir,W0)
       IMPLICIT NONE
       REAL*8 CAT , D2W , ELM , ELML , ELMU , EPS , epsi , EROOT , errt , 
@@ -22,10 +54,11 @@
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /CXI   / XI(500)
+
       ppp = 0.
       epsi = EPS(IEXP)
       errt = EROOT(IEXP)
-      rmir = CAT(Ir,3)
+      rmir = CAT(Ir,3) ! m quantum number of substate Ir
       DO i1 = 1 , LAMMAX
          lam = LAMDA(i1)
          nz = LZETA(lam)
@@ -55,7 +88,7 @@
                            is = is2 + i3
                            nz = nz + 1
                            z = ZETA(nz)
-                           rmis = CAT(is,3)
+                           rmis = CAT(is,3) ! m quantum number of substate is
                            rmu = rmis - rmir
                            mua = ABS(rmu) + 1.1
                            IF ( lam.LE.6 .OR. mua.NE.1 ) THEN
