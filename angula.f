@@ -31,21 +31,21 @@ C      Trec   - Theta of recoiling nucleus
 C      Gth    -
 C      Figl   -
 C      Ngl    - detector number
+C      Op2    - The part after the OP, for the option we are processing
       
       SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
       REAL*8 AGELI , alab , arg , at , attl , BETAR , bt , CC , DELLA , 
      &       DELTA , dsig , DSIGS , EG , ENDEC , ENZ , EP , EPS , 
-     &       EROOT , f , Fi0
-      REAL*8 fi01 , Fi1 , fi11 , FIEX , Figl , FP , GKP , Gth , Q , qv , 
-     &       sm , TAU , TETACM , TLBDG , Trec , TREP , ttx , VINF , XA , 
-     &       XA1
-      REAL*8 Ygn , ylmr , ZETA
+     &       EROOT , f , Fi0 , fi01 , Fi1 , fi11
+      REAL*8 FIEX , Figl , FP , GKP , Gth , Q , qv , sm , TAU
+     &       TETACM , TLBDG , Trec , TREP , ttx , VINF , XA , 
+     &       XA1 , Ygn , ylmr , ZETA
       INTEGER*4 IAXS , Idr , IEXP , ifn , Iful , ig , il , inat , inx1 , 
      &          ipd , is , ITMA , ITTE , iu , ixs , IZ , IZ1 , j , ji , 
-     &          jj
-      INTEGER*4 jm , k , KLEC , kq , KSEQ , l , lf , lf1 , LZETA , 
-     &          mind , NANG , NEXPT , Ngl , NICC , nlv
+     &          jj , jm , k
+      INTEGER*4 KLEC , kq , KSEQ , l , lf , lf1 , LZETA , mind , NANG , 
+     &          NEXPT , Ngl , NICC , nlv
       CHARACTER*4 Op2
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
      &          Ygn(500)
@@ -63,6 +63,7 @@ C      Ngl    - detector number
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
+      
       DO l = 1 , Idr
          nlv = KSEQ(l,3) ! Level number of l'th decay
          il = (nlv-1)*28
