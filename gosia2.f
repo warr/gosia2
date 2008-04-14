@@ -2499,7 +2499,7 @@ C        Added for gosia2
                IDIVE(jj1,jj) = 1
             ENDDO
          ENDDO
-      ELSE
+      ELSE ! iobl .lt. 1
          REWIND 7
          REWIND 27
          irix = 7
