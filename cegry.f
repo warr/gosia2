@@ -81,7 +81,7 @@ C      Iredv  -
       REAL*8 dl , DQ , DSIGS , DYEX , effi , EG , EMH , EN , ENDEC , 
      &       ENZ , EP , EPS , EROOT , fi0 , fi1 , fic , FIEX , figl , 
      &       fm , g
-      REAL*8 gth , ODL , PART , PARTL , Q , QCEN , rik , rl , rx , ry , 
+      REAL*8 gth , ODL , part , partl , Q , QCEN , rik , rl , rx , ry , 
      &       rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , SUBCH2 , sum3 , 
      &       SUMCL
       REAL*8 sumpr , TACOS , TAU , TETACM , tetrc , tfac , thc , TLBDG , 
@@ -105,11 +105,11 @@ C      Iredv  -
      &          NMAX , NMAX1 , Nwyr , NYLDE
       INTEGER*4 MCFIX ! For gosia2
       CHARACTER*4 wupl , war , op2
-      DIMENSION lic(32) , lth(500) , cnr(32,50)
+      DIMENSION part(32,50,2) , lic(32) , lth(500) , cnr(32,50) , 
+     &          partl(32,50,2)
       COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,500) , 
      &                IRAWEX(50)
       COMMON /ODCH  / DEV(500)
-      COMMON /TUTAJ / PART(32,50,2) , PARTL(32,50,2)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
      &                ENZ(200)
@@ -143,6 +143,7 @@ C      Iredv  -
       COMMON /TRB   / ITS
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
       COMMON /CCCDS / NDST(50)
+      SAVE part, partl
 
       op2 = '    '
       ifxd = 0
@@ -185,8 +186,8 @@ C     with CONT:PRT, and then does OP,EXIT
                IF ( IEXP.EQ.1 ) sum3 = 0.
                DO jj = 1 , LP6
                   DO jk = 1 , 2
-                     PARTL(jj,IEXP,jk) = 0.
-                     PART(jj,IEXP,jk) = 0.
+                     partl(jj,IEXP,jk) = 0.
+                     part(jj,IEXP,jk) = 0.
                   ENDDO
                ENDDO
             ENDIF
@@ -349,14 +350,14 @@ C     with CONT:PRT, and then does OP,EXIT
                      IF ( IGRD.NE.1 ) THEN
                         IF ( JSKIP(IEXP).NE.0 ) THEN
                            dl = DYEX(k9,lu)*DYEX(k9,lu)
-                           PART(k9,IEXP,1) = PART(k9,IEXP,1) + YGN(l)
+                           part(k9,IEXP,1) = part(k9,IEXP,1) + YGN(l)
      &                        *YGN(l)*wf*wf/dl
-                           PART(k9,IEXP,2) = PART(k9,IEXP,2) - 2.*YGN(l)
+                           part(k9,IEXP,2) = part(k9,IEXP,2) - 2.*YGN(l)
      &                        *wf*YEXP(k9,lu)/dl
                            sumpr = sumpr + YEXP(k9,lu)*YEXP(k9,lu)/dl
-                           PARTL(k9,IEXP,1) = PARTL(k9,IEXP,1)
+                           partl(k9,IEXP,1) = partl(k9,IEXP,1)
      &                        + YEXP(k9,lu)*YEXP(k9,lu)/dl
-                           PARTL(k9,IEXP,2) = PARTL(k9,IEXP,2)
+                           partl(k9,IEXP,2) = partl(k9,IEXP,2)
      &                        + LOG(wf*YGN(l)/YEXP(k9,lu))*YEXP(k9,lu)
      &                        *YEXP(k9,lu)/dl
                            sum3 = sum3 + YEXP(k9,lu)*YEXP(k9,lu)
@@ -508,7 +509,7 @@ C     with CONT:PRT, and then does OP,EXIT
          IF ( JSKIP(jj).NE.0 ) THEN
             kc = NDST(jj)
             DO jk = 1 , kc
-               cnr(jk,jj) = -.5*PART(jk,jj,2)/PART(jk,jj,1)
+               cnr(jk,jj) = -.5*part(jk,jj,2)/part(jk,jj,1)
                IF ( INNR.NE.0 ) CNOR(jk,jj) = cnr(jk,jj)
             ENDDO ! Loop on datasets
             IF ( INNR.NE.1 ) THEN
@@ -518,8 +519,8 @@ C     with CONT:PRT, and then does OP,EXIT
                   IF ( LNORM(jj1).EQ.jj ) THEN
                      k = NDST(jj1)
                      DO jk = 1 , k
-                        d = d + YNRM(jk,jj1)*PART(jk,jj1,1)*YNRM(jk,jj1)
-                        g = g - .5*YNRM(jk,jj1)*PART(jk,jj1,2)
+                        d = d + YNRM(jk,jj1)*part(jk,jj1,1)*YNRM(jk,jj1)
+                        g = g - .5*YNRM(jk,jj1)*part(jk,jj1,2)
                      ENDDO ! Loop on datasets
                   ENDIF ! IF ( LNORM(jj1).EQ.jj )
                ENDDO ! Loop on experiment
@@ -554,10 +555,10 @@ C     Calculate chi squared
          k = NDST(jj)
          DO jk = 1 , k
             IF ( MCFIX .EQ. 0) CNOR(jk,jj) = CNOR1(jk,jj)
-            Chilo = Chilo + PARTL(jk,jj,1)*LOG(CNOR(jk,jj))
-     &              **2 + PARTL(jk,jj,2)*2.*LOG(CNOR(jk,jj))
-            Chisq = Chisq + CNOR(jk,jj)*CNOR(jk,jj)*PART(jk,jj,1)
-     &              + CNOR(jk,jj)*PART(jk,jj,2)
+            Chilo = Chilo + partl(jk,jj,1)*LOG(CNOR(jk,jj))
+     &              **2 + partl(jk,jj,2)*2.*LOG(CNOR(jk,jj))
+            Chisq = Chisq + CNOR(jk,jj)*CNOR(jk,jj)*part(jk,jj,1)
+     &              + CNOR(jk,jj)*part(jk,jj,2)
          ENDDO ! Loop on datasets
       ENDDO ! Loop on experiment
 
