@@ -424,7 +424,7 @@ C     MeV
      &      22.933 , 11.334 , 4.540 , 1.813 , .8020 , .5900/
 
       READ * , IBPS
-      READ 99055 , op1 , op2
+      READ 99056 , op1 , op2
       CALL OPENF1
       IBPS = IBPS - 1
       JZB = 25
@@ -643,7 +643,7 @@ C     Initialize pointers
       ENDDO
       ERR = .FALSE.
       intend = 0
- 200  READ (JZB,99055) op1 , op2
+ 200  READ (JZB,99056) op1 , op2
       IF ( op1.EQ.'OP, ' ) THEN
          IF ( op2.EQ.'GOSI' ) oph = op2
          IF ( op2.EQ.'GOSI' ) opcja = op2
@@ -1090,7 +1090,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
      &                                  dsx , 
      &                                  (GRAD(jyi)*dsig*ax,jyi=1,idr)
                                  IF ( IPRM(11).EQ.1 ) THEN
-                                    WRITE (22,99047) lx , ija0 , enb , 
+                                    WRITE (22,99048) lx , ija0 , enb , 
      &                                 tta
                                     IF ( tta.LT.0. ) WRITE (22,99010)
      &                                 tting
@@ -1100,7 +1100,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                                     DO jyi = 1 , idr
                                        ni = KSEQ(jyi,3)
                                        nf = KSEQ(jyi,4)
-                                       WRITE (22,99048) ni , nf , 
+                                       WRITE (22,99049) ni , nf , 
      &                                    SPIN(ni) , SPIN(nf) , 
      &                                    GRAD(jyi)*dsig*ax , GRAD(jyi)
      &                                    /GRAD(IDRN)
@@ -1240,13 +1240,13 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                               GRAD(jd) = SIMIN(npce1,hen,XI)
                            ENDDO
                            IF ( ja.EQ.1 ) dst = dst + DS
-                           IF ( ja.EQ.1 ) WRITE (22,99011) DS , lx
-99011                      FORMAT (1X/////5X,
+                           IF ( ja.EQ.1 ) WRITE (22,99111) DS , lx
+99111                      FORMAT (1X/////5X,
      &                            'INTEGRATED RUTHERFORD CROSS SECTION='
      &                            ,1E9.4,2X,'FOR EXP.',1I2///)
-                           WRITE (22,99012) lx , ja , emn , emx , tmn , 
+                           WRITE (22,99112) lx , ja , emn , emx , tmn , 
      &                            tmx
-99012                      FORMAT (1X,//50X,'INTEGRATED YIELDS'//5X,
+99112                      FORMAT (1X,//50X,'INTEGRATED YIELDS'//5X,
      &                             'EXPERIMENT ',1I2,2X,'DETECTOR ',
      &                             1I2/5X,'ENERGY RANGE ',1F8.3,'---',
      &                             1F8.3,1X,'MEV',3X,
@@ -1260,7 +1260,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                            DO jd = 1 , idr
                               ni = KSEQ(jd,3)
                               nf = KSEQ(jd,4)
-                              WRITE (22,99048) ni , nf , SPIN(ni) , 
+                              WRITE (22,99049) ni , nf , SPIN(ni) , 
      &                               SPIN(nf) , GRAD(jd) , GRAD(jd)
      &                               /GRAD(IDRN)
                            ENDDO
@@ -1269,9 +1269,9 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                            IF ( jpin(lx).EQ.0 ) THEN
                               CALL COORD(wth,wph,wthh,1,2,pfi,wpi,
      &                           TLBDG(lx),lx,txx,txx)
-                              WRITE (22,99013) FIEX(lx,1)*57.2957795 , 
+                              WRITE (22,99113) FIEX(lx,1)*57.2957795 , 
      &                               FIEX(lx,2)*57.2957795 , lx
-99013                         FORMAT (//5X,
+99113                         FORMAT (//5X,
      &                          'WARNING: THE PHI ANGLE WAS REPLACED BY'
      &                          ,1X,F8.3,1X,'TO',F8.3,3X,
      &                          'FOR EXPERIMENT',2X,I3)
@@ -1283,8 +1283,8 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                         ENDIF
                         iske = iske + ne*ntt*naa
                      ENDDO
-                     IF ( mpin.GT.1 ) WRITE (22,99014) dst , lx
-99014                FORMAT (1x//2x,
+                     IF ( mpin.GT.1 ) WRITE (22,99114) dst , lx
+99114                FORMAT (1x//2x,
      &                      'Total integrated Rutherford cross section='
      &                      ,1E8.3,' for exp. ',1I2/)
                   ENDDO
@@ -1408,11 +1408,11 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
             ENDIF
          ENDIF
       ENDIF
-      WRITE (22,99015) op1 , op2
-99015 FORMAT (5X,'UNRECOGNIZED OPTION',1X,1A3,1A4)
+      WRITE (22,99115) op1 , op2
+99115 FORMAT (5X,'UNRECOGNIZED OPTION',1X,1A3,1A4)
       GOTO 2200
- 300  READ (JZB,99016) op1
-99016 FORMAT (1A4)
+ 300  READ (JZB,99116) op1
+99116 FORMAT (1A4)
       IF ( op1.EQ.'    ' ) GOTO 200
       IF ( op1.EQ.'LEVE' ) THEN
          NMAX = 0
@@ -1727,8 +1727,8 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
 99022    FORMAT (1X///20X,'*** BEST POINT FOUND (TAPE17) ***'///)
          CALL PRELM(3)
       ENDIF
-      IF ( naxfl.EQ.0 ) WRITE (22,99050)
-      IF ( naxfl.NE.0 ) WRITE (22,99049)
+      IF ( naxfl.EQ.0 ) WRITE (22,99051)
+      IF ( naxfl.NE.0 ) WRITE (22,99050)
       WRITE (22,99023)
 99023 FORMAT (40X,'ESTIMATED ERRORS'//5X,'INDEX',5X,'NI',5X,'NF',5X,
      &        'ME AND ERRORS'//)
@@ -1742,8 +1742,8 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
      &              1F9.5,')','......',1F7.1,' ,',1F7.1,1X,'PC')
          ENDIF
       ENDDO
-      IF ( naxfl.NE.0 ) WRITE (22,99049)
-      IF ( naxfl.EQ.0 ) WRITE (22,99050)
+      IF ( naxfl.NE.0 ) WRITE (22,99050)
+      IF ( naxfl.EQ.0 ) WRITE (22,99051)
       WRITE (22,99025)
 99025 FORMAT (40X,'ESTIMATED ERRORS',//5X,'INDEX',5X,'NI',5X,'NF',5X,
      &        'B(E,ML)(OR QUADRUPOLE MOMENT)',' AND ERRORS'//)
@@ -1762,12 +1762,12 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
      &              be2a = 0.
                be2a = be2a**2/sbe
                be2b = be2b**2/sbe
-               WRITE (22,99051) kh2 , LEAD(2,kh2) , LEAD(1,kh2) , be2 , 
+               WRITE (22,99052) kh2 , LEAD(2,kh2) , LEAD(1,kh2) , be2 , 
      &                          be2a - be2 , be2b - be2
             ELSE
                ispb = INT(SPIN(ispa))*2
                qfac = 3.170662*WTHREJ(ispb,4,ispb,-ispb,0,ispb)
-               WRITE (22,99051) kh2 , LEAD(2,kh2) , LEAD(1,kh2) , 
+               WRITE (22,99052) kh2 , LEAD(2,kh2) , LEAD(1,kh2) , 
      &                          HLM(kh2)*qfac , DEVD(kh2)*qfac , 
      &                          DEVU(kh2)*qfac
             ENDIF
@@ -1933,12 +1933,12 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                ENDDO
                pop1 = 1. - summm
                jgl = 1
-               IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 ) WRITE (22,99052)
+               IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 ) WRITE (22,99053)
      &              jgl , pop1
                DO jgl = 2 , NMAX
                   loct = (jgl-1)*28 + 1
                   IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
-     &                 WRITE (22,99052) jgl , ZETA(loct)
+     &                 WRITE (22,99053) jgl , ZETA(loct)
                ENDDO
                IF ( op2.NE.'STAR' ) THEN
                   CALL DECAY(ccd,0,ccc)
@@ -1998,7 +1998,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                            decen = decen*(1.+BETAR(IEXP)*cocos)
                            CALL EFFIX(ipd,decen,effi)
                            IF ( op2.EQ.'POIN' .AND. IPRM(20).EQ.1 )
-     &                          WRITE (23,99048) ni , nf , SPIN(ni) , 
+     &                          WRITE (23,99049) ni , nf , SPIN(ni) , 
      &                                 SPIN(nf) , decen , effi
                            YGN(jyi) = YGN(jyi)*effi
                         ENDDO
@@ -2017,14 +2017,14 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                      jgl1 = jgl1 + 1
                      lu = ILE(jgl1)
                      IF ( op2.EQ.'POIN' .OR. IPRM(11).EQ.1 )
-     &                    WRITE (22,99047) IEXP , jgl1 , EP(IEXP) , 
+     &                    WRITE (22,99048) IEXP , jgl1 , EP(IEXP) , 
      &                    TLBDG(IEXP)
                      jmm = 0
                      DO jyi = 1 , idr
                         ni = KSEQ(jyi,3)
                         nf = KSEQ(jyi,4)
                         IF ( op2.EQ.'POIN' .OR. IPRM(11).EQ.1 )
-     &                       WRITE (22,99048) ni , nf , SPIN(ni) , 
+     &                       WRITE (22,99049) ni , nf , SPIN(ni) , 
      &                       SPIN(nf) , YGN(jyi) , YGN(jyi)/YGN(IDRN)
                         IF ( ifwd.EQ.1 ) THEN
                            IF ( (YGN(jyi)/YGN(IDRN)).GE.slim ) THEN
@@ -2432,21 +2432,21 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                   WRITE (22,99034) lex , zmir(lex,2,jex)
 99034             FORMAT (1X/30X,'E',1I1,8X,'MI=0',5X,'MAX.ZETA=',
      &                    1F6.3//)
-                  WRITE (22,99053)
+                  WRITE (22,99054)
                   DO kex = 1 , 10
                      xxi = XIR(lex,jex)*(kex-1)/9.
-                     WRITE (22,99054) xxi , 
+                     WRITE (22,99055) xxi , 
      &                                (PARXM(jex,ilx,kex,lex),ilx=1,4)
                   ENDDO
                   IF ( MAGA(jex).NE.0 ) THEN
                      WRITE (22,99035) lex , zmir(lex,1,jex)
 99035                FORMAT (1X//30X,'E',1I1,8X,'MI=+/-1',5X,
      &                       'MAX.ZETA=',1F6.3//)
-                     WRITE (22,99053)
+                     WRITE (22,99054)
                      DO kex = 1 , 5
                         xxi = XIR(lex,jex)*(kex-1)/4.
                         u = 0.
-                        WRITE (22,99054) xxi , u , PARX(jex,2*lex-1,kex)
+                        WRITE (22,99055) xxi , u , PARX(jex,2*lex-1,kex)
      &                         , u , PARX(jex,2*lex,kex)
                      ENDDO ! Loop on kex
                   ENDIF ! if maga(jex).ne.0
@@ -2525,14 +2525,14 @@ c     *(ccch1+ccch2)
  1600 WRITE (22,99036)
 99036 FORMAT (5X,'ERROR-M.E. DOES NOT BELONG TO THE UPPER TRIANGLE')
       GOTO 2100
- 1700 WRITE (22,99037)
-99037 FORMAT (5X,'ERROR-WRONG SEQUENCE OF MULTIPOLARITIES')
+ 1700 WRITE (22,99044)
+99044 FORMAT (5X,'ERROR-WRONG SEQUENCE OF MULTIPOLARITIES')
       GOTO 2100
- 1800 WRITE (22,99038)
-99038 FORMAT (5X,'ERROR-REPEATED APPEARANCE OF THE STATE')
+ 1800 WRITE (22,99045)
+99045 FORMAT (5X,'ERROR-REPEATED APPEARANCE OF THE STATE')
       GOTO 2100
- 1900 WRITE (22,99039)
-99039 FORMAT (1X///10X,'ERROR-INSUFFICIENT SPACE FOR E-THETA INTEGR ',
+ 1900 WRITE (22,99046)
+99046 FORMAT (1X///10X,'ERROR-INSUFFICIENT SPACE FOR E-THETA INTEGR ',
      &        'ATION')
       GOTO 2100
  2000 IF ( mret.EQ.1 .AND. JZB.EQ.26 ) nawr = 0
@@ -2557,27 +2557,27 @@ c     *(ccch1+ccch2)
             ENDIF
             CALL MIXR(iva,1,chisq,chilo)
             IF ( IPRM(15).NE.0 .AND. KFERR.NE.1 .AND. iyr.NE.0 ) THEN
-               WRITE (22,99040)
-99040          FORMAT (1X//20X,'CALCULATED LIFETIMES'//5X,'LEVEL',5X,
+               WRITE (22,99011)
+99011          FORMAT (1X//20X,'CALCULATED LIFETIMES'//5X,'LEVEL',5X,
      &                 'LIFETIME(PSEC)',5X,'EXP',8X,'ERROR'/)
                DO iva = 2 , NMAX
                   DO iva1 = 1 , 10
                      IF ( LIFCT(iva1).EQ.iva ) GOTO 2005
                   ENDDO
-                  WRITE (22,99041) iva , TAU(iva)
-99041             FORMAT (7X,1I2,7X,1E10.4)
+                  WRITE (22,99012) iva , TAU(iva)
+99012             FORMAT (7X,1I2,7X,1E10.4)
                   GOTO 2010
- 2005             WRITE (22,99042) iva , TAU(iva) , TIMEL(1,iva1) , 
+ 2005             WRITE (22,99013) iva , TAU(iva) , TIMEL(1,iva1) , 
      &                             TIMEL(2,iva1)
-99042             FORMAT (7X,1I2,7X,1E10.4,5X,1E10.4,4X,1E10.4)
+99013             FORMAT (7X,1I2,7X,1E10.4,5X,1E10.4,4X,1E10.4)
  2010             IF ( iva.EQ.NMAX ) THEN
                      IF ( NAMX.GE.1 ) THEN
-                        WRITE (22,99043)
-99043                   FORMAT (5x,//,
+                        WRITE (22,99014)
+99014                   FORMAT (5x,//,
      &                     'CALCULATED AND EXPERIMENTAL MATRIX ELEMENTS'
      &                     ,//)
-                        WRITE (22,99044)
-99044                   FORMAT (5x,'NI ','NF ',' EXP. ME   ',
+                        WRITE (22,99015)
+99015                   FORMAT (5x,'NI ','NF ',' EXP. ME   ',
      &                          'CURRENT ME','   SIGMA')
                         DO kq = 1 , NAMX
                            ni = IAMY(kq,1)
@@ -2586,9 +2586,9 @@ c     *(ccch1+ccch2)
                            ess = ELM(ind)
                            esd = EAMX(kq,1)
                            dsd = EAMX(kq,2)
-                           WRITE (22,99045) ni , nf , esd , ess , 
+                           WRITE (22,99016) ni , nf , esd , ess , 
      &                            (ess-esd)/dsd
-99045                      FORMAT (5x,1I2,1x,1I2,1x,1F9.4,1x,1F9.4,1x,
+99016                      FORMAT (5x,1I2,1x,1I2,1x,1F9.4,1x,1F9.4,1x,
      &                             1F9.4)
                         ENDDO
                      ENDIF
@@ -2606,8 +2606,8 @@ c     *(ccch1+ccch2)
             CALL KLOPOT(kmat,rlr)
          ENDIF
       ENDIF
- 2200 WRITE (22,99046)
-99046 FORMAT (15X,'********* END OF EXECUTION **********')
+ 2200 WRITE (22,99047)
+99047 FORMAT (15X,'********* END OF EXECUTION **********')
  2300 IF ( mrepf.NE.1 ) THEN
          IF ( mret.EQ.1 ) JZB = 25
          IF ( mret.EQ.1 ) GOTO 100
@@ -2622,18 +2622,18 @@ c     *(ccch1+ccch2)
          GOTO 100
       ENDIF
 
-99047 FORMAT (1X//50X,'CALCULATED YIELDS'//5X,'EXPERIMENT ',1I2,2X,
+99048 FORMAT (1X//50X,'CALCULATED YIELDS'//5X,'EXPERIMENT ',1I2,2X,
      &        'DETECTOR ',1I2/5X,'ENERGY ',1F10.3,1X,'MEV',2X,'THETA ',
      &        1F7.3,1X,'DEG'//5X,'NI',5X,'NF',5X,'II',5X,'IF',5X,
      &        'YIELD',5X,'NORMALIZED YIELD'/)
-99048 FORMAT (5X,1I2,5X,1I2,3X,1F4.1,3X,1F4.1,3X,1E11.5,3X,1E11.5)
-99049 FORMAT (1X///44X,'OVERALL')
-99050 FORMAT (1X///43X,'DIAGONAL')
-99051 FORMAT (6X,1I3,6X,1I2,5X,1I2,5X,1F10.5,2X,'(',1F10.5,' ,',1F10.5,
+99049 FORMAT (5X,1I2,5X,1I2,3X,1F4.1,3X,1F4.1,3X,1E11.5,3X,1E11.5)
+99050 FORMAT (1X///44X,'OVERALL')
+99051 FORMAT (1X///43X,'DIAGONAL')
+99052 FORMAT (6X,1I3,6X,1I2,5X,1I2,5X,1F10.5,2X,'(',1F10.5,' ,',1F10.5,
      &        ')')
-99052 FORMAT (2X,'LEVEL',1X,1I2,10X,'POPULATION',1X,1E14.6)
-99053 FORMAT (5X,'XI',13X,'Q1',22X,'Q2'///13X,'SLOPE',2X,'INTERCEPT',7X,
+99053 FORMAT (2X,'LEVEL',1X,1I2,10X,'POPULATION',1X,1E14.6)
+99054 FORMAT (5X,'XI',13X,'Q1',22X,'Q2'///13X,'SLOPE',2X,'INTERCEPT',7X,
      &        'SLOPE',5X,'INTERCEPT'//)
-99054 FORMAT (2X,1F6.4,3X,1E8.2,2X,1E8.2,6X,1E8.2,2X,1E8.2)
-99055 FORMAT (1A3,1A4)
+99055 FORMAT (2X,1F6.4,3X,1E8.2,2X,1E8.2,6X,1E8.2,2X,1E8.2)
+99056 FORMAT (1A3,1A4)
       END
