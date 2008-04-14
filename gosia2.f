@@ -2602,21 +2602,22 @@ C---- gosia2 changes start
          IF ( ifm.NE.1 ) GOTO 430 ! changed for gosia2
          GOTO 2000
       ENDIF
+
 C     Calculate chi squared and normalization without minimizing
       MCFIX = 1
 C---- gosia2 changes end
       CALL MINI(chisq,1.D+38,nptl,conu,imode,idr,xtest,0,0,0,bten)
 C---- gosia2 changes start
-
+      
 C     Set CNOR1 to the average of CNOR1 and CNOR2
       DO kh1 = 1 , LP6 ! LP6 = 32
          DO kh2 = 1 , LP3 ! LP3 = 75
-           IF ( JZB.EQ.25 ) THEN ! If it is the second nucleus
+            IF ( JZB.EQ.25 ) THEN ! If it is the second nucleus
                CNOR1(kh1,kh2) = CNOR(kh1,kh2)
-           ELSE
+            ELSE
                CNOR2(kh1,kh2) = CNOR(kh1,kh2)
                CNOR1(kh1,kh2) = (CNOR1(kh1,kh2)+CNOR2(kh1,kh2))/2.
-           ENDIF
+            ENDIF
          ENDDO
       ENDDO
       
@@ -2632,10 +2633,11 @@ C     Store chisq
 
 C     Decide whether to terminate here
       IF ( JZB.EQ.26 ) THEN
-        cht = ABS(chir-chp) ! Difference in old and new chisq
-        IF ( cht.LT.0.1 .OR. mawr.GE.20 ) mret = 0 ! terminate
-        nawr = 1
+         cht = ABS(chir-chp) ! Difference in old and new chisq
+         IF ( cht.LT.0.1 .OR. mawr.GE.20 ) mret = 0 ! terminate
+         nawr = 1
       ENDIF
+
       IF ( IBPS.EQ.0 .AND. JZB.EQ.25 ) JZB = 26
       IF ( IBPS.NE.0 ) JZB = 25
       GOTO 2200 ! Back to beginning
