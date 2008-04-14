@@ -265,8 +265,8 @@ C      Bten   -
  200     CALL CEGRY(Chisq,itemp,Chilo,Idr,nwyr,Icll,issp,0)
          issp = 0
          IF ( Ncall.EQ.0 .AND. JSKIP(jkl).NE.0 ) THEN
-            IF ( Ncall.NE.0 ) GOTO 200
-            GOTO 150
+            IF ( Ncall.EQ.0 ) GOTO 150
+            GOTO 200
          ELSE
             NWR = NWR + nwyr
             IF ( Icll.LE.2 .AND. JSKIP(jkl).NE.0 ) THEN
