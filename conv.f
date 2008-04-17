@@ -15,7 +15,7 @@ C      NICC   - number of conversion coefficients
 C
 C Formal parameters:
 C      Ega    - gamma energy
-C      N      -
+C      N      - multipolarity
 C
 C Return value:
 C      conversion coefficient interpolated to energy Ega
@@ -28,9 +28,9 @@ C      conversion coefficient interpolated to energy Ega
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
      &                NICC , NANG(200)
 
-      IF ( N.EQ.0 ) THEN
+      IF ( N.EQ.0 ) THEN ! If no multipolarity defined
          CONV = 0.0
-      ELSEIF ( ABS(CC(1,N)).LT.1.E-9 ) THEN
+      ELSEIF ( ABS(CC(1,N)).LT.1.E-9 ) THEN ! If no conversion coefficients given for this multipolarity
          CONV = 0.0
       ELSE
          nen = 4
