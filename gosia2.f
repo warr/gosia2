@@ -1214,6 +1214,7 @@ C              Treat OP,INTG
                      IF ( npct.LT.0 ) mfla = 1
                      IF ( iecd(lx).EQ.1 ) mfla = 1
                      npct = ABS(npct)
+                     IF ( npct.GT.50 ) STOP 'ABS(NI2) is limited to 50!'
                      npce = npce + MOD(npce,2)
                      npct = npct + MOD(npct,2)
                      mpin = 1
