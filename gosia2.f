@@ -795,7 +795,7 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                ENDIF
             ENDDO
             CALL PRELM(4) ! changed from 2 to 4 for gosia2
-            GOTO 100 ! End of OP,REST
+            GOTO 100 ! End of OP,REST - back to input loop
 
 C        Treat other options
          ELSE
@@ -820,7 +820,7 @@ C---- gosia2 changes end
                rem = LOG(remax)
                LOCKS = 0
                LOCKF = 0
-               JENTR = 1
+               JENTR = 1 ! Flag to indicate we are in OP,ERRO
                sh = 1.
                ifbp = 0
                inpo = 1
@@ -859,8 +859,8 @@ C---- gosia2 changes end
                      DO inn = 1 , MEMAX
                         WRITE (IUNIT3,*) inn , ELM(inn)
                      ENDDO
-                  ENDIF
-               ENDIF
+                  ENDIF ! IF ( irep.NE.2 )
+               ENDIF ! IF ( iosr.NE.0 .AND. idf.NE.0 )
                IF ( irep.NE.0 ) THEN
                   REWIND 15
                   READ (15,*) (DEVD(kh1),DEVU(kh1),kh1=1,MEMAX)
@@ -871,7 +871,7 @@ C---- gosia2 changes end
                   ENDDO
                ENDIF
                IF ( IMIN.EQ.0 ) CALL CMLAB(0,dsig,ttttt)
-               IF ( ERR ) GOTO 2000
+               IF ( ERR ) GOTO 2000 ! Error
                IF ( IMIN.NE.0 ) GOTO 400
                GOTO 1300 ! End of OP,ERRO
 
@@ -887,7 +887,7 @@ C           Treat OP,TITL (title)
 99009          FORMAT (20A4)
                WRITE (22,99010) (title(k),k=1,20)
 99010          FORMAT (10X,20A4/10X,100('-'))
-               GOTO 100 ! End of OP,TITL
+               GOTO 100 ! End of OP,TITL - back to input loop
 
             ELSE
 
@@ -975,12 +975,12 @@ C              Treat OP,THEO
                         WRITE (irix,*) ELM(kb)
                      ENDIF
                   ENDDO
-                  GOTO 100 ! End of OP,THEO
+                  GOTO 100 ! End of OP,THEO - back to input loop
 
 C              Treat OP,YIEL
                ELSEIF ( op2.EQ.'YIEL' ) THEN
                   CALL ADHOC(oph,idr,nfd,ntap,iyr)
-                  GOTO 100 ! End of OP,YIEL
+                  GOTO 100 ! End of OP,YIEL - back to input loop
 
 C              Treat OP,INTG
                ELSEIF ( op2.EQ.'INTG' ) THEN
@@ -1050,19 +1050,19 @@ C              Treat OP,INTG
                               IF ( kloop.EQ.1 ) THEN
                                  IF ( iecd(lx).NE.0 ) THEN
                                     nfi = 1
-                                    fiex1(ktt,1,1) = wpi(ktt,1)
-                                    fiex1(ktt,1,2) = wpi(ktt,2)
+                                    fiex1(ktt,1,1) = wpi(ktt,1) ! Lower phi limit
+                                    fiex1(ktt,1,2) = wpi(ktt,2) ! Upper phi limit
                                  ENDIF
                               ENDIF
                               CALL CMLAB(lx,dsig,tetrc)
-                              IF ( ERR ) GOTO 2000
+                              IF ( ERR ) GOTO 2000 ! Error
                               tting = TLBDG(lx)
-                              IF ( ERR ) GOTO 1900
+                              IF ( ERR ) GOTO 1900 ! Troubleshoot
                               CALL LOAD(lx,1,1,0.D0,jj)
                               CALL ALLOC(ACCUR)
                               CALL SNAKE(lx,ZPOL)
                               CALL SETIN
-                              DO j = 1 , LMAX
+                              DO j = 1 , LMAX ! For each spin up to ground-state spin + 1
                                  polm = DBLE(j-1) - SPIN(1)
                                  CALL LOAD(lx,2,1,polm,jj)
                                  CALL STING(jj)
@@ -1093,8 +1093,8 @@ C              Treat OP,INTG
                                     CALL ANGULA(YGN,idr,1,fi0,fi1,tetrc,
      &                                gth,figl,ijan,op2)
                                     IF ( IFMO.NE.0 ) THEN
-                                       id = ITMA(IEXP,ijan)
-                                       d = ODL(id)
+                                       id = ITMA(IEXP,ijan) ! Get detector identity
+                                       d = ODL(id) ! Get result of OP,GDET calculation
                                        rx = d*SIN(gth)*COS(figl-fm)
      &                                    - .25*SIN(tetrc)*COS(fm)
                                        ry = d*SIN(gth)*SIN(figl-fm)
@@ -1115,8 +1115,8 @@ C              Treat OP,INTG
                                        ENDDO
                                     ENDIF
                                     IF ( IRAWEX(lx).NE.0 ) THEN
-                                       ipd = ITMA(lx,ijan)
-                                       DO jyi = 1 , idr
+                                       ipd = ITMA(lx,ijan) ! Get identity of detector
+                                       DO jyi = 1 , idr ! For each decay
                                          ni = KSEQ(jyi,3)
                                          nf = KSEQ(jyi,4)
                                          decen = EN(ni) - EN(nf)
@@ -1128,16 +1128,16 @@ C              Treat OP,INTG
                                          CALL EFFIX(ipd,decen,effi)
                                          YGN(jyi) = YGN(jyi)*effi
                                        ENDDO
-                                       inclus = ICLUST(lx,ijan)
+                                       inclus = ICLUST(lx,ijan) ! Cluster number for detector ijan
                                        IF ( inclus.NE.0 ) THEN
-                                         DO jyi = 1 , idr
+                                         DO jyi = 1 , idr ! For each decay
                                          SUMCL(inclus,jyi)
      &                                      = SUMCL(inclus,jyi)
      &                                      + YGN(jyi)
                                          ENDDO
                                          IF ( ijan.NE.LASTCL(lx,inclus)
-     &                                      ) GOTO 132
-                                         DO jyi = 1 , idr
+     &                                      ) GOTO 132 ! If it is not the last detector in the cluster
+                                         DO jyi = 1 , idr ! For each decay
                                          YGN(jyi) = SUMCL(inclus,jyi)
                                          ENDDO
                                        ENDIF
@@ -1203,10 +1203,10 @@ C              Treat OP,INTG
                            ILE(na1) = ILE(na1) + NYLDE(lx-1,na1)
                         ENDDO
                      ENDIF
-                     READ (JZB,*) nptx
+                     READ (JZB,*) nptx ! Number of meshpoints for stopping powers
                      IF ( nptx.NE.0 ) THEN
-                        READ (JZB,*) (esp(i),i=1,nptx)
-                        READ (JZB,*) (dedx(i),i=1,nptx)
+                        READ (JZB,*) (esp(i),i=1,nptx) ! Energy
+                        READ (JZB,*) (dedx(i),i=1,nptx) ! Stopping power
                         npt = nptx
                      ENDIF
                      READ (JZB,*) npce , npct
