@@ -4,7 +4,7 @@ C SUBROUTINE PODZIEL
 C
 C Called by: APRAM
 C
-C Purpose: subdivide matrix operators if the sumation doesn't converge.
+C Purpose: subdivide matrix operators if the summation doesn't converge.
 C
 C Uses global variables:
 C      IDIVE  - number of subdivisions
