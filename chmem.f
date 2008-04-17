@@ -11,8 +11,8 @@ C Uses global variables:
 C      ELM    - matrix elements
 C      EAMX   - known matrix elements and their error
 C      NAMX   - number of known matrix elements
-C      IAMX   -
-C      IAMY   -
+C      IAMX   - index of matrix element for known matrix element
+C      IAMY   - level indices of pair of levels for which matrix element is known
  
       SUBROUTINE CHMEM(Nw,Chi,Chilo)
       IMPLICIT NONE
