@@ -89,7 +89,6 @@ C      Iredv  -
      &       TREP , UPL , VACDP , VINF , wf , XA , XA1 , XNOR , YEXP , 
      &       YGN , YGP , YNRM
       REAL*8 ZPOL
-      REAL*8 CNOR1 , CNOR2 ! For gosia2
       INTEGER*4 iabc , IAXS , IBYP , Icall , ICLUST , id , idc , Idr , 
      &          IDRN , IEXP , ifdu , IFMO , ifxd , IGRD , ii , ILE , 
      &          ile2 , IMIN , inclus , INM
@@ -104,8 +103,10 @@ C      Iredv  -
      &          na , NANG , NDIM
       INTEGER*4 NDST , NEXPT , nf , nf1 , ni , ni1 , NICC , NLIFT , 
      &          NMAX , NMAX1 , Nwyr , NYLDE
+      CHARACTER*4 wupl , war
+      REAL*8 CNOR1 , CNOR2 ! For gosia2
       INTEGER*4 MCFIX ! For gosia2
-      CHARACTER*4 wupl , war , op2
+      CHARACTER*4 op2 ! For gosia2
       DIMENSION part(32,50,2) , lic(32) , lth(500) , cnr(32,50) , 
      &          partl(32,50,2)
       COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,500) , 
@@ -225,7 +226,7 @@ C     with CONT:PRT, and then does OP,EXIT
                ifxd = 0
                fm = (fi0+fi1)/2.
                IF ( Icall.EQ.4 ) ifxd = 1
-               CALL ANGULA(YGN,Idr,ifxd,fi0,fi1,tetrc,gth,figl,k,op2)
+               CALL ANGULA(YGN,Idr,ifxd,fi0,fi1,tetrc,gth,figl,k,op2) ! Changed in gosia2
 
 C              Correct for finite recoil
                IF ( IFMO.NE.0 ) THEN
@@ -238,7 +239,7 @@ C              Correct for finite recoil
                   sf = d*d/rl/rl
                   thc = TACOS(rz/rl)
                   fic = ATAN2(ry,rx)
-                  CALL ANGULA(YGP,Idr,ifxd,fi0,fi1,tetrc,thc,fic,k,op2)
+                  CALL ANGULA(YGP,Idr,ifxd,fi0,fi1,tetrc,thc,fic,k,op2) ! Changed in gosia2
                   DO ixl = 1 , Idr ! For each decay
                      ixm = KSEQ(ixl,3) ! Initial level of ixl'th decay
                      tfac = TAU(ixm) ! Get lifetime
@@ -445,7 +446,7 @@ C              Correct for finite recoil
                figl = AGELI(IEXP,k,2)
                fm = (fi0+fi1)/2.
 
-               CALL ANGULA(YGN,Idr,ifxd,fi0,fi1,tetrc,gth,figl,k,op2)
+               CALL ANGULA(YGN,Idr,ifxd,fi0,fi1,tetrc,gth,figl,k,op2) ! Changed in gosia2
 
 C              Correct for finite recoil
                IF ( IFMO.NE.0 ) THEN
@@ -458,7 +459,7 @@ C              Correct for finite recoil
                   sf = d*d/rl/rl
                   thc = TACOS(rz/rl)
                   fic = ATAN2(ry,rx)
-                  CALL ANGULA(YGP,Idr,ifxd,fi0,fi1,tetrc,thc,fic,k,op2)
+                  CALL ANGULA(YGP,Idr,ifxd,fi0,fi1,tetrc,thc,fic,k,op2) ! Changed in gosia2
                   DO ixl = 1 , Idr
                      ixm = KSEQ(ixl,3) ! Initial level of ixl'th decay
                      tfac = TAU(ixm)
