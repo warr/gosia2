@@ -5,15 +5,17 @@ C
 C Called by: LAIAMP, LSLOOP, NEWLV, SEQ
 C
 C Uses global variables:
+C      LDNUM  - number of matrix elements with each multipolarity populating levels
+C      LEAD   - pair of levels involved in each matrix element
 C      MULTI  - number of matrix elements with a given multipolarity
-C      IFAC   -
 C
 C Formal parameters:
-C      N1     - number of levels
-C      N2     -
+C      N1     - index of initial level
+C      N2     - index of matrix element for given level and multipolarity
 C      N3     - multipolarity
 C
-C Purpose: calculate an index used for some arrays.
+C Purpose: calculate the level number for the final level associated with the
+C      matrix element index N2, initial level index N1 and multipolarity N3.
  
       INTEGER*4 FUNCTION LEADF(N1,N2,N3)
       IMPLICIT NONE
@@ -25,16 +27,26 @@ C Purpose: calculate an index used for some arrays.
       lsum = 0
       n3m = N3 - 1
       IF ( n3m.NE.0 ) THEN
-         DO k = 1 , n3m
+         DO k = 1 , n3m ! Loop over multipolarities lower than one required
             lsum = lsum + MULTI(k)
          ENDDO
       ENDIF
+
+C     lsum now points to start of the multipolarity N3
+       
       n1m = N1 - 1
       IF ( n1m.NE.0 ) THEN
-         DO k = 1 , n1m
+         DO k = 1 , n1m ! Loop over levels below the selected one
             lsum = lsum + LDNUM(N3,k)
          ENDDO
       ENDIF
+
+C     lsum now points to start of level N1 for multipolarity N3
+      
       n1m = lsum + N2
-      LEADF = LEAD(2,n1m)
+
+C     n1m now points to the appropriate matrix element N2 for initial level N1
+C     and multipolarity N3
+      
+      LEADF = LEAD(2,n1m) ! Get the final level for this matrix element
       END
