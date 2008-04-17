@@ -27,7 +27,7 @@ C      Estimated amplitude
       REAL*8 sa , sb , sia , sib , W0 , Xiv
 
       mi = Mua - 1
-      axi = ABS(Xiv)
+      axi = ABS(Xiv) ! Absolute value of xi
       la = Lmda
       IF ( Lmda.EQ.7 ) la = 3
 
