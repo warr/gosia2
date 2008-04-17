@@ -63,15 +63,16 @@ C Here we parse the input of the OP,YIEL command and store the values.
      &       EP , ODL , Q
       REAL*8 SPIN , TAU , TIMEL , TLBDG , UPL , VINF , wamx , wbra , 
      &       wdl , wlf , XA , XA1 , YEXP , YGN , YGP , YNRM , ZPOL
-      INTEGER*4 IAMX , IAMY , iax , IBPS , IBRC , Idr , IDRN , iexp1 ,
-     &          IFMO , ILE , ilft , IMIX , iosr , ipri , IPRM , ISO ,
-     &          isrt1 , ITMA , ITS , iuf , IUNIT3 , IVAR
-      INTEGER*4 IY , Iyr , IZ , IZ1 , jic , jicc , juf , JZB , KSEQ , 
-     &          lb , li , licc , LIFCT , llia , LMAXE , lxt , MAGEXC , 
-     &          MEM , MEMAX , MEMX6 , n1
+      INTEGER*4 IAMX , IAMY , iax , IBRC , Idr , IDRN , iexp1 , IFMO , 
+     &          ILE , ilft , IMIX , iosr , ipri , IPRM , ISO , isrt1 , 
+     &          ITMA , ITS , iuf , IVAR
+      INTEGER*4 IY , Iyr , IZ , IZ1 , jic , jicc , juf , KSEQ , lb , 
+     &          li , licc , LIFCT , llia , LMAXE , lxt , MAGEXC , MEM , 
+     &          MEMAX , MEMX6 , n1
       INTEGER*4 n2 , NAMX , NANG , NBRA , ndas , NDL , NDST , ndtp , 
      &          NEXPT , Nfd , NICC , nistr , NLIFT , ns1 , ns2 , ns3 , 
      &          ns4 , Ntap , nvare , NYLDE
+      INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
       CHARACTER*4 Oph
       COMMON /CCCDS / NDST(50)
       COMMON /DIMX  / DIX(4) , ODL(200)
