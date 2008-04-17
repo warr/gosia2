@@ -1512,12 +1512,12 @@ C                 Treat OP,MAP
 
       WRITE (22,99022) op1 , op2
 99022 FORMAT (5X,'UNRECOGNIZED OPTION',1X,1A3,1A4)
-      GOTO 2000
+      GOTO 2000 ! Normal end of execution
 
 C     Treat suboptions of OP,COUL and OP,GOSI
  200  READ (JZB,99023) op1 ! Read the suboption
 99023 FORMAT (1A4)
-      IF ( op1.EQ.'    ' ) GOTO 100
+      IF ( op1.EQ.'    ' ) GOTO 100 ! Back to input loop
 
 C     Treat suboption LEVE (levels)
       IF ( op1.EQ.'LEVE' ) THEN
@@ -1557,7 +1557,7 @@ C     Treat suboption ME (matrix elements)
             ENDIF
             IF ( ipo1.NE.0 ) THEN
                IF ( ipo2.EQ.0 ) THEN
-                  IF ( ipo1.LE.la ) GOTO 1600
+                  IF ( ipo1.LE.la ) GOTO 1600 ! Error - wrong sequence of multipolarities
                   LAMMAX = LAMMAX + 1
                   LAMDA(LAMMAX) = ipo1
                   ipo3 = 0
@@ -1565,9 +1565,9 @@ C     Treat suboption ME (matrix elements)
                ELSE
                   MULTI(la) = MULTI(la) + 1
                   indx = indx + 1
-                  IF ( ipo1.GT.ABS(ipo2) ) GOTO 1500
+                  IF ( ipo1.GT.ABS(ipo2) ) GOTO 1500 ! Error - M.E. does not belong to the upper triangle
                   IF ( ipo1.NE.ipo3 ) THEN
-                     IF ( ipo1.LT.ipo3 ) GOTO 1700
+                     IF ( ipo1.LT.ipo3 ) GOTO 1700 ! Error - repeated appearance of the state
                      ipo3 = ipo1
                   ENDIF
                   ELM(indx) = po1
@@ -1625,7 +1625,7 @@ C     Treat suboption ME (matrix elements)
             IF ( la.GT.LMAXE .AND. la.LE.6 ) LMAXE = la
  250     ENDDO
  300     MEMAX = indx
-         IF ( la.GT.6 ) MAGEXC = 1
+         IF ( la.GT.6 ) MAGEXC = 1 ! Flag that we need magnetic excitations
          memx4 = MULTI(1) + MULTI(2) + MULTI(3) + MULTI(4)
          MEMX6 = memx4 + MULTI(5) + MULTI(6)
          IF ( ABS(IPRM(1)).EQ.1 ) CALL PRELM(iopri)
@@ -1760,7 +1760,7 @@ C     Else we don't recognize the suboption
       ELSE
          WRITE (22,99027) op1
 99027    FORMAT (5X,'UNRECOGNIZED SUBOPTION',1X,1A4)
-         GOTO 2000
+         GOTO 2000 ! Normal end of execution
       ENDIF
       GOTO 200 ! Get next suboption
 
@@ -1815,7 +1815,7 @@ C     Handle OP,ERRO
          naxfl = 0
          IF ( ms.EQ.0 ) mend = MEMAX
          IF ( ms.EQ.0 ) ms = 1
-         DO kh = ms , mend
+         DO kh = ms , mend ! Loop over matrix elements
             DO ij = 1 , 2
                pv = (ELMU(kh)-ELML(kh))/100.
                IF ( ij.NE.1 .OR. (ELM(kh)-ELML(kh)).GE.pv ) THEN
@@ -1892,7 +1892,7 @@ C     Handle OP,ERRO
             ENDIF
          ENDIF
       ENDDO
-      GOTO 2000
+      GOTO 2000 ! Normal end of execution
 
  700  irea = 0
       IF ( ms.LT.0 ) irea = 1
@@ -1901,13 +1901,13 @@ C     Handle OP,ERRO
  800  naxfl = 1
       IF ( irea.EQ.1 ) READ (JZB,*) ms , mend
       IF ( ms.NE.0 ) THEN
-         DO kh = ms , mend
+         DO kh = ms , mend ! For matrix elements
             IF ( ifc.NE.1 ) THEN
                REWIND 18
                DO kh1 = 1 , kh
                   READ (18,*) (KVAR(jyi),jyi=1,MEMAX)
                ENDDO
-               DO kh1 = 1 , MEMAX
+               DO kh1 = 1 , MEMAX ! For each matrix element
                   ivrh = IVAR(kh1)
                   IF ( KVAR(kh1).EQ.0 ) IVAR(kh1) = 0
                   KVAR(kh1) = ivrh
@@ -1919,7 +1919,7 @@ C     Handle OP,ERRO
                IF ( ABS(sh).LT.1.E-6 ) sh = (-1)**ij*ABS(HLM(kh))/10.
                ELM(kh) = HLM(kh) + 1.5*sh
                mm = 0
-               DO kh1 = 1 , MEMAX
+               DO kh1 = 1 , MEMAX ! For each matrix element
                   IF ( ifc.EQ.1 ) KVAR(kh1) = IVAR(kh1)
                   mm = mm + IVAR(kh1)
                ENDDO
@@ -1933,24 +1933,24 @@ C     Handle OP,ERRO
                   DLOCK = .05
                   CALL MINI(chiss,-1.D0,2,.0001D0,1000,idr,100000.D0,0,
      &                      iosr,kh,bten)
-                  DO kh1 = 1 , MEMAX
+                  DO kh1 = 1 , MEMAX ! For each matrix element
                      SA(kh1) = (ELM(kh1)-HLM(kh1))/ABS(sh)
                   ENDDO
                   CALL KONTUR(idr,chis0,chisl,ifbp,inpo,kh,sh,bten,rem)
                ENDIF
-               DO kh1 = 1 , MEMAX
+               DO kh1 = 1 , MEMAX ! For each matrix element
                   IF ( ifc.EQ.1 ) IVAR(kh1) = KVAR(kh1)
                   ELM(kh1) = HLM(kh1)
                ENDDO
             ENDDO
             IF ( ifc.NE.1 ) THEN
-               DO kh1 = 1 , MEMAX
+               DO kh1 = 1 , MEMAX ! For each matrix element
                   IVAR(kh1) = KVAR(kh1)
                ENDDO
             ENDIF
             REWIND 15
             WRITE (15,*) (DEVD(kh1),DEVU(kh1),kh1=1,MEMAX)
-         ENDDO
+         ENDDO ! Loop on matrix elements kh
          IF ( irea.EQ.1 ) GOTO 800
       ENDIF
       IF ( iosr.NE.0 ) THEN
@@ -1962,7 +1962,7 @@ C     Handle OP,ERRO
  900  jfre = 0
       irfix = 0
       IF ( op2.EQ.'RE,F' ) irfix = 1
- 1000 DO jrls = 1 , MEMAX
+ 1000 DO jrls = 1 , MEMAX ! For each matrix element
          IF ( IVAR(jrls).NE.0 .OR. irfix.NE.1 ) THEN
             IF ( IVAR(jrls).GT.999 ) THEN
                IF ( jfre.EQ.1 ) GOTO 1100
@@ -1972,14 +1972,14 @@ C     Handle OP,ERRO
             ELMU(jrls) = ABS(ELMU(jrls))
             IF ( jrls.GT.MEMX6 ) IVAR(jrls) = 1
          ENDIF
- 1100 ENDDO
+ 1100 ENDDO ! For each matrix element jrls
       DO jrls = 1 , MEMAX
          ivarh(jrls) = IVAR(jrls)
       ENDDO
-      GOTO 100
+      GOTO 100 ! Back to input loop
 
- 1200 CALL CMLAB(0,dsig,ttttt)
-      IF ( ERR ) GOTO 2000
+ 1200 CALL CMLAB(0,dsig,ttttt) ! Options MAP, STAR, POINT, MINI etc.
+      IF ( ERR ) GOTO 2000 ! Error
       IF ( op2.EQ.'POIN' ) READ (JZB,*) ifwd , slim
       ient = 1
       icg = 1
@@ -1991,7 +1991,7 @@ C     Handle OP,ERRO
                ILE(ii) = 1
             ENDDO
             nch = 0
-            DO jexp = 1 , NEXPT
+            DO jexp = 1 , NEXPT ! For each experiment
                IEXP = jexp
                ttttt = TREP(IEXP)
                dsig = DSIGS(IEXP)
@@ -2003,13 +2003,13 @@ C     Handle OP,ERRO
                      ENDDO
                   ENDIF
                ENDIF
-               fi0 = FIEX(IEXP,1)
-               fi1 = FIEX(IEXP,2)
+               fi0 = FIEX(IEXP,1) ! Lower phi limit
+               fi1 = FIEX(IEXP,2) ! Upper phi limit
                CALL LOAD(IEXP,1,icg,0.D0,jj)
                CALL ALLOC(ACCUR)
                CALL SNAKE(IEXP,ZPOL)
                CALL SETIN
-               DO j = 1 , LMAX
+               DO j = 1 , LMAX ! For each spin up to ground-state spin + 1
                   polm = DBLE(j-1) - SPIN(1)
                   CALL LOAD(IEXP,2,icg,polm,jj)
                   CALL STING(jj)
@@ -2023,14 +2023,14 @@ C     Handle OP,ERRO
      &                    1F5.1,5X,'EXPERIMENT',1X,1I2//5X,'LEVEL',2X,
      &                    'SPIN',2X,'M',5X,'REAL AMPLITUDE',2X,
      &                    'IMAGINARY AMPLITUDE'//)
-                  DO k = 1 , ISMAX
+                  DO k = 1 , ISMAX ! For substates
                      pr = pr + DBLE(ARM(k,5))**2 + IMAG(ARM(k,5))**2
                      IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
      &                    WRITE (22,99035) INT(CAT(k,1)) , CAT(k,2) , 
      &                    CAT(k,3) , DBLE(ARM(k,5)) , IMAG(ARM(k,5))
 99035                FORMAT (7X,1I2,3X,1F4.1,2X,1F5.1,2X,1E14.6,2X,
      &                       1E14.6)
-                  ENDDO
+                  ENDDO ! Loop on substates k
                   IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
      &               WRITE (22,99643) pr
 99643             FORMAT (1X/5X,'SUM OF PROBABILITIES=',1E14.6)
