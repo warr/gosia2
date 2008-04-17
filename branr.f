@@ -10,11 +10,10 @@ C experimental ones.
 C
 C Uses global variables:
 C      BRAT   - branching ratio and its error
-C      DELTA  -
+C      DELTA  - \delta_\lambda: index 1 = electric^2, 2 = magnetic^2, 3 = cross term
 C      ELM    - matrix elements
 C      EN     - level energy
 C      IBRC   - index branching ratios
-C      IFAC   -
 C      IPRM   - printing flags (see suboption PRT of OP,CONT)
 C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
 C      MULTI  - number of matrix elements with given multipolarity
@@ -46,21 +45,25 @@ C      Chilo  - chi squared of logs
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
 
+C     If no branching ratios were defined, return doing nothing
       IF ( NBRA.EQ.0 ) RETURN
+
+C     If printing option is on, print something      
       IF ( IPRM(3).EQ.-1 ) WRITE (22,99001)
 99001 FORMAT (1X,///10X,'EXP. AND CALCULATED BRANCHING RATIOS',//5X,
      &        'NS1',5X,'NF1',5X,'NS2',5X,'NF2',5X,'RATIO(1:2)',9X,
      &        'ERROR',7X,'CALC.RATIO',5X,'(EXP-CAL)/ERROR',//)
-      Nwyr = Nwyr + NBRA
+
+      Nwyr = Nwyr + NBRA ! Add to number of datapoints contributing to chisqr
       mul2 = MULTI(1) + MULTI(2)
-      DO k = 1 , NBRA
+      DO k = 1 , NBRA ! For each branching ratio
          ch1 = 0.
          ch2 = 0.
          iflg = 1
          itt = 1
          iout = 0
-         n1 = IBRC(1,k)
-         n2 = IBRC(2,k)
+         n1 = IBRC(1,k) ! 1st matrix element
+         n2 = IBRC(2,k) ! 2nd matrix element
          i1 = KSEQ(n1,1) ! Index of n1'th gamma
          i2 = KSEQ(n2,1) ! Index of n2'th gamma
          eng1 = EN(KSEQ(n1,3)) - EN(KSEQ(n1,4)) ! Energy of gamma 1
@@ -98,6 +101,7 @@ C      Chilo  - chi squared of logs
      &                               KSEQ(n2,3) , KSEQ(n2,4) , BRAT(k,1)
      &                               , BRAT(k,2) , ch1/ch2 , -u
 99002    FORMAT (5X,3(1I2,6X),1I2,5X,3(1F10.5,5X),5X,1F4.1)
-      ENDDO
-      IF ( IPRM(3).EQ.-1 ) IPRM(3) = 0
+      ENDDO ! Loop on branching ratios
+       
+      IF ( IPRM(3).EQ.-1 ) IPRM(3) = 0 ! Turn off printing option, so we don't print twice
       END
