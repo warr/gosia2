@@ -97,7 +97,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
       COMMON /PRT   / IPRM(20)
       COMMON /TRB   / ITS
-      COMMON /SWITCH/ JZB , IBPS , IUNIT3
+      COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2
       
 C     Read OP,YIEL parameters
       iosr = 0
