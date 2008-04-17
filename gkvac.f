@@ -10,16 +10,16 @@ C GKI array of common GVAC
 C
 C Uses global variables:
 C      BETAR  - recoil beta
-C      GKI    - G_k
+C      GKI    - G_k for a single level
 C      IEXP   - experiment number
 C      ITTE   - thick target experiment flag
 C      SPIN   - spin of level
-C      TAU    -
-C      VACDP  -
+C      TAU    - lifetime in picoseconds
+C      VACDP  - G_k for each level
 C      XLAMB  - Lambda*       (this is G(3) in GOSIA)
 C
 C Formal parameters:
-C      Il     -
+C      Il     - level index
  
       SUBROUTINE GKVAC(Il)
       IMPLICIT NONE
@@ -44,9 +44,9 @@ C      Il     -
 
       IF ( ABS(XLAMB).GE.1.E-9 ) THEN
          IF ( ITTE(IEXP).EQ.0 ) THEN
-            sp = SPIN(Il)
+            sp = SPIN(Il) ! Spin of level
             beta = BETAR(IEXP)
-            time = TAU(Il)
+            time = TAU(Il) ! lifetime of level
             CALL GKK(IZ,beta,sp,time,Il)
             VACDP(1,Il) = GKI(1)
             VACDP(2,Il) = GKI(2)
