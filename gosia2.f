@@ -1243,35 +1243,44 @@ C              Treat OP,INTG
      &                          (pfi(j),j=1,npct1)
                         ENDIF
                         het = het/57.2957795
+C                       Interpolate stopping power for each of the energies
+C                       that we need. esp is an array of energies and dedx is
+C                       an array containing the stopping powers at those
+C                       energies. Function is unweighted sqrt. The energies
+C                       are not the energies we gave for the meshpoints, but
+C                       the range over which we integrate the bombarding energy
+C                       with the number of steps specified.
                         DO j = 1 , npce1
                            xx = (j-1)*hen + emn
                            CALL LAGRAN(esp,dedx,npt,1,xx,yy,3,1)
                            HLMLM(j) = 1./yy
                         ENDDO
+                         
+C                       Now we calculate for all the mesh points. 
                         naa = NDST(lx)
                         IF ( IRAWEX(lx).EQ.0 ) naa = NANG(lx)
                         iskf = naa - 1
                         DO ja = 1 , naa
-                           icll = 3
-                           DO je = 1 , ne
+                           icll = 3 ! Weighting mode
+                           DO je = 1 , ne ! ne = number of energy mesh points
                               lu = ILE(ja)
                               isko = (je-1)*naa*ntt + ja - 1
                               CALL TAPMA(lx,iske,isko,iskf,ntt,idr,1,
      &                           nft,enb)
-                              IF ( nft.EQ.1 ) GOTO 1900
+                              IF ( nft.EQ.1 ) GOTO 1900 ! Troubleshoot
                               DO jd = 1 , idr
-                                 DO jtp = 1 , ntt
+                                 DO jtp = 1 , ntt ! ntt = number of theta meshpoints
                                     IF ( jd.EQ.1 .AND. ja.EQ.1 )
      &                                 DSG(jtp) = dsxm(lpin,je,jtp)
                                     jyv = (jtp-1)*idr + jd
                                     YV(jtp) = ZETA(jyv)
-                                 ENDDO
-                                 DO jt = 1 , npct1
+                                 ENDDO ! Loop on theta meshpoints
+                                 DO jt = 1 , npct1 ! number of equal divisions in theta for interpolation
                                     xx = (jt-1)*het + tmn/57.2957795
                                     CALL LAGRAN(XV,YV,ntt,jt,xx,yy,2,
-     &                                 icll)
+     &                                 icll) ! interpolate at angle xx
                                     CALL LAGRAN(XV,DSG,ntt,jt,xx,zz,2,
-     &                                 icll)
+     &                                 icll) ! interpolate gamma yield at xx
                                     IF ( mfla.EQ.1 ) yy = yy*pfi(jt)
      &                                 /57.2957795
                                     IF ( yy.LE.0. ) yy = 1.E-15
@@ -1288,33 +1297,37 @@ C              Treat OP,INTG
      &                                = SIMIN(npct1,het,HLM)
                                  ZV(je) = enb
                               ENDDO
-                           ENDDO
+                           ENDDO ! Loop on energy mesh
+
+C                          Now interpolate                            
                            icll = 3
-                           DO jd = 1 , idr
+                           DO jd = 1 , idr ! For each decay
                               DO jtp = 1 , ne
                                  jyv = (jtp-1)*idr + jd + ntt*idr
                                  YV(jtp) = ZETA(jyv)
                               ENDDO
-                              DO jt = 1 , npce1
+                              DO jt = 1 , npce1 ! npce1 is number of equal energy steps
                                  xx = (jt-1)*hen + emn
                                  CALL LAGRAN(ZV,YV,ne,jt,xx,yy,2,icll)
+C                                Interpolate cross-section at this energy
                                  IF ( jd.EQ.1 .AND. ja.EQ.1 )
      &                                CALL LAGRAN(ZV,DSE,ne,jt,xx,zz,2,
-     &                                icll)
+     &                                icll) ! Interpolate for this energy
                                  IF ( jd.EQ.1 .AND. ja.EQ.1 ) HLM(jt)
-     &                                = zz*HLMLM(jt)
+     &                             = zz*HLMLM(jt) ! HLMLM = 1 / stopping power
                                  XI(jt) = yy*HLMLM(jt)
                               ENDDO
                               icll = 4
                               IF ( jd.EQ.1 .AND. ja.EQ.1 )
-     &                             DS = SIMIN(npce1,hen,HLM)
+     &                             DS = SIMIN(npce1,hen,HLM) ! integrate
                               GRAD(jd) = SIMIN(npce1,hen,XI)
-                           ENDDO
+                           ENDDO ! Loop over decays jd
                            IF ( ja.EQ.1 ) dst = dst + DS
                            IF ( ja.EQ.1 ) WRITE (22,99018) DS , lx
 99018                      FORMAT (1X/////5X,
      &                            'INTEGRATED RUTHERFORD CROSS SECTION='
      &                            ,1E9.4,2X,'FOR EXP.',1I2///)
+
                            WRITE (22,99019) lx , ja , emn , emx , tmn , 
      &                            tmx
 99019                      FORMAT (1X,//50X,'INTEGRATED YIELDS'//5X,
@@ -1333,7 +1346,7 @@ C              Treat OP,INTG
                               nf = KSEQ(jd,4)
                               WRITE (22,99049) ni , nf , SPIN(ni) , 
      &                               SPIN(nf) , GRAD(jd) , GRAD(jd)
-     &                               /GRAD(IDRN)
+     &                               /GRAD(IDRN) ! IDRN is the normalising transition
                            ENDDO
                         ENDDO
                         IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
@@ -1351,7 +1364,7 @@ C              Treat OP,INTG
                                  FIEX(lx,2) = FIEX(lx,2) + 3.14159265
                               ENDIF
                            ENDIF
-                        ENDIF
+                        ENDIF ! If circular detector
                         iske = iske + ne*ntt*naa
                      ENDDO
                      IF ( mpin.GT.1 ) WRITE (22,99021) dst , lx
@@ -1402,7 +1415,7 @@ C              Treat OP,INTG
                         ENDDO
                      ENDDO
                   ENDIF
-                  GOTO 100 ! End of OP,INTG
+                  GOTO 100 ! End of OP,INTG - back to input loop
 
 C              Treat OP,CORR
                ELSEIF ( op2.EQ.'CORR' ) THEN
@@ -1438,7 +1451,7 @@ C                 Treat OP,SIXJ
                            ENDDO
                         ENDDO
                      ENDDO
-                     GOTO 2000 ! End of OP,SIXJ
+                     GOTO 2000 ! End of OP,SIXJ - normal end of execution
 
 C                 Treat OP,RAW (raw uncorrected gamma yields)
                   ELSEIF ( op2.EQ.'RAW ' ) THEN
@@ -1466,11 +1479,11 @@ C                    Read absorber coefficients from unit 8
 C                    Read input from standard input
                      DO l = 1 , LP1 ! LP1 = 50
                         READ (JZB,*) mexl ! experiment number
-                        IF ( mexl.EQ.0 ) GOTO 100
+                        IF ( mexl.EQ.0 ) GOTO 100 ! Back to input loop
                         IRAWEX(mexl) = 1
                         n = NANG(mexl)
                         DO j = 1 , n
-                           jj = ITMA(mexl,j)
+                           jj = ITMA(mexl,j) ! Get identity of detector
                            READ (JZB,*) (AKAVKA(k,jj),k=1,8) ! efficiency curve parameters
                         ENDDO
                         READ (JZB,*) kclust ! number of clusters
@@ -1478,20 +1491,20 @@ C                    Read input from standard input
                            DO j = 1 , kclust
                               READ (JZB,*) numcl ! Number of detectors for this cluster
                               READ (JZB,*) (liscl(k),k=1,numcl) ! Indices of logical detectors
-                              LASTCL(l,j) = liscl(numcl)
+                              LASTCL(l,j) = liscl(numcl) ! Index of last detector in cluster
                               DO k = 1 , numcl
                                  kk = liscl(k)
-                                 ICLUST(l,kk) = j
+                                 ICLUST(l,kk) = j ! Set cluster number
                               ENDDO
                            ENDDO
                         ENDIF
                      ENDDO
-                     GOTO 100 ! End of OP,RAW
+                     GOTO 100 ! End of OP,RAW - back to input loop
 
 C                 Treat OP,MAP
                   ELSEIF ( op2.EQ.'MAP ' ) THEN
                      GOTO 1200 ! End of OP,MAP 
-                  ENDIF
+                  ENDIF ! IF ( op2.EQ.'SIXJ' )
                ENDIF
             ENDIF
          ENDIF
