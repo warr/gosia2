@@ -31,22 +31,23 @@ C      Trec   - Theta of recoiling nucleus
 C      Gth    - Theta of gamma
 C      Figl   - Phi of gamma
 C      Ngl    - detector number
-C      Op2    - The part after the OP, for the option we are processing
+C      Op2    - The part after the OP, for the option we are processing (gosia2)
       
       SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
       REAL*8 AGELI , alab , arg , at , attl , BETAR , bt , CC , DELLA , 
-     &       DELTA , dsig , DSIGS , EG , ENDEC , ENZ , EP , EPS , 
-     &       EROOT , f , Fi0 , fi01 , Fi1 , fi11
-      REAL*8 FIEX , Figl , FP , GKP , Gth , Q , qv , sm , TAU , 
-     &       TETACM , TLBDG , Trec , TREP , ttx , VINF , XA , 
-     &       XA1 , Ygn , ylmr , ZETA
+     &       DELTA , EG , ENDEC , ENZ , EPS , EROOT , f , Fi0 , fi01 , 
+     &       Fi1 , fi11
+      REAL*8 FIEX , Figl , FP , GKP , Gth , Q , qv , sm , TAU , Trec , 
+     &       Ygn , ylmr , ZETA
       INTEGER*4 IAXS , Idr , IEXP , ifn , Iful , ig , il , inat , inx1 , 
-     &          ipd , is , ITMA , ITTE , iu , ixs , IZ , IZ1 , j , ji , 
-     &          jj , jm , k
+     &          ipd , is , ITMA , ITTE , iu , ixs , j , ji , jj , jm , k
       INTEGER*4 KLEC , kq , KSEQ , l , lf , lf1 , LZETA , mind , NANG , 
-     &          NEXPT , Ngl , NICC , nlv
-      CHARACTER*4 Op2
+     &          Ngl , NICC , nlv
+      REAL*8 dsig, DSIGS , EP , TETACM , TLBDG , TREP , ttx , VINF ,
+     &       XA , XA1 ! For gosia2
+      INTEGER*4 IZ, IZ1, NEXPT ! For gosia2
+      CHARACTER*4 Op2 ! For gosia2
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
      &          Ygn(500)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
@@ -60,9 +61,9 @@ C      Op2    - The part after the OP, for the option we are processing
       COMMON /CATLF / FP(4,500,3) , GKP(4,500,2) , KLEC(75)
       COMMON /BREC  / BETAR(50)
       COMMON /THTAR / ITTE(50)
-      COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
+      COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50) ! For gosia2
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
-     &                TLBDG(50) , VINF(50)
+     &                TLBDG(50) , VINF(50) ! For gosia2
       
       DO l = 1 , Idr ! For each decay
 
@@ -156,11 +157,12 @@ C      Op2    - The part after the OP, for the option we are processing
          ENDIF
       ENDDO ! Loop over decays
 
-C     This bit added for gosia2
+C     Added for gosia2
       IF ( Op2.EQ.'INTG' ) RETURN
       dsig = DSIGS(IEXP)
       ttx = TLBDG(IEXP)/57.2957795 ! Theta in lab frame in radians
       DO j = 1 , Idr  ! For each decay
          Ygn(j) = Ygn(j)*dsig*SIN(ttx)
       ENDDO ! Loop on decays Idr
+C     End of addition for gosia2
       END
