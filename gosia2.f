@@ -2291,7 +2291,7 @@ C     Handle OP,ERRO
                zmir(iuy,2,IEXP) = 0.
             ENDDO
             CALL LOAD(IEXP,1,2,0.D0,jj)
-            DO jgs = 1 , LMAX
+            DO jgs = 1 , LMAX ! For each spin up to ground-state spin + 1
                polm = DBLE(jgs-1) - SPIN(1)
                CALL LOAD(IEXP,3,2,polm,jj)
                CALL PATH(jj)
@@ -2454,8 +2454,8 @@ C     Handle OP,ERRO
             ENDDO ! Loop over kk
             EMMA(IEXP) = emhl1
             NMAX = nmaxh
-            SPIN(1) = sh1
-            SPIN(2) = sh2
+            SPIN(1) = sh1 ! Restore ground-state spin
+            SPIN(2) = sh2 ! Restore spin of first excited state
             IFAC(1) = ih1
             IFAC(2) = ih2
             MAGEXC = magh
@@ -2465,14 +2465,15 @@ C     Handle OP,ERRO
             LEAD(2,1) = lh2
             LAMMAX = lamh
             MEMAX = memh
-            DO kh = 1 , 8
+            DO kh = 1 , 8 ! For each multipolarity
                LDNUM(kh,2) = ihlm(kh+24)
                MULTI(kh) = ihlm(kh)
                LAMDA(kh) = ihlm(kh+8)
                LDNUM(kh,1) = ihlm(kh+16)
             ENDDO
             INTERV(IEXP) = intvh
-         ENDDO
+         ENDDO ! Loop over experiments jexp
+
          REWIND 7
          REWIND 27
          irix = 7
@@ -2481,7 +2482,7 @@ C     Handle OP,ERRO
             WRITE (irix,*) (XIR(iuy,jj),jj=1,NEXPT)
             WRITE (irix,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
          ENDDO
-         DO jj = 1 , NEXPT
+         DO jj = 1 , NEXPT ! For each experiment
             DO jk = 1 , 4
                DO kuku = 1 , 6
                   WRITE (irix,*) (PARXM(jj,jk,jl,kuku),jl=1,10)
@@ -2513,7 +2514,7 @@ C---- gosia2 changes end
             READ (irix,*) (XIR(iuy,jj),jj=1,NEXPT)
             READ (irix,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
          ENDDO
-         DO jj = 1 , NEXPT
+         DO jj = 1 , NEXPT ! For each experiment
             DO jk = 1 , 4
                DO kuku = 1 , 6
                   READ (irix,*) (PARXM(jj,jk,jl,kuku),jl=1,10)
@@ -2523,7 +2524,7 @@ C---- gosia2 changes end
                READ (irix,*) (PARX(jj,jk,jl),jl=1,5)
             ENDDO
          ENDDO
-         DO jgs = 1 , MEMAX
+         DO jgs = 1 , MEMAX ! For each matrix element
             DO jgr = 1 , 7
                QAPR(jgs,1,jgr) = 0.
             ENDDO
@@ -2565,7 +2566,7 @@ C     Handle map
          ENDDO ! Loop on jex
       ENDIF ! IPRM(12).ne.0 .or. op2.eq.'MAP '
 
-      IF ( op2.NE.'GOSI' .AND. op2.NE.'ERRO' ) GOTO 100
+      IF ( op2.NE.'GOSI' .AND. op2.NE.'ERRO' ) GOTO 100 ! Back to input loop
       IF ( op2.EQ.'ERRO' ) GOTO 400
 
  1400 mret = ABS(mret) ! Added for gosia2
@@ -2648,15 +2649,15 @@ C---- gosia2 changes end
 
  1500 WRITE (22,99043)
 99043 FORMAT (5X,'ERROR-M.E. DOES NOT BELONG TO THE UPPER TRIANGLE')
-      GOTO 1900
+      GOTO 1900 ! Troubleshoot
 
  1600 WRITE (22,99044)
 99044 FORMAT (5X,'ERROR-WRONG SEQUENCE OF MULTIPOLARITIES')
-      GOTO 1900
+      GOTO 1900 ! Troubleshoot
 
  1700 WRITE (22,99045)
 99045 FORMAT (5X,'ERROR-REPEATED APPEARANCE OF THE STATE')
-      GOTO 1900
+      GOTO 1900 ! Troubleshoot
 
  1800 WRITE (22,99046)
 99046 FORMAT (1X///10X,'ERROR-INSUFFICIENT SPACE FOR E-THETA INTEGR ',
@@ -2667,10 +2668,11 @@ C---- gosia2 changes end
          WRITE (18,*) iva , iva , iva , chisq
          IF ( ITS.NE.2 ) THEN
             WRITE (15,*) iva , chisq , chisq , chisq , chisq
-            CALL KLOPOT(kmat,rlr)
+            CALL KLOPOT(kmat,rlr) ! Troubleshooting
          ENDIF
       ENDIF
 
+C     End of execution
  2000 WRITE (22,99047)
 99047 FORMAT (15X,'********* END OF EXECUTION **********')
 
@@ -2779,5 +2781,4 @@ C---- gosia2 changes end
 99054 FORMAT (5X,'XI',13X,'Q1',22X,'Q2'///13X,'SLOPE',2X,'INTERCEPT',7X,
      &        'SLOPE',5X,'INTERCEPT'//)
 99055 FORMAT (2X,1F6.4,3X,1E8.2,2X,1E8.2,6X,1E8.2,2X,1E8.2)
-
       END
