@@ -9,27 +9,27 @@ C Purpose: calculate angular distribution of emitted gamma rays
 C
 C Uses global variables:
 C      BETAR  - recoil beta
-C      DELLA  -
-C      ENDEC  -
-C      ENZ    -
-C      FP     -
+C      DELLA  - products of matrix elements: e1^2, e2^2, e1*e2
+C      ENDEC  - energy difference for each matrix element
+C      ENZ    - something to do with the absorption
+C      FP     - F coefficient * DELTA^2
 C      IAXS   - axial symmetry flag
 C      IEXP   - experiment number
 C      ITMA   - identify detectors according to OP,GDET
 C      ITTE   - thick target experiment flag
 C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
-C      TAU    - 
+C      TAU    - lifetime in picoseconds
 C      ZETA   - various coefficients
 C
 C Formal parameters:
-C      Ygn    -
+C      Ygn    - Gamma-ray yield
 C      Idr    - number of decays
 C      Iful   - flag to select full basis or not
 C      Fi0    - phi_0
 C      Fi1    - phi_1
 C      Trec   - Theta of recoiling nucleus
-C      Gth    -
-C      Figl   -
+C      Gth    - Theta of gamma
+C      Figl   - Phi of gamma
 C      Ngl    - detector number
 C      Op2    - The part after the OP, for the option we are processing
       
@@ -64,19 +64,23 @@ C      Op2    - The part after the OP, for the option we are processing
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       
-      DO l = 1 , Idr
+      DO l = 1 , Idr ! For each decay
+
          nlv = KSEQ(l,3) ! Level number of l'th decay
          il = (nlv-1)*28
          inx1 = KSEQ(l,2) ! Index of l'th decay
+
          DO j = 1 , 4
             f(j) = FP(j,l,1)*DELLA(l,1)
          ENDDO
+
          IF ( inx1.NE.0 ) THEN
             DO j = 1 , 4
                f(j) = f(j) + 2.*FP(j,l,3)*DELLA(l,3) + FP(j,l,2)
      &                *DELLA(l,2)
             ENDDO
          ENDIF
+
          DO j = 1 , 4
             f(j) = f(j)*TAU(nlv)
             iu = (j-1)*7
@@ -88,6 +92,7 @@ C      Op2    - The part after the OP, for the option we are processing
                at(is) = ZETA(ig)*f(j)
             ENDDO
          ENDDO
+
          IF ( Iful.EQ.1 ) THEN
             DO j = 1 , 9
                DO k = 1 , 9
@@ -104,13 +109,13 @@ C      Op2    - The part after the OP, for the option we are processing
                   alab(lf,k) = at(inat)
                ENDDO
             ENDDO
-            bt = BETAR(IEXP)
+            bt = BETAR(IEXP) ! Get beta
             IF ( ITTE(IEXP).NE.1 ) CALL RECOIL(alab,attl,bt,Trec)
             IF ( l.EQ.1 ) CALL YLM1(Gth,ylmr)
-            ixs = IAXS(IEXP)
-            fi01 = Fi0 - Figl
-            fi11 = Fi1 - Figl
-            CALL FIINT1(fi01,fi11,alab,ixs)
+            ixs = IAXS(IEXP) ! Get axial symmetry flag
+            fi01 = Fi0 - Figl ! Get lower phi limit
+            fi11 = Fi1 - Figl ! Get upper phi limit
+            CALL FIINT1(fi01,fi11,alab,ixs) ! Integrate over phi in lab frame
             Ygn(l) = alab(1,1)*.0795774715 ! 0.0795774715 = 1 / (4 pi)
             DO j = 2 , 9
                sm = ylmr(j,1)*alab(j,1)
@@ -119,17 +124,17 @@ C      Op2    - The part after the OP, for the option we are processing
                      sm = sm + 2.*ylmr(j,k)*alab(j,k)
                   ENDDO
                ENDIF
-               ipd = ITMA(IEXP,Ngl)
+               ipd = ITMA(IEXP,Ngl) ! Detector ID
                arg = (ENDEC(l)-ENZ(ipd))**2
                qv = (Q(3,ipd,j-1)*Q(2,ipd,j-1)+Q(1,ipd,j-1)*arg)
      &              /(Q(2,ipd,j-1)+arg)
                Ygn(l) = Ygn(l) + sm*qv
             ENDDO
          ELSE
-            ixs = IAXS(IEXP)
-            fi01 = Fi0 - Figl
-            fi11 = Fi1 - Figl
-            CALL FIINT(fi01,fi11,at,ixs)
+            ixs = IAXS(IEXP) ! Get axial symmetry flag
+            fi01 = Fi0 - Figl ! Get lower phi limit
+            fi11 = Fi1 - Figl ! Get upper phi limit
+            CALL FIINT(fi01,fi11,at,ixs) ! Integrate over phi in recoiling nucleus frame, result in at
             IF ( l.EQ.1 ) CALL YLM(Gth,ylmr)
             Ygn(l) = at(1)*.0795774715 ! 0.0795774715 = 1 / (4 pi)
             DO jj = 1 , 3
@@ -149,11 +154,13 @@ C      Op2    - The part after the OP, for the option we are processing
                Ygn(l) = Ygn(l) + sm*qv
             ENDDO
          ENDIF
-      ENDDO
+      ENDDO ! Loop over decays
+
+C     This bit added for gosia2
       IF ( Op2.EQ.'INTG' ) RETURN
       dsig = DSIGS(IEXP)
-      ttx = TLBDG(IEXP)/57.2957795
-      DO j = 1 , Idr
+      ttx = TLBDG(IEXP)/57.2957795 ! Theta in lab frame in radians
+      DO j = 1 , Idr  ! For each decay
          Ygn(j) = Ygn(j)*dsig*SIN(ttx)
-      ENDDO
+      ENDDO ! Loop on decays Idr
       END
