@@ -7,19 +7,19 @@ C
 C Purpose:
 C
 C Uses global variables:
-C      ARM    - reduced matrix elements
+C      ARM    - excitation amplitudes of substates.
 C      DEV    -
 C      IEXP   - experiment number
 C      ITS    - create tape 18 file (OP,CONT switch SEL,)
 C      KVAR   -
 C
 C Formal parameters:
-C      Rik    -
-C      Rv     -
-C      Em     -
+C      Rik    - DEV + YEXP
+C      Rv     - difference between experimental and calculated yields
+C      Em     - matrix element
 C      Jk     -
 C      Kk     -
-C      Indx   -
+C      Indx   - index of matrix element
 C      Lu     -
  
       SUBROUTINE SIXEL(Rik,Rv,Em,Jk,Kk,Indx,Lu)
