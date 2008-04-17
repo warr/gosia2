@@ -7,14 +7,14 @@ C
 C Purpose: to halve the step size for the integeration in INTG.
 C
 C Uses global variables:
-C      ARM    - reduced matrix elements
+C      ARM    - excitation amplitudes of substates.
 C      CAT    - substates of levels (n_level, J, m)
-C      ISMAX  -
+C      ISMAX  - number of substates used
 C      NMAX   - number of levels
-C      NSTART -
+C      NSTART - index in CAT of first substate associated with a level
 C
 C Formal parameters:
-C      ISO    -
+C      Iso    - isotropic flag
  
       SUBROUTINE HALF(Iso)
       IMPLICIT NONE
@@ -29,7 +29,7 @@ C      ISO    -
 
       IF ( Iso.EQ.0 ) THEN
          DO j = 1 , NMAX ! Loop over levels
-            ir = NSTART(j) - 1
+            ir = NSTART(j) - 1 ! Index of first substate of level - 1
  20         ir = ir + 1
             fpom = ARM(ir,3)
             ARM(ir,1) = -.0625*(ARM(ir,1)+ARM(ir,4))
@@ -41,7 +41,7 @@ C      ISO    -
          GOTO 99999
       ENDIF
        
-      DO j = 1 , ISMAX
+      DO j = 1 , ISMAX ! Loop over substates
          fpom = ARM(j,3)
          ARM(j,1) = -.0625*(ARM(j,4)+ARM(j,1))
      &              + .5625*(ARM(j,2)+ARM(j,3))
