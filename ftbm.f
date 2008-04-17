@@ -12,20 +12,20 @@ C
 C Uses global variables:
 C      ACCA   - accuracy
 C      ACCUR  - accuracy required
-C      ARM    - the reduced matrix elements
+C      ARM    - excitation amplitudes of substates.
 C      CAT    - substates of levels (n_level, J, m)
-C      CHIS11 - 
+C      CHIS11 - chi squared
 C      ELM    - matrix elements given by user
-C      EMH    -
+C      EMH    - matrix element
 C      IAXS   - axial symmetry flag
 C      IEXP   - experiment number
 C      IGRD   -
-C      ILE    -
-C      INM    -
-C      INTR   -
+C      ILE    - yield number for each detector
+C      INM    - index of matrix element
+C      INTR   - flag to swap chisqr and log(chisqr)
 C      IPRM   - printing flags (see suboption PRT of OP,CONT)
-C      ISMAX  -
-C      ISO    -
+C      ISMAX  - number of substates used
+C      ISO    - isotropic flag
 C      ITAK2  -
 C      IY     - index of experimental yields
 C      JSKIP  - Experiments to skip during minimisation.
@@ -33,7 +33,7 @@ C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
 C      LFL    -
 C      LFL1   -
 C      LFL2   -
-C      LMAX   -
+C      LMAX   - ground-state spin + 1
 C      LP3    - maximum number of levels (75)
 C      LP6    - (32)
 C      LP8    - (104)
@@ -49,13 +49,13 @@ C      NDIM   - maximum number of levels (75)
 C      NEXPT  - number of experiments
 C      NLIFT  - number of lifetimes
 C      NMAX   - number of levels
-C      NSTART -
-C      NSTOP  - 
+C      NSTART - index in CAT of first substate associated with a level
+C      NSTOP  - index in CAT of last substate associated with a level
 C      NWR    - number of datapoints used in fit
 C      NYLDE  -
 C      SPIN   - spin of level
 C      ZETA   - the coupling constants
-C      ZPOL   -
+C      ZPOL   - dipole term
 C
 C Formal parameters:
 C      Icll   -
@@ -132,31 +132,35 @@ C      Bten   -
       Chisq = 0.
       LFL = 0
       chis1 = 0.
-      ixx = NDIM*MEMAX + LP11
+      ixx = NDIM*MEMAX + LP11 ! LP11 is 103
+
       DO i1 = 1 , ixx
          ZETA(i1) = 0.
       ENDDO
-      DO ii = 1 , LP6
+
+      DO ii = 1 , LP6 ! LP6 is 32
          ILE(ii) = 1
       ENDDO
+
       itemp = 0
       NWR = 0
       iapx = 1
-      DO jkl = 1 , NEXPT
+
+      DO jkl = 1 , NEXPT ! For each experiment
          IEXP = jkl
          IGRD = 0
          LFL2 = 1
          IF ( ITAK2.EQ.-1 ) THEN
             DO larm = 1 , 4
-               DO karm = 1 , LP10
+               DO karm = 1 , LP10 ! LP10 is 600
                   ARM(karm,larm) = (0.,0.)
                ENDDO
             ENDDO
          ENDIF
          iflg = 0
          IF ( IEXP.NE.1 ) THEN
-            kk = NANG(IEXP)
-            DO jjj = 1 , LP6
+            kk = NANG(IEXP) ! Number of detector angles
+            DO jjj = 1 , LP6 ! LP6 is 32
                ILE(jjj) = ILE(jjj) + NYLDE(IEXP-1,jjj)
             ENDDO
          ENDIF
@@ -165,25 +169,25 @@ C      Bten   -
          IF ( MAGA(IEXP).EQ.0 ) lp = 1
          IF ( Ncall.EQ.0 ) GOTO 150
          IF ( Icll.EQ.4 ) GOTO 100
- 50      loch = LP3*(MEMAX-1) + NMAX + LP11
+ 50      loch = LP3*(MEMAX-1) + NMAX + LP11 ! LP3 is 75, LP11 is 103
          DO k = 1 , loch
             ZETA(k) = 0.
          ENDDO
          CALL LOAD(IEXP,1,2,0.D0,jj)
-         DO k = 1 , LMAX
+         DO k = 1 , LMAX ! For each multipolarity up to ground-state spin + 1
             fc = 2.
             IF ( k.EQ.LMAX ) fc = 1.
             IF ( DBLE(INT(SPIN(1))).LT.SPIN(1) ) fc = 2.
             loc = 0
-            polm = DBLE(k-1) - SPIN(1)
-            CALL LOAD(IEXP,3,2,polm,jj)
-            CALL PATH(jj)
-            CALL LOAD(IEXP,2,2,polm,jj)
-            CALL APRAM(IEXP,1,1,jj,ACCA)
+            polm = DBLE(k-1) - SPIN(1) ! Multipolarity - ground-state spin
+            CALL LOAD(IEXP,3,2,polm,jj) ! Calculate parameters
+            CALL PATH(jj) ! Find path
+            CALL LOAD(IEXP,2,2,polm,jj) ! Calculate parameters
+            CALL APRAM(IEXP,1,1,jj,ACCA) ! Calculate excitation amplitudes
             IF ( Ncall.NE.0 ) THEN
                IF ( Icll.NE.3 ) THEN
                   DO indx = 1 , MEMX6 ! Loop over E1...6 matrix elements
-                     CALL APRAM(IEXP,0,indx,jj,ACCA)
+                     CALL APRAM(IEXP,0,indx,jj,ACCA) ! Calculate excitation amplitudes
                      kx = 0
                      DO i11 = 1 , NMAX ! Loop over levels
                         IF ( NSTART(i11).NE.0 ) THEN
@@ -192,7 +196,7 @@ C      Bten   -
                            lpx = MIN(lp,jpp)
                            IF ( ISO.NE.0 ) lpx = NSTOP(i11)
      &                          - NSTART(i11) + 1
-                           DO lpxd = 1 , lpx
+                           DO lpxd = 1 , lpx ! Loop over substates for level
                               kx = kx + 1
                               ZETA(loc) = ZETA(loc) + fc*DBLE(ARM(kx,5))
      &                           *DBLE(ARM(kx,6))
@@ -205,7 +209,8 @@ C      Bten   -
                ENDIF ! IF ( Icll.NE.3 )
             ENDIF ! Loop on Ncall
             CALL TENB(k,Bten,LMAX)
-         ENDDO ! Loop on k
+         ENDDO ! Loop on multipolarity k
+
          IF ( loc.NE.0 ) THEN
             REWIND 14
             WRITE (14,*) (ZETA(i11),i11=LP8,loch)
@@ -215,7 +220,7 @@ C      Bten   -
          IF ( Icll.GE.2 ) GOTO 200
          llx = 28*NMAX
          DO lx = 1 , llx
-            ZETA(LP9+lx) = ZETA(lx)
+            ZETA(LP9+lx) = ZETA(lx) ! LP9 is 47900
          ENDDO
          IF ( Icll.NE.1 ) GOTO 200
  100     iapx = 0
@@ -231,7 +236,7 @@ C      Bten   -
 99001       FORMAT (1X//40X,'EXCITATION AMPLITUDES'//10X,'M=',1F4.1,5X,
      &              'EXPERIMENT',1X,1I2//5X,'LEVEL',2X,'SPIN',2X,'M',5X,
      &              'REAL AMPLITUDE',2X,'IMAGINARY AMPLITUDE'//)
-            CALL STING(kk) ! Calculate reduced matrix elements
+            CALL STING(kk) ! Calculate excitation amplitudes
             CALL PATH(kk)
             CALL INTG(IEXP) ! Integrate
             CALL TENB(k,Bten,LMAX)
@@ -286,16 +291,16 @@ C      Bten   -
                chisx = 0.
                llx = 28*NMAX
                DO lix = 1 , llx
-                  ZETA(LP9+lix) = ZETA(lix)
+                  ZETA(LP9+lix) = ZETA(lix) ! LP9 is 47900
                ENDDO
                CALL CEGRY(chisx,itemp,Chilo,Idr,nwyr,0,0,1)
-               DO knm = 1 , MEMAX
+               DO knm = 1 , MEMAX ! Loop over matrix elements
                   INM = knm
                   chisx = 0.
                   EMH = ELM(INM)
                   ELM(INM) = 1.05*EMH
                   lcc = LP3*(INM-1) + LP11
-                  DO lst = 2 , NMAX
+                  DO lst = 2 , NMAX ! For all states except ground state
                      wz = ZETA(lst+lcc)
                      inpx = (lst-1)*28
                      DO jy = 1 , 4
@@ -372,9 +377,9 @@ C      Bten   -
                   ile1 = ILE(1) + NYLDE(IEXP,1) - 1
                   ile3 = ILE(1)
                   licz = 0
-                  DO ile2 = ile3 , ile1
+                  DO ile2 = ile3 , ile1 ! For each experimental yield
                      licz = licz + 1
-                     idec = IY(ile2,1)
+                     idec = IY(ile2,1) ! Decay number
                      IF ( idec.GT.1000 ) idec = idec/1000
                      luu = 6*licz - 5
                      jk = (luu-1)/LP10 + 1
@@ -397,13 +402,13 @@ C      Bten   -
             IF ( Icll.EQ.1 ) CALL CEGRY(Chisq,itemp,Chilo,Idr,nowr,7,
      &                                  issp,0)
          ENDIF
-         CALL BRANR(Chisq,NWR,Chilo)
-         CALL MIXR(NWR,0,Chisq,Chilo)
-         CALL CHMEM(NWR,Chisq,Chilo)
+         CALL BRANR(Chisq,NWR,Chilo) ! Branching ratios
+         CALL MIXR(NWR,0,Chisq,Chilo) ! Mixing ratios
+         CALL CHMEM(NWR,Chisq,Chilo) ! Compare matrix elements
          NWR = NWR + NLIFT
          Chisq = Chisq/NWR
          IF ( INTR.NE.0 ) THEN
-            chx = Chisq
+            chx = Chisq ! Swap chisqr and log(chisqr)
             Chisq = Chilo
             Chilo = chx
          ENDIF
