@@ -4,14 +4,14 @@ C SUBROUTINE PATH
 C
 C Called by: GOSIA
 C
-C Purpose:
+C Purpose: Calculate path for each level
 C
 C Uses global variables:
 C      CAT    - substates of levels (n_level, J, m)
-C      IPATH  -
+C      IPATH  - index of substate in level with same m as substate Irld
 C      NMAX   - number of levels
-C      NSTART -
-C      NSTOP  -
+C      NSTART - index in CAT of first substate associated with a level
+C      NSTOP  - index in CAT of last substate associated with a level
 C
 C Formal parameters:
 C      Irld   - index into ARM array
@@ -27,18 +27,18 @@ C      Irld   - index into ARM array
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
 
       spm = CAT(Irld,3) ! m quantum number for substate Irld
-      DO i = 2 , NMAX
+      DO i = 2 , NMAX ! For each level except ground state
          IPATH(i) = 0
-         ist = NSTART(i)
-         IF ( ist.NE.0 ) THEN
-            isp = NSTOP(i)
-            DO j = ist , isp
+         ist = NSTART(i) ! Index of first substate for level
+         IF ( ist.NE.0 ) THEN ! If this is non-zero
+            isp = NSTOP(i) ! Index of last substate for level
+            DO j = ist , isp ! For each substate of level
                vl = CAT(j,3) ! m quantum number for substate j
-               IF ( ABS(vl-spm).LT.1.E-6 ) GOTO 50
+               IF ( ABS(vl-spm).LT.1.E-6 ) GOTO 50 ! Jump if they have the same m
             ENDDO
          ENDIF
          GOTO 100
- 50      IPATH(i) = j
+ 50      IPATH(i) = j ! Store it
  100  ENDDO
-      IPATH(1) = Irld
+      IPATH(1) = Irld ! Special case of ground state
       END
