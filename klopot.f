@@ -57,11 +57,13 @@ C      Rlr    - print out if matrix element exceeds Rlr.
       indx = 1
       REWIND 15
       REWIND 17
-      DO i = 1 , MEMAX
+
+      DO i = 1 , MEMAX ! Zero all matrix elements and limits
          ELM(i) = 0.
          ELMU(i) = 0.
          ELML(i) = 0.
       ENDDO
+
       iexh = 1
  100  g = 0.
       d = 0.
@@ -145,7 +147,7 @@ C      Rlr    - print out if matrix element exceeds Rlr.
             ENDDO
             WRITE (22,99006)
 99006       FORMAT (2X////40X,'ANALYSIS OF SIGNIFICANT DEPENDENCES'//)
-            DO i = 1 , MEMAX
+            DO i = 1 , MEMAX ! For each matrix element
                IF ( KVAR(i).NE.0 ) THEN
                   lc = 0
                   IF ( ELML(i).GE..5 ) THEN
@@ -170,7 +172,7 @@ C      Rlr    - print out if matrix element exceeds Rlr.
      &                          3X,'D(SIGMA**2)/D(ME)',4X,'I',1X,'EXP',
      &                          2X,'TRANSITION',2X,'SIGMA',3X,
      &                          'DERIVATIVE',3X,'D(SIGMA**2)/D(ME)')
-                        DO l = 1 , K
+                        DO l = 1 , K ! For each of the important contributions to chisqr
                            ump = 0.
                            umm = 0.
                            DO j = 1 , lc
@@ -208,7 +210,7 @@ C      Rlr    - print out if matrix element exceeds Rlr.
                      ENDIF
                   ENDIF
                ENDIF
-            ENDDO
+            ENDDO ! Loop over matrix elements
             RETURN
          ELSE
             ll = ll + 1
