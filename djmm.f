@@ -8,7 +8,7 @@ C Purpose: calculate the rotation functions D^k_{\xi \xi^\prime}
 C
 C Uses global variables:
 C      B      - array of factorials
-C      BEQ    - beta
+C      BEQ    - identifier for angle for rotations
 C
 C Formal parameters:
 C      Beta   - v/c
@@ -24,6 +24,7 @@ C previously calculated. For this to work, the variable djm has to be
 C declared with a SAVE statement, otherwise the variable is an automatic one,
 C which is created freshly each time the function is called.
 
+ 
       REAL*8 FUNCTION DJMM(Beta,K,Kpp,Kp)
       IMPLICIT NONE
       REAL*8 B , b1 , b2 , be , BEQ , Beta , cb , ctb , djm , f , g , 
@@ -40,17 +41,21 @@ C which is created freshly each time the function is called.
       sk = DBLE(K)
       ul = sk*((sk-1.)*(4.*sk+7)/6.+1.)
       lca = INT(ul+.1)
+
+C     Calculate position in djm and iczy arrays
       loc = lca + (2*K+1)*Kp + Kpp + K + 1
-      IF ( ABS(BEQ-ABS(Beta)).GT.1.E-6 ) THEN
+
+      IF ( ABS(BEQ-ABS(Beta)).GT.1.E-6 ) THEN ! If beta doesn't match the identifier, initialise
          BEQ = ABS(Beta)
          DO ill = 1 , 525
             iczy(ill) = 0
          ENDDO
-      ELSEIF ( iczy(loc).EQ.1 ) THEN
+      ELSEIF ( iczy(loc).EQ.1 ) THEN ! We have already calculated it, so return
          DJMM = djm(loc)*ifza
          GOTO 99999
       ENDIF
-       
+
+C     We have to calculate it
       be = BEQ/2.
       cb = COS(be)
       sb = SIN(be)
