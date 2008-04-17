@@ -18,7 +18,7 @@ C      ZETA   - various coefficients (here the collision functions)
 C
 C Formal parameters:
 C      Nexp   - experiment number
-C      Zpol   -
+C      Zpol   - dipole term
 C
 C The function QE is used to calculate Qe and QM to calculate Qm, but first
 C we call QRANGE to determine the range over which we need to calculate them.
