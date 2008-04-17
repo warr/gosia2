@@ -44,7 +44,8 @@ C      Rem    -
      &          j , Jj , l , LMAXE , LNY , m , MAGEXC , MEMAX , MEMX6 , 
      &          NWR
       DIMENSION f(3) , Bten(1200)
-      COMMON /VLIN  / XV(51) , YV(51) , ZV(20) , DSG(20) , DSE(20) , DS
+      COMMON /VLIN  / XV(101) , YV(101) , ZV(100) , DSG(100) ,
+     &                DSE(100) , DS
       COMMON /DFTB  / DEVD(500) , DEVU(500)
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)

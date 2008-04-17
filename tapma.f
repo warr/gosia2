@@ -34,7 +34,8 @@ C maps.
      &          Lx , lx1 , LZETA , na , Nco , ne , nfil , nfilt , Nflr , 
      &          Nft
       INTEGER*4 ng , ng1 , ntt
-      COMMON /VLIN  / XV(51) , YV(51) , ZV(20) , DSG(20) , DSE(20) , DS
+      COMMON /VLIN  / XV(101) , YV(101) , ZV(100) , DSG(100) ,
+     &                DSE(100) , DS
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /YTEOR / YGN(500) , YGP(500) , IFMO
 
