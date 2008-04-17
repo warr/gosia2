@@ -12,9 +12,9 @@ C      IY     - index for yields
 C      YEXP   - experimental yield
 C
 C Formal parameters:
-C      Lst    - start
-C      Ls     - end
-C      L      -
+C      Lst    - first yield in set
+C      Ls     - last yield in set
+C      L      - number of dataset
  
       SUBROUTINE SZEREG(Lst,Ls,L)
       IMPLICIT NONE
