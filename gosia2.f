@@ -2357,7 +2357,7 @@ C     Handle OP,ERRO
                   CALL LOAD(IEXP,1,icg,0.D0,jj)
                   CALL LOAD(IEXP,2,icg,0.D0,jj)
                   CALL PATH(1)
-                  sz1 = MIN(zmir(kk,1,IEXP),10.)
+                  sz1 = MIN(zmir(kk,1,IEXP),10.D0)
                   sz2 = zmir(kk,2,IEXP)/50.
                   acof = 2.4009604E-3/zmir(kk,2,IEXP)
                   bcof = 8.163265E-4
