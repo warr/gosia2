@@ -8,7 +8,6 @@ C Purpose: to determine the range of the integration over omega.
 C
 C Uses global variables:
 C      ACC50  - accuracy required for integration
-C      IFAC   -
 C      IRA    - range for omega for each multipolarity
 C      MULTI  - number of matrix elements with each multipolarity populating levels
 C
