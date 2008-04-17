@@ -8,17 +8,17 @@ C
 C Purpose: calculate the state of polarization of the decaying level
 C
 C Uses global variables:
-C      ARM    - reduced matrix elements
+C      ARM    - excitation amplitudes of substates.
 C      CAT    - substates of levels (n_level, J, m)
 C      NMAX   - number of levels
-C      NSTART -
-C      NSTOP  -
+C      NSTART - index in CAT of first substate associated with a level
+C      NSTOP  - index in CAT of last substate associated with a level
 C      SPIN   - spin of level
 C
 C Formal parameters:
-C      Icl    -
-C      Bten   -
-C      Lmax   -
+C      Icl    - multipolarity
+C      Bten   - result
+C      Lmax   - maximum multipolarity to calculate for
 C
 C Note that the parameters to WTHREJ are all doubled, so that this routine
 C can cope with half-integers.
@@ -48,11 +48,11 @@ C can cope with half-integers.
          ENDDO
       ENDIF
 
-      DO i = 2 , NMAX
-         ms = NSTART(i)
+      DO i = 2 , NMAX ! For each level except ground state
+         ms = NSTART(i) ! First substate of level
          IF ( ms.NE.0 ) THEN
-            msp = NSTOP(i)
-            si = SPIN(i)
+            msp = NSTOP(i) ! Last substate of level
+            si = SPIN(i) ! Spin of level
             isi = INT(2.*si+.01)
             ce = SQRT(2.*si+1.)
             DO kp = 1 , 7 , 2
@@ -100,5 +100,5 @@ C can cope with half-integers.
                ENDIF ! If isi.GE.k
             ENDDO ! Loop over kp
          ENDIF ! If ms.NE.0
-      ENDDO ! Loop over i
+      ENDDO ! Loop over level i
       END
