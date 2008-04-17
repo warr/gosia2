@@ -8,24 +8,24 @@ C
 C Purpose: perform the minimization
 C
 C Uses global variables:
-C      CHIS11 -
+C      CHIS11 - chi squared
 C      CORF   - internal correction factors
 C      DEVD   -
 C      DEVU   -
 C      DLOCK  - limit of derivative below which matrix element fixed if LOCKS=1
 C      ELM    - matrix elements
-C      ELMH   -
+C      ELMH   - matrix element
 C      GRAD   - partial derivative of chi squared wrt. matrix element
-C      HLMLM  -
+C      HLMLM  - old value of matrix element or chi squared
 C      ICS    - read internal correction factors from file rather than recalculating
 C      IFBFL  - calculate derivatives with forward-backward method
-C      INTR   -
+C      INTR   - flag to swap chisqr and log(chisqr)
 C      IPRM   - printing flags (see suboption PRT of OP,CONT)
 C      IPS1   - terminate after calculating and writing correction factors
 C      ITAK2  -
-C      IUNIT3 - unit for TAPE3
+C      IUNIT3 - unit for TAPE3 (gosia2)
 C      IVAR   - fixed, correlated or free flag
-C      JENTR  -
+C      JENTR  - flag set to 0 normally, 1 in OP,ERRO
 C      KFERR  - error flag for minimization
 C      KVAR   -
 C      LFL1   -
@@ -134,11 +134,11 @@ C        L=1 => logs used to claculate chi squared
          IF ( Imode.GE.1100 ) metf = 1
          IF ( (Imode-1000-100*metf).GE.10 ) lnm = 1
          IF ( (Imode-1000-100*metf-10*lnm).EQ.1 ) LNY = 1 ! Use logs
-         IF ( JENTR.EQ.1 ) GOTO 200
+         IF ( JENTR.EQ.1 ) GOTO 200 ! If we are in OP,ERRO, jump
          IF ( ICS.NE.0 ) THEN ! Read correction factors from file, rather than recalculating
             REWIND 11
-            DO jnm = 1 , LP4
-               READ (11) (CORF(jnm,kh2),kh2=1,LP6)
+            DO jnm = 1 , LP4 ! LP4 is 1500
+               READ (11) (CORF(jnm,kh2),kh2=1,LP6) ! LP6 is 32
             ENDDO
             ICS = 0
             GOTO 200
@@ -250,7 +250,7 @@ C     Write correction factors
          ENDDO
          IF ( KFERR.EQ.1 ) THEN
             GRAD(Jjh) = 0.
-            IF ( Is.EQ.1 .AND. icount.EQ.1 ) WRITE (IUNIT3,*)
+            IF ( Is.EQ.1 .AND. icount.EQ.1 ) WRITE (IUNIT3,*) ! For sigma program
      &           (NWR*GRAD(jnm),jnm=1,MEMAX)
          ENDIF
          IF ( metf.EQ.1 .AND. ipas.EQ.2 ) THEN
