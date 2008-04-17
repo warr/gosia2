@@ -2032,9 +2032,9 @@ C     Handle OP,ERRO
      &                       1E14.6)
                   ENDDO ! Loop on substates k
                   IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
-     &              WRITE (22,99036) pr
+     &                 WRITE (22,99036) pr
 99036             FORMAT (1X/5X,'SUM OF PROBABILITIES=',1E14.6)
-               ENDDO
+               ENDDO ! Loop over spins j
                CALL TENS(bten)
                IF ( itno.NE.0 ) THEN ! write statistical tensors on tape 17
                   DO k = 2 , NMAX
