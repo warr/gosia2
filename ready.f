@@ -18,7 +18,7 @@ C      NYLDE  - number of yields
 C      YEXP   - experimental yield
 C
 C Formal parameters:
-C      Idr    -
+C      Idr    - number of decays
 C      Ntap   - unit for yield file
 C      Ipri   - printing flag (Ipri=1 gives additional output)
 C
@@ -47,17 +47,19 @@ C experimental yields
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /CCCDS / NDST(50)
       
+C     Rewind yield file
       REWIND Ntap
-      DO k = 1 , LP6
+
+      DO k = 1 , LP6 ! LP6 = 32
          iytot(k) = 0
       ENDDO
       IF ( Ipri.EQ.1 ) WRITE (22,99001)
 99001 FORMAT (5X/47X,'REPRINT OF EXPERIMENTAL DATA TO BE FITTED'//)
-      DO lxp = 1 , NEXPT
+      DO lxp = 1 , NEXPT ! For each experiment
          DO kkl = 1 , LP6
             NYLDE(lxp,kkl) = 0
          ENDDO
-         ii = NDST(lxp)
+         ii = NDST(lxp) ! Number of datasets
          DO kk = 1 , ii ! iexp, ng, zp, ag, ep, nd, wt
             READ (Ntap,*) ne , nanx , zp , ap , xep , nval , waga
             IF ( Ipri.EQ.1 ) WRITE (22,99002) ne , zp , ap , xep , 
@@ -113,8 +115,8 @@ C experimental yields
             lbg = iytt - nval + 1
             CALL SZEREG(lbg,iytt,kk)
             NYLDE(lxp,kk) = nval
-         ENDDO
-      ENDDO
+         ENDDO ! For each dataset kk
+      ENDDO ! Loop on experiments lxp
 99005 FORMAT (1X///5X,'ERROR-NO MATRIX ELEMENT BETWEEN STATES',1X,1I2,
      &        ' AND ',1I2,/10X,'THIS TRANSITION IGNORED',//)
       END
