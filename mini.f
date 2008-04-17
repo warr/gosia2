@@ -66,18 +66,19 @@ C don't go outside the limits specified by the user.
      &       f2 , flt , GRAD
       REAL*8 gradp , HLMLM , ht , p , q , rfk , SA , sel , shl , sumg1 , 
      &       sumg2 , sumht , UPL , uxa , xkat , Xtest , YEXP , YNRM
-      INTEGER*4 i , IBPS , icl1 , icl2 , icount , ICS , Idr , IDRN , 
-     &          IFBFL , iht , iin , ILE , Imode , indx1 , INM , inmx , 
-     &          ino , INTR , ipas , ipm , IPRM
-      INTEGER*4 Ips , IPS1 , Is , istec , ITAK2 , itf , IUNIT3 , IVAR , 
-     &          IY , j , jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , 
-     &          jnm , jpr , jsa , jst , JZB
+      INTEGER*4 i , icl1 , icl2 , icount , ICS , Idr , IDRN , IFBFL , 
+     &          iht , iin , ILE , Imode , indx1 , INM , inmx , ino , 
+     &          INTR , ipas , ipm , IPRM
+      INTEGER*4 Ips , IPS1 , Is , istec , ITAK2 , itf , IVAR , IY , j , 
+     &          jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , jnm , 
+     &          jpr , jsa , jst
       INTEGER*4 KFERR , kh2 , kkk , KVAR , l , LFL , LFL1 , LFL2 , 
      &          LMAXE , lnm , LNY , LOCKF , LOCKS , LP1 , LP10 , LP11 , 
      &          LP12 , LP13 , LP14 , LP2
       INTEGER*4 LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , MAGEXC , MEMAX , 
      &          MEMX6 , metf , mvfl , ncall , nlinn , NLOCK , noflg , 
      &          Nptl , NWR , NYLDE
+      INTEGER*4 IBPS, IUNIT3, JZB ! For gosia2
       DIMENSION ipm(10) , Bten(1200) , gradp(500)
       COMMON /DUMM  / GRAD(500) , HLMLM(500) , ELMH(500)
       COMMON /ILEWY / NWR
@@ -98,7 +99,7 @@ C don't go outside the limits specified by the user.
       COMMON /ERRAN / KFERR
       COMMON /LOGY  / LNY , INTR , IPS1
       COMMON /ERCAL / JENTR , ICS
-      COMMON /SWITCH/ JZB , IBPS , IUNIT3
+      COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2
 
 C     Initialise gradp to zero for each matrix element
       DO i = 1 , MEMAX
@@ -250,7 +251,7 @@ C     Write correction factors
          ENDDO
          IF ( KFERR.EQ.1 ) THEN
             GRAD(Jjh) = 0.
-            IF ( Is.EQ.1 .AND. icount.EQ.1 ) WRITE (IUNIT3,*) ! For sigma program
+            IF ( Is.EQ.1 .AND. icount.EQ.1 ) WRITE (IUNIT3,*) ! For sigma program (unit changed for gosia2)
      &           (NWR*GRAD(jnm),jnm=1,MEMAX)
          ENDIF
          IF ( metf.EQ.1 .AND. ipas.EQ.2 ) THEN
