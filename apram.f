@@ -8,7 +8,7 @@ C
 C Purpose: calculate approximate value of the Coulomb excitation amplitudes.
 C
 C Uses global parameters:
-C      ARM    - reduced matrix elements
+C      ARM    - excitation amplitudes of substates.
 C      ELM    - matrix elements
 C      IDIVE  - number of subdivisions
 C      LERF   - error flag for expansion in POMNOZ
