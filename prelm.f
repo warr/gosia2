@@ -13,7 +13,6 @@ C      ELM25  - storage for matrix elements for target (added for gosia2)
 C      ELM26  - storage for matrix elements for projectile (added for gosia2)
 C      ELML   - lower limits on matrix elements
 C      ELMU   - upper limits on matrix elements
-C      IFAC   -
 C      IVAR   - indicates a limit or correlation is set
 C      JZB    - unit to read from
 C      LDNUM  - number of matrix elements with each multipolarity populating levels
