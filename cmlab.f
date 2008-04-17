@@ -9,7 +9,7 @@ C Purpose: calculate for center of mass frame
 C
 C Uses global variables:
 C      BETAR  - recoil beta
-C      DSIGS  -
+C      DSIGS  - dsigma for each experiment
 C      EN     - level energies
 C      EP     - bombarding energy
 C      EPS    - epsilon
@@ -31,8 +31,8 @@ C      TREP   - theta of recoiling nucleus
 C
 C Formal parameters:
 C      Ii     - experiment number (or zero for all experiments)
-C      Dsig   -
-C      Tetrn  -
+C      Dsig   - dsigma
+C      Tetrn  - theta of recoiling nucleus
 
       SUBROUTINE CMLAB(Ii,Dsig,Tetrn)
       IMPLICIT NONE
@@ -64,7 +64,7 @@ C      Tetrn  -
       lexp1 = NEXPT
       IF ( Ii.NE.0 ) lexp0 = Ii
       IF ( Ii.NE.0 ) lexp1 = Ii
-      DO lexp = lexp0 , lexp1
+      DO lexp = lexp0 , lexp1 ! For each experiment
          iflaa = 0
          IF ( TLBDG(lexp).LT.0 ) iflaa = 1
          IF ( IPRM(1).EQ.1 ) THEN
@@ -114,24 +114,26 @@ C        If IPRM(1) we want extra printout
 
          tlbrad = TLBDG(lexp)/57.2957795 ! Theta of detector to radians
          ared = 1.0 + a1/a2 ! reduced mass
-         emax = EP(lexp)/ared
-         DO n = 1 , NMAX
-            IF ( EN(n).GT.emax ) GOTO 50
+         emax = EP(lexp)/ared ! Maximum excitation energy
+         DO n = 1 , NMAX ! For each level
+            IF ( EN(n).GT.emax ) GOTO 50 ! Give error if energy of state too high
          ENDDO
          epmin = EP(lexp) - EN(NCM)*ared
          taup = SQRT(EP(lexp)/epmin)
          tau = taup*a1/a2
-         IF ( tau.LE.1.0 ) GOTO 100
+         IF ( tau.LE.1.0 ) GOTO 100 ! No limit on scattering angle
          tmxdg = TASIN(1.0/tau)*57.2957795
-         IF ( tmxdg.GE.TLBDG(lexp) ) GOTO 100
+         IF ( tmxdg.GE.TLBDG(lexp) ) GOTO 100 ! Within limit of scattering angle
+
          WRITE (22,99007) tmxdg , lexp
 99007    FORMAT (1X,'ERROR- MAXIMUM SCATTERING ANGLE IS ',F7.2,
      &           ' DEGREES',' FOR EXPERIMENT ',1I2)
-         GOTO 200
+         GOTO 200 ! Error
+
  50      WRITE (22,99008) emax , lexp
 99008    FORMAT (1X,'ERROR- MAXIMUM EXCITATION ENERGY IS ',F8.4,' MEV',
      &           ' FOR EXPERIMENT ',1I2)
-         GOTO 200
+         GOTO 200 ! Error
 
  100     tcmrad = tlbrad + TASIN(tau*SIN(tlbrad))
          tcmdg = tcmrad*57.2957795
@@ -213,8 +215,11 @@ C        More additional printout
          Tetrn = zlbrad
          IF ( IZ1(lexp).LT.0. ) Tetrn = tlbrad
          TREP(lexp) = Tetrn
-      ENDDO
-      IPRM(10) = 0
+      ENDDO ! Loop over experiments lexp
+
+      IPRM(10) = 0 ! Turn off printing so we don't write things twice
       RETURN
- 200  ERR = .TRUE.
+
+C     An error has occured, so set error flag and return
+ 200  ERR = .TRUE. ! Set error flag
       END
