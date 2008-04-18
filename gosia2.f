@@ -266,11 +266,9 @@ C      ZV     - energy meshpoints
      &       ycorr
       REAL*8 YEXP , YGN , YGP , YNRM , YV , yy , yyd1 , yydd , yyy , 
      &       ZETA , zmir , zp , ZPOL , ZV , zz
-      REAL*8 CNOR1 , CNOR2 , ELM25 , ELM26 , chir , chp , ccch1 ,
-     &       ccch2 , cht ! For gosia2
       INTEGER*4 i , i122 , IAMX , IAMY , IAPR , iapx , IAXS , ib , 
-     &          ibaf , IBPS , IBRC , IBYP , icg , icll , ICLUST , ICS ,
-     &          ict , ictl , id , idf , IDIVE
+     &          ibaf , IBRC , IBYP , icg , icll , ICLUST , ICS , ict , 
+     &          ictl , id , idf , IDIVE
       INTEGER*4 idr , IDRN , iecd , ient , IEXP , IFAC , IFBFL , ifbp , 
      &          ifc , ifm , IFMO , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
      &          ihuj , ii , ij
@@ -282,10 +280,10 @@ C      ZV     - energy meshpoints
      &          iopri , iosr , IP , IPATH , ipd , iph
       INTEGER*4 IPI , ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
      &          ipri , IPRM , IPS1 , IRAWEX , irea , irep , irfix , 
-     &          irix , ISEX , isip , iske , iskf , ISKIN
+     &          ISEX , isip , iske , iskf , ISKIN
       INTEGER*4 isko , iskok , ISMAX , ISO , isoh , ispa , ispb , ITMA , 
-     &          itno , itp , ITS , ITTE , IUNIT3 , iuy , iva , iva1 , 
-     &          IVAR , ivarh , ivari , ivrh , IWF
+     &          itno , itp , ITS , ITTE , iuy , iva , iva1 , IVAR , 
+     &          ivarh , ivari , ivrh , IWF
       INTEGER*4 ixj , ixl , ixm , IY , iyr , IZ , IZ1 , izcap , j , ja , 
      &          jan , jan1 , jb , jb1 , jb2 , jd , jde , jdy , je , 
      &          JENTR
@@ -293,8 +291,8 @@ C      ZV     - energy meshpoints
      &          jj , jj1 , jjjj , jjlx , jjx , jk , jkloo , jktt , jl , 
      &          jmm , jmpin
       INTEGER*4 jp , jphd , jpin , jrls , js , JSKIP , jt , jtp , jyi , 
-     &          jyi1 , jyi2 , jyv , jz , JZB , k , kb , kclust , kerf ,
-     &          kex , KF , KFERR
+     &          jyi1 , jyi2 , jyv , jz , k , kb , kclust , kerf , kex , 
+     &          KF , KFERR
       INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kl , kloop , 
      &          kmat , kq , KSEQ , ktt , kuku , KVAR , l , la , la1 , 
      &          lam , lamd
@@ -317,12 +315,15 @@ C      ZV     - energy meshpoints
      &          nmaxh , nmemx , nnl , nogeli , npce , npce1 , npct , 
      &          npct1 , npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , NYLDE , nz
-      INTEGER*4 MCFIX , nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
-      INTEGER*4 mret , mawr ! For gosia2
       LOGICAL ERR
       COMPLEX*16 ARM , EXPO
       CHARACTER*4 oph , op1 , opcja , op2
       CHARACTER*1 prp
+      REAL*8 CNOR1 , CNOR2 , ELM25 , ELM26 , chir , chp , ccch1 ,
+     &       ccch2 , cht ! For gosia2
+      INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
+      INTEGER*4 MCFIX , nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
+      INTEGER*4 mret , mawr , irix ! For gosia2
       DIMENSION ihlm(32) , esp(20) , dedx(20) , bten(1200) , 
      &          fiex1(100,100,2) , title(20) , pfi(101) , zmir(6,2,50) , 
      &          iecd(50) , wpi(100,2) , tau1(10) , eng(10) , 
