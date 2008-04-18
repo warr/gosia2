@@ -114,7 +114,7 @@ C      HLMLM  - old value of matrix element or chi squared
 C      IAMX   - index of matrix element for known matrix element
 C      IAMY   - level indices of pair of levels for which matrix element is known
 C      IAX    - axial symmetry flag
-C      IBPS   - target/projectile switch
+C      IBPS   - target/projectile switch (gosia2)
 C      IBYP   - flag to indicate whether we calculate <\alpha_k>
 C      ICLUST - cluster number for each experiment and detector
 C      ICS    - read internal correction factors flag (OP,CONT switch CRF,)
@@ -141,7 +141,7 @@ C      ISO    - isotropic flag
 C      ITMA   - identify detectors according to OP,GDET
 C      ITS    - create tape 18 file (OP,CONT switch SEL,)
 C      ITTE   - thick target experiment flag
-C      IUNIT3 - unit for TAPE3
+C      IUNIT3 - unit for TAPE3 (gosia2)
 C      IVAR   - indicates a limit or correlation is set
 C      IWF    - warning flag
 C      IY     - index for yields
