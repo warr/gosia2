@@ -2677,6 +2677,7 @@ C---- gosia2 changes end
 99046 FORMAT (1X///10X,'ERROR-INSUFFICIENT SPACE FOR E-THETA INTEGR ',
      &        'ATION')
 
+C     Troubleshooting
  1900 IF ( ITS.NE.0 ) THEN
          iva = 0
          WRITE (18,*) iva , iva , iva , chisq
@@ -2780,7 +2781,7 @@ C---- gosia2 changes end
             IF ( IMIN.NE.0 ) CALL PRELM(3)
          ENDIF
       ENDIF
-      GOTO 1900 ! End of OP,EXIT
+      GOTO 1900 ! End of OP,EXIT - troubleshoot
 
 99048 FORMAT (1X//50X,'CALCULATED YIELDS'//5X,'EXPERIMENT ',1I2,2X,
      &        'DETECTOR ',1I2/5X,'ENERGY ',1F10.3,1X,'MEV',2X,'THETA ',
