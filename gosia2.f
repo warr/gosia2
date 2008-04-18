@@ -566,14 +566,10 @@ C---- gosia2 changes end
             CC(i,j) = 0.
          ENDDO
       ENDDO
-      IPRM(2) = 0 ! changed from 1 to 0 for gosia2
-      IPRM(4) = 0 ! changed from -2 to 0 for gosia2
-      IPRM(5) = 1 ! changed from 11111 to 1 for gosia2
+      IPRM(4) = -2
+      IPRM(5) = 11111
       IPRM(6) = 11111
       IPRM(7) = 0
-      IPRM(11) = 0 ! changed from 1 to 0 for gosia2
-      IPRM(12) = 0 ! changed from 1 to 0 for gosia2
-      IPRM(14) = 0 ! changed from 1 to 0 for gosia2
       IPRM(16) = 0
       IPRM(17) = 0
       IPRM(18) = 0
