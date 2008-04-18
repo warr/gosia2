@@ -118,8 +118,8 @@ C      Iredv  -
       COMMON /BREC  / BETAR(50)
       COMMON /DIMX  / DIX(4) , ODL(200)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
-      COMMON /CINIT / CNOR(32,75) , CNOR1(32,75) , CNOR2(32,75) , INNR ,
-     &                MCFIX ! Changed in gosia2
+      COMMON /CINIT / CNOR(32,75) , INNR
+      COMMON /CINIT2/ CNOR1(32,75) , CNOR2(32,75) , MCFIX ! For gosia2
       COMMON /PRT   / IPRM(20)
       COMMON /LIFE  / NLIFT
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
