@@ -344,7 +344,6 @@ C      ZV     - energy meshpoints
       COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
      &                ENZ(200)
       COMMON /CINIT / CNOR(32,75) , INNR
-      COMMON /CINIT2/ CNOR1(32,75) , CNOR2(32,75) , MCFIX ! For gosia2
       COMMON /XRA   / SE
       COMMON /HHH   / HLM(500)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
@@ -402,7 +401,8 @@ C      ZV     - energy meshpoints
       COMMON /ERCAL / JENTR , ICS
       COMMON /LOGY  / LNY , INTR , IPS1
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
-      COMMON /SWITCH/ JZB , IBPS , IUNIT3
+      COMMON /CINIT2/ CNOR1(32,75) , CNOR2(32,75) , MCFIX ! For gosia2
+      COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2
       COMMON /RESC  / ELM25(500) , ELM26(500) ! For gosia2
       DATA (eng(k),k=1,10)/.05 , .06 , .08 , .1 , .15 , .2 , .3 , .5 , 
      &      1. , 1.5/
