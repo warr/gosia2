@@ -211,7 +211,7 @@ C      TAU    - lifetime in picoseconds
 C      THICK  - thickness of each absorber type
 C      TIMEC  - Tau_C (N.B. here it is G(4))
 C      TIMEL  - lifetimes and their errors
-C      TLBGD  - theta of particle detector
+C      TLBDG  - theta of particle detector
 C      TREP   - theta of recoiling nucleus
 C      UPL    - upper limits for all gamma detectors
 C      VINF   - speed of projectile at infinty
