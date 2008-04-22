@@ -187,7 +187,7 @@ C      MULTI  - number of matrix elements having given multipolarity
 C      NAMX   - number of known matrix elements
 C      NANG   - number of gamma-ray detectors for each experiment
 C      NBRA   - number of branching ratios
-C      NCM    - calculate kinematics assuming this spin for final state (default = 2.0)
+C      NCM    - calculate kinematics assuming this state for final state (default = 2)
 C      NDIM   - maximum number of levels
 C      NDST   - number of data sets
 C      NEXPT  - number of experiments
@@ -609,7 +609,7 @@ C---- gosia2 changes end
       LMAXE = 0
       CALL FAKP
       CALL FHIP
-      NCM = 2 ! Default final spin for kinematics calculation (OP,CONT NCM,)
+      NCM = 2 ! Default final state for kinematics calculation (OP,CONT NCM,)
       DO ijx = 1 , LP1 ! LP1 = 50
          INTERV(ijx) = 1
       ENDDO

@@ -19,7 +19,7 @@ C      IPRM   - printing flags (see suboption PRT of OP,CONT)
 C      ISKIN  - kinematic flag (0,1)
 C      IZ     - Z of investigated nucleus
 C      IZ1    - Z of not-investated nucleus
-C      NCM    - calculate kinematics assuming this spin for final state (default = 2.0)
+C      NCM    - calculate kinematics assuming this state for final state (default = 2)
 C      NEXPT  - number of experiments
 C      NMAX   - number of level energies
 C      TETACM - theta of particle detector in center of mass frame
