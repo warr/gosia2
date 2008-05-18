@@ -29,6 +29,7 @@ C     AKAVKA(5) = f  - fit flag
 C     AKAVKA(6) = N
 C     AKAVKA(7) = b
 C     AKAVKA(8) = c
+C     AKAVKA(9) = control flag
       
       SUBROUTINE EFFIX(Ipd,En,Effi)
       IMPLICIT NONE
@@ -36,7 +37,7 @@ C     AKAVKA(8) = c
      &       w , xx , yy
       INTEGER*4 i , Ipd , j , l , ll , n
       DIMENSION xx(51) , yy(51)
-      COMMON /EFCAL / ABC(8,10) , AKAVKA(8,200) , THICK(200,7)
+      COMMON /EFCAL / ABC(8,10) , AKAVKA(9,200) , THICK(200,7)
       
       Effi = 1.E-6
       En = En + 1.E-24
