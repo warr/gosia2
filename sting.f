@@ -43,7 +43,7 @@ C      Irld   - index into ARM array
       COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /AZ    / ARM(600,7)
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
+      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /ADBXI / EXPO(1500)
       COMMON /FLA   / IFLG
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)

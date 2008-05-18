@@ -48,7 +48,7 @@ C      Chilo  - chi squared of logs
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
+      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /CATLF / FP(4,500,3) , GKP(4,500,2) , KLEC(75)
       COMMON /LCDL  / DELLA(500,3)

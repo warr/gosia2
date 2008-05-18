@@ -377,7 +377,7 @@ C      ZV     - energy meshpoints
       COMMON /MINNI / IMIN , LNORM(50)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
+      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
       COMMON /PRT   / IPRM(20)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /CB    / B(20)
@@ -385,7 +385,7 @@ C      ZV     - energy meshpoints
       COMMON /CLCOM0/ IFAC(75)
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /CLCOM9/ ERR
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
+      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /CEXC9 / INTERV(50)
       COMMON /CAUX0 / EMMA(75) , NCM

@@ -77,7 +77,7 @@ C      Joj    - index of substate (write only)
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
       COMMON /PSPIN / ISHA
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
+      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
       COMMON /PCOM  / PSI(500)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /CLM   / LMAX

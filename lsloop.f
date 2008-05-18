@@ -68,7 +68,7 @@ C half-integers.
       COMMON /PTH   / IPATH(75) , MAGA(75)
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
+      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /CLCOM0/ IFAC(75)
       
       lam2 = 2*Lam

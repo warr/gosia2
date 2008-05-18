@@ -37,7 +37,7 @@ C      Ktoto  - number of iterations needed
       COMMON /INHI  / INHB
       COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
+      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
       COMMON /AZ    / ARM(600,7)
       COMMON /APRX  / LERF , IDIVE(50,2)
       DATA ci/(0.,-1.)/ ! -sqrt(-1)

@@ -42,7 +42,7 @@ C      I57    - switch which is either 5 or 7. This tells LAISUM to access eithe
      &          NSTOP , NSW , nz
       COMPLEX*16 ARM , EXPO
       COMMON /AZ    / ARM(600,7)
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
+      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /COEX2 / NMAX , NDIM , NMAX1

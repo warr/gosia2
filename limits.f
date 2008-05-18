@@ -18,8 +18,8 @@ C      MEMAX  - number of matrix elements
       IMPLICIT NONE
       REAL*8 ELM , ELML , ELMU , SA
       INTEGER*4 IVAR , j , LMAXE , MAGEXC , MEMAX , MEMX6
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
+      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
+      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
 
       DO j = 1 , MEMAX ! Loop over matrix elements
          IF ( IVAR(j).NE.0 ) THEN ! If not fixed

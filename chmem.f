@@ -19,7 +19,7 @@ C      IAMY   - level indices of pair of levels for which matrix element is know
       REAL*8 Chi , Chilo , di , EAMX , ELM , ELML , ELMU , SA
       INTEGER*4 ia , IAMX , IAMY , ib , NAMX , Nw
       COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
+      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
 
       IF ( NAMX.EQ.0 ) RETURN
       Nw = Nw + NAMX

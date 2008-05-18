@@ -94,7 +94,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
      &                ISO
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
+      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
       COMMON /PRT   / IPRM(20)
       COMMON /TRB   / ITS
       COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2

@@ -27,8 +27,8 @@ C may have been changed when we randomized.
       IMPLICIT NONE
       REAL*8 ELM , ELML , ELMU , RNDM , SA , SE
       INTEGER*4 IVAR , k , k1 , LMAXE , MAGEXC , MEMAX , MEMX6
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
+      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
+      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
       COMMON /XRA   / SE
 
 C     Randomize all that are not fixed or correlated
