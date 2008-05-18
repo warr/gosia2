@@ -15,7 +15,7 @@ C      NICC   - number of conversion coefficients
 C
 C Formal parameters:
 C      Ega    - gamma energy
-C      N      - multipolarity N=1,2,3 = E1,2,3 and N=4,5 = M1,2 (not as elsewhere)
+C      N      - multipolarity N=1,2,3 = E1,2,3 and N=4,5 = M1,2 (not as elsewhere!)
 C
 C Return value:
 C      conversion coefficient interpolated to energy Ega
