@@ -125,6 +125,7 @@ C      Bten   -
       COMMON /SKP   / JSKIP(50)
       COMMON /LIFE  / NLIFT
       COMMON /LOGY  / LNY , INTR , IPS1
+      DATA pr/0./,lmh/0/,loc/0/,loch/0/
 
       issp = 0
       Chilo = 0.
