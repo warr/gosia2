@@ -44,6 +44,7 @@ C      Iop    - print flag (controls what is written to output).
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2
       COMMON /RESC  / ELM25(500) , ELM26(500) ! Added for gosia2
+      DATA ste/0./
 
       inx = 0
       WRITE (22,99001)
