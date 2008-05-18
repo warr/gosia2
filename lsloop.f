@@ -60,7 +60,7 @@ C half-integers.
      &          NSTART , NSTOP , Nz
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
-      COMMON /PCOM  / PSI(500)
+      COMMON /PCOM  / PSI(1500)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
