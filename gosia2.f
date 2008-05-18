@@ -2062,7 +2062,7 @@ C     Handle OP,ERRO
                   CALL DECAY(ccd,0,ccc)
                   nogeli = NANG(IEXP) ! Number of detector angles for expt
                   jgl1 = 0
-                  DO js = 1 ,  ! LP2 = 1500 (maximum number of matrix elements)LP2
+                  DO js = 1 , LP2 ! LP2 = 1500 (maximum number of matrix elements)LP2
                      DO jgl = 1 , 20
                         SUMCL(jgl,js) = 0.
                      ENDDO
