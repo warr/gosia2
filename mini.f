@@ -94,7 +94,7 @@ C don't go outside the limits specified by the user.
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
-      COMMON /SEL   / KVAR(500)
+      COMMON /SEL   / KVAR(1500)
       COMMON /FIT   / LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
       COMMON /ERRAN / KFERR
       COMMON /LOGY  / LNY , INTR , IPS1

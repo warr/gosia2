@@ -397,7 +397,7 @@ C      ZV     - energy meshpoints
       COMMON /APRX  / LERF , IDIVE(50,2)
       COMMON /SKP   / JSKIP(50)
       COMMON /TRB   / ITS
-      COMMON /SEL   / KVAR(500)
+      COMMON /SEL   / KVAR(1500)
       COMMON /ERCAL / JENTR , ICS
       COMMON /LOGY  / LNY , INTR , IPS1
       COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)

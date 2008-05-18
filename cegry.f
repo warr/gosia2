@@ -128,7 +128,7 @@ C      Iredv  -
       COMMON /MINNI / IMIN , LNORM(50)
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
       COMMON /YTEOR / YGN(1500) , YGP(1500) , IFMO
-      COMMON /SEL   / KVAR(500)
+      COMMON /SEL   / KVAR(1500)
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 

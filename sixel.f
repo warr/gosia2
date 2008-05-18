@@ -33,7 +33,7 @@ C      Lu     -
       COMMON /ODCH  / DEV(500)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /TRB   / ITS
-      COMMON /SEL   / KVAR(500)
+      COMMON /SEL   / KVAR(1500)
 
       kk6 = Kk + 5
       rn = DEV(Lu)

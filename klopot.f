@@ -48,7 +48,7 @@ C      Rlr    - print out if matrix element exceeds Rlr.
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
-      COMMON /SEL   / KVAR(500)
+      COMMON /SEL   / KVAR(1500)
 
       REWIND 14
       REWIND 18
