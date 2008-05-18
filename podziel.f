@@ -28,6 +28,7 @@ C      J      - experiment number
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
       COMMON /APRX  / LERF , IDIVE(50,2)
+      DATA l1/0/
 
       IF ( I.NE.3 ) THEN
          IF ( I.EQ.1 ) THEN
