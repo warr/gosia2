@@ -60,6 +60,7 @@ C 8 = M2.
      &                ISO
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(75)
+      DATA jsave/0/
       
       m6 = 0
       DO l = 1 , 6
