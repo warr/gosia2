@@ -73,7 +73,7 @@ C 8 = M2.
          KLEC(l) = 0 ! Initialise KLEC to zero
       ENDDO
 
-      DO k = 1 , LP2 ! LP2 = 500 (number of matrix elements)
+      DO k = 1 , LP2 ! LP2 = 1500 (number of matrix elements)
          DO j = 1 , 3
             DO l = 1 , 4
                FP(l,k,j) = 0.
