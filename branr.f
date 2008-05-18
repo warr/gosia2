@@ -39,7 +39,7 @@ C      Chilo  - chi squared of logs
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
       COMMON /BRNCH / BRAT(50,2) , IBRC(2,50) , NBRA
-      COMMON /TRA   / DELTA(1500,3) , ENDEC(500) , ITMA(50,200) , 
+      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
      &                ENZ(200)
       COMMON /PRT   / IPRM(20)
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
