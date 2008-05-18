@@ -89,7 +89,7 @@ C don't go outside the limits specified by the user.
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
      &                YNRM(32,50) , IDRN , ILE(32)
-      COMMON /DFTB  / DEVD(500) , DEVU(500)
+      COMMON /DFTB  / DEVD(1500) , DEVU(1500)
       COMMON /PRT   / IPRM(20)
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)

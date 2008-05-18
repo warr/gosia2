@@ -349,7 +349,7 @@ C      ZV     - energy meshpoints
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
       COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
       COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
-      COMMON /DFTB  / DEVD(500) , DEVU(500)
+      COMMON /DFTB  / DEVD(1500) , DEVU(1500)
       COMMON /ERRAN / KFERR
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
