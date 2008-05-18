@@ -45,6 +45,7 @@ C      Tzz    - upper limit of theta (degrees)
      &                TLBDG(50) , VINF(50)
       COMMON /SECK  / ISKIN(50)
       DATA rade/57.2957795/ ! 180 / pi
+      DATA ws/0./
 
       IF ( Ifw.EQ.0 ) THEN
          Tyy = Wth - Wthh ! Lower limit of theta
