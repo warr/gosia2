@@ -8,7 +8,7 @@ C Purpose: subdivide matrix operators if the summation doesn't converge.
 C
 C Uses global variables:
 C      IDIVE  - number of subdivisions
-C      LP2    - maximum number of matrix elements (500)
+C      LP2    - maximum number of matrix elements (1500)
 C      QAPR   - approximate Coulomb amplitudes
 C
 C We use the identity: exp(A) \bar{a} = exp(A/2) exp(A/2)\bar{a}.
