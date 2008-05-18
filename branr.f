@@ -64,8 +64,8 @@ C     If printing option is on, print something
          iout = 0
          n1 = IBRC(1,k) ! 1st matrix element
          n2 = IBRC(2,k) ! 2nd matrix element
-         i1 = KSEQ(n1,1) ! Index of n1'th gamma
-         i2 = KSEQ(n2,1) ! Index of n2'th gamma
+         i1 = KSEQ(n1,1) ! Index of n1'th level
+         i2 = KSEQ(n2,1) ! Index of n2'th level
          eng1 = EN(KSEQ(n1,3)) - EN(KSEQ(n1,4)) ! Energy of gamma 1
          eng2 = EN(KSEQ(n2,3)) - EN(KSEQ(n2,4)) ! Energy of gamma 2
          IF ( i1.NE.0 ) THEN
