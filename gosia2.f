@@ -171,7 +171,7 @@ C      LP11   - LP8 - 1 (103)
 C      LP12   - number of steps of omega (365)
 C      LP13   - LP9 + 1 (47901)
 C      LP14   - maximum space for collision functions (4900)
-C      LP2    - maximum number of matrix elements (500)
+C      LP2    - maximum number of matrix elements (1500)
 C      LP3    - maximum number of levels (75)
 C      LP4    - maximum number of yields (1500)
 C      LP6    - maximum number of gamma detectors (32)
@@ -458,7 +458,7 @@ C     Initialize prime numbers
 C     Initialize pointers
       lp0 = 50000 ! Size of ZETA array
       LP1 = 50 ! Maximum number of experiments
-      LP2 = 500 ! Maximum number of matrix elements
+      LP2 = 1500 ! Maximum number of matrix elements
       LP3 = 75 ! Maximum number of levels
       LP4 = 1500
       LP6 = 32
@@ -630,7 +630,7 @@ C---- gosia2 changes end
          MULTI(lam) = 0
          LAMDA(lam) = 0
       ENDDO
-      DO j = 1 , LP2 ! LP2 = 500
+      DO j = 1 , LP2 ! LP2 = 1500 (maximum number of matrix elements)
          EXPO(j) = (1.,0.)
          KVAR(j) = 1
          ELM(j) = 0.
@@ -645,11 +645,11 @@ C---- gosia2 changes end
       ISEX(1) = 0
       ACCA = .00001
       oph = '    '
-      nmemx = LP2 + 9 ! LP2 = 500
+      nmemx = LP2 + 9 ! LP2 = 1500 (maximum number of matrix elements)
       IEXP = 1
       IMIN = 0
       i122 = 0
-      DO j = 1 , LP2 ! LP2 = 500
+      DO j = 1 , LP2 ! LP2 = 1500 (maximum number of matrix elements)
          DO k = 1 , 2
             DO l = 1 , 7
                QAPR(j,k,l) = 0.
@@ -1071,7 +1071,7 @@ C              Treat OP,INTG
                               ENDDO
                               CALL TENS(bten)
                               CALL DECAY(ccd,0,ccc)
-                              DO j = 1 , LP2
+                              DO j = 1 , LP2 ! LP2 = 1500 (maximum number of matrix elements)
                                  DO ijan = 1 , 20
                                     SUMCL(ijan,j) = 0.
                                  ENDDO
@@ -2062,7 +2062,7 @@ C     Handle OP,ERRO
                   CALL DECAY(ccd,0,ccc)
                   nogeli = NANG(IEXP) ! Number of detector angles for expt
                   jgl1 = 0
-                  DO js = 1 , LP2
+                  DO js = 1 ,  ! LP2 = 1500 (maximum number of matrix elements)LP2
                      DO jgl = 1 , 20
                         SUMCL(jgl,js) = 0.
                      ENDDO
