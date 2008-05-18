@@ -743,6 +743,11 @@ C        Treat OP,RAND (randomise matrix elements)
             CALL PRELM(2)
             GOTO 100 ! End of OP,RAND - back to input loop
 
+C     Treat OP,SELE
+         ELSEIF ( op2.EQ.'SELE' ) THEN
+            CALL SELECT
+            GOTO 2000 ! End of execution
+
 C     Treat OP,BRIC
          ELSEIF ( op2.EQ.'BRIC' ) THEN
             CALL BRICC
