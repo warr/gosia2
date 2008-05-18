@@ -58,7 +58,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
      &                NICC , NANG(200)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /LCDL  / DELLA(500,3)
-      COMMON /CATLF / FP(4,500,3) , GKP(4,500,2) , KLEC(75)
+      COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(75)
       COMMON /BREC  / BETAR(50)
       COMMON /THTAR / ITTE(50)
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50) ! For gosia2

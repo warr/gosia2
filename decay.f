@@ -50,7 +50,7 @@ C      Chilo  - chi squared of logs
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
-      COMMON /CATLF / FP(4,500,3) , GKP(4,500,2) , KLEC(75)
+      COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(75)
       COMMON /LCDL  / DELLA(500,3)
       DIMENSION gk(4)
 
