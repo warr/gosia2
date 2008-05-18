@@ -100,6 +100,7 @@ C don't go outside the limits specified by the user.
       COMMON /LOGY  / LNY , INTR , IPS1
       COMMON /ERCAL / JENTR , ICS
       COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2
+      DATA chirf/0./,dm/0./,sumg2/0./
 
 C     Initialise gradp to zero for each matrix element
       DO i = 1 , MEMAX
