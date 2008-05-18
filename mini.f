@@ -79,7 +79,7 @@ C don't go outside the limits specified by the user.
      &          MEMX6 , metf , mvfl , ncall , nlinn , NLOCK , noflg , 
      &          Nptl , NWR , NYLDE
       INTEGER*4 IBPS, IUNIT3, JZB ! For gosia2
-      DIMENSION ipm(10) , Bten(1200) , gradp(500)
+      DIMENSION ipm(10) , Bten(1200) , gradp(1500)
       COMMON /DUMM  / GRAD(1500) , HLMLM(1500) , ELMH(1500)
       COMMON /ILEWY / NWR
       COMMON /CH1T  / CHIS11
