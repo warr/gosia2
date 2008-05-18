@@ -87,7 +87,7 @@ C      Joj    - index of substate (write only)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
-      COMMON /CXI   / XI(500)
+      COMMON /CXI   / XI(1500)
       COMMON /CAUX0 / EMMA(75) , NCM
       COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)

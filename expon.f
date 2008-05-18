@@ -36,7 +36,7 @@ C in the function SETIN.
       INTEGER*4 Inx , Isg , Isg1 , Kdiv , Ndiv , Npt
       COMPLEX*16 expo1 , ci , expox , TCEXP
       COMMON /ADX   / ADB(365)
-      COMMON /CXI   / XI(500)
+      COMMON /CXI   / XI(1500)
       DATA ci/(0.,1.)/
       
       expox = TCEXP(ci*XI(Inx)*ADB(Npt)*Isg)

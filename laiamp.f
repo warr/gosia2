@@ -52,7 +52,7 @@ C      W0     - omega limit
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
-      COMMON /CXI   / XI(500)
+      COMMON /CXI   / XI(1500)
 
       ppp = 0.
       epsi = EPS(IEXP) ! epsilon
