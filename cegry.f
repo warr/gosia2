@@ -107,7 +107,7 @@ C      Iredv  -
       REAL*8 CNOR1 , CNOR2 ! For gosia2
       INTEGER*4 MCFIX ! For gosia2
       CHARACTER*4 op2 ! For gosia2
-      DIMENSION part(32,50,2) , lic(32) , lth(500) , cnr(32,50) , 
+      DIMENSION part(32,50,2) , lic(32) , lth(1500) , cnr(32,50) , 
      &          partl(32,50,2)
       COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,1500) , 
      &                IRAWEX(50)
