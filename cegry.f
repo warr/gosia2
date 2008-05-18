@@ -437,7 +437,7 @@ C              Correct for finite recoil
             fi0 = FIEX(IEXP,1)
             fi1 = FIEX(IEXP,2)
             na = NANG(IEXP)
-            DO k = 1 , LP2 ! LP2 = 1500
+            DO k = 1 , LP2 ! LP2 is 1500
                DO kj = 1 , 20
                   SUMCL(kj,k) = 0
                ENDDO
