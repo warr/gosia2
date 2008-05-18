@@ -31,7 +31,7 @@ C      Inpo   -
 C      Jj     - matrix element
 C      Sh     -
 C      Bten   -
-C      Rem    -
+C      Rem    - natural log of the largest value the computer can represent
  
       SUBROUTINE KONTUR(Idr,Chis0,Chil,Ifbf,Inpo,Jj,Sh,Bten,Rem)
       IMPLICIT NONE
