@@ -30,7 +30,7 @@ C      Lu     -
      &          KVAR , l , l1 , Lu
       COMPLEX*16 ARM
       COMMON /AZ    / ARM(600,7)
-      COMMON /ODCH  / DEV(500)
+      COMMON /ODCH  / DEV(1500)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /TRB   / ITS
       COMMON /SEL   / KVAR(1500)

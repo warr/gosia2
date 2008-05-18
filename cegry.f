@@ -111,7 +111,7 @@ C      Iredv  -
      &          partl(32,50,2)
       COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,1500) , 
      &                IRAWEX(50)
-      COMMON /ODCH  / DEV(500)
+      COMMON /ODCH  / DEV(1500)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
      &                ENZ(200)
