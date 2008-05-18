@@ -362,7 +362,7 @@ C      ZV     - energy meshpoints
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
      &                YNRM(32,50) , IDRN , ILE(32)
       COMMON /YTEOR / YGN(1500) , YGP(1500) , IFMO
-      COMMON /LEV   / TAU(75) , KSEQ(500,4)
+      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /MAP   / PARX(50,12,5) , PARXM(50,4,10,6) , XIR(6,50)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
      &                NICC , NANG(200)

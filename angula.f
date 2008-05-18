@@ -53,7 +53,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
      &                ENZ(200)
-      COMMON /LEV   / TAU(75) , KSEQ(500,4)
+      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
      &                NICC , NANG(200)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)

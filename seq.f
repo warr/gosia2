@@ -58,7 +58,7 @@ C 8 = M2.
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
-      COMMON /LEV   / TAU(75) , KSEQ(500,4)
+      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /CATLF / FP(4,500,3) , GKP(4,500,2) , KLEC(75)
       
       m6 = 0

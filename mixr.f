@@ -26,7 +26,7 @@ C      Chilo  - chi squared using logs
      &       TAU
       INTEGER*4 i , IMIX , INTR , inx , inx1 , IPS1 , Ipsw , it , KSEQ , 
      &          LNY , NDL , Nw
-      COMMON /LEV   / TAU(75) , KSEQ(500,4)
+      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /MIXD  / DMIXE(20,2) , DMIX(20) , IMIX(20) , NDL
       COMMON /LOGY  / LNY , INTR , IPS1

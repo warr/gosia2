@@ -26,7 +26,7 @@ C      Idr    - number of decays
      &                MULTI(8)
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
-      COMMON /LEV   / TAU(75) , KSEQ(500,4)
+      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
 
       WRITE (22,99001)
 99001 FORMAT (1X//20X,'CALCULATED INTERNAL CONVERSION ',

@@ -121,7 +121,7 @@ C      Iredv  -
       COMMON /CINIT / CNOR(32,75) , INNR
       COMMON /PRT   / IPRM(20)
       COMMON /LIFE  / NLIFT
-      COMMON /LEV   / TAU(75) , KSEQ(500,4)
+      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /IGRAD / IGRD
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)

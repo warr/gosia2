@@ -46,7 +46,7 @@ C      Chilo  - chi squared of logs
       COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /LEV   / TAU(75) , KSEQ(500,4)
+      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
