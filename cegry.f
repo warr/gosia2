@@ -39,7 +39,7 @@ C      KVAR   -
 C      LASTCL - index of last detector in cluster
 C      LFL    -
 C      LNORM  - normalization constant control
-C      LP2    - maximum number of matrix elements (500)
+C      LP2    - maximum number of matrix elements (1500)
 C      LP6    - 32
 C      LP10   - 600
 C      MCFIX  - fixing parameter (added for gosia2)
@@ -214,7 +214,7 @@ C     with CONT:PRT, and then does OP,EXIT
             fi1 = FIEX(IEXP,2) ! Upper phi limit
             na = NANG(IEXP) ! Number of detector angles
 
-            DO k = 1 , LP2 ! LP2 is 500
+            DO k = 1 , LP2 ! LP2 is 1500
                DO k9 = 1 , 20
                   SUMCL(k9,k) = 0.
                ENDDO
@@ -280,7 +280,7 @@ C              Correct for finite recoil
      &                 'YEXP',7X,'PC. DIFF.',2X,'(YE-YC)/SIGMA')
                ENDIF
                lu = ILE(k9) ! Yield number for detector k9
-               DO iabc = 1 , LP2 ! LP2 = 500
+               DO iabc = 1 , LP2 ! LP2 = 1500
                   lth(iabc) = 0
                ENDDO
                DO l = 1 , Idr ! For each decay
@@ -436,7 +436,7 @@ C              Correct for finite recoil
             fi0 = FIEX(IEXP,1)
             fi1 = FIEX(IEXP,2)
             na = NANG(IEXP)
-            DO k = 1 , LP2
+            DO k = 1 , LP2 ! LP2 = 1500
                DO kj = 1 , 20
                   SUMCL(kj,k) = 0
                ENDDO
