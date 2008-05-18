@@ -127,7 +127,7 @@ C      Iredv  -
      &                TLBDG(50) , VINF(50)
       COMMON /MINNI / IMIN , LNORM(50)
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
-      COMMON /YTEOR / YGN(500) , YGP(500) , IFMO
+      COMMON /YTEOR / YGN(1500) , YGP(1500) , IFMO
       COMMON /SEL   / KVAR(500)
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14

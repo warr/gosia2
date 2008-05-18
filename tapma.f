@@ -37,7 +37,7 @@ C maps.
       COMMON /VLIN  / XV(101) , YV(101) , ZV(100) , DSG(100) ,
      &                DSE(100) , DS
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /YTEOR / YGN(500) , YGP(500) , IFMO
+      COMMON /YTEOR / YGN(1500) , YGP(1500) , IFMO
 
       Nft = 0
       nfilt = 0
