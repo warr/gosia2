@@ -59,6 +59,7 @@ C      Tetrn  - theta of recoiling nucleus
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
+      DATA r3/0./
 
       lexp0 = 1
       lexp1 = NEXPT
