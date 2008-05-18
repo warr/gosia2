@@ -44,7 +44,7 @@ C      Irld   - index into ARM array
      &                MULTI(8)
       COMMON /AZ    / ARM(600,7)
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
-      COMMON /ADBXI / EXPO(500)
+      COMMON /ADBXI / EXPO(1500)
       COMMON /FLA   / IFLG
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)

@@ -339,7 +339,7 @@ C      ZV     - energy meshpoints
       COMMON /EFCAL / ABC(8,10) , AKAVKA(8,200) , THICK(200,7)
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
       COMMON /BREC  / BETAR(50)
-      COMMON /ADBXI / EXPO(500)
+      COMMON /ADBXI / EXPO(1500)
       COMMON /DIMX  / DIX(4) , ODL(200)
       COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
      &                ENZ(200)

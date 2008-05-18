@@ -45,7 +45,7 @@ C storage part.
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
      &                ISG1
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
-      COMMON /ADBXI / EXPO(500)
+      COMMON /ADBXI / EXPO(1500)
       COMMON /FLA   / IFLG
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
 

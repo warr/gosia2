@@ -69,7 +69,7 @@ C z is the coupling parameter zeta, calculated in the function LSLOOP.
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
      &                ISG1
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
-      COMMON /ADBXI / EXPO(500)
+      COMMON /ADBXI / EXPO(1500)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
