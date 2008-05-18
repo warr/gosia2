@@ -1,9 +1,6 @@
 BINDIR=$(ROOT)/usr/bin
 MANDIR=$(ROOT)/usr/share/man/man1
 
-UID=0
-GID=0
-
 EXE=gosia2
 MAN=gosia2.1
 
@@ -14,10 +11,11 @@ FC=g77
 # cases seem to be harmless. i.e. if (condition) then a=1 else a=2 endif
 # and then using a gives this warning, but in fact a is always set to
 # something
-#FFLAGS = -g -Wall
+FFLAGS = -g -Wall
+FFLAGS += -fbounds-check
 
 # Turn on optimisation
-FFLAGS += -O -funroll-loops
+FFLAGS += -O2 -funroll-loops
 
 DEPS=Makefile
 
@@ -107,9 +105,9 @@ OBJS += setin.o
 OBJS += simin.o
 OBJS += sixel.o
 OBJS += snake.o
-OBJS += splner.o
 OBJS += spline.o
 OBJS += splint.o
+OBJS += splner.o
 OBJS += stamp.o
 OBJS += sting.o
 OBJS += szereg.o
@@ -136,10 +134,10 @@ clean:
 	rm -f *~ *.o $(EXE) $(SINGLE_FILE)
 
 install: $(EXE) $(MAN)
-	install -m 755 -o $(UID) -g $(GID) -d $(BINDIR)
-	install -m 755 -o $(UID) -g $(GID) -s $(EXE) $(BINDIR)
-	install -m 755 -o $(UID) -g $(GID) -d $(MANDIR)
-	install -m 644 -o $(UID) -g $(GID) $(MAN) $(MANDIR)
+	install -m 755 -d $(BINDIR)
+	install -m 755 -s $(EXE) $(BINDIR)
+	install -m 755 -d $(MANDIR)
+	install -m 644 $(MAN) $(MANDIR)
 	gzip -f $(MANDIR)/$(MAN)
 
 single_file:
@@ -158,5 +156,5 @@ single_file:
 	mixr.f coord.f chmem.f pticc.f rndm.f kontur.f rk4.f \
 	qfit.f gamatt.f gcf.f tcexp.f tcabs.f tasin.f tacos.f \
 	openf.f effix.f adhoc.f elmt.f select.f bricc.f newcnv.f \
-	splner.f spline.f splint.f cclkup.f> $(SINGLE_FILE)
+	splner.f spline.f splint.f cclkup.f > $(SINGLE_FILE)
 
