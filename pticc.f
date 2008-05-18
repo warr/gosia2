@@ -22,7 +22,7 @@ C      Idr    - number of decays
      &       enet , SPIN , TAU , ZPOL
       INTEGER*4 Idr , iinx , ISO , KSEQ , l , LAMDA , LAMMAX , LDNUM , 
      &          LEAD , MULTI , nf , ni
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO

@@ -31,7 +31,7 @@ C index, knowing that we are always using steps of 0.03.
       INTEGER*4 i , IRA , LAMDA , LAMMAX , LDNUM , LEAD , MAXLA , MULTI
       COMMON /A50   / ACC50
       COMMON /RNG   / IRA(8) , MAXLA
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
 
       acl = -LOG(Acc1)

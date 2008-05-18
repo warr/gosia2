@@ -40,7 +40,7 @@ C storage part.
      &          m , MEM , MSTORE , MULTI
       INTEGER*4 N , NDIV , NPT , NSTART , NSTOP , NSW
       COMPLEX*16 EXPO , EXPON
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
      &                ISG1

@@ -24,7 +24,7 @@ C      Index of matrix element
       IMPLICIT NONE
       INTEGER*4 k , LAMDA , LAMMAX , LDNUM , LEAD , msum , MULTI , N1 , 
      &          n1m , N2 , N3 , n3m
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
 
       msum = 0

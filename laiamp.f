@@ -42,7 +42,7 @@ C      W0     - omega limit
      &          mrange , mua , MULTI , NDIV , NPT , NSTART , NSTOP , 
      &          NSW , nz
       COMPLEX*16 ARM , STAMP , dis , uhuj
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /AZ    / ARM(600,7)
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 

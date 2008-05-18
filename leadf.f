@@ -21,7 +21,7 @@ C      matrix element index N2, initial level index N1 and multipolarity N3.
       IMPLICIT NONE
       INTEGER*4 k , LAMDA , LAMMAX , LDNUM , LEAD , lsum , MULTI , N1 , 
      &          n1m , N2 , N3 , n3m
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
 
       lsum = 0

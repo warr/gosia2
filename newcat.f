@@ -32,7 +32,7 @@ C     Jidim   -
       INTEGER*4 NMAX1
       COMMON /MAP   / PARX(50,12,5) , PARXM(50,4,10,6) , XIR(6,50)
       COMMON /CXI   / XI(1500)
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /PTH   / IPATH(75) , MAGA(75)

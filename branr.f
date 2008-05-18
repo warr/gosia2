@@ -34,7 +34,7 @@ C      Chilo  - chi squared of logs
      &          j1 , j2 , k , KSEQ , lab1 , lab2 , LAMDA , LAMMAX , 
      &          LDNUM , LEAD , mul2
       INTEGER*4 MULTI , n1 , n2 , NBRA , Nwyr
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO

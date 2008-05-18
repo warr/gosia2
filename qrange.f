@@ -28,7 +28,7 @@ C      Irl    -
       INTEGER*4 nlend , Nlm
       DIMENSION Lloc(8) , Irl(8)
       COMMON /RNG   / IRA(8) , MAXLA
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
 
       IF ( Icnt.EQ.1 ) THEN
