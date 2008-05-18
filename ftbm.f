@@ -92,13 +92,14 @@ C      Bten   -
      &          NANG , Ncall , NDIM , NEXPT , NICC , NLIFT , nlin , 
      &          NMAX , NMAX1 , nowr , npoz , nrest , NSTART
       INTEGER*4 NSTOP , NWR , nwyr , NYLDE
+      INTEGER*4 ISPL ! Added for spline
       COMPLEX*16 ARM
       DIMENSION jmte(6) , prop(6) , Bten(1200)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
-     &                NICC , NANG(200)
+     &                NICC , NANG(200) , ISPL
       COMMON /ILEWY / NWR
       COMMON /CH1T  / CHIS11
       COMMON /IGRAD / IGRD

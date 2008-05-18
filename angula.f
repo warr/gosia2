@@ -47,6 +47,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       REAL*8 dsig, DSIGS , EP , TETACM , TLBDG , TREP , ttx , VINF ,
      &       XA , XA1 ! For gosia2
       INTEGER*4 IZ, IZ1, NEXPT ! For gosia2
+      INTEGER*4 ISPL ! Added for spline
       CHARACTER*4 Op2 ! For gosia2
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
      &          Ygn(*)
@@ -55,7 +56,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
      &                ENZ(200)
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
-     &                NICC , NANG(200)
+     &                NICC , NANG(200) , ISPL
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /LCDL  / DELLA(1500,3)
       COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(75)

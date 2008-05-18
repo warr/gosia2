@@ -73,6 +73,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
      &          NEXPT , Nfd , NICC , nistr , NLIFT , ns1 , ns2 , ns3 , 
      &          ns4 , Ntap , nvare , NYLDE
       INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
+      INTEGER*4 ISPL ! Added for spline
       CHARACTER*4 Oph
       COMMON /CCCDS / NDST(50)
       COMMON /DIMX  / DIX(4) , ODL(200)
@@ -89,7 +90,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       COMMON /YTEOR / YGN(1500) , YGP(1500) , IFMO
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
-     &                NICC , NANG(200)
+     &                NICC , NANG(200) , ISPL
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 

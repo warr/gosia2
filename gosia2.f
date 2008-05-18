@@ -324,6 +324,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
       INTEGER*4 MCFIX , nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
       INTEGER*4 mret , mawr , irix ! For gosia2
+      INTEGER*4 ISPL ! Added for spline
       DIMENSION ihlm(32) , esp(20) , dedx(20) , bten(1200) , 
      &          fiex1(100,100,2) , title(20) , pfi(101) , zmir(6,2,50) , 
      &          iecd(50) , wpi(100,2) , tau1(10) , eng(10) , 
@@ -365,7 +366,7 @@ C      ZV     - energy meshpoints
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /MAP   / PARX(50,12,5) , PARXM(50,4,10,6) , XIR(6,50)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
-     &                NICC , NANG(200)
+     &                NICC , NANG(200) , ISPL
       COMMON /GGG   / G(7)
       COMMON /AZ    / ARM(600,7)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
