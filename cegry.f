@@ -146,6 +146,7 @@ C      Iredv  -
       COMMON /CCCDS / NDST(50)
       COMMON /CINIT2/ CNOR1(32,75) , CNOR2(32,75) , MCFIX ! For gosia2
       SAVE part, partl ! For gosia2
+      DATA sum3/0./,sumpr/0./
 
       op2 = '    ' ! For gosia2
       ifxd = 0
