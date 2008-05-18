@@ -36,7 +36,7 @@ C     Jidim   -
      &                MULTI(8)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /PTH   / IPATH(75) , MAGA(75)
-      COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
+      COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
 
       Jidim = NMAX + 1
       IF ( MAGA(Iexp).NE.0 ) Jidim = 3*NMAX + 1

@@ -24,7 +24,7 @@ C      Indx   - Index of matrix element
      &          ISEX , ism , MAGA , Mt , N
       REAL*8 QAPR
       COMMON /PTH   / IPATH(75) , MAGA(75)
-      COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
+      COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
       
       IAPR(Indx,1) = N  ! Index of initial level
       IAPR(Indx,2) = Mt ! Index of final level

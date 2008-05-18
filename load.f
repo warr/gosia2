@@ -89,7 +89,7 @@ C      Joj    - index of substate (write only)
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /CXI   / XI(1500)
       COMMON /CAUX0 / EMMA(75) , NCM
-      COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
+      COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)
       DIMENSION etan(75) , cpsi(8)
       

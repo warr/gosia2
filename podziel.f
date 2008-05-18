@@ -26,7 +26,7 @@ C      J      - experiment number
       REAL*8 QAPR
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
+      COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
       COMMON /APRX  / LERF , IDIVE(50,2)
 
       IF ( I.NE.3 ) THEN
