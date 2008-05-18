@@ -5,7 +5,7 @@ C
 C Called by: CONV, EFFIX, GOSIA
 C Calls:     FUNC, FUNC1
 C
-C Purpose: perform an interpolation
+C Purpose: perform a Lagrangian interpolation
 C
 C Formal parameters:
 C      X      - x-coordinate of input data
