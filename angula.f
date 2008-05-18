@@ -49,7 +49,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       INTEGER*4 IZ, IZ1, NEXPT ! For gosia2
       CHARACTER*4 Op2 ! For gosia2
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
-     &          Ygn(500)
+     &          Ygn(*)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
      &                ENZ(200)
