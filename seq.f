@@ -19,7 +19,7 @@ C      GKP    - Gk * DELTA^2
 C      KLEC   - number of decays for each level
 C      KSEQ   - indices for each decay (level1, level2, matrix element, multipolarity + 10)
 C      LDNUM  - number of matrix elements with each multipolarity populating levels
-C      LP2    - maximum number of matrix elements (500)
+C      LP2    - maximum number of matrix elements (1500)
 C      LP3    - maximum number of levels (75)
 C      MULTI  - number of matrix elements having a given multipolarity
 C      NMAX   - number of levels
