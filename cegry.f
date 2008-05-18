@@ -109,7 +109,7 @@ C      Iredv  -
       CHARACTER*4 op2 ! For gosia2
       DIMENSION part(32,50,2) , lic(32) , lth(500) , cnr(32,50) , 
      &          partl(32,50,2)
-      COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,500) , 
+      COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,1500) , 
      &                IRAWEX(50)
       COMMON /ODCH  / DEV(500)
       COMMON /COEX2 / NMAX , NDIM , NMAX1

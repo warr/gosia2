@@ -331,7 +331,7 @@ C      ZV     - energy meshpoints
      &          ivarh(1500) , liscl(200) , dsxm(100,100,100) , 
      &          levl(50) , xlevb(50,2) , bm(8,20,20,3) , mlt(1500) , 
      &          ivari(1500) ,jpin(50)
-      COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,500) , 
+      COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,1500) , 
      &                IRAWEX(50)
       COMMON /CCCDS / NDST(50)
       COMMON /INHI  / INHB
