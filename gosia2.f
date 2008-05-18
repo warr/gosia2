@@ -743,6 +743,11 @@ C        Treat OP,RAND (randomise matrix elements)
             CALL PRELM(2)
             GOTO 100 ! End of OP,RAND - back to input loop
 
+C     Treat OP,BRIC
+         ELSEIF ( op2.EQ.'BRIC' ) THEN
+            CALL BRICC
+            GOTO 100 ! End of OP,BRIC - back to input loop
+
 C        Treat OP,TROU (troubleshooting)
          ELSEIF ( op2.EQ.'TROU' ) THEN
             ITS = 1 ! Create tape 18 flag
