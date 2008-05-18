@@ -14,7 +14,7 @@ C      ELMU   - upper limit on matrix elements
 C      EP     - bombarding energy
 C      IY     - index of experimental yields
 C      KVAR   -
-C      LP2    - maximum number of matrix elements (500)
+C      LP2    - maximum number of matrix elements (1500)
 C      MEMAX  - number of matrix elements
 C      NEXPT  - number of experiments
 C      TLBDG  - theta of particle detector
@@ -104,7 +104,7 @@ C      Rlr    - print out if matrix element exceeds Rlr.
             GOTO 400
          ENDIF
       ENDIF
-      loc = (iexh-1)*LP2 + inh ! LP2 = 500
+      loc = (iexh-1)*LP2 + inh ! LP2 = 1500
       ipf = 0
       ZETA(loc) = (VINF(iexh)*g1+TLBDG(iexh)*g2)/VINF(iexh)/VINF(iexh)
       inh = indx
