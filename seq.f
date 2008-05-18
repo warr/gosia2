@@ -167,15 +167,15 @@ C     multipolarity
             IF ( la.EQ.1 ) THEN
                DELTA(Idr,1) = 398.77393*ega*egs ! E1
                mule = 1
-               istr1 = 1
+               istr1 = 1 ! In array CC and N parameter of CONV -> E1
             ELSEIF ( la.EQ.2 ) THEN
                DELTA(Idr,1) = 3.5002636*egs*ega*ega ! E2
                mule = 2
-               istr1 = 2
+               istr1 = 2 ! In array CC and N parameter of CONV -> E2
             ELSEIF ( la.EQ.3 ) THEN
                DELTA(Idr,1) = 0.023891302*ega*ega*ega*egs ! E3
                mule = 3
-               istr1 = 3
+               istr1 = 3 ! In array CC and N parameter of CONV -> E3
             ELSE
                GOTO 100
             ENDIF
@@ -185,11 +185,11 @@ C     multipolarity
          IF ( la.EQ.2 ) THEN
             DELTA(Idr,2) = 0.036806836*ega*ega*egs ! M2
             mulm = 2
-            istr2 = 5
+            istr2 = 5 ! In array CC and N parameter of CONV -> M2
          ELSE
             DELTA(Idr,2) = 4.1932861*ega*egs ! M1
             mulm = 1
-            istr2 = 4
+            istr2 = 4 ! In array CC and N parameter of CONV -> M1
          ENDIF
  150     IF ( nob.NE.2 ) THEN
             IF ( mule.NE.1 ) THEN
