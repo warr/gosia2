@@ -80,7 +80,7 @@ C don't go outside the limits specified by the user.
      &          Nptl , NWR , NYLDE
       INTEGER*4 IBPS, IUNIT3, JZB ! For gosia2
       DIMENSION ipm(10) , Bten(1200) , gradp(500)
-      COMMON /DUMM  / GRAD(500) , HLMLM(500) , ELMH(500)
+      COMMON /DUMM  / GRAD(1500) , HLMLM(1500) , ELMH(1500)
       COMMON /ILEWY / NWR
       COMMON /CH1T  / CHIS11
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 

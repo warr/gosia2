@@ -356,7 +356,7 @@ C      ZV     - energy meshpoints
       COMMON /SECK  / ISKIN(50)
       COMMON /VLIN  / XV(101) , YV(101) , ZV(100) , DSG(100) ,
      &                DSE(100) , DS
-      COMMON /DUMM  / GRAD(500) , HLMLM(500) , ELMH(500)
+      COMMON /DUMM  / GRAD(1500) , HLMLM(1500) , ELMH(1500)
       COMMON /BRNCH / BRAT(50,2) , IBRC(2,50) , NBRA
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
