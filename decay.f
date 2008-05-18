@@ -41,7 +41,7 @@ C      Chilo  - chi squared of logs
      &          KSEQ
       INTEGER*4 l , l1 , lc1 , lc2 , LIFCT , LZETA , n1 , n2 , NDIM , 
      &          Nlift , NMAX , NMAX1
-      COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
+      COMMON /TRA   / DELTA(1500,3) , ENDEC(500) , ITMA(50,200) , 
      &                ENZ(200)
       COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP

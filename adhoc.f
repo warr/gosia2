@@ -76,7 +76,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       CHARACTER*4 Oph
       COMMON /CCCDS / NDST(50)
       COMMON /DIMX  / DIX(4) , ODL(200)
-      COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
+      COMMON /TRA   / DELTA(1500,3) , ENDEC(500) , ITMA(50,200) , 
      &                ENZ(200)
       COMMON /LIFE  / NLIFT
       COMMON /MIXD  / DMIXE(20,2) , DMIX(20) , IMIX(20) , NDL

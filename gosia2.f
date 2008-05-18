@@ -341,7 +341,7 @@ C      ZV     - energy meshpoints
       COMMON /BREC  / BETAR(50)
       COMMON /ADBXI / EXPO(1500)
       COMMON /DIMX  / DIX(4) , ODL(200)
-      COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
+      COMMON /TRA   / DELTA(1500,3) , ENDEC(500) , ITMA(50,200) , 
      &                ENZ(200)
       COMMON /CINIT / CNOR(32,75) , INNR
       COMMON /XRA   / SE

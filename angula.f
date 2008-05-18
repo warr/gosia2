@@ -51,7 +51,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
      &          Ygn(500)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
+      COMMON /TRA   / DELTA(1500,3) , ENDEC(500) , ITMA(50,200) , 
      &                ENZ(200)
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 

@@ -113,7 +113,7 @@ C      Iredv  -
      &                IRAWEX(50)
       COMMON /ODCH  / DEV(500)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
+      COMMON /TRA   / DELTA(1500,3) , ENDEC(500) , ITMA(50,200) , 
      &                ENZ(200)
       COMMON /BREC  / BETAR(50)
       COMMON /DIMX  / DIX(4) , ODL(200)
