@@ -49,7 +49,7 @@ C      Rem    -
       COMMON /DFTB  / DEVD(500) , DEVU(500)
       COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
-      COMMON /HHH   / HLM(500)
+      COMMON /HHH   / HLM(1500)
       COMMON /ILEWY / NWR
       COMMON /LOGY  / LNY , INTR , IPS1
 

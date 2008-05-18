@@ -345,7 +345,7 @@ C      ZV     - energy meshpoints
      &                ENZ(200)
       COMMON /CINIT / CNOR(32,75) , INNR
       COMMON /XRA   / SE
-      COMMON /HHH   / HLM(500)
+      COMMON /HHH   / HLM(1500)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
       COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
       COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
