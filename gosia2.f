@@ -316,6 +316,7 @@ C      ZV     - energy meshpoints
      &          NMAX1 , nmaxh , nmemx , nnl , nogeli , npce , npce1 , 
      &          npct , npct1 , npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , NYLDE , nz
+      INTEGER*4 ISPL ! Added for spline
       LOGICAL ERR
       COMPLEX*16 ARM , EXPO
       CHARACTER*4 oph , op1 , opcja , op2
@@ -325,7 +326,6 @@ C      ZV     - energy meshpoints
       INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
       INTEGER*4 MCFIX , nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
       INTEGER*4 mret , mawr , irix ! For gosia2
-      INTEGER*4 ISPL ! Added for spline
       DIMENSION ihlm(32) , esp(20) , dedx(20) , bten(1200) , 
      &          fiex1(100,100,2) , title(20) , pfi(101) , zmir(6,2,50) , 
      &          iecd(50) , wpi(100,2) , tau1(10) , eng(10) , 
