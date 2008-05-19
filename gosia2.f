@@ -429,7 +429,7 @@ C     MeV
      &      25.302 , 12.541 , 5.193 , 2.215 , 1.077 , .8176/
       DATA (tau2(k,7),k=1,10)/89.809 , 56.338 , 27.009 , 62.966 , 
      &      22.933 , 11.334 , 4.540 , 1.813 , .8020 , .5900/
-      DATA q1/0./,q2/0./,iph/0/,ipine/0/
+      DATA q1/0./,q2/0./,iph/0/
 
 C     Initialize prime numbers
       IP(1) = 2
@@ -1718,9 +1718,9 @@ C     Treat suboption CONT (control)
                            GOTO 350
                         ELSE
                            IF ( op1.EQ.'CCF,' ) IPS1 = ipo1
-                           IF ( op1.EQ.'PIN,' ) ipine = ipo1
-                           IF ( op1.EQ.'PIN,' ) ipinf = 1
                            IF ( op1.EQ.'PIN,' ) THEN
+                              ipine = ipo1
+                              ipinf = 1
                               DO ipp = 1 , ipine
                                  READ (JZB,*) ig1 , ig2
                                  jpin(ig1) = ig2
