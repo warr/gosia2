@@ -542,6 +542,7 @@ C---- gosia2 changes end
       LNY = 0
       JENTR = 0 ! Flag to indicate we are not in OP,ERRO
       ICS = 0
+      ISPL = 0 ! Flag to indicate we should use LAGRAN not SPLINE
 
       DO i = 1 , LP1 ! LP1 = 50
          jpin(i) = 0
