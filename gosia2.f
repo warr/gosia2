@@ -1664,6 +1664,7 @@ C     Treat suboption CONT (control)
          IF ( op1.EQ.'ACP,' ) ACCA = 10.**(-fipo1)
          IF ( op1.EQ.'SEL,' ) ITS = 2
          IF ( op1.EQ.'SMR,' ) iosr = 1
+         IF ( op1.EQ.'SPL,' ) ISPL = ipo1
          IF ( op1.EQ.'FMI,' ) ifm = 1
          IF ( op1.EQ.'TEN,' ) itno = 1
          IF ( op1.EQ.'NCM,' ) NCM = ipo1
