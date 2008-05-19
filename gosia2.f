@@ -1003,7 +1003,7 @@ C              Treat OP,INTG
                   REWIND 14
                   lfagg = 1
                   IF ( SPIN(1).LT..25 ) ISO = 0
-                  DO lx = 1 , NEXPT
+                  DO lx = 1 , NEXPT ! For each experiment
                      lpin = 1
                      IF ( ipinf.NE.0 ) THEN
                         IF ( jpin(lx).NE.0 ) lpin = jpin(lx)
@@ -1011,7 +1011,7 @@ C              Treat OP,INTG
                      IEXP = lx
                      tth = TLBDG(lx)
                      enh = EP(lx)
-                     DO mpin = 1 , lpin
+                     DO mpin = 1 , lpin ! For each pin diode
                         IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
                            READ (JZB,*) ne , ntt , emn , emx , wth , 
      &                          wph , wthh
@@ -1039,7 +1039,7 @@ C              Treat OP,INTG
      &                       (YV(i),i=1,ntt)
                         IF ( tth.LT.0. ) ELMH(2*lx-1) = YV(1)
                         IF ( tth.LT.0. ) ELMH(2*lx) = YV(ntt)
-                        DO kloop = 1 , ne
+                        DO kloop = 1 , ne ! For each energy meshpoint
                            enb = XV(kloop)
                            EP(lx) = enb
                            DO ktt = 1 , ntt
@@ -1047,12 +1047,12 @@ C              Treat OP,INTG
                               IF ( IAXS(lx).NE.0 ) THEN
                                  IF ( iecd(lx).NE.1 ) THEN
                                     IF ( kloop.EQ.1 ) THEN
-                                       READ (JZB,*) nfi
+                                       READ (JZB,*) nfi ! Number of phi ranges
                                        READ (JZB,*) 
      &                                    (fiex1(ktt,jfi,1),fiex1(ktt,
      &                                    jfi,2),jfi=1,nfi)
                                        IF ( tth.LT.0. ) THEN
-                                         DO jfi = 1 , nfi
+                                         DO jfi = 1 , nfi ! For each phi angle
                                          fiex1(ktt,jfi,1)
      &                                      = fiex1(ktt,jfi,1) + 180.
                                          fiex1(ktt,jfi,2)
@@ -1094,13 +1094,13 @@ C              Treat OP,INTG
                                  ENDDO
                               ENDDO
                               ija0 = 0
-                              DO ijan = 1 , jan
+                              DO ijan = 1 , jan ! For each detector angle
                                  IF ( IAXS(lx).EQ.0 ) nfi = 1
                                  DO jyi = 1 , idr
                                     GRAD(jyi) = 0.
                                  ENDDO
                                  todfi = 0.
-                                 DO jfi = 1 , nfi
+                                 DO jfi = 1 , nfi ! For each phi angle
                                     fi0 = fiex1(ktt,jfi,1)/57.2957795
                                     fi1 = fiex1(ktt,jfi,2)/57.2957795
                                     gth = AGELI(IEXP,ijan,1)
@@ -1108,7 +1108,7 @@ C              Treat OP,INTG
                                     figl = AGELI(IEXP,ijan,2)
                                     CALL ANGULA(YGN,idr,1,fi0,fi1,tetrc,
      &                                gth,figl,ijan,op2)
-                                    IF ( IFMO.NE.0 ) THEN
+                                    IF ( IFMO.NE.0 ) THEN ! If correction due to recoil
                                        id = ITMA(IEXP,ijan) ! Get detector identity
                                        d = ODL(id) ! Get result of OP,GDET calculation
                                        rx = d*SIN(gth)*COS(figl-fm)
@@ -1122,14 +1122,14 @@ C              Treat OP,INTG
                                        fic = ATAN2(ry,rx)
                                        CALL ANGULA(YGP,idr,1,fi0,fi1,
      &                                    tetrc,thc,fic,ijan,op2)
-                                       DO ixl = 1 , idr
+                                       DO ixl = 1 , idr ! For each decay
                                          ixm = KSEQ(ixl,3)
                                          tfac = TAU(ixm)
                                          YGN(ixl) = YGN(ixl)
      &                                      + .01199182*tfac*BETAR(IEXP)
      &                                      *(sf*YGP(ixl)-YGN(ixl))
-                                       ENDDO
-                                    ENDIF
+                                       ENDDO ! Loop on decays
+                                    ENDIF ! If correction due to recoil
                                     IF ( IRAWEX(lx).NE.0 ) THEN
                                        ipd = ITMA(lx,ijan) ! Get identity of detector
                                        DO jyi = 1 , idr ! For each decay
@@ -1159,11 +1159,11 @@ C              Treat OP,INTG
                                        ENDIF
                                     ENDIF
                                     IF ( jfi.EQ.1 ) ija0 = ija0 + 1
-                                    DO jyi = 1 , idr
+                                    DO jyi = 1 , idr ! For each decay
                                        GRAD(jyi) = GRAD(jyi) + YGN(jyi)
-                                    ENDDO
+                                    ENDDO ! Loop on decays jyi
                                     todfi = todfi + ABS(fi1-fi0)
-                                 ENDDO
+                                 ENDDO ! For each phi angle jfi
                                  IF ( IAXS(lx).EQ.0 ) todfi = 6.283185
                                  ax = 1.
                                  IF ( mfla.EQ.1 ) ax = 1./todfi
@@ -1190,23 +1190,27 @@ C              Treat OP,INTG
      &                                    SPIN(ni) , SPIN(nf) , 
      &                                    GRAD(jyi)*dsig*ax , GRAD(jyi)
      &                                    /GRAD(IDRN)
-                                    ENDDO
-                                 ENDIF
- 132                          ENDDO
-                           ENDDO
-                        ENDDO
-                     ENDDO
+                                    ENDDO ! Loop on decays jyi
+                                 ENDIF ! If printout of yields at meshpoints
+ 132                          ENDDO ! Loop on detector angles ijan
+                           ENDDO ! Loop on theta angles ktt
+                        ENDDO ! Loop on energy meshpoints kloop
+                     ENDDO ! Loop on pin diodes mpin
+                      
                      EP(lx) = enh
                      TLBDG(lx) = tth
-                  ENDDO
+                  ENDDO ! Loop on experiments lx
                   REWIND 14
                   REWIND 15
                   iske = 0
-                  DO na = 1 , LP6
+                  DO na = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
                      ILE(na) = 1
                   ENDDO
                   ilx = 0
-                  DO lx = 1 , NEXPT
+C                 We have now performed the full coulex calculation at each of the
+C                 meshpoints, so now we start the integration
+                  DO lx = 1 , NEXPT ! Loop over experiments
+C                    Read tape 17
                      REWIND 17
                      DO ijaja = 1 , 300000
                         READ (17,*,END=134) jjlx , jmpin , jkloo , 
@@ -1215,7 +1219,7 @@ C              Treat OP,INTG
                      ENDDO
  134                 na = NANG(lx)
                      IF ( lx.NE.1 ) THEN
-                        DO na1 = 1 , LP6
+                        DO na1 = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
                            ILE(na1) = ILE(na1) + NYLDE(lx-1,na1)
                         ENDDO
                      ENDIF
@@ -1238,7 +1242,7 @@ C              Treat OP,INTG
                         IF ( jpin(lx).NE.0 ) mpin = jpin(lx)
                      ENDIF
                      dst = 0.
-                     DO lpin = 1 , mpin
+                     DO lpin = 1 , mpin ! Loop over pin diodes
                         ilx = ilx + 1
                         IF ( ilx.NE.1 )
      &                       CALL TAPMA(lx,iske,isko,iskf,nflr,idr,0,
@@ -1276,7 +1280,7 @@ C                       Now we calculate for all the mesh points.
                         naa = NDST(lx)
                         IF ( IRAWEX(lx).EQ.0 ) naa = NANG(lx)
                         iskf = naa - 1
-                        DO ja = 1 , naa
+                        DO ja = 1 , naa ! Loop over detector angles
                            icll = 3 ! Weighting mode
                            DO je = 1 , ne ! ne = number of energy mesh points
                               lu = ILE(ja)
@@ -1284,13 +1288,13 @@ C                       Now we calculate for all the mesh points.
                               CALL TAPMA(lx,iske,isko,iskf,ntt,idr,1,
      &                           nft,enb)
                               IF ( nft.EQ.1 ) GOTO 1900 ! Troubleshoot
-                              DO jd = 1 , idr
+                              DO jd = 1 , idr ! For each decay
                                  DO jtp = 1 , ntt ! ntt = number of theta meshpoints
                                     IF ( jd.EQ.1 .AND. ja.EQ.1 )
      &                                 DSG(jtp) = dsxm(lpin,je,jtp)
                                     jyv = (jtp-1)*idr + jd
                                     YV(jtp) = ZETA(jyv)
-                                 ENDDO ! Loop on theta meshpoints
+                                 ENDDO ! Loop on theta meshpoints jtp
                                  DO jt = 1 , npct1 ! number of equal divisions in theta for interpolation
                                     xx = (jt-1)*het + tmn/57.2957795
                                     CALL LAGRAN(XV,YV,ntt,jt,xx,yy,2,
@@ -1305,23 +1309,23 @@ C                       Now we calculate for all the mesh points.
                                     XI(jt) = yy*SIN(xx)
                                     IF ( jd.EQ.1 .AND. ja.EQ.1 ) HLM(jt)
      &                                 = zz*SIN(xx)
-                                 ENDDO
+                                 ENDDO ! Loop on equal theta divisions jt
                                  icll = 4
                                  locat = ntt*idr + (je-1)*idr + jd
                                  ZETA(locat) = SIMIN(npct1,het,XI)
                                  IF ( jd.EQ.1 .AND. ja.EQ.1 ) DSE(je)
      &                                = SIMIN(npct1,het,HLM)
                                  ZV(je) = enb
-                              ENDDO
-                           ENDDO ! Loop on energy mesh
+                              ENDDO ! Loop on decays jd
+                           ENDDO ! Loop on energy meshpoints je
 
 C                          Now interpolate                            
                            icll = 3
                            DO jd = 1 , idr ! For each decay
-                              DO jtp = 1 , ne
+                              DO jtp = 1 , ne ! For each energy meshpoint
                                  jyv = (jtp-1)*idr + jd + ntt*idr
                                  YV(jtp) = ZETA(jyv)
-                              ENDDO
+                              ENDDO ! Loop on energy meshpoints jtp
                               DO jt = 1 , npce1 ! npce1 is number of equal energy steps
                                  xx = (jt-1)*hen + emn
                                  CALL LAGRAN(ZV,YV,ne,jt,xx,yy,2,icll)
@@ -1378,11 +1382,11 @@ C                                Interpolate cross-section at this energy
                               IF ( TLBDG(lx).LT.0 ) THEN
                                  FIEX(lx,1) = FIEX(lx,1) + 3.14159265
                                  FIEX(lx,2) = FIEX(lx,2) + 3.14159265
-                              ENDIF
-                           ENDIF
+                              ENDIF ! If theta_lab < 0
+                           ENDIF ! If no pin diodes
                         ENDIF ! If circular detector
                         iske = iske + ne*ntt*naa
-                     ENDDO
+                     ENDDO ! Loop over pin diodes
                      IF ( mpin.GT.1 ) WRITE (22,99021) dst , lx
 99021                FORMAT (1x//2x,
      &                      'Total integrated Rutherford cross section='
@@ -1390,18 +1394,18 @@ C                                Interpolate cross-section at this energy
                   ENDDO
                   IF ( ipinf.NE.0 ) THEN
                      ngpr = 0
-                     DO lx = 1 , NEXPT
+                     DO lx = 1 , NEXPT ! For each experiment
                         nged = NDST(lx)
                         IF ( IRAWEX(lx).EQ.0 ) nged = NANG(lx)
                         IF ( lx.NE.1 ) ngpr = ngpr + idr*jpin(lx-1)
      &                       *NDST(lx-1)
                         lpin = jpin(lx)
                         IF ( lpin.EQ.0 ) lpin = 1
-                        DO jgd = 1 , nged
+                        DO jgd = 1 , nged ! For each angle or dataset
                            DO jd = 1 , idr
                               GRAD(jd) = 0.
                            ENDDO
-                           DO mpin = 1 , lpin
+                           DO mpin = 1 , lpin ! For each pin diode
                               REWIND 15
                               ndum = ngpr + (jgd-1)*idr + (mpin-1)
      &                               *jgd*idr
@@ -1410,26 +1414,26 @@ C                                Interpolate cross-section at this energy
                                     READ (15,*) xx
                                  ENDDO
                               ENDIF
-                              DO jd = 1 , idr
+                              DO jd = 1 , idr ! For each decay
                                  READ (15,*) xx
                                  GRAD(jd) = GRAD(jd) + xx
-                              ENDDO
-                           ENDDO
+                              ENDDO ! Loop on decays jd
+                           ENDDO ! Loop on pin diodes mpin
                            WRITE (17,*) (GRAD(jd),jd=1,idr)
-                        ENDDO
-                     ENDDO
+                        ENDDO ! Loop on angle or dataset jgd
+                     ENDDO ! Loop on experiment lx
                      REWIND 15
                      REWIND 17
-                     DO lx = 1 , NEXPT
+                     DO lx = 1 , NEXPT ! For each experiment
                         nged = NDST(lx)
                         IF ( IRAWEX(lx).EQ.0 ) nged = NANG(lx)
-                        DO ija0 = 1 , nged
+                        DO ija0 = 1 , nged ! For each angle or dataset
                            READ (17,*) (GRAD(jdy),jdy=1,idr)
-                           DO jd = 1 , idr
+                           DO jd = 1 , idr ! For each decay
                               WRITE (15,*) GRAD(jd)
-                           ENDDO
-                        ENDDO
-                     ENDDO
+                           ENDDO ! Loop on decays jd
+                        ENDDO ! Loop on angle or dataset ija0
+                     ENDDO ! Loop on experiments lx
                   ENDIF
                   GOTO 100 ! End of OP,INTG - back to input loop
 
