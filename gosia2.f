@@ -748,16 +748,6 @@ C        Treat OP,RAND (randomise matrix elements)
             CALL PRELM(2)
             GOTO 100 ! End of OP,RAND - back to input loop
 
-C     Treat OP,SELE
-         ELSEIF ( op2.EQ.'SELE' ) THEN
-            CALL SELECT
-            GOTO 2000 ! End of execution
-
-C     Treat OP,BRIC
-         ELSEIF ( op2.EQ.'BRIC' ) THEN
-            CALL BRICC
-            GOTO 100 ! End of OP,BRIC - back to input loop
-
 C        Treat OP,TROU (troubleshooting)
          ELSEIF ( op2.EQ.'TROU' ) THEN
             ITS = 1 ! Create tape 18 flag
@@ -812,6 +802,16 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
             ENDDO
             CALL PRELM(4) ! changed from 2 to 4 for gosia2
             GOTO 100 ! End of OP,REST - back to input loop
+
+C     Treat OP,SELE
+         ELSEIF ( op2.EQ.'SELE' ) THEN
+            CALL SELECT
+            GOTO 2000 ! End of execution
+
+C     Treat OP,BRIC
+         ELSEIF ( op2.EQ.'BRIC' ) THEN
+            CALL BRICC
+            GOTO 100 ! End of OP,BRIC - back to input loop
 
 C        Treat other options
          ELSE
