@@ -544,7 +544,7 @@ C---- gosia2 changes end
       ICS = 0
       ISPL = 0 ! Flag to indicate we should use LAGRAN not SPLINE
 
-      DO i = 1 , LP1 ! LP1 = 50
+      DO i = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
          jpin(i) = 0
          iecd(i) = 0
       ENDDO
@@ -561,7 +561,7 @@ C---- gosia2 changes end
       NLOCK = 0
       LOCKF = 0
       DO i = 1 , LP4 ! LP4 = 1500
-         DO j = 1 , LP6 ! LP6 = 32
+         DO j = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
             CORF(i,j) = 1.
          ENDDO
       ENDDO
@@ -580,7 +580,7 @@ C---- gosia2 changes end
       IPRM(18) = 0
       IPRM(19) = 0
       IPRM(20) = 0
-      DO i = 1 , LP1 ! LP1 = 50
+      DO i = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
          DO j = 1 , 5
             IF ( j.NE.5 ) THEN
                DO k = 1 , 10
@@ -594,7 +594,7 @@ C---- gosia2 changes end
             ENDDO
          ENDDO
       ENDDO
-      DO k = 1 , LP1 ! LP1 = 50
+      DO k = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
          IDIVE(k,1) = 1
          IDIVE(k,2) = 1
          DO iuy = 1 , 6
@@ -605,7 +605,7 @@ C---- gosia2 changes end
       lfagg = 0
       izcap = 12800
       KFERR = 0
-      NDIM = LP3 ! LP3 = 75
+      NDIM = LP3 ! LP3 = 75 (maximum number of levels)
       ISO = 1
       B(1) = 1.
       DO i = 2 , 20
@@ -615,7 +615,7 @@ C---- gosia2 changes end
       CALL FAKP
       CALL FHIP
       NCM = 2 ! Default final state for kinematics calculation (OP,CONT NCM,)
-      DO ijx = 1 , LP1 ! LP1 = 50
+      DO ijx = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
          INTERV(ijx) = 1
       ENDDO
       la = 0
@@ -624,12 +624,12 @@ C---- gosia2 changes end
       ACCUR = .00001
       icg = 1
       ient = 1
-      jphd = 1
+      jphd = 1 ! Print header flag
       DIPOL = 0.005
       MAGEXC = 0 ! Initially flag that we don't need magnetic excitations
       LAMMAX = 0
       DO lam = 1 , 8
-         DO lexp = 1 , LP3 ! LP3 = 75
+         DO lexp = 1 , LP3 ! LP3 = 75 (maximum number of levels)
             LDNUM(lam,lexp) = 0
          ENDDO
          MULTI(lam) = 0
@@ -640,11 +640,11 @@ C---- gosia2 changes end
          KVAR(j) = 1
          ELM(j) = 0.
       ENDDO
-      DO j = 1 , LP1 ! LP1 = 50
+      DO j = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
          JSKIP(j) = 1
          ISKIN(j) = 0
       ENDDO
-      DO j = 1 , LP3 ! LP3 = 75
+      DO j = 1 , LP3 ! LP3 = 75 (maximum number of levels)
          ISEX(j) = 1111
       ENDDO
       ISEX(1) = 0
@@ -664,6 +664,7 @@ C---- gosia2 changes end
       ERR = .FALSE.
       intend = 0 ! End of initialization
 
+C.............................................................................
 C     Start reading input file.
  100  READ (JZB,99001) op1 , op2
 99001 FORMAT (1A3,1A4)
@@ -677,7 +678,8 @@ C        Treat OP,FILE (attach files to fortran units)
             CALL OPENF
             GOTO 100 ! End of OP,FILE - back to input loop
          ENDIF
-         
+
+C        Print header         
          IF ( jphd.EQ.1 ) WRITE (22,99002)
 99002    FORMAT ('1'/1X,125('*')/1X,125('*')/1X,50('*'),25X,50('*')/1X,
      &           50('*'),10X,'GOSIA2',9X,50('*')/1X,50('*'),25X,50('*')
@@ -686,7 +688,7 @@ C        Treat OP,FILE (attach files to fortran units)
 99003    FORMAT (1X/20X,'ROCHESTER COULOMB EXCITATION DATA ANALYSIS ',
      &           'CODE BY T.CZOSNYKA,D.CLINE AND C.Y.WU'/50X,
      &           'LATEST REVISION- JUNE  2006'//////)
-         jphd = 0
+         jphd = 0 ! Set print header flag to zero, so we don't repeat header
 
 C        Handle OP,GDET (germanium detectors)
          IF ( op2.EQ.'GDET' ) THEN
@@ -929,7 +931,7 @@ C              Treat OP,THEO
                   irix = 12
                   REWIND (irix)
                   ibaf = 1
-                  DO jb = 1 , LP1 ! LP1 = 50
+                  DO jb = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
                      DO lb = 1 , 2
                         xlevb(jb,lb) = 0
                      ENDDO
@@ -1480,7 +1482,7 @@ C                    Read absorber coefficients from unit 8
                      DO l = 1 , nfd
                         READ (8,*) (THICK(l,j),j=1,7) ! thickness of absorbers
                      ENDDO
-                     DO l = 1 , LP1 ! LP1 = 50
+                     DO l = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
                         DO j = 1 , 200
                            ICLUST(l,j) = 0
                         ENDDO
@@ -1491,7 +1493,7 @@ C                    Read absorber coefficients from unit 8
                      ENDDO
 
 C                    Read input from standard input
-                     DO l = 1 , LP1 ! LP1 = 50
+                     DO l = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
                         READ (JZB,*) mexl ! experiment number
                         IF ( mexl.EQ.0 ) GOTO 100 ! Back to input loop
                         IRAWEX(mexl) = 1
@@ -2529,7 +2531,7 @@ C        Added for gosia2
          ENDDO
 C---- gosia2 changes end
          DO jj = 1 , 2
-            DO jj1 = 1 , LP1 ! LP1 = 50
+            DO jj1 = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
                IDIVE(jj1,jj) = 1
             ENDDO
          ENDDO
@@ -2620,7 +2622,7 @@ C---- gosia2 changes start
          ENDIF
          IF ( IPS1.EQ.0 ) GOTO 2000
          IMIN = IMIN + 1
-         DO iva = 1 , LP1 ! LP1 = 50
+         DO iva = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
             JSKIP(iva) = 1
          ENDDO
          irix = 12
@@ -2642,7 +2644,7 @@ C---- gosia2 changes start
       
 C     Set CNOR1 to the average of CNOR1 and CNOR2
       DO kh1 = 1 , LP6 ! LP6 = 32
-         DO kh2 = 1 , LP3 ! LP3 = 75
+         DO kh2 = 1 , LP3 ! LP3 = 75 (maximum number of levels)
             IF ( JZB.EQ.25 ) THEN ! If it is the second nucleus
                CNOR1(kh1,kh2) = CNOR(kh1,kh2)
             ELSE
@@ -2720,7 +2722,7 @@ C     Decide if we have to loop again for beam/projectile
 
 C     Write normalization coefficients
       DO mmmm = 1 , LP6 ! LP6 is 32
-         DO kkkk = 1 , LP1 ! LP1 is 50
+         DO kkkk = 1 , LP1 ! LP1 is 50 (maximum number of experiments)
             WRITE (13,*) CNOR1(mmmm,kkkk)
          ENDDO
       ENDDO
