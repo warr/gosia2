@@ -493,8 +493,8 @@ C     Use input unit 25 for target and 26 for projectile
 C---- gosia2 changes end
 
 C     Initialize normalization to 1.
-      DO i = 1 , LP3 ! LP3 = 75
-         DO j = 1 , LP6 ! LP6 = 32
+      DO i = 1 , LP3 ! LP3 = 75 (maximum number of levels)
+         DO j = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
             CNOR(j,i) = 1.
             CNOR1(j,i) = 1. ! Added for gosia2
             CNOR2(j,i) = 1. ! Added for gosia2
