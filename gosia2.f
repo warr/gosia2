@@ -1750,7 +1750,7 @@ C     Treat suboption CONT (control)
                ivarh(jjx) = IVAR(jjx)
             ENDDO
          ENDIF
-         GOTO 350
+         GOTO 350 ! Back to beginning of CONT loop
 
 C     Treat suboption EXPT
       ELSEIF ( op1.EQ.'EXPT' ) THEN
@@ -1788,13 +1788,13 @@ C     Handle OP,ERRO
  400  IF ( ICS.EQ.1 ) THEN
          REWIND 11
          DO kh1 = 1 , LP4
-            READ (11) (CORF(kh1,kh2),kh2=1,LP6)
+            READ (11) (CORF(kh1,kh2),kh2=1,LP6) ! LP6 = 32 (maximum number of gamma detectors)
          ENDDO
       ELSE
          CALL FTBM(0,chiss,idr,0,chilo,bten)
          REWIND 11
          DO kh1 = 1 , LP4
-            WRITE (11) (CORF(kh1,kh2),kh2=1,LP6)
+            WRITE (11) (CORF(kh1,kh2),kh2=1,LP6) ! LP6 = 32 (maximum number of gamma detectors)
          ENDDO
       ENDIF
 
@@ -2007,7 +2007,7 @@ C     Handle OP,ERRO
       IF ( iobl.LT.1 ) THEN
          IF ( op2.NE.'GOSI' ) THEN
             iapx = 0
-            DO ii = 1 , LP6
+            DO ii = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
                ILE(ii) = 1
             ENDDO
             nch = 0
@@ -2018,7 +2018,7 @@ C     Handle OP,ERRO
                IF ( op2.NE.'STAR' ) THEN
                   jmm = IEXP
                   IF ( IEXP.NE.1 ) THEN
-                     DO lli = 1 , LP6
+                     DO lli = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
                         ILE(lli) = ILE(lli) + NYLDE(IEXP-1,lli)
                      ENDDO
                   ENDIF
@@ -2084,7 +2084,7 @@ C     Handle OP,ERRO
                   CALL DECAY(ccd,0,ccc)
                   nogeli = NANG(IEXP) ! Number of detector angles for expt
                   jgl1 = 0
-                  DO js = 1 , LP2 ! LP2 = 1500 (maximum number of matrix elements)LP2
+                  DO js = 1 , LP2 ! LP2 = 1500 (maximum number of matrix elements)
                      DO jgl = 1 , 20
                         SUMCL(jgl,js) = 0.
                      ENDDO
@@ -2648,7 +2648,7 @@ C---- gosia2 changes end
 C---- gosia2 changes start
       
 C     Set CNOR1 to the average of CNOR1 and CNOR2
-      DO kh1 = 1 , LP6 ! LP6 = 32
+      DO kh1 = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
          DO kh2 = 1 , LP3 ! LP3 = 75 (maximum number of levels)
             IF ( JZB.EQ.25 ) THEN ! If it is the second nucleus
                CNOR1(kh1,kh2) = CNOR(kh1,kh2)
@@ -2681,23 +2681,27 @@ C     Decide whether to terminate here
       GOTO 2200 ! Back to beginning
 C---- gosia2 changes end
 
-
+C.............................................................................
  1500 WRITE (22,99043)
 99043 FORMAT (5X,'ERROR-M.E. DOES NOT BELONG TO THE UPPER TRIANGLE')
       GOTO 1900 ! Troubleshoot
 
+C.............................................................................
  1600 WRITE (22,99044)
 99044 FORMAT (5X,'ERROR-WRONG SEQUENCE OF MULTIPOLARITIES')
       GOTO 1900 ! Troubleshoot
 
+C.............................................................................
  1700 WRITE (22,99045)
 99045 FORMAT (5X,'ERROR-REPEATED APPEARANCE OF THE STATE')
       GOTO 1900 ! Troubleshoot
 
+C.............................................................................
  1800 WRITE (22,99046)
 99046 FORMAT (1X///10X,'ERROR-INSUFFICIENT SPACE FOR E-THETA INTEGR ',
      &        'ATION')
 
+C.............................................................................
 C     Troubleshooting
  1900 IF ( ITS.NE.0 ) THEN
          iva = 0
@@ -2726,7 +2730,7 @@ C     Decide if we have to loop again for beam/projectile
       ENDIF
 
 C     Write normalization coefficients
-      DO mmmm = 1 , LP6 ! LP6 is 32
+      DO mmmm = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
          DO kkkk = 1 , LP1 ! LP1 is 50 (maximum number of experiments)
             WRITE (13,*) CNOR1(mmmm,kkkk)
          ENDDO
