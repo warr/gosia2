@@ -465,11 +465,11 @@ C     Initialize pointers
       LP2 = 1500 ! Maximum number of matrix elements
       LP3 = 75 ! Maximum number of levels
       LP4 = 1500
-      LP6 = 32
+      LP6 = 32 ! Maximum number of gamma detectors
       LP7 = lp0 - 4900 ! Start of collision coefficients in ZETA
       LP8 = LP3*28 + 1
       LP9 = lp0 - LP3*28
-      LP10 = 600
+      LP10 = 600 ! Maximum number of substates
       LP11 = LP8 - 1
       LP12 = 365 ! Maximum number of steps of omega (dimension of ADB, SH, CH)
       LP13 = LP9 + 1
