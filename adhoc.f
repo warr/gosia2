@@ -69,13 +69,13 @@ C Here we parse the input of the OP,YIEL command and store the values.
       INTEGER*4 IY , Iyr , IZ , IZ1 , jic , jicc , juf , KSEQ , lb , 
      &          li , licc , LIFCT , llia , LMAXE , lxt , MAGEXC , MEM , 
      &          MEMAX , MEMX6 , n1
-      INTEGER*4 n2 , NAMX , NANG , NBRA , ndas , NDL , NDST , ndtp , 
+      INTEGER*4 n2 , NAMX , NANG , NBRA , ndas , NDL , ndtp , 
      &          NEXPT , Nfd , NICC , nistr , NLIFT , ns1 , ns2 , ns3 , 
      &          ns4 , Ntap , nvare , NYLDE
       INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
       INTEGER*4 ISPL ! Added for spline
       CHARACTER*4 Oph
-      COMMON /CCCDS / NDST(50)
+      INCLUDE 'cccds.inc'
       COMMON /DIMX  / DIX(4) , ODL(200)
       COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
      &                ENZ(200)

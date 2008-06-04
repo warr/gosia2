@@ -309,7 +309,7 @@ C      ZV     - energy meshpoints
      &          mfla , mlt , mm , mpin , ms , MULTI , n , na , na1 , 
      &          naa , nallow , NAMX , NANG
       INTEGER*4 naxfl , nb1 , nb2 , nbands , NBRA , nch , NCM , NDIM , 
-     &          ndima , NDST , ndum , ne , NEXPT , nf , nfd , nfdd , 
+     &          ndima , ndum , ne , NEXPT , nf , nfd , nfdd , 
      &          nfi , nflr , nft , nged
       INTEGER*4 ngpr , ni , NICC , nksi , nl , NLIFT , NLOCK , NMAX ,
      &          NMAX1 , nmaxh , nmemx , nnl , nogeli , npce , npce1 , 
@@ -333,7 +333,7 @@ C      ZV     - energy meshpoints
      &          levl(50) , xlevb(50,2) , bm(8,20,20,3) , mlt(1500) , 
      &          ivari(1500) , jpin(50)
       INCLUDE 'clust.inc'
-      COMMON /CCCDS / NDST(50)
+      INCLUDE 'cccds.inc'
       COMMON /INHI  / INHB
       COMMON /IDENT / BEQ
       COMMON /EFCAL / ABC(8,10) , AKAVKA(9,200) , THICK(200,7)

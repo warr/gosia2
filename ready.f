@@ -33,7 +33,7 @@ C experimental yields
      &          iytot , iytt , IZ , IZ1 , j , k , kk , kkl , KSEQ , 
      &          lbg , LP1
       INTEGER*4 LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , LP4 , 
-     &          LP6 , LP7 , LP8 , LP9 , lxp , nanx , nde , nde1 , NDST , 
+     &          LP6 , LP7 , LP8 , LP9 , lxp , nanx , nde , nde1 , 
      &          ne , NEXPT , ns1
       INTEGER*4 ns2 , ns3 , ns4 , nsxh , nsyh , Ntap , nval , NYLDE
       DIMENSION iytot(32)
@@ -45,7 +45,7 @@ C experimental yields
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /CCCDS / NDST(50)
+      INCLUDE 'cccds.inc'
       
 C     Rewind yield file
       REWIND Ntap

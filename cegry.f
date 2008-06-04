@@ -100,7 +100,7 @@ C      Iredv  -
       INTEGER*4 LNORM , LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , 
      &          LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , lth , lu , luu , 
      &          na , NANG , NDIM
-      INTEGER*4 NDST , NEXPT , nf , nf1 , ni , ni1 , NICC , NLIFT , 
+      INTEGER*4 NEXPT , nf , nf1 , ni , ni1 , NICC , NLIFT , 
      &          NMAX , NMAX1 , Nwyr , NYLDE
       INTEGER*4 ISPL ! Added for spline
       CHARACTER*4 wupl , war
@@ -142,7 +142,7 @@ C      Iredv  -
       COMMON /SKP   / JSKIP(50)
       COMMON /TRB   / ITS
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
-      COMMON /CCCDS / NDST(50)
+      INCLUDE 'cccds.inc'
       COMMON /CINIT2/ CNOR1(32,75) , CNOR2(32,75) , MCFIX ! For gosia2
       SAVE part, partl ! For gosia2
       DATA sum3/0./,sumpr/0./

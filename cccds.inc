@@ -1,0 +1,2 @@
+      INTEGER*4 NDST
+      COMMON /CCCDS / NDST(50)
