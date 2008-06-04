@@ -274,7 +274,7 @@ C      ZV     - energy meshpoints
      &          ihuj , ii , ij
       INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ILE , ile1 , ilevls , 
      &          ilx , im , IMIN , imode , in1 , in2 , inclus , ind , 
-     &          ind1 , ind2 , indx , INHB
+     &          ind1 , ind2 , indx
       INTEGER*4 inko , inm1 , inm2 , inn , INNR , inpo , intend , 
      &          INTERV , INTR , intvh , inva , inx1 , iobl , iocc , 
      &          iopri , iosr , IP , IPATH , ipd , iph
@@ -334,7 +334,7 @@ C      ZV     - energy meshpoints
      &          ivari(1500) , jpin(50)
       INCLUDE 'clust.inc'
       INCLUDE 'cccds.inc'
-      COMMON /INHI  / INHB
+      INCLUDE 'inhi.inc'
       COMMON /IDENT / BEQ
       COMMON /EFCAL / ABC(8,10) , AKAVKA(9,200) , THICK(200,7)
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
