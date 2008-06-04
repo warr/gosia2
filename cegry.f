@@ -78,11 +78,11 @@ C      Iredv  -
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AGELI , AKS , CC , ccc , ccd , 
      &       Chilo , Chisq , CNOR , cnr , cocos , CORF , d , decen , 
-     &       DELTA , DEV , DIPOL , DIX
+     &       DELTA , DEV , DIPOL
       REAL*8 dl , DQ , DYEX , effi , EG , EMH , EN , ENDEC , 
      &       ENZ , EP , EPS , EROOT , fi0 , fi1 , fic , FIEX , figl , 
      &       fm , g
-      REAL*8 gth , ODL , part , partl , Q , QCEN , rik , rl , rx , ry , 
+      REAL*8 gth , part , partl , Q , QCEN , rik , rl , rx , ry , 
      &       rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , SUBCH2 , sum3
       REAL*8 sumpr , TACOS , TAU , tetrc , tfac , thc , TLBDG , 
      &       UPL , VACDP , VINF , wf , XA , XA1 , XNOR , YEXP , 
@@ -115,7 +115,7 @@ C      Iredv  -
       COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
      &                ENZ(200)
       INCLUDE 'brec.inc'
-      COMMON /DIMX  / DIX(4) , ODL(200)
+      INCLUDE 'dimx.inc'
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
       COMMON /CINIT / CNOR(32,75) , INNR
       COMMON /PRT   / IPRM(20)

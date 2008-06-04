@@ -59,8 +59,8 @@ C Here we parse the input of the OP,YIEL command and store the values.
       SUBROUTINE ADHOC(Oph,Idr,Nfd,Ntap,Iyr)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AGELI , BRAT , CC , CORF , DELTA , DIPOL , 
-     &       DIX , DMIX , DMIXE , DYEX , EAMX , EG , EN , ENDEC , ENZ , 
-     &       EP , ODL , Q
+     &       DMIX , DMIXE , DYEX , EAMX , EG , EN , ENDEC , ENZ , 
+     &       EP , Q
       REAL*8 SPIN , TAU , TIMEL , TLBDG , UPL , VINF , wamx , wbra , 
      &       wdl , wlf , XA , XA1 , YEXP , YGN , YGP , YNRM , ZPOL
       INTEGER*4 IAMX , IAMY , iax , IBRC , Idr , IDRN , iexp1 , IFMO , 
@@ -76,7 +76,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       INTEGER*4 ISPL ! Added for spline
       CHARACTER*4 Oph
       INCLUDE 'cccds.inc'
-      COMMON /DIMX  / DIX(4) , ODL(200)
+      INCLUDE 'dimx.inc'
       COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
      &                ENZ(200)
       COMMON /LIFE  / NLIFT

@@ -240,7 +240,7 @@ C      ZV     - energy meshpoints
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
      &       CNOR , cnst
       REAL*8 cocos , conu , CORF , d , decen , dedx , DELTA , DEVD , 
-     &       DEVU , DIPOL , DIX , DLOCK , DQ , DS , dsd , DSE , DSG , 
+     &       DEVU , DIPOL , DLOCK , DQ , DS , dsd , DSE , DSG , 
      &       dsig , dst
       REAL*8 dsx , dsxm , DYEX , EAMX , effi , EG , eh1 , ELM , ELMH , 
      &       elmi , ELML , ELMT , ELMU , emhl1 , EMMA , emn , emx , EN , 
@@ -248,7 +248,7 @@ C      ZV     - energy meshpoints
       REAL*8 eng , enh , ENZ , EP , EPS , EROOT , esd , esp , ess , 
      &       fi0 , fi1 , fic , FIEX , fiex1 , figl , fipo1 , fm , G , 
      &       GRAD , gth
-      REAL*8 hen , het , HLM , HLMLM , ODL , p , PARX , PARXM , pfi , 
+      REAL*8 hen , het , HLM , HLMLM , p , PARX , PARXM , pfi , 
      &       ph1 , ph2 , pi , PILOG , po1 , po2 , polm , pop1 , pr , 
      &       pv , Q
       REAL*8 q1 , q2 , QAPR , qc , QCEN , qfac , qr , qui , r , r1 , 
@@ -340,7 +340,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'tcm.inc'
       INCLUDE 'brec.inc'
       INCLUDE 'adbxi.inc'
-      COMMON /DIMX  / DIX(4) , ODL(200)
+      INCLUDE 'dimx.inc'
       COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
      &                ENZ(200)
       COMMON /CINIT / CNOR(32,75) , INNR
