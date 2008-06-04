@@ -253,7 +253,7 @@ C      ZV     - energy meshpoints
      &       pv , Q
       REAL*8 q1 , q2 , QAPR , qc , QCEN , qfac , qr , qui , r , r1 , 
      &       r2 , r3 , r4 , rem , remax , rl , rlr , rm , rx , ry
-      REAL*8 rz , s , s11 , s12 , s21 , s22 , SA , sbe , SE , sf , SGW , 
+      REAL*8 rz , s , s11 , s12 , s21 , s22 , SA , sbe , sf , SGW , 
      &       sh , sh1 , sh2 , SIMIN , slim , SPIN , SUBCH1 , SUBCH2
       REAL*8 summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , test , 
      &       tetrc , tfac , thc , TIMEL , title , 
@@ -343,7 +343,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'dimx.inc'
       INCLUDE 'tra.inc'
       INCLUDE 'cinit.inc'
-      COMMON /XRA   / SE
+      INCLUDE 'xra.inc'
       COMMON /HHH   / HLM(1500)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
       COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
