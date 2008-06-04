@@ -77,7 +77,7 @@ C      Iredv  -
       SUBROUTINE CEGRY(Chisq,Itemp,Chilo,Idr,Nwyr,Icall,Issp,Iredv)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AGELI , AKS , CC , ccc , ccd , 
-     &       Chilo , Chisq , CNOR , cnr , cocos , CORF , d , decen , 
+     &       Chilo , Chisq , cnr , cocos , CORF , d , decen , 
      &       DEV , DIPOL
       REAL*8 dl , DQ , DYEX , effi , EG , EMH , EN , 
      &       EP , EPS , EROOT , fi0 , fi1 , fic , FIEX , figl , 
@@ -91,7 +91,7 @@ C      Iredv  -
       INTEGER*4 iabc , IAXS , IBYP , Icall , id , idc , Idr , 
      &          IDRN , IEXP , ifdu , IFMO , ifxd , IGRD , ii , ILE , 
      &          ile2 , IMIN , inclus , INM
-      INTEGER*4 INNR , ipd , IPRM , Iredv , ISO , Issp , 
+      INTEGER*4 ipd , IPRM , Iredv , ISO , Issp , 
      &          Itemp , ITS , iva , iw , IWF , ixl , ixm , IY , 
      &          iyex , IZ , IZ1 , jj
       INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , KSEQ , 
@@ -116,7 +116,7 @@ C      Iredv  -
       INCLUDE 'brec.inc'
       INCLUDE 'dimx.inc'
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
-      COMMON /CINIT / CNOR(32,75) , INNR
+      INCLUDE 'cinit.inc'
       COMMON /PRT   / IPRM(20)
       COMMON /LIFE  / NLIFT
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)

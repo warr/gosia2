@@ -1,0 +1,3 @@
+      REAL*8 CNOR
+      INTEGER*4 INNR
+      COMMON /CINIT / CNOR(32,100) , INNR

@@ -238,7 +238,7 @@ C      ZV     - energy meshpoints
      &       be2c
       REAL*8 bk , bl , bm , bmx , BRAT , bten , bu , CAT , CC , ccc , 
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
-     &       CNOR , cnst
+     &       cnst
       REAL*8 cocos , conu , CORF , d , decen , dedx , DEVD , 
      &       DEVU , DIPOL , DLOCK , DQ , DS , dsd , DSE , DSG , 
      &       dsig , dst
@@ -275,7 +275,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ILE , ile1 , ilevls , 
      &          ilx , im , IMIN , imode , in1 , in2 , inclus , ind , 
      &          ind1 , ind2 , indx
-      INTEGER*4 inko , inm1 , inm2 , inn , INNR , inpo , intend , 
+      INTEGER*4 inko , inm1 , inm2 , inn , inpo , intend , 
      &          INTERV , INTR , intvh , inva , inx1 , iobl , iocc , 
      &          iopri , iosr , IP , IPATH , ipd , iph
       INTEGER*4 IPI , ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
@@ -342,7 +342,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'adbxi.inc'
       INCLUDE 'dimx.inc'
       INCLUDE 'tra.inc'
-      COMMON /CINIT / CNOR(32,75) , INNR
+      INCLUDE 'cinit.inc'
       COMMON /XRA   / SE
       COMMON /HHH   / HLM(1500)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
