@@ -125,13 +125,16 @@ OBJS += xstatic.o
 OBJS += ylm.o
 OBJS += ylm1.o
 
+include: include.c
+	gcc -o include include.c	
+
 SINGLE_FILE = gosia2_single_file.f
 
 gosia2: $(OBJS) $(DEPS)
 	$(FC) $(LDFLAGS) -o gosia2 $(OBJS)
 
 clean:
-	rm -f *~ *.o $(EXE) $(SINGLE_FILE)
+	rm -f *~ *.o $(EXE) $(SINGLE_FILE) include
 
 install: $(EXE) $(MAN)
 	install -m 755 -d $(BINDIR)
@@ -140,8 +143,8 @@ install: $(EXE) $(MAN)
 	install -m 644 $(MAN) $(MANDIR)
 	gzip -f $(MANDIR)/$(MAN)
 
-single_file:
-	cat gosia2.f arccos.f arctg.f load.f lsloop.f leadf.f \
+single_file: include
+	./include gosia2.f arccos.f arctg.f load.f lsloop.f leadf.f \
 	mem.f cmlab.f qe.f qm.f snake.f fhip.f alloc.f \
 	rangel.f qrange.f ampder.f laisum.f expon.f faza.f \
 	setin.f sting.f laiamp.f faza1.f trint.f pol4.f \
