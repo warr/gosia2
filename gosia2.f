@@ -235,7 +235,7 @@ C      ZV     - energy meshpoints
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , acof , AGELI , AKS , ap , 
      &       ARCCOS , ARCTG , arg , ax , B , bcof , be2 , be2a , be2b , 
-     &       be2c , BETAR
+     &       be2c
       REAL*8 bk , bl , bm , bmx , BRAT , bten , bu , CAT , CC , ccc , 
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
      &       CNOR , cnst
@@ -338,7 +338,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'ident.inc'
       INCLUDE 'efcal.inc'
       INCLUDE 'tcm.inc'
-      COMMON /BREC  / BETAR(50)
+      INCLUDE 'brec.inc'
       COMMON /ADBXI / EXPO(1500)
       COMMON /DIMX  / DIX(4) , ODL(200)
       COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 

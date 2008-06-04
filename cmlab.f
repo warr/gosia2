@@ -36,7 +36,7 @@ C      Tetrn  - theta of recoiling nucleus
 
       SUBROUTINE CMLAB(Ii,Dsig,Tetrn)
       IMPLICIT NONE
-      REAL*8 a1 , a2 , ACCA , ACCUR , ared , BETAR , d2a , DIPOL , 
+      REAL*8 a1 , a2 , ACCA , ACCUR , ared , d2a , DIPOL , 
      &       dista , dists , Dsig , emax , EMMA , EN , EP , 
      &       epmin , EPS , EROOT , FIEX
       INTEGER*4 IAXS , IEXP , iflaa , Ii , IPRM , ISKIN , ISO , IZ , 
@@ -51,7 +51,7 @@ C      Tetrn  - theta of recoiling nucleus
       COMMON /SECK  / ISKIN(50)
       COMMON /PRT   / IPRM(20)
       INCLUDE 'tcm.inc'
-      COMMON /BREC  / BETAR(50)
+      INCLUDE 'brec.inc'
       COMMON /CAUX0 / EMMA(75) , NCM
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 

@@ -35,7 +35,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       
       SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
-      REAL*8 AGELI , alab , arg , at , attl , BETAR , bt , CC , DELLA , 
+      REAL*8 AGELI , alab , arg , at , attl , bt , CC , DELLA , 
      &       DELTA , EG , ENDEC , ENZ , EPS , EROOT , f , Fi0 , fi01 , 
      &       Fi1 , fi11
       REAL*8 FIEX , Figl , FP , GKP , Gth , Q , qv , sm , TAU , Trec , 
@@ -60,7 +60,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /LCDL  / DELLA(1500,3)
       COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(75)
-      COMMON /BREC  / BETAR(50)
+      INCLUDE 'brec.inc'
       COMMON /THTAR / ITTE(50)
       INCLUDE 'tcm.inc' ! For gosia2
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 

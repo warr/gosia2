@@ -76,7 +76,7 @@ C      Iredv  -
  
       SUBROUTINE CEGRY(Chisq,Itemp,Chilo,Idr,Nwyr,Icall,Issp,Iredv)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , AGELI , AKS , BETAR , CC , ccc , ccd , 
+      REAL*8 ACCA , ACCUR , AGELI , AKS , CC , ccc , ccd , 
      &       Chilo , Chisq , CNOR , cnr , cocos , CORF , d , decen , 
      &       DELTA , DEV , DIPOL , DIX
       REAL*8 dl , DQ , DYEX , effi , EG , EMH , EN , ENDEC , 
@@ -114,7 +114,7 @@ C      Iredv  -
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
      &                ENZ(200)
-      COMMON /BREC  / BETAR(50)
+      INCLUDE 'brec.inc'
       COMMON /DIMX  / DIX(4) , ODL(200)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
       COMMON /CINIT / CNOR(32,75) , INNR
