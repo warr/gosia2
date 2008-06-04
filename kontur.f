@@ -38,7 +38,7 @@ C      Rem    - natural log of the largest value the computer can represent
       REAL*8 ac , Bten , c , Chil , chilo , Chis0 , chis1 , chis2 , d1 , 
      &       d2 , DEVD , DEVU , DS , DSE , DSG , ELM , ELML , ELMU , f , 
      &       h
-      REAL*8 HLM , Rem , RK4 , SA , sajj , Sh , t , v , ww , x , XV , 
+      REAL*8 Rem , RK4 , SA , sajj , Sh , t , v , ww , x , XV , 
      &       y , YV , ZV
       INTEGER*4 i , Idr , Ifbf , Inpo , INTR , IPS1 , itl , IVAR , ix , 
      &          j , Jj , l , LMAXE , LNY , m , MAGEXC , MEMAX , MEMX6 , 
@@ -49,7 +49,7 @@ C      Rem    - natural log of the largest value the computer can represent
       COMMON /DFTB  / DEVD(1500) , DEVU(1500)
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
-      COMMON /HHH   / HLM(1500)
+      INCLUDE 'hhh.inc'
       COMMON /ILEWY / NWR
       COMMON /LOGY  / LNY , INTR , IPS1
 

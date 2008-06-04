@@ -248,7 +248,7 @@ C      ZV     - energy meshpoints
       REAL*8 eng , enh , EP , esd , esp , ess , 
      &       fi0 , fi1 , fic , fiex1 , figl , fipo1 , fm , G , 
      &       GRAD , gth
-      REAL*8 hen , het , HLM , HLMLM , p , PARX , PARXM , pfi , 
+      REAL*8 hen , het , HLMLM , p , PARX , PARXM , pfi , 
      &       ph1 , ph2 , pi , PILOG , po1 , po2 , polm , pop1 , pr , 
      &       pv , Q
       REAL*8 q1 , q2 , QAPR , qc , QCEN , qfac , qr , qui , r , r1 , 
@@ -344,7 +344,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'tra.inc'
       INCLUDE 'cinit.inc'
       INCLUDE 'xra.inc'
-      COMMON /HHH   / HLM(1500)
+      INCLUDE 'hhh.inc'
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
       COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
       COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
