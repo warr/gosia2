@@ -70,12 +70,12 @@ C      Bten   -
       REAL*8 ACCA , ACCUR , AGELI , aval , Bten , CAT , CC , Chilo , 
      &       chis1 , CHIS11 , chish , Chisq , chisx , chx , CORF , 
      &       DIPOL , DYEX , EG , ELM , ELML
-      REAL*8 ELMU , EMH , EN , EP , EPS , EROOT , fc , FIEX , fx , 
+      REAL*8 ELMU , EMH , EN , EP , fc , fx , 
      &       polm , pr , prop , Q , SA , SPIN , TAU , TLBDG , UPL , 
      &       val , VINF
       REAL*8 wz , XA , XA1 , YEXP , YNRM , ZETA , ZPOL
-      INTEGER*4 i1 , i11 , iapx , IAXS , Icll , idec , Idr , IDRN , 
-     &          IEXP , iflg , IGRD , ii , ILE , ile1 , ile2 , ile3 , 
+      INTEGER*4 i1 , i11 , iapx , Icll , idec , Idr , IDRN , 
+     &          iflg , IGRD , ii , ILE , ile1 , ile2 , ile3 , 
      &          ilin , indx , inko , INM
       INTEGER*4 inp , inpo , inpx , INTR , inzz , inzzz , IPATH , IPRM , 
      &          IPS1 , ISMAX , ISO , issp , ITAK2 , itemp , IVAR , ixx , 
@@ -107,7 +107,7 @@ C      Bten   -
       COMMON /UWAGA / ITAK2
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
+      INCLUDE 'kin.inc'
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
      &                YNRM(32,50) , IDRN , ILE(32)

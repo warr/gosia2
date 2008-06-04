@@ -32,11 +32,10 @@ C      Chilo  - chi squared of logs
       SUBROUTINE DECAY(Chisq,Nlift,Chilo)
       IMPLICIT NONE
       REAL*8 AKS , bsum , Chilo , Chisq , DELLA , df , DQ , 
-     &       el1 , ELM , ELML , ELMU , emt , emt1 , EPS , 
-     &       EROOT , FIEX , FP
+     &       el1 , ELM , ELML , ELMU , emt , emt1 , FP
       REAL*8 gk , GKP , QCEN , SA , TAU , TIMEL , VACDP , vcd , XNOR , 
      &       ZETA
-      INTEGER*4 i , IAXS , ibra , IBYP , idr , idrh , IEXP , ifn , il , 
+      INTEGER*4 i , ibra , IBYP , idr , idrh , ifn , il , 
      &          inx , inx1 , iu , j , jlt , k , kl , KLEC , kq , 
      &          KSEQ
       INTEGER*4 l , l1 , lc1 , lc2 , LIFCT , LZETA , n1 , n2 , NDIM , 
@@ -48,7 +47,7 @@ C      Chilo  - chi squared of logs
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
-      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
+      INCLUDE 'kin.inc'
       COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(75)
       COMMON /LCDL  / DELLA(1500,3)
       DIMENSION gk(4)

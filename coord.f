@@ -30,17 +30,16 @@ C      Tzz    - upper limit of theta (degrees)
  
       SUBROUTINE COORD(Wth,Wph,Wthh,Naa,Ifw,Pfi,Wpi,Wtlb,Lz,Tyy,Tzz)
       IMPLICIT NONE
-      REAL*8 DS , DSE , DSG , EP , EPS , EROOT , FIEX , ga , gi , Pfi , 
+      REAL*8 DS , DSE , DSG , EP , ga , gi , Pfi , 
      &       rade , rmass , TACOS , TASIN , thetb , TLBDG , ttcm , Tyy , 
      &       Tzz , VINF
       REAL*8 wpa , Wph , Wpi , ws , Wth , Wthh , Wtlb , XA , XA1 , xaa , 
      &       xph , xth , xthh , XV , YV , za , za1 , zb , zl , ZV
-      INTEGER*4 i , IAXS , IEXP , Ifw , ISKIN , IZ , IZ1 , Lz , Naa , 
-     &          NEXPT
+      INTEGER*4 i , Ifw , ISKIN , IZ , IZ1 , Lz , Naa , NEXPT
       DIMENSION Pfi(101) , Wpi(100,2)
       COMMON /VLIN  / XV(101) , YV(101) , ZV(100) , DSG(100) ,
      &                DSE(100) , DS
-      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
+      INCLUDE 'kin.inc'
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       COMMON /SECK  / ISKIN(50)

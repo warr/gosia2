@@ -31,11 +31,11 @@ C      W0     - omega limit
       
       SUBROUTINE LAIAMP(Ir,W0)
       IMPLICIT NONE
-      REAL*8 CAT , D2W , ELM , ELML , ELMU , EPS , epsi , EROOT , errt , 
-     &       FIEX , pm , ppp , rmir , rmis , rmu , SA , TCABS , W0 , 
+      REAL*8 CAT , D2W , ELM , ELML , ELMU , epsi , errt , 
+     &       pm , ppp , rmir , rmis , rmu , SA , TCABS , W0 , 
      &       XI , xiv
       REAL*8 z , ZETA
-      INTEGER*4 i1 , i2 , i3 , IAXS , IEXP , indx , Ir , is , is1 , 
+      INTEGER*4 i1 , i2 , i3 , indx , Ir , is , is1 , 
      &          is2 , ISG , ISG1 , ISMAX , ismin , isplus , KDIV , la , 
      &          lam , LAMDA , LAMMAX
       INTEGER*4 LAMR , ld , LDNUM , LEAD , LEADF , LZETA , m , MEM , 
@@ -51,7 +51,7 @@ C      W0     - omega limit
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
-      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
+      INCLUDE 'kin.inc'
       COMMON /CXI   / XI(1500)
 
       ppp = 0.

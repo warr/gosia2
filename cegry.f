@@ -80,7 +80,7 @@ C      Iredv  -
      &       Chilo , Chisq , cnr , cocos , CORF , d , decen , 
      &       DIPOL
       REAL*8 dl , DQ , DYEX , effi , EG , EMH , EN , 
-     &       EP , EPS , EROOT , fi0 , fi1 , fic , FIEX , figl , 
+     &       EP , fi0 , fi1 , fic , figl , 
      &       fm , g
       REAL*8 gth , part , partl , Q , QCEN , rik , rl , rx , ry , 
      &       rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , SUBCH2 , sum3
@@ -88,8 +88,8 @@ C      Iredv  -
      &       UPL , VACDP , VINF , wf , XA , XA1 , XNOR , YEXP , 
      &       YGN , YGP , YNRM
       REAL*8 ZPOL
-      INTEGER*4 iabc , IAXS , IBYP , Icall , id , idc , Idr , 
-     &          IDRN , IEXP , ifdu , IFMO , ifxd , IGRD , ii , ILE , 
+      INTEGER*4 iabc , IBYP , Icall , id , idc , Idr , 
+     &          IDRN , ifdu , IFMO , ifxd , IGRD , ii , ILE , 
      &          ile2 , IMIN , inclus , INM
       INTEGER*4 ipd , IPRM , Iredv , ISO , Issp , 
      &          Itemp , ITS , iva , iw , IWF , ixl , ixm , IY , 
@@ -134,7 +134,7 @@ C      Iredv  -
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
      &                YNRM(32,50) , IDRN , ILE(32)
-      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
+      INCLUDE 'kin.inc'
       COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO

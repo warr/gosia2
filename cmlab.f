@@ -38,8 +38,8 @@ C      Tetrn  - theta of recoiling nucleus
       IMPLICIT NONE
       REAL*8 a1 , a2 , ACCA , ACCUR , ared , d2a , DIPOL , 
      &       dista , dists , Dsig , emax , EMMA , EN , EP , 
-     &       epmin , EPS , EROOT , FIEX
-      INTEGER*4 IAXS , IEXP , iflaa , Ii , IPRM , ISKIN , ISO , IZ , 
+     &       epmin
+      INTEGER*4 iflaa , Ii , IPRM , ISKIN , ISO , IZ , 
      &          IZ1 , lexp , lexp0 , lexp1 , n , NCM , NDIM , NEXPT , 
      &          NMAX , NMAX1
       REAL*8 r3 , SPIN , TASIN , tau , taup , tcmdg , tcmrad , 
@@ -56,7 +56,7 @@ C      Tetrn  - theta of recoiling nucleus
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
-      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
+      INCLUDE 'kin.inc'
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
       DATA r3/0./
