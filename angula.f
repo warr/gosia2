@@ -36,12 +36,11 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
       REAL*8 AGELI , alab , arg , at , attl , bt , CC , DELLA , 
-     &       DELTA , EG , ENDEC , ENZ , EPS , EROOT , f , Fi0 , fi01 , 
-     &       Fi1 , fi11
+     &       EG , EPS , EROOT , f , Fi0 , fi01 , Fi1 , fi11
       REAL*8 FIEX , Figl , FP , GKP , Gth , Q , qv , sm , TAU , Trec , 
      &       Ygn , ylmr , ZETA
       INTEGER*4 IAXS , Idr , IEXP , ifn , Iful , ig , il , inat , inx1 , 
-     &          ipd , is , ITMA , ITTE , iu , ixs , j , ji , jj , jm , k
+     &          ipd , is , ITTE , iu , ixs , j , ji , jj , jm , k
       INTEGER*4 KLEC , kq , KSEQ , l , lf , lf1 , LZETA , mind , NANG , 
      &          Ngl , NICC , nlv
       REAL*8 dsig, EP , TLBDG , ttx , VINF ,
@@ -52,8 +51,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
      &          Ygn(*)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
-     &                ENZ(200)
+      INCLUDE 'tra.inc'
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
      &                NICC , NANG(200) , ISPL

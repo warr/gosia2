@@ -27,10 +27,10 @@ C      Chilo  - chi squared of logs
       SUBROUTINE BRANR(Chisq,Nwyr,Chilo)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , BRAT , ch1 , ch2 , Chilo , Chisq , CONV , 
-     &       DELTA , DIPOL , ELM , ELML , ELMU , EN , ENDEC , eng1 , 
-     &       eng2 , ENZ , SA , SPIN
+     &       DIPOL , ELM , ELML , ELMU , EN , eng1 , 
+     &       eng2 , SA , SPIN
       REAL*8 TAU , u , ZPOL
-      INTEGER*4 i1 , i2 , IBRC , iflg , iout , IPRM , ISO , ITMA , itt , 
+      INTEGER*4 i1 , i2 , IBRC , iflg , iout , IPRM , ISO , itt , 
      &          j1 , j2 , k , KSEQ , lab1 , lab2 , LAMDA , LAMMAX , 
      &          LDNUM , LEAD , mul2
       INTEGER*4 MULTI , n1 , n2 , NBRA , Nwyr
@@ -39,8 +39,7 @@ C      Chilo  - chi squared of logs
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
       COMMON /BRNCH / BRAT(50,2) , IBRC(2,50) , NBRA
-      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
-     &                ENZ(200)
+      INCLUDE 'tra.inc'
       COMMON /PRT   / IPRM(20)
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)

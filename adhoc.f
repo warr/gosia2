@@ -58,14 +58,13 @@ C Here we parse the input of the OP,YIEL command and store the values.
  
       SUBROUTINE ADHOC(Oph,Idr,Nfd,Ntap,Iyr)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , AGELI , BRAT , CC , CORF , DELTA , DIPOL , 
-     &       DMIX , DMIXE , DYEX , EAMX , EG , EN , ENDEC , ENZ , 
-     &       EP , Q
+      REAL*8 ACCA , ACCUR , AGELI , BRAT , CC , CORF , DIPOL , 
+     &       DMIX , DMIXE , DYEX , EAMX , EG , EN , EP , Q
       REAL*8 SPIN , TAU , TIMEL , TLBDG , UPL , VINF , wamx , wbra , 
      &       wdl , wlf , XA , XA1 , YEXP , YGN , YGP , YNRM , ZPOL
       INTEGER*4 IAMX , IAMY , iax , IBRC , Idr , IDRN , iexp1 , IFMO , 
      &          ILE , ilft , IMIX , iosr , ipri , IPRM , ISO , isrt1 , 
-     &          ITMA , ITS , iuf , IVAR
+     &          ITS , iuf , IVAR
       INTEGER*4 IY , Iyr , IZ , IZ1 , jic , jicc , juf , KSEQ , lb , 
      &          li , licc , LIFCT , llia , LMAXE , lxt , MAGEXC , MEM , 
      &          MEMAX , MEMX6 , n1
@@ -77,8 +76,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       CHARACTER*4 Oph
       INCLUDE 'cccds.inc'
       INCLUDE 'dimx.inc'
-      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
-     &                ENZ(200)
+      INCLUDE 'tra.inc'
       COMMON /LIFE  / NLIFT
       COMMON /MIXD  / DMIXE(20,2) , DMIX(20) , IMIX(20) , NDL
       COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)

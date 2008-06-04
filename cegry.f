@@ -78,9 +78,9 @@ C      Iredv  -
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AGELI , AKS , CC , ccc , ccd , 
      &       Chilo , Chisq , CNOR , cnr , cocos , CORF , d , decen , 
-     &       DELTA , DEV , DIPOL
-      REAL*8 dl , DQ , DYEX , effi , EG , EMH , EN , ENDEC , 
-     &       ENZ , EP , EPS , EROOT , fi0 , fi1 , fic , FIEX , figl , 
+     &       DEV , DIPOL
+      REAL*8 dl , DQ , DYEX , effi , EG , EMH , EN , 
+     &       EP , EPS , EROOT , fi0 , fi1 , fic , FIEX , figl , 
      &       fm , g
       REAL*8 gth , part , partl , Q , QCEN , rik , rl , rx , ry , 
      &       rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , SUBCH2 , sum3
@@ -92,7 +92,7 @@ C      Iredv  -
      &          IDRN , IEXP , ifdu , IFMO , ifxd , IGRD , ii , ILE , 
      &          ile2 , IMIN , inclus , INM
       INTEGER*4 INNR , ipd , IPRM , Iredv , ISO , Issp , 
-     &          Itemp , ITMA , ITS , iva , iw , IWF , ixl , ixm , IY , 
+     &          Itemp , ITS , iva , iw , IWF , ixl , ixm , IY , 
      &          iyex , IZ , IZ1 , jj
       INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , KSEQ , 
      &          KVAR , l , l1 , LFL , LFL1 , LFL2 , lic , 
@@ -112,8 +112,7 @@ C      Iredv  -
       INCLUDE 'clust.inc'
       COMMON /ODCH  / DEV(1500)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
-     &                ENZ(200)
+      INCLUDE 'tra.inc'
       INCLUDE 'brec.inc'
       INCLUDE 'dimx.inc'
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP

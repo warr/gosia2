@@ -239,13 +239,13 @@ C      ZV     - energy meshpoints
       REAL*8 bk , bl , bm , bmx , BRAT , bten , bu , CAT , CC , ccc , 
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
      &       CNOR , cnst
-      REAL*8 cocos , conu , CORF , d , decen , dedx , DELTA , DEVD , 
+      REAL*8 cocos , conu , CORF , d , decen , dedx , DEVD , 
      &       DEVU , DIPOL , DLOCK , DQ , DS , dsd , DSE , DSG , 
      &       dsig , dst
       REAL*8 dsx , dsxm , DYEX , EAMX , effi , EG , eh1 , ELM , ELMH , 
      &       elmi , ELML , ELMT , ELMU , emhl1 , EMMA , emn , emx , EN , 
-     &       enb , ENDEC
-      REAL*8 eng , enh , ENZ , EP , EPS , EROOT , esd , esp , ess , 
+     &       enb
+      REAL*8 eng , enh , EP , EPS , EROOT , esd , esp , ess , 
      &       fi0 , fi1 , fic , FIEX , fiex1 , figl , fipo1 , fm , G , 
      &       GRAD , gth
       REAL*8 hen , het , HLM , HLMLM , p , PARX , PARXM , pfi , 
@@ -281,7 +281,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 IPI , ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
      &          ipri , IPRM , IPS1 , irea , irep , irfix , 
      &          ISEX , isip , iske , iskf , ISKIN
-      INTEGER*4 isko , iskok , ISMAX , ISO , isoh , ispa , ispb , ITMA , 
+      INTEGER*4 isko , iskok , ISMAX , ISO , isoh , ispa , ispb , 
      &          itno , itp , ITS , ITTE , iuy , iva , iva1 , IVAR , 
      &          ivarh , ivari , ivrh , IWF
       INTEGER*4 ixj , ixl , ixm , IY , iyr , IZ , IZ1 , izcap , j , ja , 
@@ -341,8 +341,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'brec.inc'
       INCLUDE 'adbxi.inc'
       INCLUDE 'dimx.inc'
-      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
-     &                ENZ(200)
+      INCLUDE 'tra.inc'
       COMMON /CINIT / CNOR(32,75) , INNR
       COMMON /XRA   / SE
       COMMON /HHH   / HLM(1500)
