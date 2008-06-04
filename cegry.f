@@ -78,7 +78,7 @@ C      Iredv  -
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AGELI , AKS , CC , ccc , ccd , 
      &       Chilo , Chisq , cnr , cocos , CORF , d , decen , 
-     &       DEV , DIPOL
+     &       DIPOL
       REAL*8 dl , DQ , DYEX , effi , EG , EMH , EN , 
      &       EP , EPS , EROOT , fi0 , fi1 , fic , FIEX , figl , 
      &       fm , g
@@ -110,7 +110,7 @@ C      Iredv  -
       DIMENSION part(32,50,2) , lic(32) , lth(1500) , cnr(32,50) , 
      &          partl(32,50,2)
       INCLUDE 'clust.inc'
-      COMMON /ODCH  / DEV(1500)
+      INCLUDE 'odch.inc'
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       INCLUDE 'tra.inc'
       INCLUDE 'brec.inc'
