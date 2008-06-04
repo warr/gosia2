@@ -83,20 +83,19 @@ C      Iredv  -
      &       ENZ , EP , EPS , EROOT , fi0 , fi1 , fic , FIEX , figl , 
      &       fm , g
       REAL*8 gth , ODL , part , partl , Q , QCEN , rik , rl , rx , ry , 
-     &       rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , SUBCH2 , sum3 , 
-     &       SUMCL
+     &       rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , SUBCH2 , sum3
       REAL*8 sumpr , TACOS , TAU , TETACM , tetrc , tfac , thc , TLBDG , 
      &       TREP , UPL , VACDP , VINF , wf , XA , XA1 , XNOR , YEXP , 
      &       YGN , YGP , YNRM
       REAL*8 ZPOL
-      INTEGER*4 iabc , IAXS , IBYP , Icall , ICLUST , id , idc , Idr , 
+      INTEGER*4 iabc , IAXS , IBYP , Icall , id , idc , Idr , 
      &          IDRN , IEXP , ifdu , IFMO , ifxd , IGRD , ii , ILE , 
      &          ile2 , IMIN , inclus , INM
-      INTEGER*4 INNR , ipd , IPRM , IRAWEX , Iredv , ISO , Issp , 
+      INTEGER*4 INNR , ipd , IPRM , Iredv , ISO , Issp , 
      &          Itemp , ITMA , ITS , iva , iw , IWF , ixl , ixm , IY , 
      &          iyex , IZ , IZ1 , jj
       INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , KSEQ , 
-     &          KVAR , l , l1 , LASTCL , LFL , LFL1 , LFL2 , lic , 
+     &          KVAR , l , l1 , LFL , LFL1 , LFL2 , lic , 
      &          licz , ll1
       INTEGER*4 LNORM , LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , 
      &          LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , lth , lu , luu , 
@@ -110,8 +109,7 @@ C      Iredv  -
       CHARACTER*4 op2 ! For gosia2
       DIMENSION part(32,50,2) , lic(32) , lth(1500) , cnr(32,50) , 
      &          partl(32,50,2)
-      COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,1500) , 
-     &                IRAWEX(50)
+      INCLUDE 'clust.inc'
       COMMON /ODCH  / DEV(1500)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 

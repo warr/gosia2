@@ -254,8 +254,7 @@ C      ZV     - energy meshpoints
       REAL*8 q1 , q2 , QAPR , qc , QCEN , qfac , qr , qui , r , r1 , 
      &       r2 , r3 , r4 , rem , remax , rl , rlr , rm , rx , ry
       REAL*8 rz , s , s11 , s12 , s21 , s22 , SA , sbe , SE , sf , SGW , 
-     &       sh , sh1 , sh2 , SIMIN , slim , SPIN , SUBCH1 , SUBCH2 , 
-     &       SUMCL
+     &       sh , sh1 , sh2 , SIMIN , slim , SPIN , SUBCH1 , SUBCH2
       REAL*8 summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , test , 
      &       TETACM , tetrc , tfac , thc , THICK , TIMEL , title , 
      &       TLBDG , tmn , tmx , todfi , TREP
@@ -268,7 +267,7 @@ C      ZV     - energy meshpoints
       REAL*8 YEXP , YGN , YGP , YNRM , YV , yy , yyd1 , yydd , yyy , 
      &       ZETA , zmir , zp , ZPOL , ZV , zz
       INTEGER*4 i , i122 , IAMX , IAMY , IAPR , iapx , IAXS , ib , 
-     &          ibaf , IBRC , IBYP , icg , icll , ICLUST , ICS , ict , 
+     &          ibaf , IBRC , IBYP , icg , icll , ICS , ict , 
      &          ictl , id , idf , IDIVE
       INTEGER*4 idr , IDRN , iecd , ient , IEXP , IFAC , IFBFL , ifbp , 
      &          ifc , ifm , IFMO , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
@@ -280,7 +279,7 @@ C      ZV     - energy meshpoints
      &          INTERV , INTR , intvh , inva , inx1 , iobl , iocc , 
      &          iopri , iosr , IP , IPATH , ipd , iph
       INTEGER*4 IPI , ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
-     &          ipri , IPRM , IPS1 , IRAWEX , irea , irep , irfix , 
+     &          ipri , IPRM , IPS1 , irea , irep , irfix , 
      &          ISEX , isip , iske , iskf , ISKIN
       INTEGER*4 isko , iskok , ISMAX , ISO , isoh , ispa , ispb , ITMA , 
      &          itno , itp , ITS , ITTE , iuy , iva , iva1 , IVAR , 
@@ -297,7 +296,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kl , kloop , 
      &          kmat , kq , KSEQ , ktt , kuku , KVAR , l , la , la1 , 
      &          lam , lamd
-      INTEGER*4 LAMDA , lamh , LAMMAX , LASTCL , lb , lck1 , lck2 , 
+      INTEGER*4 LAMDA , lamh , LAMMAX , lb , lck1 , lck2 , 
      &          LDNUM , LEAD , LERF , levl , lex , lexp , lfagg , 
      &          lfini , lh1 , lh2 , LIFCT , liscl , lkj
       INTEGER*4 lkj1 , ll , lli , lll , LMAX , lmax1 , LMAXE , lmaxh , 
@@ -333,8 +332,7 @@ C      ZV     - energy meshpoints
      &          ivarh(1500) , liscl(200) , dsxm(100,100,100) , 
      &          levl(50) , xlevb(50,2) , bm(8,20,20,3) , mlt(1500) , 
      &          ivari(1500) , jpin(50)
-      COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,1500) , 
-     &                IRAWEX(50)
+      INCLUDE 'clust.inc'
       COMMON /CCCDS / NDST(50)
       COMMON /INHI  / INHB
       COMMON /IDENT / BEQ
