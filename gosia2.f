@@ -317,7 +317,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , NYLDE , nz
       INTEGER*4 ISPL ! Added for spline
       LOGICAL ERR
-      COMPLEX*16 ARM , EXPO
+      COMPLEX*16 ARM
       CHARACTER*4 oph , op1 , opcja , op2
       CHARACTER*1 prp
       REAL*8 CNOR1 , CNOR2 , ELM25 , ELM26 , chir , chp , ccch1 ,
@@ -339,7 +339,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'efcal.inc'
       INCLUDE 'tcm.inc'
       INCLUDE 'brec.inc'
-      COMMON /ADBXI / EXPO(1500)
+      INCLUDE 'adbxi.inc'
       COMMON /DIMX  / DIX(4) , ODL(200)
       COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
      &                ENZ(200)

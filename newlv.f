@@ -39,13 +39,13 @@ C storage part.
      &          La , LAMDA , LAMMAX , LAMR , Ld , LDNUM , LEAD , LEADF , 
      &          m , MEM , MSTORE , MULTI
       INTEGER*4 N , NDIV , NPT , NSTART , NSTOP , NSW
-      COMPLEX*16 EXPO , EXPON
+      COMPLEX*16 EXPON
       COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
      &                ISG1
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
-      COMMON /ADBXI / EXPO(1500)
+      INCLUDE 'adbxi.inc'
       COMMON /FLA   / IFLG
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
 

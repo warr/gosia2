@@ -40,7 +40,7 @@ C      I57    - switch which is either 5 or 7. This tells LAISUM to access eithe
       INTEGER*4 ld , LDNUM , LEAD , LZETA , m , mm , MSTORE , MULTI , 
      &          n , NDIM , NDIV , nhold , NMAX , NMAX1 , NPT , NSTART , 
      &          NSTOP , NSW , nz
-      COMPLEX*16 ARM , EXPO
+      COMPLEX*16 ARM
       COMMON /AZ    / ARM(600,7)
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
@@ -49,7 +49,7 @@ C      I57    - switch which is either 5 or 7. This tells LAISUM to access eithe
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
      &                ISG1
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
-      COMMON /ADBXI / EXPO(1500)
+      INCLUDE 'adbxi.inc'
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)

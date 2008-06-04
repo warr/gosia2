@@ -39,12 +39,12 @@ C      Irld   - index into ARM array
      &          KDIV , lam , LAMDA
       INTEGER*4 LAMMAX , LAMR , ld , LDNUM , LEAD , LZETA , maxh , 
      &          MAXLA , mm , MSTORE , MULTI , n , NDIV , NPT , NSW , nz
-      COMPLEX*16 ARM , EXPO
+      COMPLEX*16 ARM
       COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /AZ    / ARM(600,7)
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
-      COMMON /ADBXI / EXPO(1500)
+      INCLUDE 'adbxi.inc'
       COMMON /FLA   / IFLG
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)

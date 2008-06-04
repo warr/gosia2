@@ -1,0 +1,2 @@
+      COMPLEX*16 EXPO
+      COMMON /ADBXI / EXPO(1500)
