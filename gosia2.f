@@ -233,7 +233,7 @@ C      ZV     - energy meshpoints
 
       PROGRAM GOSIA2
       IMPLICIT NONE
-      REAL*8 ABC , ACCA , ACCUR , acof , AGELI , AKAVKA , AKS , ap , 
+      REAL*8 ACCA , ACCUR , acof , AGELI , AKS , ap , 
      &       ARCCOS , ARCTG , arg , ax , B , bcof , be2 , be2a , be2b , 
      &       be2c , BETAR
       REAL*8 bk , bl , bm , bmx , BRAT , bten , bu , CAT , CC , ccc , 
@@ -256,7 +256,7 @@ C      ZV     - energy meshpoints
       REAL*8 rz , s , s11 , s12 , s21 , s22 , SA , sbe , SE , sf , SGW , 
      &       sh , sh1 , sh2 , SIMIN , slim , SPIN , SUBCH1 , SUBCH2
       REAL*8 summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , test , 
-     &       TETACM , tetrc , tfac , thc , THICK , TIMEL , title , 
+     &       TETACM , tetrc , tfac , thc , TIMEL , title , 
      &       TLBDG , tmn , tmx , todfi , TREP
       REAL*8 tta , tth , tting , ttttt , txx , u , UPL , VACDP , 
      &       val , VINF , waga , wph , wpi , WSIXJ , wth , wthh , 
@@ -336,7 +336,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'cccds.inc'
       INCLUDE 'inhi.inc'
       INCLUDE 'ident.inc'
-      COMMON /EFCAL / ABC(8,10) , AKAVKA(9,200) , THICK(200,7)
+      INCLUDE 'efcal.inc'
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
       COMMON /BREC  / BETAR(50)
       COMMON /ADBXI / EXPO(1500)

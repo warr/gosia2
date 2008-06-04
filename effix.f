@@ -33,11 +33,10 @@ C     AKAVKA(9) = control flag
       
       SUBROUTINE EFFIX(Ipd,En,Effi)
       IMPLICIT NONE
-      REAL*8 ABC , AKAVKA , d , Effi , En , enl , pw , s , t , THICK , 
-     &       w , xx , yy
+      REAL*8 d , Effi , En , enl , pw , s , t , w , xx , yy
       INTEGER*4 i , Ipd , j , l , ll , n
       DIMENSION xx(51) , yy(51)
-      COMMON /EFCAL / ABC(8,10) , AKAVKA(9,200) , THICK(200,7)
+      INCLUDE 'efcal.inc'
       
       Effi = 1.E-6
       En = En + 1.E-24
