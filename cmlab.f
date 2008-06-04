@@ -37,20 +37,20 @@ C      Tetrn  - theta of recoiling nucleus
       SUBROUTINE CMLAB(Ii,Dsig,Tetrn)
       IMPLICIT NONE
       REAL*8 a1 , a2 , ACCA , ACCUR , ared , BETAR , d2a , DIPOL , 
-     &       dista , dists , Dsig , DSIGS , emax , EMMA , EN , EP , 
+     &       dista , dists , Dsig , emax , EMMA , EN , EP , 
      &       epmin , EPS , EROOT , FIEX
       INTEGER*4 IAXS , IEXP , iflaa , Ii , IPRM , ISKIN , ISO , IZ , 
      &          IZ1 , lexp , lexp0 , lexp1 , n , NCM , NDIM , NEXPT , 
      &          NMAX , NMAX1
-      REAL*8 r3 , SPIN , TASIN , tau , taup , tcmdg , tcmrad , TETACM , 
-     &       Tetrn , TLBDG , tlbrad , tmxdg , TREP , VINF , XA , XA1 , 
+      REAL*8 r3 , SPIN , TASIN , tau , taup , tcmdg , tcmrad , 
+     &       Tetrn , TLBDG , tlbrad , tmxdg , VINF , XA , XA1 , 
      &       z1 , z2 , zcmdg , zcmrad
       REAL*8 zlbrad , ZPOL
       LOGICAL ERR
       COMMON /CLCOM9/ ERR
       COMMON /SECK  / ISKIN(50)
       COMMON /PRT   / IPRM(20)
-      COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
+      INCLUDE 'tcm.inc'
       COMMON /BREC  / BETAR(50)
       COMMON /CAUX0 / EMMA(75) , NCM
       COMMON /COEX2 / NMAX , NDIM , NMAX1

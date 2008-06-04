@@ -19,13 +19,12 @@ C      Bten   -
  
       SUBROUTINE TENS(Bten)
       IMPLICIT NONE
-      REAL*8 arg , Bten , DJMM , DSIGS , EPS , EROOT , FIEX , TETACM , 
-     &       TREP , ZETA
+      REAL*8 arg , Bten , DJMM , EPS , EROOT , FIEX , ZETA
       INTEGER*4 i , IAXS , IEXP , ind , inz , iph , ix , k , k1 , kp , 
      &          l , lp , lpp , lx , lxx , LZETA , NDIM , NMAX , NMAX1
       DIMENSION Bten(1200)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
-      COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
+      INCLUDE 'tcm.inc'
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
 

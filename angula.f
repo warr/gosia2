@@ -44,7 +44,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
      &          ipd , is , ITMA , ITTE , iu , ixs , j , ji , jj , jm , k
       INTEGER*4 KLEC , kq , KSEQ , l , lf , lf1 , LZETA , mind , NANG , 
      &          Ngl , NICC , nlv
-      REAL*8 dsig, DSIGS , EP , TETACM , TLBDG , TREP , ttx , VINF ,
+      REAL*8 dsig, EP , TLBDG , ttx , VINF ,
      &       XA , XA1 ! For gosia2
       INTEGER*4 IZ, IZ1, NEXPT ! For gosia2
       INTEGER*4 ISPL ! Added for spline
@@ -62,7 +62,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(75)
       COMMON /BREC  / BETAR(50)
       COMMON /THTAR / ITTE(50)
-      COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50) ! For gosia2
+      INCLUDE 'tcm.inc' ! For gosia2
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50) ! For gosia2
       
