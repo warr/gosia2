@@ -23,13 +23,13 @@ C      Il     - level index
  
       SUBROUTINE GKVAC(Il)
       IMPLICIT NONE
-      REAL*8 beta , GKI , sp , SUM , time
+      REAL*8 beta , sp , time
       INTEGER*4 i , Il
       INCLUDE 'lev.inc'
       INCLUDE 'brec.inc'
       INCLUDE 'ggg.inc'
       INCLUDE 'cx.inc'
-      COMMON /GVAC  / GKI(3) , SUM(3)
+      INCLUDE 'gvac.inc'
       INCLUDE 'kin.inc'
       INCLUDE 'vac.inc'
       INCLUDE 'coex.inc'
