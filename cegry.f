@@ -85,7 +85,7 @@ C      Iredv  -
      &          ii , ile2 , inclus
       INTEGER*4 ipd , Iredv , Issp , Itemp , iva , iw , ixl , ixm , 
      &          iyex , jj
-      INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , 
+      INTEGER*4 jj1 , jk , jpc , k , k9 , kc , kj , kk , 
      &          l , l1 , lic , licz , ll1
       INTEGER*4 lth , lu , luu , na
       INTEGER*4 nf , nf1 , ni , ni1 , Nwyr
@@ -118,7 +118,7 @@ C      Iredv  -
       INCLUDE 'kin.inc'
       INCLUDE 'warn.inc'
       INCLUDE 'coex.inc'
-      COMMON /SKP   / JSKIP(50)
+      INCLUDE 'skp.inc'
       INCLUDE 'trb.inc'
       INCLUDE 'tcm.inc'
       INCLUDE 'cccds.inc'

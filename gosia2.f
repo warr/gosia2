@@ -284,7 +284,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 jex , jexp , jfi , jfre , jgd , jgl , jgl1 , jgr , jgs , 
      &          jj , jj1 , jjjj , jjlx , jjx , jk , jkloo , jktt , jl , 
      &          jmm , jmpin
-      INTEGER*4 jp , jphd , jpin , jrls , js , JSKIP , jt , jtp , jyi , 
+      INTEGER*4 jp , jphd , jpin , jrls , js , jt , jtp , jyi , 
      &          jyi1 , jyi2 , jyv , jz , k , kb , kclust , kerf , kex
       INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kl , kloop , 
      &          kmat , kq , ktt , kuku , l , la , la1 , lam , lamd
@@ -370,7 +370,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'thtar.inc'
       COMMON /FIT   / LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
       INCLUDE 'aprx.inc'
-      COMMON /SKP   / JSKIP(50)
+      INCLUDE 'skp.inc'
       INCLUDE 'trb.inc'
       INCLUDE 'sel.inc'
       COMMON /ERCAL / JENTR , ICS

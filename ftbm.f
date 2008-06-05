@@ -77,7 +77,7 @@ C      Bten   -
       INTEGER*4 inp , inpo , inpx , inzz , inzzz , 
      &          issp , itemp , ixx , izzz
       INTEGER*4 j , jj , jjgg , jjj , jk , jkl , jm , jmf , jmt , jmte , 
-     &          jpp , jpz , JSKIP , jy , k , karm , kk , kk6 , kkx , kmt
+     &          jpp , jpz , jy , k , karm , kk , kk6 , kkx , kmt
       INTEGER*4 knm , kx , larm , lcc , lcou , licz , lix , llx , lm , 
      &          lmh , loc , loch , loct
       INTEGER*4 lp , lpit , lput , lpx , lpxd , ls , lst
@@ -105,7 +105,7 @@ C      Bten   -
       INCLUDE 'pth.inc'
       INCLUDE 'prt.inc'
       INCLUDE 'cexc.inc'
-      COMMON /SKP   / JSKIP(50)
+      INCLUDE 'skp.inc'
       INCLUDE 'life.inc'
       INCLUDE 'logy.inc'
       DATA pr/0./,lmh/0/,loc/0/,loch/0/
