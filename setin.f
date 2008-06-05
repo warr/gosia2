@@ -24,11 +24,10 @@ C 365  in GOSIA, which is the dimension of the array.
  
       SUBROUTINE SETIN
       IMPLICIT NONE
-      REAL*8 ADB
       INTEGER*4 k
       INCLUDE 'mgn.inc'
       INCLUDE 'hiper.inc'
-      COMMON /ADX   / ADB(365)
+      INCLUDE 'adx.inc'
       INCLUDE 'kin.inc'
       
       DO k = 1 , LP12
