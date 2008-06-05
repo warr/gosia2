@@ -60,7 +60,7 @@ C      Joj    - index of substate (write only)
       INTEGER*4 i , i1 , i2 , i3 , Icg , Ient , Iexp , 
      &          ir , is , ISHA , ispi , ispo
       INTEGER*4 jj , jjj , Joj , la , lam , lam1 , ld , 
-     &          LMAX , m , m1 , m2 , mstop , n , 
+     &          m , m1 , m2 , mstop , n , 
      &          n2 , n3 , nn , nz
       INCLUDE 'clcom.inc'
       INCLUDE 'mgn.inc'
@@ -69,7 +69,7 @@ C      Joj    - index of substate (write only)
       INCLUDE 'cexc.inc'
       INCLUDE 'pcom.inc'
       INCLUDE 'ccoup.inc'
-      COMMON /CLM   / LMAX
+      INCLUDE 'clm.inc'
       INCLUDE 'clcom8.inc'
       INCLUDE 'clcom9.inc'
       INCLUDE 'coex2.inc'

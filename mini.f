@@ -75,10 +75,10 @@ C don't go outside the limits specified by the user.
       INTEGER*4 kh2 , kkk , l , LFL , LFL1 , LFL2 , 
      &          lnm , LOCKF , LOCKS , 
      &          metf , mvfl , ncall , nlinn , NLOCK , noflg , 
-     &          Nptl , NWR
+     &          Nptl
       DIMENSION ipm(10) , Bten(1200) , gradp(1500)
       INCLUDE 'dumm.inc'
-      COMMON /ILEWY / NWR
+      INCLUDE 'ilewy.inc'
       COMMON /CH1T  / CHIS11
       INCLUDE 'mgn.inc'
       COMMON /UWAGA / ITAK2

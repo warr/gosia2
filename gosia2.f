@@ -290,7 +290,7 @@ C      ZV     - energy meshpoints
      &          kmat , kq , ktt , kuku , l , la , la1 , lam , lamd
       INTEGER*4 lamh , lb , lck1 , lck2 , levl , lex , lexp , 
      &          lfagg , lfini , lh1 , lh2 , liscl , lkj
-      INTEGER*4 lkj1 , ll , lli , lll , LMAX , lmax1 , lmaxh , 
+      INTEGER*4 lkj1 , ll , lli , lll , lmax1 , lmaxh , 
      &          LNORM , locat , LOCKF , LOCKS , loct , lp0 , 
      &          lpin , ltrn , ltrn1 , ltrn2 , lu , lx , lxd , 
      &          magh , MEM
@@ -357,7 +357,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'prt.inc'
       INCLUDE 'ccoup.inc'
       INCLUDE 'cb.inc'
-      COMMON /CLM   / LMAX
+      INCLUDE 'clm.inc'
       INCLUDE 'clcom0.inc'
       INCLUDE 'clcom8.inc'
       INCLUDE 'clcom9.inc'
