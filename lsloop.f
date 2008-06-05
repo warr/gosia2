@@ -49,7 +49,7 @@ C half-integers.
       IMPLICIT NONE
       REAL*8 phz , 
      &       PSI , rmir , rmis , Ssqrt , WTHREJ
-      INTEGER*4 i2 , i3 , Icg , Iexp , IFAC , iiex , indx , 
+      INTEGER*4 i2 , i3 , Icg , Iexp , iiex , indx , 
      &          inqa , inr , ins , Ir , is , is1 , is2 , ismin
       INTEGER*4 isplus , jg1 , jg2 , jrmir , La , Lam , lam2 , Ld , 
      &          LEADF , m , MEM , mrange , mt , N , Nz
@@ -62,7 +62,7 @@ C half-integers.
       INCLUDE 'pth.inc'
       INCLUDE 'mgn.inc'
       INCLUDE 'comme.inc'
-      COMMON /CLCOM0/ IFAC(75)
+      INCLUDE 'clcom0.inc'
       
       lam2 = 2*Lam
       inr = CAT(Ir,2)*2. ! 2 * Spin of substate Ir

@@ -70,7 +70,7 @@ C value of f(n).
       SUBROUTINE INTG(Ien)
       IMPLICIT NONE
       REAL*8 D2W , f , rim , rl , srt
-      INTEGER*4 i , i57 , Ien , IFAC , IFLG , ihold , intend , INTERV , 
+      INTEGER*4 i , i57 , Ien , IFLG , ihold , intend , INTERV , 
      &          ir , ir1 , ISG , ISG1 , k , 
      &          kast , KDIV , LAMR
       INTEGER*4 mir , n , NDIV , NPT , NSW
@@ -79,7 +79,7 @@ C value of f(n).
       INCLUDE 'az.inc'
       INCLUDE 'rng.inc'
       INCLUDE 'a50.inc'
-      COMMON /CLCOM0/ IFAC(75)
+      INCLUDE 'clcom0.inc'
       INCLUDE 'clcom8.inc'
       INCLUDE 'coex2.inc'
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 

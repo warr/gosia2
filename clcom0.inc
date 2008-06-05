@@ -1,0 +1,2 @@
+      INTEGER*4 IFAC
+      COMMON /CLCOM0/ IFAC(100)

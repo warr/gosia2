@@ -264,7 +264,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 i , i122 , iapx , ib , 
      &          ibaf , icg , icll , ICS , ict , 
      &          ictl , id , idf
-      INTEGER*4 idr , iecd , ient , IFAC , IFBFL , ifbp , 
+      INTEGER*4 idr , iecd , ient , IFBFL , ifbp , 
      &          ifc , ifm , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
      &          ihuj , ii , ij
       INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ile1 , ilevls , 
@@ -360,7 +360,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'ccoup.inc'
       INCLUDE 'cb.inc'
       COMMON /CLM   / LMAX
-      COMMON /CLCOM0/ IFAC(75)
+      INCLUDE 'clcom0.inc'
       INCLUDE 'clcom8.inc'
       COMMON /CLCOM9/ ERR
       INCLUDE 'comme.inc'
