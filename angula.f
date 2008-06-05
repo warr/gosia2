@@ -35,12 +35,12 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       
       SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
-      REAL*8 alab , arg , at , attl , bt , f , Fi0 , fi01 , Fi1 , 
+      REAL*8 alab , arg , at , attl , bt , f , Fi0 , fi01 , Fi1 ,
      &       fi11 , Figl , Gth , qv , sm , Trec , Ygn , ylmr
       INTEGER*4 Idr , ifn , Iful , ig , il , inat , inx1 , 
      &          ipd , is , iu , ixs , j , ji , jj , jm , k
       INTEGER*4 kq , l , lf , lf1 , mind , Ngl , nlv
-      REAL*8 dsig, ttx
+      REAL*8 dsig, ttx ! For gosia2
       CHARACTER*4 Op2 ! For gosia2
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
      &          Ygn(*)
