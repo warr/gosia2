@@ -263,13 +263,13 @@ C      ZV     - energy meshpoints
       REAL*8 xep , XI , xi1 , xi2 , XIR , xk1 , xk2 , xl1 , xlevb , 
      &       xlk , xm1 , xm2 , xm3 , xtest , xw , xx , xxi , 
      &       ycorr
-      REAL*8 YGN , YGP , yy , yyd1 , yydd , yyy , 
+      REAL*8 yy , yyd1 , yydd , yyy , 
      &       ZETA , zmir , zp , ZPOL , zz
       INTEGER*4 i , i122 , IAPR , iapx , ib , 
      &          ibaf , icg , icll , ICS , ict , 
      &          ictl , id , idf , IDIVE
       INTEGER*4 idr , iecd , ient , IFAC , IFBFL , ifbp , 
-     &          ifc , ifm , IFMO , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
+     &          ifc , ifm , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
      &          ihuj , ii , ij
       INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ile1 , ilevls , 
      &          ilx , im , IMIN , imode , in1 , in2 , inclus , ind , 
@@ -353,7 +353,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'dumm.inc'
       INCLUDE 'brnch.inc'
       INCLUDE 'yexpt.inc'
-      COMMON /YTEOR / YGN(1500) , YGP(1500) , IFMO
+      INCLUDE 'yteor.inc'
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /MAP   / PARX(50,12,5) , PARXM(50,4,10,6) , XIR(6,50)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 

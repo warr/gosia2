@@ -79,17 +79,15 @@ C      Iredv  -
       REAL*8 ACCA , ACCUR , AGELI , CC , ccc , ccd , 
      &       Chilo , Chisq , cnr , cocos , d , decen , 
      &       DIPOL
-      REAL*8 dl , effi , EG , EMH , EN , 
-     &       EP , fi0 , fi1 , fic , figl , 
+      REAL*8 dl , effi , EG , EMH , EN , EP , fi0 , fi1 , fic , figl , 
      &       fm , g
       REAL*8 gth , part , partl , Q , rik , rl , rx , ry , 
      &       rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , SUBCH2 , sum3
       REAL*8 sumpr , TACOS , TAU , tetrc , tfac , thc , TLBDG , 
-     &       VINF , wf , XA , XA1 , YGN , YGP
+     &       VINF , wf , XA , XA1
       REAL*8 ZPOL
-      INTEGER*4 iabc , Icall , id , idc , Idr , 
-     &          ifdu , IFMO , ifxd , IGRD , ii , 
-     &          ile2 , IMIN , inclus , INM
+      INTEGER*4 iabc , Icall , id , idc , Idr ,  ifdu , ifxd , IGRD , 
+     &          ii , ile2 , IMIN , inclus , INM
       INTEGER*4 ipd , IPRM , Iredv , ISO , Issp , 
      &          Itemp , ITS , iva , iw , IWF , ixl , ixm , 
      &          iyex , IZ , IZ1 , jj
@@ -123,7 +121,7 @@ C      Iredv  -
      &                TLBDG(50) , VINF(50)
       COMMON /MINNI / IMIN , LNORM(50)
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
-      COMMON /YTEOR / YGN(1500) , YGP(1500) , IFMO
+      INCLUDE 'yteor.inc'
       COMMON /SEL   / KVAR(1500)
       INCLUDE 'mgn.inc'
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 

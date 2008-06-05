@@ -1,0 +1,3 @@
+      REAL*8 YGN , YGP
+      INTEGER*4 IFMO
+      COMMON /YTEOR / YGN(1500) , YGP(1500) , IFMO
