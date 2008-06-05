@@ -18,13 +18,13 @@ C      Irld   - index into ARM array
  
       SUBROUTINE PATH(Irld)
       IMPLICIT NONE
-      REAL*8 CAT , spm , vl
-      INTEGER*4 i , IPATH , Irld , ISMAX , isp , ist , j , MAGA , 
+      REAL*8 spm , vl
+      INTEGER*4 i , IPATH , Irld , isp , ist , j , MAGA , 
      &          NSTART , NSTOP
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)
       INCLUDE 'coex2.inc'
-      COMMON /CLCOM8/ CAT(600,3) , ISMAX
+      INCLUDE 'clcom8.inc'
 
       spm = CAT(Irld,3) ! m quantum number for substate Irld
       DO i = 2 , NMAX ! For each level except ground state

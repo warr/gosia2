@@ -33,9 +33,9 @@ C      I57    - switch which is either 5 or 7. This tells LAISUM to access eithe
 
       SUBROUTINE AMPDER(I57)
       IMPLICIT NONE
-      REAL*8 CAT , D2W , ELM , ELML , ELMU , rsg , SA
+      REAL*8 D2W , ELM , ELML , ELMU , rsg , SA
       INTEGER*4 i1 , I57 , ibg , iend , iflg , indx , ir , is2 , ISG , 
-     &          ISG1 , ISMAX , ISSTAR , ISSTO , k , KDIV , lam , 
+     &          ISG1 , ISSTAR , ISSTO , k , KDIV , lam , 
      &          LAMR , lax
       INTEGER*4 ld , m , mm , MSTORE , 
      &          n , NDIV , nhold , NPT , NSTART , 
@@ -50,7 +50,7 @@ C      I57    - switch which is either 5 or 7. This tells LAISUM to access eithe
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
       INCLUDE 'adbxi.inc'
       INCLUDE 'ccoup.inc'
-      COMMON /CLCOM8/ CAT(600,3) , ISMAX
+      INCLUDE 'clcom8.inc'
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
 
 C     Zero ARM(k,4) and ARM(k,6) for each substate used

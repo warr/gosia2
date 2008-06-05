@@ -18,13 +18,11 @@ C      Iso    - isotropic flag
  
       SUBROUTINE HALF(Iso)
       IMPLICIT NONE
-      REAL*8 CAT
-      INTEGER*4 ir , ISMAX , Iso , j , NSTART , 
-     &          NSTOP
+      INTEGER*4 ir , Iso , j , NSTART , NSTOP
       COMPLEX*16 ARM , fpom
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /AZ    / ARM(600,7)
-      COMMON /CLCOM8/ CAT(600,3) , ISMAX
+      INCLUDE 'clcom8.inc'
       INCLUDE 'coex2.inc'
 
       IF ( Iso.EQ.0 ) THEN

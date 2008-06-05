@@ -53,13 +53,13 @@ C      Joj    - index of substate (write only)
  
       SUBROUTINE LOAD(Iexp,Ient,Icg,Polm,Joj)
       IMPLICIT NONE
-      REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ah , CAT , 
+      REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ah , 
      &       cpsi , dep , EMMA , EP , eta , etan , Polm , 
      &       pp1 , pp2
       REAL*8 ppp , PSI , QAPR , rlam , ssqrt , szet , TLBDG , 
      &       VINF , wrt , wrtm , XA , XA1 , z1 , z2 , zet , zsqa
       INTEGER*4 i , i1 , i2 , i3 , IAPR , Icg , Ient , Iexp , IPATH , 
-     &          ir , is , ISEX , ISHA , ISMAX , ispi , ispo , 
+     &          ir , is , ISEX , ISHA , ispi , ispo , 
      &          IVAR , IZ , IZ1
       INTEGER*4 jj , jjj , Joj , la , lam , lam1 , ld , 
      &          LMAX , LMAXE , m , m1 , 
@@ -75,7 +75,7 @@ C      Joj    - index of substate (write only)
       COMMON /PCOM  / PSI(1500)
       INCLUDE 'ccoup.inc'
       COMMON /CLM   / LMAX
-      COMMON /CLCOM8/ CAT(600,3) , ISMAX
+      INCLUDE 'clcom8.inc'
       COMMON /CLCOM9/ ERR
       INCLUDE 'coex2.inc'
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
