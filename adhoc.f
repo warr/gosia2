@@ -208,7 +208,7 @@ C     Read branching ratios
             BRAT(lb,2) = BRAT(lb,2)/(SQRT(wbra)+1.E-10) ! Relative error
             WRITE (22,99003) ns1 , ns2 , ns3 , ns4 , BRAT(lb,1) , 
      &                       BRAT(lb,2)
-99003       FORMAT (5X,1I2,6X,1I2,6X,1I2,6X,1I2,5X,1F10.5,5X,1F10.5)
+99003       FORMAT (4X,1I3,5X,1I3,5X,1I3,5X,1I3,5X,1F10.5,5X,1F10.5)
             DO li = 1 , Idr ! Search decays for these pairs of levels
                IF ( KSEQ(li,3).EQ.ns3 .AND. KSEQ(li,4).EQ.ns4 ) THEN
                   IBRC(2,lb) = li ! Decay index for first pair
@@ -242,7 +242,7 @@ C     Read lifetimes
             READ (JZB,*) LIFCT(ilft) , TIMEL(1,ilft) , TIMEL(2,ilft)
             TIMEL(2,ilft) = TIMEL(2,ilft)/(SQRT(wlf)+1.E-10) ! Relative error
             WRITE (22,99006) LIFCT(ilft) , TIMEL(1,ilft) , TIMEL(2,ilft)
-99006       FORMAT (7X,1I2,6X,1F10.2,3X,1F10.2)
+99006       FORMAT (6X,1I3,6X,1F10.2,3X,1F10.2)
          ENDDO
          WRITE (22,99007) wlf
 99007    FORMAT (1X/10X,'LIFETIMES ARE TAKEN WITH WEIGHT',2X,1E14.6)
@@ -290,5 +290,5 @@ C     Read known matrix elements
       WRITE (22,99011) wamx
 99011 FORMAT (/10X,' MATRIX ELEMENT(S) ARE TAKEN WITH WEIGHT',2X,1E14.6)
 
-99012 FORMAT (10X,1I2,'---',1I2,14X,1F9.4,8X,1F9.4)
+99012 FORMAT (9X,1I3,'---',1I3,13X,1F9.4,8X,1F9.4)
       END
