@@ -233,7 +233,7 @@ C      ZV     - energy meshpoints
 
       PROGRAM GOSIA2
       IMPLICIT NONE
-      REAL*8 acof , ap , ARCCOS , ARCTG , arg , ax , B , bcof , be2 , 
+      REAL*8 acof , ap , ARCCOS , ARCTG , arg , ax , bcof , be2 , 
      &       be2a , be2b , be2c
       REAL*8 bk , bl , bm , bmx , bten , bu , ccc , 
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
@@ -358,7 +358,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'cexc.inc'
       INCLUDE 'prt.inc'
       INCLUDE 'ccoup.inc'
-      COMMON /CB    / B(20)
+      INCLUDE 'cb.inc'
       COMMON /CLM   / LMAX
       COMMON /CLCOM0/ IFAC(75)
       INCLUDE 'clcom8.inc'
