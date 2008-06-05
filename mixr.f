@@ -23,12 +23,11 @@ C      Chilo  - chi squared using logs
       SUBROUTINE MIXR(Nw,Ipsw,Chi,Chilo)
       IMPLICIT NONE
       REAL*8 Chi , Chilo , dl , DMIX , DMIXE
-      INTEGER*4 i , IMIX , INTR , inx , inx1 , IPS1 , Ipsw , it , 
-     &          LNY , NDL , Nw
+      INTEGER*4 i , IMIX , inx , inx1 , Ipsw , it , NDL , Nw
       INCLUDE 'lev.inc'
       INCLUDE 'comme.inc'
       COMMON /MIXD  / DMIXE(20,2) , DMIX(20) , IMIX(20) , NDL
-      COMMON /LOGY  / LNY , INTR , IPS1
+      INCLUDE 'logy.inc'
 
       IF ( NDL.EQ.0 ) RETURN
       Nw = Nw + NDL

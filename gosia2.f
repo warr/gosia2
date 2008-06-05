@@ -271,10 +271,10 @@ C      ZV     - energy meshpoints
      &          ilx , im , IMIN , imode , in1 , in2 , inclus , ind , 
      &          ind1 , ind2 , indx
       INTEGER*4 inko , inm1 , inm2 , inn , inpo , intend , 
-     &          INTERV , INTR , intvh , inva , inx1 , iobl , iocc , 
+     &          INTERV , intvh , inva , inx1 , iobl , iocc , 
      &          iopri , iosr , ipd , iph
       INTEGER*4 ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
-     &          ipri , IPS1 , irea , irep , irfix , 
+     &          ipri , irea , irep , irfix , 
      &          isip , iske , iskf
       INTEGER*4 isko , iskok , isoh , ispa , ispb , 
      &          itno , itp , ITTE , iuy , iva , iva1 , 
@@ -292,7 +292,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 lamh , lb , lck1 , lck2 , levl , lex , lexp , 
      &          lfagg , lfini , lh1 , lh2 , liscl , lkj
       INTEGER*4 lkj1 , ll , lli , lll , LMAX , lmax1 , lmaxh , 
-     &          LNORM , LNY , locat , LOCKF , LOCKS , loct , lp0 , 
+     &          LNORM , locat , LOCKF , LOCKS , loct , lp0 , 
      &          lpin , ltrn , ltrn1 , ltrn2 , lu , lx , lxd , 
      &          magh , MEM
       INTEGER*4 memax1 , memh , memx4 , mend , mexl , 
@@ -377,7 +377,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'trb.inc'
       INCLUDE 'sel.inc'
       COMMON /ERCAL / JENTR , ICS
-      COMMON /LOGY  / LNY , INTR , IPS1
+      INCLUDE 'logy.inc'
       INCLUDE 'fakul.inc'
       COMMON /LIFE  / NLIFT
       COMMON /CINIT2/ CNOR1(32,75) , CNOR2(32,75) , MCFIX ! For gosia2

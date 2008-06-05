@@ -74,14 +74,14 @@ C      Bten   -
       INTEGER*4 i1 , i11 , iapx , Icll , idec , Idr , 
      &          iflg , IGRD , ii , ile1 , ile2 , ile3 , 
      &          ilin , indx , inko , INM
-      INTEGER*4 inp , inpo , inpx , INTR , inzz , inzzz , 
-     &          IPS1 , issp , ITAK2 , itemp , ixx , 
+      INTEGER*4 inp , inpo , inpx , inzz , inzzz , 
+     &          issp , ITAK2 , itemp , ixx , 
      &          izzz
       INTEGER*4 j , jj , jjgg , jjj , jk , jkl , jm , jmf , jmt , jmte , 
      &          jpp , jpz , JSKIP , jy , k , karm , kk , kk6 , kkx , kmt
       INTEGER*4 knm , kx , larm , lcc , lcou , LFL , LFL1 , 
      &          LFL2 , licz , lix , llx , lm , LMAX , lmh , 
-     &          LNY , loc , loch , loct
+     &          loc , loch , loct
       INTEGER*4 lp , lpit , lput , lpx , lpxd , ls , lst
       INTEGER*4 luu , lx , Ncall , NLIFT , nlin , 
      &          nowr , npoz , nrest , NWR , nwyr
@@ -110,7 +110,7 @@ C      Bten   -
       INCLUDE 'cexc.inc'
       COMMON /SKP   / JSKIP(50)
       COMMON /LIFE  / NLIFT
-      COMMON /LOGY  / LNY , INTR , IPS1
+      INCLUDE 'logy.inc'
       DATA pr/0./,lmh/0/,loc/0/,loch/0/
 
       issp = 0

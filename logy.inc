@@ -1,0 +1,2 @@
+      INTEGER*4 LNY , INTR , IPS1
+      COMMON /LOGY  / LNY , INTR , IPS1
