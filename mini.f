@@ -61,21 +61,21 @@ C don't go outside the limits specified by the user.
       REAL*8 a , a0 , a1 , b , Bten , c , ccd , chd , chil , chilo , 
      &       Chiok , chirf , CHIS11 , chis12 , chis13 , chisf , chisp , 
      &       Chisq , chiss , chl
-      REAL*8 chx , cmax , Conv , CORF , crit , dl , 
-     &       DLOCK , dm , DYEX , ELM , ELML , ELMU , EMH , f1 , 
+      REAL*8 chx , cmax , Conv , crit , dl , 
+     &       DLOCK , dm , ELM , ELML , ELMU , EMH , f1 , 
      &       f2 , flt
       REAL*8 gradp , ht , p , q , rfk , SA , sel , shl , sumg1 , 
-     &       sumg2 , sumht , UPL , uxa , xkat , Xtest , YEXP , YNRM
-      INTEGER*4 i , icl1 , icl2 , icount , ICS , Idr , IDRN , IFBFL , 
-     &          iht , iin , ILE , Imode , indx1 , INM , inmx , ino , 
+     &       sumg2 , sumht , uxa , xkat , Xtest
+      INTEGER*4 i , icl1 , icl2 , icount , ICS , Idr , IFBFL , 
+     &          iht , iin , Imode , indx1 , INM , inmx , ino , 
      &          INTR , ipas , ipm , IPRM
-      INTEGER*4 Ips , IPS1 , Is , istec , ITAK2 , itf , IVAR , IY , j , 
+      INTEGER*4 Ips , IPS1 , Is , istec , ITAK2 , itf , IVAR , j , 
      &          jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , jnm , 
      &          jpr , jsa , jst
       INTEGER*4 kh2 , kkk , KVAR , l , LFL , LFL1 , LFL2 , 
      &          LMAXE , lnm , LNY , LOCKF , LOCKS , MAGEXC , MEMAX , 
      &          MEMX6 , metf , mvfl , ncall , nlinn , NLOCK , noflg , 
-     &          Nptl , NWR , NYLDE
+     &          Nptl , NWR
       INTEGER*4 IBPS, IUNIT3, JZB ! For gosia2
       DIMENSION ipm(10) , Bten(1200) , gradp(1500)
       INCLUDE 'dumm.inc'
@@ -83,9 +83,7 @@ C don't go outside the limits specified by the user.
       COMMON /CH1T  / CHIS11
       INCLUDE 'mgn.inc'
       COMMON /UWAGA / ITAK2
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
-     &                YNRM(32,50) , IDRN , ILE(32)
+      INCLUDE 'yexpt.inc'
       INCLUDE 'dftb.inc'
       COMMON /PRT   / IPRM(20)
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL

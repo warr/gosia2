@@ -27,17 +27,15 @@ C experimental yields
  
       SUBROUTINE READY(Idr,Ntap,Ipri)
       IMPLICIT NONE
-      REAL*8 ap , CORF , DYEX , EP , TAU , TLBDG , u , UPL , VINF , w , 
-     &       waga , XA , XA1 , xep , YEXP , YNRM , zp
-      INTEGER*4 idc , idc1 , idcx , Idr , IDRN , ii , ILE , Ipri , IY , 
+      REAL*8 ap , EP , TAU , TLBDG , u , VINF , w , 
+     &       waga , XA , XA1 , xep , zp
+      INTEGER*4 idc , idc1 , idcx , Idr , ii , Ipri , 
      &          iytot , iytt , IZ , IZ1 , j , k , kk , kkl , KSEQ , 
      &          lbg
       INTEGER*4 lxp , nanx , nde , nde1 , ne , NEXPT , ns1
-      INTEGER*4 ns2 , ns3 , ns4 , nsxh , nsyh , Ntap , nval , NYLDE
+      INTEGER*4 ns2 , ns3 , ns4 , nsxh , nsyh , Ntap , nval
       DIMENSION iytot(32)
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
-     &                YNRM(32,50) , IDRN , ILE(32)
+      INCLUDE 'yexpt.inc'
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)

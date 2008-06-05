@@ -28,18 +28,16 @@ C      Rlr    - print out if matrix element exceeds Rlr.
 
       SUBROUTINE KLOPOT(K,Rlr)
       IMPLICIT NONE
-      REAL*8 a , al , al1 , b , c , ch , CORF , d , dy , DYEX , e , 
+      REAL*8 a , al , al1 , b , c , ch , d , dy , e , 
      &       ELM , ELML , ELMU , EP , g , g1 , g2 , rl , Rlr
-      REAL*8 SA , sgm , TLBDG , u , umm , ump , UPL , ux , VINF , XA , 
-     &       XA1 , YEXP , YNRM , ZETA
-      INTEGER*4 i , IDRN , iex , iexh , iexp , ILE , indx , inh , ipf , 
-     &          IVAR , IY , IZ , IZ1 , j , jm , jp , K , KVAR , l , lc
+      REAL*8 SA , sgm , TLBDG , u , umm , ump , ux , VINF , XA , 
+     &       XA1 , ZETA
+      INTEGER*4 i , iex , iexh , iexp , indx , inh , ipf , 
+     &          IVAR , IZ , IZ1 , j , jm , jp , K , KVAR , l , lc
       INTEGER*4 ll , LMAXE , lngt , loc , lu , LZETA , MAGEXC
-      INTEGER*4 MEMAX , MEMX6 , NEXPT , nf , ni , nm , np , NYLDE
+      INTEGER*4 MEMAX , MEMX6 , NEXPT , nf , ni , nm , np
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
-     &                YNRM(32,50) , IDRN , ILE(32)
+      INCLUDE 'yexpt.inc'
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
       INCLUDE 'mgn.inc'
       COMMON /CCOUP / ZETA(50000) , LZETA(8)

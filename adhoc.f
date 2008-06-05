@@ -58,19 +58,19 @@ C Here we parse the input of the OP,YIEL command and store the values.
  
       SUBROUTINE ADHOC(Oph,Idr,Nfd,Ntap,Iyr)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , AGELI , CC , CORF , DIPOL , 
-     &       DMIX , DMIXE , DYEX , EG , EN , EP , Q
-      REAL*8 SPIN , TAU , TLBDG , UPL , VINF , wamx , wbra , 
-     &       wdl , wlf , XA , XA1 , YEXP , YGN , YGP , YNRM , ZPOL
-      INTEGER*4 iax , Idr , IDRN , iexp1 , IFMO , 
-     &          ILE , ilft , IMIX , iosr , ipri , IPRM , ISO , isrt1 , 
+      REAL*8 ACCA , ACCUR , AGELI , CC , DIPOL , 
+     &       DMIX , DMIXE , EG , EN , EP , Q
+      REAL*8 SPIN , TAU , TLBDG , VINF , wamx , wbra , 
+     &       wdl , wlf , XA , XA1 , YGN , YGP , ZPOL
+      INTEGER*4 iax , Idr , iexp1 , IFMO , 
+     &          ilft , IMIX , iosr , ipri , IPRM , ISO , isrt1 , 
      &          ITS , iuf , IVAR
-      INTEGER*4 IY , Iyr , IZ , IZ1 , jic , jicc , juf , KSEQ , lb , 
+      INTEGER*4 Iyr , IZ , IZ1 , jic , jicc , juf , KSEQ , lb , 
      &          li , licc , llia , LMAXE , lxt , MAGEXC , MEM , 
      &          MEMAX , MEMX6 , n1
       INTEGER*4 n2 , NANG , ndas , NDL , ndtp , 
      &          NEXPT , Nfd , NICC , nistr , NLIFT , ns1 , ns2 , ns3 , 
-     &          ns4 , Ntap , nvare , NYLDE
+     &          ns4 , Ntap , nvare
       INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
       INTEGER*4 ISPL ! Added for spline
       CHARACTER*4 Oph
@@ -82,9 +82,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       INCLUDE 'me2d.inc'
       INCLUDE 'life1.inc'
       INCLUDE 'brnch.inc'
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
-     &                YNRM(32,50) , IDRN , ILE(32)
+      INCLUDE 'yexpt.inc'
       COMMON /YTEOR / YGN(1500) , YGP(1500) , IFMO
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 

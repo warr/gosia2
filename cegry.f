@@ -77,22 +77,21 @@ C      Iredv  -
       SUBROUTINE CEGRY(Chisq,Itemp,Chilo,Idr,Nwyr,Icall,Issp,Iredv)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AGELI , CC , ccc , ccd , 
-     &       Chilo , Chisq , cnr , cocos , CORF , d , decen , 
+     &       Chilo , Chisq , cnr , cocos , d , decen , 
      &       DIPOL
-      REAL*8 dl , DYEX , effi , EG , EMH , EN , 
+      REAL*8 dl , effi , EG , EMH , EN , 
      &       EP , fi0 , fi1 , fic , figl , 
      &       fm , g
       REAL*8 gth , part , partl , Q , rik , rl , rx , ry , 
      &       rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , SUBCH2 , sum3
       REAL*8 sumpr , TACOS , TAU , tetrc , tfac , thc , TLBDG , 
-     &       UPL , VINF , wf , XA , XA1 , YEXP , 
-     &       YGN , YGP , YNRM
+     &       VINF , wf , XA , XA1 , YGN , YGP
       REAL*8 ZPOL
       INTEGER*4 iabc , Icall , id , idc , Idr , 
-     &          IDRN , ifdu , IFMO , ifxd , IGRD , ii , ILE , 
+     &          ifdu , IFMO , ifxd , IGRD , ii , 
      &          ile2 , IMIN , inclus , INM
       INTEGER*4 ipd , IPRM , Iredv , ISO , Issp , 
-     &          Itemp , ITS , iva , iw , IWF , ixl , ixm , IY , 
+     &          Itemp , ITS , iva , iw , IWF , ixl , ixm , 
      &          iyex , IZ , IZ1 , jj
       INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , KSEQ , 
      &          KVAR , l , l1 , LFL , LFL1 , LFL2 , lic , 
@@ -100,7 +99,7 @@ C      Iredv  -
       INTEGER*4 LNORM , lth , lu , luu , 
      &          na , NANG , NDIM
       INTEGER*4 NEXPT , nf , nf1 , ni , ni1 , NICC , NLIFT , 
-     &          NMAX , NMAX1 , Nwyr , NYLDE
+     &          NMAX , NMAX1 , Nwyr
       INTEGER*4 ISPL ! Added for spline
       CHARACTER*4 wupl , war
       REAL*8 CNOR1 , CNOR2 ! For gosia2
@@ -129,9 +128,7 @@ C      Iredv  -
       INCLUDE 'mgn.inc'
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
      &                NICC , NANG(200) , ISPL
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
-     &                YNRM(32,50) , IDRN , ILE(32)
+      INCLUDE 'yexpt.inc'
       INCLUDE 'kin.inc'
       COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 

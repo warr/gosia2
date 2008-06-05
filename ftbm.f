@@ -68,18 +68,18 @@ C      Bten   -
       SUBROUTINE FTBM(Icll,Chisq,Idr,Ncall,Chilo,Bten)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AGELI , aval , Bten , CAT , CC , Chilo , 
-     &       chis1 , CHIS11 , chish , Chisq , chisx , chx , CORF , 
-     &       DIPOL , DYEX , EG , ELM , ELML
+     &       chis1 , CHIS11 , chish , Chisq , chisx , chx , 
+     &       DIPOL , EG , ELM , ELML
       REAL*8 ELMU , EMH , EN , EP , fc , fx , 
-     &       polm , pr , prop , Q , SA , SPIN , TAU , TLBDG , UPL , 
+     &       polm , pr , prop , Q , SA , SPIN , TAU , TLBDG , 
      &       val , VINF
-      REAL*8 wz , XA , XA1 , YEXP , YNRM , ZETA , ZPOL
-      INTEGER*4 i1 , i11 , iapx , Icll , idec , Idr , IDRN , 
-     &          iflg , IGRD , ii , ILE , ile1 , ile2 , ile3 , 
+      REAL*8 wz , XA , XA1 , ZETA , ZPOL
+      INTEGER*4 i1 , i11 , iapx , Icll , idec , Idr , 
+     &          iflg , IGRD , ii , ile1 , ile2 , ile3 , 
      &          ilin , indx , inko , INM
       INTEGER*4 inp , inpo , inpx , INTR , inzz , inzzz , IPATH , IPRM , 
      &          IPS1 , ISMAX , ISO , issp , ITAK2 , itemp , IVAR , ixx , 
-     &          IY , IZ , IZ1 , izzz
+     &          IZ , IZ1 , izzz
       INTEGER*4 j , jj , jjgg , jjj , jk , jkl , jm , jmf , jmt , jmte , 
      &          jpp , jpz , JSKIP , jy , k , karm , kk , kk6 , kkx , kmt
       INTEGER*4 knm , KSEQ , kx , larm , lcc , lcou , LFL , LFL1 , 
@@ -89,7 +89,7 @@ C      Bten   -
       INTEGER*4 luu , lx , LZETA , MAGA , MAGEXC , MEMAX , MEMX6 , 
      &          NANG , Ncall , NDIM , NEXPT , NICC , NLIFT , nlin , 
      &          NMAX , NMAX1 , nowr , npoz , nrest , NSTART
-      INTEGER*4 NSTOP , NWR , nwyr , NYLDE
+      INTEGER*4 NSTOP , NWR , nwyr
       INTEGER*4 ISPL ! Added for spline
       COMPLEX*16 ARM
       DIMENSION jmte(6) , prop(6) , Bten(1200)
@@ -106,9 +106,7 @@ C      Bten   -
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       INCLUDE 'kin.inc'
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
-     &                YNRM(32,50) , IDRN , ILE(32)
+      INCLUDE 'yexpt.inc'
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /CLM   / LMAX
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
