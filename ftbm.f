@@ -75,8 +75,7 @@ C      Bten   -
      &          iflg , IGRD , ii , ile1 , ile2 , ile3 , 
      &          ilin , indx , inko , INM
       INTEGER*4 inp , inpo , inpx , inzz , inzzz , 
-     &          issp , ITAK2 , itemp , ixx , 
-     &          izzz
+     &          issp , itemp , ixx , izzz
       INTEGER*4 j , jj , jjgg , jjj , jk , jkl , jm , jmf , jmt , jmte , 
      &          jpp , jpz , JSKIP , jy , k , karm , kk , kk6 , kkx , kmt
       INTEGER*4 knm , kx , larm , lcc , lcou , LFL , LFL1 , 
@@ -92,7 +91,7 @@ C      Bten   -
       COMMON /CH1T  / CHIS11
       COMMON /IGRAD / IGRD
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
-      COMMON /UWAGA / ITAK2
+      INCLUDE 'uwaga.inc'
       INCLUDE 'lev.inc'
       INCLUDE 'ccoup.inc'
       INCLUDE 'kin.inc'

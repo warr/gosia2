@@ -1,0 +1,2 @@
+      INTEGER*4 ITAK2
+      COMMON /UWAGA / ITAK2

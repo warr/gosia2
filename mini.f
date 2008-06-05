@@ -69,7 +69,7 @@ C don't go outside the limits specified by the user.
       INTEGER*4 i , icl1 , icl2 , icount , ICS , Idr , IFBFL , 
      &          iht , iin , Imode , indx1 , INM , inmx , ino , 
      &          ipas , ipm
-      INTEGER*4 Ips , Is , istec , ITAK2 , itf , j , 
+      INTEGER*4 Ips , Is , istec , itf , j , 
      &          jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , jnm , 
      &          jpr , jsa , jst
       INTEGER*4 kh2 , kkk , l , LFL , LFL1 , LFL2 , 
@@ -81,7 +81,7 @@ C don't go outside the limits specified by the user.
       INCLUDE 'ilewy.inc'
       COMMON /CH1T  / CHIS11
       INCLUDE 'mgn.inc'
-      COMMON /UWAGA / ITAK2
+      INCLUDE 'uwaga.inc'
       INCLUDE 'yexpt.inc'
       INCLUDE 'dftb.inc'
       INCLUDE 'prt.inc'
