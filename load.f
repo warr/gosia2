@@ -55,8 +55,8 @@ C      Joj    - index of substate (write only)
       IMPLICIT NONE
       REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ah , cpsi , dep , 
      &       EMMA , eta , etan , Polm , pp1 , pp2
-      REAL*8 ppp , PSI , rlam , ssqrt , szet , 
-     &       wrt , wrtm , z1 , z2 , zet , zsqa
+      REAL*8 ppp , rlam , ssqrt , szet , wrt , wrtm , z1 , z2 , 
+     &       zet , zsqa
       INTEGER*4 i , i1 , i2 , i3 , Icg , Ient , Iexp , 
      &          ir , is , ISHA , ispi , ispo
       INTEGER*4 jj , jjj , Joj , la , lam , lam1 , ld , 
@@ -68,7 +68,7 @@ C      Joj    - index of substate (write only)
       INCLUDE 'coex.inc'
       COMMON /PSPIN / ISHA
       INCLUDE 'cexc.inc'
-      COMMON /PCOM  / PSI(1500)
+      INCLUDE 'pcom.inc'
       INCLUDE 'ccoup.inc'
       COMMON /CLM   / LMAX
       INCLUDE 'clcom8.inc'
