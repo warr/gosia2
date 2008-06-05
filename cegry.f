@@ -90,8 +90,6 @@ C      Iredv  -
       INTEGER*4 lth , lu , luu , na
       INTEGER*4 nf , nf1 , ni , ni1 , Nwyr
       CHARACTER*4 wupl , war
-      REAL*8 CNOR1 , CNOR2 ! For gosia2
-      INTEGER*4 MCFIX ! For gosia2
       CHARACTER*4 op2 ! For gosia2
       DIMENSION part(32,50,2) , lic(32) , lth(1500) , cnr(32,50) , 
      &          partl(32,50,2)
@@ -122,7 +120,7 @@ C      Iredv  -
       INCLUDE 'trb.inc'
       INCLUDE 'tcm.inc'
       INCLUDE 'cccds.inc'
-      COMMON /CINIT2/ CNOR1(32,75) , CNOR2(32,75) , MCFIX ! For gosia2
+      INCLUDE 'cinit2.inc' ! For gosia2
       SAVE part, partl ! For gosia2
       DATA sum3/0./,sumpr/0./
 

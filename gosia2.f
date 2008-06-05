@@ -306,8 +306,8 @@ C      ZV     - energy meshpoints
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , nz
       CHARACTER*4 oph , op1 , opcja , op2
       CHARACTER*1 prp
-      REAL*8 CNOR1 , CNOR2 , chir , chp , ccch1 ,ccch2 , cht ! For gosia2
-      INTEGER*4 MCFIX , nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
+      REAL*8 chir , chp , ccch1 ,ccch2 , cht ! For gosia2
+      INTEGER*4 nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
       INTEGER*4 mret , mawr , irix ! For gosia2
       DIMENSION ihlm(32) , esp(20) , dedx(20) , bten(1200) , 
      &          fiex1(100,100,2) , title(20) , pfi(101) , zmir(6,2,50) , 
@@ -377,7 +377,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'logy.inc'
       INCLUDE 'fakul.inc'
       INCLUDE 'life.inc'
-      COMMON /CINIT2/ CNOR1(32,75) , CNOR2(32,75) , MCFIX ! For gosia2
+      INCLUDE 'cinit2.inc' ! For gosia2
       INCLUDE 'switch.inc' ! For gosia2
       INCLUDE 'resc.inc'
       DATA (eng(k),k=1,10)/.05 , .06 , .08 , .1 , .15 , .2 , .3 , .5 , 
