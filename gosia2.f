@@ -263,7 +263,7 @@ C      ZV     - energy meshpoints
       REAL*8 yy , yyd1 , yydd , yyy , zmir , zp , zz
       INTEGER*4 i , i122 , iapx , ib , 
      &          ibaf , icg , icll , ICS , ict , 
-     &          ictl , id , idf , IDIVE
+     &          ictl , id , idf
       INTEGER*4 idr , iecd , ient , IFAC , IFBFL , ifbp , 
      &          ifc , ifm , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
      &          ihuj , ii , ij
@@ -290,7 +290,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kl , kloop , 
      &          kmat , kq , ktt , kuku , KVAR , l , la , la1 , 
      &          lam , lamd
-      INTEGER*4 lamh , lb , lck1 , lck2 , LERF , levl , lex , lexp , 
+      INTEGER*4 lamh , lb , lck1 , lck2 , levl , lex , lexp , 
      &          lfagg , lfini , lh1 , lh2 , liscl , lkj
       INTEGER*4 lkj1 , ll , lli , lll , LMAX , lmax1 , LMAXE , lmaxh , 
      &          LNORM , LNY , locat , LOCKF , LOCKS , loct , lp0 , 
@@ -375,7 +375,7 @@ C      ZV     - energy meshpoints
       COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
       COMMON /THTAR / ITTE(50)
       COMMON /FIT   / LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
-      COMMON /APRX  / LERF , IDIVE(50,2)
+      INCLUDE 'aprx.inc'
       COMMON /SKP   / JSKIP(50)
       COMMON /TRB   / ITS
       COMMON /SEL   / KVAR(1500)

@@ -1,0 +1,2 @@
+      INTEGER*4 LERF , IDIVE
+      COMMON /APRX  / LERF , IDIVE(50,2)

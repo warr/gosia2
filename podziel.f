@@ -19,10 +19,10 @@ C      J      - experiment number
  
       SUBROUTINE PODZIEL(I,J)
       IMPLICIT NONE
-      INTEGER*4 I , IDIVE , J , k , l , l1 , l2 , LERF
+      INTEGER*4 I , J , k , l , l1 , l2
       INCLUDE 'mgn.inc'
       INCLUDE 'aprcat.inc'
-      COMMON /APRX  / LERF , IDIVE(50,2)
+      INCLUDE 'aprx.inc'
       DATA l1/0/
 
       IF ( I.NE.3 ) THEN
