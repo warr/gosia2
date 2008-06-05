@@ -39,7 +39,7 @@ C      Tetrn  - theta of recoiling nucleus
       REAL*8 a1 , a2 , ACCA , ACCUR , ared , d2a , DIPOL , 
      &       dista , dists , Dsig , emax , EMMA , EN , EP , 
      &       epmin
-      INTEGER*4 iflaa , Ii , IPRM , ISKIN , ISO , IZ , 
+      INTEGER*4 iflaa , Ii , IPRM , ISO , IZ , 
      &          IZ1 , lexp , lexp0 , lexp1 , n , NCM , NDIM , NEXPT , 
      &          NMAX , NMAX1
       REAL*8 r3 , SPIN , TASIN , tau , taup , tcmdg , tcmrad , 
@@ -48,7 +48,7 @@ C      Tetrn  - theta of recoiling nucleus
       REAL*8 zlbrad , ZPOL
       LOGICAL ERR
       COMMON /CLCOM9/ ERR
-      COMMON /SECK  / ISKIN(50)
+      INCLUDE 'seck.inc'
       COMMON /PRT   / IPRM(20)
       INCLUDE 'tcm.inc'
       INCLUDE 'brec.inc'

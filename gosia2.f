@@ -280,7 +280,7 @@ C      ZV     - energy meshpoints
      &          iopri , iosr , IP , IPATH , ipd , iph
       INTEGER*4 IPI , ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
      &          ipri , IPRM , IPS1 , irea , irep , irfix , 
-     &          ISEX , isip , iske , iskf , ISKIN
+     &          ISEX , isip , iske , iskf
       INTEGER*4 isko , iskok , ISMAX , ISO , isoh , ispa , ispb , 
      &          itno , itp , ITS , ITTE , iuy , iva , iva1 , IVAR , 
      &          ivarh , ivari , ivrh , IWF
@@ -349,7 +349,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'dftb.inc'
       INCLUDE 'erran.inc'
       INCLUDE 'mgn.inc'
-      COMMON /SECK  / ISKIN(50)
+      INCLUDE 'seck.inc'
       COMMON /VLIN  / XV(101) , YV(101) , ZV(100) , DSG(100) ,
      &                DSE(100) , DS
       COMMON /DUMM  / GRAD(1500) , HLMLM(1500) , ELMH(1500)

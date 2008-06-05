@@ -1,0 +1,2 @@
+      INTEGER*4 ISKIN
+      COMMON /SECK  / ISKIN(50)
