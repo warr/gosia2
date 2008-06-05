@@ -85,7 +85,7 @@ C      Iredv  -
      &       VINF , wf , XA , XA1
       INTEGER*4 iabc , Icall , id , idc , Idr ,  ifdu , ifxd , IGRD , 
      &          ii , ile2 , IMIN , inclus , INM
-      INTEGER*4 ipd , IPRM , Iredv , Issp , 
+      INTEGER*4 ipd , Iredv , Issp , 
      &          Itemp , ITS , iva , iw , IWF , ixl , ixm , 
      &          iyex , IZ , IZ1 , jj
       INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , 
@@ -107,7 +107,7 @@ C      Iredv  -
       INCLUDE 'dimx.inc'
       INCLUDE 'vac.inc'
       INCLUDE 'cinit.inc'
-      COMMON /PRT   / IPRM(20)
+      INCLUDE 'prt.inc'
       COMMON /LIFE  / NLIFT
       INCLUDE 'lev.inc'
       COMMON /IGRAD / IGRD

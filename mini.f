@@ -68,7 +68,7 @@ C don't go outside the limits specified by the user.
      &       sumg2 , sumht , uxa , xkat , Xtest
       INTEGER*4 i , icl1 , icl2 , icount , ICS , Idr , IFBFL , 
      &          iht , iin , Imode , indx1 , INM , inmx , ino , 
-     &          INTR , ipas , ipm , IPRM
+     &          INTR , ipas , ipm
       INTEGER*4 Ips , IPS1 , Is , istec , ITAK2 , itf , j , 
      &          jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , jnm , 
      &          jpr , jsa , jst
@@ -85,7 +85,7 @@ C don't go outside the limits specified by the user.
       COMMON /UWAGA / ITAK2
       INCLUDE 'yexpt.inc'
       INCLUDE 'dftb.inc'
-      COMMON /PRT   / IPRM(20)
+      INCLUDE 'prt.inc'
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
       INCLUDE 'cexc.inc'
       INCLUDE 'comme.inc'

@@ -26,16 +26,15 @@ C      Chilo  - chi squared of logs
 
       SUBROUTINE BRANR(Chisq,Nwyr,Chilo)
       IMPLICIT NONE
-      REAL*8 ch1 , ch2 , Chilo , Chisq , CONV , 
-     &       eng1 , eng2 , u
-      INTEGER*4 i1 , i2 , iflg , iout , IPRM , itt , 
-     &          j1 , j2 , k , lab1 , lab2 , mul2
+      REAL*8 ch1 , ch2 , Chilo , Chisq , CONV , eng1 , eng2 , u
+      INTEGER*4 i1 , i2 , iflg , iout , itt , j1 , j2 , 
+     &          k , lab1 , lab2 , mul2
       INTEGER*4 n1 , n2 , Nwyr
-      INCLUDE 'clcom.inc'
       INCLUDE 'coex.inc'
+      INCLUDE 'clcom.inc'
       INCLUDE 'brnch.inc'
       INCLUDE 'tra.inc'
-      COMMON /PRT   / IPRM(20)
+      INCLUDE 'prt.inc'
       INCLUDE 'comme.inc'
       INCLUDE 'lev.inc'
 

@@ -1,0 +1,2 @@
+      INTEGER*4 IPRM
+      COMMON /PRT   / IPRM(20)

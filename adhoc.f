@@ -61,7 +61,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       REAL*8 DMIX , DMIXE , EP
       REAL*8 TLBDG , VINF , wamx , wbra , wdl , wlf , XA , XA1
       INTEGER*4 iax , Idr , iexp1 , 
-     &          ilft , IMIX , iosr , ipri , IPRM , isrt1 , 
+     &          ilft , IMIX , iosr , ipri , isrt1 , 
      &          ITS , iuf
       INTEGER*4 Iyr , IZ , IZ1 , jic , jicc , juf , lb , 
      &          li , licc , llia , lxt , MEM , n1
@@ -86,7 +86,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       INCLUDE 'cexc.inc'
-      COMMON /PRT   / IPRM(20)
+      INCLUDE 'prt.inc'
       COMMON /TRB   / ITS
       COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2
       

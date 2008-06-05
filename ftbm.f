@@ -75,7 +75,7 @@ C      Bten   -
       INTEGER*4 i1 , i11 , iapx , Icll , idec , Idr , 
      &          iflg , IGRD , ii , ile1 , ile2 , ile3 , 
      &          ilin , indx , inko , INM
-      INTEGER*4 inp , inpo , inpx , INTR , inzz , inzzz , IPRM , 
+      INTEGER*4 inp , inpo , inpx , INTR , inzz , inzzz , 
      &          IPS1 , issp , ITAK2 , itemp , ixx , 
      &          IZ , IZ1 , izzz
       INTEGER*4 j , jj , jjgg , jjj , jk , jkl , jm , jmf , jmt , jmte , 
@@ -108,7 +108,7 @@ C      Bten   -
       INCLUDE 'mgn.inc'
       INCLUDE 'coex2.inc'
       INCLUDE 'pth.inc'
-      COMMON /PRT   / IPRM(20)
+      INCLUDE 'prt.inc'
       INCLUDE 'cexc.inc'
       COMMON /SKP   / JSKIP(50)
       COMMON /LIFE  / NLIFT
