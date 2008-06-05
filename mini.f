@@ -61,7 +61,7 @@ C don't go outside the limits specified by the user.
       REAL*8 a , a0 , a1 , b , Bten , c , ccd , chd , chil , chilo , 
      &       Chiok , chirf , CHIS11 , chis12 , chis13 , chisf , chisp , 
      &       Chisq , chiss , chl
-      REAL*8 chx , cmax , Conv , CORF , crit , DEVD , DEVU , dl , 
+      REAL*8 chx , cmax , Conv , CORF , crit , dl , 
      &       DLOCK , dm , DYEX , ELM , ELMH , ELML , ELMU , EMH , f1 , 
      &       f2 , flt , GRAD
       REAL*8 gradp , HLMLM , ht , p , q , rfk , SA , sel , shl , sumg1 , 
@@ -89,7 +89,7 @@ C don't go outside the limits specified by the user.
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
      &                YNRM(32,50) , IDRN , ILE(32)
-      COMMON /DFTB  / DEVD(1500) , DEVU(1500)
+      INCLUDE 'dftb.inc'
       COMMON /PRT   / IPRM(20)
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)

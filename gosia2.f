@@ -239,8 +239,8 @@ C      ZV     - energy meshpoints
       REAL*8 bk , bl , bm , bmx , BRAT , bten , bu , CAT , CC , ccc , 
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
      &       cnst
-      REAL*8 cocos , conu , CORF , d , decen , dedx , DEVD , 
-     &       DEVU , DIPOL , DLOCK , DS , dsd , DSE , DSG , 
+      REAL*8 cocos , conu , CORF , d , decen , dedx , 
+     &       DIPOL , DLOCK , DS , dsd , DSE , DSG , 
      &       dsig , dst
       REAL*8 dsx , dsxm , DYEX , effi , EG , eh1 , ELM , ELMH , 
      &       elmi , ELML , ELMT , ELMU , emhl1 , EMMA , emn , emx , EN , 
@@ -348,7 +348,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'vac.inc'
       INCLUDE 'me2d.inc'
       INCLUDE 'life1.inc'
-      COMMON /DFTB  / DEVD(1500) , DEVU(1500)
+      INCLUDE 'dftb.inc'
       COMMON /ERRAN / KFERR
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
