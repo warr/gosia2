@@ -84,7 +84,7 @@ C      Iredv  -
       INTEGER*4 iabc , Icall , id , idc , Idr ,  ifdu , ifxd , IGRD , 
      &          ii , ile2 , IMIN , inclus , INM
       INTEGER*4 ipd , Iredv , Issp , 
-     &          Itemp , ITS , iva , iw , IWF , ixl , ixm , 
+     &          Itemp , iva , iw , IWF , ixl , ixm , 
      &          iyex , jj
       INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , 
      &          l , l1 , LFL , LFL1 , LFL2 , lic , 
@@ -121,7 +121,7 @@ C      Iredv  -
       COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
       INCLUDE 'coex.inc'
       COMMON /SKP   / JSKIP(50)
-      COMMON /TRB   / ITS
+      INCLUDE 'trb.inc'
       INCLUDE 'tcm.inc'
       INCLUDE 'cccds.inc'
       COMMON /CINIT2/ CNOR1(32,75) , CNOR2(32,75) , MCFIX ! For gosia2

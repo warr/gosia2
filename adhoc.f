@@ -61,8 +61,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       REAL*8 DMIX , DMIXE
       REAL*8 wamx , wbra , wdl , wlf
       INTEGER*4 iax , Idr , iexp1 , 
-     &          ilft , IMIX , iosr , ipri , isrt1 , 
-     &          ITS , iuf
+     &          ilft , IMIX , iosr , ipri , isrt1 , iuf
       INTEGER*4 Iyr , jic , jicc , juf , lb , 
      &          li , licc , llia , lxt , MEM , n1
       INTEGER*4 n2 , ndas , NDL , ndtp , 
@@ -86,7 +85,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       INCLUDE 'cx.inc'
       INCLUDE 'cexc.inc'
       INCLUDE 'prt.inc'
-      COMMON /TRB   / ITS
+      INCLUDE 'trb.inc'
       COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2
       
 C     Read OP,YIEL parameters
