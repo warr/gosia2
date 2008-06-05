@@ -74,8 +74,7 @@ C value of f(n).
       INTEGER*4 i , i57 , Ien , IFAC , IFLG , ihold , intend , INTERV , 
      &          IPATH , ir , ir1 , IRA , ISG , ISG1 , k , 
      &          kast , KDIV , LAMR
-      INTEGER*4 MAGA , MAXLA , mir , n , NDIV , 
-     &          NPT , NSTART , NSTOP , NSW
+      INTEGER*4 MAGA , MAXLA , mir , n , NDIV , NPT , NSW
       COMPLEX*16 ARM , hold
       INCLUDE 'coex.inc'
       COMMON /AZ    / ARM(600,7)
@@ -87,7 +86,7 @@ C value of f(n).
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
      &                ISG1
       COMMON /FLA   / IFLG
-      COMMON /CEXC0 / NSTART(76) , NSTOP(75)
+      INCLUDE 'cexc0.inc'
       COMMON /PTH   / IPATH(75) , MAGA(75)
       COMMON /CEXC9 / INTERV(50)
       

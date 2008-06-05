@@ -28,14 +28,13 @@ C can cope with half-integers.
       REAL*8 Bten , ce , fc , si , WTHREJ , x
       INTEGER*4 i , Icl , iha , ila , ilg , ind , isi , 
      &          ite , jm , jmp , k , kk , kp , l , ll , Lmax , lp , m
-      INTEGER*4 mm , mp , ms , msp , NSTART , 
-     &          NSTOP
+      INTEGER*4 mm , mp , ms , msp
       COMPLEX*16 ARM
       DIMENSION Bten(1200)
       INCLUDE 'coex.inc'
       INCLUDE 'clcom8.inc'
       INCLUDE 'coex2.inc'
-      COMMON /CEXC0 / NSTART(76) , NSTOP(75)
+      INCLUDE 'cexc0.inc'
       COMMON /AZ    / ARM(600,7)
       
       iha = (-1)**INT(2.*SPIN(1)+.01)

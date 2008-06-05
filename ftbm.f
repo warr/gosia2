@@ -87,13 +87,12 @@ C      Bten   -
       INTEGER*4 lp , lpit , lput , lpx , lpxd , ls , lst
       INTEGER*4 luu , lx , MAGA , MAGEXC , MEMAX , MEMX6 , 
      &          Ncall , NEXPT , NLIFT , nlin , 
-     &          nowr , npoz , nrest , NSTART
-      INTEGER*4 NSTOP , NWR , nwyr
+     &          nowr , npoz , nrest , NWR , nwyr
       COMPLEX*16 ARM
       DIMENSION jmte(6) , prop(6) , Bten(1200)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
-      COMMON /CEXC0 / NSTART(76) , NSTOP(75)
+      INCLUDE 'cexc0.inc'
       INCLUDE 'ccc.inc'
       COMMON /ILEWY / NWR
       COMMON /CH1T  / CHIS11

@@ -38,8 +38,7 @@ C      I57    - switch which is either 5 or 7. This tells LAISUM to access eithe
      &          ISG1 , ISSTAR , ISSTO , k , KDIV , lam , 
      &          LAMR , lax
       INTEGER*4 ld , m , mm , MSTORE , 
-     &          n , NDIV , nhold , NPT , NSTART , 
-     &          NSTOP , NSW , nz
+     &          n , NDIV , nhold , NPT , NSW , nz
       COMPLEX*16 ARM
       COMMON /AZ    / ARM(600,7)
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
@@ -51,7 +50,7 @@ C      I57    - switch which is either 5 or 7. This tells LAISUM to access eithe
       INCLUDE 'adbxi.inc'
       INCLUDE 'ccoup.inc'
       INCLUDE 'clcom8.inc'
-      COMMON /CEXC0 / NSTART(76) , NSTOP(75)
+      INCLUDE 'cexc0.inc'
 
 C     Zero ARM(k,4) and ARM(k,6) for each substate used
       DO k = 1 , ISMAX ! ISMAX is number of substates used

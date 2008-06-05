@@ -39,8 +39,7 @@ C      W0     - omega limit
      &          is2 , ISG , ISG1 , ismin , isplus , KDIV , la , 
      &          lam
       INTEGER*4 LAMR , ld , LEADF , m , MEM , 
-     &          mrange , mua , NDIV , NPT , NSTART , NSTOP , 
-     &          NSW , nz
+     &          mrange , mua , NDIV , NPT , NSW , nz
       COMPLEX*16 ARM , STAMP , dis , uhuj
       INCLUDE 'clcom.inc'
       COMMON /AZ    / ARM(600,7)
@@ -49,7 +48,7 @@ C      W0     - omega limit
       INCLUDE 'ccoup.inc'
       INCLUDE 'clcom8.inc'
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
-      COMMON /CEXC0 / NSTART(76) , NSTOP(75)
+      INCLUDE 'cexc0.inc'
       INCLUDE 'kin.inc'
       INCLUDE 'cxi.inc'
 

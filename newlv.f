@@ -38,7 +38,7 @@ C storage part.
       INTEGER*4 i2 , IFLG , indx , ISG , ISG1 , ISSTAR , ISSTO , KDIV , 
      &          La , LAMR , Ld , LEADF , 
      &          m , MEM , MSTORE
-      INTEGER*4 N , NDIV , NPT , NSTART , NSTOP , NSW
+      INTEGER*4 N , NDIV , NPT , NSW
       COMPLEX*16 EXPON
       INCLUDE 'clcom.inc'
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
@@ -46,7 +46,7 @@ C storage part.
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
       INCLUDE 'adbxi.inc'
       COMMON /FLA   / IFLG
-      COMMON /CEXC0 / NSTART(76) , NSTOP(75)
+      INCLUDE 'cexc0.inc'
 
       Ld = LDNUM(La,N) ! Get number of levels connected to level N by multipolarity La
       IF ( Ld.EQ.0 ) RETURN ! Return if there aren't any
