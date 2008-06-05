@@ -1,0 +1,2 @@
+      INTEGER*4 IMIN , LNORM
+      COMMON /MINNI / IMIN , LNORM(50)

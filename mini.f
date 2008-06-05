@@ -62,18 +62,16 @@ C don't go outside the limits specified by the user.
      &       Chiok , chirf , CHIS11 , chis12 , chis13 , chisf , chisp , 
      &       Chisq , chiss , chl
       REAL*8 chx , cmax , Conv , crit , dl , 
-     &       DLOCK , dm , EMH , f1 , 
-     &       f2 , flt
+     &       DLOCK , dm , f1 , f2 , flt
       REAL*8 gradp , ht , p , q , rfk , sel , shl , sumg1 , 
      &       sumg2 , sumht , uxa , xkat , Xtest
       INTEGER*4 i , icl1 , icl2 , icount , ICS , Idr , IFBFL , 
-     &          iht , iin , Imode , indx1 , INM , inmx , ino , 
+     &          iht , iin , Imode , indx1 , inmx , ino , 
      &          ipas , ipm
       INTEGER*4 Ips , Is , istec , itf , j , 
      &          jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , jnm , 
      &          jpr , jsa , jst
-      INTEGER*4 kh2 , kkk , l , LFL , LFL1 , LFL2 , 
-     &          lnm , LOCKF , LOCKS , 
+      INTEGER*4 kh2 , kkk , l , lnm , LOCKF , LOCKS , 
      &          metf , mvfl , ncall , nlinn , NLOCK , noflg , 
      &          Nptl
       DIMENSION ipm(10) , Bten(1200) , gradp(1500)
@@ -85,7 +83,7 @@ C don't go outside the limits specified by the user.
       INCLUDE 'yexpt.inc'
       INCLUDE 'dftb.inc'
       INCLUDE 'prt.inc'
-      COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
+      INCLUDE 'lczp.inc'
       INCLUDE 'cexc.inc'
       INCLUDE 'comme.inc'
       INCLUDE 'sel.inc'

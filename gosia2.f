@@ -267,7 +267,7 @@ C      ZV     - energy meshpoints
      &          ifc , ifm , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
      &          ihuj , ii , ij
       INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ile1 , ilevls , 
-     &          ilx , im , IMIN , imode , in1 , in2 , inclus , ind , 
+     &          ilx , im , imode , in1 , in2 , inclus , ind , 
      &          ind1 , ind2 , indx
       INTEGER*4 inko , inm1 , inm2 , inn , inpo , intend , 
      &          intvh , inva , inx1 , iobl , iocc , 
@@ -291,7 +291,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 lamh , lb , lck1 , lck2 , levl , lex , lexp , 
      &          lfagg , lfini , lh1 , lh2 , liscl , lkj
       INTEGER*4 lkj1 , ll , lli , lll , lmax1 , lmaxh , 
-     &          LNORM , locat , LOCKF , LOCKS , loct , lp0 , 
+     &          locat , LOCKF , LOCKS , loct , lp0 , 
      &          lpin , ltrn , ltrn1 , ltrn2 , lu , lx , lxd , 
      &          magh , MEM
       INTEGER*4 memax1 , memh , memx4 , mend , mexl , 
@@ -350,7 +350,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'cxi.inc'
       INCLUDE 'clcom.inc'
       INCLUDE 'coex.inc'
-      COMMON /MINNI / IMIN , LNORM(50)
+      INCLUDE 'minni.inc'
       INCLUDE 'cx.inc'
       INCLUDE 'cexc.inc'
       INCLUDE 'prt.inc'
