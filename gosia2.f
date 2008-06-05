@@ -433,13 +433,13 @@ C     Initialize pointers
       lp0 = 50000 ! Size of ZETA array
       LP1 = 50 ! Maximum number of experiments
       LP2 = 1500 ! Maximum number of matrix elements
-      LP3 = 75 ! Maximum number of levels
+      LP3 = 100 ! Maximum number of levels
       LP4 = 1500
       LP6 = 32 ! Maximum number of gamma detectors
       LP7 = lp0 - 4900 ! Start of collision coefficients in ZETA
       LP8 = LP3*28 + 1
       LP9 = lp0 - LP3*28
-      LP10 = 600 ! Maximum number of substates
+      LP10 = 1200 ! Maximum number of substates
       LP11 = LP8 - 1
       LP12 = 365 ! Maximum number of steps of omega (dimension of ADB, SH, CH)
       LP13 = LP9 + 1
@@ -463,7 +463,7 @@ C     Use input unit 25 for target and 26 for projectile
 C---- gosia2 changes end
 
 C     Initialize normalization to 1.
-      DO i = 1 , LP3 ! LP3 = 75 (maximum number of levels)
+      DO i = 1 , LP3 ! LP3 = 100 (maximum number of levels)
          DO j = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
             CNOR(j,i) = 1.
             CNOR1(j,i) = 1. ! Added for gosia2
@@ -575,7 +575,7 @@ C---- gosia2 changes end
       lfagg = 0
       izcap = 12800
       KFERR = 0
-      NDIM = LP3 ! LP3 = 75 (maximum number of levels)
+      NDIM = LP3 ! LP3 = 100 (maximum number of levels)
       ISO = 1
       B(1) = 1.
       DO i = 2 , 20
@@ -599,7 +599,7 @@ C---- gosia2 changes end
       MAGEXC = 0 ! Initially flag that we don't need magnetic excitations
       LAMMAX = 0
       DO lam = 1 , 8
-         DO lexp = 1 , LP3 ! LP3 = 75 (maximum number of levels)
+         DO lexp = 1 , LP3 ! LP3 = 100 (maximum number of levels)
             LDNUM(lam,lexp) = 0
          ENDDO
          MULTI(lam) = 0
@@ -614,7 +614,7 @@ C---- gosia2 changes end
          JSKIP(j) = 1
          ISKIN(j) = 0
       ENDDO
-      DO j = 1 , LP3 ! LP3 = 75 (maximum number of levels)
+      DO j = 1 , LP3 ! LP3 = 100 (maximum number of levels)
          ISEX(j) = 1111
       ENDDO
       ISEX(1) = 0
@@ -1531,7 +1531,7 @@ C     Treat suboption LEVE (levels)
             IF ( ipo2.EQ.-1 ) prp = '-'
             IF ( ABS(IPRM(1)).EQ.1 ) WRITE (22,99025) ipo1 , prp , 
      &           SPIN(ipo1) , EN(ipo1)
-99025       FORMAT (6X,1I2,11X,1A1,10X,1F4.1,8X,1F10.4)
+99025       FORMAT (5X,1I3,11X,1A1,10X,1F4.1,8X,1F10.4)
          ENDDO
 
 C     Treat suboption ME (matrix elements)
@@ -1846,7 +1846,7 @@ C     Handle OP,ERRO
      &                       , DEVD(kh1) , DEVU(kh1) , DEVD(kh1)
      &                       *100./ABS(HLM(kh1)) , DEVU(kh1)
      &                       *100./ABS(HLM(kh1))
-99031       FORMAT (6X,1I3,6X,1I2,5X,1I2,5X,1F9.5,2X,'(',1F9.5,' ,',
+99031       FORMAT (6X,1I3,5X,1I3,4X,1I3,5X,1F9.5,2X,'(',1F9.5,' ,',
      &              1F9.5,')','......',1F7.1,' ,',1F7.1,1X,'PC')
          ENDIF
       ENDDO
@@ -2744,11 +2744,11 @@ C---- gosia2 changes end
                      IF ( LIFCT(iva1).EQ.iva ) GOTO 122
                   ENDDO
                   WRITE (22,99012) iva , TAU(iva)
-99012             FORMAT (7X,1I2,7X,1E10.4)
+99012             FORMAT (6X,1I3,7X,1E10.4)
                   GOTO 124
  122              WRITE (22,99013) iva , TAU(iva) , TIMEL(1,iva1) , 
      &                   TIMEL(2,iva1)
-99013             FORMAT (7X,1I2,7X,1E10.4,5X,1E10.4,4X,1E10.4)
+99013             FORMAT (6X,1I3,7X,1E10.4,5X,1E10.4,4X,1E10.4)
  124              IF ( iva.EQ.NMAX ) THEN
                      IF ( NAMX.GE.1 ) THEN
                         WRITE (22,99014)
@@ -2767,7 +2767,7 @@ C---- gosia2 changes end
                            dsd = EAMX(kq,2)
                            WRITE (22,99016) ni , nf , esd , ess , 
      &                        (ess-esd)/dsd
-99016                      FORMAT (5x,1I2,1x,1I2,1x,1F9.4,1x,1F9.4,1x,
+99016                      FORMAT (4x,1I3,1x,1I3,1x,1F9.4,1x,1F9.4,1x,
      &                              1F9.4)
                         ENDDO
                      ENDIF
@@ -2783,10 +2783,10 @@ C---- gosia2 changes end
      &        'DETECTOR ',1I2/5X,'ENERGY ',1F10.3,1X,'MEV',2X,'THETA ',
      &        1F7.3,1X,'DEG'//5X,'NI',5X,'NF',5X,'II',5X,'IF',5X,
      &        'YIELD',5X,'NORMALIZED YIELD'/)
-99049 FORMAT (5X,1I2,5X,1I2,3X,1F4.1,3X,1F4.1,3X,1E11.5,3X,1E11.5)
+99049 FORMAT (4X,1I3,4X,1I3,3X,1F4.1,3X,1F4.1,3X,1E11.5,3X,1E11.5)
 99050 FORMAT (1X///44X,'OVERALL')
 99051 FORMAT (1X///43X,'DIAGONAL')
-99052 FORMAT (6X,1I3,6X,1I2,5X,1I2,5X,1F10.5,2X,'(',1F10.5,' ,',1F10.5,
+99052 FORMAT (6X,1I3,5X,1I3,4X,1I3,5X,1F10.5,2X,'(',1F10.5,' ,',1F10.5,
      &        ')')
 99053 FORMAT (2X,'LEVEL',1X,1I2,10X,'POPULATION',1X,1E14.6)
 99054 FORMAT (5X,'XI',13X,'Q1',22X,'Q2'///13X,'SLOPE',2X,'INTERCEPT',7X,
