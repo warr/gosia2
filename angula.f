@@ -35,7 +35,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       
       SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
-      REAL*8 alab , arg , at , attl , bt , DELLA , f , Fi0 , fi01 , 
+      REAL*8 alab , arg , at , attl , bt , f , Fi0 , fi01 , 
      &       Fi1 , fi11
       REAL*8 Figl , Gth , qv , sm , Trec , 
      &       Ygn , ylmr
@@ -51,7 +51,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       INCLUDE 'lev.inc'
       INCLUDE 'ccc.inc'
       INCLUDE 'kin.inc'
-      COMMON /LCDL  / DELLA(1500,3)
+      INCLUDE 'lcdl.inc'
       INCLUDE 'catlf.inc'
       INCLUDE 'brec.inc'
       COMMON /THTAR / ITTE(50)
