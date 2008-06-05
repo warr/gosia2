@@ -25,9 +25,9 @@ C may have been changed when we randomized.
  
       SUBROUTINE MIXUP
       IMPLICIT NONE
-      REAL*8 ELM , ELML , ELMU , RNDM , SA
+      REAL*8 RNDM
       INTEGER*4 k , k1
-      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
+      INCLUDE 'comme.inc'
       INCLUDE 'cexc.inc'
       INCLUDE 'xra.inc'
 

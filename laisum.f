@@ -51,8 +51,7 @@ C z is the coupling parameter zeta, calculated in the function LSLOOP.
       
       SUBROUTINE LAISUM(Ir,N,Rsg,Lam,Ld,Nz,I57)
       IMPLICIT NONE
-      REAL*8 D2W , ELM , ELML , ELMU , 
-     &       q , rmir , rmis , rmu , Rsg , SA , z
+      REAL*8 D2W , q , rmir , rmis , rmu , Rsg , z
       INTEGER*4 i2 , i3 , I57 , iii , indq , indx , Ir , irs , is , 
      &          is1 , is2 , ISG , ISG1 , ISHA , ismin , 
      &          isplus , ISSTAR , ISSTO
@@ -69,7 +68,7 @@ C z is the coupling parameter zeta, calculated in the function LSLOOP.
       INCLUDE 'ccoup.inc'
       INCLUDE 'mgn.inc'
       INCLUDE 'clcom8.inc'
-      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
+      INCLUDE 'comme.inc'
       COMMON /ALLC  / LOCQ(8,7)
       INCLUDE 'cexc0.inc'
       

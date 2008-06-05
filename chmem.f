@@ -16,10 +16,10 @@ C      IAMY   - level indices of pair of levels for which matrix element is know
  
       SUBROUTINE CHMEM(Nw,Chi,Chilo)
       IMPLICIT NONE
-      REAL*8 Chi , Chilo , di , ELM , ELML , ELMU , SA
+      REAL*8 Chi , Chilo , di
       INTEGER*4 ia , ib , Nw
       INCLUDE 'me2d.inc'
-      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
+      INCLUDE 'comme.inc'
 
       IF ( NAMX.EQ.0 ) RETURN
       Nw = Nw + NAMX

@@ -239,8 +239,8 @@ C      ZV     - energy meshpoints
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
      &       cnst
       REAL*8 cocos , conu , d , decen , dedx , DLOCK , dsd , dsig , dst
-      REAL*8 dsx , dsxm , effi , eh1 , ELM , 
-     &       elmi , ELML , ELMT , ELMU , emhl1 , EMMA , emn , emx , 
+      REAL*8 dsx , dsxm , effi , eh1 , 
+     &       elmi , ELMT , emhl1 , EMMA , emn , emx , 
      &       enb
       REAL*8 eng , enh , EP , esd , esp , ess , 
      &       fi0 , fi1 , fic , fiex1 , figl , fipo1 , fm , G , 
@@ -249,7 +249,7 @@ C      ZV     - energy meshpoints
      &       ph1 , ph2 , pi , po1 , po2 , polm , pop1 , pr , pv
       REAL*8 q1 , q2 , qc , qfac , qr , qui , r , r1 , 
      &       r2 , r3 , r4 , rem , remax , rl , rlr , rm , rx , ry
-      REAL*8 rz , s , s11 , s12 , s21 , s22 , SA , sbe , sf , SGW , 
+      REAL*8 rz , s , s11 , s12 , s21 , s22 , sbe , sf , SGW , 
      &       sh , sh1 , sh2 , SIMIN , slim , SUBCH1 , SUBCH2
       REAL*8 summm , sz1 , sz2 , TACOS , tau1 , tau2 , test , 
      &       tetrc , tfac , thc , title , 
@@ -366,7 +366,7 @@ C      ZV     - energy meshpoints
       COMMON /CLCOM0/ IFAC(75)
       INCLUDE 'clcom8.inc'
       COMMON /CLCOM9/ ERR
-      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
+      INCLUDE 'comme.inc'
       INCLUDE 'coex2.inc'
       COMMON /CEXC9 / INTERV(50)
       COMMON /CAUX0 / EMMA(75) , NCM

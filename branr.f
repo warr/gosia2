@@ -26,8 +26,8 @@ C      Chilo  - chi squared of logs
 
       SUBROUTINE BRANR(Chisq,Nwyr,Chilo)
       IMPLICIT NONE
-      REAL*8 ch1 , ch2 , Chilo , Chisq , CONV , ELM , ELML , ELMU , 
-     &       eng1 , eng2 , SA , u
+      REAL*8 ch1 , ch2 , Chilo , Chisq , CONV , 
+     &       eng1 , eng2 , u
       INTEGER*4 i1 , i2 , iflg , iout , IPRM , itt , 
      &          j1 , j2 , k , lab1 , lab2 , mul2
       INTEGER*4 n1 , n2 , Nwyr
@@ -36,7 +36,7 @@ C      Chilo  - chi squared of logs
       INCLUDE 'brnch.inc'
       INCLUDE 'tra.inc'
       COMMON /PRT   / IPRM(20)
-      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
+      INCLUDE 'comme.inc'
       INCLUDE 'lev.inc'
 
 C     If no branching ratios were defined, return doing nothing

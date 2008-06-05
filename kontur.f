@@ -36,14 +36,14 @@ C      Rem    - natural log of the largest value the computer can represent
       SUBROUTINE KONTUR(Idr,Chis0,Chil,Ifbf,Inpo,Jj,Sh,Bten,Rem)
       IMPLICIT NONE
       REAL*8 ac , Bten , c , Chil , chilo , Chis0 , chis1 , chis2 , d1 , 
-     &       d2 , ELM , ELML , ELMU , f , h
-      REAL*8 Rem , RK4 , SA , sajj , Sh , t , v , ww , x , y
+     &       d2 , f , h
+      REAL*8 Rem , RK4 , sajj , Sh , t , v , ww , x , y
       INTEGER*4 i , Idr , Ifbf , Inpo , INTR , IPS1 , itl , ix , 
      &          j , Jj , l , LNY , m , NWR
       DIMENSION f(3) , Bten(1200)
       INCLUDE 'vlin.inc'
       INCLUDE 'dftb.inc'
-      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
+      INCLUDE 'comme.inc'
       INCLUDE 'cexc.inc'
       INCLUDE 'hhh.inc'
       COMMON /ILEWY / NWR

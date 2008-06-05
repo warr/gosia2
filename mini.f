@@ -62,9 +62,9 @@ C don't go outside the limits specified by the user.
      &       Chiok , chirf , CHIS11 , chis12 , chis13 , chisf , chisp , 
      &       Chisq , chiss , chl
       REAL*8 chx , cmax , Conv , crit , dl , 
-     &       DLOCK , dm , ELM , ELML , ELMU , EMH , f1 , 
+     &       DLOCK , dm , EMH , f1 , 
      &       f2 , flt
-      REAL*8 gradp , ht , p , q , rfk , SA , sel , shl , sumg1 , 
+      REAL*8 gradp , ht , p , q , rfk , sel , shl , sumg1 , 
      &       sumg2 , sumht , uxa , xkat , Xtest
       INTEGER*4 i , icl1 , icl2 , icount , ICS , Idr , IFBFL , 
      &          iht , iin , Imode , indx1 , INM , inmx , ino , 
@@ -88,7 +88,7 @@ C don't go outside the limits specified by the user.
       COMMON /PRT   / IPRM(20)
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
       INCLUDE 'cexc.inc'
-      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
+      INCLUDE 'comme.inc'
       COMMON /SEL   / KVAR(1500)
       COMMON /FIT   / LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
       INCLUDE 'erran.inc'

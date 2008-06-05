@@ -16,10 +16,9 @@ C      MEMAX  - number of matrix elements
  
       SUBROUTINE LIMITS
       IMPLICIT NONE
-      REAL*8 ELM , ELML , ELMU , SA
       INTEGER*4 j
       INCLUDE 'cexc.inc'
-      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
+      INCLUDE 'comme.inc'
 
       DO j = 1 , MEMAX ! Loop over matrix elements
          IF ( IVAR(j).NE.0 ) THEN ! If not fixed

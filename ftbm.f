@@ -68,10 +68,9 @@ C      Bten   -
       SUBROUTINE FTBM(Icll,Chisq,Idr,Ncall,Chilo,Bten)
       IMPLICIT NONE
       REAL*8 aval , Bten , Chilo , 
-     &       chis1 , CHIS11 , chish , Chisq , chisx , chx , 
-     &       ELM , ELML
-      REAL*8 ELMU , EMH , EP , fc , fx , 
-     &       polm , pr , prop , SA , TLBDG , val , VINF
+     &       chis1 , CHIS11 , chish , Chisq , chisx , chx
+      REAL*8 EMH , EP , fc , fx , 
+     &       polm , pr , prop , TLBDG , val , VINF
       REAL*8 wz , XA , XA1
       INTEGER*4 i1 , i11 , iapx , Icll , idec , Idr , 
      &          iflg , IGRD , ii , ile1 , ile2 , ile3 , 
@@ -101,7 +100,7 @@ C      Bten   -
       INCLUDE 'ccoup.inc'
       INCLUDE 'kin.inc'
       INCLUDE 'yexpt.inc'
-      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
+      INCLUDE 'comme.inc'
       COMMON /CLM   / LMAX
       INCLUDE 'coex.inc'
       INCLUDE 'clcom8.inc'

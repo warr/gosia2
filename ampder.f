@@ -33,14 +33,14 @@ C      I57    - switch which is either 5 or 7. This tells LAISUM to access eithe
 
       SUBROUTINE AMPDER(I57)
       IMPLICIT NONE
-      REAL*8 D2W , ELM , ELML , ELMU , rsg , SA
+      REAL*8 D2W , rsg
       INTEGER*4 i1 , I57 , ibg , iend , iflg , indx , ir , is2 , ISG , 
      &          ISG1 , ISSTAR , ISSTO , k , KDIV , lam , 
      &          LAMR , lax
       INTEGER*4 ld , m , mm , MSTORE , 
      &          n , NDIV , nhold , NPT , NSW , nz
       INCLUDE 'az.inc'
-      COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
+      INCLUDE 'comme.inc'
       INCLUDE 'clcom.inc'
       INCLUDE 'coex2.inc'
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
