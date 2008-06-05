@@ -37,11 +37,11 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       IMPLICIT NONE
       REAL*8 AGELI , alab , arg , at , attl , bt , CC , DELLA , 
      &       EG , f , Fi0 , fi01 , Fi1 , fi11
-      REAL*8 Figl , FP , GKP , Gth , Q , qv , sm , TAU , Trec , 
+      REAL*8 Figl , FP , GKP , Gth , Q , qv , sm , Trec , 
      &       Ygn , ylmr , ZETA
       INTEGER*4 Idr , ifn , Iful , ig , il , inat , inx1 , 
      &          ipd , is , ITTE , iu , ixs , j , ji , jj , jm , k
-      INTEGER*4 KLEC , kq , KSEQ , l , lf , lf1 , LZETA , mind , NANG , 
+      INTEGER*4 KLEC , kq , l , lf , lf1 , LZETA , mind , NANG , 
      &          Ngl , NICC , nlv
       REAL*8 dsig, EP , TLBDG , ttx , VINF ,
      &       XA , XA1 ! For gosia2
@@ -52,7 +52,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
      &          Ygn(*)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       INCLUDE 'tra.inc'
-      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
+      INCLUDE 'lev.inc'
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
      &                NICC , NANG(200) , ISPL
       INCLUDE 'kin.inc'

@@ -254,7 +254,7 @@ C      ZV     - energy meshpoints
      &       r2 , r3 , r4 , rem , remax , rl , rlr , rm , rx , ry
       REAL*8 rz , s , s11 , s12 , s21 , s22 , SA , sbe , sf , SGW , 
      &       sh , sh1 , sh2 , SIMIN , slim , SPIN , SUBCH1 , SUBCH2
-      REAL*8 summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , test , 
+      REAL*8 summm , sz1 , sz2 , TACOS , tau1 , tau2 , test , 
      &       tetrc , tfac , thc , title , 
      &       TLBDG , tmn , tmx , todfi
       REAL*8 tta , tth , tting , ttttt , txx , u , 
@@ -293,7 +293,7 @@ C      ZV     - energy meshpoints
      &          jyi1 , jyi2 , jyv , jz , k , kb , kclust , kerf , kex , 
      &          KF
       INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kl , kloop , 
-     &          kmat , kq , KSEQ , ktt , kuku , KVAR , l , la , la1 , 
+     &          kmat , kq , ktt , kuku , KVAR , l , la , la1 , 
      &          lam , lamd
       INTEGER*4 LAMDA , lamh , LAMMAX , lb , lck1 , lck2 , 
      &          LDNUM , LEAD , LERF , levl , lex , lexp , lfagg , 
@@ -354,7 +354,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'brnch.inc'
       INCLUDE 'yexpt.inc'
       INCLUDE 'yteor.inc'
-      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
+      INCLUDE 'lev.inc'
       COMMON /MAP   / PARX(50,12,5) , PARXM(50,4,10,6) , XIR(6,50)
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
      &                NICC , NANG(200) , ISPL

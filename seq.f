@@ -38,12 +38,11 @@ C 8 = M2.
       SUBROUTINE SEQ(Idr)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , CONV , DIPOL , ega , egs , emax , 
-     &       EN , F , FP , GF , GKP , SPIN , spinf , 
-     &       spini , TAU , twoi
+     &       EN , F , FP , GF , GKP , SPIN , spinf , spini , twoi
       REAL*8 ZPOL
       INTEGER*4 idecay , Idr , indx , inx , inx1 , ir , is , ISO , 
      &          istr1 , istr2 , j , js , jsave , k , KLEC , kpa , 
-     &          KSEQ , l , la
+     &          l , la
       INTEGER*4 la1 , LAMDA , LAMMAX , ld , LDNUM , LEAD , LEADF
       INTEGER*4 m , m1 , m6 , MEM , mk , mule , mulm , MULTI , n , n1 , 
      &          NDIM , NMAX , NMAX1 , nob
@@ -54,7 +53,7 @@ C 8 = M2.
       INCLUDE 'mgn.inc'
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
-      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
+      INCLUDE 'lev.inc'
       COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(75)
       DATA jsave/0/
       

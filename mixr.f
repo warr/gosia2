@@ -22,11 +22,10 @@ C      Chilo  - chi squared using logs
  
       SUBROUTINE MIXR(Nw,Ipsw,Chi,Chilo)
       IMPLICIT NONE
-      REAL*8 Chi , Chilo , dl , DMIX , DMIXE , ELM , ELML , ELMU , SA , 
-     &       TAU
-      INTEGER*4 i , IMIX , INTR , inx , inx1 , IPS1 , Ipsw , it , KSEQ , 
+      REAL*8 Chi , Chilo , dl , DMIX , DMIXE , ELM , ELML , ELMU , SA
+      INTEGER*4 i , IMIX , INTR , inx , inx1 , IPS1 , Ipsw , it , 
      &          LNY , NDL , Nw
-      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
+      INCLUDE 'lev.inc'
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /MIXD  / DMIXE(20,2) , DMIX(20) , IMIX(20) , NDL
       COMMON /LOGY  / LNY , INTR , IPS1

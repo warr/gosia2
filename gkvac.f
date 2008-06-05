@@ -26,11 +26,10 @@ C      Il     - level index
       REAL*8 ACCA , ACCUR , AVJI , beta , DIPOL , 
      &       EN , EP , FIEL , GAMMA , GFAC , GKI , 
      &       POWER , sp
-      REAL*8 SPIN , SUM , TAU , time , TIMEC , TLBDG , VINF , 
+      REAL*8 SPIN , SUM , time , TIMEC , TLBDG , VINF , 
      &       XA , XA1 , XLAMB , ZPOL
-      INTEGER*4 i , Il , ISO , ITTE , IZ , IZ1 , 
-     &          KSEQ , NEXPT
-      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
+      INTEGER*4 i , Il , ISO , ITTE , IZ , IZ1 , NEXPT
+      INCLUDE 'lev.inc'
       INCLUDE 'brec.inc'
       COMMON /GGG   / AVJI , GAMMA , XLAMB , TIMEC , GFAC , FIEL , POWER
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 

@@ -71,8 +71,7 @@ C      Bten   -
      &       chis1 , CHIS11 , chish , Chisq , chisx , chx , 
      &       DIPOL , EG , ELM , ELML
       REAL*8 ELMU , EMH , EN , EP , fc , fx , 
-     &       polm , pr , prop , Q , SA , SPIN , TAU , TLBDG , 
-     &       val , VINF
+     &       polm , pr , prop , Q , SA , SPIN , TLBDG , val , VINF
       REAL*8 wz , XA , XA1 , ZETA , ZPOL
       INTEGER*4 i1 , i11 , iapx , Icll , idec , Idr , 
      &          iflg , IGRD , ii , ile1 , ile2 , ile3 , 
@@ -82,7 +81,7 @@ C      Bten   -
      &          IZ , IZ1 , izzz
       INTEGER*4 j , jj , jjgg , jjj , jk , jkl , jm , jmf , jmt , jmte , 
      &          jpp , jpz , JSKIP , jy , k , karm , kk , kk6 , kkx , kmt
-      INTEGER*4 knm , KSEQ , kx , larm , lcc , lcou , LFL , LFL1 , 
+      INTEGER*4 knm , kx , larm , lcc , lcou , LFL , LFL1 , 
      &          LFL2 , licz , lix , llx , lm , LMAX , LMAXE , lmh , 
      &          LNY , loc , loch , loct
       INTEGER*4 lp , lpit , lput , lpx , lpxd , ls , lst
@@ -103,7 +102,7 @@ C      Bten   -
       COMMON /IGRAD / IGRD
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
       COMMON /UWAGA / ITAK2
-      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
+      INCLUDE 'lev.inc'
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       INCLUDE 'kin.inc'
       INCLUDE 'yexpt.inc'

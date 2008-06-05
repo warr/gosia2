@@ -19,14 +19,14 @@ C      Idr    - number of decays
       SUBROUTINE PTICC(Idr)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , cone1 , cone2 , conm1 , CONV , DIPOL , EN , 
-     &       enet , SPIN , TAU , ZPOL
-      INTEGER*4 Idr , iinx , ISO , KSEQ , l , LAMDA , LAMMAX , LDNUM , 
+     &       enet , SPIN , ZPOL
+      INTEGER*4 Idr , iinx , ISO , l , LAMDA , LAMMAX , LDNUM , 
      &          LEAD , MULTI , nf , ni
       COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
-      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
+      INCLUDE 'lev.inc'
 
       WRITE (22,99001)
 99001 FORMAT (1X//20X,'CALCULATED INTERNAL CONVERSION ',

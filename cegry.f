@@ -83,7 +83,7 @@ C      Iredv  -
      &       fm , g
       REAL*8 gth , part , partl , Q , rik , rl , rx , ry , 
      &       rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , SUBCH2 , sum3
-      REAL*8 sumpr , TACOS , TAU , tetrc , tfac , thc , TLBDG , 
+      REAL*8 sumpr , TACOS , tetrc , tfac , thc , TLBDG , 
      &       VINF , wf , XA , XA1
       REAL*8 ZPOL
       INTEGER*4 iabc , Icall , id , idc , Idr ,  ifdu , ifxd , IGRD , 
@@ -91,7 +91,7 @@ C      Iredv  -
       INTEGER*4 ipd , IPRM , Iredv , ISO , Issp , 
      &          Itemp , ITS , iva , iw , IWF , ixl , ixm , 
      &          iyex , IZ , IZ1 , jj
-      INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , KSEQ , 
+      INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , 
      &          KVAR , l , l1 , LFL , LFL1 , LFL2 , lic , 
      &          licz , ll1
       INTEGER*4 LNORM , lth , lu , luu , 
@@ -115,7 +115,7 @@ C      Iredv  -
       INCLUDE 'cinit.inc'
       COMMON /PRT   / IPRM(20)
       COMMON /LIFE  / NLIFT
-      COMMON /LEV   / TAU(75) , KSEQ(1500,4)
+      INCLUDE 'lev.inc'
       COMMON /IGRAD / IGRD
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
