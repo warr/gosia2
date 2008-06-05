@@ -241,9 +241,8 @@ C      ZV     - energy meshpoints
       REAL*8 cocos , conu , d , decen , dedx , dsd , dsig , dst
       REAL*8 dsx , dsxm , effi , eh1 , elmi , ELMT , emhl1 , emn , emx , 
      &       enb
-      REAL*8 eng , enh , esd , esp , ess , 
-     &       fi0 , fi1 , fic , fiex1 , figl , fipo1 , fm , G , 
-     &       gth
+      REAL*8 eng , enh , esd , esp , ess , fi0 , fi1 , fic , fiex1 , 
+     &       figl , fipo1 , fm , gth
       REAL*8 hen , het , p , pfi , 
      &       ph1 , ph2 , pi , po1 , po2 , polm , pop1 , pr , pv
       REAL*8 q1 , q2 , qc , qfac , qr , qui , r , r1 , 
@@ -342,7 +341,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'lev.inc'
       INCLUDE 'map.inc'
       INCLUDE 'ccc.inc'
-      COMMON /GGG   / G(7)
+      INCLUDE 'ggg.inc'
       INCLUDE 'az.inc'
       INCLUDE 'kin.inc'
       INCLUDE 'cxi.inc'
