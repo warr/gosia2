@@ -27,9 +27,9 @@ C index, knowing that we are always using steps of 0.03.
  
       SUBROUTINE RANGEL(Acc1)
       IMPLICIT NONE
-      REAL*8 Acc1 , ACC50 , acl , w
+      REAL*8 Acc1 , acl , w
       INTEGER*4 i
-      COMMON /A50   / ACC50
+      INCLUDE 'a50.inc'
       INCLUDE 'rng.inc'
       INCLUDE 'clcom.inc'
 

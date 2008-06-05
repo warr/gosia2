@@ -1,0 +1,2 @@
+      REAL*8 ACC50
+      COMMON /A50   / ACC50
