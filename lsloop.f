@@ -48,9 +48,9 @@ C half-integers.
       SUBROUTINE LSLOOP(Ir,N,Nz,Ld,Lam,La,Ssqrt,Icg,Iexp)
       IMPLICIT NONE
       REAL*8 ELM , ELML , ELMU , phz , 
-     &       PSI , QAPR , rmir , rmis , SA , Ssqrt , WTHREJ
-      INTEGER*4 i2 , i3 , IAPR , Icg , Iexp , IFAC , iiex , indx , 
-     &          inqa , inr , ins , Ir , is , is1 , is2 , ISEX , ismin
+     &       PSI , rmir , rmis , SA , Ssqrt , WTHREJ
+      INTEGER*4 i2 , i3 , Icg , Iexp , IFAC , iiex , indx , 
+     &          inqa , inr , ins , Ir , is , is1 , is2 , ismin
       INTEGER*4 isplus , jg1 , jg2 , jrmir , La , Lam , lam2 , Ld , 
      &          LEADF , m , MEM , mrange , mt , N , Nz
       INCLUDE 'coex.inc'
@@ -58,7 +58,7 @@ C half-integers.
       INCLUDE 'ccoup.inc'
       INCLUDE 'clcom8.inc'
       INCLUDE 'cexc0.inc'
-      COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
+      INCLUDE 'aprcat.inc'
       INCLUDE 'pth.inc'
       INCLUDE 'mgn.inc'
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)

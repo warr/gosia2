@@ -247,7 +247,7 @@ C      ZV     - energy meshpoints
      &       gth
       REAL*8 hen , het , p , pfi , 
      &       ph1 , ph2 , pi , po1 , po2 , polm , pop1 , pr , pv
-      REAL*8 q1 , q2 , QAPR , qc , qfac , qr , qui , r , r1 , 
+      REAL*8 q1 , q2 , qc , qfac , qr , qui , r , r1 , 
      &       r2 , r3 , r4 , rem , remax , rl , rlr , rm , rx , ry
       REAL*8 rz , s , s11 , s12 , s21 , s22 , SA , sbe , sf , SGW , 
      &       sh , sh1 , sh2 , SIMIN , slim , SUBCH1 , SUBCH2
@@ -261,7 +261,7 @@ C      ZV     - energy meshpoints
      &       xlk , xm1 , xm2 , xm3 , xtest , xw , xx , xxi , 
      &       ycorr
       REAL*8 yy , yyd1 , yydd , yyy , zmir , zp , zz
-      INTEGER*4 i , i122 , IAPR , iapx , ib , 
+      INTEGER*4 i , i122 , iapx , ib , 
      &          ibaf , icg , icll , ICS , ict , 
      &          ictl , id , idf , IDIVE
       INTEGER*4 idr , iecd , ient , IFAC , IFBFL , ifbp , 
@@ -275,7 +275,7 @@ C      ZV     - energy meshpoints
      &          iopri , iosr , ipd , iph
       INTEGER*4 ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
      &          ipri , IPRM , IPS1 , irea , irep , irfix , 
-     &          ISEX , isip , iske , iskf
+     &          isip , iske , iskf
       INTEGER*4 isko , iskok , isoh , ispa , ispb , 
      &          itno , itp , ITS , ITTE , iuy , iva , iva1 , IVAR , 
      &          ivarh , ivari , ivrh , IWF
@@ -371,7 +371,7 @@ C      ZV     - energy meshpoints
       COMMON /CEXC9 / INTERV(50)
       COMMON /CAUX0 / EMMA(75) , NCM
       INCLUDE 'pth.inc'
-      COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
+      INCLUDE 'aprcat.inc'
       COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
       COMMON /THTAR / ITTE(50)
       COMMON /FIT   / LOCKF , NLOCK , IFBFL , LOCKS , DLOCK

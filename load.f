@@ -56,10 +56,10 @@ C      Joj    - index of substate (write only)
       REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ah , 
      &       cpsi , dep , EMMA , EP , eta , etan , Polm , 
      &       pp1 , pp2
-      REAL*8 ppp , PSI , QAPR , rlam , ssqrt , szet , TLBDG , 
+      REAL*8 ppp , PSI , rlam , ssqrt , szet , TLBDG , 
      &       VINF , wrt , wrtm , XA , XA1 , z1 , z2 , zet , zsqa
-      INTEGER*4 i , i1 , i2 , i3 , IAPR , Icg , Ient , Iexp , 
-     &          ir , is , ISEX , ISHA , ispi , ispo , 
+      INTEGER*4 i , i1 , i2 , i3 , Icg , Ient , Iexp , 
+     &          ir , is , ISHA , ispi , ispo , 
      &          IVAR , IZ , IZ1
       INTEGER*4 jj , jjj , Joj , la , lam , lam1 , ld , 
      &          LMAX , LMAXE , m , m1 , 
@@ -83,7 +83,7 @@ C      Joj    - index of substate (write only)
       INCLUDE 'cexc0.inc'
       INCLUDE 'cxi.inc'
       COMMON /CAUX0 / EMMA(75) , NCM
-      COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
+      INCLUDE 'aprcat.inc'
       INCLUDE 'pth.inc'
       DIMENSION etan(75) , cpsi(8)
       
