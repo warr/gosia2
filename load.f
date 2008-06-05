@@ -53,19 +53,15 @@ C      Joj    - index of substate (write only)
  
       SUBROUTINE LOAD(Iexp,Ient,Icg,Polm,Joj)
       IMPLICIT NONE
-      REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ah , 
-     &       cpsi , dep , EMMA , EP , eta , etan , Polm , 
-     &       pp1 , pp2
-      REAL*8 ppp , PSI , rlam , ssqrt , szet , TLBDG , 
-     &       VINF , wrt , wrtm , XA , XA1 , z1 , z2 , zet , zsqa
+      REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ah , cpsi , dep , 
+     &       EMMA , eta , etan , Polm , pp1 , pp2
+      REAL*8 ppp , PSI , rlam , ssqrt , szet , 
+     &       wrt , wrtm , z1 , z2 , zet , zsqa
       INTEGER*4 i , i1 , i2 , i3 , Icg , Ient , Iexp , 
-     &          ir , is , ISHA , ispi , ispo , 
-     &          IZ , IZ1
+     &          ir , is , ISHA , ispi , ispo
       INTEGER*4 jj , jjj , Joj , la , lam , lam1 , ld , 
-     &          LMAX , m , m1 , 
-     &          m2 , mstop , n , 
-     &          n2 , n3 , NCM
-      INTEGER*4 NEXPT , nn , nz
+     &          LMAX , m , m1 , m2 , mstop , n , 
+     &          n2 , n3 , NCM , nn , nz
       LOGICAL ERR
       INCLUDE 'clcom.inc'
       INCLUDE 'mgn.inc'
@@ -78,8 +74,7 @@ C      Joj    - index of substate (write only)
       INCLUDE 'clcom8.inc'
       COMMON /CLCOM9/ ERR
       INCLUDE 'coex2.inc'
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
-     &                TLBDG(50) , VINF(50)
+      INCLUDE 'cx.inc'
       INCLUDE 'cexc0.inc'
       INCLUDE 'cxi.inc'
       COMMON /CAUX0 / EMMA(75) , NCM

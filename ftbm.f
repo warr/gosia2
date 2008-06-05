@@ -69,26 +69,24 @@ C      Bten   -
       IMPLICIT NONE
       REAL*8 aval , Bten , Chilo , 
      &       chis1 , CHIS11 , chish , Chisq , chisx , chx
-      REAL*8 EMH , EP , fc , fx , 
-     &       polm , pr , prop , TLBDG , val , VINF
-      REAL*8 wz , XA , XA1
+      REAL*8 EMH , fc , fx , 
+     &       polm , pr , prop , val , wz
       INTEGER*4 i1 , i11 , iapx , Icll , idec , Idr , 
      &          iflg , IGRD , ii , ile1 , ile2 , ile3 , 
      &          ilin , indx , inko , INM
       INTEGER*4 inp , inpo , inpx , INTR , inzz , inzzz , 
      &          IPS1 , issp , ITAK2 , itemp , ixx , 
-     &          IZ , IZ1 , izzz
+     &          izzz
       INTEGER*4 j , jj , jjgg , jjj , jk , jkl , jm , jmf , jmt , jmte , 
      &          jpp , jpz , JSKIP , jy , k , karm , kk , kk6 , kkx , kmt
       INTEGER*4 knm , kx , larm , lcc , lcou , LFL , LFL1 , 
      &          LFL2 , licz , lix , llx , lm , LMAX , lmh , 
      &          LNY , loc , loch , loct
       INTEGER*4 lp , lpit , lput , lpx , lpxd , ls , lst
-      INTEGER*4 luu , lx , Ncall , NEXPT , NLIFT , nlin , 
+      INTEGER*4 luu , lx , Ncall , NLIFT , nlin , 
      &          nowr , npoz , nrest , NWR , nwyr
       DIMENSION jmte(6) , prop(6) , Bten(1200)
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
-     &                TLBDG(50) , VINF(50)
+      INCLUDE 'cx.inc'
       INCLUDE 'cexc0.inc'
       INCLUDE 'ccc.inc'
       COMMON /ILEWY / NWR

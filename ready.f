@@ -27,15 +27,14 @@ C experimental yields
  
       SUBROUTINE READY(Idr,Ntap,Ipri)
       IMPLICIT NONE
-      REAL*8 ap , EP , TLBDG , u , VINF , w , waga , XA , XA1 , xep , zp
+      REAL*8 ap , u , w , waga , xep , zp
       INTEGER*4 idc , idc1 , idcx , Idr , ii , Ipri , 
-     &          iytot , iytt , IZ , IZ1 , j , k , kk , kkl , lbg
-      INTEGER*4 lxp , nanx , nde , nde1 , ne , NEXPT , ns1
+     &          iytot , iytt , j , k , kk , kkl , lbg
+      INTEGER*4 lxp , nanx , nde , nde1 , ne , ns1
       INTEGER*4 ns2 , ns3 , ns4 , nsxh , nsyh , Ntap , nval
       DIMENSION iytot(32)
       INCLUDE 'yexpt.inc'
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
-     &                TLBDG(50) , VINF(50)
+      INCLUDE 'cx.inc'
       INCLUDE 'lev.inc'
       INCLUDE 'mgn.inc'
       INCLUDE 'cccds.inc'

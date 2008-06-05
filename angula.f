@@ -42,9 +42,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       INTEGER*4 Idr , ifn , Iful , ig , il , inat , inx1 , 
      &          ipd , is , ITTE , iu , ixs , j , ji , jj , jm , k
       INTEGER*4 kq , l , lf , lf1 , mind , Ngl , nlv
-      REAL*8 dsig, EP , TLBDG , ttx , VINF ,
-     &       XA , XA1 ! For gosia2
-      INTEGER*4 IZ, IZ1, NEXPT ! For gosia2
+      REAL*8 dsig, ttx
       CHARACTER*4 Op2 ! For gosia2
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
      &          Ygn(*)
@@ -58,8 +56,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       INCLUDE 'brec.inc'
       COMMON /THTAR / ITTE(50)
       INCLUDE 'tcm.inc' ! For gosia2
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
-     &                TLBDG(50) , VINF(50) ! For gosia2
+      INCLUDE 'cx.inc' ! For gosia2
       
       DO l = 1 , Idr ! For each decay
 

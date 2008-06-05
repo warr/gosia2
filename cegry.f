@@ -77,21 +77,19 @@ C      Iredv  -
       SUBROUTINE CEGRY(Chisq,Itemp,Chilo,Idr,Nwyr,Icall,Issp,Iredv)
       IMPLICIT NONE
       REAL*8 ccc , ccd , Chilo , Chisq , cnr , cocos , d , decen
-      REAL*8 dl , effi , EMH , EP , fi0 , fi1 , fic , figl , 
-     &       fm , g
+      REAL*8 dl , effi , EMH , fi0 , fi1 , fic , figl , fm , g
       REAL*8 gth , part , partl , rik , rl , rx , ry , 
      &       rys , rz , sf , sgm , SGW , SUBCH1 , SUBCH2 , sum3
-      REAL*8 sumpr , TACOS , tetrc , tfac , thc , TLBDG , 
-     &       VINF , wf , XA , XA1
+      REAL*8 sumpr , TACOS , tetrc , tfac , thc , wf
       INTEGER*4 iabc , Icall , id , idc , Idr ,  ifdu , ifxd , IGRD , 
      &          ii , ile2 , IMIN , inclus , INM
       INTEGER*4 ipd , Iredv , Issp , 
      &          Itemp , ITS , iva , iw , IWF , ixl , ixm , 
-     &          iyex , IZ , IZ1 , jj
+     &          iyex , jj
       INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , 
      &          KVAR , l , l1 , LFL , LFL1 , LFL2 , lic , 
      &          licz , ll1
-      INTEGER*4 LNORM , lth , lu , luu , na , NEXPT
+      INTEGER*4 LNORM , lth , lu , luu , na
       INTEGER*4 nf , nf1 , ni , ni1 , NLIFT , Nwyr
       CHARACTER*4 wupl , war
       REAL*8 CNOR1 , CNOR2 ! For gosia2
@@ -111,8 +109,7 @@ C      Iredv  -
       COMMON /LIFE  / NLIFT
       INCLUDE 'lev.inc'
       COMMON /IGRAD / IGRD
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
-     &                TLBDG(50) , VINF(50)
+      INCLUDE 'cx.inc'
       COMMON /MINNI / IMIN , LNORM(50)
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
       INCLUDE 'yteor.inc'

@@ -23,16 +23,14 @@ C      Il     - level index
  
       SUBROUTINE GKVAC(Il)
       IMPLICIT NONE
-      REAL*8 AVJI , beta , EP , FIEL , GAMMA , GFAC , GKI , 
+      REAL*8 AVJI , beta , FIEL , GAMMA , GFAC , GKI , 
      &       POWER , sp
-      REAL*8 SUM , time , TIMEC , TLBDG , VINF , 
-     &       XA , XA1 , XLAMB
-      INTEGER*4 i , Il , ITTE , IZ , IZ1 , NEXPT
+      REAL*8 SUM , time , TIMEC , XLAMB
+      INTEGER*4 i , Il , ITTE
       INCLUDE 'lev.inc'
       INCLUDE 'brec.inc'
       COMMON /GGG   / AVJI , GAMMA , XLAMB , TIMEC , GFAC , FIEL , POWER
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
-     &                TLBDG(50) , VINF(50)
+      INCLUDE 'cx.inc'
       COMMON /GVAC  / GKI(3) , SUM(3)
       INCLUDE 'kin.inc'
       INCLUDE 'vac.inc'

@@ -58,15 +58,15 @@ C Here we parse the input of the OP,YIEL command and store the values.
  
       SUBROUTINE ADHOC(Oph,Idr,Nfd,Ntap,Iyr)
       IMPLICIT NONE
-      REAL*8 DMIX , DMIXE , EP
-      REAL*8 TLBDG , VINF , wamx , wbra , wdl , wlf , XA , XA1
+      REAL*8 DMIX , DMIXE
+      REAL*8 wamx , wbra , wdl , wlf
       INTEGER*4 iax , Idr , iexp1 , 
      &          ilft , IMIX , iosr , ipri , isrt1 , 
      &          ITS , iuf
-      INTEGER*4 Iyr , IZ , IZ1 , jic , jicc , juf , lb , 
+      INTEGER*4 Iyr , jic , jicc , juf , lb , 
      &          li , licc , llia , lxt , MEM , n1
       INTEGER*4 n2 , ndas , NDL , ndtp , 
-     &          NEXPT , Nfd , nistr , NLIFT , ns1 , ns2 , ns3 , 
+     &          Nfd , nistr , NLIFT , ns1 , ns2 , ns3 , 
      &          ns4 , Ntap , nvare
       INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
       CHARACTER*4 Oph
@@ -83,8 +83,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       INCLUDE 'lev.inc'
       INCLUDE 'ccc.inc'
       INCLUDE 'coex.inc'
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
-     &                TLBDG(50) , VINF(50)
+      INCLUDE 'cx.inc'
       INCLUDE 'cexc.inc'
       INCLUDE 'prt.inc'
       COMMON /TRB   / ITS
