@@ -47,17 +47,16 @@ C half-integers.
  
       SUBROUTINE LSLOOP(Ir,N,Nz,Ld,Lam,La,Ssqrt,Icg,Iexp)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , CAT , DIPOL , ELM , ELML , ELMU , EN , phz , 
-     &       PSI , QAPR , rmir , rmis , SA , SPIN , Ssqrt , WTHREJ , 
-     &       ZETA , ZPOL
+      REAL*8 CAT , ELM , ELML , ELMU , phz , 
+     &       PSI , QAPR , rmir , rmis , SA , Ssqrt , WTHREJ , 
+     &       ZETA
       INTEGER*4 i2 , i3 , IAPR , Icg , Iexp , IFAC , iiex , indx , 
      &          inqa , inr , ins , IPATH , Ir , is , is1 , is2 , ISEX , 
-     &          ISMAX , ismin , ISO
+     &          ISMAX , ismin
       INTEGER*4 isplus , jg1 , jg2 , jrmir , La , Lam , lam2 , Ld , 
      &          LEADF , LZETA , m , MAGA , MEM , mrange , mt , N , 
      &          NSTART , NSTOP , Nz
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
-     &                ISO
+      INCLUDE 'coex.inc'
       COMMON /PCOM  / PSI(1500)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /CLCOM8/ CAT(600,3) , ISMAX

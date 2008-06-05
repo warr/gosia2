@@ -233,16 +233,14 @@ C      ZV     - energy meshpoints
 
       PROGRAM GOSIA2
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , acof , ap , 
-     &       ARCCOS , ARCTG , arg , ax , B , bcof , be2 , be2a , be2b , 
-     &       be2c
+      REAL*8 acof , ap , ARCCOS , ARCTG , arg , ax , B , bcof , be2 , 
+     &       be2a , be2b , be2c
       REAL*8 bk , bl , bm , bmx , bten , bu , CAT , ccc , 
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
      &       cnst
-      REAL*8 cocos , conu , d , decen , dedx , 
-     &       DIPOL , DLOCK , dsd , dsig , dst
+      REAL*8 cocos , conu , d , decen , dedx , DLOCK , dsd , dsig , dst
       REAL*8 dsx , dsxm , effi , eh1 , ELM , 
-     &       elmi , ELML , ELMT , ELMU , emhl1 , EMMA , emn , emx , EN , 
+     &       elmi , ELML , ELMT , ELMU , emhl1 , EMMA , emn , emx , 
      &       enb
       REAL*8 eng , enh , EP , esd , esp , ess , 
      &       fi0 , fi1 , fic , fiex1 , figl , fipo1 , fm , G , 
@@ -253,7 +251,7 @@ C      ZV     - energy meshpoints
       REAL*8 q1 , q2 , QAPR , qc , qfac , qr , qui , r , r1 , 
      &       r2 , r3 , r4 , rem , remax , rl , rlr , rm , rx , ry
       REAL*8 rz , s , s11 , s12 , s21 , s22 , SA , sbe , sf , SGW , 
-     &       sh , sh1 , sh2 , SIMIN , slim , SPIN , SUBCH1 , SUBCH2
+     &       sh , sh1 , sh2 , SIMIN , slim , SUBCH1 , SUBCH2
       REAL*8 summm , sz1 , sz2 , TACOS , tau1 , tau2 , test , 
      &       tetrc , tfac , thc , title , 
      &       TLBDG , tmn , tmx , todfi
@@ -263,8 +261,7 @@ C      ZV     - energy meshpoints
       REAL*8 xep , XI , xi1 , xi2 , xk1 , xk2 , xl1 , xlevb , 
      &       xlk , xm1 , xm2 , xm3 , xtest , xw , xx , xxi , 
      &       ycorr
-      REAL*8 yy , yyd1 , yydd , yyy , 
-     &       ZETA , zmir , zp , ZPOL , zz
+      REAL*8 yy , yyd1 , yydd , yyy , ZETA , zmir , zp , zz
       INTEGER*4 i , i122 , IAPR , iapx , ib , 
      &          ibaf , icg , icll , ICS , ict , 
      &          ictl , id , idf , IDIVE
@@ -280,7 +277,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 IPI , ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
      &          ipri , IPRM , IPS1 , irea , irep , irfix , 
      &          ISEX , isip , iske , iskf
-      INTEGER*4 isko , iskok , ISMAX , ISO , isoh , ispa , ispb , 
+      INTEGER*4 isko , iskok , ISMAX , isoh , ispa , ispb , 
      &          itno , itp , ITS , ITTE , iuy , iva , iva1 , IVAR , 
      &          ivarh , ivari , ivrh , IWF
       INTEGER*4 ixj , ixl , ixm , iyr , IZ , IZ1 , izcap , j , ja , 
@@ -362,8 +359,7 @@ C      ZV     - energy meshpoints
       COMMON /CXI   / XI(1500)
       COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
-     &                ISO
+      INCLUDE 'coex.inc'
       COMMON /MINNI / IMIN , LNORM(50)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)

@@ -26,10 +26,10 @@ C      Iop    - print flag (controls what is written to output).
  
       SUBROUTINE PRELM(Iop)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , b , DIPOL , ELM , ELML , ELMU , EN , 
-     &       pv , SA , SPIN , ste , ZPOL
+      REAL*8 b , ELM , ELML , ELMU , 
+     &       pv , SA , ste
       REAL*8 ELM25 , ELM26 ! Added for gosia2
-      INTEGER*4 inx , Iop , ISO , isp , IVAR , j , k , kk , l , LAMDA , 
+      INTEGER*4 inx , Iop , isp , IVAR , j , k , kk , l , LAMDA , 
      &          LAMMAX , LDNUM , LEAD , LMAXE , m , MAGEXC , MEMAX , 
      &          MEMX6 , MULTI , NDIM
       INTEGER*4 NMAX , NMAX1
@@ -37,8 +37,7 @@ C      Iop    - print flag (controls what is written to output).
       INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
-     &                ISO
+      INCLUDE 'coex.inc'
       COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       COMMON /COEX2 / NMAX , NDIM , NMAX1

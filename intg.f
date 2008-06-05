@@ -69,16 +69,15 @@ C value of f(n).
  
       SUBROUTINE INTG(Ien)
       IMPLICIT NONE
-      REAL*8 ACC50 , ACCA , ACCUR , CAT , D2W , DIPOL , EN , f , rim , 
-     &       rl , SPIN , srt , ZPOL
+      REAL*8 ACC50 , CAT , D2W , f , rim , 
+     &       rl , srt
       INTEGER*4 i , i57 , Ien , IFAC , IFLG , ihold , intend , INTERV , 
-     &          IPATH , ir , ir1 , IRA , ISG , ISG1 , ISMAX , ISO , k , 
+     &          IPATH , ir , ir1 , IRA , ISG , ISG1 , ISMAX , k , 
      &          kast , KDIV , LAMR
       INTEGER*4 MAGA , MAXLA , mir , n , NDIM , NDIV , NMAX , NMAX1 , 
      &          NPT , NSTART , NSTOP , NSW
       COMPLEX*16 ARM , hold
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
-     &                ISO
+      INCLUDE 'coex.inc'
       COMMON /AZ    / ARM(600,7)
       COMMON /RNG   / IRA(8) , MAXLA
       COMMON /A50   / ACC50

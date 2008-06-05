@@ -51,10 +51,10 @@ C z is the coupling parameter zeta, calculated in the function LSLOOP.
       
       SUBROUTINE LAISUM(Ir,N,Rsg,Lam,Ld,Nz,I57)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , CAT , D2W , DIPOL , ELM , ELML , ELMU , EN , 
-     &       q , rmir , rmis , rmu , Rsg , SA , SPIN , z , ZETA , ZPOL
+      REAL*8 CAT , D2W , ELM , ELML , ELMU , 
+     &       q , rmir , rmis , rmu , Rsg , SA , z , ZETA
       INTEGER*4 i2 , i3 , I57 , iii , indq , indx , Ir , irs , is , 
-     &          is1 , is2 , ISG , ISG1 , ISHA , ISMAX , ismin , ISO , 
+     &          is1 , is2 , ISG , ISG1 , ISHA , ISMAX , ismin , 
      &          isplus , ISSTAR , ISSTO
       INTEGER*4 KDIV , la , Lam , LAMR , Ld , LOCQ , LZETA
       INTEGER*4 m , mrange , MSTORE , mua , N , NDIV , NPT , NSTART , 
@@ -62,8 +62,7 @@ C z is the coupling parameter zeta, calculated in the function LSLOOP.
       COMPLEX*16 ARM , FAZA , pamp , pamp1
       COMMON /PSPIN / ISHA
       COMMON /AZ    / ARM(600,7)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
-     &                ISO
+      INCLUDE 'coex.inc'
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
      &                ISG1
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)

@@ -37,10 +37,9 @@ C 8 = M2.
  
       SUBROUTINE SEQ(Idr)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , CONV , DIPOL , ega , egs , emax , 
-     &       EN , F , FP , GF , GKP , SPIN , spinf , spini , twoi
-      REAL*8 ZPOL
-      INTEGER*4 idecay , Idr , indx , inx , inx1 , ir , is , ISO , 
+      REAL*8 CONV , ega , egs , emax , 
+     &       F , FP , GF , GKP , spinf , spini , twoi
+      INTEGER*4 idecay , Idr , indx , inx , inx1 , ir , is , 
      &          istr1 , istr2 , j , js , jsave , k , KLEC , kpa , 
      &          l , la
       INTEGER*4 la1 , LAMDA , LAMMAX , ld , LDNUM , LEAD , LEADF
@@ -51,8 +50,7 @@ C 8 = M2.
       COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       INCLUDE 'mgn.inc'
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
-     &                ISO
+      INCLUDE 'coex.inc'
       INCLUDE 'lev.inc'
       COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(75)
       DATA jsave/0/

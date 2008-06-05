@@ -76,19 +76,16 @@ C      Iredv  -
  
       SUBROUTINE CEGRY(Chisq,Itemp,Chilo,Idr,Nwyr,Icall,Issp,Iredv)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , ccc , ccd , 
-     &       Chilo , Chisq , cnr , cocos , d , decen , 
-     &       DIPOL
-      REAL*8 dl , effi , EMH , EN , EP , fi0 , fi1 , fic , figl , 
+      REAL*8 ccc , ccd , Chilo , Chisq , cnr , cocos , d , decen
+      REAL*8 dl , effi , EMH , EP , fi0 , fi1 , fic , figl , 
      &       fm , g
       REAL*8 gth , part , partl , rik , rl , rx , ry , 
-     &       rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , SUBCH2 , sum3
+     &       rys , rz , sf , sgm , SGW , SUBCH1 , SUBCH2 , sum3
       REAL*8 sumpr , TACOS , tetrc , tfac , thc , TLBDG , 
      &       VINF , wf , XA , XA1
-      REAL*8 ZPOL
       INTEGER*4 iabc , Icall , id , idc , Idr ,  ifdu , ifxd , IGRD , 
      &          ii , ile2 , IMIN , inclus , INM
-      INTEGER*4 ipd , IPRM , Iredv , ISO , Issp , 
+      INTEGER*4 ipd , IPRM , Iredv , Issp , 
      &          Itemp , ITS , iva , iw , IWF , ixl , ixm , 
      &          iyex , IZ , IZ1 , jj
       INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , 
@@ -125,8 +122,7 @@ C      Iredv  -
       INCLUDE 'yexpt.inc'
       INCLUDE 'kin.inc'
       COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
-     &                ISO
+      INCLUDE 'coex.inc'
       COMMON /SKP   / JSKIP(50)
       COMMON /TRB   / ITS
       INCLUDE 'tcm.inc'

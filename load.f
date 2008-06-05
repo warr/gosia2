@@ -53,14 +53,14 @@ C      Joj    - index of substate (write only)
  
       SUBROUTINE LOAD(Iexp,Ient,Icg,Polm,Joj)
       IMPLICIT NONE
-      REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ACCA , ACCUR , ah , CAT , 
-     &       cpsi , dep , DIPOL , EMMA , EN , EP , eta , etan , Polm , 
+      REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ah , CAT , 
+     &       cpsi , dep , EMMA , EP , eta , etan , Polm , 
      &       pp1 , pp2
-      REAL*8 ppp , PSI , QAPR , rlam , SPIN , ssqrt , szet , TLBDG , 
+      REAL*8 ppp , PSI , QAPR , rlam , ssqrt , szet , TLBDG , 
      &       VINF , wrt , wrtm , XA , XA1 , XI , z1 , z2 , zet , ZETA , 
-     &       ZPOL , zsqa
+     &       zsqa
       INTEGER*4 i , i1 , i2 , i3 , IAPR , Icg , Ient , Iexp , IPATH , 
-     &          ir , is , ISEX , ISHA , ISMAX , ISO , ispi , ispo , 
+     &          ir , is , ISEX , ISHA , ISMAX , ispi , ispo , 
      &          IVAR , IZ , IZ1
       INTEGER*4 jj , jjj , Joj , la , lam , lam1 , LAMDA , LAMMAX , ld , 
      &          LDNUM , LEAD , LMAX , LMAXE , LZETA , m , m1 , 
@@ -71,8 +71,7 @@ C      Joj    - index of substate (write only)
       COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
      &                MULTI(8)
       INCLUDE 'mgn.inc'
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
-     &                ISO
+      INCLUDE 'coex.inc'
       COMMON /PSPIN / ISHA
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
       COMMON /PCOM  / PSI(1500)
