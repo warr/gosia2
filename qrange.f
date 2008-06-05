@@ -23,13 +23,11 @@ C      Irl    -
       SUBROUTINE QRANGE(Icnt,Nlm,Lloc,Ibm,Icm,Idm,Irl)
       IMPLICIT NONE
       INTEGER*4 Ibm , Icm , Icnt , Idm , IRA , Irl , is , k , ke , km , 
-     &          l , LAMDA , LAMMAX , ld , LDNUM , LEAD , Lloc , ls , 
-     &          MAXLA , MULTI
+     &          l , ld , Lloc , ls , MAXLA
       INTEGER*4 nlend , Nlm
       DIMENSION Lloc(8) , Irl(8)
       COMMON /RNG   / IRA(8) , MAXLA
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
-     &                MULTI(8)
+      INCLUDE 'clcom.inc'
 
       IF ( Icnt.EQ.1 ) THEN
          Nlm = 0

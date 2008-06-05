@@ -37,13 +37,12 @@ C      W0     - omega limit
       REAL*8 z , ZETA
       INTEGER*4 i1 , i2 , i3 , indx , Ir , is , is1 , 
      &          is2 , ISG , ISG1 , ISMAX , ismin , isplus , KDIV , la , 
-     &          lam , LAMDA , LAMMAX
-      INTEGER*4 LAMR , ld , LDNUM , LEAD , LEADF , LZETA , m , MEM , 
-     &          mrange , mua , MULTI , NDIV , NPT , NSTART , NSTOP , 
+     &          lam
+      INTEGER*4 LAMR , ld , LEADF , LZETA , m , MEM , 
+     &          mrange , mua , NDIV , NPT , NSTART , NSTOP , 
      &          NSW , nz
       COMPLEX*16 ARM , STAMP , dis , uhuj
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
-     &                MULTI(8)
+      INCLUDE 'clcom.inc'
       COMMON /AZ    / ARM(600,7)
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
      &                ISG1

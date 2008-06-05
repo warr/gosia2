@@ -36,12 +36,11 @@ C storage part.
       IMPLICIT NONE
       REAL*8 D2W
       INTEGER*4 i2 , IFLG , indx , ISG , ISG1 , ISSTAR , ISSTO , KDIV , 
-     &          La , LAMDA , LAMMAX , LAMR , Ld , LDNUM , LEAD , LEADF , 
-     &          m , MEM , MSTORE , MULTI
+     &          La , LAMR , Ld , LEADF , 
+     &          m , MEM , MSTORE
       INTEGER*4 N , NDIV , NPT , NSTART , NSTOP , NSW
       COMPLEX*16 EXPON
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
-     &                MULTI(8)
+      INCLUDE 'clcom.inc'
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
      &                ISG1
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)

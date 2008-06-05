@@ -19,10 +19,8 @@ C      Idr    - number of decays
       SUBROUTINE PTICC(Idr)
       IMPLICIT NONE
       REAL*8 cone1 , cone2 , conm1 , CONV , enet
-      INTEGER*4 Idr , iinx , l , LAMDA , LAMMAX , LDNUM , 
-     &          LEAD , MULTI , nf , ni
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
-     &                MULTI(8)
+      INTEGER*4 Idr , iinx , l , nf , ni
+      INCLUDE 'clcom.inc'
       INCLUDE 'coex.inc'
       INCLUDE 'lev.inc'
 

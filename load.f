@@ -62,14 +62,13 @@ C      Joj    - index of substate (write only)
       INTEGER*4 i , i1 , i2 , i3 , IAPR , Icg , Ient , Iexp , IPATH , 
      &          ir , is , ISEX , ISHA , ISMAX , ispi , ispo , 
      &          IVAR , IZ , IZ1
-      INTEGER*4 jj , jjj , Joj , la , lam , lam1 , LAMDA , LAMMAX , ld , 
-     &          LDNUM , LEAD , LMAX , LMAXE , LZETA , m , m1 , 
-     &          m2 , MAGA , MAGEXC , MEMAX , MEMX6 , mstop , MULTI , n , 
+      INTEGER*4 jj , jjj , Joj , la , lam , lam1 , ld , 
+     &          LMAX , LMAXE , LZETA , m , m1 , 
+     &          m2 , MAGA , MAGEXC , MEMAX , MEMX6 , mstop , n , 
      &          n2 , n3 , NCM
       INTEGER*4 NDIM , NEXPT , NMAX , NMAX1 , nn , NSTART , NSTOP , nz
       LOGICAL ERR
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
-     &                MULTI(8)
+      INCLUDE 'clcom.inc'
       INCLUDE 'mgn.inc'
       INCLUDE 'coex.inc'
       COMMON /PSPIN / ISHA

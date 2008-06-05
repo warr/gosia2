@@ -35,16 +35,15 @@ C      I57    - switch which is either 5 or 7. This tells LAISUM to access eithe
       IMPLICIT NONE
       REAL*8 CAT , D2W , ELM , ELML , ELMU , rsg , SA , ZETA
       INTEGER*4 i1 , I57 , ibg , iend , iflg , indx , ir , is2 , ISG , 
-     &          ISG1 , ISMAX , ISSTAR , ISSTO , k , KDIV , lam , LAMDA , 
-     &          LAMMAX , LAMR , lax
-      INTEGER*4 ld , LDNUM , LEAD , LZETA , m , mm , MSTORE , MULTI , 
+     &          ISG1 , ISMAX , ISSTAR , ISSTO , k , KDIV , lam , 
+     &          LAMR , lax
+      INTEGER*4 ld , LZETA , m , mm , MSTORE , 
      &          n , NDIM , NDIV , nhold , NMAX , NMAX1 , NPT , NSTART , 
      &          NSTOP , NSW , nz
       COMPLEX*16 ARM
       COMMON /AZ    / ARM(600,7)
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
-     &                MULTI(8)
+      INCLUDE 'clcom.inc'
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
      &                ISG1

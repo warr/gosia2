@@ -29,10 +29,8 @@ C
 
       INTEGER*4 MAGEXC, MEMAX, LMAXE, MEMX6, IVAR
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
-
-      INTEGER*4 LAMDA, LEAD, LDNUM, LAMMAX, MULTI
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
-     &                MULTI(8)
+      
+      INCLUDE 'clcom.inc'
 
       INTEGER*4 n1, n2
       CHARACTER*1024 idx_name, icc_name

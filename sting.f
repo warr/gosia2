@@ -36,12 +36,11 @@ C      Irld   - index into ARM array
       REAL*8 CAT , D2W , ELM , ELML , ELMU , rsg , SA , w0 , ZETA
       INTEGER*4 i , i57 , ibg , iend , IFLG , indx , IRA , Irld , is2 , 
      &          ISG , ISG1 , ISMAX , ISSTAR , ISSTO , j , j1 , jj , 
-     &          KDIV , lam , LAMDA
-      INTEGER*4 LAMMAX , LAMR , ld , LDNUM , LEAD , LZETA , maxh , 
-     &          MAXLA , mm , MSTORE , MULTI , n , NDIV , NPT , NSW , nz
+     &          KDIV , lam
+      INTEGER*4 LAMR , ld , LZETA , maxh , 
+     &          MAXLA , mm , MSTORE , n , NDIV , NPT , NSW , nz
       COMPLEX*16 ARM
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
-     &                MULTI(8)
+      INCLUDE 'clcom.inc'
       COMMON /AZ    / ARM(600,7)
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       INCLUDE 'adbxi.inc'
