@@ -83,7 +83,7 @@ C      ISO    - isotropic flag
 C      ITMA   - identify detectors according to OP,GDET
 C      ITS    - create tape 18 file (OP,CONT switch SEL,)
 C      ITTE   - thick target experiment flag
-C      IUNIT3 - unit for TAPE3 (gosia2)
+C      IUNIT3 - unit for TAPE3
 C      IVAR   - indicates a limit or correlation is set
 C      IWF    - warning flag
 C      IY     - index for yields
