@@ -35,26 +35,23 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       
       SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
-      REAL*8 AGELI , alab , arg , at , attl , bt , CC , DELLA , 
-     &       EG , f , Fi0 , fi01 , Fi1 , fi11
-      REAL*8 Figl , FP , GKP , Gth , Q , qv , sm , Trec , 
+      REAL*8 alab , arg , at , attl , bt , DELLA , f , Fi0 , fi01 , 
+     &       Fi1 , fi11
+      REAL*8 Figl , FP , GKP , Gth , qv , sm , Trec , 
      &       Ygn , ylmr , ZETA
       INTEGER*4 Idr , ifn , Iful , ig , il , inat , inx1 , 
      &          ipd , is , ITTE , iu , ixs , j , ji , jj , jm , k
-      INTEGER*4 KLEC , kq , l , lf , lf1 , LZETA , mind , NANG , 
-     &          Ngl , NICC , nlv
+      INTEGER*4 KLEC , kq , l , lf , lf1 , LZETA , mind , Ngl , nlv
       REAL*8 dsig, EP , TLBDG , ttx , VINF ,
      &       XA , XA1 ! For gosia2
       INTEGER*4 IZ, IZ1, NEXPT ! For gosia2
-      INTEGER*4 ISPL ! Added for spline
       CHARACTER*4 Op2 ! For gosia2
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
      &          Ygn(*)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       INCLUDE 'tra.inc'
       INCLUDE 'lev.inc'
-      COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
-     &                NICC , NANG(200) , ISPL
+      INCLUDE 'ccc.inc'
       INCLUDE 'kin.inc'
       COMMON /LCDL  / DELLA(1500,3)
       COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(75)

@@ -58,8 +58,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
  
       SUBROUTINE ADHOC(Oph,Idr,Nfd,Ntap,Iyr)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , AGELI , CC , DIPOL , 
-     &       DMIX , DMIXE , EG , EN , EP , Q
+      REAL*8 ACCA , ACCUR , DIPOL , DMIX , DMIXE , EN , EP
       REAL*8 SPIN , TLBDG , VINF , wamx , wbra , 
      &       wdl , wlf , XA , XA1 , ZPOL
       INTEGER*4 iax , Idr , iexp1 , 
@@ -68,11 +67,10 @@ C Here we parse the input of the OP,YIEL command and store the values.
       INTEGER*4 Iyr , IZ , IZ1 , jic , jicc , juf , lb , 
      &          li , licc , llia , LMAXE , lxt , MAGEXC , MEM , 
      &          MEMAX , MEMX6 , n1
-      INTEGER*4 n2 , NANG , ndas , NDL , ndtp , 
-     &          NEXPT , Nfd , NICC , nistr , NLIFT , ns1 , ns2 , ns3 , 
+      INTEGER*4 n2 , ndas , NDL , ndtp , 
+     &          NEXPT , Nfd , nistr , NLIFT , ns1 , ns2 , ns3 , 
      &          ns4 , Ntap , nvare
       INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
-      INTEGER*4 ISPL ! Added for spline
       CHARACTER*4 Oph
       INCLUDE 'cccds.inc'
       INCLUDE 'dimx.inc'
@@ -85,8 +83,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       INCLUDE 'yexpt.inc'
       INCLUDE 'yteor.inc'
       INCLUDE 'lev.inc'
-      COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
-     &                NICC , NANG(200) , ISPL
+      INCLUDE 'ccc.inc'
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 

@@ -67,11 +67,11 @@ C      Bten   -
 
       SUBROUTINE FTBM(Icll,Chisq,Idr,Ncall,Chilo,Bten)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , AGELI , aval , Bten , CAT , CC , Chilo , 
+      REAL*8 ACCA , ACCUR , aval , Bten , CAT , Chilo , 
      &       chis1 , CHIS11 , chish , Chisq , chisx , chx , 
-     &       DIPOL , EG , ELM , ELML
+     &       DIPOL , ELM , ELML
       REAL*8 ELMU , EMH , EN , EP , fc , fx , 
-     &       polm , pr , prop , Q , SA , SPIN , TLBDG , val , VINF
+     &       polm , pr , prop , SA , SPIN , TLBDG , val , VINF
       REAL*8 wz , XA , XA1 , ZETA , ZPOL
       INTEGER*4 i1 , i11 , iapx , Icll , idec , Idr , 
      &          iflg , IGRD , ii , ile1 , ile2 , ile3 , 
@@ -86,17 +86,15 @@ C      Bten   -
      &          LNY , loc , loch , loct
       INTEGER*4 lp , lpit , lput , lpx , lpxd , ls , lst
       INTEGER*4 luu , lx , LZETA , MAGA , MAGEXC , MEMAX , MEMX6 , 
-     &          NANG , Ncall , NDIM , NEXPT , NICC , NLIFT , nlin , 
+     &          Ncall , NDIM , NEXPT , NLIFT , nlin , 
      &          NMAX , NMAX1 , nowr , npoz , nrest , NSTART
       INTEGER*4 NSTOP , NWR , nwyr
-      INTEGER*4 ISPL ! Added for spline
       COMPLEX*16 ARM
       DIMENSION jmte(6) , prop(6) , Bten(1200)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
-      COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) ,
-     &                NICC , NANG(200) , ISPL
+      INCLUDE 'ccc.inc'
       COMMON /ILEWY / NWR
       COMMON /CH1T  / CHIS11
       COMMON /IGRAD / IGRD
