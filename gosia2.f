@@ -310,9 +310,9 @@ C      ZV     - energy meshpoints
       INCLUDE 'logy.inc'
       INCLUDE 'fakul.inc'
       INCLUDE 'life.inc'
+      INCLUDE 'switch.inc'
       INCLUDE 'cinit2.inc' ! For gosia2
-      INCLUDE 'switch.inc' ! For gosia2
-      INCLUDE 'resc.inc'
+      INCLUDE 'resc.inc' ! For gosia2
       DATA (eng(k),k=1,10)/.05 , .06 , .08 , .1 , .15 , .2 , .3 , .5 , 
      &      1. , 1.5/
 C     Absorption coefficients in units of 1/cm for Ge
