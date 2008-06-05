@@ -19,13 +19,13 @@ C      Iso    - isotropic flag
       SUBROUTINE DOUBLE(Iso)
       IMPLICIT NONE
       REAL*8 CAT
-      INTEGER*4 ir , ISMAX , Iso , j , NDIM , NMAX , NMAX1 , NSTART , 
+      INTEGER*4 ir , ISMAX , Iso , j , NSTART , 
      &          NSTOP
       COMPLEX*16 ARM , fpom
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /AZ    / ARM(600,7)
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
+      INCLUDE 'coex2.inc'
       
       IF ( Iso.EQ.0 ) THEN
          DO j = 1 , NMAX ! Loop over levels

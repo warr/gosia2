@@ -43,9 +43,8 @@ C 8 = M2.
      &          istr1 , istr2 , j , js , jsave , k , KLEC , kpa , 
      &          l , la
       INTEGER*4 la1 , ld , LEADF
-      INTEGER*4 m , m1 , m6 , MEM , mk , mule , mulm , n , n1 , 
-     &          NDIM , NMAX , NMAX1 , nob
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
+      INTEGER*4 m , m1 , m6 , MEM , mk , mule , mulm , n , n1 , nob
+      INCLUDE 'coex2.inc'
       INCLUDE 'tra.inc'
       INCLUDE 'clcom.inc'
       INCLUDE 'mgn.inc'

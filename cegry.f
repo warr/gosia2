@@ -91,8 +91,8 @@ C      Iredv  -
       INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , 
      &          KVAR , l , l1 , LFL , LFL1 , LFL2 , lic , 
      &          licz , ll1
-      INTEGER*4 LNORM , lth , lu , luu , na , NDIM , NEXPT
-      INTEGER*4 nf , nf1 , ni , ni1 , NLIFT , NMAX , NMAX1 , Nwyr
+      INTEGER*4 LNORM , lth , lu , luu , na , NEXPT
+      INTEGER*4 nf , nf1 , ni , ni1 , NLIFT , Nwyr
       CHARACTER*4 wupl , war
       REAL*8 CNOR1 , CNOR2 ! For gosia2
       INTEGER*4 MCFIX ! For gosia2
@@ -101,7 +101,7 @@ C      Iredv  -
      &          partl(32,50,2)
       INCLUDE 'clust.inc'
       INCLUDE 'odch.inc'
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
+      INCLUDE 'coex2.inc'
       INCLUDE 'tra.inc'
       INCLUDE 'brec.inc'
       INCLUDE 'dimx.inc'

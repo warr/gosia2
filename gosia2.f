@@ -299,11 +299,11 @@ C      ZV     - energy meshpoints
       INTEGER*4 MEMAX , memax1 , memh , memx4 , MEMX6 , mend , mexl , 
      &          mfla , mlt , mm , mpin , ms , n , na , na1 , 
      &          naa , nallow
-      INTEGER*4 naxfl , nb1 , nb2 , nbands , nch , NCM , NDIM , 
+      INTEGER*4 naxfl , nb1 , nb2 , nbands , nch , NCM , 
      &          ndima , ndum , ne , NEXPT , nf , nfd , nfdd , 
      &          nfi , nflr , nft , nged
-      INTEGER*4 ngpr , ni , nksi , nl , NLIFT , NLOCK , NMAX ,
-     &          NMAX1 , nmaxh , nmemx , nnl , nogeli , npce , npce1 , 
+      INTEGER*4 ngpr , ni , nksi , nl , NLIFT , NLOCK , 
+     &          nmaxh , nmemx , nnl , nogeli , npce , npce1 , 
      &          npct , npct1 , npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , nz
       LOGICAL ERR
@@ -368,7 +368,7 @@ C      ZV     - energy meshpoints
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /CLCOM9/ ERR
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
+      INCLUDE 'coex2.inc'
       COMMON /CEXC9 / INTERV(50)
       COMMON /CAUX0 / EMMA(75) , NCM
       COMMON /PTH   / IPATH(75) , MAGA(75)

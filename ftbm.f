@@ -86,8 +86,8 @@ C      Bten   -
      &          LNY , loc , loch , loct
       INTEGER*4 lp , lpit , lput , lpx , lpxd , ls , lst
       INTEGER*4 luu , lx , MAGA , MAGEXC , MEMAX , MEMX6 , 
-     &          Ncall , NDIM , NEXPT , NLIFT , nlin , 
-     &          NMAX , NMAX1 , nowr , npoz , nrest , NSTART
+     &          Ncall , NEXPT , NLIFT , nlin , 
+     &          nowr , npoz , nrest , NSTART
       INTEGER*4 NSTOP , NWR , nwyr
       COMPLEX*16 ARM
       DIMENSION jmte(6) , prop(6) , Bten(1200)
@@ -110,7 +110,7 @@ C      Bten   -
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /AZ    / ARM(600,7)
       INCLUDE 'mgn.inc'
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
+      INCLUDE 'coex2.inc'
       COMMON /PTH   / IPATH(75) , MAGA(75)
       COMMON /PRT   / IPRM(20)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)

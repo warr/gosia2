@@ -27,12 +27,11 @@ C     Jidim   -
       REAL*8 a , b , FXIS1 , FXIS2 , q1 , q2 , QAPR , wg , wl , 
      &       xp , xx , zt
       INTEGER*4 IAPR , Iexp , IPATH , ISEX , ist , istop , Jidim , k , 
-     &          kk , MAGA , n , NDIM , ng , nl , NMAX
-      INTEGER*4 NMAX1
+     &          kk , MAGA , n , ng , nl
       INCLUDE 'map.inc'
       INCLUDE 'cxi.inc'
       INCLUDE 'clcom.inc'
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
+      INCLUDE 'coex2.inc'
       COMMON /PTH   / IPATH(75) , MAGA(75)
       COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
 

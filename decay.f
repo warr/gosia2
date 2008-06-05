@@ -36,14 +36,13 @@ C      Chilo  - chi squared of logs
       REAL*8 gk , GKP , SA , vcd
       INTEGER*4 i , ibra , idr , idrh , ifn , il , 
      &          inx , inx1 , iu , j , jlt , k , kl , KLEC , kq
-      INTEGER*4 l , l1 , lc1 , lc2 , n1 , n2 , NDIM , 
-     &          Nlift , NMAX , NMAX1
+      INTEGER*4 l , l1 , lc1 , lc2 , n1 , n2 , Nlift
       INCLUDE 'tra.inc'
       INCLUDE 'life1.inc'
       INCLUDE 'vac.inc'
       INCLUDE 'ccoup.inc'
       INCLUDE 'lev.inc'
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
+      INCLUDE 'coex2.inc'
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       INCLUDE 'kin.inc'
       COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(75)

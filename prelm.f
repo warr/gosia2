@@ -30,15 +30,14 @@ C      Iop    - print flag (controls what is written to output).
      &       pv , SA , ste
       REAL*8 ELM25 , ELM26 ! Added for gosia2
       INTEGER*4 inx , Iop , isp , IVAR , j , k , kk , l , 
-     &          LMAXE , m , MAGEXC , MEMAX , MEMX6 , NDIM
-      INTEGER*4 NMAX , NMAX1
+     &          LMAXE , m , MAGEXC , MEMAX , MEMX6
       CHARACTER*3 wrn
       INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
       INCLUDE 'coex.inc'
       INCLUDE 'clcom.inc'
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
+      INCLUDE 'coex2.inc'
       COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2
       COMMON /RESC  / ELM25(500) , ELM26(500) ! Added for gosia2
       DATA ste/0./

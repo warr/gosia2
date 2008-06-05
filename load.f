@@ -65,7 +65,7 @@ C      Joj    - index of substate (write only)
      &          LMAX , LMAXE , m , m1 , 
      &          m2 , MAGA , MAGEXC , MEMAX , MEMX6 , mstop , n , 
      &          n2 , n3 , NCM
-      INTEGER*4 NDIM , NEXPT , NMAX , NMAX1 , nn , NSTART , NSTOP , nz
+      INTEGER*4 NEXPT , nn , NSTART , NSTOP , nz
       LOGICAL ERR
       INCLUDE 'clcom.inc'
       INCLUDE 'mgn.inc'
@@ -77,7 +77,7 @@ C      Joj    - index of substate (write only)
       COMMON /CLM   / LMAX
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /CLCOM9/ ERR
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
+      INCLUDE 'coex2.inc'
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
