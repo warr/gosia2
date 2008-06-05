@@ -43,8 +43,7 @@ C      Tetrn  - theta of recoiling nucleus
       REAL*8 r3 , TASIN , tau , taup , tcmdg , tcmrad , Tetrn , tlbrad , 
      &       tmxdg , z1 , z2 , zcmdg , zcmrad
       REAL*8 zlbrad
-      LOGICAL ERR
-      COMMON /CLCOM9/ ERR
+      INCLUDE 'clcom9.inc'
       INCLUDE 'seck.inc'
       INCLUDE 'prt.inc'
       INCLUDE 'tcm.inc'

@@ -1,0 +1,2 @@
+      LOGICAL ERR
+      COMMON /CLCOM9/ ERR

@@ -305,7 +305,6 @@ C      ZV     - energy meshpoints
      &          nmaxh , nmemx , nnl , nogeli , npce , npce1 , 
      &          npct , npct1 , npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , nz
-      LOGICAL ERR
       CHARACTER*4 oph , op1 , opcja , op2
       CHARACTER*1 prp
       REAL*8 CNOR1 , CNOR2 , ELM25 , ELM26 , chir , chp , ccch1 ,
@@ -362,7 +361,7 @@ C      ZV     - energy meshpoints
       COMMON /CLM   / LMAX
       INCLUDE 'clcom0.inc'
       INCLUDE 'clcom8.inc'
-      COMMON /CLCOM9/ ERR
+      INCLUDE 'clcom9.inc'
       INCLUDE 'comme.inc'
       INCLUDE 'coex2.inc'
       COMMON /CEXC9 / INTERV(50)
