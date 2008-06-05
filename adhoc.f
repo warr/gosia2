@@ -81,7 +81,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       INCLUDE 'cexc.inc'
       INCLUDE 'prt.inc'
       INCLUDE 'trb.inc'
-      INCLUDE 'switch.inc' ! For gosia2
+      INCLUDE 'switch.inc'
       
 C     Read OP,YIEL parameters
       iosr = 0
