@@ -22,11 +22,11 @@ C      Irl    -
  
       SUBROUTINE QRANGE(Icnt,Nlm,Lloc,Ibm,Icm,Idm,Irl)
       IMPLICIT NONE
-      INTEGER*4 Ibm , Icm , Icnt , Idm , IRA , Irl , is , k , ke , km , 
-     &          l , ld , Lloc , ls , MAXLA
+      INTEGER*4 Ibm , Icm , Icnt , Idm , Irl , is , k , ke , km , 
+     &          l , ld , Lloc , ls
       INTEGER*4 nlend , Nlm
       DIMENSION Lloc(8) , Irl(8)
-      COMMON /RNG   / IRA(8) , MAXLA
+      INCLUDE 'rng.inc'
       INCLUDE 'clcom.inc'
 
       IF ( Icnt.EQ.1 ) THEN

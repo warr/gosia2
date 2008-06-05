@@ -72,13 +72,13 @@ C value of f(n).
       REAL*8 ACC50 , D2W , f , rim , 
      &       rl , srt
       INTEGER*4 i , i57 , Ien , IFAC , IFLG , ihold , intend , INTERV , 
-     &          ir , ir1 , IRA , ISG , ISG1 , k , 
+     &          ir , ir1 , ISG , ISG1 , k , 
      &          kast , KDIV , LAMR
-      INTEGER*4 MAXLA , mir , n , NDIV , NPT , NSW
+      INTEGER*4 mir , n , NDIV , NPT , NSW
       COMPLEX*16 hold
       INCLUDE 'coex.inc'
       INCLUDE 'az.inc'
-      COMMON /RNG   / IRA(8) , MAXLA
+      INCLUDE 'rng.inc'
       COMMON /A50   / ACC50
       COMMON /CLCOM0/ IFAC(75)
       INCLUDE 'clcom8.inc'

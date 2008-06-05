@@ -28,9 +28,9 @@ C index, knowing that we are always using steps of 0.03.
       SUBROUTINE RANGEL(Acc1)
       IMPLICIT NONE
       REAL*8 Acc1 , ACC50 , acl , w
-      INTEGER*4 i , IRA , MAXLA
+      INTEGER*4 i
       COMMON /A50   / ACC50
-      COMMON /RNG   / IRA(8) , MAXLA
+      INCLUDE 'rng.inc'
       INCLUDE 'clcom.inc'
 
       acl = -LOG(Acc1)

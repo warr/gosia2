@@ -33,10 +33,9 @@ C We are limited to a maximum of LP14 (=4900) values in total.
       SUBROUTINE ALLOC(Accur)
       IMPLICIT NONE
       REAL*8 Accur
-      INTEGER*4 iflag , IRA , j , k , k1 , load
-      INTEGER*4 MAXLA
+      INTEGER*4 iflag , j , k , k1 , load
       INCLUDE 'allc.inc'
-      COMMON /RNG   / IRA(8) , MAXLA
+      INCLUDE 'rng.inc'
       INCLUDE 'mgn.inc'
 
 C     Call RANGEL to determine the range of the integration over omega, which
