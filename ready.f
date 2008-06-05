@@ -97,7 +97,7 @@ C     Rewind yield file
                IF ( idc1.GT.1000 ) idc1 = idc/1000
                IF ( Ipri.EQ.1 ) WRITE (22,99004) idc , KSEQ(idc1,3) , 
      &                                 KSEQ(idc1,4) , u , w
-99004          FORMAT (2X,1I6,2X,1I2,2X,1I2,1(1E14.6,3X,1E14.6))
+99004          FORMAT (2X,1I6,1X,1I3,1X,1I3,1(1E14.6,3X,1E14.6))
                iytt = iytot(kk)
                YEXP(kk,iytt) = u
                DYEX(kk,iytt) = w/(SQRT(waga)+1.E-4)
@@ -109,6 +109,6 @@ C     Rewind yield file
             NYLDE(lxp,kk) = nval
          ENDDO ! For each dataset kk
       ENDDO ! Loop on experiments lxp
-99005 FORMAT (1X///5X,'ERROR-NO MATRIX ELEMENT BETWEEN STATES',1X,1I2,
-     &        ' AND ',1I2,/10X,'THIS TRANSITION IGNORED',//)
+99005 FORMAT (1X///5X,'ERROR-NO MATRIX ELEMENT BETWEEN STATES',1X,1I3,
+     &        ' AND ',1I3,/10X,'THIS TRANSITION IGNORED',//)
       END
