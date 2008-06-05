@@ -22,7 +22,7 @@ C      Bten   -
       REAL*8 arg , Bten , DJMM
       INTEGER*4 i , ind , inz , iph , ix , k , k1 , kp , l , lp , 
      &          lpp , lx , lxx
-      DIMENSION Bten(1200)
+      DIMENSION Bten(2400)
       INCLUDE 'kin.inc'
       INCLUDE 'tcm.inc'
       INCLUDE 'ccoup.inc'

@@ -29,7 +29,7 @@ C can cope with half-integers.
       INTEGER*4 i , Icl , iha , ila , ilg , ind , isi , ite , jm , 
      &          jmp , k , kk , kp , l , ll , Lmax , lp , m
       INTEGER*4 mm , mp , ms , msp
-      DIMENSION Bten(1200)
+      DIMENSION Bten(2400)
       INCLUDE 'coex.inc'
       INCLUDE 'clcom8.inc'
       INCLUDE 'coex2.inc'
