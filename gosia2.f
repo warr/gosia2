@@ -238,7 +238,7 @@ C      ZV     - energy meshpoints
       REAL*8 bk , bl , bm , bmx , bten , bu , ccc , 
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
      &       cnst
-      REAL*8 cocos , conu , d , decen , dedx , DLOCK , dsd , dsig , dst
+      REAL*8 cocos , conu , d , decen , dedx , dsd , dsig , dst
       REAL*8 dsx , dsxm , effi , eh1 , elmi , ELMT , emhl1 , emn , emx , 
      &       enb
       REAL*8 eng , enh , esd , esp , ess , 
@@ -262,7 +262,7 @@ C      ZV     - energy meshpoints
       REAL*8 yy , yyd1 , yydd , yyy , zmir , zp , zz
       INTEGER*4 i , i122 , iapx , ib , ibaf , icg , icll , ict , 
      &          ictl , id , idf
-      INTEGER*4 idr , iecd , ient , IFBFL , ifbp , 
+      INTEGER*4 idr , iecd , ient , ifbp , 
      &          ifc , ifm , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
      &          ihuj , ii , ij
       INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ile1 , ilevls , 
@@ -289,7 +289,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 lamh , lb , lck1 , lck2 , levl , lex , lexp , 
      &          lfagg , lfini , lh1 , lh2 , liscl , lkj
       INTEGER*4 lkj1 , ll , lli , lll , lmax1 , lmaxh , 
-     &          locat , LOCKF , LOCKS , loct , lp0 , 
+     &          locat , loct , lp0 , 
      &          lpin , ltrn , ltrn1 , ltrn2 , lu , lx , lxd , 
      &          magh , MEM
       INTEGER*4 memax1 , memh , memx4 , mend , mexl , 
@@ -298,7 +298,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 naxfl , nb1 , nb2 , nbands , nch , 
      &          ndima , ndum , ne , nf , nfd , nfdd , 
      &          nfi , nflr , nft , nged
-      INTEGER*4 ngpr , ni , nksi , nl , NLOCK , 
+      INTEGER*4 ngpr , ni , nksi , nl , 
      &          nmaxh , nmemx , nnl , nogeli , npce , npce1 , 
      &          npct , npct1 , npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , nz
@@ -366,7 +366,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'aprcat.inc'
       INCLUDE 'warn.inc'
       INCLUDE 'thtar.inc'
-      COMMON /FIT   / LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
+      INCLUDE 'fit.inc'
       INCLUDE 'aprx.inc'
       INCLUDE 'skp.inc'
       INCLUDE 'trb.inc'

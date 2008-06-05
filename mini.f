@@ -59,21 +59,17 @@ C don't go outside the limits specified by the user.
      &                Bten)
       IMPLICIT NONE
       REAL*8 a , a0 , a1 , b , Bten , c , ccd , chd , chil , chilo , 
-     &       Chiok , chirf , chis12 , chis13 , chisf , chisp , 
-     &       Chisq , chiss , chl
-      REAL*8 chx , cmax , Conv , crit , dl , 
-     &       DLOCK , dm , f1 , f2 , flt
+     &       Chiok , chirf , chis12 , chis13 , chisf , chisp , Chisq , 
+     &       chiss , chl
+      REAL*8 chx , cmax , Conv , crit , dl , dm , f1 , f2 , flt
       REAL*8 gradp , ht , p , q , rfk , sel , shl , sumg1 , 
      &       sumg2 , sumht , uxa , xkat , Xtest
-      INTEGER*4 i , icl1 , icl2 , icount , Idr , IFBFL , 
-     &          iht , iin , Imode , indx1 , inmx , ino , 
-     &          ipas , ipm
-      INTEGER*4 Ips , Is , istec , itf , j , 
-     &          jcoup , jcp , jin , Jjh , jjj , jlin , jnm , 
-     &          jpr , jsa , jst
-      INTEGER*4 kh2 , kkk , l , lnm , LOCKF , LOCKS , 
-     &          metf , mvfl , ncall , nlinn , NLOCK , noflg , 
-     &          Nptl
+      INTEGER*4 i , icl1 , icl2 , icount , Idr , iht , iin , Imode , 
+     &          indx1 , inmx , ino , ipas , ipm
+      INTEGER*4 Ips , Is , istec , itf , j , jcoup , jcp , jin , 
+     &          Jjh , jjj , jlin , jnm , jpr , jsa , jst
+      INTEGER*4 kh2 , kkk , l , lnm , metf , mvfl , ncall , nlinn , 
+     &          noflg , Nptl
       DIMENSION ipm(10) , Bten(1200) , gradp(1500)
       INCLUDE 'dumm.inc'
       INCLUDE 'ilewy.inc'
@@ -87,7 +83,7 @@ C don't go outside the limits specified by the user.
       INCLUDE 'cexc.inc'
       INCLUDE 'comme.inc'
       INCLUDE 'sel.inc'
-      COMMON /FIT   / LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
+      INCLUDE 'fit.inc'
       INCLUDE 'erran.inc'
       INCLUDE 'logy.inc'
       INCLUDE 'ercal.inc'
