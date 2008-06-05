@@ -240,8 +240,7 @@ C      ZV     - energy meshpoints
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
      &       cnst
       REAL*8 cocos , conu , CORF , d , decen , dedx , 
-     &       DIPOL , DLOCK , DS , dsd , DSE , DSG , 
-     &       dsig , dst
+     &       DIPOL , DLOCK , dsd , dsig , dst
       REAL*8 dsx , dsxm , DYEX , effi , EG , eh1 , ELM , ELMH , 
      &       elmi , ELML , ELMT , ELMU , emhl1 , EMMA , emn , emx , EN , 
      &       enb
@@ -262,10 +261,10 @@ C      ZV     - energy meshpoints
      &       val , VINF , waga , wph , wpi , WSIXJ , wth , wthh , 
      &       WTHREJ , XA , XA1
       REAL*8 xep , XI , xi1 , xi2 , XIR , xk1 , xk2 , xl1 , xlevb , 
-     &       xlk , xm1 , xm2 , xm3 , xtest , XV , xw , xx , xxi , 
+     &       xlk , xm1 , xm2 , xm3 , xtest , xw , xx , xxi , 
      &       ycorr
-      REAL*8 YEXP , YGN , YGP , YNRM , YV , yy , yyd1 , yydd , yyy , 
-     &       ZETA , zmir , zp , ZPOL , ZV , zz
+      REAL*8 YEXP , YGN , YGP , YNRM , yy , yyd1 , yydd , yyy , 
+     &       ZETA , zmir , zp , ZPOL , zz
       INTEGER*4 i , i122 , IAPR , iapx , ib , 
      &          ibaf , IBRC , icg , icll , ICS , ict , 
      &          ictl , id , idf , IDIVE
@@ -350,8 +349,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'erran.inc'
       INCLUDE 'mgn.inc'
       INCLUDE 'seck.inc'
-      COMMON /VLIN  / XV(101) , YV(101) , ZV(100) , DSG(100) ,
-     &                DSE(100) , DS
+      INCLUDE 'vlin.inc'
       COMMON /DUMM  / GRAD(1500) , HLMLM(1500) , ELMH(1500)
       COMMON /BRNCH / BRAT(50,2) , IBRC(2,50) , NBRA
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
