@@ -1,0 +1,2 @@
+      REAL*8 CHIS11
+      COMMON /CH1T  / CHIS11

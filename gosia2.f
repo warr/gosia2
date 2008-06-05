@@ -260,8 +260,7 @@ C      ZV     - energy meshpoints
      &       xlk , xm1 , xm2 , xm3 , xtest , xw , xx , xxi , 
      &       ycorr
       REAL*8 yy , yyd1 , yydd , yyy , zmir , zp , zz
-      INTEGER*4 i , i122 , iapx , ib , 
-     &          ibaf , icg , icll , ICS , ict , 
+      INTEGER*4 i , i122 , iapx , ib , ibaf , icg , icll , ict , 
      &          ictl , id , idf
       INTEGER*4 idr , iecd , ient , IFBFL , ifbp , 
      &          ifc , ifm , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
@@ -279,8 +278,7 @@ C      ZV     - energy meshpoints
      &          itno , itp , iuy , iva , iva1 , 
      &          ivarh , ivari , ivrh
       INTEGER*4 ixj , ixl , ixm , iyr , izcap , j , ja , 
-     &          jan , jan1 , jb , jb1 , jb2 , jd , jde , jdy , je , 
-     &          JENTR
+     &          jan , jan1 , jb , jb1 , jb2 , jd , jde , jdy , je
       INTEGER*4 jex , jexp , jfi , jfre , jgd , jgl , jgl1 , jgr , jgs , 
      &          jj , jj1 , jjjj , jjlx , jjx , jk , jkloo , jktt , jl , 
      &          jmm , jmpin
@@ -373,7 +371,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'skp.inc'
       INCLUDE 'trb.inc'
       INCLUDE 'sel.inc'
-      COMMON /ERCAL / JENTR , ICS
+      INCLUDE 'ercal.inc'
       INCLUDE 'logy.inc'
       INCLUDE 'fakul.inc'
       INCLUDE 'life.inc'

@@ -59,17 +59,17 @@ C don't go outside the limits specified by the user.
      &                Bten)
       IMPLICIT NONE
       REAL*8 a , a0 , a1 , b , Bten , c , ccd , chd , chil , chilo , 
-     &       Chiok , chirf , CHIS11 , chis12 , chis13 , chisf , chisp , 
+     &       Chiok , chirf , chis12 , chis13 , chisf , chisp , 
      &       Chisq , chiss , chl
       REAL*8 chx , cmax , Conv , crit , dl , 
      &       DLOCK , dm , f1 , f2 , flt
       REAL*8 gradp , ht , p , q , rfk , sel , shl , sumg1 , 
      &       sumg2 , sumht , uxa , xkat , Xtest
-      INTEGER*4 i , icl1 , icl2 , icount , ICS , Idr , IFBFL , 
+      INTEGER*4 i , icl1 , icl2 , icount , Idr , IFBFL , 
      &          iht , iin , Imode , indx1 , inmx , ino , 
      &          ipas , ipm
       INTEGER*4 Ips , Is , istec , itf , j , 
-     &          jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , jnm , 
+     &          jcoup , jcp , jin , Jjh , jjj , jlin , jnm , 
      &          jpr , jsa , jst
       INTEGER*4 kh2 , kkk , l , lnm , LOCKF , LOCKS , 
      &          metf , mvfl , ncall , nlinn , NLOCK , noflg , 
@@ -77,7 +77,7 @@ C don't go outside the limits specified by the user.
       DIMENSION ipm(10) , Bten(1200) , gradp(1500)
       INCLUDE 'dumm.inc'
       INCLUDE 'ilewy.inc'
-      COMMON /CH1T  / CHIS11
+      INCLUDE 'ch1t.inc'
       INCLUDE 'mgn.inc'
       INCLUDE 'uwaga.inc'
       INCLUDE 'yexpt.inc'
@@ -90,7 +90,7 @@ C don't go outside the limits specified by the user.
       COMMON /FIT   / LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
       INCLUDE 'erran.inc'
       INCLUDE 'logy.inc'
-      COMMON /ERCAL / JENTR , ICS
+      INCLUDE 'ercal.inc'
       INCLUDE 'switch.inc' ! For gosia2
       DATA chirf/0./,dm/0./,sumg2/0./
 
