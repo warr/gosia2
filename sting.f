@@ -39,9 +39,8 @@ C      Irld   - index into ARM array
      &          KDIV , lam
       INTEGER*4 LAMR , ld , maxh , 
      &          MAXLA , mm , MSTORE , n , NDIV , NPT , NSW , nz
-      COMPLEX*16 ARM
       INCLUDE 'clcom.inc'
-      COMMON /AZ    / ARM(600,7)
+      INCLUDE 'az.inc'
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       INCLUDE 'adbxi.inc'
       COMMON /FLA   / IFLG

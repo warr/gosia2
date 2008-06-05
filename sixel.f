@@ -28,8 +28,7 @@ C      Lu     -
      &       Rik , rn , Rv , rx
       INTEGER*4 Indx , ITS , j , j1 , Jk , Kk , kk6 , 
      &          KVAR , l , l1 , Lu
-      COMPLEX*16 ARM
-      COMMON /AZ    / ARM(600,7)
+      INCLUDE 'az.inc'
       INCLUDE 'odch.inc'
       INCLUDE 'kin.inc'
       COMMON /TRB   / ITS

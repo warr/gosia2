@@ -40,9 +40,9 @@ C      W0     - omega limit
      &          lam
       INTEGER*4 LAMR , ld , LEADF , m , MEM , 
      &          mrange , mua , NDIV , NPT , NSW , nz
-      COMPLEX*16 ARM , STAMP , dis , uhuj
+      COMPLEX*16 STAMP , dis , uhuj
       INCLUDE 'clcom.inc'
-      COMMON /AZ    / ARM(600,7)
+      INCLUDE 'az.inc'
       COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
      &                ISG1
       INCLUDE 'ccoup.inc'

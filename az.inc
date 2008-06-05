@@ -1,0 +1,2 @@
+      COMPLEX*16 ARM
+      COMMON /AZ    / ARM(1200,7)

@@ -33,12 +33,12 @@ C      Ktoto  - number of iterations needed
      &          Jidim , k , kk , Ktoto , L , LERF , LMAXE , m , MAGA , 
      &          MAGEXC , mc , mc1
       INTEGER*4 MEMAX , MEMX6 , mw , mw1
-      COMPLEX*16 ARM , ci
+      COMPLEX*16 ci
       INCLUDE 'inhi.inc'
       COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
-      COMMON /AZ    / ARM(600,7)
+      INCLUDE 'az.inc'
       COMMON /APRX  / LERF , IDIVE(50,2)
       DATA ci/(0.,-1.)/ ! -sqrt(-1)
 

@@ -39,8 +39,7 @@ C      I57    - switch which is either 5 or 7. This tells LAISUM to access eithe
      &          LAMR , lax
       INTEGER*4 ld , m , mm , MSTORE , 
      &          n , NDIV , nhold , NPT , NSW , nz
-      COMPLEX*16 ARM
-      COMMON /AZ    / ARM(600,7)
+      INCLUDE 'az.inc'
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       INCLUDE 'clcom.inc'
       INCLUDE 'coex2.inc'

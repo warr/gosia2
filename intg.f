@@ -75,9 +75,9 @@ C value of f(n).
      &          IPATH , ir , ir1 , IRA , ISG , ISG1 , k , 
      &          kast , KDIV , LAMR
       INTEGER*4 MAGA , MAXLA , mir , n , NDIV , NPT , NSW
-      COMPLEX*16 ARM , hold
+      COMPLEX*16 hold
       INCLUDE 'coex.inc'
-      COMMON /AZ    / ARM(600,7)
+      INCLUDE 'az.inc'
       COMMON /RNG   / IRA(8) , MAXLA
       COMMON /A50   / ACC50
       COMMON /CLCOM0/ IFAC(75)

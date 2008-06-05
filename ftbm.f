@@ -88,7 +88,6 @@ C      Bten   -
       INTEGER*4 luu , lx , MAGA , MAGEXC , MEMAX , MEMX6 , 
      &          Ncall , NEXPT , NLIFT , nlin , 
      &          nowr , npoz , nrest , NWR , nwyr
-      COMPLEX*16 ARM
       DIMENSION jmte(6) , prop(6) , Bten(1200)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
@@ -107,7 +106,7 @@ C      Bten   -
       COMMON /CLM   / LMAX
       INCLUDE 'coex.inc'
       INCLUDE 'clcom8.inc'
-      COMMON /AZ    / ARM(600,7)
+      INCLUDE 'az.inc'
       INCLUDE 'mgn.inc'
       INCLUDE 'coex2.inc'
       COMMON /PTH   / IPATH(75) , MAGA(75)

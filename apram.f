@@ -31,8 +31,7 @@ C      Acca   - accuracy required
      &          ktoto , l
       INTEGER*4 l1 , l2 , l3 , LERF , LMAXE , m , MAGA , MAGEXC , 
      &          MEMAX , MEMX6
-      COMPLEX*16 ARM
-      COMMON /AZ    / ARM(600,7)
+      INCLUDE 'az.inc'
       COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
