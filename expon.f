@@ -32,11 +32,10 @@ C in the function SETIN.
 
       COMPLEX*16 FUNCTION EXPON(Inx,Npt,Isg,Isg1,Ndiv,Kdiv)
       IMPLICIT NONE
-      REAL*8 XI
       INTEGER*4 Inx , Isg , Isg1 , Kdiv , Ndiv , Npt
       COMPLEX*16 expo1 , ci , expox , TCEXP
       INCLUDE 'adx.inc'
-      COMMON /CXI   / XI(1500)
+      INCLUDE 'cxi.inc'
       DATA ci/(0.,1.)/
       
       expox = TCEXP(ci*XI(Inx)*ADB(Npt)*Isg)

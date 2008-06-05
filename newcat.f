@@ -24,13 +24,13 @@ C     Jidim   -
       
       SUBROUTINE NEWCAT(Iexp,Jidim)
       IMPLICIT NONE
-      REAL*8 a , b , FXIS1 , FXIS2 , q1 , q2 , QAPR , 
-     &       wg , wl , XI , xp , xx , zt
+      REAL*8 a , b , FXIS1 , FXIS2 , q1 , q2 , QAPR , wg , wl , 
+     &       xp , xx , zt
       INTEGER*4 IAPR , Iexp , IPATH , ISEX , ist , istop , Jidim , k , 
      &          kk , MAGA , n , NDIM , ng , nl , NMAX
       INTEGER*4 NMAX1
       INCLUDE 'map.inc'
-      COMMON /CXI   / XI(1500)
+      INCLUDE 'cxi.inc'
       INCLUDE 'clcom.inc'
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /PTH   / IPATH(75) , MAGA(75)

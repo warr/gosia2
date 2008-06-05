@@ -257,7 +257,7 @@ C      ZV     - energy meshpoints
       REAL*8 tta , tth , tting , ttttt , txx , u , 
      &       val , VINF , waga , wph , wpi , WSIXJ , wth , wthh , 
      &       WTHREJ , XA , XA1
-      REAL*8 xep , XI , xi1 , xi2 , xk1 , xk2 , xl1 , xlevb , 
+      REAL*8 xep , xi1 , xi2 , xk1 , xk2 , xl1 , xlevb , 
      &       xlk , xm1 , xm2 , xm3 , xtest , xw , xx , xxi , 
      &       ycorr
       REAL*8 yy , yyd1 , yydd , yyy , ZETA , zmir , zp , zz
@@ -353,7 +353,7 @@ C      ZV     - energy meshpoints
       COMMON /GGG   / G(7)
       COMMON /AZ    / ARM(600,7)
       INCLUDE 'kin.inc'
-      COMMON /CXI   / XI(1500)
+      INCLUDE 'cxi.inc'
       INCLUDE 'clcom.inc'
       INCLUDE 'coex.inc'
       COMMON /MINNI / IMIN , LNORM(50)

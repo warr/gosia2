@@ -33,7 +33,7 @@ C      W0     - omega limit
       IMPLICIT NONE
       REAL*8 CAT , D2W , ELM , ELML , ELMU , epsi , errt , 
      &       pm , ppp , rmir , rmis , rmu , SA , TCABS , W0 , 
-     &       XI , xiv
+     &       xiv
       REAL*8 z , ZETA
       INTEGER*4 i1 , i2 , i3 , indx , Ir , is , is1 , 
      &          is2 , ISG , ISG1 , ISMAX , ismin , isplus , KDIV , la , 
@@ -51,7 +51,7 @@ C      W0     - omega limit
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       INCLUDE 'kin.inc'
-      COMMON /CXI   / XI(1500)
+      INCLUDE 'cxi.inc'
 
       ppp = 0.
       epsi = EPS(IEXP) ! epsilon
