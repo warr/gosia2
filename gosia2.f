@@ -674,16 +674,16 @@ C        Treat OP,REST (restart)
                IF ( lkj1.EQ.0 ) GOTO 120
                IF ( mres1.EQ.0 ) ELM(lkj1) = xlk ! condition added for gosia2
             ENDDO
+ 120        WRITE (22,99008)
+99008       FORMAT (1X///5X,'*****',2X,
+     &              'RESTART-MATRIX ELEMENTS OVERWRITTEN',2X,'*****'///)
 C---- gosia2 changes start
- 120        DO lkj = 1 , MEMAX
+            DO lkj = 1 , MEMAX
                IF ( mres1.EQ.0 .AND. JZB.EQ.25 ) ELM25(lkj) = ELM(lkj)
                IF ( mres1.EQ.0 .AND. JZB.EQ.26 ) ELM26(lkj) = ELM(lkj)
             ENDDO
             IF ( JZB.EQ.26 ) mres1 = 1
-            WRITE (22,99008)
 C---- gosia2 changes end
-99008       FORMAT (1X///5X,'*****',2X,
-     &              'RESTART-MATRIX ELEMENTS OVERWRITTEN',2X,'*****'///)
             DO kk = 1 , MEMAX
                la = mlt(kk)
                IF ( ivari(kk).GE.10000 ) THEN
