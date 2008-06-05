@@ -408,7 +408,7 @@ C     Initialize normalization to 1.
       ENDDO
 
 C---- gosia2 changes start
-      IUNIT3 = 33
+      IUNIT3 = 33 ! Is 3 in gosia
       MCFIX = 1
       mres1 = 0
       mrepf = 0
@@ -1853,7 +1853,7 @@ C     Handle OP,ERRO
 99033          FORMAT (10X,'ME=',1I3,5X,'NO FREE MATRIX ELEMENTS')
                IF ( mm.NE.0 ) THEN
                   KFERR = 1
-                  IF ( iosr.EQ.1 ) WRITE (IUNIT3,*) kh , kh
+                  IF ( iosr.EQ.1 ) WRITE (IUNIT3,*) kh , kh ! For sigma program
                   IF ( iosr.EQ.1 ) WRITE (IUNIT3,*) kh , ij , ELM(kh)
                   LOCKS = 1
                   DLOCK = .05
