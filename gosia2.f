@@ -242,7 +242,7 @@ C      ZV     - energy meshpoints
       REAL*8 cocos , conu , CORF , d , decen , dedx , DEVD , 
      &       DEVU , DIPOL , DLOCK , DS , dsd , DSE , DSG , 
      &       dsig , dst
-      REAL*8 dsx , dsxm , DYEX , EAMX , effi , EG , eh1 , ELM , ELMH , 
+      REAL*8 dsx , dsxm , DYEX , effi , EG , eh1 , ELM , ELMH , 
      &       elmi , ELML , ELMT , ELMU , emhl1 , EMMA , emn , emx , EN , 
      &       enb
       REAL*8 eng , enh , EP , esd , esp , ess , 
@@ -266,7 +266,7 @@ C      ZV     - energy meshpoints
      &       ycorr
       REAL*8 YEXP , YGN , YGP , YNRM , YV , yy , yyd1 , yydd , yyy , 
      &       ZETA , zmir , zp , ZPOL , ZV , zz
-      INTEGER*4 i , i122 , IAMX , IAMY , IAPR , iapx , ib , 
+      INTEGER*4 i , i122 , IAPR , iapx , ib , 
      &          ibaf , IBRC , icg , icll , ICS , ict , 
      &          ictl , id , idf , IDIVE
       INTEGER*4 idr , IDRN , iecd , ient , IFAC , IFBFL , ifbp , 
@@ -307,7 +307,7 @@ C      ZV     - energy meshpoints
      &          MAGEXC , magh , MEM
       INTEGER*4 MEMAX , memax1 , memh , memx4 , MEMX6 , mend , mexl , 
      &          mfla , mlt , mm , mpin , ms , MULTI , n , na , na1 , 
-     &          naa , nallow , NAMX , NANG
+     &          naa , nallow , NANG
       INTEGER*4 naxfl , nb1 , nb2 , nbands , NBRA , nch , NCM , NDIM , 
      &          ndima , ndum , ne , NEXPT , nf , nfd , nfdd , 
      &          nfi , nflr , nft , nged
@@ -346,7 +346,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'xra.inc'
       INCLUDE 'hhh.inc'
       INCLUDE 'vac.inc'
-      COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
+      INCLUDE 'me2d.inc'
       COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
       COMMON /DFTB  / DEVD(1500) , DEVU(1500)
       COMMON /ERRAN / KFERR

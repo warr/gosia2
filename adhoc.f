@@ -59,16 +59,16 @@ C Here we parse the input of the OP,YIEL command and store the values.
       SUBROUTINE ADHOC(Oph,Idr,Nfd,Ntap,Iyr)
       IMPLICIT NONE
       REAL*8 ACCA , ACCUR , AGELI , BRAT , CC , CORF , DIPOL , 
-     &       DMIX , DMIXE , DYEX , EAMX , EG , EN , EP , Q
+     &       DMIX , DMIXE , DYEX , EG , EN , EP , Q
       REAL*8 SPIN , TAU , TIMEL , TLBDG , UPL , VINF , wamx , wbra , 
      &       wdl , wlf , XA , XA1 , YEXP , YGN , YGP , YNRM , ZPOL
-      INTEGER*4 IAMX , IAMY , iax , IBRC , Idr , IDRN , iexp1 , IFMO , 
+      INTEGER*4 iax , IBRC , Idr , IDRN , iexp1 , IFMO , 
      &          ILE , ilft , IMIX , iosr , ipri , IPRM , ISO , isrt1 , 
      &          ITS , iuf , IVAR
       INTEGER*4 IY , Iyr , IZ , IZ1 , jic , jicc , juf , KSEQ , lb , 
      &          li , licc , LIFCT , llia , LMAXE , lxt , MAGEXC , MEM , 
      &          MEMAX , MEMX6 , n1
-      INTEGER*4 n2 , NAMX , NANG , NBRA , ndas , NDL , ndtp , 
+      INTEGER*4 n2 , NANG , NBRA , ndas , NDL , ndtp , 
      &          NEXPT , Nfd , NICC , nistr , NLIFT , ns1 , ns2 , ns3 , 
      &          ns4 , Ntap , nvare , NYLDE
       INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
@@ -79,7 +79,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       INCLUDE 'tra.inc'
       COMMON /LIFE  / NLIFT
       COMMON /MIXD  / DMIXE(20,2) , DMIX(20) , IMIX(20) , NDL
-      COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
+      INCLUDE 'me2d.inc'
       COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
       COMMON /BRNCH / BRAT(50,2) , IBRC(2,50) , NBRA
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
