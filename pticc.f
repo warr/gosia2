@@ -42,7 +42,7 @@ C      Idr    - number of decays
          IF ( ABS(SPIN(ni)-SPIN(nf)).LT.2. ) conm1 = CONV(enet,4)
          WRITE (22,99002) ni , nf , SPIN(ni) , SPIN(nf) , enet , cone1 , 
      &                    cone2 , conm1
-99002    FORMAT (5X,I2,5X,I2,7X,F4.1,6X,F4.1,9X,F6.4,8X,E9.4,6X,E9.4,6X,
+99002    FORMAT (4X,I3,4X,I3,7X,F4.1,6X,F4.1,9X,F6.4,8X,E9.4,6X,E9.4,6X,
      &           E9.4)
       ENDDO
       END
