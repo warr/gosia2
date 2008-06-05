@@ -53,14 +53,14 @@ C z is the coupling parameter zeta, calculated in the function LSLOOP.
       IMPLICIT NONE
       REAL*8 q , rmir , rmis , rmu , Rsg , z
       INTEGER*4 i2 , i3 , I57 , iii , indq , indx , Ir , irs , is , 
-     &          is1 , is2 , ismin , isplus , ISSTAR , ISSTO
-      INTEGER*4 la , Lam , Ld , m , mrange , MSTORE , mua , N , Nz
+     &          is1 , is2 , ismin , isplus
+      INTEGER*4 la , Lam , Ld , m , mrange , mua , N , Nz
       COMPLEX*16 FAZA , pamp , pamp1
       INCLUDE 'pspin.inc'
       INCLUDE 'az.inc'
       INCLUDE 'coex.inc'
       INCLUDE 'caux.inc'
-      COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
+      INCLUDE 'pint.inc'
       INCLUDE 'adbxi.inc'
       INCLUDE 'ccoup.inc'
       INCLUDE 'mgn.inc'
