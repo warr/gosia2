@@ -67,7 +67,6 @@ C Here we parse the input of the OP,YIEL command and store the values.
       INTEGER*4 n2 , ndas , NDL , ndtp , 
      &          Nfd , nistr , NLIFT , ns1 , ns2 , ns3 , 
      &          ns4 , Ntap , nvare
-      INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
       CHARACTER*4 Oph
       INCLUDE 'cccds.inc'
       INCLUDE 'dimx.inc'
@@ -86,7 +85,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       INCLUDE 'cexc.inc'
       INCLUDE 'prt.inc'
       INCLUDE 'trb.inc'
-      COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2
+      INCLUDE 'switch.inc' ! For gosia2
       
 C     Read OP,YIEL parameters
       iosr = 0

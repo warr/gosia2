@@ -30,13 +30,12 @@ C      Iop    - print flag (controls what is written to output).
       REAL*8 ELM25 , ELM26 ! Added for gosia2
       INTEGER*4 inx , Iop , isp , j , k , kk , l , m
       CHARACTER*3 wrn
-      INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
       INCLUDE 'comme.inc'
       INCLUDE 'cexc.inc'
       INCLUDE 'coex.inc'
       INCLUDE 'clcom.inc'
       INCLUDE 'coex2.inc'
-      COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2
+      INCLUDE 'switch.inc' ! For gosia2
       COMMON /RESC  / ELM25(500) , ELM26(500) ! Added for gosia2
       DATA ste/0./
 

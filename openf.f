@@ -20,8 +20,7 @@ C zero, the function returns. It keeps looping until a unit zero is reached.
       IMPLICIT NONE
       INTEGER*4 i , j , k
       CHARACTER name*60 , opt1*20 , opt2*20
-      INTEGER*4 IBPS, IUNIT3, JZB ! For gosia2
-      COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2
+      INCLUDE 'switch.inc' ! For gosia2
 
  100  READ (JZB,*) i , j , k ! unit, old/new/unknown, formatted/unformatted
       IF ( i.EQ.0 ) RETURN

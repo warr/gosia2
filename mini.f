@@ -76,7 +76,6 @@ C don't go outside the limits specified by the user.
      &          lnm , LNY , LOCKF , LOCKS , 
      &          metf , mvfl , ncall , nlinn , NLOCK , noflg , 
      &          Nptl , NWR
-      INTEGER*4 IBPS, IUNIT3, JZB ! For gosia2
       DIMENSION ipm(10) , Bten(1200) , gradp(1500)
       INCLUDE 'dumm.inc'
       COMMON /ILEWY / NWR
@@ -94,7 +93,7 @@ C don't go outside the limits specified by the user.
       INCLUDE 'erran.inc'
       COMMON /LOGY  / LNY , INTR , IPS1
       COMMON /ERCAL / JENTR , ICS
-      COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2
+      INCLUDE 'switch.inc' ! For gosia2
       DATA chirf/0./,dm/0./,sumg2/0./
 
 C     Initialise gradp to zero for each matrix element
