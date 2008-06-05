@@ -33,12 +33,10 @@ C      Irld   - index into ARM array
  
       SUBROUTINE STING(Irld)
       IMPLICIT NONE
-      REAL*8 D2W , rsg , w0
+      REAL*8 rsg , w0
       INTEGER*4 i , i57 , ibg , iend , IFLG , indx , Irld , is2 , 
-     &          ISG , ISG1 , ISSTAR , ISSTO , j , j1 , jj , 
-     &          KDIV , lam
-      INTEGER*4 LAMR , ld , maxh , 
-     &          mm , MSTORE , n , NDIV , NPT , NSW , nz
+     &          ISSTAR , ISSTO , j , j1 , jj , lam
+      INTEGER*4 ld , maxh , mm , MSTORE , n , nz
       INCLUDE 'clcom.inc'
       INCLUDE 'az.inc'
       INCLUDE 'comme.inc'
@@ -46,8 +44,7 @@ C      Irld   - index into ARM array
       COMMON /FLA   / IFLG
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
       INCLUDE 'ccoup.inc'
-      COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
-     &                ISG1
+      INCLUDE 'caux.inc'
       INCLUDE 'clcom8.inc'
       INCLUDE 'rng.inc'
 

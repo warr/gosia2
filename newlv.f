@@ -34,15 +34,12 @@ C storage part.
       
       SUBROUTINE NEWLV(N,Ld,La)
       IMPLICIT NONE
-      REAL*8 D2W
-      INTEGER*4 i2 , IFLG , indx , ISG , ISG1 , ISSTAR , ISSTO , KDIV , 
-     &          La , LAMR , Ld , LEADF , 
-     &          m , MEM , MSTORE
-      INTEGER*4 N , NDIV , NPT , NSW
+      INTEGER*4 i2 , IFLG , indx , ISSTAR , ISSTO , 
+     &          La , Ld , LEADF , m , MEM , MSTORE
+      INTEGER*4 N
       COMPLEX*16 EXPON
       INCLUDE 'clcom.inc'
-      COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
-     &                ISG1
+      INCLUDE 'caux.inc'
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
       INCLUDE 'adbxi.inc'
       COMMON /FLA   / IFLG

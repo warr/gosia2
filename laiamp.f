@@ -31,20 +31,15 @@ C      W0     - omega limit
       
       SUBROUTINE LAIAMP(Ir,W0)
       IMPLICIT NONE
-      REAL*8 D2W , epsi , errt , 
-     &       pm , ppp , rmir , rmis , rmu , TCABS , W0 , 
-     &       xiv
-      REAL*8 z
-      INTEGER*4 i1 , i2 , i3 , indx , Ir , is , is1 , 
-     &          is2 , ISG , ISG1 , ismin , isplus , KDIV , la , 
-     &          lam
-      INTEGER*4 LAMR , ld , LEADF , m , MEM , 
-     &          mrange , mua , NDIV , NPT , NSW , nz
+      REAL*8 epsi , errt , pm , ppp , rmir , rmis , rmu , TCABS , W0 , 
+     &       xiv , z
+      INTEGER*4 i1 , i2 , i3 , indx , Ir , is , is1 , is2 ,  ismin ,
+     &          isplus , la , lam , ld , LEADF , m , MEM
+      INTEGER*4 mrange , mua , nz
       COMPLEX*16 STAMP , dis , uhuj
       INCLUDE 'clcom.inc'
       INCLUDE 'az.inc'
-      COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
-     &                ISG1
+      INCLUDE 'caux.inc'
       INCLUDE 'ccoup.inc'
       INCLUDE 'clcom8.inc'
       INCLUDE 'comme.inc'
