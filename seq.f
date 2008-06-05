@@ -20,7 +20,7 @@ C      KLEC   - number of decays for each level
 C      KSEQ   - indices for each decay (level1, level2, matrix element, multipolarity + 10)
 C      LDNUM  - number of matrix elements with each multipolarity populating levels
 C      LP2    - maximum number of matrix elements (1500)
-C      LP3    - maximum number of levels (75)
+C      LP3    - maximum number of levels (100)
 C      MULTI  - number of matrix elements having a given multipolarity
 C      NMAX   - number of levels
 C      NMAX1  - number of levels with decays
@@ -38,9 +38,9 @@ C 8 = M2.
       SUBROUTINE SEQ(Idr)
       IMPLICIT NONE
       REAL*8 CONV , ega , egs , emax , F , GF , spinf , spini , twoi
-      INTEGER*4 idecay , Idr , indx , inx , inx1 , ir , is , 
-     &          istr1 , istr2 , j , js , jsave , k , kpa , l , la
-      INTEGER*4 la1 , ld , LEADF
+      INTEGER*4 idecay , Idr , indx , inx , inx1 , ir , is , istr1 , 
+     &          istr2 , j , js , jsave , k , kpa , l , la , la1 ,
+     &          ld , LEADF
       INTEGER*4 m , m1 , m6 , MEM , mk , mule , mulm , n , n1 , nob
       INCLUDE 'coex2.inc'
       INCLUDE 'tra.inc'
@@ -59,7 +59,7 @@ C 8 = M2.
       idecay = 0
       Idr = 0
 
-      DO l = 1 , LP3 ! LP3 = 75 (number of levels)
+      DO l = 1 , LP3 ! LP3 = 100 (number of levels)
          KLEC(l) = 0 ! Initialise KLEC to zero
       ENDDO
 
