@@ -38,14 +38,13 @@ C      Rem    - natural log of the largest value the computer can represent
       REAL*8 ac , Bten , c , Chil , chilo , Chis0 , chis1 , chis2 , d1 , 
      &       d2 , ELM , ELML , ELMU , f , h
       REAL*8 Rem , RK4 , SA , sajj , Sh , t , v , ww , x , y
-      INTEGER*4 i , Idr , Ifbf , Inpo , INTR , IPS1 , itl , IVAR , ix , 
-     &          j , Jj , l , LMAXE , LNY , m , MAGEXC , MEMAX , MEMX6 , 
-     &          NWR
+      INTEGER*4 i , Idr , Ifbf , Inpo , INTR , IPS1 , itl , ix , 
+     &          j , Jj , l , LNY , m , NWR
       DIMENSION f(3) , Bten(1200)
       INCLUDE 'vlin.inc'
       INCLUDE 'dftb.inc'
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
+      INCLUDE 'cexc.inc'
       INCLUDE 'hhh.inc'
       COMMON /ILEWY / NWR
       COMMON /LOGY  / LNY , INTR , IPS1

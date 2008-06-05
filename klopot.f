@@ -33,12 +33,12 @@ C      Rlr    - print out if matrix element exceeds Rlr.
       REAL*8 SA , sgm , TLBDG , u , umm , ump , ux , VINF , XA , 
      &       XA1
       INTEGER*4 i , iex , iexh , iexp , indx , inh , ipf , 
-     &          IVAR , IZ , IZ1 , j , jm , jp , K , KVAR , l , lc
-      INTEGER*4 ll , LMAXE , lngt , loc , lu , MAGEXC
-      INTEGER*4 MEMAX , MEMX6 , NEXPT , nf , ni , nm , np
+     &          IZ , IZ1 , j , jm , jp , K , KVAR , l , lc
+      INTEGER*4 ll , lngt , loc , lu
+      INTEGER*4 NEXPT , nf , ni , nm , np
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       INCLUDE 'yexpt.inc'
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
+      INCLUDE 'cexc.inc'
       INCLUDE 'mgn.inc'
       INCLUDE 'ccoup.inc'
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 

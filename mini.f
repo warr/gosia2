@@ -69,12 +69,12 @@ C don't go outside the limits specified by the user.
       INTEGER*4 i , icl1 , icl2 , icount , ICS , Idr , IFBFL , 
      &          iht , iin , Imode , indx1 , INM , inmx , ino , 
      &          INTR , ipas , ipm , IPRM
-      INTEGER*4 Ips , IPS1 , Is , istec , ITAK2 , itf , IVAR , j , 
+      INTEGER*4 Ips , IPS1 , Is , istec , ITAK2 , itf , j , 
      &          jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , jnm , 
      &          jpr , jsa , jst
       INTEGER*4 kh2 , kkk , KVAR , l , LFL , LFL1 , LFL2 , 
-     &          LMAXE , lnm , LNY , LOCKF , LOCKS , MAGEXC , MEMAX , 
-     &          MEMX6 , metf , mvfl , ncall , nlinn , NLOCK , noflg , 
+     &          lnm , LNY , LOCKF , LOCKS , 
+     &          metf , mvfl , ncall , nlinn , NLOCK , noflg , 
      &          Nptl , NWR
       INTEGER*4 IBPS, IUNIT3, JZB ! For gosia2
       DIMENSION ipm(10) , Bten(1200) , gradp(1500)
@@ -87,7 +87,7 @@ C don't go outside the limits specified by the user.
       INCLUDE 'dftb.inc'
       COMMON /PRT   / IPRM(20)
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
+      INCLUDE 'cexc.inc'
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /SEL   / KVAR(1500)
       COMMON /FIT   / LOCKF , NLOCK , IFBFL , LOCKS , DLOCK

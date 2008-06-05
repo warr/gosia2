@@ -29,15 +29,13 @@ C      Ktoto  - number of iterations needed
       SUBROUTINE POMNOZ(Acca,L,Iw,Ktoto,Img,Jidim)
       IMPLICIT NONE
       REAL*8 Acca , sig , TCABS , test , u
-      INTEGER*4 Img , IVAR , Iw , 
-     &          Jidim , k , kk , Ktoto , L , LMAXE , m , 
-     &          MAGEXC , mc , mc1
-      INTEGER*4 MEMAX , MEMX6 , mw , mw1
+      INTEGER*4 Img , Iw , Jidim , k , kk , Ktoto , L , m , mc , mc1 , 
+     &          mw , mw1
       COMPLEX*16 ci
       INCLUDE 'inhi.inc'
       INCLUDE 'aprcat.inc'
       INCLUDE 'pth.inc'
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
+      INCLUDE 'cexc.inc'
       INCLUDE 'az.inc'
       INCLUDE 'aprx.inc'
       DATA ci/(0.,-1.)/ ! -sqrt(-1)

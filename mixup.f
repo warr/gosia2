@@ -26,9 +26,9 @@ C may have been changed when we randomized.
       SUBROUTINE MIXUP
       IMPLICIT NONE
       REAL*8 ELM , ELML , ELMU , RNDM , SA
-      INTEGER*4 IVAR , k , k1 , LMAXE , MAGEXC , MEMAX , MEMX6
+      INTEGER*4 k , k1
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
+      INCLUDE 'cexc.inc'
       INCLUDE 'xra.inc'
 
 C     Randomize all that are not fixed or correlated

@@ -77,16 +77,15 @@ C      Bten   -
      &          iflg , IGRD , ii , ile1 , ile2 , ile3 , 
      &          ilin , indx , inko , INM
       INTEGER*4 inp , inpo , inpx , INTR , inzz , inzzz , IPRM , 
-     &          IPS1 , issp , ITAK2 , itemp , IVAR , ixx , 
+     &          IPS1 , issp , ITAK2 , itemp , ixx , 
      &          IZ , IZ1 , izzz
       INTEGER*4 j , jj , jjgg , jjj , jk , jkl , jm , jmf , jmt , jmte , 
      &          jpp , jpz , JSKIP , jy , k , karm , kk , kk6 , kkx , kmt
       INTEGER*4 knm , kx , larm , lcc , lcou , LFL , LFL1 , 
-     &          LFL2 , licz , lix , llx , lm , LMAX , LMAXE , lmh , 
+     &          LFL2 , licz , lix , llx , lm , LMAX , lmh , 
      &          LNY , loc , loch , loct
       INTEGER*4 lp , lpit , lput , lpx , lpxd , ls , lst
-      INTEGER*4 luu , lx , MAGEXC , MEMAX , MEMX6 , 
-     &          Ncall , NEXPT , NLIFT , nlin , 
+      INTEGER*4 luu , lx , Ncall , NEXPT , NLIFT , nlin , 
      &          nowr , npoz , nrest , NWR , nwyr
       DIMENSION jmte(6) , prop(6) , Bten(1200)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
@@ -111,7 +110,7 @@ C      Bten   -
       INCLUDE 'coex2.inc'
       INCLUDE 'pth.inc'
       COMMON /PRT   / IPRM(20)
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
+      INCLUDE 'cexc.inc'
       COMMON /SKP   / JSKIP(50)
       COMMON /LIFE  / NLIFT
       COMMON /LOGY  / LNY , INTR , IPS1

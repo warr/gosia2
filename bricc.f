@@ -25,10 +25,8 @@ C
       INCLUDE 'coex.inc'
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
-
-      INTEGER*4 MAGEXC, MEMAX, LMAXE, MEMX6, IVAR
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
       
+      INCLUDE 'cexc.inc'
       INCLUDE 'clcom.inc'
 
       INTEGER*4 n1, n2

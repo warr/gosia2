@@ -277,7 +277,7 @@ C      ZV     - energy meshpoints
      &          ipri , IPRM , IPS1 , irea , irep , irfix , 
      &          isip , iske , iskf
       INTEGER*4 isko , iskok , isoh , ispa , ispb , 
-     &          itno , itp , ITS , ITTE , iuy , iva , iva1 , IVAR , 
+     &          itno , itp , ITS , ITTE , iuy , iva , iva1 , 
      &          ivarh , ivari , ivrh , IWF
       INTEGER*4 ixj , ixl , ixm , iyr , IZ , IZ1 , izcap , j , ja , 
      &          jan , jan1 , jb , jb1 , jb2 , jd , jde , jdy , je , 
@@ -292,11 +292,11 @@ C      ZV     - energy meshpoints
      &          lam , lamd
       INTEGER*4 lamh , lb , lck1 , lck2 , levl , lex , lexp , 
      &          lfagg , lfini , lh1 , lh2 , liscl , lkj
-      INTEGER*4 lkj1 , ll , lli , lll , LMAX , lmax1 , LMAXE , lmaxh , 
+      INTEGER*4 lkj1 , ll , lli , lll , LMAX , lmax1 , lmaxh , 
      &          LNORM , LNY , locat , LOCKF , LOCKS , loct , lp0 , 
      &          lpin , ltrn , ltrn1 , ltrn2 , lu , lx , lxd , 
-     &          MAGEXC , magh , MEM
-      INTEGER*4 MEMAX , memax1 , memh , memx4 , MEMX6 , mend , mexl , 
+     &          magh , MEM
+      INTEGER*4 memax1 , memh , memx4 , mend , mexl , 
      &          mfla , mlt , mm , mpin , ms , n , na , na1 , 
      &          naa , nallow
       INTEGER*4 naxfl , nb1 , nb2 , nbands , nch , NCM , 
@@ -358,7 +358,7 @@ C      ZV     - energy meshpoints
       COMMON /MINNI / IMIN , LNORM(50)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
+      INCLUDE 'cexc.inc'
       COMMON /PRT   / IPRM(20)
       INCLUDE 'ccoup.inc'
       COMMON /CB    / B(20)
