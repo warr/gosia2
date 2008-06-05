@@ -270,7 +270,7 @@ C      ZV     - energy meshpoints
      &          ilx , im , IMIN , imode , in1 , in2 , inclus , ind , 
      &          ind1 , ind2 , indx
       INTEGER*4 inko , inm1 , inm2 , inn , inpo , intend , 
-     &          INTERV , intvh , inva , inx1 , iobl , iocc , 
+     &          intvh , inva , inx1 , iobl , iocc , 
      &          iopri , iosr , ipd , iph
       INTEGER*4 ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
      &          ipri , irea , irep , irfix , 
@@ -363,7 +363,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'clcom9.inc'
       INCLUDE 'comme.inc'
       INCLUDE 'coex2.inc'
-      COMMON /CEXC9 / INTERV(50)
+      INCLUDE 'cexc9.inc'
       INCLUDE 'caux0.inc'
       INCLUDE 'pth.inc'
       INCLUDE 'aprcat.inc'

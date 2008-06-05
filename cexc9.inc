@@ -1,0 +1,2 @@
+      INTEGER*4 INTERV
+      COMMON /CEXC9 / INTERV(50)

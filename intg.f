@@ -70,9 +70,8 @@ C value of f(n).
       SUBROUTINE INTG(Ien)
       IMPLICIT NONE
       REAL*8 f , rim , rl , srt
-      INTEGER*4 i , i57 , Ien , ihold , intend , INTERV , 
-     &          ir , ir1 , k , kast
-      INTEGER*4 mir , n
+      INTEGER*4 i , i57 , Ien , ihold , intend , ir , ir1 , k , kast , 
+     &          mir , n
       COMPLEX*16 hold
       INCLUDE 'coex.inc'
       INCLUDE 'az.inc'
@@ -85,7 +84,7 @@ C value of f(n).
       INCLUDE 'fla.inc'
       INCLUDE 'cexc0.inc'
       INCLUDE 'pth.inc'
-      COMMON /CEXC9 / INTERV(50)
+      INCLUDE 'cexc9.inc'
       
       intend = INTERV(Ien) ! Default accuracy set by INT option of OP,CONT
       D2W = .03 ! We use steps of 0.03 in omega
