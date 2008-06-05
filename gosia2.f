@@ -166,13 +166,13 @@ C      LNY    - use logs to calculate chi squared
 C      LOCKF  - flag to fix matrix elements with most significant derivative
 C      LOCKS  - lock flag. If LOCKS=1, fix at first stage of minimization
 C      LP1    - maximum number of experiments (50)
-C      LP10   - maximum number of substates (600)
+C      LP10   - maximum number of substates (1200)
 C      LP11   - LP8 - 1 (103)
 C      LP12   - number of steps of omega (365)
 C      LP13   - LP9 + 1 (47901)
 C      LP14   - maximum space for collision functions (4900)
 C      LP2    - maximum number of matrix elements (1500)
-C      LP3    - maximum number of levels (75)
+C      LP3    - maximum number of levels (100)
 C      LP4    - maximum number of yields (1500)
 C      LP6    - maximum number of gamma detectors (32)
 C      LP7    - start of collision functions (45100)
@@ -241,17 +241,16 @@ C      ZV     - energy meshpoints
       REAL*8 cocos , conu , d , decen , dedx , dsd , dsig , dst
       REAL*8 dsx , dsxm , effi , eh1 , elmi , ELMT , emhl1 , emn , emx , 
      &       enb
-      REAL*8 eng , enh , esd , esp , ess , fi0 , fi1 , fic , fiex1 , 
-     &       figl , fipo1 , fm , gth
+      REAL*8 eng , enh , esd , esp , ess , 
+     &       fi0 , fi1 , fic , fiex1 , figl , fipo1 , fm , gth
       REAL*8 hen , het , p , pfi , 
      &       ph1 , ph2 , pi , po1 , po2 , polm , pop1 , pr , pv
-      REAL*8 q1 , q2 , qc , qfac , qr , qui , r , r1 , 
-     &       r2 , r3 , r4 , rem , remax , rl , rlr , rm , rx , ry
-      REAL*8 rz , s , s11 , s12 , s21 , s22 , sbe , sf , 
-     &       sh , sh1 , sh2 , SIMIN , slim
+      REAL*8 q1 , q2 , qc , qfac , qr , qui , r , r1 , r2 , r3 , r4 , 
+     &       rem , remax , rl , rlr , rm , rx , ry
+      REAL*8 rz , s , s11 , s12 , s21 , s22 , sbe , sf , sh , sh1 , 
+     &       sh2 , SIMIN , slim
       REAL*8 summm , sz1 , sz2 , TACOS , tau1 , tau2 , test , 
-     &       tetrc , tfac , thc , title , 
-     &       tmn , tmx , todfi
+     &       tetrc , tfac , thc , title , tmn , tmx , todfi
       REAL*8 tta , tth , tting , ttttt , txx , u , 
      &       val , waga , wph , wpi , WSIXJ , wth , wthh , 
      &       WTHREJ
@@ -259,47 +258,42 @@ C      ZV     - energy meshpoints
      &       xlk , xm1 , xm2 , xm3 , xtest , xw , xx , xxi , 
      &       ycorr
       REAL*8 yy , yyd1 , yydd , yyy , zmir , zp , zz
-      INTEGER*4 i , i122 , iapx , ib , ibaf , icg , icll , ict , 
-     &          ictl , id , idf
-      INTEGER*4 idr , iecd , ient , ifbp , 
-     &          ifc , ifm , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
-     &          ihuj , ii , ij
+      INTEGER*4 i , i122 , iapx , ib , ibaf , icg , icll , ict , ictl , 
+     &          id , idf
+      INTEGER*4 idr , iecd , ient , ifbp , ifc , ifm , ifwd , 
+     &          ig1 , ig2 , ih1 , ih2 , ihlm , ihuj , ii , ij
       INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ile1 , ilevls , 
      &          ilx , im , imode , in1 , in2 , inclus , ind , 
      &          ind1 , ind2 , indx
-      INTEGER*4 inko , inm1 , inm2 , inn , inpo , intend , 
-     &          intvh , inva , inx1 , iobl , iocc , 
-     &          iopri , iosr , ipd , iph
+      INTEGER*4 inko , inm1 , inm2 , inn , inpo , intend , intvh , 
+     &          inva , inx1 , iobl , iocc , iopri , iosr , ipd , iph
       INTEGER*4 ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
-     &          ipri , irea , irep , irfix , 
-     &          isip , iske , iskf
-      INTEGER*4 isko , iskok , isoh , ispa , ispb , 
-     &          itno , itp , iuy , iva , iva1 , 
-     &          ivarh , ivari , ivrh
+     &          ipri , irea , irep , irfix , isip , iske , iskf
+      INTEGER*4 isko , iskok , isoh , ispa , ispb , itno , 
+     &          itp , iuy , iva , iva1 , ivarh , ivari , ivrh
       INTEGER*4 ixj , ixl , ixm , iyr , izcap , j , ja , 
      &          jan , jan1 , jb , jb1 , jb2 , jd , jde , jdy , je
       INTEGER*4 jex , jexp , jfi , jfre , jgd , jgl , jgl1 , jgr , jgs , 
      &          jj , jj1 , jjjj , jjlx , jjx , jk , jkloo , jktt , jl , 
      &          jmm , jmpin
-      INTEGER*4 jp , jphd , jpin , jrls , js , jt , jtp , jyi , 
-     &          jyi1 , jyi2 , jyv , jz , k , kb , kclust , kerf , kex
+      INTEGER*4 jp , jphd , jpin , jrls , js , jt , jtp , jyi , jyi1 , 
+     &          jyi2 , jyv , jz , k , kb , kclust , kerf , kex
       INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kl , kloop , 
      &          kmat , kq , ktt , kuku , l , la , la1 , lam , lamd
       INTEGER*4 lamh , lb , lck1 , lck2 , levl , lex , lexp , 
      &          lfagg , lfini , lh1 , lh2 , liscl , lkj
-      INTEGER*4 lkj1 , ll , lli , lll , lmax1 , lmaxh , 
-     &          locat , loct , lp0 , 
-     &          lpin , ltrn , ltrn1 , ltrn2 , lu , lx , lxd , 
-     &          magh , MEM
+      INTEGER*4 lkj1 , ll , lli , lll , lmax1 , lmaxh , locat , 
+     &          loct , lp0 , lpin
+      INTEGER*4 ltrn , ltrn1 , ltrn2 , lu , lx , lxd , magh , MEM
       INTEGER*4 memax1 , memh , memx4 , mend , mexl , 
-     &          mfla , mlt , mm , mpin , ms , n , na , na1 , 
-     &          naa , nallow
-      INTEGER*4 naxfl , nb1 , nb2 , nbands , nch , 
-     &          ndima , ndum , ne , nf , nfd , nfdd , 
+     &          mfla , mlt , mm , mpin , ms , n , na , na1 , naa , 
+     &          nallow
+      INTEGER*4 naxfl , nb1 , nb2 , nbands , nch , ndima , ndum , 
+     &          ne , nf , nfd , nfdd , 
      &          nfi , nflr , nft , nged
-      INTEGER*4 ngpr , ni , nksi , nl , 
-     &          nmaxh , nmemx , nnl , nogeli , npce , npce1 , 
-     &          npct , npct1 , npt , nptl , nptx , ns1
+      INTEGER*4 ngpr , ni , nksi , nl , nmaxh , nmemx , nnl , 
+     &          nogeli , npce , npce1 , npct , npct1 , 
+     &          npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , nz
       CHARACTER*4 oph , op1 , opcja , op2
       CHARACTER*1 prp
