@@ -72,7 +72,7 @@ C don't go outside the limits specified by the user.
       INTEGER*4 Ips , IPS1 , Is , istec , ITAK2 , itf , IVAR , IY , j , 
      &          jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , jnm , 
      &          jpr , jsa , jst
-      INTEGER*4 KFERR , kh2 , kkk , KVAR , l , LFL , LFL1 , LFL2 , 
+      INTEGER*4 kh2 , kkk , KVAR , l , LFL , LFL1 , LFL2 , 
      &          LMAXE , lnm , LNY , LOCKF , LOCKS , LP1 , LP10 , LP11 , 
      &          LP12 , LP13 , LP14 , LP2
       INTEGER*4 LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , MAGEXC , MEMAX , 
@@ -96,7 +96,7 @@ C don't go outside the limits specified by the user.
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /SEL   / KVAR(1500)
       COMMON /FIT   / LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
-      COMMON /ERRAN / KFERR
+      INCLUDE 'erran.inc'
       COMMON /LOGY  / LNY , INTR , IPS1
       COMMON /ERCAL / JENTR , ICS
       COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2

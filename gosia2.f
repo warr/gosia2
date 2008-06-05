@@ -292,7 +292,7 @@ C      ZV     - energy meshpoints
      &          jmm , jmpin
       INTEGER*4 jp , jphd , jpin , jrls , js , JSKIP , jt , jtp , jyi , 
      &          jyi1 , jyi2 , jyv , jz , k , kb , kclust , kerf , kex , 
-     &          KF , KFERR
+     &          KF
       INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kl , kloop , 
      &          kmat , kq , KSEQ , ktt , kuku , KVAR , l , la , la1 , 
      &          lam , lamd
@@ -349,7 +349,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'me2d.inc'
       INCLUDE 'life1.inc'
       INCLUDE 'dftb.inc'
-      COMMON /ERRAN / KFERR
+      INCLUDE 'erran.inc'
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /SECK  / ISKIN(50)

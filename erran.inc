@@ -1,0 +1,2 @@
+      INTEGER*4 KFERR
+      COMMON /ERRAN / KFERR
