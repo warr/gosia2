@@ -300,11 +300,9 @@ C      ZV     - energy meshpoints
      &          LDNUM , LEAD , LERF , levl , lex , lexp , lfagg , 
      &          lfini , lh1 , lh2 , liscl , lkj
       INTEGER*4 lkj1 , ll , lli , lll , LMAX , lmax1 , LMAXE , lmaxh , 
-     &          LNORM , LNY , locat , LOCKF , LOCKS , loct , lp0 , LP1 , 
-     &          LP10 , LP11 , LP12 , LP13
-      INTEGER*4 LP14 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , lpin , 
-     &          ltrn , ltrn1 , ltrn2 , lu , lx , lxd , LZETA , MAGA , 
-     &          MAGEXC , magh , MEM
+     &          LNORM , LNY , locat , LOCKF , LOCKS , loct , lp0 , 
+     &          lpin , ltrn , ltrn1 , ltrn2 , lu , lx , lxd , LZETA , 
+     &          MAGA , MAGEXC , magh , MEM
       INTEGER*4 MEMAX , memax1 , memh , memx4 , MEMX6 , mend , mexl , 
      &          mfla , mlt , mm , mpin , ms , MULTI , n , na , na1 , 
      &          naa , nallow , NANG
@@ -350,8 +348,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'life1.inc'
       INCLUDE 'dftb.inc'
       INCLUDE 'erran.inc'
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
+      INCLUDE 'mgn.inc'
       COMMON /SECK  / ISKIN(50)
       COMMON /VLIN  / XV(101) , YV(101) , ZV(100) , DSG(100) ,
      &                DSE(100) , DS

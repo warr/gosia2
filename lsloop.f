@@ -54,9 +54,7 @@ C half-integers.
      &          inqa , inr , ins , IPATH , Ir , is , is1 , is2 , ISEX , 
      &          ISMAX , ismin , ISO
       INTEGER*4 isplus , jg1 , jg2 , jrmir , La , Lam , lam2 , Ld , 
-     &          LEADF , LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , 
-     &          LP3 , LP4 , LP6 , LP7
-      INTEGER*4 LP8 , LP9 , LZETA , m , MAGA , MEM , mrange , mt , N , 
+     &          LEADF , LZETA , m , MAGA , MEM , mrange , mt , N , 
      &          NSTART , NSTOP , Nz
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
@@ -66,8 +64,7 @@ C half-integers.
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
+      INCLUDE 'mgn.inc'
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /CLCOM0/ IFAC(75)
       

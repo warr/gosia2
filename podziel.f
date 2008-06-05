@@ -19,13 +19,9 @@ C      J      - experiment number
  
       SUBROUTINE PODZIEL(I,J)
       IMPLICIT NONE
-      INTEGER*4 I , IAPR , IDIVE , ISEX , J , k , l , l1 , l2 , LERF , 
-     &          LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , 
-     &          LP4 , LP6
-      INTEGER*4 LP7 , LP8 , LP9
+      INTEGER*4 I , IAPR , IDIVE , ISEX , J , k , l , l1 , l2 , LERF
       REAL*8 QAPR
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
+      INCLUDE 'mgn.inc'
       COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
       COMMON /APRX  / LERF , IDIVE(50,2)
       DATA l1/0/

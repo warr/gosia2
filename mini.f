@@ -73,9 +73,7 @@ C don't go outside the limits specified by the user.
      &          jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , jnm , 
      &          jpr , jsa , jst
       INTEGER*4 kh2 , kkk , KVAR , l , LFL , LFL1 , LFL2 , 
-     &          LMAXE , lnm , LNY , LOCKF , LOCKS , LP1 , LP10 , LP11 , 
-     &          LP12 , LP13 , LP14 , LP2
-      INTEGER*4 LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , MAGEXC , MEMAX , 
+     &          LMAXE , lnm , LNY , LOCKF , LOCKS , MAGEXC , MEMAX , 
      &          MEMX6 , metf , mvfl , ncall , nlinn , NLOCK , noflg , 
      &          Nptl , NWR , NYLDE
       INTEGER*4 IBPS, IUNIT3, JZB ! For gosia2
@@ -83,8 +81,7 @@ C don't go outside the limits specified by the user.
       COMMON /DUMM  / GRAD(1500) , HLMLM(1500) , ELMH(1500)
       COMMON /ILEWY / NWR
       COMMON /CH1T  / CHIS11
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
+      INCLUDE 'mgn.inc'
       COMMON /UWAGA / ITAK2
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 

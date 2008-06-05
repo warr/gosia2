@@ -31,10 +31,8 @@ C experimental yields
      &       waga , XA , XA1 , xep , YEXP , YNRM , zp
       INTEGER*4 idc , idc1 , idcx , Idr , IDRN , ii , ILE , Ipri , IY , 
      &          iytot , iytt , IZ , IZ1 , j , k , kk , kkl , KSEQ , 
-     &          lbg , LP1
-      INTEGER*4 LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , LP4 , 
-     &          LP6 , LP7 , LP8 , LP9 , lxp , nanx , nde , nde1 , 
-     &          ne , NEXPT , ns1
+     &          lbg
+      INTEGER*4 lxp , nanx , nde , nde1 , ne , NEXPT , ns1
       INTEGER*4 ns2 , ns3 , ns4 , nsxh , nsyh , Ntap , nval , NYLDE
       DIMENSION iytot(32)
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
@@ -43,8 +41,7 @@ C experimental yields
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
+      INCLUDE 'mgn.inc'
       INCLUDE 'cccds.inc'
       
 C     Rewind yield file

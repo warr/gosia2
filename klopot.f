@@ -34,17 +34,14 @@ C      Rlr    - print out if matrix element exceeds Rlr.
      &       XA1 , YEXP , YNRM , ZETA
       INTEGER*4 i , IDRN , iex , iexh , iexp , ILE , indx , inh , ipf , 
      &          IVAR , IY , IZ , IZ1 , j , jm , jp , K , KVAR , l , lc
-      INTEGER*4 ll , LMAXE , lngt , loc , LP1 , LP10 , LP11 , LP12 , 
-     &          LP13 , LP14 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &          lu , LZETA , MAGEXC
+      INTEGER*4 ll , LMAXE , lngt , loc , lu , LZETA , MAGEXC
       INTEGER*4 MEMAX , MEMX6 , NEXPT , nf , ni , nm , np , NYLDE
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
      &                YNRM(32,50) , IDRN , ILE(32)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
+      INCLUDE 'mgn.inc'
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
      &                TLBDG(50) , VINF(50)

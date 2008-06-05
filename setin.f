@@ -25,10 +25,8 @@ C 365  in GOSIA, which is the dimension of the array.
       SUBROUTINE SETIN
       IMPLICIT NONE
       REAL*8 ADB , CH , SH
-      INTEGER*4 k , LP1 , LP10 , LP11 , LP12 , LP13 , 
-     &          LP14 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
+      INTEGER*4 k
+      INCLUDE 'mgn.inc'
       COMMON /HIPER / SH(365) , CH(365)
       COMMON /ADX   / ADB(365)
       INCLUDE 'kin.inc'

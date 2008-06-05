@@ -85,9 +85,7 @@ C      Bten   -
       INTEGER*4 knm , KSEQ , kx , larm , lcc , lcou , LFL , LFL1 , 
      &          LFL2 , licz , lix , llx , lm , LMAX , LMAXE , lmh , 
      &          LNY , loc , loch , loct
-      INTEGER*4 lp , LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , 
-     &          LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , lpit , lput , lpx , 
-     &          lpxd , ls , lst
+      INTEGER*4 lp , lpit , lput , lpx , lpxd , ls , lst
       INTEGER*4 luu , lx , LZETA , MAGA , MAGEXC , MEMAX , MEMX6 , 
      &          NANG , Ncall , NDIM , NEXPT , NICC , NLIFT , nlin , 
      &          NMAX , NMAX1 , nowr , npoz , nrest , NSTART
@@ -117,8 +115,7 @@ C      Bten   -
      &                ISO
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /AZ    / ARM(600,7)
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
+      INCLUDE 'mgn.inc'
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /PTH   / IPATH(75) , MAGA(75)
       COMMON /PRT   / IPRM(20)

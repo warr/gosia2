@@ -56,9 +56,7 @@ C z is the coupling parameter zeta, calculated in the function LSLOOP.
       INTEGER*4 i2 , i3 , I57 , iii , indq , indx , Ir , irs , is , 
      &          is1 , is2 , ISG , ISG1 , ISHA , ISMAX , ismin , ISO , 
      &          isplus , ISSTAR , ISSTO
-      INTEGER*4 KDIV , la , Lam , LAMR , Ld , LOCQ , LP1 , LP10 , LP11 , 
-     &          LP12 , LP13 , LP14 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , 
-     &          LP9 , LZETA
+      INTEGER*4 KDIV , la , Lam , LAMR , Ld , LOCQ , LZETA
       INTEGER*4 m , mrange , MSTORE , mua , N , NDIV , NPT , NSTART , 
      &          NSTOP , NSW , Nz
       COMPLEX*16 ARM , FAZA , pamp , pamp1
@@ -71,8 +69,7 @@ C z is the coupling parameter zeta, calculated in the function LSLOOP.
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
       INCLUDE 'adbxi.inc'
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
+      INCLUDE 'mgn.inc'
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /ALLC  / LOCQ(8,7)
