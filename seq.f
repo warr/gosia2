@@ -39,7 +39,7 @@ C 8 = M2.
       IMPLICIT NONE
       REAL*8 CONV , ega , egs , emax , F , GF , spinf , spini , twoi
       INTEGER*4 idecay , Idr , indx , inx , inx1 , ir , is , istr1 , 
-     &          istr2 , j , js , jsave , k , kpa , l , la , la1 ,
+     &          istr2 , j , js , jsave , k , kpa , l , la , la1 , 
      &          ld , LEADF
       INTEGER*4 m , m1 , m6 , MEM , mk , mule , mulm , n , n1 , nob
       INCLUDE 'coex2.inc'
