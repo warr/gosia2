@@ -26,13 +26,12 @@ C      Lu     -
       IMPLICIT NONE
       REAL*8 a1 , al , al1 , c1 , c2 , Em , 
      &       Rik , rn , Rv , rx
-      INTEGER*4 Indx , ITS , j , j1 , Jk , Kk , kk6 , 
-     &          KVAR , l , l1 , Lu
+      INTEGER*4 Indx , ITS , j , j1 , Jk , Kk , kk6 , l , l1 , Lu
       INCLUDE 'az.inc'
       INCLUDE 'odch.inc'
       INCLUDE 'kin.inc'
       COMMON /TRB   / ITS
-      COMMON /SEL   / KVAR(1500)
+      INCLUDE 'sel.inc'
 
       kk6 = Kk + 5
       rn = DEV(Lu)

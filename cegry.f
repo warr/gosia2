@@ -87,7 +87,7 @@ C      Iredv  -
      &          Itemp , ITS , iva , iw , IWF , ixl , ixm , 
      &          iyex , jj
       INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , 
-     &          KVAR , l , l1 , LFL , LFL1 , LFL2 , lic , 
+     &          l , l1 , LFL , LFL1 , LFL2 , lic , 
      &          licz , ll1
       INTEGER*4 LNORM , lth , lu , luu , na
       INTEGER*4 nf , nf1 , ni , ni1 , NLIFT , Nwyr
@@ -113,7 +113,7 @@ C      Iredv  -
       COMMON /MINNI / IMIN , LNORM(50)
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
       INCLUDE 'yteor.inc'
-      COMMON /SEL   / KVAR(1500)
+      INCLUDE 'sel.inc'
       INCLUDE 'mgn.inc'
       INCLUDE 'ccc.inc'
       INCLUDE 'yexpt.inc'
