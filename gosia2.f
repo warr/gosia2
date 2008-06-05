@@ -248,8 +248,8 @@ C      ZV     - energy meshpoints
      &       ph1 , ph2 , pi , po1 , po2 , polm , pop1 , pr , pv
       REAL*8 q1 , q2 , qc , qfac , qr , qui , r , r1 , 
      &       r2 , r3 , r4 , rem , remax , rl , rlr , rm , rx , ry
-      REAL*8 rz , s , s11 , s12 , s21 , s22 , sbe , sf , SGW , 
-     &       sh , sh1 , sh2 , SIMIN , slim , SUBCH1 , SUBCH2
+      REAL*8 rz , s , s11 , s12 , s21 , s22 , sbe , sf , 
+     &       sh , sh1 , sh2 , SIMIN , slim
       REAL*8 summm , sz1 , sz2 , TACOS , tau1 , tau2 , test , 
      &       tetrc , tfac , thc , title , 
      &       tmn , tmx , todfi
@@ -277,7 +277,7 @@ C      ZV     - energy meshpoints
      &          isip , iske , iskf
       INTEGER*4 isko , iskok , isoh , ispa , ispb , 
      &          itno , itp , iuy , iva , iva1 , 
-     &          ivarh , ivari , ivrh , IWF
+     &          ivarh , ivari , ivrh
       INTEGER*4 ixj , ixl , ixm , iyr , izcap , j , ja , 
      &          jan , jan1 , jb , jb1 , jb2 , jd , jde , jdy , je , 
      &          JENTR
@@ -366,7 +366,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'caux0.inc'
       INCLUDE 'pth.inc'
       INCLUDE 'aprcat.inc'
-      COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
+      INCLUDE 'warn.inc'
       INCLUDE 'thtar.inc'
       COMMON /FIT   / LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
       INCLUDE 'aprx.inc'

@@ -79,12 +79,12 @@ C      Iredv  -
       REAL*8 ccc , ccd , Chilo , Chisq , cnr , cocos , d , decen
       REAL*8 dl , effi , fi0 , fi1 , fic , figl , fm , g
       REAL*8 gth , part , partl , rik , rl , rx , ry , 
-     &       rys , rz , sf , sgm , SGW , SUBCH1 , SUBCH2 , sum3
+     &       rys , rz , sf , sgm , sum3
       REAL*8 sumpr , TACOS , tetrc , tfac , thc , wf
       INTEGER*4 iabc , Icall , id , idc , Idr ,  ifdu , ifxd , 
      &          ii , ile2 , inclus
-      INTEGER*4 ipd , Iredv , Issp , Itemp , iva , iw , IWF , 
-     &          ixl , ixm , iyex , jj
+      INTEGER*4 ipd , Iredv , Issp , Itemp , iva , iw , ixl , ixm , 
+     &          iyex , jj
       INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , 
      &          l , l1 , lic , licz , ll1
       INTEGER*4 lth , lu , luu , na
@@ -116,7 +116,7 @@ C      Iredv  -
       INCLUDE 'ccc.inc'
       INCLUDE 'yexpt.inc'
       INCLUDE 'kin.inc'
-      COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
+      INCLUDE 'warn.inc'
       INCLUDE 'coex.inc'
       COMMON /SKP   / JSKIP(50)
       INCLUDE 'trb.inc'
