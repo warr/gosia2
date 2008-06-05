@@ -256,7 +256,7 @@ C      ZV     - energy meshpoints
       REAL*8 rz , s , s11 , s12 , s21 , s22 , SA , sbe , sf , SGW , 
      &       sh , sh1 , sh2 , SIMIN , slim , SPIN , SUBCH1 , SUBCH2
       REAL*8 summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , test , 
-     &       tetrc , tfac , thc , TIMEL , title , 
+     &       tetrc , tfac , thc , title , 
      &       TLBDG , tmn , tmx , todfi
       REAL*8 tta , tth , tting , ttttt , txx , u , UPL , 
      &       val , VINF , waga , wph , wpi , WSIXJ , wth , wthh , 
@@ -298,7 +298,7 @@ C      ZV     - energy meshpoints
      &          lam , lamd
       INTEGER*4 LAMDA , lamh , LAMMAX , lb , lck1 , lck2 , 
      &          LDNUM , LEAD , LERF , levl , lex , lexp , lfagg , 
-     &          lfini , lh1 , lh2 , LIFCT , liscl , lkj
+     &          lfini , lh1 , lh2 , liscl , lkj
       INTEGER*4 lkj1 , ll , lli , lll , LMAX , lmax1 , LMAXE , lmaxh , 
      &          LNORM , LNY , locat , LOCKF , LOCKS , loct , lp0 , LP1 , 
      &          LP10 , LP11 , LP12 , LP13
@@ -347,7 +347,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'hhh.inc'
       INCLUDE 'vac.inc'
       INCLUDE 'me2d.inc'
-      COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
+      INCLUDE 'life1.inc'
       COMMON /DFTB  / DEVD(1500) , DEVU(1500)
       COMMON /ERRAN / KFERR
       COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
