@@ -70,7 +70,7 @@ C value of f(n).
       SUBROUTINE INTG(Ien)
       IMPLICIT NONE
       REAL*8 f , rim , rl , srt
-      INTEGER*4 i , i57 , Ien , IFLG , ihold , intend , INTERV , 
+      INTEGER*4 i , i57 , Ien , ihold , intend , INTERV , 
      &          ir , ir1 , k , kast
       INTEGER*4 mir , n
       COMPLEX*16 hold
@@ -82,7 +82,7 @@ C value of f(n).
       INCLUDE 'clcom8.inc'
       INCLUDE 'coex2.inc'
       INCLUDE 'caux.inc'
-      COMMON /FLA   / IFLG
+      INCLUDE 'fla.inc'
       INCLUDE 'cexc0.inc'
       INCLUDE 'pth.inc'
       COMMON /CEXC9 / INTERV(50)

@@ -34,13 +34,13 @@ C storage part.
       
       SUBROUTINE NEWLV(N,Ld,La)
       IMPLICIT NONE
-      INTEGER*4 i2 , IFLG , indx , La , Ld , LEADF , m , MEM , N
+      INTEGER*4 i2 , indx , La , Ld , LEADF , m , MEM , N
       COMPLEX*16 EXPON
       INCLUDE 'clcom.inc'
       INCLUDE 'caux.inc'
       INCLUDE 'pint.inc'
       INCLUDE 'adbxi.inc'
-      COMMON /FLA   / IFLG
+      INCLUDE 'fla.inc'
       INCLUDE 'cexc0.inc'
 
       Ld = LDNUM(La,N) ! Get number of levels connected to level N by multipolarity La

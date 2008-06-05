@@ -1,0 +1,2 @@
+      INTEGER*4 IFLG
+      COMMON /FLA   / IFLG
