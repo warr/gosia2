@@ -53,19 +53,18 @@ C      Joj    - index of substate (write only)
  
       SUBROUTINE LOAD(Iexp,Ient,Icg,Polm,Joj)
       IMPLICIT NONE
-      REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ah , cpsi , dep , 
-     &       eta , etan , Polm , pp1 , pp2
-      REAL*8 ppp , rlam , ssqrt , szet , wrt , wrtm , z1 , z2 , 
-     &       zet , zsqa
-      INTEGER*4 i , i1 , i2 , i3 , Icg , Ient , Iexp , 
-     &          ir , is , ISHA , ispi , ispo
-      INTEGER*4 jj , jjj , Joj , la , lam , lam1 , ld , 
-     &          m , m1 , m2 , mstop , n , 
-     &          n2 , n3 , nn , nz
+      REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ah , cpsi , dep , eta , 
+     &       etan , Polm , pp1 , pp2
+      REAL*8 ppp , rlam , ssqrt , szet , wrt , wrtm , z1 , z2 , zet , 
+     &       zsqa
+      INTEGER*4 i , i1 , i2 , i3 , Icg , Ient , Iexp , ir , is , ispi , 
+     &          ispo
+      INTEGER*4 jj , jjj , Joj , la , lam , lam1 , ld , m , m1 , 
+     &          m2 , mstop , n , n2 , n3 , nn , nz
       INCLUDE 'clcom.inc'
       INCLUDE 'mgn.inc'
       INCLUDE 'coex.inc'
-      COMMON /PSPIN / ISHA
+      INCLUDE 'pspin.inc'
       INCLUDE 'cexc.inc'
       INCLUDE 'pcom.inc'
       INCLUDE 'ccoup.inc'
