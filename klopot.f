@@ -183,9 +183,9 @@ C      Rlr    - print out if matrix element exceeds Rlr.
      &                            IY(jp,3) , CORF(jp,1) , CORF(jp,2) , 
      &                            ump , IY(jm,1) , IY(jm,2) , IY(jm,3) , 
      &                            CORF(jm,1) , CORF(jm,2) , umm
-99008                      FORMAT (6X,1I2,3X,1I2,'--',1I2,5X,1F4.1,4X,
-     &                             1E9.2,7X,1E9.2,9X,'I',2X,1I2,3X,1I2,
-     &                             '--',1I2,5X,1F4.1,4X,1E9.2,7X,1E9.2)
+99008                      FORMAT (5X,1I3,2X,1I3,'--',1I3,4X,1F4.1,4X,
+     &                             1E9.2,7X,1E9.2,9X,'I',1X,1I3,2X,1I3,
+     &                             '--',1I3,4X,1F4.1,4X,1E9.2,7X,1E9.2)
                            CORF(jp,1) = 0.
                            CORF(jm,1) = 0.
                         ENDDO
