@@ -56,7 +56,7 @@ C      Chilo  - chi squared using logs
          it = IMIX(i) ! Matrix element for this mixing ratio
          WRITE (22,99002) KSEQ(it,3) , KSEQ(it,4) , DMIXE(i,1) , DMIX(i)
      &                    , dl ! KSEQs are level numbers
-99002    FORMAT (10X,1I2,'---',1I2,14X,1F7.2,12X,1F7.2,13X,1F5.2)
+99002    FORMAT (9X,1I3,'---',1I3,13X,1F7.2,12X,1F7.2,13X,1F5.2)
       ENDDO ! Loop on mixing ratios i
 
       END
