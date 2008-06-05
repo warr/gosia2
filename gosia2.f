@@ -236,18 +236,18 @@ C      ZV     - energy meshpoints
       REAL*8 ACCA , ACCUR , acof , AGELI , ap , 
      &       ARCCOS , ARCTG , arg , ax , B , bcof , be2 , be2a , be2b , 
      &       be2c
-      REAL*8 bk , bl , bm , bmx , BRAT , bten , bu , CAT , CC , ccc , 
+      REAL*8 bk , bl , bm , bmx , bten , bu , CAT , CC , ccc , 
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
      &       cnst
       REAL*8 cocos , conu , CORF , d , decen , dedx , 
      &       DIPOL , DLOCK , dsd , dsig , dst
-      REAL*8 dsx , dsxm , DYEX , effi , EG , eh1 , ELM , ELMH , 
+      REAL*8 dsx , dsxm , DYEX , effi , EG , eh1 , ELM , 
      &       elmi , ELML , ELMT , ELMU , emhl1 , EMMA , emn , emx , EN , 
      &       enb
       REAL*8 eng , enh , EP , esd , esp , ess , 
      &       fi0 , fi1 , fic , fiex1 , figl , fipo1 , fm , G , 
-     &       GRAD , gth
-      REAL*8 hen , het , HLMLM , p , PARX , PARXM , pfi , 
+     &       gth
+      REAL*8 hen , het , p , PARX , PARXM , pfi , 
      &       ph1 , ph2 , pi , PILOG , po1 , po2 , polm , pop1 , pr , 
      &       pv , Q
       REAL*8 q1 , q2 , QAPR , qc , qfac , qr , qui , r , r1 , 
@@ -266,7 +266,7 @@ C      ZV     - energy meshpoints
       REAL*8 YEXP , YGN , YGP , YNRM , yy , yyd1 , yydd , yyy , 
      &       ZETA , zmir , zp , ZPOL , zz
       INTEGER*4 i , i122 , IAPR , iapx , ib , 
-     &          ibaf , IBRC , icg , icll , ICS , ict , 
+     &          ibaf , icg , icll , ICS , ict , 
      &          ictl , id , idf , IDIVE
       INTEGER*4 idr , IDRN , iecd , ient , IFAC , IFBFL , ifbp , 
      &          ifc , ifm , IFMO , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
@@ -305,7 +305,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 MEMAX , memax1 , memh , memx4 , MEMX6 , mend , mexl , 
      &          mfla , mlt , mm , mpin , ms , MULTI , n , na , na1 , 
      &          naa , nallow , NANG
-      INTEGER*4 naxfl , nb1 , nb2 , nbands , NBRA , nch , NCM , NDIM , 
+      INTEGER*4 naxfl , nb1 , nb2 , nbands , nch , NCM , NDIM , 
      &          ndima , ndum , ne , NEXPT , nf , nfd , nfdd , 
      &          nfi , nflr , nft , nged
       INTEGER*4 ngpr , ni , NICC , nksi , nl , NLIFT , NLOCK , NMAX ,
@@ -350,8 +350,8 @@ C      ZV     - energy meshpoints
       INCLUDE 'mgn.inc'
       INCLUDE 'seck.inc'
       INCLUDE 'vlin.inc'
-      COMMON /DUMM  / GRAD(1500) , HLMLM(1500) , ELMH(1500)
-      COMMON /BRNCH / BRAT(50,2) , IBRC(2,50) , NBRA
+      INCLUDE 'dumm.inc'
+      INCLUDE 'brnch.inc'
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
      &                YNRM(32,50) , IDRN , ILE(32)

@@ -62,9 +62,9 @@ C don't go outside the limits specified by the user.
      &       Chiok , chirf , CHIS11 , chis12 , chis13 , chisf , chisp , 
      &       Chisq , chiss , chl
       REAL*8 chx , cmax , Conv , CORF , crit , dl , 
-     &       DLOCK , dm , DYEX , ELM , ELMH , ELML , ELMU , EMH , f1 , 
-     &       f2 , flt , GRAD
-      REAL*8 gradp , HLMLM , ht , p , q , rfk , SA , sel , shl , sumg1 , 
+     &       DLOCK , dm , DYEX , ELM , ELML , ELMU , EMH , f1 , 
+     &       f2 , flt
+      REAL*8 gradp , ht , p , q , rfk , SA , sel , shl , sumg1 , 
      &       sumg2 , sumht , UPL , uxa , xkat , Xtest , YEXP , YNRM
       INTEGER*4 i , icl1 , icl2 , icount , ICS , Idr , IDRN , IFBFL , 
      &          iht , iin , ILE , Imode , indx1 , INM , inmx , ino , 
@@ -78,7 +78,7 @@ C don't go outside the limits specified by the user.
      &          Nptl , NWR , NYLDE
       INTEGER*4 IBPS, IUNIT3, JZB ! For gosia2
       DIMENSION ipm(10) , Bten(1200) , gradp(1500)
-      COMMON /DUMM  / GRAD(1500) , HLMLM(1500) , ELMH(1500)
+      INCLUDE 'dumm.inc'
       COMMON /ILEWY / NWR
       COMMON /CH1T  / CHIS11
       INCLUDE 'mgn.inc'

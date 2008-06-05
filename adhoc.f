@@ -58,17 +58,17 @@ C Here we parse the input of the OP,YIEL command and store the values.
  
       SUBROUTINE ADHOC(Oph,Idr,Nfd,Ntap,Iyr)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , AGELI , BRAT , CC , CORF , DIPOL , 
+      REAL*8 ACCA , ACCUR , AGELI , CC , CORF , DIPOL , 
      &       DMIX , DMIXE , DYEX , EG , EN , EP , Q
       REAL*8 SPIN , TAU , TLBDG , UPL , VINF , wamx , wbra , 
      &       wdl , wlf , XA , XA1 , YEXP , YGN , YGP , YNRM , ZPOL
-      INTEGER*4 iax , IBRC , Idr , IDRN , iexp1 , IFMO , 
+      INTEGER*4 iax , Idr , IDRN , iexp1 , IFMO , 
      &          ILE , ilft , IMIX , iosr , ipri , IPRM , ISO , isrt1 , 
      &          ITS , iuf , IVAR
       INTEGER*4 IY , Iyr , IZ , IZ1 , jic , jicc , juf , KSEQ , lb , 
      &          li , licc , llia , LMAXE , lxt , MAGEXC , MEM , 
      &          MEMAX , MEMX6 , n1
-      INTEGER*4 n2 , NANG , NBRA , ndas , NDL , ndtp , 
+      INTEGER*4 n2 , NANG , ndas , NDL , ndtp , 
      &          NEXPT , Nfd , NICC , nistr , NLIFT , ns1 , ns2 , ns3 , 
      &          ns4 , Ntap , nvare , NYLDE
       INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
@@ -81,7 +81,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       COMMON /MIXD  / DMIXE(20,2) , DMIX(20) , IMIX(20) , NDL
       INCLUDE 'me2d.inc'
       INCLUDE 'life1.inc'
-      COMMON /BRNCH / BRAT(50,2) , IBRC(2,50) , NBRA
+      INCLUDE 'brnch.inc'
       COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
      &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
      &                YNRM(32,50) , IDRN , ILE(32)
