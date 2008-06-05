@@ -57,16 +57,16 @@ C element.
 
       SUBROUTINE GKK(Iz,Beta,Spin,Time,Il)
       IMPLICIT NONE
-      REAL*8 AKS , alp , ATS , AVJI , Beta , ccf , down , DQ , dwc , f , 
-     &       FIEL , GAMMA , GFAC , GKI , hmean , POWER , QCEN , rk , 
+      REAL*8 alp , ATS , AVJI , Beta , ccf , down , dwc , f , 
+     &       FIEL , GAMMA , GFAC , GKI , hmean , POWER , rk , 
      &       sm , Spin
-      REAL*8 SUM , Time , TIMEC , up , upc , VACDP , valmi , w2 , wrt , 
-     &       WSIXJ , wsp , xji , xlam , XLAMB , XNOR
-      INTEGER*4 i , IBYP , if2 , ifq , Il , imean , inq , irk2 , 
+      REAL*8 SUM , Time , TIMEC , up , upc , valmi , w2 , wrt , 
+     &       WSIXJ , wsp , xji , xlam , XLAMB
+      INTEGER*4 i , if2 , ifq , Il , imean , inq , irk2 , 
      &          ispin2 , ixji2 , Iz , j , k , k1 , k2 , l , m , ncoup , 
      &          nz
       COMMON /GVAC  / GKI(3) , SUM(3)
-      COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
+      INCLUDE 'vac.inc'
       COMMON /GGG   / AVJI , GAMMA , XLAMB , TIMEC , GFAC , FIEL , POWER
       
       IF ( IBYP.NE.1 ) THEN

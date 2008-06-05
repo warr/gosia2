@@ -23,12 +23,12 @@ C      Il     - level index
  
       SUBROUTINE GKVAC(Il)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , AKS , AVJI , beta , DIPOL , DQ , 
+      REAL*8 ACCA , ACCUR , AVJI , beta , DIPOL , 
      &       EN , EP , FIEL , GAMMA , GFAC , GKI , 
-     &       POWER , QCEN , sp
-      REAL*8 SPIN , SUM , TAU , time , TIMEC , TLBDG , VACDP , VINF , 
-     &       XA , XA1 , XLAMB , XNOR , ZPOL
-      INTEGER*4 i , IBYP , Il , ISO , ITTE , IZ , IZ1 , 
+     &       POWER , sp
+      REAL*8 SPIN , SUM , TAU , time , TIMEC , TLBDG , VINF , 
+     &       XA , XA1 , XLAMB , ZPOL
+      INTEGER*4 i , Il , ISO , ITTE , IZ , IZ1 , 
      &          KSEQ , NEXPT
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       INCLUDE 'brec.inc'
@@ -37,7 +37,7 @@ C      Il     - level index
      &                TLBDG(50) , VINF(50)
       COMMON /GVAC  / GKI(3) , SUM(3)
       INCLUDE 'kin.inc'
-      COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
+      INCLUDE 'vac.inc'
       COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
      &                ISO
       COMMON /THTAR / ITTE(50)

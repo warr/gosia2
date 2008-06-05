@@ -233,14 +233,14 @@ C      ZV     - energy meshpoints
 
       PROGRAM GOSIA2
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , acof , AGELI , AKS , ap , 
+      REAL*8 ACCA , ACCUR , acof , AGELI , ap , 
      &       ARCCOS , ARCTG , arg , ax , B , bcof , be2 , be2a , be2b , 
      &       be2c
       REAL*8 bk , bl , bm , bmx , BRAT , bten , bu , CAT , CC , ccc , 
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
      &       cnst
       REAL*8 cocos , conu , CORF , d , decen , dedx , DEVD , 
-     &       DEVU , DIPOL , DLOCK , DQ , DS , dsd , DSE , DSG , 
+     &       DEVU , DIPOL , DLOCK , DS , dsd , DSE , DSG , 
      &       dsig , dst
       REAL*8 dsx , dsxm , DYEX , EAMX , effi , EG , eh1 , ELM , ELMH , 
      &       elmi , ELML , ELMT , ELMU , emhl1 , EMMA , emn , emx , EN , 
@@ -251,23 +251,23 @@ C      ZV     - energy meshpoints
       REAL*8 hen , het , HLMLM , p , PARX , PARXM , pfi , 
      &       ph1 , ph2 , pi , PILOG , po1 , po2 , polm , pop1 , pr , 
      &       pv , Q
-      REAL*8 q1 , q2 , QAPR , qc , QCEN , qfac , qr , qui , r , r1 , 
+      REAL*8 q1 , q2 , QAPR , qc , qfac , qr , qui , r , r1 , 
      &       r2 , r3 , r4 , rem , remax , rl , rlr , rm , rx , ry
       REAL*8 rz , s , s11 , s12 , s21 , s22 , SA , sbe , sf , SGW , 
      &       sh , sh1 , sh2 , SIMIN , slim , SPIN , SUBCH1 , SUBCH2
       REAL*8 summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , test , 
      &       tetrc , tfac , thc , TIMEL , title , 
      &       TLBDG , tmn , tmx , todfi
-      REAL*8 tta , tth , tting , ttttt , txx , u , UPL , VACDP , 
+      REAL*8 tta , tth , tting , ttttt , txx , u , UPL , 
      &       val , VINF , waga , wph , wpi , WSIXJ , wth , wthh , 
      &       WTHREJ , XA , XA1
       REAL*8 xep , XI , xi1 , xi2 , XIR , xk1 , xk2 , xl1 , xlevb , 
-     &       xlk , xm1 , xm2 , xm3 , XNOR , xtest , XV , xw , xx , xxi , 
+     &       xlk , xm1 , xm2 , xm3 , xtest , XV , xw , xx , xxi , 
      &       ycorr
       REAL*8 YEXP , YGN , YGP , YNRM , YV , yy , yyd1 , yydd , yyy , 
      &       ZETA , zmir , zp , ZPOL , ZV , zz
       INTEGER*4 i , i122 , IAMX , IAMY , IAPR , iapx , ib , 
-     &          ibaf , IBRC , IBYP , icg , icll , ICS , ict , 
+     &          ibaf , IBRC , icg , icll , ICS , ict , 
      &          ictl , id , idf , IDIVE
       INTEGER*4 idr , IDRN , iecd , ient , IFAC , IFBFL , ifbp , 
      &          ifc , ifm , IFMO , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
@@ -345,7 +345,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'cinit.inc'
       INCLUDE 'xra.inc'
       INCLUDE 'hhh.inc'
-      COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
+      INCLUDE 'vac.inc'
       COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
       COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
       COMMON /DFTB  / DEVD(1500) , DEVU(1500)

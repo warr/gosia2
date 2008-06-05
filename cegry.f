@@ -76,19 +76,19 @@ C      Iredv  -
  
       SUBROUTINE CEGRY(Chisq,Itemp,Chilo,Idr,Nwyr,Icall,Issp,Iredv)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , AGELI , AKS , CC , ccc , ccd , 
+      REAL*8 ACCA , ACCUR , AGELI , CC , ccc , ccd , 
      &       Chilo , Chisq , cnr , cocos , CORF , d , decen , 
      &       DIPOL
-      REAL*8 dl , DQ , DYEX , effi , EG , EMH , EN , 
+      REAL*8 dl , DYEX , effi , EG , EMH , EN , 
      &       EP , fi0 , fi1 , fic , figl , 
      &       fm , g
-      REAL*8 gth , part , partl , Q , QCEN , rik , rl , rx , ry , 
+      REAL*8 gth , part , partl , Q , rik , rl , rx , ry , 
      &       rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , SUBCH2 , sum3
       REAL*8 sumpr , TACOS , TAU , tetrc , tfac , thc , TLBDG , 
-     &       UPL , VACDP , VINF , wf , XA , XA1 , XNOR , YEXP , 
+     &       UPL , VINF , wf , XA , XA1 , YEXP , 
      &       YGN , YGP , YNRM
       REAL*8 ZPOL
-      INTEGER*4 iabc , IBYP , Icall , id , idc , Idr , 
+      INTEGER*4 iabc , Icall , id , idc , Idr , 
      &          IDRN , ifdu , IFMO , ifxd , IGRD , ii , ILE , 
      &          ile2 , IMIN , inclus , INM
       INTEGER*4 ipd , IPRM , Iredv , ISO , Issp , 
@@ -115,7 +115,7 @@ C      Iredv  -
       INCLUDE 'tra.inc'
       INCLUDE 'brec.inc'
       INCLUDE 'dimx.inc'
-      COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
+      INCLUDE 'vac.inc'
       INCLUDE 'cinit.inc'
       COMMON /PRT   / IPRM(20)
       COMMON /LIFE  / NLIFT

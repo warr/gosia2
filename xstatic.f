@@ -30,9 +30,9 @@ C paper.
 
       SUBROUTINE XSTATIC(Iz,Ido,Iup,Beta)
       IMPLICIT NONE
-      REAL*8 AKS , Beta , DQ , h , QCEN , VACDP , XNOR
-      INTEGER*4 IBYP , Ido , Iup , Iz , lq
-      COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
+      REAL*8 Beta , h
+      INTEGER*4 Ido , Iup , Iz , lq
+      INCLUDE 'vac.inc'
       
       h = 1./(1.+(Iz**.45*.012008/Beta)**1.666667)
       QCEN = Iz*h**.6
