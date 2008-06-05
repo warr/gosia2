@@ -1,0 +1,2 @@
+      INTEGER*4 ITTE
+      COMMON /THTAR / ITTE(50)

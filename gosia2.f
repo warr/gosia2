@@ -276,7 +276,7 @@ C      ZV     - energy meshpoints
      &          ipri , irea , irep , irfix , 
      &          isip , iske , iskf
       INTEGER*4 isko , iskok , isoh , ispa , ispb , 
-     &          itno , itp , ITTE , iuy , iva , iva1 , 
+     &          itno , itp , iuy , iva , iva1 , 
      &          ivarh , ivari , ivrh , IWF
       INTEGER*4 ixj , ixl , ixm , iyr , izcap , j , ja , 
      &          jan , jan1 , jb , jb1 , jb2 , jd , jde , jdy , je , 
@@ -367,7 +367,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'pth.inc'
       INCLUDE 'aprcat.inc'
       COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
-      COMMON /THTAR / ITTE(50)
+      INCLUDE 'thtar.inc'
       COMMON /FIT   / LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
       INCLUDE 'aprx.inc'
       COMMON /SKP   / JSKIP(50)
