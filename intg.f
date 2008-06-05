@@ -72,9 +72,9 @@ C value of f(n).
       REAL*8 ACC50 , D2W , f , rim , 
      &       rl , srt
       INTEGER*4 i , i57 , Ien , IFAC , IFLG , ihold , intend , INTERV , 
-     &          IPATH , ir , ir1 , IRA , ISG , ISG1 , k , 
+     &          ir , ir1 , IRA , ISG , ISG1 , k , 
      &          kast , KDIV , LAMR
-      INTEGER*4 MAGA , MAXLA , mir , n , NDIV , NPT , NSW
+      INTEGER*4 MAXLA , mir , n , NDIV , NPT , NSW
       COMPLEX*16 hold
       INCLUDE 'coex.inc'
       INCLUDE 'az.inc'
@@ -87,7 +87,7 @@ C value of f(n).
      &                ISG1
       COMMON /FLA   / IFLG
       INCLUDE 'cexc0.inc'
-      COMMON /PTH   / IPATH(75) , MAGA(75)
+      INCLUDE 'pth.inc'
       COMMON /CEXC9 / INTERV(50)
       
       intend = INTERV(Ien) ! Default accuracy set by INT option of OP,CONT

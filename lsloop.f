@@ -50,18 +50,16 @@ C half-integers.
       REAL*8 ELM , ELML , ELMU , phz , 
      &       PSI , QAPR , rmir , rmis , SA , Ssqrt , WTHREJ
       INTEGER*4 i2 , i3 , IAPR , Icg , Iexp , IFAC , iiex , indx , 
-     &          inqa , inr , ins , IPATH , Ir , is , is1 , is2 , ISEX , 
-     &          ismin
+     &          inqa , inr , ins , Ir , is , is1 , is2 , ISEX , ismin
       INTEGER*4 isplus , jg1 , jg2 , jrmir , La , Lam , lam2 , Ld , 
-     &          LEADF , m , MAGA , MEM , mrange , mt , N , 
-     &          Nz
+     &          LEADF , m , MEM , mrange , mt , N , Nz
       INCLUDE 'coex.inc'
       COMMON /PCOM  / PSI(1500)
       INCLUDE 'ccoup.inc'
       INCLUDE 'clcom8.inc'
       INCLUDE 'cexc0.inc'
       COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
-      COMMON /PTH   / IPATH(75) , MAGA(75)
+      INCLUDE 'pth.inc'
       INCLUDE 'mgn.inc'
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /CLCOM0/ IFAC(75)

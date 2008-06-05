@@ -26,13 +26,13 @@ C     Jidim   -
       IMPLICIT NONE
       REAL*8 a , b , FXIS1 , FXIS2 , q1 , q2 , QAPR , wg , wl , 
      &       xp , xx , zt
-      INTEGER*4 IAPR , Iexp , IPATH , ISEX , ist , istop , Jidim , k , 
-     &          kk , MAGA , n , ng , nl
+      INTEGER*4 IAPR , Iexp , ISEX , ist , istop , Jidim , k , 
+     &          kk , n , ng , nl
       INCLUDE 'map.inc'
       INCLUDE 'cxi.inc'
       INCLUDE 'clcom.inc'
       INCLUDE 'coex2.inc'
-      COMMON /PTH   / IPATH(75) , MAGA(75)
+      INCLUDE 'pth.inc'
       COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
 
       Jidim = NMAX + 1

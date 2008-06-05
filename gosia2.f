@@ -272,7 +272,7 @@ C      ZV     - energy meshpoints
      &          ind1 , ind2 , indx
       INTEGER*4 inko , inm1 , inm2 , inn , inpo , intend , 
      &          INTERV , INTR , intvh , inva , inx1 , iobl , iocc , 
-     &          iopri , iosr , IPATH , ipd , iph
+     &          iopri , iosr , ipd , iph
       INTEGER*4 ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
      &          ipri , IPRM , IPS1 , irea , irep , irfix , 
      &          ISEX , isip , iske , iskf
@@ -295,7 +295,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 lkj1 , ll , lli , lll , LMAX , lmax1 , LMAXE , lmaxh , 
      &          LNORM , LNY , locat , LOCKF , LOCKS , loct , lp0 , 
      &          lpin , ltrn , ltrn1 , ltrn2 , lu , lx , lxd , 
-     &          MAGA , MAGEXC , magh , MEM
+     &          MAGEXC , magh , MEM
       INTEGER*4 MEMAX , memax1 , memh , memx4 , MEMX6 , mend , mexl , 
      &          mfla , mlt , mm , mpin , ms , n , na , na1 , 
      &          naa , nallow
@@ -370,7 +370,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'coex2.inc'
       COMMON /CEXC9 / INTERV(50)
       COMMON /CAUX0 / EMMA(75) , NCM
-      COMMON /PTH   / IPATH(75) , MAGA(75)
+      INCLUDE 'pth.inc'
       COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
       COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
       COMMON /THTAR / ITTE(50)

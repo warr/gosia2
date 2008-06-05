@@ -19,9 +19,9 @@ C      Irld   - index into ARM array
       SUBROUTINE PATH(Irld)
       IMPLICIT NONE
       REAL*8 spm , vl
-      INTEGER*4 i , IPATH , Irld , isp , ist , j , MAGA
+      INTEGER*4 i , Irld , isp , ist , j
       INCLUDE 'cexc0.inc'
-      COMMON /PTH   / IPATH(75) , MAGA(75)
+      INCLUDE 'pth.inc'
       INCLUDE 'coex2.inc'
       INCLUDE 'clcom8.inc'
 

@@ -27,13 +27,13 @@ C      Acca   - accuracy required
       IMPLICIT NONE
       REAL*8 Acca , accah , ELM , ELML , ELMU , QAPR , SA , uwa
       INTEGER*4 i1 , i56 , i7 , IAPR , IDIVE , Iexp , img , Inc , Indx , 
-     &          IPATH , Irld , ISEX , itm , IVAR , j , jidim , jj , k , 
+     &          Irld , ISEX , itm , IVAR , j , jidim , jj , k , 
      &          ktoto , l
-      INTEGER*4 l1 , l2 , l3 , LERF , LMAXE , m , MAGA , MAGEXC , 
+      INTEGER*4 l1 , l2 , l3 , LERF , LMAXE , m , MAGEXC , 
      &          MEMAX , MEMX6
       INCLUDE 'az.inc'
       COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
-      COMMON /PTH   / IPATH(75) , MAGA(75)
+      INCLUDE 'pth.inc'
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /APRX  / LERF , IDIVE(50,2)
