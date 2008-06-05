@@ -247,7 +247,7 @@ C      ZV     - energy meshpoints
       REAL*8 eng , enh , EP , esd , esp , ess , 
      &       fi0 , fi1 , fic , fiex1 , figl , fipo1 , fm , G , 
      &       gth
-      REAL*8 hen , het , p , PARX , PARXM , pfi , 
+      REAL*8 hen , het , p , pfi , 
      &       ph1 , ph2 , pi , PILOG , po1 , po2 , polm , pop1 , pr , 
      &       pv , Q
       REAL*8 q1 , q2 , QAPR , qc , qfac , qr , qui , r , r1 , 
@@ -260,7 +260,7 @@ C      ZV     - energy meshpoints
       REAL*8 tta , tth , tting , ttttt , txx , u , 
      &       val , VINF , waga , wph , wpi , WSIXJ , wth , wthh , 
      &       WTHREJ , XA , XA1
-      REAL*8 xep , XI , xi1 , xi2 , XIR , xk1 , xk2 , xl1 , xlevb , 
+      REAL*8 xep , XI , xi1 , xi2 , xk1 , xk2 , xl1 , xlevb , 
      &       xlk , xm1 , xm2 , xm3 , xtest , xw , xx , xxi , 
      &       ycorr
       REAL*8 yy , yyd1 , yydd , yyy , 
@@ -355,7 +355,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'yexpt.inc'
       INCLUDE 'yteor.inc'
       INCLUDE 'lev.inc'
-      COMMON /MAP   / PARX(50,12,5) , PARXM(50,4,10,6) , XIR(6,50)
+      INCLUDE 'map.inc'
       COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
      &                NICC , NANG(200) , ISPL
       COMMON /GGG   / G(7)
