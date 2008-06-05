@@ -18,10 +18,10 @@ C 365  in GOSIA, which is the dimension of the arrays.
  
       SUBROUTINE FHIP
       IMPLICIT NONE
-      REAL*8 CH , er , ex , SH , w
+      REAL*8 er , ex , w
       INTEGER*4 j
       INCLUDE 'mgn.inc'
-      COMMON /HIPER / SH(365) , CH(365)
+      INCLUDE 'hiper.inc'
       
       w = -.03
       DO j = 1 , LP12

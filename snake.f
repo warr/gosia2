@@ -35,9 +35,9 @@ C M1, M2.
  
       SUBROUTINE SNAKE(Nexp,Zpol)
       IMPLICIT NONE
-      REAL*8 b10 , b12 , b2 , b4 , b6 , b8 , c , c2 , c4 , c6 , CH , 
+      REAL*8 b10 , b12 , b2 , b4 , b6 , b8 , c , c2 , c4 , c6 , 
      &       chi , cq , d , d2 , d3 , d4 , d5 , d6
-      REAL*8 ert , pol , SH , shi , ZETA , Zpol
+      REAL*8 ert , pol , shi , ZETA , Zpol
       INTEGER*4 ibm , icm , icnt , idm , irl , j , k , 
      &          lloc , lmd , lmda , LOCQ , LZETA , mimx , 
      &          Nexp , nind , nlm
@@ -46,7 +46,7 @@ C M1, M2.
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       INCLUDE 'mgn.inc'
       COMMON /ALLC  / LOCQ(8,7)
-      COMMON /HIPER / SH(365) , CH(365)
+      INCLUDE 'hiper.inc'
       
       icnt = 0
  100  icnt = icnt + 1
