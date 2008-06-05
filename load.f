@@ -57,13 +57,12 @@ C      Joj    - index of substate (write only)
      &       cpsi , dep , EMMA , EP , eta , etan , Polm , 
      &       pp1 , pp2
       REAL*8 ppp , PSI , QAPR , rlam , ssqrt , szet , TLBDG , 
-     &       VINF , wrt , wrtm , XA , XA1 , z1 , z2 , zet , ZETA , 
-     &       zsqa
+     &       VINF , wrt , wrtm , XA , XA1 , z1 , z2 , zet , zsqa
       INTEGER*4 i , i1 , i2 , i3 , IAPR , Icg , Ient , Iexp , IPATH , 
      &          ir , is , ISEX , ISHA , ISMAX , ispi , ispo , 
      &          IVAR , IZ , IZ1
       INTEGER*4 jj , jjj , Joj , la , lam , lam1 , ld , 
-     &          LMAX , LMAXE , LZETA , m , m1 , 
+     &          LMAX , LMAXE , m , m1 , 
      &          m2 , MAGA , MAGEXC , MEMAX , MEMX6 , mstop , n , 
      &          n2 , n3 , NCM
       INTEGER*4 NDIM , NEXPT , NMAX , NMAX1 , nn , NSTART , NSTOP , nz
@@ -74,7 +73,7 @@ C      Joj    - index of substate (write only)
       COMMON /PSPIN / ISHA
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
       COMMON /PCOM  / PSI(1500)
-      COMMON /CCOUP / ZETA(50000) , LZETA(8)
+      INCLUDE 'ccoup.inc'
       COMMON /CLM   / LMAX
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /CLCOM9/ ERR

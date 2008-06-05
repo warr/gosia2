@@ -28,14 +28,12 @@ C maps.
  
       SUBROUTINE TAPMA(Lx,Iske,Isko,Iskf,Nflr,Idr,Nco,Nft,Enb)
       IMPLICIT NONE
-      REAL*8 emn , emx , en0 , Enb , tmn , tmx , tta , 
-     &       ZETA
+      REAL*8 emn , emx , en0 , Enb , tmn , tmx , tta
       INTEGER*4 Idr , Iske , Iskf , Isko , j , jf , jj , js , k , 
-     &          Lx , lx1 , LZETA , na , Nco , ne , nfil , nfilt , Nflr , 
-     &          Nft
+     &          Lx , lx1 , na , Nco , ne , nfil , nfilt , Nflr , Nft
       INTEGER*4 ng , ng1 , ntt
       INCLUDE 'vlin.inc'
-      COMMON /CCOUP / ZETA(50000) , LZETA(8)
+      INCLUDE 'ccoup.inc'
       INCLUDE 'yteor.inc'
 
       Nft = 0

@@ -38,17 +38,17 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       REAL*8 alab , arg , at , attl , bt , DELLA , f , Fi0 , fi01 , 
      &       Fi1 , fi11
       REAL*8 Figl , FP , GKP , Gth , qv , sm , Trec , 
-     &       Ygn , ylmr , ZETA
+     &       Ygn , ylmr
       INTEGER*4 Idr , ifn , Iful , ig , il , inat , inx1 , 
      &          ipd , is , ITTE , iu , ixs , j , ji , jj , jm , k
-      INTEGER*4 KLEC , kq , l , lf , lf1 , LZETA , mind , Ngl , nlv
+      INTEGER*4 KLEC , kq , l , lf , lf1 , mind , Ngl , nlv
       REAL*8 dsig, EP , TLBDG , ttx , VINF ,
      &       XA , XA1 ! For gosia2
       INTEGER*4 IZ, IZ1, NEXPT ! For gosia2
       CHARACTER*4 Op2 ! For gosia2
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
      &          Ygn(*)
-      COMMON /CCOUP / ZETA(50000) , LZETA(8)
+      INCLUDE 'ccoup.inc'
       INCLUDE 'tra.inc'
       INCLUDE 'lev.inc'
       INCLUDE 'ccc.inc'

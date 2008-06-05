@@ -260,7 +260,7 @@ C      ZV     - energy meshpoints
       REAL*8 xep , xi1 , xi2 , xk1 , xk2 , xl1 , xlevb , 
      &       xlk , xm1 , xm2 , xm3 , xtest , xw , xx , xxi , 
      &       ycorr
-      REAL*8 yy , yyd1 , yydd , yyy , ZETA , zmir , zp , zz
+      REAL*8 yy , yyd1 , yydd , yyy , zmir , zp , zz
       INTEGER*4 i , i122 , IAPR , iapx , ib , 
      &          ibaf , icg , icll , ICS , ict , 
      &          ictl , id , idf , IDIVE
@@ -294,7 +294,7 @@ C      ZV     - energy meshpoints
      &          lfagg , lfini , lh1 , lh2 , liscl , lkj
       INTEGER*4 lkj1 , ll , lli , lll , LMAX , lmax1 , LMAXE , lmaxh , 
      &          LNORM , LNY , locat , LOCKF , LOCKS , loct , lp0 , 
-     &          lpin , ltrn , ltrn1 , ltrn2 , lu , lx , lxd , LZETA , 
+     &          lpin , ltrn , ltrn1 , ltrn2 , lu , lx , lxd , 
      &          MAGA , MAGEXC , magh , MEM
       INTEGER*4 MEMAX , memax1 , memh , memx4 , MEMX6 , mend , mexl , 
      &          mfla , mlt , mm , mpin , ms , n , na , na1 , 
@@ -361,7 +361,7 @@ C      ZV     - energy meshpoints
      &                TLBDG(50) , VINF(50)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
       COMMON /PRT   / IPRM(20)
-      COMMON /CCOUP / ZETA(50000) , LZETA(8)
+      INCLUDE 'ccoup.inc'
       COMMON /CB    / B(20)
       COMMON /CLM   / LMAX
       COMMON /CLCOM0/ IFAC(75)

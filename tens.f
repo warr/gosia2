@@ -19,13 +19,13 @@ C      Bten   -
  
       SUBROUTINE TENS(Bten)
       IMPLICIT NONE
-      REAL*8 arg , Bten , DJMM , ZETA
+      REAL*8 arg , Bten , DJMM
       INTEGER*4 i , ind , inz , iph , ix , k , k1 , kp , 
-     &          l , lp , lpp , lx , lxx , LZETA , NDIM , NMAX , NMAX1
+     &          l , lp , lpp , lx , lxx , NDIM , NMAX , NMAX1
       DIMENSION Bten(1200)
       INCLUDE 'kin.inc'
       INCLUDE 'tcm.inc'
-      COMMON /CCOUP / ZETA(50000) , LZETA(8)
+      INCLUDE 'ccoup.inc'
       COMMON /COEX2 / NMAX , NDIM , NMAX1
 
       ix = NMAX*28

@@ -1,0 +1,3 @@
+      REAL*8 ZETA
+      INTEGER*4 LZETA
+      COMMON /CCOUP / ZETA(50000) , LZETA(8)
