@@ -40,8 +40,8 @@ C      LASTCL - index of last detector in cluster
 C      LFL    -
 C      LNORM  - normalization constant control
 C      LP2    - maximum number of matrix elements (1500)
-C      LP6    - 32
-C      LP10   - 600
+C      LP6    - maximum number of Ge detectors 32
+C      LP10   - maximum number of magnetic substates 1200
 C      MCFIX  - fixing parameter (added for gosia2)
 C      NANG   - number of gamma-ray detectors for each experiment
 C      NDST   - number of data sets
@@ -79,16 +79,15 @@ C      Iredv  -
       REAL*8 ccc , ccd , Chilo , Chisq , cnr , cocos , d , decen
       REAL*8 dl , effi , fi0 , fi1 , fic , figl , fm , g
       REAL*8 gth , part , partl , rik , rl , rx , ry , 
-     &       rys , rz , sf , sgm , sum3
-      REAL*8 sumpr , TACOS , tetrc , tfac , thc , wf
-      INTEGER*4 iabc , Icall , id , idc , Idr ,  ifdu , ifxd , 
-     &          ii , ile2 , inclus
-      INTEGER*4 ipd , Iredv , Issp , Itemp , iva , iw , ixl , ixm , 
-     &          iyex , jj
-      INTEGER*4 jj1 , jk , jpc , k , k9 , kc , kj , kk , 
-     &          l , l1 , lic , licz , ll1
-      INTEGER*4 lth , lu , luu , na
-      INTEGER*4 nf , nf1 , ni , ni1 , Nwyr
+     &       rys , rz , sf , sgm , sum3 , sumpr , TACOS
+      REAL*8 tetrc , tfac , thc , wf
+      INTEGER*4 iabc , Icall , id , idc , Idr , ifdu , ifxd , ii , 
+     &          ile2 , inclus
+      INTEGER*4 ipd , Iredv , Issp , Itemp , iva , iw , ixl , 
+     &          ixm , iyex , jj
+      INTEGER*4 jj1 , jk , jpc , k , k9 , kc , kj , kk , l , l1 , 
+     &          lic , licz , ll1
+      INTEGER*4 lth , lu , luu , na , nf , nf1 , ni , ni1 , Nwyr
       CHARACTER*4 wupl , war
       CHARACTER*4 op2 ! For gosia2
       DIMENSION part(32,50,2) , lic(32) , lth(1500) , cnr(32,50) , 
@@ -118,8 +117,8 @@ C      Iredv  -
       INCLUDE 'coex.inc'
       INCLUDE 'skp.inc'
       INCLUDE 'trb.inc'
-      INCLUDE 'tcm.inc'
       INCLUDE 'cccds.inc'
+      INCLUDE 'tcm.inc'
       INCLUDE 'cinit2.inc' ! For gosia2
       SAVE part, partl ! For gosia2
       DATA sum3/0./,sumpr/0./
@@ -319,7 +318,7 @@ C              Correct for finite recoil
                         IF ( LFL.EQ.1 ) THEN
                            IF ( k9.EQ.1 ) THEN
                               luu = 6*licz - 5
-                              jk = (luu-1)/LP10 + 1 ! LP10 is 600
+                              jk = (luu-1)/LP10 + 1 ! LP10 is 1200
                               kk = luu - LP10*(jk-1)
                               rik = DEV(licz) + YEXP(k9,lu)
                               sgm = -DEV(licz)/DYEX(k9,lu)
