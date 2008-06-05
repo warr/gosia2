@@ -32,9 +32,9 @@ C      Chilo  - chi squared of logs
       SUBROUTINE DECAY(Chisq,Nlift,Chilo)
       IMPLICIT NONE
       REAL*8 bsum , Chilo , Chisq , DELLA , df , el1 , emt , 
-     &       emt1 , FP , gk , GKP , vcd
+     &       emt1 , gk , vcd
       INTEGER*4 i , ibra , idr , idrh , ifn , il , 
-     &          inx , inx1 , iu , j , jlt , k , kl , KLEC , kq
+     &          inx , inx1 , iu , j , jlt , k , kl , kq
       INTEGER*4 l , l1 , lc1 , lc2 , n1 , n2 , Nlift
       INCLUDE 'tra.inc'
       INCLUDE 'life1.inc'
@@ -44,7 +44,7 @@ C      Chilo  - chi squared of logs
       INCLUDE 'coex2.inc'
       INCLUDE 'comme.inc'
       INCLUDE 'kin.inc'
-      COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(75)
+      INCLUDE 'catlf.inc'
       COMMON /LCDL  / DELLA(1500,3)
       DIMENSION gk(4)
       DATA emt1/0./

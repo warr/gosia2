@@ -37,11 +37,11 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       IMPLICIT NONE
       REAL*8 alab , arg , at , attl , bt , DELLA , f , Fi0 , fi01 , 
      &       Fi1 , fi11
-      REAL*8 Figl , FP , GKP , Gth , qv , sm , Trec , 
+      REAL*8 Figl , Gth , qv , sm , Trec , 
      &       Ygn , ylmr
       INTEGER*4 Idr , ifn , Iful , ig , il , inat , inx1 , 
      &          ipd , is , ITTE , iu , ixs , j , ji , jj , jm , k
-      INTEGER*4 KLEC , kq , l , lf , lf1 , mind , Ngl , nlv
+      INTEGER*4 kq , l , lf , lf1 , mind , Ngl , nlv
       REAL*8 dsig, EP , TLBDG , ttx , VINF ,
      &       XA , XA1 ! For gosia2
       INTEGER*4 IZ, IZ1, NEXPT ! For gosia2
@@ -54,7 +54,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       INCLUDE 'ccc.inc'
       INCLUDE 'kin.inc'
       COMMON /LCDL  / DELLA(1500,3)
-      COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(75)
+      INCLUDE 'catlf.inc'
       INCLUDE 'brec.inc'
       COMMON /THTAR / ITTE(50)
       INCLUDE 'tcm.inc' ! For gosia2
