@@ -90,7 +90,7 @@ C      Iredv  -
      &          l , l1 , LFL , LFL1 , LFL2 , lic , 
      &          licz , ll1
       INTEGER*4 LNORM , lth , lu , luu , na
-      INTEGER*4 nf , nf1 , ni , ni1 , NLIFT , Nwyr
+      INTEGER*4 nf , nf1 , ni , ni1 , Nwyr
       CHARACTER*4 wupl , war
       REAL*8 CNOR1 , CNOR2 ! For gosia2
       INTEGER*4 MCFIX ! For gosia2
@@ -106,7 +106,7 @@ C      Iredv  -
       INCLUDE 'vac.inc'
       INCLUDE 'cinit.inc'
       INCLUDE 'prt.inc'
-      COMMON /LIFE  / NLIFT
+      INCLUDE 'life.inc'
       INCLUDE 'lev.inc'
       COMMON /IGRAD / IGRD
       INCLUDE 'cx.inc'

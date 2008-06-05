@@ -1,0 +1,2 @@
+      INTEGER*4 NLIFT
+      COMMON /LIFE  / NLIFT

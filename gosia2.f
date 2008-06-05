@@ -301,7 +301,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 naxfl , nb1 , nb2 , nbands , nch , NCM , 
      &          ndima , ndum , ne , nf , nfd , nfdd , 
      &          nfi , nflr , nft , nged
-      INTEGER*4 ngpr , ni , nksi , nl , NLIFT , NLOCK , 
+      INTEGER*4 ngpr , ni , nksi , nl , NLOCK , 
      &          nmaxh , nmemx , nnl , nogeli , npce , npce1 , 
      &          npct , npct1 , npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , nz
@@ -379,7 +379,7 @@ C      ZV     - energy meshpoints
       COMMON /ERCAL / JENTR , ICS
       INCLUDE 'logy.inc'
       INCLUDE 'fakul.inc'
-      COMMON /LIFE  / NLIFT
+      INCLUDE 'life.inc'
       COMMON /CINIT2/ CNOR1(32,75) , CNOR2(32,75) , MCFIX ! For gosia2
       INCLUDE 'switch.inc' ! For gosia2
       COMMON /RESC  / ELM25(500) , ELM26(500) ! For gosia2
