@@ -91,7 +91,7 @@ C      IZ     - Z of investigated nucleus
 C      IZ1    - Z of non-investigated nucleus
 C      JENTR  - flag set to 0 normally, 1 in OP,ERRO
 C      JSKIP  - Experiments to skip during minimisation.
-C      JZB    - unit to read from (gosia2)
+C      JZB    - unit to read from
 C      KFERR  - error flag for minimization
 C      KSEQ   - index of level
 C      KVAR   -
