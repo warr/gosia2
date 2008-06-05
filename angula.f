@@ -41,7 +41,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
      &          ipd , is , iu , ixs , j , ji , jj , jm , k
       INTEGER*4 kq , l , lf , lf1 , mind , Ngl , nlv
       REAL*8 dsig, ttx ! For gosia2
-      CHARACTER*4 Op2 ! For gosia2
+      CHARACTER*4 Op2
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
      &          Ygn(*)
       INCLUDE 'ccoup.inc'

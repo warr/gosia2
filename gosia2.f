@@ -1013,7 +1013,7 @@ C              Treat OP,INTG
                                     fm = (fi0+fi1)/2.
                                     figl = AGELI(IEXP,ijan,2)
                                     CALL ANGULA(YGN,idr,1,fi0,fi1,tetrc,
-     &                                gth,figl,ijan,op2)
+     &                                 gth,figl,ijan,op2)
                                     IF ( IFMO.NE.0 ) THEN ! If correction due to recoil
                                        id = ITMA(IEXP,ijan) ! Get detector identity
                                        d = ODL(id) ! Get result of OP,GDET calculation
