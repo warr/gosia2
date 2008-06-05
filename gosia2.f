@@ -246,8 +246,7 @@ C      ZV     - energy meshpoints
      &       fi0 , fi1 , fic , fiex1 , figl , fipo1 , fm , G , 
      &       gth
       REAL*8 hen , het , p , pfi , 
-     &       ph1 , ph2 , pi , PILOG , po1 , po2 , polm , pop1 , pr , 
-     &       pv
+     &       ph1 , ph2 , pi , po1 , po2 , polm , pop1 , pr , pv
       REAL*8 q1 , q2 , QAPR , qc , qfac , qr , qui , r , r1 , 
      &       r2 , r3 , r4 , rem , remax , rl , rlr , rm , rx , ry
       REAL*8 rz , s , s11 , s12 , s21 , s22 , SA , sbe , sf , SGW , 
@@ -273,8 +272,8 @@ C      ZV     - energy meshpoints
      &          ind1 , ind2 , indx
       INTEGER*4 inko , inm1 , inm2 , inn , inpo , intend , 
      &          INTERV , INTR , intvh , inva , inx1 , iobl , iocc , 
-     &          iopri , iosr , IP , IPATH , ipd , iph
-      INTEGER*4 IPI , ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
+     &          iopri , iosr , IPATH , ipd , iph
+      INTEGER*4 ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
      &          ipri , IPRM , IPS1 , irea , irep , irfix , 
      &          ISEX , isip , iske , iskf
       INTEGER*4 isko , iskok , ISMAX , isoh , ispa , ispb , 
@@ -287,8 +286,7 @@ C      ZV     - energy meshpoints
      &          jj , jj1 , jjjj , jjlx , jjx , jk , jkloo , jktt , jl , 
      &          jmm , jmpin
       INTEGER*4 jp , jphd , jpin , jrls , js , JSKIP , jt , jtp , jyi , 
-     &          jyi1 , jyi2 , jyv , jz , k , kb , kclust , kerf , kex , 
-     &          KF
+     &          jyi1 , jyi2 , jyv , jz , k , kb , kclust , kerf , kex
       INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kl , kloop , 
      &          kmat , kq , ktt , kuku , KVAR , l , la , la1 , 
      &          lam , lamd
@@ -384,7 +382,7 @@ C      ZV     - energy meshpoints
       COMMON /SEL   / KVAR(1500)
       COMMON /ERCAL / JENTR , ICS
       COMMON /LOGY  / LNY , INTR , IPS1
-      COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
+      INCLUDE 'fakul.inc'
       COMMON /LIFE  / NLIFT
       COMMON /CINIT2/ CNOR1(32,75) , CNOR2(32,75) , MCFIX ! For gosia2
       COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2

@@ -15,9 +15,8 @@ C      N      - number N
  
       SUBROUTINE PRIM(N)
       IMPLICIT NONE
-      INTEGER*4 i , IP , IPI , KF , N , nni , nnk
-      REAL*8 PILOG
-      COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
+      INTEGER*4 i , N , nni , nnk
+      INCLUDE 'fakul.inc'
 
       nnk = N
       DO i = 1 , 26

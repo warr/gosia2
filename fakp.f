@@ -15,9 +15,9 @@ C      PILOG  - table of natural logs of primes
  
       SUBROUTINE FAKP
       IMPLICIT NONE
-      INTEGER*4 i , IP , IPI , k , KF , l
-      REAL*8 PILOG , x
-      COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
+      INTEGER*4 i , k , l
+      REAL*8 x
+      INCLUDE 'fakul.inc'
 
 C     Calculate log of primes
       DO i = 1 , 26
