@@ -33,9 +33,9 @@ C      W0     - omega limit
       IMPLICIT NONE
       REAL*8 epsi , errt , pm , ppp , rmir , rmis , rmu , TCABS , W0 , 
      &       xiv , z
-      INTEGER*4 i1 , i2 , i3 , indx , Ir , is , is1 , is2 ,  ismin ,
-     &          isplus , la , lam , ld , LEADF , m , MEM
-      INTEGER*4 mrange , mua , nz
+      INTEGER*4 i1 , i2 , i3 , indx , Ir , is , is1 , is2 , ismin , 
+     &          isplus , la , lam
+      INTEGER*4 ld , LEADF , m , MEM , mrange , mua , nz
       COMPLEX*16 STAMP , dis , uhuj
       INCLUDE 'clcom.inc'
       INCLUDE 'az.inc'
