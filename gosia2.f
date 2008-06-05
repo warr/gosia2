@@ -306,8 +306,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , nz
       CHARACTER*4 oph , op1 , opcja , op2
       CHARACTER*1 prp
-      REAL*8 CNOR1 , CNOR2 , ELM25 , ELM26 , chir , chp , ccch1 ,
-     &       ccch2 , cht ! For gosia2
+      REAL*8 CNOR1 , CNOR2 , chir , chp , ccch1 ,ccch2 , cht ! For gosia2
       INTEGER*4 MCFIX , nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
       INTEGER*4 mret , mawr , irix ! For gosia2
       DIMENSION ihlm(32) , esp(20) , dedx(20) , bten(1200) , 
@@ -380,7 +379,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'life.inc'
       COMMON /CINIT2/ CNOR1(32,75) , CNOR2(32,75) , MCFIX ! For gosia2
       INCLUDE 'switch.inc' ! For gosia2
-      COMMON /RESC  / ELM25(500) , ELM26(500) ! For gosia2
+      INCLUDE 'resc.inc'
       DATA (eng(k),k=1,10)/.05 , .06 , .08 , .1 , .15 , .2 , .3 , .5 , 
      &      1. , 1.5/
 C     Absorption coefficients in units of 1/cm for Ge

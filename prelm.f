@@ -27,7 +27,6 @@ C      Iop    - print flag (controls what is written to output).
       SUBROUTINE PRELM(Iop)
       IMPLICIT NONE
       REAL*8 b , pv , ste
-      REAL*8 ELM25 , ELM26 ! Added for gosia2
       INTEGER*4 inx , Iop , isp , j , k , kk , l , m
       CHARACTER*3 wrn
       INCLUDE 'comme.inc'
@@ -36,7 +35,7 @@ C      Iop    - print flag (controls what is written to output).
       INCLUDE 'clcom.inc'
       INCLUDE 'coex2.inc'
       INCLUDE 'switch.inc' ! For gosia2
-      COMMON /RESC  / ELM25(500) , ELM26(500) ! Added for gosia2
+      INCLUDE 'resc.inc' ! Added for gosia2
       DATA ste/0./
 
       inx = 0

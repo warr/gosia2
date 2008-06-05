@@ -1,0 +1,2 @@
+      REAL*8 ELM25 , ELM26
+      COMMON /RESC  / ELM25(500) , ELM26(500)
