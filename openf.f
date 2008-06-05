@@ -7,7 +7,7 @@ C
 C Purpose: open files to specified units.
 C
 C Uses global variables:
-C      JZB    - unit to read from (gosia2)
+C      JZB    - unit to read from
 C
 C The function reads three integers, the first of which is the unit to use for
 C the open statement. The second is 1 if the file is required to exist already,
