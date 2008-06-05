@@ -81,7 +81,7 @@ C      Iredv  -
       REAL*8 gth , part , partl , rik , rl , rx , ry , 
      &       rys , rz , sf , sgm , SGW , SUBCH1 , SUBCH2 , sum3
       REAL*8 sumpr , TACOS , tetrc , tfac , thc , wf
-      INTEGER*4 iabc , Icall , id , idc , Idr ,  ifdu , ifxd , IGRD , 
+      INTEGER*4 iabc , Icall , id , idc , Idr ,  ifdu , ifxd , 
      &          ii , ile2 , IMIN , inclus , INM
       INTEGER*4 ipd , Iredv , Issp , 
      &          Itemp , iva , iw , IWF , ixl , ixm , 
@@ -108,7 +108,7 @@ C      Iredv  -
       INCLUDE 'prt.inc'
       INCLUDE 'life.inc'
       INCLUDE 'lev.inc'
-      COMMON /IGRAD / IGRD
+      INCLUDE 'igrad.inc'
       INCLUDE 'cx.inc'
       COMMON /MINNI / IMIN , LNORM(50)
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL

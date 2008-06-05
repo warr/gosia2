@@ -72,7 +72,7 @@ C      Bten   -
       REAL*8 EMH , fc , fx , 
      &       polm , pr , prop , val , wz
       INTEGER*4 i1 , i11 , iapx , Icll , idec , Idr , 
-     &          iflg , IGRD , ii , ile1 , ile2 , ile3 , 
+     &          iflg , ii , ile1 , ile2 , ile3 , 
      &          ilin , indx , inko , INM
       INTEGER*4 inp , inpo , inpx , inzz , inzzz , 
      &          issp , itemp , ixx , izzz
@@ -89,7 +89,7 @@ C      Bten   -
       INCLUDE 'ccc.inc'
       INCLUDE 'ilewy.inc'
       COMMON /CH1T  / CHIS11
-      COMMON /IGRAD / IGRD
+      INCLUDE 'igrad.inc'
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
       INCLUDE 'uwaga.inc'
       INCLUDE 'lev.inc'
