@@ -34,18 +34,18 @@ C      LFL    -
 C      LFL1   -
 C      LFL2   -
 C      LMAX   - ground-state spin + 1
-C      LP3    - maximum number of levels (75)
-C      LP6    - (32)
+C      LP3    - maximum number of levels (100)
+C      LP6    - maximum number of Ge detectors (32)
 C      LP8    - (104)
 C      LP9    - last 2100 words of ZETA array (47900)
-C      LP10   - (600)
+C      LP10   - maximum number of magnetic substates (1200)
 C      LP11   - LP8 - 1 (103)
 C      LP13   - LP9 + 1 (47901)
 C      LP14   - maximum space for collision functions (4900)
 C      MEMAX  - number of matrix elements
 C      MEMX6  - number of matrix elements with E1...6 multipolarity
 C      NANG   - number of gamma-ray detectors for each experiment
-C      NDIM   - maximum number of levels (75)
+C      NDIM   - maximum number of levels (100)
 C      NEXPT  - number of experiments
 C      NLIFT  - number of lifetimes
 C      NMAX   - number of levels
@@ -133,7 +133,7 @@ C      Bten   -
          LFL2 = 1
          IF ( ITAK2.EQ.-1 ) THEN
             DO larm = 1 , 4
-               DO karm = 1 , LP10 ! LP10 is 600
+               DO karm = 1 , LP10 ! LP10 is 1200
                   ARM(karm,larm) = (0.,0.)
                ENDDO
             ENDDO
@@ -150,7 +150,7 @@ C      Bten   -
          IF ( MAGA(IEXP).EQ.0 ) lp = 1
          IF ( Ncall.EQ.0 ) GOTO 150
          IF ( Icll.EQ.4 ) GOTO 100
- 50      loch = LP3*(MEMAX-1) + NMAX + LP11 ! LP3 is 75, LP11 is 103
+ 50      loch = LP3*(MEMAX-1) + NMAX + LP11 ! LP3 is 100, LP11 is 103
          DO k = 1 , loch
             ZETA(k) = 0.
          ENDDO
