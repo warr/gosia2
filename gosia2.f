@@ -239,8 +239,7 @@ C      ZV     - energy meshpoints
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
      &       cnst
       REAL*8 cocos , conu , d , decen , dedx , DLOCK , dsd , dsig , dst
-      REAL*8 dsx , dsxm , effi , eh1 , 
-     &       elmi , ELMT , emhl1 , EMMA , emn , emx , 
+      REAL*8 dsx , dsxm , effi , eh1 , elmi , ELMT , emhl1 , emn , emx , 
      &       enb
       REAL*8 eng , enh , esd , esp , ess , 
      &       fi0 , fi1 , fic , fiex1 , figl , fipo1 , fm , G , 
@@ -298,7 +297,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 memax1 , memh , memx4 , mend , mexl , 
      &          mfla , mlt , mm , mpin , ms , n , na , na1 , 
      &          naa , nallow
-      INTEGER*4 naxfl , nb1 , nb2 , nbands , nch , NCM , 
+      INTEGER*4 naxfl , nb1 , nb2 , nbands , nch , 
      &          ndima , ndum , ne , nf , nfd , nfdd , 
      &          nfi , nflr , nft , nged
       INTEGER*4 ngpr , ni , nksi , nl , NLOCK , 
@@ -365,7 +364,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'comme.inc'
       INCLUDE 'coex2.inc'
       COMMON /CEXC9 / INTERV(50)
-      COMMON /CAUX0 / EMMA(75) , NCM
+      INCLUDE 'caux0.inc'
       INCLUDE 'pth.inc'
       INCLUDE 'aprcat.inc'
       COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF

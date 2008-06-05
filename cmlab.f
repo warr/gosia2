@@ -36,10 +36,8 @@ C      Tetrn  - theta of recoiling nucleus
 
       SUBROUTINE CMLAB(Ii,Dsig,Tetrn)
       IMPLICIT NONE
-      REAL*8 a1 , a2 , ared , d2a , dista , dists , Dsig , emax , EMMA , 
-     &       epmin
-      INTEGER*4 iflaa , Ii , 
-     &          lexp , lexp0 , lexp1 , n , NCM
+      REAL*8 a1 , a2 , ared , d2a , dista , dists , Dsig , emax , epmin
+      INTEGER*4 iflaa , Ii , lexp , lexp0 , lexp1 , n
       REAL*8 r3 , TASIN , tau , taup , tcmdg , tcmrad , Tetrn , tlbrad , 
      &       tmxdg , z1 , z2 , zcmdg , zcmrad
       REAL*8 zlbrad
@@ -48,7 +46,7 @@ C      Tetrn  - theta of recoiling nucleus
       INCLUDE 'prt.inc'
       INCLUDE 'tcm.inc'
       INCLUDE 'brec.inc'
-      COMMON /CAUX0 / EMMA(75) , NCM
+      INCLUDE 'caux0.inc'
       INCLUDE 'coex2.inc'
       INCLUDE 'cx.inc'
       INCLUDE 'kin.inc'
