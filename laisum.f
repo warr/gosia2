@@ -55,7 +55,7 @@ C z is the coupling parameter zeta, calculated in the function LSLOOP.
       INTEGER*4 i2 , i3 , I57 , iii , indq , indx , Ir , irs , is , 
      &          is1 , is2 , ISG , ISG1 , ISHA , ismin , 
      &          isplus , ISSTAR , ISSTO
-      INTEGER*4 KDIV , la , Lam , LAMR , Ld , LOCQ
+      INTEGER*4 KDIV , la , Lam , LAMR , Ld
       INTEGER*4 m , mrange , MSTORE , mua , N , NDIV , NPT , NSW , Nz
       COMPLEX*16 FAZA , pamp , pamp1
       COMMON /PSPIN / ISHA
@@ -69,7 +69,7 @@ C z is the coupling parameter zeta, calculated in the function LSLOOP.
       INCLUDE 'mgn.inc'
       INCLUDE 'clcom8.inc'
       INCLUDE 'comme.inc'
-      COMMON /ALLC  / LOCQ(8,7)
+      INCLUDE 'allc.inc'
       INCLUDE 'cexc0.inc'
       
       rmir = CAT(Ir,3) ! m quantum number of substate Ir

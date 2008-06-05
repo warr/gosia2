@@ -38,14 +38,13 @@ C M1, M2.
       REAL*8 b10 , b12 , b2 , b4 , b6 , b8 , c , c2 , c4 , c6 , 
      &       chi , cq , d , d2 , d3 , d4 , d5 , d6
       REAL*8 ert , pol , shi , Zpol
-      INTEGER*4 ibm , icm , icnt , idm , irl , j , k , 
-     &          lloc , lmd , lmda , LOCQ , mimx , 
-     &          Nexp , nind , nlm
+      INTEGER*4 ibm , icm , icnt , idm , irl , j , k , lloc , lmd , 
+     &          lmda , mimx , Nexp , nind , nlm
       DIMENSION lloc(8) , cq(7) , irl(8)
       INCLUDE 'kin.inc'
       INCLUDE 'ccoup.inc'
       INCLUDE 'mgn.inc'
-      COMMON /ALLC  / LOCQ(8,7)
+      INCLUDE 'allc.inc'
       INCLUDE 'hiper.inc'
       
       icnt = 0

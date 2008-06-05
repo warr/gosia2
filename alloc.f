@@ -33,9 +33,9 @@ C We are limited to a maximum of LP14 (=4900) values in total.
       SUBROUTINE ALLOC(Accur)
       IMPLICIT NONE
       REAL*8 Accur
-      INTEGER*4 iflag , IRA , j , k , k1 , load , LOCQ
+      INTEGER*4 iflag , IRA , j , k , k1 , load
       INTEGER*4 MAXLA
-      COMMON /ALLC  / LOCQ(8,7)
+      INCLUDE 'allc.inc'
       COMMON /RNG   / IRA(8) , MAXLA
       INCLUDE 'mgn.inc'
 
