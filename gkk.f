@@ -114,7 +114,8 @@ C element.
                k1 = 2*k
                AKS(k1,Il) = AKS(k1,Il) + SUM(k)
             ENDDO
- 100     ENDDO ! Loop on j
+ 100         CONTINUE
+         ENDDO ! Loop on j
          imean = imean + 1
          IF ( imean.EQ.1 ) GOTO 50
       ENDIF

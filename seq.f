@@ -220,7 +220,8 @@ C     multipolarity
          DELTA(Idr,1) = DELTA(Idr,1)*(1.+CONV(ega,istr1))
          DELTA(Idr,2) = DELTA(Idr,2)*(CONV(ega,istr2)+1.)
          KLEC(n) = KLEC(n) + 1 ! Increment KLEC for initial level
- 200  ENDDO ! Loop on decays l
+ 200     CONTINUE
+      ENDDO ! Loop on decays l
 
       NMAX1 = 0
       DO n = 1 , NMAX ! For each level count those which have decays

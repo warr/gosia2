@@ -74,7 +74,8 @@ C
                ENDIF
             ENDIF
             a(i,j) = 1.d0
- 350     ENDDO
+ 350        CONTINUE
+         ENDDO
          WRITE (10,*) (INT(a(i,j)),j=1,memax)
       ENDDO
       DO i = 1 , memax

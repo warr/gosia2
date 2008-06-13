@@ -119,7 +119,8 @@ C                    contribution
                         ENDIF
                      ENDIF
                   ENDIF
- 10            ENDDO
+ 10               CONTINUE
+               ENDDO
                IF ( N.EQ.m ) THEN
                   ARM(Ir,4) = ARM(Ir,4) + pamp*ELM(indx)
                ELSE

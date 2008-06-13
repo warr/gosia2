@@ -102,7 +102,8 @@ C     Rewind yield file
                YEXP(kk,iytt) = u
                DYEX(kk,iytt) = w/(SQRT(waga)+1.E-4)
                IY(iytt,kk) = idc
- 40         ENDDO
+ 40            CONTINUE
+            ENDDO
             iytt = iytot(kk)
             lbg = iytt - nval + 1
             CALL SZEREG(lbg,iytt,kk)

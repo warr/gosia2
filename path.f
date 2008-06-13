@@ -38,6 +38,7 @@ C      Irld   - index into ARM array
          ENDIF
          GOTO 100
  50      IPATH(i) = j ! Store it
- 100  ENDDO
+ 100     CONTINUE
+      ENDDO
       IPATH(1) = Irld ! Special case of ground state
       END

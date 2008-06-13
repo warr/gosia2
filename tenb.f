@@ -89,7 +89,8 @@ C can cope with half-integers.
                               GOTO 2
                            ENDIF
                         ENDIF
- 6                   ENDDO
+ 6                      CONTINUE
+                     ENDDO
                      IF ( Icl.EQ.Lmax ) Bten(ind) = Bten(ind)
      &                    *ce/(2.*SPIN(1)+1.)
                   ENDDO ! Loop over lp

@@ -1098,7 +1098,8 @@ C              Treat OP,INTG
      &                                    /GRAD(IDRN)
                                     ENDDO ! Loop on decays jyi
                                  ENDIF ! If printout of yields at meshpoints
- 132                          ENDDO ! Loop on detector angles ijan
+ 132                             CONTINUE
+                              ENDDO ! Loop on detector angles ijan
                            ENDDO ! Loop on theta angles ktt
                         ENDDO ! Loop on energy meshpoints kloop
                      ENDDO ! Loop on pin diodes mpin
@@ -1549,7 +1550,8 @@ C     Treat suboption ME (matrix elements)
             IF ( ipo1.EQ.0 ) GOTO 300
  220        la = ipo1
             IF ( la.GT.LMAXE .AND. la.LE.6 ) LMAXE = la
- 250     ENDDO
+ 250        CONTINUE
+         ENDDO
  300     MEMAX = indx
          IF ( la.GT.6 ) MAGEXC = 1 ! Flag that we need magnetic excitations
          memx4 = MULTI(1) + MULTI(2) + MULTI(3) + MULTI(4)
@@ -1760,7 +1762,8 @@ C     Handle OP,ERRO
             ENDDO
             REWIND 15
             WRITE (15,*) (DEVD(ij),DEVU(ij),ij=1,MEMAX)
- 500     ENDDO
+ 500        CONTINUE
+         ENDDO
       ENDIF
  600  IF ( ifbp.EQ.1 ) THEN
          REWIND 17
@@ -1898,7 +1901,8 @@ C     Handle OP,ERRO
             ELMU(jrls) = ABS(ELMU(jrls))
             IF ( jrls.GT.MEMX6 ) IVAR(jrls) = 1
          ENDIF
- 1100 ENDDO ! For each matrix element jrls
+ 1100    CONTINUE
+      ENDDO ! For each matrix element jrls
       DO jrls = 1 , MEMAX
          ivarh(jrls) = IVAR(jrls)
       ENDDO
@@ -2117,7 +2121,8 @@ C     Handle OP,ERRO
                               lu = lu + 1
                            ENDIF
                         ENDIF
- 1202                ENDDO
+ 1202                   CONTINUE
+                     ENDDO
                      IF ( ifwd.EQ.1 ) THEN
                         xw = 1.
                         WRITE (4,*) IEXP , jgl1 , ABS(IZ1(IEXP)) , 
@@ -2129,7 +2134,8 @@ C     Handle OP,ERRO
      &                                 CORF(jyi,4)
                         ENDDO
                      ENDIF
- 1205             ENDDO ! Loop on detector angles jgl
+ 1205                CONTINUE
+                  ENDDO ! Loop on detector angles jgl
                   IF ( op2.EQ.'CORR' ) THEN
                      jgl1 = 0
                      DO jgl = 1 , nogeli ! For each detector
@@ -2172,7 +2178,8 @@ C     Handle OP,ERRO
      &                            ycorr/CORF(ile1+itp-1,jgl1)
 99039                      FORMAT (5X,I4,5X,I4,3X,E8.3,4X,E8.3,4X,E8.3)
                         ENDDO ! Loop over itp
- 1206                ENDDO ! Loop over jgl
+ 1206                   CONTINUE
+                     ENDDO ! Loop over jgl
                   ENDIF ! if ( op2.EQ. 'CORR')
                ENDIF
             ENDDO ! Loop over jexp

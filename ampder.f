@@ -103,5 +103,6 @@ C     Zero ARM(k,4) and ARM(k,6) for each substate used
                ENDIF ! If IR .le ISMAX
             ENDIF ! If LD .ne. 0
          ENDIF ! If LAMR(lam) .ne. 0
- 100  ENDDO ! Loop over lambda
+ 100     CONTINUE
+      ENDDO ! Loop over lambda
       END

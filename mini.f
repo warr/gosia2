@@ -222,7 +222,8 @@ C     Write correction factors
                      flt = 1.01
                      IF ( jjj.EQ.2 ) flt = .99
                      ELM(jcoup) = ELMH(jcoup)*flt
- 355              ENDDO
+ 355                 CONTINUE
+                  ENDDO
                   CALL FTBM(3,chis13,Idr,ncall,chx,Bten)
                   IF ( jjj.EQ.1 ) HLMLM(jnm) = chis13
                   IF ( IFBFL.NE.1 .OR. jjj.NE.1 ) THEN

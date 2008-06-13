@@ -108,7 +108,8 @@ C     Calculate size of each division (ws)
             Wpi(i,1) = (xph-wpa)*rade ! Lower phi limit
             Wpi(i,2) = (xph+wpa)*rade ! Upper phi limit
          ENDIF
- 100  ENDDO ! Loop on theta divisions i
+ 100     CONTINUE
+      ENDDO ! Loop on theta divisions i
 
 C     If a negative value of theta was specified for a meshpoint value,
 C     we use the target angle

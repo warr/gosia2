@@ -398,7 +398,8 @@ C              Correct for finite recoil
 99010             FORMAT (1X/50X,'CHISQ SUBTOTAL = ',E14.6)
                   SUBCH2 = SUBCH1
                ENDIF
- 20         ENDDO ! Loop on detector angles k
+ 20            CONTINUE
+            ENDDO ! Loop on detector angles k
 
             IF ( IGRD.EQ.1 ) RETURN
             IF ( IEXP.NE.NEXPT ) RETURN
@@ -491,7 +492,8 @@ C              Correct for finite recoil
                      ENDIF
                   ENDIF
                ENDDO ! Loop on l
- 40         ENDDO ! Loop on k
+ 40            CONTINUE
+            ENDDO ! Loop on k
             RETURN
          ENDIF ! if Itemp.EQ.0
       ENDIF ! if Icall.NE.7
