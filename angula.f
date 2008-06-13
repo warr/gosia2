@@ -148,8 +148,9 @@ C      Op2    - The part after the OP, for the option we are processing
          ENDIF
       ENDDO ! Loop over decays
 
-C     Added for gosia2
       IF ( Op2.EQ.'INTG' ) RETURN
+
+C     Added for gosia2
       dsig = DSIGS(IEXP)
       ttx = TLBDG(IEXP)/57.2957795 ! Theta in lab frame in radians
       DO j = 1 , Idr  ! For each decay
