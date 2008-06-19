@@ -4,7 +4,7 @@ MANDIR=$(ROOT)/usr/share/man/man1
 EXE=gosia2
 MAN=gosia2.1
 
-FC=g77
+FC=gfortran
 
 # Turn on debugging - note that -Wall and -O2 together gives warnings
 # about variables being possibly used without being initialised. These
