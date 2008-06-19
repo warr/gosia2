@@ -79,7 +79,7 @@ C      Bten   -
      &          lmh , loc , loch , loct
       INTEGER*4 lp , lpit , lput , lpx , lpxd , ls , lst
       INTEGER*4 luu , lx , Ncall , nlin , nowr , npoz , nrest , nwyr
-      DIMENSION jmte(6) , prop(6) , Bten(1200)
+      DIMENSION jmte(6) , prop(6) , Bten(*)
       INCLUDE 'cx.inc'
       INCLUDE 'cexc0.inc'
       INCLUDE 'ccc.inc'

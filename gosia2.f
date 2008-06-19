@@ -243,7 +243,7 @@ C      ZV     - energy meshpoints
       REAL*8 chir , chp , ccch1 ,ccch2 , cht ! For gosia2
       INTEGER*4 nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
       INTEGER*4 mret , mawr , irix ! For gosia2
-      DIMENSION ihlm(32) , esp(20) , dedx(20) , bten(1200) , 
+      DIMENSION ihlm(32) , esp(20) , dedx(20) , bten(1600) , ! bten dimension = 16 * maxlevels
      &          fiex1(100,100,2) , title(20) , pfi(101) , zmir(6,2,50) , 
      &          iecd(50) , wpi(100,2) , tau1(10) , eng(10) , 
      &          tau2(10,7) , xl1(7) , qui(8,10) , cf(8,2) , 

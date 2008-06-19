@@ -70,7 +70,7 @@ C don't go outside the limits specified by the user.
      &          Jjh , jjj , jlin , jnm , jpr , jsa , jst
       INTEGER*4 kh2 , kkk , l , lnm , metf , mvfl , ncall , nlinn , 
      &          noflg , Nptl
-      DIMENSION ipm(10) , Bten(1200) , gradp(1500)
+      DIMENSION ipm(10) , Bten(*) , gradp(1500)
       INCLUDE 'dumm.inc'
       INCLUDE 'ilewy.inc'
       INCLUDE 'ch1t.inc'
