@@ -5,7 +5,8 @@ C
 C Calls: ADHOC, ALLOC, ANGULA, ARCCOS, ARCTG, CMLAB, COORD, DECAY, DJMM,
 C        EFFIX, ELMT, FAKP, FHIP, FTBM, INTG, KLOPOT, KONTUR, LAGRAN, LOAD,
 C        MINI, MIXR, MIXUP, OPENF, PATH, PRELM, PTICC, QFIT, READY, SETIN,
-C        SIMIN, SNAKE, STING, TACOS, TAPMA, TEMB, TENS, WSIXJ, WTHREJ
+C        SIMIN, SNAKE, SPLNER, STING, TACOS, TAPMA, TEMB, TENS, WSIXJ,
+C        WTHREJ
 C
 C Uses global variables:
 C      ABC    - absorption coefficients
@@ -448,7 +449,7 @@ C---- gosia2 changes end
       LNY = 0
       JENTR = 0 ! Flag to indicate we are not in OP,ERRO
       ICS = 0
-      ISPL = 0 ! Flag to indicate we should use LAGRAN not SPLINE
+      ISPL = 0 ! Flag to indicate we should use LAGRAN not SPLNER
 
       DO i = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
          jpin(i) = 0
@@ -1179,7 +1180,10 @@ C                       the range over which we integrate the bombarding energy
 C                       with the number of steps specified.
                         DO j = 1 , npce1
                            xx = (j-1)*hen + emn
-                           CALL LAGRAN(esp,dedx,npt,1,xx,yy,3,1)
+                           IF ( ISPL.EQ.0 )
+     &                        CALL LAGRAN(esp,dedx,npt,1,xx,yy,3,1)
+                           IF ( ISPL.EQ.1 )
+     &                        CALL SPLNER(esp,dedx,npt,xx,yy,3)
                            HLMLM(j) = 1./yy
                         ENDDO
                          
@@ -1204,10 +1208,17 @@ C                       Now we calculate for all the mesh points.
                                  ENDDO ! Loop on theta meshpoints jtp
                                  DO jt = 1 , npct1 ! number of equal divisions in theta for interpolation
                                     xx = (jt-1)*het + tmn/57.2957795
-                                    CALL LAGRAN(XV,YV,ntt,jt,xx,yy,2,
+                                    IF ( ISPL.EQ.0 )
+     &                                 CALL LAGRAN(XV,YV,ntt,jt,xx,yy,2,
      &                                 icll) ! interpolate at angle xx
-                                    CALL LAGRAN(XV,DSG,ntt,jt,xx,zz,2,
-     &                                 icll) ! interpolate gamma yield at xx
+                                    IF ( ISPL.EQ.1 )
+     &                                 CALL SPLNER(XV,YV,ntt,xx,yy,2) ! interpolate at angle xx
+                                    IF ( ISPL.EQ.0 )
+     &                                 CALL LAGRAN(XV,DSG,ntt,jt,xx,zz,
+     &                                 2,icll) ! interpolate gamma yield at xx
+                                    IF ( ISPL.EQ.1 )
+     &                                 CALL SPLNER(XV,DSG,ntt,xx,zz,
+     &                                 2) ! interpolate gamma yield at xx
                                     IF ( mfla.EQ.1 ) yy = yy*pfi(jt)
      &                                 /57.2957795
                                     IF ( yy.LE.0. ) yy = 1.E-15
@@ -1235,11 +1246,19 @@ C                          Now interpolate
                               ENDDO ! Loop on energy meshpoints jtp
                               DO jt = 1 , npce1 ! npce1 is number of equal energy steps
                                  xx = (jt-1)*hen + emn
-                                 CALL LAGRAN(ZV,YV,ne,jt,xx,yy,2,icll)
+                                 IF ( ISPL.EQ.0 )
+     &                                CALL LAGRAN(ZV,YV,ne,jt,xx,yy,2,
+     &                                icll)
+                                 IF ( ISPL.EQ.1 )
+     &                                CALL SPLNER(ZV,YV,ne,xx,yy,2)
 C                                Interpolate cross-section at this energy
-                                 IF ( jd.EQ.1 .AND. ja.EQ.1 )
+                                 IF ( jd.EQ.1 .AND. ja.EQ.1 .AND.
+     &                                ISPL.EQ.0 )
      &                                CALL LAGRAN(ZV,DSE,ne,jt,xx,zz,2,
      &                                icll) ! Interpolate for this energy
+                                 IF ( jd.EQ.1 .AND. ja.EQ.1 .AND.
+     &                                ISPL.EQ.1 )
+     &                                CALL SPLNER(ZV,DSE,ne,xx,zz,2) ! Interpolate for this energy
                                  IF ( jd.EQ.1 .AND. ja.EQ.1 ) HLM(jt)
      &                             = zz*HLMLM(jt) ! HLMLM = 1 / stopping power
                                  XI(jt) = yy*HLMLM(jt)

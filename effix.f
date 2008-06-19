@@ -3,7 +3,7 @@ C----------------------------------------------------------------------
 C SUBROUTINE EFFIX
 C
 C Called by: CEGRY, GOSIA2
-C Calls:     LAGRAN
+C Calls:     LAGRAN, SPLNER
 C
 C Purpose: calculate the efficiency of the detector at a given energy.
 C
@@ -17,8 +17,8 @@ C      Ipd    - detector number
 C      En     - gamma-ray energy
 C      Effi   - efficiency
 C
-C Note that it uses LAGRAN to interpolate between the data points given
-C by the user.
+C Note that it uses LAGRAN or SPLNER according to the ISPL flag to
+C interpolate between the data points given by the user.
 C
 C The efficiency curve parameters are those of GREMLIN:
 C     AKAVKA(1) = a0
@@ -35,8 +35,9 @@ C     AKAVKA(9) = control flag
       IMPLICIT NONE
       REAL*8 d , Effi , En , enl , pw , s , t , w , xx , yy
       INTEGER*4 i , Ipd , j , l , ll , n
-      DIMENSION xx(51) , yy(51)
+      DIMENSION xx(101) , yy(101)
       INCLUDE 'efcal.inc'
+      INCLUDE 'ccc.inc'
       
       Effi = 1.E-6
       En = En + 1.E-24
@@ -80,7 +81,8 @@ C     AKAVKA(9) = control flag
                   yy(2) = ABC(l,j+1)
                   yy(3) = ABC(l,j+2)
                ENDIF
-               CALL LAGRAN(xx,yy,3,0,enl,t,1,1)
+               IF ( ISPL.EQ.0 ) CALL LAGRAN(xx,yy,3,0,enl,t,1,1)
+               IF ( ISPL.EQ.1 ) CALL SPLNER(xx,yy,3,enl,t,1)
                s = s + EXP(t)*THICK(Ipd,l)
             ENDIF
          ENDDO

@@ -3,7 +3,7 @@ C----------------------------------------------------------------------
 C FUNCTION CONV
 C
 C Called by: BRANR, PTICC, SEQ
-C Calls:     LAGRAN, NEWCNV
+C Calls:     LAGRAN, NEWCNV, SPLNER
 C
 C Purpose: calculate the conversion coefficient at a particular energy by
 C interpolating over the values provided by the user.
@@ -24,7 +24,7 @@ C      conversion coefficient interpolated to energy Ega
       IMPLICIT NONE
       REAL*8 cpo , cpo1 , cv , Ega , NEWCNV
       INTEGER*4 j , N , n1 , nen
-      DIMENSION cpo(51) , cpo1(51)
+      DIMENSION cpo(101) , cpo1(101)
       INCLUDE 'ccc.inc'
 
 C     If the number of conversion coefficients entered by the user is negative
@@ -55,7 +55,8 @@ C     then use read the conversion coefficients from a file on unit 29.
             cpo1(j) = EG(n1+j-1)
          ENDDO
 C        Interpolate 
-         CALL LAGRAN(cpo1,cpo,4,1,Ega,cv,2,1)
+         IF ( ISPL.EQ. 0 ) CALL LAGRAN(cpo1,cpo,4,1,Ega,cv,2,1)
+         IF ( ISPL.EQ. 1 ) CALL SPLNER(cpo1,cpo,4,Ega,cv,2)
          CONV = cv
          RETURN
       ENDIF

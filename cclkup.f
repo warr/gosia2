@@ -82,7 +82,7 @@ C             Set up for interpolation
               ENDDO
  
 C             Perform spline over data
-              CALL SPLNER(x,y,nrec(ishell),1,LOG(Egamma),result,2,1)
+              CALL SPLNER(x,y,nrec(ishell),LOG(Egamma),result,2)
             ENDIF
 
 C           Add the conversion coefficients of each subshell
