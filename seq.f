@@ -138,7 +138,7 @@ C     multipolarity
          la1 = 0
          inx1 = 0
          DO j = js , idecay ! For each decay
-            IF ( KSEQ(j,4).GE.10 ) THEN ! KSEQ(1,4) is 10 + multipolarity
+            IF ( KSEQ(j,4).GE.10 ) THEN ! KSEQ(j,4) is 10 + multipolarity
                n1 = KSEQ(j,1) ! Initial level
                m1 = KSEQ(j,2) ! Final level
                IF ( n1.EQ.n .AND. m1.EQ.m ) THEN ! Decays involving the same pair of levels
