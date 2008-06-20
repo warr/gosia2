@@ -39,7 +39,7 @@ C      Rem    - natural log of the largest value the computer can represent
      &       d2 , f , h
       REAL*8 Rem , RK4 , sajj , Sh , t , v , ww , x , y
       INTEGER*4 i , Idr , Ifbf , Inpo , itl , ix , j , Jj , l , m
-      DIMENSION f(3) , Bten(1200)
+      DIMENSION f(3) , Bten(*)
       INCLUDE 'vlin.inc'
       INCLUDE 'dftb.inc'
       INCLUDE 'comme.inc'
