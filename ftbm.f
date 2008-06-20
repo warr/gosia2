@@ -52,7 +52,7 @@ C      NMAX   - number of levels
 C      NSTART - index in CAT of first substate associated with a level
 C      NSTOP  - index in CAT of last substate associated with a level
 C      NWR    - number of datapoints used in fit
-C      NYLDE  -
+C      NYLDE  - number of yields
 C      SPIN   - spin of level
 C      ZETA   - the coupling constants
 C      ZPOL   - dipole term
