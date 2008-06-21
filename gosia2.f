@@ -103,7 +103,7 @@ C      LDNUM  - number of matrix elements with each multipolarity populating eac
 C      LEAD   - pair of levels involved in each matrix element
 C      LIFCT  - index for lifetimes
 C      LMAX   - ground-state spin + 1
-C      LMAXE  - maxmium multipolarity needed for calculation
+C      LMAXE  - maximum multipolarity needed for calculation
 C      LNORM  - normalisation constant control
 C      LNY    - use logs to calculate chi squared
 C      LOCKF  - flag to fix matrix elements with most significant derivative
