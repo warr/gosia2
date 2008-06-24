@@ -169,7 +169,7 @@ C     Read upper limits and relative normalisation factors
          ENDIF
       ENDDO ! Loop li on experiments
 
-C     Read file for experimental yields       
+C     Read file for experimental yields
       READ (JZB,*) Ntap ! NTAP
       IF ( Ntap.NE.0 ) THEN
          ipri = IPRM(2)
