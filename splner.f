@@ -9,7 +9,7 @@ C
 C Formal parameters:
 C      X      - x-coordinate of input data
 C      Yr     - y-coordinate of input data
-C      Ndata  - number of data points
+C      N      - number of data points
 C      Xx     - value for which to interpolate
 C      Yy     - result of interpolation
 C      Iscal  - mode: 1 = linear, 2 = exponential, 3 = square root
