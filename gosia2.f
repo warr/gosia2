@@ -474,6 +474,8 @@ C---- gosia2 changes end
       ENDDO
       DO i = 1 , 20
          IPRM(i) = 1
+      ENDDO
+      DO i = 1 , 50
          DO j = 1 , 5
             CC(i,j) = 0.
          ENDDO
