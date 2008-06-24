@@ -1,3 +1,18 @@
+C----------------------------------------------------------------------
+C SUBROUTINE SPLINE
+C
+C Called by: SPLNER
+C
+C Purpose: fit a spline to data points
+C
+C Formal parameters:
+C      X      - x-coordinate of input data
+C      Y      - y-coordinate of input data
+C      N      - number of data points
+C      Yp1    - slope of first two data points
+C      Yyn    - slope of last two data points
+C      Y2     - second derivative vector
+C
       SUBROUTINE SPLINE(X,Y,N,Yp1,Ypn,Y2)
       IMPLICIT NONE
       INTEGER*4 N
