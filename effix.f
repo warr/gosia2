@@ -113,7 +113,7 @@ c     JAERI calibration - TC, Nov.2000
          w = LOG(En/.511)
          Effi = EXP(AKAVKA(1,Ipd)+AKAVKA(2,Ipd)
      &          *w-EXP(AKAVKA(3,Ipd)+AKAVKA(4,Ipd)*w))
-         GOTO 99999
+         RETURN
       ELSE
 c GREMLIN
          w = LOG(20.*En)
@@ -134,4 +134,4 @@ c GREMLIN
       IF ( ABS(pw-1.).LT.1.E-6 ) WRITE (22,99001)
 99001 FORMAT (5x,'***** CRASH - EFFIX *****')
       Effi = Effi/(1.-pw)
-99999 END
+      END
