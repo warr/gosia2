@@ -56,7 +56,7 @@ C     Open the BrIcc database files
          n2 = LEAD(1,i) ! Lower level
          IF ( n1.EQ.n2 ) GOTO 100 ! Ignore diagonal matrix elements
 
-         temp = EN(n1) - EN(n2) ! Energy of transition
+         temp = ABS(EN(n1) - EN(n2)) ! Energy of transition
 
 C        Now look to see if we have it already
          DO j = 1, ngamma
