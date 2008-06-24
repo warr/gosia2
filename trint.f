@@ -55,12 +55,29 @@ C     If Arg is small, use the polynomial expansion
 C     Otherwise use the expansion in terms of sine and cosine
       s = SIN(Arg)
       c = COS(Arg)
-      f = POL4(1.D0,38.027246D0,265.187033D0,335.67732D0,38.102495D0,a)
-      f = f/POL4(1.D0,40.021433D0,322.624911D0,570.23628D0,157.105423D0,
-     &    a)/Arg
-      g = POL4(1.D0,42.242855D0,302.757865D0,352.018498D0,21.821899D0,a)
-      g = g/POL4(1.D0,48.196927D0,482.485984D0,1114.978885D0,
-     &    449.690326D0,a)/a
+
+C     Here we use an approximation. If Arg is quite large, a is very large 
+C     and the four polynomials are all huge. Moreover, the four polynomials 
+C     are almost identical, so the ratios are unity. So in this case, 
+C     f = 1./Arg and g=1./a is a good approximation.
+      
+      f = 1.
+      g = 1.
+
+      IF ( a.LE.1.D+8 ) THEN
+         f = POL4(1.D0,38.027246D0,265.187033D0,335.67732D0,38.102495D0,
+     &       a)
+         f = f/POL4(1.D0,40.021433D0,322.624911D0,570.23628D0,
+     &       157.105423D0,a)
+         g = POL4(1.D0,42.242855D0,302.757865D0,352.018498D0,
+     &       21.821899D0,a)
+         g = g/POL4(1.D0,48.196927D0,482.485984D0,1114.978885D0,
+     &       449.690326D0,a)
+      ENDIF
+      
+      f = f/Arg
+      g = g/a
+      
       Si = f*c + g*s
       Ci = g*c - f*s
 99999 END
