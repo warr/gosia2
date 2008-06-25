@@ -211,7 +211,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 inko , inm1 , inm2 , inn , inpo , intend , intvh , 
      &          inva , inx1 , iobl , iocc , iopri , iosr , ipd , iph
       INTEGER*4 ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
-     &          ipri , irea , irep , irfix , isip , iske , iskf
+     &          ipri , irea , irep , irfix , irix , isip , iske , iskf
       INTEGER*4 isko , iskok , isoh , ispa , ispb , itno , 
      &          itp , iuy , iva , iva1 , ivarh , ivari , ivrh
       INTEGER*4 ixj , ixl , ixm , iyr , izcap , j , ja , 
@@ -242,7 +242,7 @@ C      ZV     - energy meshpoints
       CHARACTER*1 prp
       REAL*8 chir , chp , ccch1 ,ccch2 , cht ! For gosia2
       INTEGER*4 nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
-      INTEGER*4 mret , mawr , irix ! For gosia2
+      INTEGER*4 mret , mawr ! For gosia2
       DIMENSION ihlm(32) , esp(20) , dedx(20) , bten(1600) , ! bten dimension = 16 * maxlevels
      &          fiex1(100,100,2) , title(20) , pfi(101) , zmir(6,2,50) , 
      &          iecd(50) , wpi(100,2) , tau1(10) , eng(10) , 
@@ -2451,10 +2451,9 @@ C     Handle OP,ERRO
             INTERV(IEXP) = intvh
          ENDDO ! Loop over experiments jexp
 
-         REWIND 7
-         REWIND 27
          irix = 7
          IF ( IBPS.EQ.1 ) irix = 27 ! unit 7 for target, 27 for beam
+         REWIND irix
          DO iuy = 1 , 6
             WRITE (irix,*) (XIR(iuy,jj),jj=1,NEXPT)
             WRITE (irix,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
@@ -2483,10 +2482,9 @@ C---- gosia2 changes end
             ENDDO
          ENDDO
       ELSE ! iobl .lt. 1
-         REWIND 7
-         REWIND 27
          irix = 7
          IF ( IBPS.EQ.1 ) irix = 27 ! unit 7 for target, 27 for beam
+         REWIND irix
          DO iuy = 1 , 6
             READ (irix,*) (XIR(iuy,jj),jj=1,NEXPT)
             READ (irix,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
