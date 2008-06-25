@@ -1,3 +1,18 @@
+C----------------------------------------------------------------------
+C SUBROUTINE SPLINT
+C
+C Called by: SPLNER
+C
+C Purpose: evaluate spline
+C
+C Formal parameters:
+C      Xa     - x-coordinate of input data
+C      Ya     - y-coordinate of input data
+C      Ya2    - second derivative vector
+C      N      - number of data points
+C      Xx     - value for which to evaluate spline
+C      Yy     - result
+C
       SUBROUTINE SPLINT(Xa,Ya,Y2a,N,Xx,Yy)
 c
 c xa,ya - tabulated function
