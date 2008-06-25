@@ -202,7 +202,7 @@ C      ZV     - energy meshpoints
      &       ycorr
       REAL*8 yy , yyd1 , yydd , yyy , zmir , zp , zz
       INTEGER*4 i , i122 , iapx , ib , ibaf , icg , icll , ict , ictl , 
-     &          id , idf
+     &          id , ideff , idf
       INTEGER*4 idr , iecd , ient , ifbp , ifc , ifm , ifwd , 
      &          ig1 , ig2 , ih1 , ih2 , ihlm , ihuj , ii , ij
       INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ile1 , ilevls , 
@@ -249,7 +249,7 @@ C      ZV     - energy meshpoints
      &          tau2(10,7) , xl1(7) , qui(8,10) , cf(8,2) , 
      &          ivarh(1500) , liscl(200) , dsxm(100,100,100) , 
      &          levl(50) , xlevb(50,2) , bm(8,20,20,3) , mlt(1500) , 
-     &          ivari(1500) , jpin(50)
+     &          ivari(1500) , jpin(50) , ideff(50)
       INCLUDE 'clust.inc'
       INCLUDE 'cccds.inc'
       INCLUDE 'inhi.inc'
@@ -452,6 +452,7 @@ C---- gosia2 changes end
       ISPL = 0 ! Flag to indicate we should use LAGRAN not SPLNER
 
       DO i = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
+         ideff(i) = 0
          jpin(i) = 0
          iecd(i) = 0
       ENDDO
@@ -1433,6 +1434,7 @@ C                    Read input from standard input
                         DO j = 1 , n
                            jj = ITMA(mexl,j) ! Get identity of detector
                            READ (JZB,*) (AKAVKA(k,jj),k=1,8) ! efficiency curve parameters
+                           AKAVKA(9,jj) = ideff(mexl)
                         ENDDO
                         READ (JZB,*) kclust ! number of clusters
                         IF ( kclust.NE.0 ) THEN
@@ -1594,6 +1596,12 @@ C     Treat suboption CONT (control)
          IF ( op1.EQ.'SEL,' ) ITS = 2
          IF ( op1.EQ.'SMR,' ) iosr = 1
          IF ( op1.EQ.'SPL,' ) ISPL = ipo1
+         IF ( op1.EQ.'EFF,' ) THEN
+            DO jjx = 1 , ipo1
+               READ (JZB,*) ipo2 , ijx
+               ideff(ipo2) = ijx
+            ENDDO
+         ENDIF
          IF ( op1.EQ.'FMI,' ) ifm = 1
          IF ( op1.EQ.'TEN,' ) itno = 1
          IF ( op1.EQ.'NCM,' ) NCM = ipo1
