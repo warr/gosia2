@@ -188,7 +188,7 @@ C      Bten   -
                      ENDDO ! Loop over levels
                   ENDDO ! Loop on E1...6 matrix elements
                ENDIF ! IF ( Icll.NE.3 )
-            ENDIF ! Loop on Ncall
+            ENDIF ! IF ( Ncall.NE.0 )
             CALL TENB(k,Bten,LMAX)
          ENDDO ! Loop on multipolarity k
 
