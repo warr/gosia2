@@ -2,7 +2,8 @@ BINDIR=$(ROOT)/usr/bin
 MANDIR=$(ROOT)/usr/share/man/man1
 
 EXE=gosia2
-MAN=gosia2.1
+MAN=$(EXE).1
+SRCS=$(EXE).f
 
 FC=gfortran
 
@@ -21,6 +22,7 @@ DEPS=Makefile
 
 ALL: $(EXE)
 
+OBJS += $(EXE).o
 OBJS += adhoc.o
 OBJS += alloc.o
 OBJS += ampder.o
@@ -61,7 +63,6 @@ OBJS += gcf.o
 OBJS += gf.o
 OBJS += gkk.o
 OBJS += gkvac.o
-OBJS += gosia2.o
 OBJS += half.o
 OBJS += intg.o
 OBJS += klopot.o
@@ -125,13 +126,25 @@ OBJS += xstatic.o
 OBJS += ylm.o
 OBJS += ylm1.o
 
+SRCS += arccos.f arctg.f load.f lsloop.f leadf.f mem.f cmlab.f qe.f qm.f \
+snake.f fhip.f alloc.f rangel.f qrange.f ampder.f laisum.f expon.f faza.f \
+setin.f sting.f laiamp.f faza1.f trint.f pol4.f stamp.f reset.f half.f \
+double.f path.f intg.f newlv.f code7.f apram.f newcat.f pomnoz.f tenb.f \
+tens.f djmm.f ftbm.f mini.f cegry.f fakp.f prim.f seq.f gf.f f.f conv.f \
+wthrej.f wsixj.f lagran.f func.f func1.f gkvac.f gkk.f xstatic.f ats.f ylm.f \
+decay.f angula.f ready.f branr.f limits.f szereg.f sixel.f prelm.f recoil.f \
+rotate.f ylm1.f fiint.f fiint1.f tapma.f simin.f mixup.f fxis1.f fxis2.f \
+podziel.f klopot.f mixr.f coord.f chmem.f pticc.f rndm.f kontur.f rk4.f \
+qfit.f gamatt.f gcf.f tcexp.f tcabs.f tasin.f tacos.f openf.f effix.f \
+adhoc.f elmt.f select.f bricc.f newcnv.f splner.f spline.f splint.f cclkup.f
+	
 include: include.c
-	gcc -o include include.c	
+	gcc -o $@ $<
 
-SINGLE_FILE = gosia2_single_file.f
+SINGLE_FILE = $(EXE)_single_file.f
 
-gosia2: $(OBJS) $(DEPS)
-	$(FC) $(LDFLAGS) -o gosia2 $(OBJS)
+$(EXE): $(OBJS) $(DEPS)
+	$(FC) $(LDFLAGS) -o $@ $(OBJS)
 
 clean:
 	rm -f *~ *.o $(EXE) $(SINGLE_FILE) include
@@ -144,20 +157,5 @@ install: $(EXE) $(MAN)
 	gzip -f $(MANDIR)/$(MAN)
 
 single_file: include
-	./include gosia2.f arccos.f arctg.f load.f lsloop.f leadf.f \
-	mem.f cmlab.f qe.f qm.f snake.f fhip.f alloc.f \
-	rangel.f qrange.f ampder.f laisum.f expon.f faza.f \
-	setin.f sting.f laiamp.f faza1.f trint.f pol4.f \
-	stamp.f reset.f half.f double.f path.f intg.f newlv.f \
-	code7.f apram.f newcat.f pomnoz.f tenb.f tens.f djmm.f \
-	ftbm.f mini.f cegry.f fakp.f prim.f seq.f gf.f f.f \
-	conv.f wthrej.f wsixj.f lagran.f func.f func1.f \
-	gkvac.f gkk.f xstatic.f ats.f ylm.f decay.f angula.f \
-	ready.f branr.f limits.f szereg.f sixel.f prelm.f \
-	recoil.f rotate.f ylm1.f fiint.f fiint1.f tapma.f \
-	simin.f mixup.f fxis1.f fxis2.f podziel.f klopot.f \
-	mixr.f coord.f chmem.f pticc.f rndm.f kontur.f rk4.f \
-	qfit.f gamatt.f gcf.f tcexp.f tcabs.f tasin.f tacos.f \
-	openf.f effix.f adhoc.f elmt.f select.f bricc.f newcnv.f \
-	splner.f spline.f splint.f cclkup.f > $(SINGLE_FILE)
+	./include $(SRCS) > $(SINGLE_FILE)
 
