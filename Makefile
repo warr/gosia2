@@ -141,7 +141,8 @@ adhoc.f elmt.f select.f bricc.f newcnv.f splner.f spline.f splint.f cclkup.f
 include: include.c
 	gcc -o $@ $<
 
-SINGLE_FILE = $(EXE)_single_file.f
+DATE=$(shell date +%04Y%02m%02d)
+SINGLE_FILE = $(EXE)_$(DATE).f
 
 $(EXE): $(OBJS) $(DEPS)
 	$(FC) $(LDFLAGS) -o $@ $(OBJS)
