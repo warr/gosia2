@@ -27,6 +27,7 @@ C Iscal = 3   FUNC(y) = sqrt(y)  FUNC1(y) = y^2
       REAL*8 arh , FUNC , FUNC1 , t , w , X , Xx , Y , y1 , Yy
       INTEGER*4 i , Ipc , Irc , Iscal , j , Ndata
       DIMENSION X(*) , Y(*) , w(101) , arh(101,101)
+      SAVE arh
       
       IF ( Irc.EQ.2 ) THEN
       ELSEIF ( Irc.EQ.3 ) THEN
