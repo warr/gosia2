@@ -1,3 +1,28 @@
+20080626 (synchronized with gosia1)
+° Reordering of all variable declarations so variables in common blocks are
+  together.
+° Increased size of arrays for levels from 75 to 100.
+° Change in many format statements to accomodate 100 levels (I2 -> I3).
+° Increased size of arrays for substates from 600 to 1200.
+° Restructure function EFFIX to allow more flexible selection of efficiency
+  calbration type.
+° Added Radware efficiency calibration (Pawel J. Napiorkowski).
+° Added EFF, option to CONT to make it easier to select efficiency method.
+° Bugfix in gremlin efficiency method: a sign was wrong in Woods-Saxon term.
+° Bugfix in initialisation of conversion coefficients for interpolation
+  method (only part of array was initialized).
+° Add CONTINUE statements to prevent GOTO the ENDDO of a loop. This is
+  deprecated and will be removed in future.
+° Call either LAGRAN or SPLNER to do interpolation according to ISPL variable.
+° Approximation in TRINT  if Arg is very large (then ratio is one) as in
+  pawel.
+° Replaced OPEN(NAME=xxx) with OPEN(FILE=xxx) as the former is an extension
+  to the language, while the latter is standard.
+° Bugfix in BRICC: we need the absolute value of the difference in energy
+  levels not the signed difference.
+° Bugfix for dimension of bten, which should have been 1600 and was
+  different in different places.
+
 20080519 (synchronized with gosia1)
 ° Add spline support (Pawel J. Napiorkowski)
 ° Add CONT option SPL,
