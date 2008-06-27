@@ -17,9 +17,9 @@ C      conversion coefficient interpolated to energy Ega
       IMPLICIT NONE
 
       INTEGER*4 isfirst, i, j, N, nenergies
-      DATA isfirst/1/
       REAL*8 energies(1500), bricc(1500, 5), Ega
       SAVE energies, bricc, isfirst, nenergies
+      DATA isfirst/1/
 
 C     The first time, we need to read the data
       IF ( isfirst.eq.1 ) THEN
