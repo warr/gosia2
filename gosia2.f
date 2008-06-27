@@ -1983,10 +1983,10 @@ C     Handle OP,ERRO
      &                    'SPIN',2X,'M',5X,'REAL AMPLITUDE',2X,
      &                    'IMAGINARY AMPLITUDE'//)
                   DO k = 1 , ISMAX ! For substates
-                     pr = pr + DBLE(ARM(k,5))**2 + IMAG(ARM(k,5))**2
+                     pr = pr + DBLE(ARM(k,5))**2 + DIMAG(ARM(k,5))**2
                      IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
      &                    WRITE (22,99035) INT(CAT(k,1)) , CAT(k,2) , 
-     &                    CAT(k,3) , DBLE(ARM(k,5)) , IMAG(ARM(k,5))
+     &                    CAT(k,3) , DBLE(ARM(k,5)) , DIMAG(ARM(k,5))
 99035                FORMAT (7X,1I2,3X,1F4.1,2X,1F5.1,2X,1E14.6,2X,
      &                       1E14.6)
                   ENDDO ! Loop on substates k
@@ -2380,9 +2380,9 @@ C     Handle OP,ERRO
                            jp = 2
                            IF ( MAGA(IEXP).NE.0 .AND. jd.EQ.2 ) jp = 3
                            p = DBLE(ARM(1,5))
-                           r = IMAG(ARM(1,5))
+                           r = DIMAG(ARM(1,5))
                            qr = DBLE(ARM(jp,5))
-                           s = IMAG(ARM(jp,5))
+                           s = DIMAG(ARM(jp,5))
                            test = p*p + r*r + qr*qr + s*s
                            p = p/SQRT(test)
                            s = ABS(r/s)

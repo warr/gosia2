@@ -170,7 +170,7 @@ C     Calculate derivatives of amplitudes
                IF ( ihold.NE.0 ) THEN
                   hold = ARM(ihold,5) - ARM(ihold,7)
                   rl = DBLE(hold)
-                  rim = IMAG(hold)
+                  rim = DIMAG(hold)
                   srt = rl*rl + rim*rim
                   f = MAX(f,srt)
                ENDIF

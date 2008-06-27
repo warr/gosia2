@@ -71,11 +71,11 @@ C can cope with half-integers.
                         fc = WTHREJ(isi,kk,isi,jmp,ll,jm)
                         ite = 1
  2                      IF ( ila.EQ.1 ) x = DBLE(ARM(mp,5))
-     &                       *DBLE(ARM(mm,5)) + IMAG(ARM(mp,5))
-     &                       *IMAG(ARM(mm,5))
+     &                       *DBLE(ARM(mm,5)) + DIMAG(ARM(mp,5))
+     &                       *DIMAG(ARM(mm,5))
                         IF ( ila.NE.1 ) x = DBLE(ARM(mp,5))
-     &                       *IMAG(ARM(mm,5)) - DBLE(ARM(mm,5))
-     &                       *IMAG(ARM(mp,5))
+     &                       *DIMAG(ARM(mm,5)) - DBLE(ARM(mm,5))
+     &                       *DIMAG(ARM(mp,5))
                         Bten(ind) = Bten(ind) + x*fc*ilg
                         IF ( ite.EQ.2 ) GOTO 6
  4                      IF ( iha.NE.1 .OR. Icl.NE.Lmax ) THEN

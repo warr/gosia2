@@ -181,8 +181,8 @@ C      Bten   -
                               kx = kx + 1
                               ZETA(loc) = ZETA(loc) + fc*DBLE(ARM(kx,5))
      &                           *DBLE(ARM(kx,6))
-     &                           /fx + fc*IMAG(ARM(kx,5))
-     &                           *IMAG(ARM(kx,6))/fx
+     &                           /fx + fc*DIMAG(ARM(kx,5))
+     &                           *DIMAG(ARM(kx,6))/fx
                            ENDDO ! Loop on lpxd
                         ENDIF ! IF ( NSTART(i11).NE.0 )
                      ENDDO ! Loop over levels
@@ -224,7 +224,7 @@ C      Bten   -
             IF ( IPRM(7).EQ.-1 ) THEN
                DO j = 1 , ISMAX
                   WRITE (22,99002) INT(CAT(j,1)) , CAT(j,2) , CAT(j,3) , 
-     &                             DBLE(ARM(j,5)) , IMAG(ARM(j,5))
+     &                             DBLE(ARM(j,5)) , DIMAG(ARM(j,5))
 99002             FORMAT (7X,1I2,3X,1F4.1,2X,1F4.1,2X,1E14.6,2X,1E14.6)
                ENDDO
             ENDIF ! IF ( IPRM(7).EQ.-1 )
@@ -368,7 +368,7 @@ C      Bten   -
                      kk6 = kk + 5
                      WRITE (22,99009) KSEQ(idec,3) , KSEQ(idec,4) , ! Level numbers
      &                                (INT(DBLE(ARM(kkx,jk))),
-     &                                IMAG(ARM(kkx,jk)),kkx=kk,kk6)
+     &                                DIMAG(ARM(kkx,jk)),kkx=kk,kk6)
 99009                FORMAT (2X,1I2,'--',1I2,5X,
      &                       6('(',1I3,2X,1E8.2,')',3X))
                   ENDDO ! Loop on ile2

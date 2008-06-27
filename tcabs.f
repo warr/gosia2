@@ -18,7 +18,7 @@ C      absolute value of complex number Z.
       COMPLEX*16 Z
       
       a = DBLE(Z)
-      b = IMAG(Z)
+      b = DIMAG(Z)
       IF ( ABS(a).LT.1.E-16 ) a = 0.
       IF ( ABS(b).LT.1.E-16 ) b = 0.
       TCABS = SQRT(a*a+b*b)
