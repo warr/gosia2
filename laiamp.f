@@ -106,5 +106,5 @@ C                             estimate amplitude
             ENDIF ! If there are matrix elements of this multipolarity connecting to the ground state
          ENDIF
       ENDDO ! Loop on lambda
-      ARM(Ir,5) = CMPLX(SQRT(1.-ppp),0.)
+      ARM(Ir,5) = DCMPLX(SQRT(1.-ppp),0.D0)
       END

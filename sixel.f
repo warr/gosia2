@@ -49,10 +49,10 @@ C      Lu     -
                l1 = kk6 + j1 - l
                c1 = DBLE(ARM(l1-1,Jk))
                c2 = IMAG(ARM(l1-1,Jk))
-               ARM(l1,Jk) = CMPLX(c1,c2)
+               ARM(l1,Jk) = DCMPLX(c1,c2)
             ENDDO
             rx = DBLE(Indx)
-            ARM(j,Jk) = CMPLX(rx,al)
+            ARM(j,Jk) = DCMPLX(rx,al)
             GOTO 99999
          ENDIF
       ENDDO

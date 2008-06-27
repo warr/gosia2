@@ -22,5 +22,5 @@ C      complex exponential of Z.
       a = EXP(a)
       c = a*COS(b)
       d = a*SIN(b)
-      TCEXP = CMPLX(c,d)
+      TCEXP = DCMPLX(c,d)
       END

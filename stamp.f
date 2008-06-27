@@ -38,7 +38,7 @@ C      Estimated amplitude
          exa = EXP(a)
          dwi = 3*Dw
          cic = exa*(EXP(dwi)-1.)
-         STAMP = CMPLX(cic,0.)
+         STAMP = DCMPLX(cic,0.D0)
          IF ( la.EQ.2 ) THEN
             IF ( mi.EQ.0 ) fct = 3.*(3.-Epsi*Epsi)/Epsi/Epsi/Epsi/Epsi
             IF ( mi.EQ.1 ) fct = 1.837117307*Errt/Epsi/Epsi/Epsi/Epsi ! 1.837117307 = sqrt(27/8)
@@ -69,11 +69,11 @@ C      Estimated amplitude
          cis = sa + cia - bis
          cic = ca - sia - bic
          IF ( la.EQ.1 ) THEN
-            STAMP = CMPLX(cic,cis)
+            STAMP = DCMPLX(cic,cis)
          ELSE
             dwi = (bic2-cis+ca/a)/2.
             exa = (bis2+cic+sa/a)/2.
-            STAMP = CMPLX(dwi,exa)
+            STAMP = DCMPLX(dwi,exa)
          ENDIF
          IF ( la.EQ.2 ) THEN
             IF ( mi.EQ.0 ) fct = .75*(3.-Epsi*Epsi)*axi*axi/Epsi/Epsi

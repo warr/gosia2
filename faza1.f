@@ -33,5 +33,5 @@ C      Rmu    -
             RETURN
          ENDIF
       ENDIF
-      Dis = CMPLX(-DBLE(irs),0.)
+      Dis = DCMPLX(-DBLE(irs),0.D0)
 99999 END
