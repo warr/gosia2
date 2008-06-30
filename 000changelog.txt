@@ -1,4 +1,4 @@
-20080626 (synchronized with gosia1)
+20080630 (synchronized with gosia1)
 ° Reordering of all variable declarations so variables in common blocks are
   together.
 ° Increased size of arrays for levels from 75 to 100.
@@ -25,6 +25,7 @@
 ° Use DCMPLX instead of CMPLX for portability.
 ° Use DIMAG instead of IMAG for portability.
 ° Reorder DATA statement in NEWCNV for portability.
+° Use LAGRAN for interpolation if less than three data points even if ISPL = 1
 
 20080519 (synchronized with gosia1)
 ° Add spline support (Pawel J. Napiorkowski)
