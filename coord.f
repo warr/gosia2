@@ -16,17 +16,17 @@ C      XA1    - A of non-investigated nucleus
 C      YV     - scattering angle meshpoints where we calculate exact Coulex
 C
 C Formal parameters:
-C      Wth    - theta of centre of detector (degrees)
-C      Wph    - phi of centre of detector (degrees)
-C      Wthh   - half angle subtended (degrees)
-C      Naa    - number of theta divisions
-C      Ifw    - flag: 0 for meshpoints, 1 for subdivisions, 2 for pin diodes
-C      Pfi    - phi range for each theta value
-C      Wpi    - phi range of detector
-C      Wtlb   - angle of particle detector in theta (degrees) in lab frame
-C      Lz     - experiment number
-C      Tyy    - lower limit of theta (degrees)
-C      Tzz    - upper limit of theta (degrees)
+C      Wth    - theta of centre of detector (degrees) - readonly
+C      Wph    - phi of centre of detector (degrees) - readonly
+C      Wthh   - half angle subtended (degrees) - readonly
+C      Naa    - number of theta divisions - readonly
+C      Ifw    - flag: 0 for meshpoints, 1 for subdivisions, 2 for pin diodes -readonly
+C      Pfi    - phi range for each theta value - writeonly
+C      Wpi    - phi range of detector - read/write
+C      Wtlb   - angle of particle detector in theta (degrees) in lab frame - readonly
+C      Lz     - experiment number - readonly
+C      Tyy    - lower limit of theta (degrees) - read/write
+C      Tzz    - upper limit of theta (degrees) - read/write
  
       SUBROUTINE COORD(Wth,Wph,Wthh,Naa,Ifw,Pfi,Wpi,Wtlb,Lz,Tyy,Tzz)
       IMPLICIT NONE
@@ -43,7 +43,7 @@ C      Tzz    - upper limit of theta (degrees)
       DATA rade/57.2957795/ ! 180 / pi
       DATA ws/0./
 
-      IF ( Ifw.EQ.0 ) THEN
+      IF ( Ifw.EQ.0 ) THEN ! For meshpoints
          Tyy = Wth - Wthh ! Lower limit of theta
          Tzz = Wth + Wthh ! Upper limit of theta
       ENDIF
