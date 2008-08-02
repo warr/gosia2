@@ -93,7 +93,7 @@ C           Add the conversion coefficients of each subshell
  
       RETURN
  
- 100  WRITE (*,*) 'ERROR - No data found for this Z'
+ 100  WRITE (*,*) 'ERROR - No data found for this Z ', Myz
       CCLKUP = -1.0D0
       RETURN
       END
