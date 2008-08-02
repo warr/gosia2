@@ -7,21 +7,21 @@ C
 C Purpose: read parameters for sensitivity maps
 C
 C Uses global variables:
-C      DS     -
+C      DS     - differential cross section
 C      XV     - energy meshpoints (sometimes theta meshpoints) where we calculate exact Coulex
 C      YGN    - gamma yield calculated without correction to angular distribution from finite recoil distance
 C      ZETA   - various coefficients
 C
 C Formal parameters:
-C      Lx     -
+C      Lx     - experiment number
 C      Iske   -
 C      Isko   -
 C      Iskf   -
 C      Nflr   -
-C      Idr    -
+C      Idr    - number of decays
 C      Nco    -
-C      Nft    -
-C      Enb    -
+C      Nft    - error flag: 0 = no error, 1 = error
+C      Enb    - energy of meshpoint read from file
 C
 C Note that unit 14 is used internally for the purpose of sensitivity
 C maps.
@@ -40,6 +40,7 @@ C maps.
       nfilt = 0
       REWIND 14
 
+C     Skip over unwanted records
       IF ( Iske.NE.0 ) THEN
  50      READ (14,*) ne , ntt , emn , emx , tmn , tmx , na , tmx , tmx , 
      &               tmx
@@ -53,6 +54,7 @@ C maps.
 
       IF ( Nco.EQ.0 ) RETURN
 
+C     Read record
       READ (14,*) ne , ntt , emn , emx , tmn , tmx , na , tmx , tmx , 
      &            tmx
       IF ( Isko.NE.0 ) THEN
