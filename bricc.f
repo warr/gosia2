@@ -47,9 +47,10 @@ C     Make sure we are at start of file that we want to write
       rewind(29)
       
 C     Open the BrIcc database files
-      OPEN (UNIT=30,FILE=idx_name,ACCESS='direct',RECL=2048,ERR=999)
+      OPEN (UNIT=30,FILE=idx_name,ACCESS='direct',RECL=2048,ERR=999,
+     &      STATUS='OLD')
       OPEN (UNIT=31,FILE=icc_name, ACCESS='direct',RECL=44,ERR=999,
-     &      FORM='UNFORMATTED')
+     &      FORM='UNFORMATTED',STATUS='OLD')
 
       ngamma = 0
       DO i = 1 , MEMAX ! For each matrix element
