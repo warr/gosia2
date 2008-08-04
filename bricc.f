@@ -24,14 +24,15 @@ C
       INCLUDE 'cx.inc'
       INCLUDE 'cexc.inc'
       INCLUDE 'clcom.inc'
+      INCLUDE 'switch.inc'
 
       INTEGER*4 n1, n2
       CHARACTER*1024 idx_name, icc_name
       REAL*8 mycc(5), CCLKUP
 
 C     Read the names of the files
-      read (*,'(A)') idx_name
-      read (*,'(A)') icc_name
+      read (JZB,'(A)') idx_name
+      read (JZB,'(A)') icc_name
 
 C     Write to output
       write(22,'(/,3A)') 'OP,BRIC interpolation of conversion ',
