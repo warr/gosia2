@@ -17,7 +17,7 @@ C      KVAR   -
 C      LP2    - maximum number of matrix elements (1500)
 C      MEMAX  - number of matrix elements
 C      NEXPT  - number of experiments
-C      TLBDG  - theta of particle detector
+C      TLBDG  - theta of particle detector (in degrees)
 C      ZETA   - various coefficients
 C      VINF   - speed of projectile at infinity
 C

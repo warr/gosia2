@@ -23,7 +23,7 @@ C      NCM    - calculate kinematics assuming this state for final state (defaul
 C      NEXPT  - number of experiments
 C      NMAX   - number of level energies
 C      TETACM - theta of particle detector in center of mass frame
-C      TLBDG  - theta of particle detector
+C      TLBDG  - theta of particle detector (in degrees)
 C      VINF   - speed of projectile at infinity
 C      XA     - A of investigated nucleus
 C      XA1    - A of not-investated nucleus
