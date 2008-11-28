@@ -56,7 +56,7 @@ C      SUBCH1 - partial chisqr
 C      SUBCH2 - partial chisqr
 C      SUMCL  - sum of yields for clusters
 C      TAU    - lifetime in picoseconds
-C      TREP   - theta of recoiling nucleus
+C      TREP   - theta of recoiling nucleus (in radians)
 C      UPL    - upper limits for all gamma detectors
 C      VACDP  - G_k for each level
 C      YEXP   - experimental yield

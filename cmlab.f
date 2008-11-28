@@ -27,7 +27,7 @@ C      TLBDG  - theta of particle detector (in degrees)
 C      VINF   - speed of projectile at infinity
 C      XA     - A of investigated nucleus
 C      XA1    - A of not-investated nucleus
-C      TREP   - theta of recoiling nucleus
+C      TREP   - theta of recoiling nucleus (in radians)
 C
 C Formal parameters:
 C      Ii     - experiment number (or zero for all experiments)
