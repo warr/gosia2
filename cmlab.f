@@ -32,7 +32,7 @@ C
 C Formal parameters:
 C      Ii     - experiment number (or zero for all experiments)
 C      Dsig   - dsigma
-C      Tetrn  - theta of recoiling nucleus
+C      Tetrn  - theta of recoiling nucleus (in radians)
 
       SUBROUTINE CMLAB(Ii,Dsig,Tetrn)
       IMPLICIT NONE
