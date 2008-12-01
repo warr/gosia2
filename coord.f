@@ -90,10 +90,10 @@ C     Calculate size of each division (ws)
                ttcm = xaa - TASIN(rmass*SIN(xaa))
                xaa = ABS(ttcm)/2.
                GOTO 50
-            ENDIF ! End of pin diode option
+            ENDIF
  20         ttcm = xaa + TASIN(rmass*SIN(xaa))
             xaa = (3.14159265-ttcm)/2.
-         ENDIF
+         ENDIF ! End of pin diode option
 
  50      gi = (za-COS(xaa)/zb)/(zl*za1)
          ga = TACOS(gi)
