@@ -8,11 +8,11 @@ C
 C Purpose:
 C
 C Uses global variables:
-C      IAXS   - axial symmetry flag
-C      IEXP   - experiment number
-C      NMAX   - number of levels
-C      TETACM - theta of particle detector in center of mass frame
-C      ZETA   - various coefficients
+C      IAXS   - axial symmetry flag (readonly)
+C      IEXP   - experiment number (readonly)
+C      NMAX   - number of levels (readonly)
+C      TETACM - theta of particle detector in center of mass frame (readonly)
+C      ZETA   - various coefficients (read/write)
 C
 C Formal parameter:
 C      Bten   - 
