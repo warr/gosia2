@@ -86,12 +86,12 @@ C     Calculate size of each division (ws)
             ELSEIF ( XA1(Lz).LE.XA ) THEN
                GOTO 20
             ENDIF
-            IF ( ISKIN(Lz).EQ.0 ) THEN
+            IF ( ISKIN(Lz).EQ.0 ) THEN ! ISKIN = 0 means take lower CM angle
                ttcm = xaa - TASIN(rmass*SIN(xaa))
                xaa = ABS(ttcm)/2.
                GOTO 50
             ENDIF
- 20         ttcm = xaa + TASIN(rmass*SIN(xaa))
+ 20         ttcm = xaa + TASIN(rmass*SIN(xaa)) ! Take higher CM angle
             xaa = (3.14159265-ttcm)/2.
          ENDIF ! End of pin diode option
 
