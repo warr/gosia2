@@ -3,7 +3,7 @@ C----------------------------------------------------------------------
 C SUBROUTINE CMLAB
 C
 C Called by: GOSIA
-C Calls:     RECOIL, TASIN
+C Calls:     TASIN
 C
 C Purpose: calculate for center of mass frame
 C
