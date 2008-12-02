@@ -7,9 +7,9 @@ C
 C Purpose: determine the range for which we will need Qe and Qm values.
 C
 C Uses global variables:
-C      IRA    - range to integrate over omega
-C      MAXLA  - multipolarity to calculate
-C      MULTI  - number of matrix elements having given multipolarity
+C      IRA    - range to integrate over omega (readonly)
+C      MAXLA  - multipolarity to calculate (writeonly)
+C      MULTI  - number of matrix elements having given multipolarity (readonly)
 C
 C Formal parameters:
 C      Icnt   - index of omega to calculate
