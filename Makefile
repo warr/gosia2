@@ -65,6 +65,7 @@ OBJS += gkk.o
 OBJS += gkvac.o
 OBJS += half.o
 OBJS += intg.o
+OBJS += invkin.o
 OBJS += klopot.o
 OBJS += kontur.o
 OBJS += lagran.o
@@ -136,7 +137,8 @@ decay.f angula.f ready.f branr.f limits.f szereg.f sixel.f prelm.f recoil.f \
 rotate.f ylm1.f fiint.f fiint1.f tapma.f simin.f mixup.f fxis1.f fxis2.f \
 podziel.f klopot.f mixr.f coord.f chmem.f pticc.f rndm.f kontur.f rk4.f \
 qfit.f gamatt.f gcf.f tcexp.f tcabs.f tasin.f tacos.f openf.f effix.f \
-adhoc.f elmt.f select.f bricc.f newcnv.f splner.f spline.f splint.f cclkup.f
+adhoc.f elmt.f select.f bricc.f newcnv.f splner.f spline.f splint.f cclkup.f \
+invkin.f
 	
 include: include.c
 	gcc -o $@ $<
