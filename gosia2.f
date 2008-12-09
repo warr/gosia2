@@ -953,9 +953,8 @@ C              Treat OP,INTG
                            enb = XV(kloop)
                            EP(lx) = enb
                            DO ktt = 1 , ntt
-                              tta = YV(ktt)
-                              tta = SIGN(tta, tth)
-                              IF ( IAXS(lx).NE.0 ) THEN
+                              tta = SIGN(YV(ktt),tth)
+                              IF ( IAXS(lx).NE.0 ) THEN ! If not axial symmetry
                                  IF ( iecd(lx).NE.1 ) THEN
                                     IF ( kloop.EQ.1 ) THEN
                                        READ (JZB,*) nfi ! Number of phi ranges
@@ -972,7 +971,7 @@ C              Treat OP,INTG
                                        ENDIF
                                     ENDIF
                                  ENDIF
-                              ENDIF
+                              ENDIF ! If not axial symmetry
                               TLBDG(lx) = tta
                               IF ( kloop.EQ.1 ) THEN
                                  IF ( iecd(lx).NE.0 ) THEN
@@ -1166,7 +1165,7 @@ C                    Read tape 17
                         IF ( iocc.GT.izcap ) GOTO 1800
                         hen = (emx-emn)/npce
                         npce1 = npce + 1
-                        het = (tmx-tmn)/npct
+                        het = (tmx-tmn)/npct ! Step in theta in degrees
                         npct1 = npct + 1
                         IF ( iecd(lx).EQ.1 ) ! Circular detector
      &                       CALL COORD(wth,wph,wthh,npct1,1,pfi,wpi,
@@ -1175,7 +1174,8 @@ C                    Read tape 17
                            IF ( mfla.EQ.1 ) READ (JZB,*)
      &                          (pfi(j),j=1,npct1)
                         ENDIF
-                        het = het/57.2957795
+                        het = het/57.2957795 ! Step in theta in radians
+                        
 C                       Interpolate stopping power for each of the energies
 C                       that we need. esp is an array of energies and dedx is
 C                       an array containing the stopping powers at those
@@ -1209,40 +1209,51 @@ C                       Now we calculate for all the mesh points.
                                     IF ( jd.EQ.1 .AND. ja.EQ.1 )
      &                                 DSG(jtp) = dsxm(lpin,je,jtp)
                                     jyv = (jtp-1)*idr + jd
-                                    YV(jtp) = ZETA(jyv)
+                                    YV(jtp) = ZETA(jyv) ! Point yield
                                  ENDDO ! Loop on theta meshpoints jtp
                                  DO jt = 1 , npct1 ! number of equal divisions in theta for interpolation
                                     xx = (jt-1)*het + tmn/57.2957795
                                     IF ( ISPL.EQ.0 )
      &                                 CALL LAGRAN(XV,YV,ntt,jt,xx,yy,2,
-     &                                 icll) ! interpolate at angle xx
+     &                                 icll) ! interpolate point yield at theta = xx
                                     IF ( ISPL.EQ.1 )
-     &                                 CALL SPLNER(XV,YV,ntt,xx,yy,2) ! interpolate at angle xx
+     &                                 CALL SPLNER(XV,YV,ntt,xx,yy,2) ! interpolate point yield at theta = xx
                                     IF ( ISPL.EQ.0 )
      &                                 CALL LAGRAN(XV,DSG,ntt,jt,xx,zz,
-     &                                 2,icll) ! interpolate gamma yield at xx
+     &                                 2,icll) ! interpolate gamma yield at theta = xx
                                     IF ( ISPL.EQ.1 )
      &                                 CALL SPLNER(XV,DSG,ntt,xx,zz,
-     &                                 2) ! interpolate gamma yield at xx
+     &                                 2) ! interpolate gamma yield at theta = xx
                                     IF ( mfla.EQ.1 ) yy = yy*pfi(jt)
      &                                 /57.2957795
                                     IF ( yy.LE.0. ) yy = 1.E-15
                                     IF ( mfla.EQ.1 ) zz = zz*pfi(jt)
      &                                 /57.2957795
-                                    XI(jt) = yy*SIN(xx)
+                                    XI(jt) = yy*SIN(xx) ! yy = integral of point yields over phi
                                     IF ( jd.EQ.1 .AND. ja.EQ.1 ) HLM(jt)
-     &                                 = zz*SIN(xx)
+     &                                 = zz*SIN(xx) ! zz = integral over phi of Rutherford cross section
                                  ENDDO ! Loop on equal theta divisions jt
                                  icll = 4
                                  locat = ntt*idr + (je-1)*idr + jd
+C                                Integrate point yields over theta using Simpson's rule
                                  ZETA(locat) = SIMIN(npct1,het,XI)
+C                                If it is first decay and angle, integrate Rutherford cross section over theta
                                  IF ( jd.EQ.1 .AND. ja.EQ.1 ) DSE(je)
      &                                = SIMIN(npct1,het,HLM)
                                  ZV(je) = enb
                               ENDDO ! Loop on decays jd
                            ENDDO ! Loop on energy meshpoints je
 
-C                          Now interpolate                            
+C    Interpolation over energy:
+C    The array ZV contains the energies of the meshpoints and the elements of the YV
+C    array are set to the angle-integrated yield for each decay at the corresponding
+C    energy, while DSE contains the Rutherford cross section for those energies. Since
+C    the energies of the meshpoints are not necessarily equally spaced, we need to
+C    interpolate to a set of equally spaced energies separated by "hen" starting from
+C    "emn". To get the contribution from each energy, dE = 1 / (stopping power). Note
+C    that we only evaluate the Rutherford cross section for the first decay and first
+C    angle, since it is the same for all.
+
                            icll = 3
                            DO jd = 1 , idr ! For each decay
                               DO jtp = 1 , ne ! For each energy meshpoint
@@ -1251,13 +1262,16 @@ C                          Now interpolate
                               ENDDO ! Loop on energy meshpoints jtp
                               DO jt = 1 , npce1 ! npce1 is number of equal energy steps
                                  xx = (jt-1)*hen + emn
+
+C                                Interpolate the angle-integrated yield for this energy
                                  IF ( ISPL.EQ.0 )
      &                                CALL LAGRAN(ZV,YV,ne,jt,xx,yy,2,
      &                                icll)
                                  IF ( ISPL.EQ.1 )
      &                                CALL SPLNER(ZV,YV,ne,xx,yy,2)
-C                                Interpolate cross-section at this energy
-                                 IF ( jd.EQ.1 .AND. ja.EQ.1 .AND.
+
+C                                Interpolate Rutherford cross-section for this energy
+                                 IF ( jd.EQ.1 .AND. ja.EQ.1 .AND. ! Only for first decay and angle
      &                                ISPL.EQ.0 )
      &                                CALL LAGRAN(ZV,DSE,ne,jt,xx,zz,2,
      &                                icll) ! Interpolate for this energy
@@ -1267,12 +1281,18 @@ C                                Interpolate cross-section at this energy
                                  IF ( jd.EQ.1 .AND. ja.EQ.1 ) HLM(jt)
      &                             = zz*HLMLM(jt) ! HLMLM = 1 / stopping power
                                  XI(jt) = yy*HLMLM(jt)
-                              ENDDO
+                              ENDDO ! Loop on equal energy steps
+
+C   So now after this loop, we have XI containing the angle-integrated yield times dE for 
+C   a set of equally spaced energies, so we use Simpson's rule to integrate them and store
+C   in GRAD(jd). The first time, we also have in HLM a set of Rutherford cross-sections for
+C   equally spaced energies, which we integrate in the same way.
                               icll = 4
                               IF ( jd.EQ.1 .AND. ja.EQ.1 )
      &                             DS = SIMIN(npce1,hen,HLM) ! integrate
                               GRAD(jd) = SIMIN(npce1,hen,XI)
                            ENDDO ! Loop over decays jd
+
                            IF ( ja.EQ.1 ) dst = dst + DS
                            IF ( ja.EQ.1 ) WRITE (22,99018) DS , lx
 99018                      FORMAT (1X/////5X,
@@ -1299,7 +1319,8 @@ C                                Interpolate cross-section at this energy
      &                               SPIN(nf) , GRAD(jd) , GRAD(jd)
      &                               /GRAD(IDRN) ! IDRN is the normalising transition
                            ENDDO
-                        ENDDO
+                        ENDDO ! Loop over detector angles ja
+
                         IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
                            IF ( jpin(lx).EQ.0 ) THEN
                               CALL COORD(wth,wph,wthh,1,2,pfi,wpi,
@@ -1418,7 +1439,7 @@ C              Treat OP,INTI
      &                           CALL INVKIN(EP(lx),EN(NCM),XA,XA1(lx),
      &                                       YV(ktt), tta, 1, ISKIN(lx))
                               tta = SIGN(tta, tth)
-                              IF ( IAXS(lx).NE.0 ) THEN
+                              IF ( IAXS(lx).NE.0 ) THEN ! If not axial symmetry
                                  IF ( iecd(lx).NE.1 ) THEN
                                     IF ( kloop.EQ.1 ) THEN
                                        READ (JZB,*) nfi ! Number of phi ranges
@@ -1435,7 +1456,7 @@ C              Treat OP,INTI
                                        ENDIF
                                     ENDIF
                                  ENDIF
-                              ENDIF
+                              ENDIF ! If not axial symmetry
                               TLBDG(lx) = tta
                               IF ( kloop.EQ.1 ) THEN
                                  IF ( iecd(lx).NE.0 ) THEN
@@ -1626,7 +1647,7 @@ C                    Read tape 17
                         IF ( iocc.GT.izcap ) GOTO 1800
                         hen = (emx-emn)/npce
                         npce1 = npce + 1
-                        het = (tmx-tmn)/npct
+                        het = (tmx-tmn)/npct ! Step in theta in degrees
                         npct1 = npct + 1
                         IF ( iecd(lx).EQ.1 ) ! Circular detector
      &                       CALL COORD(wth,wph,wthh,npct1,1,pfi,wpi,
@@ -1635,7 +1656,8 @@ C                    Read tape 17
                            IF ( mfla.EQ.1 ) READ (JZB,*)
      &                          (pfi(j),j=1,npct1)
                         ENDIF
-                        het = het/57.2957795
+                        het = het/57.2957795 ! Step in theta in radians
+                        
 C                       Interpolate stopping power for each of the energies
 C                       that we need. esp is an array of energies and dedx is
 C                       an array containing the stopping powers at those
@@ -1669,40 +1691,51 @@ C                       Now we calculate for all the mesh points.
                                     IF ( jd.EQ.1 .AND. ja.EQ.1 )
      &                                 DSG(jtp) = dsxm(lpin,je,jtp)
                                     jyv = (jtp-1)*idr + jd
-                                    YV(jtp) = ZETA(jyv)
+                                    YV(jtp) = ZETA(jyv) ! Point yield
                                  ENDDO ! Loop on theta meshpoints jtp
                                  DO jt = 1 , npct1 ! number of equal divisions in theta for interpolation
                                     xx = (jt-1)*het + tmn/57.2957795
                                     IF ( ISPL.EQ.0 )
      &                                 CALL LAGRAN(XV,YV,ntt,jt,xx,yy,2,
-     &                                 icll) ! interpolate at angle xx
+     &                                 icll) ! interpolate point yield at theta = xx
                                     IF ( ISPL.EQ.1 )
-     &                                 CALL SPLNER(XV,YV,ntt,xx,yy,2) ! interpolate at angle xx
+     &                                 CALL SPLNER(XV,YV,ntt,xx,yy,2) ! interpolate point yield at theta = xx
                                     IF ( ISPL.EQ.0 )
      &                                 CALL LAGRAN(XV,DSG,ntt,jt,xx,zz,
-     &                                 2,icll) ! interpolate gamma yield at xx
+     &                                 2,icll) ! interpolate gamma yield at theta = xx
                                     IF ( ISPL.EQ.1 )
      &                                 CALL SPLNER(XV,DSG,ntt,xx,zz,
-     &                                 2) ! interpolate gamma yield at xx
+     &                                 2) ! interpolate gamma yield at theta = xx
                                     IF ( mfla.EQ.1 ) yy = yy*pfi(jt)
      &                                 /57.2957795
                                     IF ( yy.LE.0. ) yy = 1.E-15
                                     IF ( mfla.EQ.1 ) zz = zz*pfi(jt)
      &                                 /57.2957795
-                                    XI(jt) = yy*SIN(xx)
+                                    XI(jt) = yy*SIN(xx) ! yy = integral of point yields over phi
                                     IF ( jd.EQ.1 .AND. ja.EQ.1 ) HLM(jt)
-     &                                 = zz*SIN(xx)
+     &                                 = zz*SIN(xx) ! zz = integral over phi of Rutherford cross section
                                  ENDDO ! Loop on equal theta divisions jt
                                  icll = 4
                                  locat = ntt*idr + (je-1)*idr + jd
+C                                Integrate point yields over theta using Simpson's rule
                                  ZETA(locat) = SIMIN(npct1,het,XI)
+C                                If it is first decay and angle, integrate Rutherford cross section over theta
                                  IF ( jd.EQ.1 .AND. ja.EQ.1 ) DSE(je)
      &                                = SIMIN(npct1,het,HLM)
                                  ZV(je) = enb
                               ENDDO ! Loop on decays jd
                            ENDDO ! Loop on energy meshpoints je
 
-C                          Now interpolate                            
+C    Interpolation over energy:
+C    The array ZV contains the energies of the meshpoints and the elements of the YV
+C    array are set to the angle-integrated yield for each decay at the corresponding
+C    energy, while DSE contains the Rutherford cross section for those energies. Since
+C    the energies of the meshpoints are not necessarily equally spaced, we need to
+C    interpolate to a set of equally spaced energies separated by "hen" starting from
+C    "emn". To get the contribution from each energy, dE = 1 / (stopping power). Note
+C    that we only evaluate the Rutherford cross section for the first decay and first
+C    angle, since it is the same for all.
+
                            icll = 3
                            DO jd = 1 , idr ! For each decay
                               DO jtp = 1 , ne ! For each energy meshpoint
@@ -1711,13 +1744,16 @@ C                          Now interpolate
                               ENDDO ! Loop on energy meshpoints jtp
                               DO jt = 1 , npce1 ! npce1 is number of equal energy steps
                                  xx = (jt-1)*hen + emn
+
+C                                Interpolate the angle-integrated yield for this energy
                                  IF ( ISPL.EQ.0 )
      &                                CALL LAGRAN(ZV,YV,ne,jt,xx,yy,2,
      &                                icll)
                                  IF ( ISPL.EQ.1 )
      &                                CALL SPLNER(ZV,YV,ne,xx,yy,2)
-C                                Interpolate cross-section at this energy
-                                 IF ( jd.EQ.1 .AND. ja.EQ.1 .AND.
+
+C                                Interpolate Rutherford cross-section for this energy
+                                 IF ( jd.EQ.1 .AND. ja.EQ.1 .AND. ! Only for first decay and angle
      &                                ISPL.EQ.0 )
      &                                CALL LAGRAN(ZV,DSE,ne,jt,xx,zz,2,
      &                                icll) ! Interpolate for this energy
@@ -1727,12 +1763,18 @@ C                                Interpolate cross-section at this energy
                                  IF ( jd.EQ.1 .AND. ja.EQ.1 ) HLM(jt)
      &                             = zz*HLMLM(jt) ! HLMLM = 1 / stopping power
                                  XI(jt) = yy*HLMLM(jt)
-                              ENDDO
+                              ENDDO ! Loop on equal energy steps
+
+C   So now after this loop, we have XI containing the angle-integrated yield times dE for 
+C   a set of equally spaced energies, so we use Simpson's rule to integrate them and store
+C   in GRAD(jd). The first time, we also have in HLM a set of Rutherford cross-sections for
+C   equally spaced energies, which we integrate in the same way.
                               icll = 4
                               IF ( jd.EQ.1 .AND. ja.EQ.1 )
      &                             DS = SIMIN(npce1,hen,HLM) ! integrate
                               GRAD(jd) = SIMIN(npce1,hen,XI)
                            ENDDO ! Loop over decays jd
+
                            IF ( ja.EQ.1 ) dst = dst + DS
                            IF ( ja.EQ.1 ) WRITE (22,99018) DS , lx
 
@@ -1748,7 +1790,8 @@ C                                Interpolate cross-section at this energy
      &                               SPIN(nf) , GRAD(jd) , GRAD(jd)
      &                               /GRAD(IDRN) ! IDRN is the normalising transition
                            ENDDO
-                        ENDDO
+                        ENDDO ! Loop over detector angles ja
+
                         IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
                            IF ( jpin(lx).EQ.0 ) THEN
                               CALL COORD(wth,wph,wthh,1,2,pfi,wpi,
