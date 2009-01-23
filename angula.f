@@ -148,7 +148,7 @@ C      Op2    - The part after the OP, for the option we are processing
          ENDIF
       ENDDO ! Loop over decays
 
-      IF ( Op2.EQ.'INTG' ) RETURN
+      IF ( Op2.EQ.'INTG' .OR. Op2.EQ.'INTI' ) RETURN
 
 C     Added for gosia2
       dsig = DSIGS(IEXP)
