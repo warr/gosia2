@@ -16,20 +16,31 @@ C
 C Formal parameters:
 C      E_p     - Beam energy in MeV (readonly)
 C      E_x     - energy of excited state to use for kinematic in MeV (readonly)
-C      M_p     - mass of projectile nuclei in AMU (readonly)
-C      M_t     - mass of target nuclei in AMU (readonly)
+C      I_Z     - Projectile/target flag. -ve if projectile excitation
+C      M_inv   - mass of investigated nuclei in AMU (readonly)
+C      M_non   - mass of non-investigated nuclei in AMU (readonly)
 C      Theta_t - theta of recoiling target nucleus in lab frame (readonly)
 C      Theta_p - theta of scattered projectile in lab frame (writeonly)
 C      Iflag   - flag to select one of two possible solutions (readonly)
 C      Ikin    - kinematic flag (writeonly)
       
-      SUBROUTINE INVKIN(E_p, E_x , M_p, M_t , Theta_t , Theta_p ,
-     &                  Iflag , Ikin)
+      SUBROUTINE INVKIN(E_p, E_x , I_z , M_inv , M_non , Theta_t ,
+     &                  Theta_p , Iflag , Ikin)
 
-      REAL*8 E_p , M_p , M_t , Theta_t , Theta_p , E_x
+      REAL*8 E_p , M_inv , M_non , Theta_t , Theta_p , E_x , M_p , M_t
       REAL*8 ared , epmin , t , x(2), y , thres
-      INTEGER*4 Iflag , Ikin
+      INTEGER*4 Iflag , Ikin , I_z
+
+C     Sort out which is the projectile and which is the target
       
+      IF ( I_z.LT.0 ) THEN
+         M_p = M_inv ! Projectile is investigated
+         M_t = M_non ! Target is non investigated
+      ELSE
+         M_p = M_non ! Projectile is non investigated
+         M_t = M_inv ! Target is investigated
+      ENDIF
+
 C     Reduced mass
       
       ared = 1 + M_p / M_t
