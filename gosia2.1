@@ -1,0 +1,141 @@
+.TH gosia2 1 "2006 SEPTEMBER 27"
+.SH NAME
+gosia2 \- Calculates cross-sections for Coulex
+.SH SYNOPSIS
+
+Calculates cross-sections for Coulomb excitation experiments. While the
+normal version of gosia only calculates for the target,
+.B gosia2
+calculates target and beam simultaneously and is, therefore, particularly
+useful for radioactive beam experiments, where the matrix elements of the
+beam nuclei are determined by comparing yields for gamma rays from the
+projectile-like and target-like nuclei, where the target is known.
+
+.SH USAGE
+
+.BR gosia < input_file
+
+.SH FILES
+
+Needs an input file in a special format.
+
+The first line of the file must have the "integer beam/particle switch",
+which should be 1 if the file is for the target and 2 if the file
+corresponds to the beam.
+
+The rest of the file is divided into major options, each of which has its
+own format. The options all start with "OP," and have four characters. i.e.
+those like "OP,MAP " and "OP,RAW " which appear to only have three
+characters after the "OP,"
+.B must
+have a space after them. The options are:
+
+.B OP,CORR
+- Correct experimental data for the difference between integrated yield
+calculations and the point values used for the calculation of Coulomb
+excitaiton cross sections and gamma-ray yields.
+
+.B OP,COUL
+- Performs the calculations of Coulomb excitation probabilities and
+gamma-ray yields for a fixed set of matrix elements. No fitting of matrix
+elements to experimental data is performed. May not be used together with
+OP,GOSI. It has the suboptions LEVEL, ME, EXPT, CONT. Note that the syntax
+for the ME suboption is different to that for OP,GOSI.
+
+.B OP,ERRO
+- Activate the estimation of errors
+
+.B OP,EXIT
+- Ends the input from this file and generates the final output. Anything
+after this is not read.
+
+.B OP,FILE
+- Assigns filenames to units and indicates how the files should be opened.
+
+.B OP,GDET
+- Creates the files which contain the data needed to calculate the solid
+angle attenuation factors.
+
+.B OP,GOSI
+- Perform a least sequares fit of the matrix elements to experimental data.
+May not be used together with OP,COUL. It has the suboptions LEVEL, ME,
+EXPT, CONT. Note that the syntax for the ME suboption is different to that
+for OP,COUL.
+
+.B OP,INTG
+- Execution option used to integrate the deexcitation gamma-ray yields,
+resulting from Coulomb excitation, over energy loss of the incident beam in
+the target and over the solid angles of the particle detectors.
+
+.B OP,MAP
+- Calculates q-parameter maps.
+
+.B OP,MINI
+- Executes the least-squares fit of the matrix elements to the experimental
+data. The next line has the variables imode, nptl, chiok, conu, xtest,
+lockf, nlock, ifbfl, locks and dlock.
+
+.B OP,POIN
+- Execution option to calculate the Coulomb excitation and dexcitation
+gamma-ray yields at fixed scattering angle and bombarding energy.
+
+.B OP,RAND
+- randomise the matrix elements. The following line is a real number which
+acts as the seed for the randomisation.
+
+.B OP,RAW
+- Used to input data necessary if efficieny-uncorrected (raw) gamma yields
+and/or yields resulting from summing over several gamma spectra are to be
+used as experimental data.
+
+.B OP,RE,A
+- Releases all matrix elements previously fixed and voids all coupling of
+matrix elements for the current minimization run.
+
+.B OP,RE,C
+- Releases all previously fixed matrix elements but preserves the couplings.
+
+.B OP,RE,F
+- Voids coupling of matrix elements, while retaining the fixed ones.
+
+.B OP,REST
+- Restart option. The matrix elements are read from the appropriate file.
+The following lines have a list of the parameters lkj1 and xlk, which is
+terminated by a value of lkj1 of zero.
+
+.B OP,SIXJ
+- Creates a table of Wigner 6-j symbols used by the sum rules code SIGMA.
+
+.B OP,STAR
+- Execution option to calculate only the Coulomb excitation amplitudes and
+cross sections, not the gamma-ray yields.
+
+.B OP,THEO
+- Generates matrix elements according to the geometrical model following
+Bohr and Mottelson prescription.
+
+.B OP,TITL
+- Reads in the user's title for the experiment. Note that it can be repeated.
+
+.B OP,TROU
+- Performs an analysis at the local minimum to pinpoint erroneous
+experimental data. This option must be inserted immediately before OP,EXIT.
+The next line has the parameters kmat and rlr.
+
+.B OP,YIEL
+- Used for input of data required if it is necessary to calculate the
+gamma-ray deexcitation of the Coulomb excited nucleus. OP,YIEL is mandatory
+if OP,GOSI is selected.
+
+.SH HISTORY
+
+This version is based on the June 2006 one downloaded from 
+.BR http://www.pas.rochester.edu/~cline/Research/GOSIAcodes/gosia2.f
+
+It was written by:
+.B T. Czosnyka, D. Cline AND C.Y. Wu
+
+It has been completely restructured using spag and all the REAL have been
+converted to REAL*8, all the COMPLEX to COMPLEX*16 and all the intrinsic
+functions which were 32 bit, converted to the generic versions. Furthermore,
+a few constants were converted to double precision.
