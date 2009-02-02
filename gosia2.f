@@ -238,6 +238,7 @@ C      ZV     - energy meshpoints
      &          nogeli , npce , npce1 , npct , npct1 , 
      &          npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , nz
+      INTEGER*4 iskin_protect
       CHARACTER*4 oph , op1 , opcja , op2
       CHARACTER*1 prp
       REAL*8 chir , chp , ccch1 ,ccch2 , cht ! For gosia2
@@ -249,7 +250,7 @@ C      ZV     - energy meshpoints
      &          tau2(10,7) , xl1(7) , qui(8,10) , cf(8,2) , 
      &          ivarh(1500) , liscl(200) , dsxm(100,100,100) , 
      &          levl(50) , xlevb(50,2) , bm(8,20,20,3) , mlt(1500) , 
-     &          ivari(1500) , jpin(50) , ideff(50)
+     &          ivari(1500) , jpin(50) , ideff(50) , iskin_protect(50)
       INCLUDE 'clust.inc'
       INCLUDE 'cccds.inc'
       INCLUDE 'inhi.inc'
@@ -1391,6 +1392,9 @@ C   equally spaced energies, which we integrate in the same way.
 
 C              Treat OP,INTI
                ELSEIF ( op2.EQ.'INTI' ) THEN
+                  DO lx = 1 , NEXPT ! For each experiment store original ISKIN
+                     iskin_protect(lx) = ISKIN(lx)
+                  ENDDO
                   REWIND 14
                   lfagg = 1
                   IF ( SPIN(1).LT..25 ) ISO = 0
@@ -1852,6 +1856,9 @@ C   equally spaced energies, which we integrate in the same way.
                         ENDDO ! Loop on angle or dataset ija0
                      ENDDO ! Loop on experiments lx
                   ENDIF
+                  DO lx = 1 , NEXPT ! For each experiment restore original ISKIN
+                     ISKIN(lx) = iskin_protect(lx)
+                  ENDDO
                   GOTO 100 ! End of OP,INTI - back to input loop
 
 C              Treat OP,CORR
