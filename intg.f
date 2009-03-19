@@ -9,23 +9,24 @@ C Purpose: the main integration routine.
 C
 C Uses global variables:
 C      ACC50  - accuracy required for integration
-C      ARM    - reduced matrix elements
-C      CAT    -
+C      ARM    - excitation amplitudes of substates.
+C      CAT    - substates of levels (n_level, J, m)
 C      D2W    - step in omega (= 0.03)
+C      IFAC   - spin/parity phase factor
 C      IFLG   - flag to determine whether to calculate exponential (so we don't calculate twice)
 C      INTERV - default accuracy check parameter (see OP,CONT:INT)
-C      IPATH  -
+C      IPATH  - index of substate in level with same m as substate Irld
 C      IRA    - limit of omega for integration for each multipolarity
-C      ISG    -
-C      ISMAX  -
-C      ISO    -
-C      KDIV   -
-C      LAMR   -
-C      MAXLA  -
-C      NDIV   -
+C      ISG    - index for sigma
+C      ISMAX  - number of substates used
+C      ISO    - Isotropic flag
+C      KDIV   - index for division
+C      LAMR   - flag = 1 if we should calculate this multipolarity
+C      MAXLA  - multipolarity to calculate
+C      NDIV   - number of divisions
 C      NMAX   - number of levels
-C      NPT    -
-C      NSTART -
+C      NPT    - index in ADB array (this is omega / 0.03)
+C      NSTART - index in CAT of first substate associated with a level
 C      NSW    -
 C
 C Formal parameters:
@@ -68,28 +69,22 @@ C value of f(n).
  
       SUBROUTINE INTG(Ien)
       IMPLICIT NONE
-      REAL*8 ACC50 , ACCA , ACCUR , CAT , D2W , DIPOL , EN , f , rim , 
-     &       rl , SPIN , srt , ZPOL
-      INTEGER*4 i , i57 , Ien , IFAC , IFLG , ihold , intend , INTERV , 
-     &          IPATH , ir , ir1 , IRA , ISG , ISG1 , ISMAX , ISO , k , 
-     &          kast , KDIV , LAMR
-      INTEGER*4 MAGA , MAXLA , mir , n , NDIM , NDIV , NMAX , NMAX1 , 
-     &          NPT , NSTART , NSTOP , NSW
-      COMPLEX*16 ARM , hold
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
-     &                ISO
-      COMMON /AZ    / ARM(600,7)
-      COMMON /RNG   / IRA(8) , MAXLA
-      COMMON /A50   / ACC50
-      COMMON /CLCOM0/ IFAC(75)
-      COMMON /CLCOM8/ CAT(600,3) , ISMAX
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
-     &                ISG1
-      COMMON /FLA   / IFLG
-      COMMON /CEXC0 / NSTART(76) , NSTOP(75)
-      COMMON /PTH   / IPATH(75) , MAGA(75)
-      COMMON /CEXC9 / INTERV(50)
+      REAL*8 f , rim , rl , srt
+      INTEGER*4 i , i57 , Ien , ihold , intend , ir , ir1 , k , kast , 
+     &          mir , n
+      COMPLEX*16 hold
+      INCLUDE 'coex.inc'
+      INCLUDE 'az.inc'
+      INCLUDE 'rng.inc'
+      INCLUDE 'a50.inc'
+      INCLUDE 'clcom0.inc'
+      INCLUDE 'clcom8.inc'
+      INCLUDE 'coex2.inc'
+      INCLUDE 'caux.inc'
+      INCLUDE 'fla.inc'
+      INCLUDE 'cexc0.inc'
+      INCLUDE 'pth.inc'
+      INCLUDE 'cexc9.inc'
       
       intend = INTERV(Ien) ! Default accuracy set by INT option of OP,CONT
       D2W = .03 ! We use steps of 0.03 in omega
@@ -104,13 +99,13 @@ C value of f(n).
       ENDDO
 C     Predictor 
       IF ( ISO.EQ.0 ) THEN
-         DO n = 1 , NMAX
-            ir = NSTART(n) - 1
+         DO n = 1 , NMAX ! For each level
+            ir = NSTART(n) - 1 ! First substate - 1
  120        ir = ir + 1
             ARM(ir,7) = ARM(ir,5)
      &                  + D2W/24.*(55.0*ARM(ir,4)-59.0*ARM(ir,3)
      &                  +37.0*ARM(ir,2)-9.0*ARM(ir,1))
-            mir = CAT(ir,3)
+            mir = CAT(ir,3) ! m quantum number of substate ir
             ir1 = ir - 2*mir
             ARM(ir1,7) = IFAC(n)*ARM(ir,7)
             IF ( DBLE(mir).LT.-0.1 ) GOTO 120
@@ -135,26 +130,26 @@ C     Predictor
       ISG = 1
  200  CALL RESET(ISO)
       IFLG = 1
-      i57 = 7
+      i57 = 7 ! Tell LAISUM to use ARM(I,7) for excitation amplitudes
 
 C     Calculate derivatives of amplitudes
       CALL AMPDER(i57)
       
 C     Corrector
       IF ( ISO.EQ.0 ) THEN
-         DO n = 1 , NMAX
-            ir = NSTART(n) - 1
+         DO n = 1 , NMAX ! For each level
+            ir = NSTART(n) - 1 ! First substate - 1
  220        ir = ir + 1
             ARM(ir,5) = ARM(ir,5)
      &                  + D2W/24.*(9.0*ARM(ir,4)+19.0*ARM(ir,3)
      &                  -5.0*ARM(ir,2)+ARM(ir,1))
-            mir = CAT(ir,3)
+            mir = CAT(ir,3) ! m quantum number of substate ir
             ir1 = ir - 2*mir
             ARM(ir1,5) = IFAC(n)*ARM(ir,5)
             IF ( DBLE(mir).LT.-0.1 ) GOTO 220
          ENDDO
       ELSE
-         DO ir = 1 , ISMAX
+         DO ir = 1 , ISMAX ! For each substate
             ARM(ir,5) = ARM(ir,5)
      &                  + D2W/24.*(9.0*ARM(ir,4)+19.0*ARM(ir,3)
      &                  -5.0*ARM(ir,2)+ARM(ir,1))
@@ -162,7 +157,7 @@ C     Corrector
       ENDIF
       kast = kast + 1
       IFLG = 0
-      i57 = 5
+      i57 = 5 ! Tell LAISUM to use ARM(I,5) for excitation amplitudes
 
 C     Calculate derivatives of amplitudes
       CALL AMPDER(i57)
@@ -170,12 +165,12 @@ C     Calculate derivatives of amplitudes
          IF ( kast.GE.intend ) THEN
             kast = 0
             f = 0.
-            DO k = 1 , NMAX
+            DO k = 1 , NMAX ! For each level
                ihold = IPATH(k)
                IF ( ihold.NE.0 ) THEN
                   hold = ARM(ihold,5) - ARM(ihold,7)
                   rl = DBLE(hold)
-                  rim = IMAG(hold)
+                  rim = DIMAG(hold)
                   srt = rl*rl + rim*rim
                   f = MAX(f,srt)
                ENDIF

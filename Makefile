@@ -1,28 +1,28 @@
 BINDIR=$(ROOT)/usr/bin
 MANDIR=$(ROOT)/usr/share/man/man1
 
-UID=0
-GID=0
-
 EXE=gosia2
-MAN=gosia2.1
+MAN=$(EXE).1
+SRCS=$(EXE).f
 
-FC=g77
+FC=gfortran
 
 # Turn on debugging - note that -Wall and -O2 together gives warnings
 # about variables being possibly used without being initialised. These
 # cases seem to be harmless. i.e. if (condition) then a=1 else a=2 endif
 # and then using a gives this warning, but in fact a is always set to
 # something
-#FFLAGS = -g -Wall
+FFLAGS = -g -Wall
+FFLAGS += -fbounds-check
 
 # Turn on optimisation
-FFLAGS += -O -funroll-loops
+FFLAGS += -O2 -funroll-loops
 
 DEPS=Makefile
 
 ALL: $(EXE)
 
+OBJS += $(EXE).o
 OBJS += adhoc.o
 OBJS += alloc.o
 OBJS += ampder.o
@@ -32,6 +32,8 @@ OBJS += arccos.o
 OBJS += arctg.o
 OBJS += ats.o
 OBJS += branr.o
+OBJS += bricc.o
+OBJS += cclkup.o
 OBJS += cegry.o
 OBJS += chmem.o
 OBJS += cmlab.o
@@ -61,9 +63,9 @@ OBJS += gcf.o
 OBJS += gf.o
 OBJS += gkk.o
 OBJS += gkvac.o
-OBJS += gosia2.o
 OBJS += half.o
 OBJS += intg.o
+OBJS += invkin.o
 OBJS += klopot.o
 OBJS += kontur.o
 OBJS += lagran.o
@@ -78,6 +80,7 @@ OBJS += mini.o
 OBJS += mixr.o
 OBJS += mixup.o
 OBJS += newcat.o
+OBJS += newcnv.o
 OBJS += newlv.o
 OBJS += openf.o
 OBJS += path.o
@@ -98,11 +101,15 @@ OBJS += reset.o
 OBJS += rk4.o
 OBJS += rndm.o
 OBJS += rotate.o
+OBJS += select.o
 OBJS += seq.o
 OBJS += setin.o
 OBJS += simin.o
 OBJS += sixel.o
 OBJS += snake.o
+OBJS += spline.o
+OBJS += splint.o
+OBJS += splner.o
 OBJS += stamp.o
 OBJS += sting.o
 OBJS += szereg.o
@@ -120,35 +127,38 @@ OBJS += xstatic.o
 OBJS += ylm.o
 OBJS += ylm1.o
 
-SINGLE_FILE = gosia2_single_file.f
+SRCS += arccos.f arctg.f load.f lsloop.f leadf.f mem.f cmlab.f qe.f qm.f \
+snake.f fhip.f alloc.f rangel.f qrange.f ampder.f laisum.f expon.f faza.f \
+setin.f sting.f laiamp.f faza1.f trint.f pol4.f stamp.f reset.f half.f \
+double.f path.f intg.f newlv.f code7.f apram.f newcat.f pomnoz.f tenb.f \
+tens.f djmm.f ftbm.f mini.f cegry.f fakp.f prim.f seq.f gf.f f.f conv.f \
+wthrej.f wsixj.f lagran.f func.f func1.f gkvac.f gkk.f xstatic.f ats.f ylm.f \
+decay.f angula.f ready.f branr.f limits.f szereg.f sixel.f prelm.f recoil.f \
+rotate.f ylm1.f fiint.f fiint1.f tapma.f simin.f mixup.f fxis1.f fxis2.f \
+podziel.f klopot.f mixr.f coord.f chmem.f pticc.f rndm.f kontur.f rk4.f \
+qfit.f gamatt.f gcf.f tcexp.f tcabs.f tasin.f tacos.f openf.f effix.f \
+adhoc.f elmt.f select.f bricc.f newcnv.f splner.f spline.f splint.f cclkup.f \
+invkin.f
+	
+include: include.c
+	gcc -o $@ $<
 
-gosia2: $(OBJS) $(DEPS)
-	$(FC) $(LDFLAGS) -o gosia2 $(OBJS)
+DATE=$(shell date +%04Y%02m%02d)
+SINGLE_FILE = $(EXE)_$(DATE).f
+
+$(EXE): $(OBJS) $(DEPS)
+	$(FC) $(LDFLAGS) -o $@ $(OBJS)
 
 clean:
-	rm -f *~ *.o $(EXE) $(SINGLE_FILE)
+	rm -f *~ *.o $(EXE) $(SINGLE_FILE) include
 
 install: $(EXE) $(MAN)
-	install -m 755 -o $(UID) -g $(GID) -d $(BINDIR)
-	install -m 755 -o $(UID) -g $(GID) -s $(EXE) $(BINDIR)
-	install -m 755 -o $(UID) -g $(GID) -d $(MANDIR)
-	install -m 644 -o $(UID) -g $(GID) $(MAN) $(MANDIR)
+	install -m 755 -d $(BINDIR)
+	install -m 755 -s $(EXE) $(BINDIR)
+	install -m 755 -d $(MANDIR)
+	install -m 644 $(MAN) $(MANDIR)
 	gzip -f $(MANDIR)/$(MAN)
 
-single_file:
-	cat gosia2.f arccos.f arctg.f load.f lsloop.f leadf.f \
-	mem.f cmlab.f qe.f qm.f snake.f fhip.f alloc.f \
-	rangel.f qrange.f ampder.f laisum.f expon.f faza.f \
-	setin.f sting.f laiamp.f faza1.f trint.f pol4.f \
-	stamp.f reset.f half.f double.f path.f intg.f newlv.f \
-	code7.f apram.f newcat.f pomnoz.f tenb.f tens.f djmm.f \
-	ftbm.f mini.f cegry.f fakp.f prim.f seq.f gf.f f.f \
-	conv.f wthrej.f wsixj.f lagran.f func.f func1.f \
-	gkvac.f gkk.f xstatic.f ats.f ylm.f decay.f angula.f \
-	ready.f branr.f limits.f szereg.f sixel.f prelm.f \
-	recoil.f rotate.f ylm1.f fiint.f fiint1.f tapma.f \
-	simin.f mixup.f fxis1.f fxis2.f podziel.f klopot.f \
-	mixr.f coord.f chmem.f pticc.f rndm.f kontur.f rk4.f \
-	qfit.f gamatt.f gcf.f tcexp.f tcabs.f tasin.f tacos.f \
-	openf.f effix.f adhoc.f elmt.f > $(SINGLE_FILE)
+single_file: include
+	./include $(SRCS) > $(SINGLE_FILE)
 

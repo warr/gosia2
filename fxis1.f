@@ -19,8 +19,7 @@ C      sign of xi
       REAL*8 FUNCTION FXIS1(I,N)
       IMPLICIT NONE
       INTEGER*4 I , N
-      REAL*8 XI
-      COMMON /CXI   / XI(500)
+      INCLUDE 'cxi.inc'
 
       IF ( N.EQ.2 .OR. N.EQ.3 .OR. N.EQ.5 .OR. N.EQ.6 ) THEN
          FXIS1 = 1.

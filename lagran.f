@@ -5,7 +5,7 @@ C
 C Called by: CONV, EFFIX, GOSIA
 C Calls:     FUNC, FUNC1
 C
-C Purpose: perform an interpolation
+C Purpose: perform a Lagrangian interpolation
 C
 C Formal parameters:
 C      X      - x-coordinate of input data
@@ -26,7 +26,8 @@ C Iscal = 3   FUNC(y) = sqrt(y)  FUNC1(y) = y^2
       IMPLICIT NONE
       REAL*8 arh , FUNC , FUNC1 , t , w , X , Xx , Y , y1 , Yy
       INTEGER*4 i , Ipc , Irc , Iscal , j , Ndata
-      DIMENSION X(51) , Y(51) , w(51) , arh(51,51)
+      DIMENSION X(*) , Y(*) , w(101) , arh(101,101)
+      SAVE arh
       
       IF ( Irc.EQ.2 ) THEN
       ELSEIF ( Irc.EQ.3 ) THEN

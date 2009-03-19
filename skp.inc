@@ -1,0 +1,2 @@
+      INTEGER*4 JSKIP
+      COMMON /SKP   / JSKIP(50)

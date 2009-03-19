@@ -12,6 +12,7 @@ C      H      - step between points
 C      Y      - array of points
 C
 C Return value:
+C      Integral under the array
 C
  
       REAL*8 FUNCTION SIMIN(Np,H,Y)

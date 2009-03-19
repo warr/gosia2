@@ -1,0 +1,2 @@
+      INTEGER*4 NWR
+      COMMON /ILEWY / NWR

@@ -8,14 +8,14 @@ C
 C Purpose: calculate time-dependent deorientation coefficients
 C
 C Uses global variables:
-C      AKS    -
+C      AKS    - <\alpha_k> values
 C      AVJI   - average J  (this is G(1) in GOSIA)
 C      DQ     - width of gaussian distribution
 C      FILE   - K          (this is G(6) in GOSIA)
 C      GAMMA  - Gamma      (this is G(2) in GOSIA)
 C      GFAC   - g          (this is G(5) in GOSIA)
-C      GKI    - G_k
-C      IBYP   -
+C      GKI    - G_k for a single level
+C      IBYP   - flag to indicate whether we calculate <\alpha_k>
 C      POWER  - x          (this is G(7) in GOSIA)
 C      QCEN   - center of gaussian distribution
 C      SUM    - sum over 6-j symbol squared
@@ -57,18 +57,15 @@ C element.
 
       SUBROUTINE GKK(Iz,Beta,Spin,Time,Il)
       IMPLICIT NONE
-      REAL*8 AKS , alp , ATS , AVJI , Beta , ccf , down , DQ , dwc , f , 
-     &       FIEL , GAMMA , GFAC , GKI , hmean , POWER , QCEN , rk , 
-     &       sm , Spin
-      REAL*8 SUM , Time , TIMEC , up , upc , VACDP , valmi , w2 , wrt , 
-     &       WSIXJ , wsp , xji , xlam , XLAMB , XNOR
-      INTEGER*4 i , IBYP , if2 , ifq , Il , imean , inq , irk2 , 
-     &          ispin2 , ixji2 , Iz , j , k , k1 , k2 , l , m , ncoup , 
-     &          nz
-      COMMON /GVAC  / GKI(3) , SUM(3)
-      COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
-      COMMON /GGG   / AVJI , GAMMA , XLAMB , TIMEC , GFAC , FIEL , POWER
-      
+      REAL*8 alp , ATS , Beta , ccf , down , dwc , f , hmean , rk , sm , 
+     &       Spin , Time , up , upc , valmi , w2 , wrt , WSIXJ , wsp , 
+     &       xji , xlam
+      INTEGER*4 i , if2 , ifq , Il , imean , inq , irk2 , ispin2 , 
+     &          ixji2 , Iz , j , k , k1 , k2 , l , m , ncoup , nz
+      INCLUDE 'gvac.inc'
+      INCLUDE 'vac.inc'
+      INCLUDE 'ggg.inc'
+
       IF ( IBYP.NE.1 ) THEN
          imean = 0
          CALL XSTATIC(Iz,inq,ifq,Beta) ! inq and ifq are range of integral
@@ -82,7 +79,7 @@ C element.
          DO j = inq , ifq
             l = l + 1
             nz = Iz - j
-            xji = ATS(nz) ! Ground-state spin of nucleus
+            xji = ATS(nz) ! Ground-state spin of atom
             sm = Spin
             IF ( imean.EQ.1 ) xji = AVJI
             IF ( Spin.GT.xji ) sm = xji
@@ -117,10 +114,12 @@ C element.
                k1 = 2*k
                AKS(k1,Il) = AKS(k1,Il) + SUM(k)
             ENDDO
- 100     ENDDO ! Loop on j
+ 100        CONTINUE
+         ENDDO ! Loop on j
          imean = imean + 1
          IF ( imean.EQ.1 ) GOTO 50
       ENDIF
+
       hmean = FIEL*Iz*(Beta**POWER) ! Mean magnetic field in fluctuating state
       wsp = 4789.*GFAC*hmean/AVJI ! 4789 is the nuclear magneton
       wsp = wsp*TIMEC
@@ -138,10 +137,10 @@ C element.
          GKI(k) = up/down
          alp = 9.*xlam*xlam + 8.*xlam*TIMEC*(w2-xlam*xlam)
          alp = SQRT(alp) - 3.*xlam
-         alp = alp/4./xlam/TIMEC                             ! alp is p
+         alp = alp/4./xlam/TIMEC                      ! alp is p
          upc = xlam*Time*(down-2.*alp*alp*Time*TIMEC) ! numerator
          dwc = (down+alp*Time)*(down+2.*alp*Time)     ! denominator
-         ccf = 1. + upc/dwc                     ! ccf is correction factor
+         ccf = 1. + upc/dwc                           ! ccf is correction factor
          GKI(k) = GKI(k)*ccf
       ENDDO
       END

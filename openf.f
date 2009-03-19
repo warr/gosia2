@@ -18,9 +18,9 @@ C zero, the function returns. It keeps looping until a unit zero is reached.
  
       SUBROUTINE OPENF
       IMPLICIT NONE
-      INTEGER*4 i , IBPS , IUNIT3 , j , JZB , k
+      INTEGER*4 i , j , k
       CHARACTER name*60 , opt1*20 , opt2*20
-      COMMON /SWITCH/ JZB , IBPS , IUNIT3
+      INCLUDE 'switch.inc'
 
  100  READ (JZB,*) i , j , k ! unit, old/new/unknown, formatted/unformatted
       IF ( i.EQ.0 ) RETURN
@@ -33,14 +33,14 @@ C zero, the function returns. It keeps looping until a unit zero is reached.
 99001 FORMAT (A)
 
 C     If it is for unit 25 or 26 and we are not reading from unit 5, ignore it
-      IF ( JZB.NE.5 .AND. (i.EQ.25 .OR. i.EQ.26) ) GOTO 100
+      IF ( JZB.NE.5 .AND. (i.EQ.25 .OR. i.EQ.26) ) GOTO 100 ! For gosia2
 
 C     Now open the file
       OPEN (i,IOSTAT=k,FILE=name,STATUS=opt1,FORM=opt2)
-c      IF ( k.EQ.0 ) WRITE (6,99002) 'OPENED ' , name
-c99002 FORMAT (1X,2A)
-c      WRITE (6,99003) ' IO-num = ' , i , opt1 , opt2
-c99003 FORMAT (1X,A,I4,2(1x,A))
+      IF ( k.EQ.0 ) WRITE (6,99002) 'OPENED ' , name
+99002 FORMAT (1X,2A)
+      WRITE (6,99003) ' IO-num = ' , i , opt1 , opt2
+99003 FORMAT (1X,A,I4,2(1x,A))
       IF ( k.EQ.0 ) GOTO 100
       WRITE (6,99004) 'PROBLEMS OPENING ' , name , k
 99004 FORMAT (A,A,I6)

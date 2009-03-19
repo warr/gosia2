@@ -1,0 +1,2 @@
+      REAL*8 DELLA
+      COMMON /LCDL  / DELLA(1500,3)

@@ -10,28 +10,29 @@ C          ZETA array starting at the beginning of this array (note that
 C          this array has other things in it as well as zeta).
 C
 C Uses global variables:
-C      CAT    -
+C      CAT    - substates of levels (n_level, J, m)
 C      ELM    - matrix elements
-C      IAPR   -
-C      ISO    -
+C      IAPR   - index of initial and final levels for each matrix element
+C      IFAC   - spin/parity phase factor
+C      ISO    - isotropic flag
 C      LP7    - maximum number of zeta coefficients (45100)
 C      MAGA   - number of magnetic substates in approximate calculation
-C      NSTART -
-C      NSTOP  -
+C      NSTART - index in CAT of first substate associated with a level
+C      NSTOP  - index in CAT of last substate associated with a level
 C      PSI    - psi coefficients
-C      QAPR   -
+C      QAPR   - approximate Coulomb amplitudes
 C      SPIN   - spin of level
 C      ZETA   -
 C
 C Formal parameters:
-C      Ir     -
-C      N      -
-C      Nz     -
+C      Ir     - index of first substate of level
+C      N      - index of level
+C      Nz     - index into ZETA array for this multipolarity
 C      Ld     - number of matrix elements with this multipolarity
 C      Lam    - lambda
 C      La     - 1...6 for E1...6 or 7,8 for M1,2
 C      Ssqrt  - sqrt(2 * lambda + 1)
-C      Icg    -
+C      Icg    - (read only)
 C      Iexp   - experiment number
 C
 C \zeta_{kn}^{(\lambda n)} = \sqrt{2 \lambda + 1} *
@@ -46,42 +47,34 @@ C half-integers.
  
       SUBROUTINE LSLOOP(Ir,N,Nz,Ld,Lam,La,Ssqrt,Icg,Iexp)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , CAT , DIPOL , ELM , ELML , ELMU , EN , phz , 
-     &       PSI , QAPR , rmir , rmis , SA , SPIN , Ssqrt , WTHREJ , 
-     &       ZETA , ZPOL
-      INTEGER*4 i2 , i3 , IAPR , Icg , Iexp , IFAC , iiex , indx , 
-     &          inqa , inr , ins , IPATH , Ir , is , is1 , is2 , ISEX , 
-     &          ISMAX , ismin , ISO
+      REAL*8 phz , rmir , rmis , Ssqrt , WTHREJ
+      INTEGER*4 i2 , i3 , Icg , Iexp , iiex , indx , inqa , inr , 
+     &          ins , Ir , is , is1 , is2 , ismin
       INTEGER*4 isplus , jg1 , jg2 , jrmir , La , Lam , lam2 , Ld , 
-     &          LEADF , LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , 
-     &          LP3 , LP4 , LP6 , LP7
-      INTEGER*4 LP8 , LP9 , LZETA , m , MAGA , MEM , mrange , mt , N , 
-     &          NSTART , NSTOP , Nz
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
-     &                ISO
-      COMMON /PCOM  / PSI(500)
-      COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /CLCOM8/ CAT(600,3) , ISMAX
-      COMMON /CEXC0 / NSTART(76) , NSTOP(75)
-      COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
-      COMMON /PTH   / IPATH(75) , MAGA(75)
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
-      COMMON /CLCOM0/ IFAC(75)
+     &          LEADF , m , MEM , mrange , mt , N , Nz
+      INCLUDE 'coex.inc'
+      INCLUDE 'pcom.inc'
+      INCLUDE 'ccoup.inc'
+      INCLUDE 'clcom8.inc'
+      INCLUDE 'cexc0.inc'
+      INCLUDE 'aprcat.inc'
+      INCLUDE 'pth.inc'
+      INCLUDE 'mgn.inc'
+      INCLUDE 'comme.inc'
+      INCLUDE 'clcom0.inc'
       
       lam2 = 2*Lam
-      inr = CAT(Ir,2)*2.
-      rmir = CAT(Ir,3)
+      inr = CAT(Ir,2)*2. ! 2 * Spin of substate Ir
+      rmir = CAT(Ir,3)   ! m quantum number of substate Ir
       jrmir = 2.*rmir
       DO i2 = 1 , Ld
-         m = LEADF(N,i2,La)
-         indx = MEM(N,m,La)
-         IAPR(indx,1) = N
-         IAPR(indx,2) = m
+         m = LEADF(N,i2,La) ! Index of final level
+         indx = MEM(N,m,La) ! Index of matrix element
+         IAPR(indx,1) = N   ! Index of initial level
+         IAPR(indx,2) = m   ! Index of final level
          ismin = 0
          ins = SPIN(m)*2.
-         is1 = NSTART(m)
+         is1 = NSTART(m) ! Index of first substate of level m
          IF ( is1.NE.0 ) THEN
             isplus = INT(rmir-CAT(is1,3)) - Lam
             IF ( isplus.LT.0 ) THEN
@@ -94,7 +87,7 @@ C half-integers.
             IF ( mrange.GT.0 ) THEN
                DO i3 = 1 , mrange
                   is = is2 + i3
-                  rmis = CAT(is,3)
+                  rmis = CAT(is,3) ! m quantum number of substate is
                   IF ( ISO.NE.0 .OR. rmis.LE..1 .OR. rmir.LE..1 ) THEN
                      jg1 = -rmis*2.
                      jg2 = (rmis-rmir)*2.
@@ -108,7 +101,7 @@ C half-integers.
      &                           *Ssqrt*WTHREJ(ins,lam2,inr,jg1,jg2,
      &                           jrmir)
                               IF ( Icg.NE.1 ) THEN
-                                 mt = CAT(is,1)
+                                 mt = CAT(is,1) ! level number of substate is
                                  CALL CODE7(Ir,is,N,mt,inqa,indx)
                                  IF ( ABS(ELM(indx)).LT.1.E-6 )
      &                                ELM(indx) = 1.E-6
@@ -123,9 +116,9 @@ C half-integers.
                            ENDIF
                         ENDIF
                      ENDIF
-                  ENDIF
-               ENDDO
-            ENDIF
-         ENDIF
-      ENDDO
+                  ENDIF ! If isotropic or rmis < 1 or rmir < 1
+               ENDDO ! Loop on substates
+            ENDIF ! If range of substates is greater than 0
+         ENDIF ! If there are substates
+      ENDDO ! Loop on matrix elements
       END

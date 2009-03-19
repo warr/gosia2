@@ -1,9 +1,9 @@
  
 C----------------------------------------------------------------------
-C SUBROUTINE CONV
+C FUNCTION CONV
 C
 C Called by: BRANR, PTICC, SEQ
-C Calls:     LAGRAN
+C Calls:     LAGRAN, NEWCNV, SPLNER
 C
 C Purpose: calculate the conversion coefficient at a particular energy by
 C interpolating over the values provided by the user.
@@ -15,22 +15,28 @@ C      NICC   - number of conversion coefficients
 C
 C Formal parameters:
 C      Ega    - gamma energy
-C      N      -
+C      N      - multipolarity N=1,2,3 = E1,2,3 and N=4,5 = M1,2 (not as elsewhere!)
 C
 C Return value:
 C      conversion coefficient interpolated to energy Ega
 
       REAL*8 FUNCTION CONV(Ega,N)
       IMPLICIT NONE
-      REAL*8 AGELI , CC , cpo , cpo1 , cv , EG , Ega , Q
-      INTEGER*4 j , N , n1 , NANG , nen , NICC
-      DIMENSION cpo(51) , cpo1(51)
-      COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
-     &                NICC , NANG(200)
+      REAL*8 cpo , cpo1 , cv , Ega , NEWCNV
+      INTEGER*4 j , N , n1 , nen
+      DIMENSION cpo(101) , cpo1(101)
+      INCLUDE 'ccc.inc'
 
-      IF ( N.EQ.0 ) THEN
+C     If the number of conversion coefficients entered by the user is negative
+C     then use read the conversion coefficients from a file on unit 29.
+      IF ( NICC.LE.0 ) THEN
+         CONV=NEWCNV(Ega,N)
+         RETURN
+      ENDIF
+
+      IF ( N.EQ.0 ) THEN ! If no multipolarity defined
          CONV = 0.0
-      ELSEIF ( ABS(CC(1,N)).LT.1.E-9 ) THEN
+      ELSEIF ( ABS(CC(1,N)).LT.1.E-9 ) THEN ! If no conversion coefficients given for this multipolarity
          CONV = 0.0
       ELSE
          nen = 4
@@ -49,7 +55,8 @@ C      conversion coefficient interpolated to energy Ega
             cpo1(j) = EG(n1+j-1)
          ENDDO
 C        Interpolate 
-         CALL LAGRAN(cpo1,cpo,4,1,Ega,cv,2,1)
+         IF ( ISPL.EQ. 0 ) CALL LAGRAN(cpo1,cpo,4,1,Ega,cv,2,1)
+         IF ( ISPL.EQ. 1 ) CALL SPLNER(cpo1,cpo,4,Ega,cv,2)
          CONV = cv
          RETURN
       ENDIF

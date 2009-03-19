@@ -1,0 +1,2 @@
+      REAL*8 BEQ
+      COMMON /IDENT / BEQ

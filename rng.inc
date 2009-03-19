@@ -1,0 +1,2 @@
+      INTEGER*4 IRA , MAXLA
+      COMMON /RNG   / IRA(8) , MAXLA

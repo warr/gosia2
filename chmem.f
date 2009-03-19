@@ -11,15 +11,15 @@ C Uses global variables:
 C      ELM    - matrix elements
 C      EAMX   - known matrix elements and their error
 C      NAMX   - number of known matrix elements
-C      IAMX   -
-C      IAMY   -
+C      IAMX   - index of matrix element for known matrix element
+C      IAMY   - level indices of pair of levels for which matrix element is known
  
       SUBROUTINE CHMEM(Nw,Chi,Chilo)
       IMPLICIT NONE
-      REAL*8 Chi , Chilo , di , EAMX , ELM , ELML , ELMU , SA
-      INTEGER*4 ia , IAMX , IAMY , ib , NAMX , Nw
-      COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
+      REAL*8 Chi , Chilo , di
+      INTEGER*4 ia , ib , Nw
+      INCLUDE 'me2d.inc'
+      INCLUDE 'comme.inc'
 
       IF ( NAMX.EQ.0 ) RETURN
       Nw = Nw + NAMX

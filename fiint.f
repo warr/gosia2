@@ -9,7 +9,7 @@ C
 C Formal parameters:
 C      Fi0    - phi_0
 C      Fi1    - phi_1
-C      At     -
+C      At     - return value
 C      Ixs    - axial symmetry flag
 
       SUBROUTINE FIINT(Fi0,Fi1,At,Ixs)

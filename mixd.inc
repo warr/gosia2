@@ -1,0 +1,3 @@
+      REAL*8 DMIXE , DMIX
+      INTEGER*4 IMIX , NDL
+      COMMON /MIXD  / DMIXE(20,2) , DMIX(20) , IMIX(20) , NDL

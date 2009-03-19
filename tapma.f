@@ -7,41 +7,40 @@ C
 C Purpose: read parameters for sensitivity maps
 C
 C Uses global variables:
-C      DS     -
-C      XV     - energy meshpoints where we calculate exact Coulex
+C      DS     - differential cross section
+C      XV     - energy meshpoints (sometimes theta meshpoints) where we calculate exact Coulex
 C      YGN    - gamma yield calculated without correction to angular distribution from finite recoil distance
 C      ZETA   - various coefficients
 C
 C Formal parameters:
-C      Lx     -
+C      Lx     - experiment number
 C      Iske   -
 C      Isko   -
 C      Iskf   -
 C      Nflr   -
-C      Idr    -
+C      Idr    - number of decays
 C      Nco    -
-C      Nft    -
-C      Enb    -
+C      Nft    - error flag: 0 = no error, 1 = error
+C      Enb    - energy of meshpoint read from file
 C
 C Note that unit 14 is used internally for the purpose of sensitivity
 C maps.
  
       SUBROUTINE TAPMA(Lx,Iske,Isko,Iskf,Nflr,Idr,Nco,Nft,Enb)
       IMPLICIT NONE
-      REAL*8 DS , DSE , DSG , emn , emx , en0 , Enb , tmn , tmx , tta , 
-     &       XV , YGN , YGP , YV , ZETA , ZV
-      INTEGER*4 Idr , IFMO , Iske , Iskf , Isko , j , jf , jj , js , k , 
-     &          Lx , lx1 , LZETA , na , Nco , ne , nfil , nfilt , Nflr , 
-     &          Nft
+      REAL*8 emn , emx , en0 , Enb , tmn , tmx , tta
+      INTEGER*4 Idr , Iske , Iskf , Isko , j , jf , jj , js , k , 
+     &          Lx , lx1 , na , Nco , ne , nfil , nfilt , Nflr , Nft
       INTEGER*4 ng , ng1 , ntt
-      COMMON /VLIN  / XV(51) , YV(51) , ZV(20) , DSG(20) , DSE(20) , DS
-      COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /YTEOR / YGN(500) , YGP(500) , IFMO
+      INCLUDE 'vlin.inc'
+      INCLUDE 'ccoup.inc'
+      INCLUDE 'yteor.inc'
 
       Nft = 0
       nfilt = 0
       REWIND 14
 
+C     Skip over unwanted records
       IF ( Iske.NE.0 ) THEN
  50      READ (14,*) ne , ntt , emn , emx , tmn , tmx , na , tmx , tmx , 
      &               tmx
@@ -55,6 +54,7 @@ C maps.
 
       IF ( Nco.EQ.0 ) RETURN
 
+C     Read record
       READ (14,*) ne , ntt , emn , emx , tmn , tmx , na , tmx , tmx , 
      &            tmx
       IF ( Isko.NE.0 ) THEN

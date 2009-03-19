@@ -18,7 +18,7 @@ C      NYLDE  - number of yields
 C      YEXP   - experimental yield
 C
 C Formal parameters:
-C      Idr    -
+C      Idr    - number of decays
 C      Ntap   - unit for yield file
 C      Ipri   - printing flag (Ipri=1 gives additional output)
 C
@@ -27,37 +27,31 @@ C experimental yields
  
       SUBROUTINE READY(Idr,Ntap,Ipri)
       IMPLICIT NONE
-      REAL*8 ap , CORF , DYEX , EP , TAU , TLBDG , u , UPL , VINF , w , 
-     &       waga , XA , XA1 , xep , YEXP , YNRM , zp
-      INTEGER*4 idc , idc1 , idcx , Idr , IDRN , ii , ILE , Ipri , IY , 
-     &          iytot , iytt , IZ , IZ1 , j , k , kk , kkl , KSEQ , 
-     &          lbg , LP1
-      INTEGER*4 LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , LP4 , 
-     &          LP6 , LP7 , LP8 , LP9 , lxp , nanx , nde , nde1 , NDST , 
-     &          ne , NEXPT , ns1
-      INTEGER*4 ns2 , ns3 , ns4 , nsxh , nsyh , Ntap , nval , NYLDE
+      REAL*8 ap , u , w , waga , xep , zp
+      INTEGER*4 idc , idc1 , idcx , Idr , ii , Ipri , 
+     &          iytot , iytt , j , k , kk , kkl , lbg
+      INTEGER*4 lxp , nanx , nde , nde1 , ne , ns1
+      INTEGER*4 ns2 , ns3 , ns4 , nsxh , nsyh , Ntap , nval
       DIMENSION iytot(32)
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
-     &                YNRM(32,50) , IDRN , ILE(32)
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
-     &                TLBDG(50) , VINF(50)
-      COMMON /LEV   / TAU(75) , KSEQ(500,4)
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /CCCDS / NDST(50)
+      INCLUDE 'yexpt.inc'
+      INCLUDE 'cx.inc'
+      INCLUDE 'lev.inc'
+      INCLUDE 'mgn.inc'
+      INCLUDE 'cccds.inc'
       
+C     Rewind yield file
       REWIND Ntap
-      DO k = 1 , LP6
+
+      DO k = 1 , LP6 ! LP6 = 32
          iytot(k) = 0
       ENDDO
       IF ( Ipri.EQ.1 ) WRITE (22,99001)
 99001 FORMAT (5X/47X,'REPRINT OF EXPERIMENTAL DATA TO BE FITTED'//)
-      DO lxp = 1 , NEXPT
+      DO lxp = 1 , NEXPT ! For each experiment
          DO kkl = 1 , LP6
             NYLDE(lxp,kkl) = 0
          ENDDO
-         ii = NDST(lxp)
+         ii = NDST(lxp) ! Number of datasets
          DO kk = 1 , ii ! iexp, ng, zp, ag, ep, nd, wt
             READ (Ntap,*) ne , nanx , zp , ap , xep , nval , waga
             IF ( Ipri.EQ.1 ) WRITE (22,99002) ne , zp , ap , xep , 
@@ -103,18 +97,19 @@ C experimental yields
                IF ( idc1.GT.1000 ) idc1 = idc/1000
                IF ( Ipri.EQ.1 ) WRITE (22,99004) idc , KSEQ(idc1,3) , 
      &                                 KSEQ(idc1,4) , u , w
-99004          FORMAT (2X,1I6,2X,1I2,2X,1I2,1(1E14.6,3X,1E14.6))
+99004          FORMAT (2X,1I6,1X,1I3,1X,1I3,1(1E14.6,3X,1E14.6))
                iytt = iytot(kk)
                YEXP(kk,iytt) = u
                DYEX(kk,iytt) = w/(SQRT(waga)+1.E-4)
                IY(iytt,kk) = idc
- 40         ENDDO
+ 40            CONTINUE
+            ENDDO
             iytt = iytot(kk)
             lbg = iytt - nval + 1
             CALL SZEREG(lbg,iytt,kk)
             NYLDE(lxp,kk) = nval
-         ENDDO
-      ENDDO
-99005 FORMAT (1X///5X,'ERROR-NO MATRIX ELEMENT BETWEEN STATES',1X,1I2,
-     &        ' AND ',1I2,/10X,'THIS TRANSITION IGNORED',//)
+         ENDDO ! For each dataset kk
+      ENDDO ! Loop on experiments lxp
+99005 FORMAT (1X///5X,'ERROR-NO MATRIX ELEMENT BETWEEN STATES',1X,1I3,
+     &        ' AND ',1I3,/10X,'THIS TRANSITION IGNORED',//)
       END

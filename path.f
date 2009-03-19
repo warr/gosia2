@@ -4,41 +4,41 @@ C SUBROUTINE PATH
 C
 C Called by: GOSIA
 C
-C Purpose:
+C Purpose: Calculate path for each level
 C
 C Uses global variables:
-C      CAT    - catalog of matrix elements
-C      IPATH  -
+C      CAT    - substates of levels (n_level, J, m)
+C      IPATH  - index of substate in level with same m as substate Irld
 C      NMAX   - number of levels
-C      NSTART -
-C      NSTOP  -
+C      NSTART - index in CAT of first substate associated with a level
+C      NSTOP  - index in CAT of last substate associated with a level
 C
 C Formal parameters:
 C      Irld   - index into ARM array
  
       SUBROUTINE PATH(Irld)
       IMPLICIT NONE
-      REAL*8 CAT , spm , vl
-      INTEGER*4 i , IPATH , Irld , ISMAX , isp , ist , j , MAGA , NDIM , 
-     &          NMAX , NMAX1 , NSTART , NSTOP
-      COMMON /CEXC0 / NSTART(76) , NSTOP(75)
-      COMMON /PTH   / IPATH(75) , MAGA(75)
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /CLCOM8/ CAT(600,3) , ISMAX
+      REAL*8 spm , vl
+      INTEGER*4 i , Irld , isp , ist , j
+      INCLUDE 'cexc0.inc'
+      INCLUDE 'pth.inc'
+      INCLUDE 'coex2.inc'
+      INCLUDE 'clcom8.inc'
 
-      spm = CAT(Irld,3)
-      DO i = 2 , NMAX
+      spm = CAT(Irld,3) ! m quantum number for substate Irld
+      DO i = 2 , NMAX ! For each level except ground state
          IPATH(i) = 0
-         ist = NSTART(i)
-         IF ( ist.NE.0 ) THEN
-            isp = NSTOP(i)
-            DO j = ist , isp
-               vl = CAT(j,3)
-               IF ( ABS(vl-spm).LT.1.E-6 ) GOTO 50
+         ist = NSTART(i) ! Index of first substate for level
+         IF ( ist.NE.0 ) THEN ! If this is non-zero
+            isp = NSTOP(i) ! Index of last substate for level
+            DO j = ist , isp ! For each substate of level
+               vl = CAT(j,3) ! m quantum number for substate j
+               IF ( ABS(vl-spm).LT.1.E-6 ) GOTO 50 ! Jump if they have the same m
             ENDDO
          ENDIF
          GOTO 100
- 50      IPATH(i) = j
- 100  ENDDO
-      IPATH(1) = Irld
+ 50      IPATH(i) = j ! Store it
+ 100     CONTINUE
+      ENDDO
+      IPATH(1) = Irld ! Special case of ground state
       END

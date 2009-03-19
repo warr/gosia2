@@ -25,11 +25,11 @@ C may have been changed when we randomized.
  
       SUBROUTINE MIXUP
       IMPLICIT NONE
-      REAL*8 ELM , ELML , ELMU , RNDM , SA , SE
-      INTEGER*4 IVAR , k , k1 , LMAXE , MAGEXC , MEMAX , MEMX6
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
-      COMMON /XRA   / SE
+      REAL*8 RNDM
+      INTEGER*4 k , k1
+      INCLUDE 'comme.inc'
+      INCLUDE 'cexc.inc'
+      INCLUDE 'xra.inc'
 
 C     Randomize all that are not fixed or correlated
       DO k = 1 , MEMAX ! For each matrix element

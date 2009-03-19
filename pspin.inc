@@ -1,0 +1,2 @@
+      INTEGER*4 ISHA
+      COMMON /PSPIN / ISHA

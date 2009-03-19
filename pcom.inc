@@ -1,0 +1,2 @@
+      REAL*8 PSI
+      COMMON /PCOM  / PSI(1500)

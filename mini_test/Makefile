@@ -1,4 +1,4 @@
-GOSIA2DIR=/home/warr/devel/gosia2
+GOSIA2DIR=/home/warr/devel/gosia2_new
 
 INP += ag109_mini0.inp
 INP += kr92_mini0.inp

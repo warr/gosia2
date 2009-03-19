@@ -16,10 +16,10 @@ C
 C Formal parameters:
 C      Inx    - index in XI array
 C      Npt    - index in ADB array (this is omega / 0.03)
-C      Isg    -
-C      Isg1   -
-C      Ndiv   -
-C      Kdiv   -
+C      Isg    - phase
+C      Isg1   - index for sigma
+C      Ndiv   - number of divisions
+C      Kdiv   - index for division
 C
 C Return value:
 C      the exponential
@@ -32,11 +32,10 @@ C in the function SETIN.
 
       COMPLEX*16 FUNCTION EXPON(Inx,Npt,Isg,Isg1,Ndiv,Kdiv)
       IMPLICIT NONE
-      REAL*8 ADB , XI
       INTEGER*4 Inx , Isg , Isg1 , Kdiv , Ndiv , Npt
       COMPLEX*16 expo1 , ci , expox , TCEXP
-      COMMON /ADX   / ADB(365)
-      COMMON /CXI   / XI(500)
+      INCLUDE 'adx.inc'
+      INCLUDE 'cxi.inc'
       DATA ci/(0.,1.)/
       
       expox = TCEXP(ci*XI(Inx)*ADB(Npt)*Isg)

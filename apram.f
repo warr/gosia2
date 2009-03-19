@@ -8,7 +8,7 @@ C
 C Purpose: calculate approximate value of the Coulomb excitation amplitudes.
 C
 C Uses global parameters:
-C      ARM    - reduced matrix elements
+C      ARM    - excitation amplitudes of substates.
 C      ELM    - matrix elements
 C      IDIVE  - number of subdivisions
 C      LERF   - error flag for expansion in POMNOZ
@@ -25,19 +25,15 @@ C      Acca   - accuracy required
 
       SUBROUTINE APRAM(Iexp,Inc,Indx,Irld,Acca)
       IMPLICIT NONE
-      REAL*8 Acca , accah , ELM , ELML , ELMU , QAPR , SA , uwa
-      INTEGER*4 i1 , i56 , i7 , IAPR , IDIVE , Iexp , img , Inc , Indx , 
-     &          IPATH , Irld , ISEX , itm , IVAR , j , jidim , jj , k , 
-     &          ktoto , l
-      INTEGER*4 l1 , l2 , l3 , LERF , LMAXE , m , MAGA , MAGEXC , 
-     &          MEMAX , MEMX6
-      COMPLEX*16 ARM
-      COMMON /AZ    / ARM(600,7)
-      COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
-      COMMON /PTH   / IPATH(75) , MAGA(75)
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
-      COMMON /APRX  / LERF , IDIVE(50,2)
+      REAL*8 Acca , accah , uwa
+      INTEGER*4 i1 , i56 , i7 , Iexp , img , Inc , Indx , Irld , itm , 
+     &          j , jidim , jj , k , ktoto , l , l1 , l2 , l3 , m
+      INCLUDE 'az.inc'
+      INCLUDE 'aprcat.inc'
+      INCLUDE 'pth.inc'
+      INCLUDE 'cexc.inc'
+      INCLUDE 'comme.inc'
+      INCLUDE 'aprx.inc'
 
       LERF = 0
       accah = Acca

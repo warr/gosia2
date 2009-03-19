@@ -18,7 +18,7 @@ C      ZETA   - various coefficients (here the collision functions)
 C
 C Formal parameters:
 C      Nexp   - experiment number
-C      Zpol   -
+C      Zpol   - dipole term
 C
 C The function QE is used to calculate Qe and QM to calculate Qm, but first
 C we call QRANGE to determine the range over which we need to calculate them.
@@ -35,21 +35,17 @@ C M1, M2.
  
       SUBROUTINE SNAKE(Nexp,Zpol)
       IMPLICIT NONE
-      REAL*8 b10 , b12 , b2 , b4 , b6 , b8 , c , c2 , c4 , c6 , CH , 
-     &       chi , cq , d , d2 , d3 , d4 , d5 , d6 , EPS
-      REAL*8 EROOT , ert , FIEX , pol , SH , shi , ZETA , Zpol
-      INTEGER*4 IAXS , ibm , icm , icnt , idm , IEXP , irl , j , k , 
-     &          lloc , lmd , lmda , LOCQ , LP1 , LP10 , LP11 , LP12 , 
-     &          LP13 , LP14 , LP2
-      INTEGER*4 LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , LZETA , mimx , 
-     &          Nexp , nind , nlm
+      REAL*8 b10 , b12 , b2 , b4 , b6 , b8 , c , c2 , c4 , c6 , 
+     &       chi , cq , d , d2 , d3 , d4 , d5 , d6
+      REAL*8 ert , pol , shi , Zpol
+      INTEGER*4 ibm , icm , icnt , idm , irl , j , k , lloc , lmd , 
+     &          lmda , mimx , Nexp , nind , nlm
       DIMENSION lloc(8) , cq(7) , irl(8)
-      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
-      COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /ALLC  / LOCQ(8,7)
-      COMMON /HIPER / SH(365) , CH(365)
+      INCLUDE 'kin.inc'
+      INCLUDE 'ccoup.inc'
+      INCLUDE 'mgn.inc'
+      INCLUDE 'allc.inc'
+      INCLUDE 'hiper.inc'
       
       icnt = 0
  100  icnt = icnt + 1
@@ -125,5 +121,8 @@ C     Calculate some parameters, which we will pass to QE or QM
             ENDDO
          ENDIF
       ENDDO
+      IF ( icnt.EQ.365) THEN
+        STOP 'Sorry, I can only do 365 steps in omega. You need more!'
+      ENDIF
       GOTO 100
       END

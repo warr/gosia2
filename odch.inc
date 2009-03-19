@@ -1,0 +1,2 @@
+      REAL*8 DEV
+      COMMON /ODCH  / DEV(1500)

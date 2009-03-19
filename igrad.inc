@@ -1,0 +1,2 @@
+      INTEGER*4 IGRD
+      COMMON /IGRAD / IGRD

@@ -3,13 +3,13 @@ C----------------------------------------------------------------------
 C SUBROUTINE CMLAB
 C
 C Called by: GOSIA
-C Calls:     RECOIL, TASIN
+C Calls:     TASIN
 C
 C Purpose: calculate for center of mass frame
 C
 C Uses global variables:
 C      BETAR  - recoil beta
-C      DSIGS  -
+C      DSIGS  - dsigma for each experiment
 C      EN     - level energies
 C      EP     - bombarding energy
 C      EPS    - epsilon
@@ -19,52 +19,44 @@ C      IPRM   - printing flags (see suboption PRT of OP,CONT)
 C      ISKIN  - kinematic flag (0,1)
 C      IZ     - Z of investigated nucleus
 C      IZ1    - Z of not-investated nucleus
-C      NCM    - calculate kinematics assuming this spin for final state (default = 2.0)
+C      NCM    - calculate kinematics assuming this state for final state (default = 2)
 C      NEXPT  - number of experiments
 C      NMAX   - number of level energies
 C      TETACM - theta of particle detector in center of mass frame
-C      TLBDG  - theta of particle detector
+C      TLBDG  - theta of particle detector in lab frame (in degrees)
 C      VINF   - speed of projectile at infinity
 C      XA     - A of investigated nucleus
 C      XA1    - A of not-investated nucleus
-C      TREP   - theta of recoiling nucleus
+C      TREP   - theta of recoiling nucleus (in radians)
 C
 C Formal parameters:
 C      Ii     - experiment number (or zero for all experiments)
-C      Dsig   -
-C      Tetrn  -
+C      Dsig   - dsigma
+C      Tetrn  - theta of recoiling nucleus in lab frame (in radians)
 
       SUBROUTINE CMLAB(Ii,Dsig,Tetrn)
       IMPLICIT NONE
-      REAL*8 a1 , a2 , ACCA , ACCUR , ared , BETAR , d2a , DIPOL , 
-     &       dista , dists , Dsig , DSIGS , emax , EMMA , EN , EP , 
-     &       epmin , EPS , EROOT , FIEX
-      INTEGER*4 IAXS , IEXP , iflaa , Ii , IPRM , ISKIN , ISO , IZ , 
-     &          IZ1 , lexp , lexp0 , lexp1 , n , NCM , NDIM , NEXPT , 
-     &          NMAX , NMAX1
-      REAL*8 r3 , SPIN , TASIN , tau , taup , tcmdg , tcmrad , TETACM , 
-     &       Tetrn , TLBDG , tlbrad , tmxdg , TREP , VINF , XA , XA1 , 
-     &       z1 , z2 , zcmdg , zcmrad
-      REAL*8 zlbrad , ZPOL
-      LOGICAL ERR
-      COMMON /CLCOM9/ ERR
-      COMMON /SECK  / ISKIN(50)
-      COMMON /PRT   / IPRM(20)
-      COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
-      COMMON /BREC  / BETAR(50)
-      COMMON /CAUX0 / EMMA(75) , NCM
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
-     &                TLBDG(50) , VINF(50)
-      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
-     &                ISO
+      REAL*8 a1 , a2 , ared , d2a , dista , dists , Dsig , emax , epmin
+      REAL*8 r3 , TASIN , tau , taup , tcmdg , tcmrad , Tetrn , tlbrad , 
+     &       tmxdg , z1 , z2 , zcmdg , zcmrad , zlbrad
+      INTEGER*4 iflaa , Ii , lexp , lexp0 , lexp1 , n
+      INCLUDE 'clcom9.inc'
+      INCLUDE 'seck.inc'
+      INCLUDE 'prt.inc'
+      INCLUDE 'tcm.inc'
+      INCLUDE 'brec.inc'
+      INCLUDE 'caux0.inc'
+      INCLUDE 'coex2.inc'
+      INCLUDE 'cx.inc'
+      INCLUDE 'kin.inc'
+      INCLUDE 'coex.inc'
+      DATA r3/0./
 
       lexp0 = 1
       lexp1 = NEXPT
       IF ( Ii.NE.0 ) lexp0 = Ii
       IF ( Ii.NE.0 ) lexp1 = Ii
-      DO lexp = lexp0 , lexp1
+      DO lexp = lexp0 , lexp1 ! For each experiment
          iflaa = 0
          IF ( TLBDG(lexp).LT.0 ) iflaa = 1
          IF ( IPRM(1).EQ.1 ) THEN
@@ -91,9 +83,14 @@ C      Tetrn  -
 C
 C        dists is Cline's estimate of the maximum safe bombarding energy
          dists = 1.44*(a1+a2)*z1*z2/((a1**.33333+a2**.33333)*1.25+5.)/a2
+C        dista is 0.05 * distance of closest approach for head-on collisions
          dista = 0.0719949*(1.0+a1/a2)*z1*z2/EP(lexp)
-         d2a = 20.0*dista
-C        VINF = sqrt(2 * EP / 931.494028 * A1) - 931.494028 = 1 AMU
+C        d2a is the distance of closest approach for head-on collisions in fm
+C        q^2/4/pi/epsilon_0 * (1+a1/a2) * Z1 * Z2 / Ep. For Ep in MeV and d2a
+C        in fm, q^2/4/pi/epsilon_0 = 1.44
+         d2a = 20.0*dista ! = 1.44 * (1.0+a1/a2)*z1*z2/EP(lexp)
+C        VINF is the initial velocity of the incoming projectile (at infinity)
+C        VINF = sqrt(2 * EP / 931.494028 * A1) : 931.494028 = 1 AMU
          VINF(lexp) = 0.0463365*SQRT(EP(lexp)/a1)
 
 C        If IPRM(1) we want extra printout
@@ -112,42 +109,67 @@ C        If IPRM(1) we want extra printout
      &             ,1X,1F10.4,1X,'FM')
          ENDIF
 
+C        Final kinetic energy \v{E} = E_P - \Delta E (1 + m_P / m_T)
+C        Here we set ared = (1 + m_P / m_T)
+C        The maximum excitation energy corresponds to \v{E} = 0, so
+C        \DeltaE = E_P \over {1 + m_P / m_T) = E_P/ared
+C        We check that there are no states defined which are higher than this.
+
          tlbrad = TLBDG(lexp)/57.2957795 ! Theta of detector to radians
          ared = 1.0 + a1/a2 ! reduced mass
-         emax = EP(lexp)/ared
-         DO n = 1 , NMAX
-            IF ( EN(n).GT.emax ) GOTO 50
+         emax = EP(lexp)/ared ! Maximum excitation energy
+         DO n = 1 , NMAX ! For each level
+            IF ( EN(n).GT.emax ) GOTO 50 ! Give error if energy of state too high
          ENDDO
+
+C        Gosia calculates assuming the kinematics for all states are approximately
+C        those corresponding to the state NCM (by default NCM = 2 : the first excited
+C        state). So for this energy we calculate the \v{E} and store it in epmin.
+C        We also calculate tau defined as (a1/a2)*sqrt(E_P / \v{E}) for this value
+C        of \v{E}.
+C        A value of tau less than 1 corresponds to normal kinematics, so the full
+C        range of theta in the centre of mass system corresponds to the full range
+C        in the lab system. However, for tau greater than 1 (i.e. inverse kinematics)
+C        there are two possible values for the lab angle for a given centre of mass
+C        angle and there is a maximum lab angle, which can be attained: tmxdg given
+C        by SIN(tmxdg) = 1 / tau.
          epmin = EP(lexp) - EN(NCM)*ared
          taup = SQRT(EP(lexp)/epmin)
          tau = taup*a1/a2
-         IF ( tau.LE.1.0 ) GOTO 100
-         tmxdg = TASIN(1.0/tau)*57.2957795
-         IF ( tmxdg.GE.TLBDG(lexp) ) GOTO 100
+         IF ( tau.LE.1.0 ) GOTO 100 ! No limit on scattering angle
+         tmxdg = TASIN(1.0/tau)*57.2957795 ! Maximum lab angle in degrees
+         IF ( tmxdg.GE.TLBDG(lexp) ) GOTO 100 ! Within limit of scattering angle
+
          WRITE (22,99007) tmxdg , lexp
 99007    FORMAT (1X,'ERROR- MAXIMUM SCATTERING ANGLE IS ',F7.2,
      &           ' DEGREES',' FOR EXPERIMENT ',1I2)
-         GOTO 200
+         GOTO 200 ! Error
+
  50      WRITE (22,99008) emax , lexp
 99008    FORMAT (1X,'ERROR- MAXIMUM EXCITATION ENERGY IS ',F8.4,' MEV',
      &           ' FOR EXPERIMENT ',1I2)
-         GOTO 200
+         GOTO 200 ! Error
 
- 100     tcmrad = tlbrad + TASIN(tau*SIN(tlbrad))
-         tcmdg = tcmrad*57.2957795
-         IF ( tau.GT.1.0 ) THEN
+C        Calculate centre of mass angle
+ 100     tcmrad = tlbrad + TASIN(tau*SIN(tlbrad)) ! In radians
+         tcmdg = tcmrad*57.2957795 ! and in degrees
+
+C        In inverse kinematics, for a given lab angle, there are two solutions
+C        for the centre of mass angle.
+         IF ( tau.GT.1.0 ) THEN ! Inverse kinematics
             IF ( IPRM(1).EQ.1 ) THEN
                IF ( Ii.EQ.0 .AND. IPRM(10).EQ.1 ) WRITE (22,99009)
      &              tcmdg , lexp
 99009          FORMAT (5X,'SECOND POSSIBLE CM SCATTERING ANGLE IS',F7.2,
      &                 ' DEGREES FOR EXPERIMENT ',1I2)
             ENDIF
-            IF ( ISKIN(lexp).NE.1 ) THEN
+            IF ( ISKIN(lexp).NE.1 ) THEN ! If ISKIN is set, take the second solution
                tcmdg = 180. + 2.*TLBDG(lexp) - tcmdg
                tcmrad = tcmdg/57.2957795
             ENDIF
          ENDIF
 
+C        EPS is "epsilon" the eccentricity parameter.
          EPS(lexp) = 1./SIN(tcmrad/2.)
          TETACM(lexp) = tcmrad
          IF ( IPRM(1).EQ.1 ) THEN
@@ -157,6 +179,10 @@ C        If IPRM(1) we want extra printout
      &              'EPSILON',1X,1F10.4)
          ENDIF
 
+C        If Z1 is negative, we are interested in target excitations, but if it
+C        is positive, we want the projectile excitation, so calculate the lab
+C        recoil energy of appropriate particle and store it in BETAR (we will
+C        convert this to beta of the recoil later)
          IF ( IZ1(lexp).GT.0 ) BETAR(lexp) = a1*a2/(a1+a2)
      &        **2*(1.+taup*taup-2.*taup*COS(tcmrad))*epmin
          IF ( IZ1(lexp).LT.0 ) BETAR(lexp) = (a2/(a1+a2))
@@ -169,6 +195,8 @@ C        More additional printout
 99011       FORMAT (5X,'RECOIL ENERGY(MEV)',2X,1F10.4)
          ENDIF
 
+C        This is the beta of the recoiling particle of interest (target or projectile
+C        depending on sign of Z1, which is used as a flag)
          BETAR(lexp) = .0463365*SQRT(BETAR(lexp)/XA) ! 0.0463365 = sqrt(2/931.494028)
          IF ( IPRM(1).EQ.1 ) THEN
             IF ( Ii.EQ.0 .AND. IPRM(10).EQ.1 ) WRITE (22,99012)
@@ -180,7 +208,9 @@ C        More additional printout
      &              'OF SAFE BOMBARDING ENERGY AT THIS ANGLE')
          ENDIF
 
-         IF ( iflaa.NE.1 ) THEN
+C        iflaa = 0 when projectile detected, = 1 when target detected
+C        r3 is the Jacobian dOmega/domega
+         IF ( iflaa.NE.1 ) THEN ! Projectile detected
             IF ( ABS(tcmdg-180.).LT.1.E-5 ) THEN
                r3 = (1.-tau)**2
             ELSE
@@ -190,10 +220,15 @@ C        More additional printout
             ENDIF
          ENDIF
 
-         zcmdg = 180. - tcmdg
-         zcmrad = zcmdg/57.2957795
-         zlbrad = ATAN(SIN(zcmrad)/(COS(zcmrad)+taup))
-         IF ( iflaa.NE.0 ) THEN
+C        Calculate the values for the target. In the centre of mass system, the
+C        target and projectile angles differ by 180 degrees
+         zcmdg = 180. - tcmdg ! Target angle in degrees in cm system
+         zcmrad = zcmdg/57.2957795 ! and in radians
+         zlbrad = ATAN(SIN(zcmrad)/(COS(zcmrad)+taup)) ! target theta in lab (radians)
+
+C        iflaa = 0 when projectile detected, = 1 when target detected
+C        r3 is the Jacobian dOmega/domega
+         IF ( iflaa.NE.0 ) THEN ! Target detected, but theta is for projectile!
             IF ( ABS(tcmdg-180.).LT.1.E-5 ) THEN
                r3 = (1.+taup)**2
                TLBDG(lexp) = 0.
@@ -206,6 +241,7 @@ C        More additional printout
             ENDIF
          ENDIF
 
+C        Now calculate dsigma
          Dsig = 250.*r3*SQRT(EP(lexp)/(EP(lexp)-ared*EN(NCM)))
      &          *dista*dista*(EPS(lexp))**4
          EROOT(lexp) = SQRT(EPS(lexp)*EPS(lexp)-1.)
@@ -213,8 +249,11 @@ C        More additional printout
          Tetrn = zlbrad
          IF ( IZ1(lexp).LT.0. ) Tetrn = tlbrad
          TREP(lexp) = Tetrn
-      ENDDO
-      IPRM(10) = 0
+      ENDDO ! Loop over experiments lexp
+
+      IPRM(10) = 0 ! Turn off printing so we don't write things twice
       RETURN
- 200  ERR = .TRUE.
+
+C     An error has occured, so set error flag and return
+ 200  ERR = .TRUE. ! Set error flag
       END

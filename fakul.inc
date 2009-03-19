@@ -1,0 +1,3 @@
+      REAL*8 PILOG
+      INTEGER*4 IP , IPI , KF
+      COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)

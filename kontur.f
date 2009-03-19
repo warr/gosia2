@@ -12,8 +12,8 @@ C      DEVU   -
 C      ELM    - matrix elements
 C      ELML   - lower limit on matrix elements
 C      ELMU   - upper limit on matrix elements
-C      HLM    -
-C      INTR   -
+C      HLM    - previous values of matrix elements
+C      INTR   - flag to swap chisqr and log(chisqr)
 C      IPS1   - terminate after calculating and writing correction factors
 C      LNY    - use logs to calculate chi squared
 C      MEMAX  - number of matrix elements
@@ -23,41 +23,37 @@ C      XV     - energy meshpoints where we calculate exact Coulex
 C      YV     - scattering angle meshpoints where we calculate exact Coulex
 C
 C Formal parameters:
-C      Idr    -
+C      Idr    - number of decays
 C      Chis0  -
 C      Chil   -
 C      Ifbf   -
 C      Inpo   -
-C      Jj     -
+C      Jj     - matrix element
 C      Sh     -
 C      Bten   -
-C      Rem    -
+C      Rem    - natural log of the largest value the computer can represent
  
       SUBROUTINE KONTUR(Idr,Chis0,Chil,Ifbf,Inpo,Jj,Sh,Bten,Rem)
       IMPLICIT NONE
       REAL*8 ac , Bten , c , Chil , chilo , Chis0 , chis1 , chis2 , d1 , 
-     &       d2 , DEVD , DEVU , DS , DSE , DSG , ELM , ELML , ELMU , f , 
-     &       h
-      REAL*8 HLM , Rem , RK4 , SA , sajj , Sh , t , v , ww , x , XV , 
-     &       y , YV , ZV
-      INTEGER*4 i , Idr , Ifbf , Inpo , INTR , IPS1 , itl , IVAR , ix , 
-     &          j , Jj , l , LMAXE , LNY , m , MAGEXC , MEMAX , MEMX6 , 
-     &          NWR
-      DIMENSION f(3) , Bten(1200)
-      COMMON /VLIN  / XV(51) , YV(51) , ZV(20) , DSG(20) , DSE(20) , DS
-      COMMON /DFTB  / DEVD(500) , DEVU(500)
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
-      COMMON /HHH   / HLM(500)
-      COMMON /ILEWY / NWR
-      COMMON /LOGY  / LNY , INTR , IPS1
+     &       d2 , f , h
+      REAL*8 Rem , RK4 , sajj , Sh , t , v , ww , x , y
+      INTEGER*4 i , Idr , Ifbf , Inpo , itl , ix , j , Jj , l , m
+      DIMENSION f(3) , Bten(*)
+      INCLUDE 'vlin.inc'
+      INCLUDE 'dftb.inc'
+      INCLUDE 'comme.inc'
+      INCLUDE 'cexc.inc'
+      INCLUDE 'hhh.inc'
+      INCLUDE 'ilewy.inc'
+      INCLUDE 'logy.inc'
 
       LNY = 0
       h = .05*ABS(HLM(Jj))
       IF ( Inpo.NE.-1 ) h = ABS(Sh)
  100  INTR = 0
-      sajj = ABS(SA(Jj))
-      DO l = 1 , MEMAX
+      sajj = ABS(SA(Jj)) ! ratio of matrix elements for correlation
+      DO l = 1 , MEMAX ! For each matrix element
          ELM(l) = HLM(l)
          SA(l) = SA(l)/sajj
       ENDDO
@@ -75,7 +71,7 @@ C      Rem    -
       DO j = 1 , MEMAX
          ELM(j) = .5*h*SA(j) + ELM(j)
       ENDDO
-      CALL LIMITS
+      CALL LIMITS ! Constrain matrix elements within limits
       CALL FTBM(3,chis1,Idr,1,chilo,Bten)
       IF ( chis1.LE.Chis0 ) THEN
          IF ( Inpo.EQ.-1 ) WRITE (22,99003) Jj , ELM(Jj) , chis1
@@ -95,11 +91,11 @@ C      Rem    -
          h = h/2.
          GOTO 100
       ELSE
-         DO j = 1 , MEMAX
+         DO j = 1 , MEMAX ! For each matrix element
             ELM(j) = ELM(j) + .5*SA(j)*h
          ENDDO
          v = ELM(Jj)
-         CALL LIMITS
+         CALL LIMITS ! Constrain matrix elements within limits
          IF ( ABS(v-ELM(Jj)).GT.1.E-6 ) itl = 1
          CALL FTBM(3,chis2,Idr,1,chilo,Bten)
          IF ( chis2.LE.Chis0 ) THEN
@@ -157,7 +153,7 @@ C      Rem    -
       IF ( f(3).GE.1.E-3 ) GOTO 200
       GOTO 600
  500  REWIND 17
-      DO l = 1 , MEMAX
+      DO l = 1 , MEMAX ! For each matrix element
          WRITE (17,*) ELM(l)
       ENDDO
       IF ( ix.EQ.1 ) GOTO 300

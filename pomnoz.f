@@ -9,10 +9,10 @@ C Purpose: perform the expansion to calculate the approximate Coulomb
 C          amplitudes
 C
 C Uses global variables:
-C      ARM    - reduced matrix elements
-C      IAPR   -
+C      ARM    - excitation amplitudes of substates.
+C      IAPR   - index of initial and final levels for each matrix element
 C      INHB   - inhibit error flag setting (LERF)
-C      IPATH  -
+C      IPATH  - index of substate in level with same m as substate Irld
 C      ISEX   -
 C      LERF   - error flag which is set here and used in APRAM
 C      MEMX6  - number of matrix elements with E1...6 multipolarity
@@ -28,18 +28,16 @@ C      Ktoto  - number of iterations needed
  
       SUBROUTINE POMNOZ(Acca,L,Iw,Ktoto,Img,Jidim)
       IMPLICIT NONE
-      REAL*8 Acca , QAPR , sig , TCABS , test , u
-      INTEGER*4 IAPR , IDIVE , Img , INHB , IPATH , ISEX , IVAR , Iw , 
-     &          Jidim , k , kk , Ktoto , L , LERF , LMAXE , m , MAGA , 
-     &          MAGEXC , mc , mc1
-      INTEGER*4 MEMAX , MEMX6 , mw , mw1
-      COMPLEX*16 ARM , ci
-      COMMON /INHI  / INHB
-      COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
-      COMMON /PTH   / IPATH(75) , MAGA(75)
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
-      COMMON /AZ    / ARM(600,7)
-      COMMON /APRX  / LERF , IDIVE(50,2)
+      REAL*8 Acca , sig , TCABS , test , u
+      INTEGER*4 Img , Iw , Jidim , k , kk , Ktoto , L , m , mc , mc1 , 
+     &          mw , mw1
+      COMPLEX*16 ci
+      INCLUDE 'inhi.inc'
+      INCLUDE 'aprcat.inc'
+      INCLUDE 'pth.inc'
+      INCLUDE 'cexc.inc'
+      INCLUDE 'az.inc'
+      INCLUDE 'aprx.inc'
       DATA ci/(0.,-1.)/ ! -sqrt(-1)
 
       sig = 1.

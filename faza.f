@@ -26,7 +26,7 @@ C      Phase
          IF ( Rmu.LT.0. ) FAZA = -FAZA
          IF ( La.EQ.7 ) RETURN
          IF ( Mi.EQ.2 ) RETURN
-         FAZA = CMPLX(Rsg,0.)
+         FAZA = DCMPLX(Rsg,0.D0)
          IF ( Rmu.LT.0. ) FAZA = -FAZA
          GOTO 99999
       ELSE                ! E1...6
@@ -36,5 +36,5 @@ C      Phase
             RETURN
          ENDIF
       ENDIF
-      FAZA = CMPLX(Rsg,0.)
+      FAZA = DCMPLX(Rsg,0.D0)
 99999 END

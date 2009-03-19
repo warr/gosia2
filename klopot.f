@@ -14,10 +14,10 @@ C      ELMU   - upper limit on matrix elements
 C      EP     - bombarding energy
 C      IY     - index of experimental yields
 C      KVAR   -
-C      LP2    - maximum number of matrix elements (500)
+C      LP2    - maximum number of matrix elements (1500)
 C      MEMAX  - number of matrix elements
 C      NEXPT  - number of experiments
-C      TLBDG  - theta of particle detector
+C      TLBDG  - theta of particle detector in lab frame (in degrees)
 C      ZETA   - various coefficients
 C      VINF   - speed of projectile at infinity
 C
@@ -28,27 +28,19 @@ C      Rlr    - print out if matrix element exceeds Rlr.
 
       SUBROUTINE KLOPOT(K,Rlr)
       IMPLICIT NONE
-      REAL*8 a , al , al1 , b , c , ch , CORF , d , dy , DYEX , e , 
-     &       ELM , ELML , ELMU , EP , g , g1 , g2 , rl , Rlr
-      REAL*8 SA , sgm , TLBDG , u , umm , ump , UPL , ux , VINF , XA , 
-     &       XA1 , YEXP , YNRM , ZETA
-      INTEGER*4 i , IDRN , iex , iexh , iexp , ILE , indx , inh , ipf , 
-     &          IVAR , IY , IZ , IZ1 , j , jm , jp , K , KVAR , l , lc
-      INTEGER*4 ll , LMAXE , lngt , loc , LP1 , LP10 , LP11 , LP12 , 
-     &          LP13 , LP14 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &          lu , LZETA , MAGEXC
-      INTEGER*4 MEMAX , MEMX6 , NEXPT , nf , ni , nm , np , NYLDE
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
-     &                YNRM(32,50) , IDRN , ILE(32)
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
-     &                TLBDG(50) , VINF(50)
-      COMMON /SEL   / KVAR(500)
+      REAL*8 a , al , al1 , b , c , ch , d , dy , e , g , g1 , g2 , 
+     &       rl , Rlr , sgm , u , umm , ump , ux
+      INTEGER*4 i , iex , iexh , iexp , indx , inh , ipf , j , jm , 
+     &          jp , K , l , lc , ll , lngt , loc , lu , nf , ni , nm , 
+     &          np
+      INCLUDE 'comme.inc'
+      INCLUDE 'yexpt.inc'
+      INCLUDE 'cexc.inc'
+      INCLUDE 'mgn.inc'
+      INCLUDE 'ccoup.inc'
+      INCLUDE 'cx.inc'
+      INCLUDE 'sel.inc'
+      DATA jm/0/,jp/0/
 
       REWIND 14
       REWIND 18
@@ -57,11 +49,13 @@ C      Rlr    - print out if matrix element exceeds Rlr.
       indx = 1
       REWIND 15
       REWIND 17
-      DO i = 1 , MEMAX
+
+      DO i = 1 , MEMAX ! Zero all matrix elements and limits
          ELM(i) = 0.
          ELMU(i) = 0.
          ELML(i) = 0.
       ENDDO
+
       iexh = 1
  100  g = 0.
       d = 0.
@@ -102,7 +96,7 @@ C      Rlr    - print out if matrix element exceeds Rlr.
             GOTO 400
          ENDIF
       ENDIF
-      loc = (iexh-1)*LP2 + inh ! LP2 = 500
+      loc = (iexh-1)*LP2 + inh ! LP2 = 1500
       ipf = 0
       ZETA(loc) = (VINF(iexh)*g1+TLBDG(iexh)*g2)/VINF(iexh)/VINF(iexh)
       inh = indx
@@ -145,7 +139,7 @@ C      Rlr    - print out if matrix element exceeds Rlr.
             ENDDO
             WRITE (22,99006)
 99006       FORMAT (2X////40X,'ANALYSIS OF SIGNIFICANT DEPENDENCES'//)
-            DO i = 1 , MEMAX
+            DO i = 1 , MEMAX ! For each matrix element
                IF ( KVAR(i).NE.0 ) THEN
                   lc = 0
                   IF ( ELML(i).GE..5 ) THEN
@@ -170,7 +164,7 @@ C      Rlr    - print out if matrix element exceeds Rlr.
      &                          3X,'D(SIGMA**2)/D(ME)',4X,'I',1X,'EXP',
      &                          2X,'TRANSITION',2X,'SIGMA',3X,
      &                          'DERIVATIVE',3X,'D(SIGMA**2)/D(ME)')
-                        DO l = 1 , K
+                        DO l = 1 , K ! For each of the important contributions to chisqr
                            ump = 0.
                            umm = 0.
                            DO j = 1 , lc
@@ -189,9 +183,9 @@ C      Rlr    - print out if matrix element exceeds Rlr.
      &                            IY(jp,3) , CORF(jp,1) , CORF(jp,2) , 
      &                            ump , IY(jm,1) , IY(jm,2) , IY(jm,3) , 
      &                            CORF(jm,1) , CORF(jm,2) , umm
-99008                      FORMAT (6X,1I2,3X,1I2,'--',1I2,5X,1F4.1,4X,
-     &                             1E9.2,7X,1E9.2,9X,'I',2X,1I2,3X,1I2,
-     &                             '--',1I2,5X,1F4.1,4X,1E9.2,7X,1E9.2)
+99008                      FORMAT (5X,1I3,2X,1I3,'--',1I3,4X,1F4.1,4X,
+     &                             1E9.2,7X,1E9.2,9X,'I',1X,1I3,2X,1I3,
+     &                             '--',1I3,4X,1F4.1,4X,1E9.2,7X,1E9.2)
                            CORF(jp,1) = 0.
                            CORF(jm,1) = 0.
                         ENDDO
@@ -208,7 +202,7 @@ C      Rlr    - print out if matrix element exceeds Rlr.
                      ENDIF
                   ENDIF
                ENDIF
-            ENDDO
+            ENDDO ! Loop over matrix elements
             RETURN
          ELSE
             ll = ll + 1

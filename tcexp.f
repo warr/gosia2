@@ -18,9 +18,9 @@ C      complex exponential of Z.
       COMPLEX*16 Z
       
       a = DBLE(Z)
-      b = IMAG(Z)
+      b = DIMAG(Z)
       a = EXP(a)
       c = a*COS(b)
       d = a*SIN(b)
-      TCEXP = CMPLX(c,d)
+      TCEXP = DCMPLX(c,d)
       END

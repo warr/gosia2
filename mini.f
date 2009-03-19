@@ -8,24 +8,24 @@ C
 C Purpose: perform the minimization
 C
 C Uses global variables:
-C      CHIS11 -
+C      CHIS11 - chi squared
 C      CORF   - internal correction factors
 C      DEVD   -
 C      DEVU   -
 C      DLOCK  - limit of derivative below which matrix element fixed if LOCKS=1
 C      ELM    - matrix elements
-C      ELMH   -
+C      ELMH   - matrix element
 C      GRAD   - partial derivative of chi squared wrt. matrix element
-C      HLMLM  -
+C      HLMLM  - old value of matrix element or chi squared
 C      ICS    - read internal correction factors from file rather than recalculating
 C      IFBFL  - calculate derivatives with forward-backward method
-C      INTR   -
+C      INTR   - flag to swap chisqr and log(chisqr)
 C      IPRM   - printing flags (see suboption PRT of OP,CONT)
 C      IPS1   - terminate after calculating and writing correction factors
 C      ITAK2  -
 C      IUNIT3 - unit for TAPE3
 C      IVAR   - fixed, correlated or free flag
-C      JENTR  -
+C      JENTR  - flag set to 0 normally, 1 in OP,ERRO
 C      KFERR  - error flag for minimization
 C      KVAR   -
 C      LFL1   -
@@ -59,46 +59,36 @@ C don't go outside the limits specified by the user.
      &                Bten)
       IMPLICIT NONE
       REAL*8 a , a0 , a1 , b , Bten , c , ccd , chd , chil , chilo , 
-     &       Chiok , chirf , CHIS11 , chis12 , chis13 , chisf , chisp , 
-     &       Chisq , chiss , chl
-      REAL*8 chx , cmax , Conv , CORF , crit , DEVD , DEVU , dl , 
-     &       DLOCK , dm , DYEX , ELM , ELMH , ELML , ELMU , EMH , f1 , 
-     &       f2 , flt , GRAD
-      REAL*8 gradp , HLMLM , ht , p , q , rfk , SA , sel , shl , sumg1 , 
-     &       sumg2 , sumht , UPL , uxa , xkat , Xtest , YEXP , YNRM
-      INTEGER*4 i , IBPS , icl1 , icl2 , icount , ICS , Idr , IDRN , 
-     &          IFBFL , iht , iin , ILE , Imode , indx1 , INM , inmx , 
-     &          ino , INTR , ipas , ipm , IPRM
-      INTEGER*4 Ips , IPS1 , Is , istec , ITAK2 , itf , IUNIT3 , IVAR , 
-     &          IY , j , jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , 
-     &          jnm , jpr , jsa , jst , JZB
-      INTEGER*4 KFERR , kh2 , kkk , KVAR , l , LFL , LFL1 , LFL2 , 
-     &          LMAXE , lnm , LNY , LOCKF , LOCKS , LP1 , LP10 , LP11 , 
-     &          LP12 , LP13 , LP14 , LP2
-      INTEGER*4 LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , MAGEXC , MEMAX , 
-     &          MEMX6 , metf , mvfl , ncall , nlinn , NLOCK , noflg , 
-     &          Nptl , NWR , NYLDE
-      DIMENSION ipm(10) , Bten(1200) , gradp(500)
-      COMMON /DUMM  / GRAD(500) , HLMLM(500) , ELMH(500)
-      COMMON /ILEWY / NWR
-      COMMON /CH1T  / CHIS11
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /UWAGA / ITAK2
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
-     &                YNRM(32,50) , IDRN , ILE(32)
-      COMMON /DFTB  / DEVD(500) , DEVU(500)
-      COMMON /PRT   / IPRM(20)
-      COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
-      COMMON /SEL   / KVAR(500)
-      COMMON /FIT   / LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
-      COMMON /ERRAN / KFERR
-      COMMON /LOGY  / LNY , INTR , IPS1
-      COMMON /ERCAL / JENTR , ICS
-      COMMON /SWITCH/ JZB , IBPS , IUNIT3
+     &       Chiok , chirf , chis12 , chis13 , chisf , chisp , Chisq , 
+     &       chiss , chl
+      REAL*8 chx , cmax , Conv , crit , dl , dm , f1 , f2 , flt
+      REAL*8 gradp , ht , p , q , rfk , sel , shl , sumg1 , 
+     &       sumg2 , sumht , uxa , xkat , Xtest
+      INTEGER*4 i , icl1 , icl2 , icount , Idr , iht , iin , Imode , 
+     &          indx1 , inmx , ino , ipas , ipm
+      INTEGER*4 Ips , Is , istec , itf , j , jcoup , jcp , jin , 
+     &          Jjh , jjj , jlin , jnm , jpr , jsa , jst
+      INTEGER*4 kh2 , kkk , l , lnm , metf , mvfl , ncall , nlinn , 
+     &          noflg , Nptl
+      DIMENSION ipm(10) , Bten(*) , gradp(1500)
+      INCLUDE 'dumm.inc'
+      INCLUDE 'ilewy.inc'
+      INCLUDE 'ch1t.inc'
+      INCLUDE 'mgn.inc'
+      INCLUDE 'uwaga.inc'
+      INCLUDE 'yexpt.inc'
+      INCLUDE 'dftb.inc'
+      INCLUDE 'prt.inc'
+      INCLUDE 'lczp.inc'
+      INCLUDE 'cexc.inc'
+      INCLUDE 'comme.inc'
+      INCLUDE 'sel.inc'
+      INCLUDE 'fit.inc'
+      INCLUDE 'erran.inc'
+      INCLUDE 'logy.inc'
+      INCLUDE 'ercal.inc'
+      INCLUDE 'switch.inc'
+      DATA chirf/0./,dm/0./,sumg2/0./
 
 C     Initialise gradp to zero for each matrix element
       DO i = 1 , MEMAX
@@ -128,17 +118,17 @@ C        K=1 => relative changes
 C
 C        L=0 => yields, branching ratios used to calculate chi squared
 C        L=1 => logs used to claculate chi squared
-      IF ( Imode.LT.2000 ) THEN !Fast approximation for chi squared and derivatives
+      IF ( Imode.LT.2000 ) THEN ! Fast approximation for chi squared and derivatives
          icl1 = 0
          icl2 = 3
          IF ( Imode.GE.1100 ) metf = 1
          IF ( (Imode-1000-100*metf).GE.10 ) lnm = 1
          IF ( (Imode-1000-100*metf-10*lnm).EQ.1 ) LNY = 1 ! Use logs
-         IF ( JENTR.EQ.1 ) GOTO 200
+         IF ( JENTR.EQ.1 ) GOTO 200 ! If we are in OP,ERRO, jump
          IF ( ICS.NE.0 ) THEN ! Read correction factors from file, rather than recalculating
             REWIND 11
-            DO jnm = 1 , LP4
-               READ (11) (CORF(jnm,kh2),kh2=1,LP6)
+            DO jnm = 1 , LP4 ! LP4 is 1500
+               READ (11) (CORF(jnm,kh2),kh2=1,LP6) ! LP6 is 32
             ENDDO
             ICS = 0
             GOTO 200
@@ -168,9 +158,9 @@ C     Write correction factors
       REWIND 11
       DO jnm = 1 , LP4
          WRITE (11) (CORF(jnm,kh2),kh2=1,LP6)
-       ENDDO
+      ENDDO
        
-       IF ( IPS1.EQ.0 ) RETURN ! If IPS1 = 0, terminate after writing correction factors
+      IF ( IPS1.EQ.0 ) RETURN ! If IPS1 = 0, terminate after writing correction factors
        
  200  noflg = 0
       ncall = 1
@@ -232,7 +222,8 @@ C     Write correction factors
                      flt = 1.01
                      IF ( jjj.EQ.2 ) flt = .99
                      ELM(jcoup) = ELMH(jcoup)*flt
- 355              ENDDO
+ 355                 CONTINUE
+                  ENDDO
                   CALL FTBM(3,chis13,Idr,ncall,chx,Bten)
                   IF ( jjj.EQ.1 ) HLMLM(jnm) = chis13
                   IF ( IFBFL.NE.1 .OR. jjj.NE.1 ) THEN
@@ -250,7 +241,7 @@ C     Write correction factors
          ENDDO
          IF ( KFERR.EQ.1 ) THEN
             GRAD(Jjh) = 0.
-            IF ( Is.EQ.1 .AND. icount.EQ.1 ) WRITE (IUNIT3,*)
+            IF ( Is.EQ.1 .AND. icount.EQ.1 ) WRITE (IUNIT3,*) ! For sigma program
      &           (NWR*GRAD(jnm),jnm=1,MEMAX)
          ENDIF
          IF ( metf.EQ.1 .AND. ipas.EQ.2 ) THEN
@@ -339,7 +330,7 @@ C     Write correction factors
          IF ( KFERR.NE.1 ) THEN
             IF ( MOD(icount,IPRM(5)).EQ.0 .OR. icount.EQ.1 )
      &           WRITE (22,99010) Chisq
-c            WRITE (*,99010) Chisq
+            WRITE (*,99010) Chisq
             IF ( MOD(icount,IPRM(6)).EQ.0 ) THEN
                WRITE (22,99002)
 99002          FORMAT (20X,'GRADIENT'//)

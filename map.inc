@@ -1,0 +1,2 @@
+      REAL*8 PARX, PARXM, XIR
+      COMMON /MAP   / PARX(50,12,5) , PARXM(50,4,10,6) , XIR(6,50)

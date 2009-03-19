@@ -4,11 +4,11 @@ C SUBROUTINE PODZIEL
 C
 C Called by: APRAM
 C
-C Purpose: subdivide matrix operators if the sumation doesn't converge.
+C Purpose: subdivide matrix operators if the summation doesn't converge.
 C
 C Uses global variables:
 C      IDIVE  - number of subdivisions
-C      LP2    - maximum number of matrix elements (500)
+C      LP2    - maximum number of matrix elements (1500)
 C      QAPR   - approximate Coulomb amplitudes
 C
 C We use the identity: exp(A) \bar{a} = exp(A/2) exp(A/2)\bar{a}.
@@ -19,15 +19,11 @@ C      J      - experiment number
  
       SUBROUTINE PODZIEL(I,J)
       IMPLICIT NONE
-      INTEGER*4 I , IAPR , IDIVE , ISEX , J , k , l , l1 , l2 , LERF , 
-     &          LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , 
-     &          LP4 , LP6
-      INTEGER*4 LP7 , LP8 , LP9
-      REAL*8 QAPR
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
-      COMMON /APRX  / LERF , IDIVE(50,2)
+      INTEGER*4 I , J , k , l , l1 , l2
+      INCLUDE 'mgn.inc'
+      INCLUDE 'aprcat.inc'
+      INCLUDE 'aprx.inc'
+      DATA l1/0/
 
       IF ( I.NE.3 ) THEN
          IF ( I.EQ.1 ) THEN

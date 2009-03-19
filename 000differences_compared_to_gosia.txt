@@ -1,0 +1,33 @@
+switch.inc
+----------
+Gosia2 has the additional variable IBPS, which selects beam or target, which
+is not used in gosia.
+
+cinit2.inc
+----------
+This only exists for gosia2. It selects which normalisation coefficients to
+use.
+
+resc.inc
+--------
+This only exists for gosia2. It contains the matrix elements for the two
+nuclei (target and projectile).
+
+angula.f
+--------
+In gosia 2, we multiply Ygn by dsig*SIN(ttx). This is not done in gosia.
+
+cegry.f
+-------
+If MCFIX is not set, we read the normalisation coefficients from CNOR1.
+
+gosia2.f
+--------
+Lots of differences compared to gosia.f.
+
+prelm.f
+-------
+
+There is some extra code for dealing with matrix elements from two nuclei
+instead of one.
+

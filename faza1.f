@@ -11,7 +11,7 @@ C      La     - lambda 1...6 = E1...6, 7,8 = M1,M2
 C      Mi     - mu 
 C      Rmir   -
 C      Rmis   -
-C      Dis    -
+C      Dis    - complex phase
 C      Rmu    -
 
       SUBROUTINE FAZA1(La,Mi,Rmir,Rmis,Dis,Rmu)
@@ -33,5 +33,5 @@ C      Rmu    -
             RETURN
          ENDIF
       ENDIF
-      Dis = CMPLX(-DBLE(irs),0.)
+      Dis = DCMPLX(-DBLE(irs),0.D0)
 99999 END

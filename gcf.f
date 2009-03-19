@@ -14,12 +14,17 @@ C      Q      - Attenuation coefficient (output)
  
       SUBROUTINE GCF(Tau,Thing,Q)
       IMPLICIT NONE
-      REAL*8 A , b , D , dl , ev , ex , f , fint , od , ODL , Q , R , 
+      REAL*8 A , b , D , dl , ev , ex , f , fint , od , Q , R , 
      &       Tau , Thing , XL , xm , yl , yu
       INTEGER*4 i , j , k , m
-      COMMON /DIMX  / A , R , XL , D , ODL(200)
+      INCLUDE 'dimx.inc'
       DIMENSION f(101) , b(4) , Q(9)
 
+      A = DIX(1)
+      R = DIX(2)
+      XL = DIX(3)
+      D = DIX(4)
+      
       b(1) = ATAN2(A,D+XL)
       b(2) = ATAN2(A,D)
       b(3) = ATAN2(R,D+XL)

@@ -8,26 +8,25 @@ C
 C Purpose:
 C
 C Uses global variables:
-C      IAXS   - axial symmetry flag
-C      IEXP   - experiment number
-C      NMAX   - number of levels
-C      TETACM - theta of particle detector in center of mass frame
-C      ZETA   - various coefficients
+C      IAXS   - axial symmetry flag (readonly)
+C      IEXP   - experiment number (readonly)
+C      NMAX   - number of levels (readonly)
+C      TETACM - theta of particle detector in center of mass frame (readonly)
+C      ZETA   - various coefficients (read/write)
 C
 C Formal parameter:
 C      Bten   - 
  
       SUBROUTINE TENS(Bten)
       IMPLICIT NONE
-      REAL*8 arg , Bten , DJMM , DSIGS , EPS , EROOT , FIEX , TETACM , 
-     &       TREP , ZETA
-      INTEGER*4 i , IAXS , IEXP , ind , inz , iph , ix , k , k1 , kp , 
-     &          l , lp , lpp , lx , lxx , LZETA , NDIM , NMAX , NMAX1
-      DIMENSION Bten(1200)
-      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
-      COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
-      COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
+      REAL*8 arg , Bten , DJMM
+      INTEGER*4 i , ind , inz , iph , ix , k , k1 , kp , l , lp , 
+     &          lpp , lx , lxx
+      DIMENSION Bten(*)
+      INCLUDE 'kin.inc'
+      INCLUDE 'tcm.inc'
+      INCLUDE 'ccoup.inc'
+      INCLUDE 'coex2.inc'
 
       ix = NMAX*28
       arg = 1.570796327 + TETACM(IEXP)/2.
@@ -35,7 +34,7 @@ C      Bten   -
          ZETA(i) = 0.
       ENDDO
 
-      DO i = 2 , NMAX
+      DO i = 2 , NMAX ! For each level except ground state
          DO kp = 1 , 7 , 2
             k = kp - 1
             k1 = INT(DBLE(k)/2.+.01)
@@ -67,5 +66,5 @@ C      Bten   -
                ENDDO ! Loop over lp
             ENDIF ! If k .eq. 0
          ENDDO ! Loop over kp
-      ENDDO ! Loop over i
+      ENDDO ! Loop over level i
       END

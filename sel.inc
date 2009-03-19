@@ -1,0 +1,2 @@
+      INTEGER*4 KVAR
+      COMMON /SEL   / KVAR(1500)

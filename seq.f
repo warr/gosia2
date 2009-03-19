@@ -11,22 +11,21 @@ C levels and take this into account, gradually working our way down to the
 C ground state.
 C
 C Uses global variables:
-C      DELTA  - 
+C      DELTA  - \delta_\lambda: index 1 = electric^2, 2 = magnetic^2, 3 = cross term
 C      EN     - energy of level
-C      ENDEC  -
-C      FP     -
-C      GKP    -
-C      IFAC   -
-C      KLEC   -
-C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
+C      ENDEC  - energy difference for each matrix element
+C      FP     - F coefficient * DELTA^2
+C      GKP    - Gk * DELTA^2
+C      KLEC   - number of decays for each level
+C      KSEQ   - indices for each decay (level1, level2, matrix element, multipolarity + 10)
 C      LDNUM  - number of matrix elements with each multipolarity populating levels
-C      LP2    - maximum number of matrix elements (500)
-C      LP3    - maximum number of levels (75)
+C      LP2    - maximum number of matrix elements (1500)
+C      LP3    - maximum number of levels (100)
 C      MULTI  - number of matrix elements having a given multipolarity
 C      NMAX   - number of levels
-C      NMAX1  - 
+C      NMAX1  - number of levels with decays
 C      SPIN   - spin of level
-C      TAU    -
+C      TAU    - normally lifetime in picoseconds (here it is used for energies, however)
 C
 C Formal parameters:
 C      Idr    - returns number of items in KSEQ array.
@@ -38,40 +37,33 @@ C 8 = M2.
  
       SUBROUTINE SEQ(Idr)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , CONV , DELTA , DIPOL , ega , egs , emax , 
-     &       EN , ENDEC , ENZ , F , FP , GF , GKP , SPIN , spinf , 
-     &       spini , TAU , twoi
-      REAL*8 ZPOL
-      INTEGER*4 idecay , Idr , indx , inx , inx1 , ir , is , ISO , 
-     &          istr1 , istr2 , ITMA , j , js , jsave , k , KLEC , kpa , 
-     &          KSEQ , l , la
-      INTEGER*4 la1 , LAMDA , LAMMAX , ld , LDNUM , LEAD , LEADF , LP1 , 
-     &          LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , LP4 , 
-     &          LP6 , LP7 , LP8 , LP9
-      INTEGER*4 m , m1 , m6 , MEM , mk , mule , mulm , MULTI , n , n1 , 
-     &          NDIM , NMAX , NMAX1 , nob
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
-     &                ENZ(200)
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
-     &                MULTI(8)
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
-     &                ISO
-      COMMON /LEV   / TAU(75) , KSEQ(500,4)
-      COMMON /CATLF / FP(4,500,3) , GKP(4,500,2) , KLEC(75)
+      REAL*8 CONV , ega , egs , emax , F , GF , spinf , spini , twoi
+      INTEGER*4 idecay , Idr , indx , inx , inx1 , ir , is , istr1 , 
+     &          istr2 , j , js , jsave , k , kpa , l , la , la1 , 
+     &          ld , LEADF
+      INTEGER*4 m , m1 , m6 , MEM , mk , mule , mulm , n , n1 , nob
+      INCLUDE 'coex2.inc'
+      INCLUDE 'tra.inc'
+      INCLUDE 'clcom.inc'
+      INCLUDE 'mgn.inc'
+      INCLUDE 'coex.inc'
+      INCLUDE 'lev.inc'
+      INCLUDE 'catlf.inc'
+      DATA jsave/0/
       
       m6 = 0
       DO l = 1 , 6
          m6 = m6 + MULTI(l)
       ENDDO
+
       idecay = 0
       Idr = 0
-      DO l = 1 , LP3
-         KLEC(l) = 0
+
+      DO l = 1 , LP3 ! LP3 = 100 (number of levels)
+         KLEC(l) = 0 ! Initialise KLEC to zero
       ENDDO
-      DO k = 1 , LP2
+
+      DO k = 1 , LP2 ! LP2 = 1500 (number of matrix elements)
          DO j = 1 , 3
             DO l = 1 , 4
                FP(l,k,j) = 0.
@@ -80,59 +72,63 @@ C 8 = M2.
             DELTA(k,j) = 0.
          ENDDO
       ENDDO
+
+C     Store the energies in TAU array
       DO n = 1 , NMAX
          TAU(n) = EN(n)
       ENDDO
-      DO n = 1 , NMAX
+
+      DO n = 1 , NMAX ! Loop on levels
+C        Find level with highest energy
          emax = 0.
-         DO j = 1 , NMAX
+         DO j = 1 , NMAX ! Loop on levels
             IF ( TAU(j).GE.emax ) THEN
                emax = TAU(j)
                jsave = j
             ENDIF
          ENDDO
-         DO is = 1 , NMAX
-            DO la = 1 , 8
-               IF ( la.LE.3 .OR. la.EQ.7 .OR. la.EQ.8 ) THEN
-                  ld = LDNUM(la,is)
+         DO is = 1 , NMAX ! Loop on levels
+            DO la = 1 , 8 ! Loop on multipolarities
+               IF ( la.LE.3 .OR. la.EQ.7 .OR. la.EQ.8 ) THEN ! E3, M1, M2
+                  ld = LDNUM(la,is) ! Number of levels connected to this one with this multipolarity
                   IF ( ld.NE.0 ) THEN
-                     DO ir = 1 , ld
+                     DO ir = 1 , ld ! For each level ir connected to level is with multipolarity la
                         m = LEADF(is,ir,la)
                         IF ( m.EQ.jsave .OR. is.EQ.jsave ) THEN
                            IF ( is.NE.jsave .OR. EN(m).LT.EN(is) ) THEN
                               IF ( m.NE.jsave .OR. EN(is).LT.EN(m) )
      &                             THEN
-                                 indx = MEM(is,m,la)
+                                 indx = MEM(is,m,la) ! Matrix element from level is to level m with multipolarity la
                                  idecay = idecay + 1
-                                 KSEQ(idecay,1) = m
-                                 KSEQ(idecay,2) = is
-                                 KSEQ(idecay,3) = indx
-                                 KSEQ(idecay,4) = la + 10
-                                 IF ( EN(m).LE.EN(is) ) THEN
+                                 KSEQ(idecay,1) = m       ! Level
+                                 KSEQ(idecay,2) = is      ! Level
+                                 KSEQ(idecay,3) = indx    ! Matrix element
+                                 KSEQ(idecay,4) = la + 10 ! Multipolarity + 10
+                                 IF ( EN(m).LE.EN(is) ) THEN ! If the levels are degenerate, swap order
                                     KSEQ(idecay,1) = is
                                     KSEQ(idecay,2) = m
                                  ENDIF
                               ENDIF
                            ENDIF
                         ENDIF
-                     ENDDO
+                     ENDDO ! Loop on levels ir
                   ENDIF
                ENDIF
-            ENDDO
-         ENDDO
+            ENDDO ! Loop on multipolarity la
+         ENDDO ! Loop on levels is
          TAU(jsave) = -1.
-      ENDDO
+      ENDDO ! Loop on levels n
 
 C     Now for each decay, calculate transition amplitudes for each
 C     multipolarity
-      DO l = 1 , idecay
+      DO l = 1 , idecay ! For each decay
          istr1 = 0
-         IF ( KSEQ(l,4).LT.10 ) GOTO 200
+         IF ( KSEQ(l,4).LT.10 ) GOTO 200 ! KSEQ(l,4) is 10 + multipolarity
          istr2 = 0
-         n = KSEQ(l,1)
-         m = KSEQ(l,2)
-         inx = KSEQ(l,3)
-         la = KSEQ(l,4) - 10
+         n = KSEQ(l,1) ! Initial level
+         m = KSEQ(l,2) ! Final level
+         inx = KSEQ(l,3) ! Matrix element
+         la = KSEQ(l,4) - 10 ! Multipolarity
          ega = EN(n) - EN(m)    ! ega = E_\gamma
          twoi = 1./SQRT(2.*SPIN(n)+1.)
          spini = SPIN(n) + .001
@@ -141,35 +137,35 @@ C     multipolarity
          js = l + 1
          la1 = 0
          inx1 = 0
-         DO j = js , idecay
-            IF ( KSEQ(j,4).GE.10 ) THEN
-               n1 = KSEQ(j,1)
-               m1 = KSEQ(j,2)
-               IF ( n1.EQ.n .AND. m1.EQ.m ) THEN
-                  inx1 = KSEQ(j,3)
-                  la1 = KSEQ(j,4) - 10
-                  KSEQ(j,4) = KSEQ(j,4) - 10
+         DO j = js , idecay ! For each decay
+            IF ( KSEQ(j,4).GE.10 ) THEN ! KSEQ(j,4) is 10 + multipolarity
+               n1 = KSEQ(j,1) ! Initial level
+               m1 = KSEQ(j,2) ! Final level
+               IF ( n1.EQ.n .AND. m1.EQ.m ) THEN ! Decays involving the same pair of levels
+                  inx1 = KSEQ(j,3) ! Matrix element
+                  la1 = KSEQ(j,4) - 10 ! Multipolarity
+                  KSEQ(j,4) = KSEQ(j,4) - 10 ! Subtract ten to indicate we have handled this one
                ENDIF
             ENDIF
-         ENDDO
-         KSEQ(l,4) = KSEQ(l,4) - 10
+         ENDDO ! Loop on decays j
+         KSEQ(l,4) = KSEQ(l,4) - 10 ! Subtract ten to indicate we have handled this one
          Idr = Idr + 1
          mule = 0
          mulm = 0
          nob = 1
  50      IF ( la.LE.3 ) THEN
             IF ( la.EQ.1 ) THEN
-               DELTA(Idr,1) = 399.05*ega*egs ! E1
+               DELTA(Idr,1) = 398.77393*ega*egs ! E1
                mule = 1
-               istr1 = 1
+               istr1 = 1 ! In array CC and N parameter of CONV -> E1
             ELSEIF ( la.EQ.2 ) THEN
-               DELTA(Idr,1) = 3.4928*egs*ega*ega ! E2
+               DELTA(Idr,1) = 3.5002636*egs*ega*ega ! E2
                mule = 2
-               istr1 = 2
+               istr1 = 2 ! In array CC and N parameter of CONV -> E2
             ELSEIF ( la.EQ.3 ) THEN
-               DELTA(Idr,1) = .02391*ega*ega*ega*egs ! E3
+               DELTA(Idr,1) = 0.023891302*ega*ega*ega*egs ! E3
                mule = 3
-               istr1 = 3
+               istr1 = 3 ! In array CC and N parameter of CONV -> E3
             ELSE
                GOTO 100
             ENDIF
@@ -177,13 +173,13 @@ C     multipolarity
          ENDIF
  100     la = la - 6
          IF ( la.EQ.2 ) THEN
-            DELTA(Idr,2) = .0368*ega*ega*egs ! M2
+            DELTA(Idr,2) = 0.036806836*ega*ega*egs ! M2
             mulm = 2
-            istr2 = 5
+            istr2 = 5 ! In array CC and N parameter of CONV -> M2
          ELSE
-            DELTA(Idr,2) = 4.1952*ega*egs ! M1
+            DELTA(Idr,2) = 4.1932861*ega*egs ! M1
             mulm = 1
-            istr2 = 4
+            istr2 = 4 ! In array CC and N parameter of CONV -> M1
          ENDIF
  150     IF ( nob.NE.2 ) THEN
             IF ( mule.NE.1 ) THEN
@@ -207,7 +203,7 @@ C     multipolarity
             KSEQ(Idr,2) = inx
             KSEQ(Idr,1) = 0
          ENDIF
-         ENDEC(Idr) = EN(n) - EN(m)
+         ENDEC(Idr) = EN(n) - EN(m) ! Energy difference between levels
          DO mk = 1 , 7 , 2
             kpa = mk/2 + 1
             k = mk - 1
@@ -220,13 +216,15 @@ C     multipolarity
                FP(kpa,Idr,3) = F(k,spini,spinf,mulm,mule)*DELTA(Idr,3)
                FP(kpa,Idr,2) = F(k,spini,spinf,mulm,mulm)*DELTA(Idr,2)
             ENDIF
-         ENDDO
+         ENDDO ! Loop on mk
          DELTA(Idr,1) = DELTA(Idr,1)*(1.+CONV(ega,istr1))
          DELTA(Idr,2) = DELTA(Idr,2)*(CONV(ega,istr2)+1.)
-         KLEC(n) = KLEC(n) + 1
- 200  ENDDO
+         KLEC(n) = KLEC(n) + 1 ! Increment KLEC for initial level
+ 200     CONTINUE
+      ENDDO ! Loop on decays l
+
       NMAX1 = 0
-      DO n = 1 , NMAX
+      DO n = 1 , NMAX ! For each level count those which have decays
          IF ( KLEC(n).NE.0 ) NMAX1 = NMAX1 + 1
       ENDDO
       END

@@ -12,18 +12,15 @@ C      IY     - index for yields
 C      YEXP   - experimental yield
 C
 C Formal parameters:
-C      Lst    - start
-C      Ls     - end
-C      L      -
+C      Lst    - first yield in set
+C      Ls     - last yield in set
+C      L      - number of dataset
  
       SUBROUTINE SZEREG(Lst,Ls,L)
       IMPLICIT NONE
-      REAL*8 CORF , DYEX , dyh , UPL , YEXP , yh , YNRM
-      INTEGER*4 ia , ib , IDRN , ih , ILE , inx , IY , k , L , Ls , 
-     &          lsp , Lst , lst1 , NYLDE
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
-     &                YNRM(32,50) , IDRN , ILE(32)
+      REAL*8 dyh , yh
+      INTEGER*4 ia , ib , ih , inx , k , L , Ls , lsp , Lst , lst1
+      INCLUDE 'yexpt.inc'
 
       IF ( Lst.EQ.Ls ) RETURN
       lst1 = Lst

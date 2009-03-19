@@ -1,69 +1,12 @@
-C      PROGRAM GOSIA2(INPUT,OUTPUT,TAPE6=OUTPUT,TAPE3,TAPE14,TAPE1,
-C        *TAPE15,TAPE17,TAPE18,TAPE4,TAPE2,TAPE7,TAPE9)
-C************************
-C HANDLES SIMULTANEOUS PROJECTILE/TARGET EXCITATION
-C   THIS IS A 32-GE DETECTOR 386+WEITEK SCALAR VERSION FROM MAR., 1989
-C FULL Q MAPS CALCULATED FOR E1 THROUGH E4 - UPDATE FROM AUG. 1989
-C NOTE: THERE IS NO LONGER THE DOMINANT MULTIPOLARITY SELECTED
-C FULL MAPS AND FITTING OF E5,E6 ADDED - APRIL 1990
-C XI AND ZETA RANGES CALCULATED FOR EACH MULTIPOLARITY INDEPENDENTLY
+      INCLUDE 'header.txt'
 C
-C May 1995 additions - matrix elements generator following general
-C structure of matrix elements as given in Bohr-Mottelson book.
-C Generator is activated by OP,THEO
-C Using OP,THEO the starting values are set according to the model while
-C all couplings are kept as given using ME suboption. OP,THEO writes
-C matrix elements to restart file which should be used subsequently.
-C
-C Eh. Vogt's addition - OP,FILE - allows to specify OPEN statements,
-C if convenient.
-C
-C November 1990 update - number of levels = 75, yields=32 x 1500
-C magnetic substates = 600 matrix elements=500
-C April 1991 update - OP,RAW added - handles non-efficiency-corrected
-C spectra, allows to form Ge detector clusters. Up to 20 clusters
-C can be defined. Number of physical Ge's increased to 200, while
-C number of datasets (i.e. single detector+cluster gamma yields)
-C is still limited to 32
-C Output is written on unit 22 to avoid mixing it with system
-C messages on some computers
-C PIN diode option added -Sept. 96
-C July 1997 - known matrix elements input in OP,YIEL extended to
-C all multipolarities. Note change in the input, now:
-C LAMDA, NS1, NS2, ME, DME
-C************************
-C            GOSIA HAS BEEN DEVELOPED BY T.CZOSNYKA,D.CLINE AND C.Y.WU
-C            AT NUCLEAR STRUCTURE RESEARCH LABORATORY,UNIV. OF ROCHESTER
-C
-C            SOME CONCEPTS USED COME FROM 1978 WINTHER/DE BOER CODE
-C            C O U L E X AND FROM NSRL DEEXCITATION CODE C E G R Y.
-C            HOWEVER,THE PARTS TAKEN FROM BOTH CODES ARE IN MOST
-C            CASES COMPLETELY REWRITTEN,SO THE SIMILARITY OF
-C            VARIABLE AND ROUTINE NAMES MAY BE MISLEADING.
-C
-C            VALUABLE CONTRIBUTIONS WERE ALSO MADE BY:
-C            L.HASSELGREN AND A.BACKLIN  (UPPSALA)
-C            J.SREBRNY  (WARSAW)
-C            B.KOTLINSKI  (WARSAW AND ROCHESTER)
-C
-C
-C            FOR INFORMATION,PLEASE CONTACT:
-C            TOMASZ CZOSNYKA,SLCJ, WARSAW UNIVERSITY, WARSZAWA, POLAND
-C            02-297 WARSZAWA, BANACHA 4-----PHONE (22)-222-123
-C            DOUGLAS CLINE,DEPARTMENT OF PHYSICS,THE UNIVERSITY OF ROCHESTER
-C            ROCHESTER,NY14627,USA------PHONE(585)275-4943
-C
-C            REF.----   UR/NSRL REPORT 308/1986
-C
-C************************  VERSION FROM JUNE, 2006  *******************
-C
-C**********************************************************************
-C PROGRAM GOSIA
+C PROGRAM GOSIA2
 C
 C Calls: ADHOC, ALLOC, ANGULA, ARCCOS, ARCTG, CMLAB, COORD, DECAY, DJMM,
-C        EFFIX, ELMT, FAKP, FHIP, FTBM, INTG, KLOPOT, KONTUR, LAGRAN, LOAD,
-C        MINI, MIXR, MIXUP, OPENF, PATH, PRELM, PTICC, QFIT, READY, SETIN,
-C        SIMIN, SNAKE, STING, TACOS, TAPMA, TEMB, TENS, WSIXJ, WTHREJ
+C        EFFIX, ELMT, FAKP, FHIP, FTBM, INTG, INVKIN, KLOPOT, KONTUR, LAGRAN,
+C        LOAD, MINI, MIXR, MIXUP, OPENF, PATH, PRELM, PTICC, QFIT, READY,
+C        SETIN, SIMIN, SNAKE, SPLNER, STING, TACOS, TAPMA, TEMB, TENS, WSIXJ,
+C        WTHREJ
 C
 C Uses global variables:
 C      ABC    - absorption coefficients
@@ -71,12 +14,12 @@ C      ACCA   - accuracy
 C      ACCUR  - accuracy required
 C      AGELI  - angles of Ge detectors
 C      AKAVKA - efficiency curve parameters
-C      ARM    - reduced matrix elements
+C      ARM    - excitation amplitudes of substates.
 C      AVJI   - average J (N.B. here it is G(1))
 C      B      - table of factorials
-C      BEQ    - beta
+C      BEQ    - identifier for angle for rotations
 C      BETAR  - recoil beta
-C      CAT    - catalog of matrix elements
+C      CAT    - substates of levels (n_level, J, m)
 C      CC     - conversion coefficients
 C      CNOR   - normalization factors
 C      CNOR1  - normalization factors for target (for gosia2)
@@ -87,10 +30,10 @@ C      DEVU   -
 C      DIPOL  - E1 polarization parameter
 C      DIX    - Ge parameters (inner & outer radius, length, distance)
 C      DLOCK  - limit derivative below which matrix element is fixed if LOCKS=1
-C      DS     -
-C      DSE    -
-C      DSG    -
-C      DSIGS  -
+C      DS     - integrated rutherford cross-section
+C      DSE    - rutherford cross section at given energy integrated over angles
+C      DSG    - differential gamma-ray yield at meshpoints
+C      DSIGS  - dsigma for each experiment
 C      DYEX   - error on experimental yield
 C      EAMX   - known matrix elements and their errors
 C      ELM    - matrix elements
@@ -99,7 +42,7 @@ C      ELM26  - matrix elements storage for projectile (for gosia2)
 C      ELMH   -
 C      ELML   - lower limit on matrix elements
 C      ELMU   - upper limit on matrix elements
-C      EMMA   - 
+C      EMMA   - Controls number of magnetic substates in full coulex calc.
 C      EN     - energy of level
 C      EP     - bombarding energy
 C      ERR    - error flag
@@ -109,76 +52,77 @@ C      FIEX   - phi range of particle detector
 C      GAMMA  - Gamma (N.B. here it is G(2))
 C      GFAC   - g (N.B. here it is G(5))
 C      GRAD   - partial derivative of chi squared wrt. each matrix element
-C      HLM    -
-C      HLMLM  -
-C      IAMX   -
-C      IAMY   -
+C      HLM    - matrix elements before minimisation
+C      HLMLM  - old value of matrix element or chi squared
+C      IAMX   - index of matrix element for known matrix element
+C      IAMY   - level indices of pair of levels for which matrix element is known
 C      IAX    - axial symmetry flag
-C      IBPS   - target/projectile switch
-C      ICLUST -
-C      ICS    -
+C      IBPS   - target/projectile switch (gosia2)
+C      IBYP   - flag to indicate whether we calculate <\alpha_k>
+C      ICLUST - cluster number for each experiment and detector
+C      ICS    - read internal correction factors flag (OP,CONT switch CRF,)
 C      IDIVE  - number of subdivisions
-C      IDRN   -
+C      IDRN   - index of normalising transition for yields
 C      IEXP   - experiment number
-C      IFAC   -
+C      IFAC   - spin/parity phase factor
 C      IFBFL  - calculate derivatives with forward-backward method
-C      IFMO   -
-C      ILE    -
+C      IFMO   - include correction to angular distance for finite recoil distance.
+C      ILE    - yield number for each detector
 C      IMIN   -
 C      INHB   - inhibit error flag (LERF) setting in POMNOZ
-C      INNR   -
-C      INTERV -
-C      INTR   -
+C      INNR   - independent normalisation switch (see OP,CONT INR,)
+C      INTERV - default accuracy check parameter for Adams-Moulton (see OP,CONT:INT)
+C      INTR   - flag to swap chisqr and log(chisqr)
 C      IP     - table of prime numbers
 C      IPRM   - various flags to control output
 C      IPS1   - terminate after calculating and storing internal correction factors
 C      IRAWEX - flag to indicate raw uncorrected yield
 C      ISEX   -
 C      ISKIN  - kinematic flag (0,1)
-C      ISMAX  -
-C      ISO    -
+C      ISMAX  - number of substates used
+C      ISO    - isotropic flag
 C      ITMA   - identify detectors according to OP,GDET
-C      ITS    -
+C      ITS    - create tape 18 file (OP,CONT switch SEL,)
 C      ITTE   - thick target experiment flag
 C      IUNIT3 - unit for TAPE3
 C      IVAR   - indicates a limit or correlation is set
-C      IWF    -
+C      IWF    - warning flag
 C      IY     - index for yields
 C      IZ     - Z of investigated nucleus
 C      IZ1    - Z of non-investigated nucleus
-C      JENTR  -
-C      JSKIP  -
+C      JENTR  - flag set to 0 normally, 1 in OP,ERRO
+C      JSKIP  - Experiments to skip during minimisation.
 C      JZB    - unit to read from
 C      KFERR  - error flag for minimization
 C      KSEQ   - index of level
 C      KVAR   -
 C      LAMAX  - number of multipolarities to calculate
 C      LAMBDA - list of multipolarities to calculate
-C      LASTCL -
+C      LASTCL - index of last detector in cluster
 C      LDNUM  - number of matrix elements with each multipolarity populating each level
 C      LEAD   - pair of levels involved in each matrix element
 C      LIFCT  - index for lifetimes
-C      LMAX   -
-C      LMAXE  -
+C      LMAX   - ground-state spin + 1
+C      LMAXE  - maximum multipolarity needed for calculation
 C      LNORM  - normalisation constant control
 C      LNY    - use logs to calculate chi squared
 C      LOCKF  - flag to fix matrix elements with most significant derivative
 C      LOCKS  - lock flag. If LOCKS=1, fix at first stage of minimization
 C      LP1    - maximum number of experiments (50)
-C      LP10   - maximum number of reduced matrix elements (600)
+C      LP10   - maximum number of substates (1200)
 C      LP11   - LP8 - 1 (103)
 C      LP12   - number of steps of omega (365)
 C      LP13   - LP9 + 1 (47901)
 C      LP14   - maximum space for collision functions (4900)
-C      LP2    - maximum number of matrix elements (500)
-C      LP3    - maximum number of levels (75)
+C      LP2    - maximum number of matrix elements (1500)
+C      LP3    - maximum number of levels (100)
 C      LP4    - maximum number of yields (1500)
 C      LP6    - maximum number of gamma detectors (32)
 C      LP7    - start of collision functions (45100)
 C      LP8    - (104)
 C      LP9    - length of ZETA - 2100 (47900)
 C      MAGA   - number of magnetic substates in approximate calculation
-C      MAGEXC -
+C      MAGEXC - flag: 0 means no magnetic excitations, 1 means with mag. exc.
 C      MCFIX  - flag to say if normalization coefficient is fixed (for gosia2)
 C      MEMAX  - number of matrix elements
 C      MEMX6  - number of matrix elements with E1...6 multipolarity
@@ -186,32 +130,33 @@ C      MULTI  - number of matrix elements having given multipolarity
 C      NAMX   - number of known matrix elements
 C      NANG   - number of gamma-ray detectors for each experiment
 C      NBRA   - number of branching ratios
-C      NCM    -
+C      NCM    - calculate kinematics assuming this state for final state (default = 2)
 C      NDIM   - maximum number of levels
 C      NDST   - number of data sets
 C      NEXPT  - number of experiments
+C      NLIFT  - number of lifetimes
 C      NLOCK  - number of elemnts to fix if LOCKF=1
 C      NMAX   - number of levels
-C      NMAX1  -
+C      NMAX1  - number of levels with decays
 C      NYLDE  - number of yields
-C      ODL    - distance from target to front face of detector
+C      ODL    - results of OP,GDET calculation
 C      PARX   - [for maps]
 C      PARXM  - [for maps]
 C      POWER  - x (N.B. here it is G(7))
 C      QAPR   - approximate Coulomb amplitudes
 C      SA     - ratio of matrix elements for correlated elements
-C      SE     -
+C      SE     - seed for random number generator of OP,RAND
+C      SGW    - number of standard deviations to generate warning (see control option WRN,X)
 C      SPIN   - spin of level
-C      SUBCH1 -
-C      SUBCH2 -
-C      SUMCL  -
-C      SWG    -
-C      TAU    - 
+C      SUBCH1 - partial chisqr
+C      SUBCH2 - partial chisqr
+C      SUMCL  - sum of yields for clusters
+C      TAU    - lifetime in picoseconds
 C      THICK  - thickness of each absorber type
 C      TIMEC  - Tau_C (N.B. here it is G(4))
 C      TIMEL  - lifetimes and their errors
-C      TLBGD  - theta of particle detector
-C      TREP   -
+C      TLBDG  - theta of particle detector in lab frame (in degrees)
+C      TREP   - theta of recoiling nucleus (in radians)
 C      UPL    - upper limits for all gamma detectors
 C      VINF   - speed of projectile at infinty
 C      XA     - A of investigated nucleus
@@ -219,191 +164,165 @@ C      XA1    - A of non-investigated nucleus
 C      XI     - xi coupling coefficients
 C      XIR    - [for maps]
 C      XLAMB  - Lambda* (N.B. here it is G(3))
-C      XV     -
+C      XV     - energy meshpoints (sometimes theta meshpoints) where we calculate exact Coulex
 C      YEXP   - experimental yields
-C      YGN    -
-C      YGP    -
+C      YGN    - gamma yield calculated without correction to angular distribution from finite recoil distance
+C      YGP    - gamma yield calculated with correction to angular distribution from finite recoil distance
 C      YNRM   - relative normalisation for gamma detectors
-C      YV     -
+C      YV     - scattering angle meshpoints where we calculate exact Coulex
 C      ZETA   - various coefficients
-C      ZPOL   -
-C      ZV     -
+C      ZPOL   - dipole term
+C      ZV     - energy meshpoints
 
-      PROGRAM GOSIA
+      PROGRAM GOSIA2
       IMPLICIT NONE
-      REAL*8 ABC , ACCA , ACCUR , acof , AGELI , AKAVKA , AKS , ap , 
-     &       ARCCOS , ARCTG , arg , ax , B , bcof , be2 , be2a , be2b , 
-     &       be2c , BEQ , BETAR
-      REAL*8 bk , bl , bm , bmx , BRAT , bten , bu , CAT , CC , ccc , 
+      REAL*8 acof , ap , ARCCOS , ARCTG , arg , ax , bcof , be2 , 
+     &       be2a , be2b , be2c
+      REAL*8 bk , bl , bm , bmx , bten , bu , ccc , 
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
-     &       CNOR , cnst
-      REAL*8 cocos , conu , CORF , d , decen , dedx , DELTA , DEVD , 
-     &       DEVU , DIPOL , DIX , DLOCK , DQ , DS , dsd , DSE , DSG , 
-     &       dsig , DSIGS , dst
-      REAL*8 dsx , dsxm , DYEX , EAMX , effi , EG , eh1 , ELM , ELMH , 
-     &       elmi , ELML , ELMT , ELMU , emhl1 , EMMA , emn , emx , EN , 
-     &       enb , ENDEC
-      REAL*8 eng , enh , ENZ , EP , EPS , EROOT , esd , esp , ess , 
-     &       fi0 , fi1 , fic , FIEX , fiex1 , figl , fipo1 , fm , G , 
-     &       GRAD , gth
-      REAL*8 hen , het , HLM , HLMLM , ODL , p , PARX , PARXM , pfi , 
-     &       ph1 , ph2 , pi , PILOG , po1 , po2 , polm , pop1 , pr , 
-     &       pv , Q
-      REAL*8 q1 , q2 , QAPR , qc , QCEN , qfac , qr , qui , r , r1 , 
-     &       r2 , r3 , r4 , rem , remax , rl , rlr , rm , rx , ry
-      REAL*8 rz , s , s11 , s12 , s21 , s22 , SA , sbe , SE , sf , SGW , 
-     &       sh , sh1 , sh2 , SIMIN , slim , SPIN , SUBCH1 , SUBCH2 , 
-     &       SUMCL
-      REAL*8 summm , sz1 , sz2 , TACOS , TAU , tau1 , tau2 , test , 
-     &       TETACM , tetrc , tfac , thc , THICK , TIMEL , title , 
-     &       TLBDG , tmn , tmx , todfi , TREP
-      REAL*8 tta , tth , tting , ttttt , ttttx , txx , u , UPL , VACDP , 
-     &       val , VINF , waga , wph , wpi , WSIXJ , wth , wthh , 
-     &       WTHREJ , XA , XA1
-      REAL*8 xep , XI , xi1 , xi2 , XIR , xk1 , xk2 , xl1 , xlevb , 
-     &       xlk , xm1 , xm2 , xm3 , XNOR , xtest , XV , xw , xx , xxi , 
+     &       cnst
+      REAL*8 cocos , conu , d , decen , dedx , dsd , dsig , dst
+      REAL*8 dsx , dsxm , effi , eh1 , elmi , ELMT , emhl1 , emn , emx , 
+     &       enb
+      REAL*8 eng , enh , esd , esp , ess , 
+     &       fi0 , fi1 , fic , fiex1 , figl , fipo1 , fm , gth
+      REAL*8 hen , het , p , pfi , 
+     &       ph1 , ph2 , pi , po1 , po2 , polm , pop1 , pr , pv
+      REAL*8 q1 , q2 , qc , qfac , qr , qui , r , r1 , r2 , r3 , r4 , 
+     &       rem , remax , rl , rlr , rm , rx , ry
+      REAL*8 rz , s , s11 , s12 , s21 , s22 , sbe , sf , sh , sh1 , 
+     &       sh2 , SIMIN , slim
+      REAL*8 summm , sz1 , sz2 , TACOS , tau1 , tau2 , test , 
+     &       tetrc , tfac , thc , title , tmn , tmx , todfi
+      REAL*8 tta , tth , tting , ttttt , txx , u , 
+     &       val , waga , wph , wpi , WSIXJ , wth , wthh , 
+     &       WTHREJ
+      REAL*8 xep , xi1 , xi2 , xk1 , xk2 , xl1 , xlevb , 
+     &       xlk , xm1 , xm2 , xm3 , xtest , xw , xx , xxi , 
      &       ycorr
-      REAL*8 YEXP , YGN , YGP , YNRM , YV , yy , yyd1 , yydd , yyy , 
-     &       ZETA , zmir , zp , ZPOL , ZV , zz
-      REAL*8 CNOR1 , CNOR2 , ELM25 , ELM26 , chir , chp , ccch1 ,
-     &       ccch2 , cht ! For gosia2
-      INTEGER*4 i , i122 , IAMX , IAMY , IAPR , iapx , IAXS , ib , 
-     &          ibaf , IBPS , IBRC , IBYP , icg , icll , ICLUST , ICS ,
-     &          ict , ictl , id , idf , IDIVE
-      INTEGER*4 idr , IDRN , iecd , ient , IEXP , IFAC , IFBFL , ifbp , 
-     &          ifc , ifm , IFMO , ifwd , ig1 , ig2 , ih1 , ih2 , ihlm , 
-     &          ihuj , ii , ij
-      INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ILE , ile1 , ilevls , 
-     &          ilx , im , IMIN , imode , in1 , in2 , inclus , ind , 
-     &          ind1 , ind2 , indx , INHB
-      INTEGER*4 inko , inm1 , inm2 , inn , INNR , inpo , intend , 
-     &          INTERV , INTR , intvh , inva , inx1 , iobl , iocc , 
-     &          iopri , iosr , IP , IPATH , ipd , iph
-      INTEGER*4 IPI , ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
-     &          ipri , IPRM , IPS1 , IRAWEX , irea , irep , irfix , 
-     &          irix , ISEX , isip , iske , iskf , ISKIN
-      INTEGER*4 isko , iskok , ISMAX , ISO , isoh , ispa , ispb , ITMA , 
-     &          itno , itp , ITS , ITTE , IUNIT3 , iuy , iva , iva1 , 
-     &          IVAR , ivarh , ivari , ivrh , IWF
-      INTEGER*4 ixj , ixl , ixm , IY , iyr , IZ , IZ1 , izcap , j , ja , 
-     &          jan , jan1 , jb , jb1 , jb2 , jd , jde , jdy , je , 
-     &          JENTR
+      REAL*8 yy , yyd1 , yydd , yyy , zmir , zp , zz
+      INTEGER*4 i , i122 , iapx , ib , ibaf , icg , icll , ict , ictl , 
+     &          id , ideff , idf
+      INTEGER*4 idr , iecd , ient , ifbp , ifc , ifm , ifwd , 
+     &          ig1 , ig2 , ih1 , ih2 , ihlm , ihuj , ii , ij
+      INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ile1 , ilevls , 
+     &          ilx , im , imode , in1 , in2 , inclus , ind , 
+     &          ind1 , ind2 , indx
+      INTEGER*4 inko , inm1 , inm2 , inn , inpo , intend , intvh , 
+     &          inva , inx1 , iobl , iocc , iopri , iosr , ipd , iph
+      INTEGER*4 ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
+     &          ipri , irea , irep , irfix , irix , isip , iske , iskf
+      INTEGER*4 isko , iskok , isoh , ispa , ispb , itno , 
+     &          itp , iuy , iva , iva1 , ivarh , ivari , ivrh
+      INTEGER*4 ixj , ixl , ixm , iyr , izcap , j , ja , 
+     &          jan , jan1 , jb , jb1 , jb2 , jd , jde , jdy , je
       INTEGER*4 jex , jexp , jfi , jfre , jgd , jgl , jgl1 , jgr , jgs , 
      &          jj , jj1 , jjjj , jjlx , jjx , jk , jkloo , jktt , jl , 
      &          jmm , jmpin
-      INTEGER*4 jp , jphd , jpin , jrls , js , JSKIP , jt , jtp , jyi , 
-     &          jyi1 , jyi2 , jyv , jz , JZB , k , kb , kclust , kerf ,
-     &          kex , KF , KFERR
+      INTEGER*4 jp , jphd , jpin , jrls , js , jt , jtp , jyi , jyi1 , 
+     &          jyi2 , jyv , jz , k , kb , kclust , kerf , kex
       INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kl , kloop , 
-     &          kmat , kq , KSEQ , ktt , kuku , KVAR , l , la , la1 , 
-     &          lam , lamd
-      INTEGER*4 LAMDA , lamh , LAMMAX , LASTCL , lb , lck1 , lck2 , 
-     &          LDNUM , LEAD , LERF , levl , lex , lexp , lfagg , 
-     &          lfini , lh1 , lh2 , LIFCT , liscl , lkj
-      INTEGER*4 lkj1 , ll , lli , lll , LMAX , lmax1 , LMAXE , lmaxh , 
-     &          LNORM , LNY , locat , LOCKF , LOCKS , loct , lp0 , LP1 , 
-     &          LP10 , LP11 , LP12 , LP13
-      INTEGER*4 LP14 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , lpin , 
-     &          ltrn , ltrn1 , ltrn2 , lu , lx , lxd , LZETA , MAGA , 
-     &          MAGEXC , magh , MEM
-      INTEGER*4 MEMAX , memax1 , memh , memx4 , MEMX6 , mend , mexl , 
-     &          mfla , mlt , mm , mpin , ms , MULTI , n , na , na1 , 
-     &          naa , nallow , NAMX , NANG
-      INTEGER*4 naxfl , nb1 , nb2 , nbands , NBRA , nch , NCM , NDIM , 
-     &          ndima , NDST , ndum , ne , NEXPT , nf , nfd , nfdd , 
+     &          kmat , kq , ktt , kuku , l , la , la1 , lam , lamd
+      INTEGER*4 lamh , lb , lck1 , lck2 , levl , lex , lexp , 
+     &          lfagg , lfini , lh1 , lh2 , liscl , lkj
+      INTEGER*4 lkj1 , ll , lli , lll , lmax1 , lmaxh , locat , 
+     &          loct , lp0 , lpin
+      INTEGER*4 ltrn , ltrn1 , ltrn2 , lu , lx , lxd , magh , MEM
+      INTEGER*4 memax1 , memh , memx4 , mend , mexl , 
+     &          mfla , mlt , mm , mpin , ms , n , na , na1 , naa , 
+     &          nallow
+      INTEGER*4 naxfl , nb1 , nb2 , nbands , nch , ndima , ndum , 
+     &          ne , nf , nfd , nfdd , 
      &          nfi , nflr , nft , nged
-      INTEGER*4 ngpr , ni , NICC , nksi , nl , NLOCK , NMAX , NMAX1 , 
-     &          nmaxh , nmemx , nnl , nogeli , npce , npce1 , npct , 
-     &          npct1 , npt , nptl , nptx , ns1
-      INTEGER*4 ns2 , ntap , ntt , numcl , nval , NYLDE , nz
-      INTEGER*4 MCFIX , nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
-      INTEGER*4 mret , mawr ! For gosia2
-      LOGICAL ERR
-      COMPLEX*16 ARM , EXPO
+      INTEGER*4 ngpr , ni , nksi , nl , nmaxh , nmemx , nnl , 
+     &          nogeli , npce , npce1 , npct , npct1 , 
+     &          npt , nptl , nptx , ns1
+      INTEGER*4 ns2 , ntap , ntt , numcl , nval , nz
+      INTEGER*4 iskin_protect
       CHARACTER*4 oph , op1 , opcja , op2
       CHARACTER*1 prp
-      DIMENSION ihlm(32) , esp(20) , dedx(20) , bten(1200) , 
-     &          fiex1(11,20,2) , title(20) , pfi(101) , zmir(6,2,50) , 
-     &          iecd(50) , wpi(11,2) , tau1(10) , eng(10) , tau2(10,7) , 
-     &          xl1(7) , qui(8,10) , cf(8,2) , ivarh(500) , liscl(200) , 
-     &          dsxm(100,20,20) , levl(50) , xlevb(50,2) , bm(8,20,20,3)
-     &          , mlt(500) , ivari(500) , jpin(50)
-      COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,500) , 
-     &                IRAWEX(50)
-      COMMON /CCCDS / NDST(50)
-      COMMON /INHI  / INHB
-      COMMON /IDENT / BEQ
-      COMMON /EFCAL / ABC(8,10) , AKAVKA(8,200) , THICK(200,7)
-      COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
-      COMMON /BREC  / BETAR(50)
-      COMMON /ADBXI / EXPO(500)
-      COMMON /DIMX  / DIX(4) , ODL(200)
-      COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
-     &                ENZ(200)
-      COMMON /CINIT / CNOR(32,75) , CNOR1(32,75) , CNOR2(32,75) , INNR ,
-     &                MCFIX ! Changed in gosia2
-      COMMON /XRA   / SE
-      COMMON /HHH   / HLM(500)
-      COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
-      COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
-      COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
-      COMMON /DFTB  / DEVD(500) , DEVU(500)
-      COMMON /ERRAN / KFERR
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
-     &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /SECK  / ISKIN(50)
-      COMMON /VLIN  / XV(51) , YV(51) , ZV(20) , DSG(20) , DSE(20) , DS
-      COMMON /DUMM  / GRAD(500) , HLMLM(500) , ELMH(500)
-      COMMON /BRNCH / BRAT(50,2) , IBRC(2,50) , NBRA
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
-     &                YNRM(32,50) , IDRN , ILE(32)
-      COMMON /YTEOR / YGN(500) , YGP(500) , IFMO
-      COMMON /LEV   / TAU(75) , KSEQ(500,4)
-      COMMON /MAP   / PARX(50,12,5) , PARXM(50,4,10,6) , XIR(6,50)
-      COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
-     &                NICC , NANG(200)
-      COMMON /GGG   / G(7)
-      COMMON /AZ    / ARM(600,7)
-      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
-      COMMON /CXI   / XI(500)
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,500) , LDNUM(8,75) , LAMMAX , 
-     &                MULTI(8)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
-     &                ISO
-      COMMON /MINNI / IMIN , LNORM(50)
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
-     &                TLBDG(50) , VINF(50)
-      COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(500)
-      COMMON /PRT   / IPRM(20)
-      COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /CB    / B(20)
-      COMMON /CLM   / LMAX
-      COMMON /CLCOM0/ IFAC(75)
-      COMMON /CLCOM8/ CAT(600,3) , ISMAX
-      COMMON /CLCOM9/ ERR
-      COMMON /COMME / ELM(500) , ELMU(500) , ELML(500) , SA(500)
-      COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /CEXC9 / INTERV(50)
-      COMMON /CAUX0 / EMMA(75) , NCM
-      COMMON /PTH   / IPATH(75) , MAGA(75)
-      COMMON /APRCAT/ QAPR(500,2,7) , IAPR(500,2) , ISEX(75)
-      COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
-      COMMON /THTAR / ITTE(50)
-      COMMON /FIT   / LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
-      COMMON /APRX  / LERF , IDIVE(50,2)
-      COMMON /SKP   / JSKIP(50)
-      COMMON /TRB   / ITS
-      COMMON /SEL   / KVAR(500)
-      COMMON /ERCAL / JENTR , ICS
-      COMMON /LOGY  / LNY , INTR , IPS1
-      COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
-      COMMON /SWITCH/ JZB , IBPS , IUNIT3
-      COMMON /RESC  / ELM25(500) , ELM26(500) ! For gosia2
+      REAL*8 chir , chp , ccch1 ,ccch2 , cht ! For gosia2
+      INTEGER*4 nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
+      INTEGER*4 mret , mawr ! For gosia2
+      DIMENSION ihlm(32) , esp(20) , dedx(20) , bten(1600) , ! bten dimension = 16 * maxlevels
+     &          fiex1(100,100,2) , title(20) , pfi(101) , zmir(6,2,50) , 
+     &          iecd(50) , wpi(100,2) , tau1(10) , eng(10) , 
+     &          tau2(10,7) , xl1(7) , qui(8,10) , cf(8,2) , 
+     &          ivarh(1500) , liscl(200) , dsxm(100,100,100) , 
+     &          levl(50) , xlevb(50,2) , bm(8,20,20,3) , mlt(1500) , 
+     &          ivari(1500) , jpin(50) , ideff(50) , iskin_protect(50)
+      INCLUDE 'clust.inc'
+      INCLUDE 'cccds.inc'
+      INCLUDE 'inhi.inc'
+      INCLUDE 'ident.inc'
+      INCLUDE 'efcal.inc'
+      INCLUDE 'tcm.inc'
+      INCLUDE 'brec.inc'
+      INCLUDE 'adbxi.inc'
+      INCLUDE 'dimx.inc'
+      INCLUDE 'tra.inc'
+      INCLUDE 'cinit.inc'
+      INCLUDE 'xra.inc'
+      INCLUDE 'hhh.inc'
+      INCLUDE 'vac.inc'
+      INCLUDE 'me2d.inc'
+      INCLUDE 'life1.inc'
+      INCLUDE 'dftb.inc'
+      INCLUDE 'erran.inc'
+      INCLUDE 'mgn.inc'
+      INCLUDE 'seck.inc'
+      INCLUDE 'vlin.inc'
+      INCLUDE 'dumm.inc'
+      INCLUDE 'brnch.inc'
+      INCLUDE 'yexpt.inc'
+      INCLUDE 'yteor.inc'
+      INCLUDE 'lev.inc'
+      INCLUDE 'map.inc'
+      INCLUDE 'ccc.inc'
+      INCLUDE 'ggg.inc'
+      INCLUDE 'az.inc'
+      INCLUDE 'kin.inc'
+      INCLUDE 'cxi.inc'
+      INCLUDE 'clcom.inc'
+      INCLUDE 'coex.inc'
+      INCLUDE 'minni.inc'
+      INCLUDE 'cx.inc'
+      INCLUDE 'cexc.inc'
+      INCLUDE 'prt.inc'
+      INCLUDE 'ccoup.inc'
+      INCLUDE 'cb.inc'
+      INCLUDE 'clm.inc'
+      INCLUDE 'clcom0.inc'
+      INCLUDE 'clcom8.inc'
+      INCLUDE 'clcom9.inc'
+      INCLUDE 'comme.inc'
+      INCLUDE 'coex2.inc'
+      INCLUDE 'cexc9.inc'
+      INCLUDE 'caux0.inc'
+      INCLUDE 'pth.inc'
+      INCLUDE 'aprcat.inc'
+      INCLUDE 'warn.inc'
+      INCLUDE 'thtar.inc'
+      INCLUDE 'fit.inc'
+      INCLUDE 'aprx.inc'
+      INCLUDE 'skp.inc'
+      INCLUDE 'trb.inc'
+      INCLUDE 'sel.inc'
+      INCLUDE 'ercal.inc'
+      INCLUDE 'logy.inc'
+      INCLUDE 'fakul.inc'
+      INCLUDE 'life.inc'
+      INCLUDE 'switch.inc'
+      INCLUDE 'cinit2.inc' ! For gosia2
+      INCLUDE 'resc.inc' ! For gosia2
       DATA (eng(k),k=1,10)/.05 , .06 , .08 , .1 , .15 , .2 , .3 , .5 , 
      &      1. , 1.5/
+C     Absorption coefficients in units of 1/cm for Ge
       DATA (tau1(k),k=1,10)/17.656 , 10.726 , 5.076 , 2.931 , 1.3065 , 
      &      .8828 , .5959 , .4357 , .3041 , .2472/
+C     Absorption coefficients in units of 1/cm for Al, C, Fe, Cu, Ag/Cd/Sn, Ta
+C     and Pb at the energies 0.05, 0.06, 0.08, 0.1, 0.15, 0.2, 0.3, 0.5, 1, 1.5
+C     MeV
       DATA (tau2(k,1),k=1,10)/.9883 , .7473 , .5442 , .4592 , .3718 , 
      &      .3302 , .2814 , .2278 , .1657 , .1350/
       DATA (tau2(k,2),k=1,10)/1.014 , .7443 , .5195 , .4261 , .3362 , 
@@ -418,6 +337,7 @@ C      ZV     -
      &      25.302 , 12.541 , 5.193 , 2.215 , 1.077 , .8176/
       DATA (tau2(k,7),k=1,10)/89.809 , 56.338 , 27.009 , 62.966 , 
      &      22.933 , 11.334 , 4.540 , 1.813 , .8020 , .5900/
+      DATA q1/0./,q2/0./,iph/0/
 
 C     Initialize prime numbers
       IP(1) = 2
@@ -450,14 +370,14 @@ C     Initialize prime numbers
 C     Initialize pointers
       lp0 = 50000 ! Size of ZETA array
       LP1 = 50 ! Maximum number of experiments
-      LP2 = 500 ! Maximum number of matrix elements
-      LP3 = 75 ! Maximum number of levels
+      LP2 = 1500 ! Maximum number of matrix elements
+      LP3 = 100 ! Maximum number of levels
       LP4 = 1500
-      LP6 = 32
+      LP6 = 32 ! Maximum number of gamma detectors
       LP7 = lp0 - 4900 ! Start of collision coefficients in ZETA
       LP8 = LP3*28 + 1
       LP9 = lp0 - LP3*28
-      LP10 = 600
+      LP10 = 1200 ! Maximum number of substates
       LP11 = LP8 - 1
       LP12 = 365 ! Maximum number of steps of omega (dimension of ADB, SH, CH)
       LP13 = LP9 + 1
@@ -466,7 +386,6 @@ C     Initialize pointers
       JZB = 5
 
 C---- gosia2 changes start
-C     IBPS = 0
 C     Read target/projectile switch and first option from standard input
       READ (*,*) IBPS
       READ (*,99001) op1 , op2
@@ -482,8 +401,8 @@ C     Use input unit 25 for target and 26 for projectile
 C---- gosia2 changes end
 
 C     Initialize normalization to 1.
-      DO i = 1 , LP3 ! LP3 = 75
-         DO j = 1 , LP6 ! LP6 = 32
+      DO i = 1 , LP3 ! LP3 = 100 (maximum number of levels)
+         DO j = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
             CNOR(j,i) = 1.
             CNOR1(j,i) = 1. ! Added for gosia2
             CNOR2(j,i) = 1. ! Added for gosia2
@@ -491,7 +410,7 @@ C     Initialize normalization to 1.
       ENDDO
 
 C---- gosia2 changes start
-      IUNIT3 = 33
+      IUNIT3 = 33 ! Is 3 in gosia
       MCFIX = 1
       mres1 = 0
       mrepf = 0
@@ -503,6 +422,7 @@ C---- gosia2 changes start
         LIFCT(i) = 0
       ENDDO
 
+      chp = chir
       IF ( mret.EQ.1 .AND. JZB.EQ.26 ) chir = 0.
       REWIND 25 ! Rewind input files
       REWIND 26
@@ -522,16 +442,18 @@ C---- gosia2 changes end
       itno = 0
       chisq = 0.
       chilo = 0.
-      IWF = 1
-      ifm = 0
+      IWF = 1 ! Turn on warnings
+      ifm = 0 ! Fast minimisation switch off by default
       IPS1 = 11
       ifwd = -1
       INTR = 0
       LNY = 0
-      JENTR = 0
+      JENTR = 0 ! Flag to indicate we are not in OP,ERRO
       ICS = 0
+      ISPL = 0 ! Flag to indicate we should use LAGRAN not SPLNER
 
-      DO i = 1 , LP1 ! LP1 = 50
+      DO i = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
+         ideff(i) = 0
          jpin(i) = 0
          iecd(i) = 0
       ENDDO
@@ -539,7 +461,7 @@ C---- gosia2 changes end
       SGW = 3.
       SUBCH1 = 0.
       SUBCH2 = 0.
-      ITS = 0
+      ITS = 0 ! Create tape 18 flag
       iosr = 0
       LOCKS = 0
       DLOCK = 1.1
@@ -548,30 +470,28 @@ C---- gosia2 changes end
       NLOCK = 0
       LOCKF = 0
       DO i = 1 , LP4 ! LP4 = 1500
-        DO j = 1 , LP6 ! LP6 = 32
+         DO j = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
             CORF(i,j) = 1.
          ENDDO
       ENDDO
       DO i = 1 , 20
          IPRM(i) = 1
+      ENDDO
+      DO i = 1 , 50
          DO j = 1 , 5
             CC(i,j) = 0.
          ENDDO
       ENDDO
-      IPRM(2) = 0 ! changed from 1 to 0 for gosia2
-      IPRM(4) = 0 ! changed from -2 to 0 for gosia2
-      IPRM(5) = 1 ! changed from 11111 to 1 for gosia2
+      IPRM(4) = -2
+      IPRM(5) = 11111
       IPRM(6) = 11111
       IPRM(7) = 0
-      IPRM(11) = 0 ! changed from 1 to 0 for gosia2
-      IPRM(12) = 0 ! changed from 1 to 0 for gosia2
-      IPRM(14) = 0 ! changed from 1 to 0 for gosia2
       IPRM(16) = 0
       IPRM(17) = 0
       IPRM(18) = 0
       IPRM(19) = 0
       IPRM(20) = 0
-      DO i = 1 , LP1 ! LP1 = 50
+      DO i = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
          DO j = 1 , 5
             IF ( j.NE.5 ) THEN
                DO k = 1 , 10
@@ -585,7 +505,7 @@ C---- gosia2 changes end
             ENDDO
          ENDDO
       ENDDO
-      DO k = 1 , LP1 ! LP1 = 50
+      DO k = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
          IDIVE(k,1) = 1
          IDIVE(k,2) = 1
          DO iuy = 1 , 6
@@ -596,7 +516,7 @@ C---- gosia2 changes end
       lfagg = 0
       izcap = 12800
       KFERR = 0
-      NDIM = LP3 ! LP3 = 75
+      NDIM = LP3 ! LP3 = 100 (maximum number of levels)
       ISO = 1
       B(1) = 1.
       DO i = 2 , 20
@@ -605,8 +525,8 @@ C---- gosia2 changes end
       LMAXE = 0
       CALL FAKP
       CALL FHIP
-      NCM = 2
-      DO ijx = 1 , LP1 ! LP1 = 50
+      NCM = 2 ! Default final state for kinematics calculation (OP,CONT NCM,)
+      DO ijx = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
          INTERV(ijx) = 1
       ENDDO
       la = 0
@@ -615,37 +535,37 @@ C---- gosia2 changes end
       ACCUR = .00001
       icg = 1
       ient = 1
-      jphd = 1
+      jphd = 1 ! Print header flag
       DIPOL = 0.005
-      MAGEXC = 0
+      MAGEXC = 0 ! Initially flag that we don't need magnetic excitations
       LAMMAX = 0
       DO lam = 1 , 8
-         DO lexp = 1 , LP3 ! LP3 = 75
+         DO lexp = 1 , LP3 ! LP3 = 100 (maximum number of levels)
             LDNUM(lam,lexp) = 0
          ENDDO
          MULTI(lam) = 0
          LAMDA(lam) = 0
       ENDDO
-      DO j = 1 , LP2 ! LP2 = 500
+      DO j = 1 , LP2 ! LP2 = 1500 (maximum number of matrix elements)
          EXPO(j) = (1.,0.)
          KVAR(j) = 1
          ELM(j) = 0.
       ENDDO
-      DO j = 1 , LP1 ! LP1 = 50
+      DO j = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
          JSKIP(j) = 1
          ISKIN(j) = 0
       ENDDO
-      DO j = 1 , LP3 ! LP3 = 75
+      DO j = 1 , LP3 ! LP3 = 100 (maximum number of levels)
          ISEX(j) = 1111
       ENDDO
       ISEX(1) = 0
       ACCA = .00001
       oph = '    '
-      nmemx = LP2 + 9 ! LP2 = 500
+      nmemx = LP2 + 9 ! LP2 = 1500 (maximum number of matrix elements)
       IEXP = 1
       IMIN = 0
       i122 = 0
-      DO j = 1 , LP2 ! LP2 = 500
+      DO j = 1 , LP2 ! LP2 = 1500 (maximum number of matrix elements)
          DO k = 1 , 2
             DO l = 1 , 7
                QAPR(j,k,l) = 0.
@@ -655,6 +575,7 @@ C---- gosia2 changes end
       ERR = .FALSE.
       intend = 0 ! End of initialization
 
+C.............................................................................
 C     Start reading input file.
  100  READ (JZB,99001) op1 , op2
 99001 FORMAT (1A3,1A4)
@@ -665,10 +586,11 @@ C     Start reading input file.
 
 C        Treat OP,FILE (attach files to fortran units)
          IF ( op2.EQ.'FILE' ) THEN
-           CALL OPENF
-           GOTO 100
+            CALL OPENF
+            GOTO 100 ! End of OP,FILE - back to input loop
          ENDIF
-         
+
+C        Print header         
          IF ( jphd.EQ.1 ) WRITE (22,99002)
 99002    FORMAT ('1'/1X,125('*')/1X,125('*')/1X,50('*'),25X,50('*')/1X,
      &           50('*'),10X,'GOSIA2',9X,50('*')/1X,50('*'),25X,50('*')
@@ -677,7 +599,7 @@ C        Treat OP,FILE (attach files to fortran units)
 99003    FORMAT (1X/20X,'ROCHESTER COULOMB EXCITATION DATA ANALYSIS ',
      &           'CODE BY T.CZOSNYKA,D.CLINE AND C.Y.WU'/50X,
      &           'LATEST REVISION- JUNE  2006'//////)
-         jphd = 0
+         jphd = 0 ! Set print header flag to zero, so we don't repeat header
 
 C        Handle OP,GDET (germanium detectors)
          IF ( op2.EQ.'GDET' ) THEN
@@ -701,13 +623,13 @@ C           attenuation coefficients
                READ (JZB,*) (DIX(k),k=1,4) ! radius of core, outer radius, length, distance
                READ (JZB,*) (xl1(k),k=1,nl) ! thicknesses of 7 kinds of absorber
                IF ( DIX(1).LE.0. ) DIX(1) = .01
-               WRITE (9,*) DIX(4)
+               WRITE (9,*) DIX(4) ! length
                IF ( nfdd.LE.0 ) WRITE (8,*) (xl1(k),k=1,nl)
                ind = 1
                IF ( xl1(5).GT.0. ) ind = 3
                IF ( xl1(6).GT.0. ) ind = 4
                IF ( xl1(7).GT.0. ) ind = 5
-               WRITE (9,*) eng(ind)
+               WRITE (9,*) eng(ind) ! First energy
                CALL QFIT(qui,tau1,tau2,eng,xl1,cf,nl,ind)
                WRITE (22,99004) i
 99004          FORMAT (10X,'DETECTOR',1X,1I2)
@@ -726,22 +648,22 @@ C           attenuation coefficients
                   ENDDO
                ENDDO
             ENDDO
-            GOTO 100 ! End of OP,GDET
+            GOTO 100 ! End of OP,GDET - back to input loop
 
-C         Treat OP,RAND (randomise matrix elements)
-          ELSEIF ( op2.EQ.'RAND' ) THEN
+C        Treat OP,RAND (randomise matrix elements)
+         ELSEIF ( op2.EQ.'RAND' ) THEN
             READ (JZB,*) SE ! Seed for random number generator
             CALL MIXUP
             WRITE (22,99007)
 99007       FORMAT (1X///5X,'MATRIX ELEMENTS RANDOMIZED...'///)
             CALL PRELM(2)
-            GOTO 100 ! End of OP,RAND
+            GOTO 100 ! End of OP,RAND - back to input loop
 
 C        Treat OP,TROU (troubleshooting)
          ELSEIF ( op2.EQ.'TROU' ) THEN
-            ITS = 1
+            ITS = 1 ! Create tape 18 flag
             READ (JZB,*) kmat , rlr
-            GOTO 100 ! End of OP,TROU
+            GOTO 100 ! End of OP,TROU - back to input loop
 
 C        Treat OP,REST (restart)
          ELSEIF ( op2.EQ.'REST' ) THEN
@@ -757,16 +679,16 @@ C        Treat OP,REST (restart)
                IF ( lkj1.EQ.0 ) GOTO 120
                IF ( mres1.EQ.0 ) ELM(lkj1) = xlk ! condition added for gosia2
             ENDDO
+ 120        WRITE (22,99008)
+99008       FORMAT (1X///5X,'*****',2X,
+     &              'RESTART-MATRIX ELEMENTS OVERWRITTEN',2X,'*****'///)
 C---- gosia2 changes start
- 120        DO lkj = 1 , MEMAX
+            DO lkj = 1 , MEMAX
                IF ( mres1.EQ.0 .AND. JZB.EQ.25 ) ELM25(lkj) = ELM(lkj)
                IF ( mres1.EQ.0 .AND. JZB.EQ.26 ) ELM26(lkj) = ELM(lkj)
             ENDDO
             IF ( JZB.EQ.26 ) mres1 = 1
-            WRITE (22,99008)
 C---- gosia2 changes end
-99008       FORMAT (1X///5X,'*****',2X,
-     &              'RESTART-MATRIX ELEMENTS OVERWRITTEN',2X,'*****'///)
             DO kk = 1 , MEMAX
                la = mlt(kk)
                IF ( ivari(kk).GE.10000 ) THEN
@@ -790,7 +712,17 @@ C      ELMU(KK)=ELMU(INX1)*ELM(KK)/ELM(INX1)
                ENDIF
             ENDDO
             CALL PRELM(4) ! changed from 2 to 4 for gosia2
-            GOTO 100 ! End of OP,REST
+            GOTO 100 ! End of OP,REST - back to input loop
+
+C     Treat OP,SELE
+         ELSEIF ( op2.EQ.'SELE' ) THEN
+            CALL SELECT
+            GOTO 2000 ! End of execution
+
+C     Treat OP,BRIC
+         ELSEIF ( op2.EQ.'BRIC' ) THEN
+            CALL BRICC
+            GOTO 100 ! End of OP,BRIC - back to input loop
 
 C        Treat other options
          ELSE
@@ -807,15 +739,15 @@ C           Treat OP,ERRO (calculate errors)
 C---- gosia2 changes start
                MCFIX = 0
                DO mmmm = 1 , 32
-                 DO kkkk = 1 , 50
-                   READ (13,*) CNOR1(mmmm,kkkk)
-                 ENDDO
+                  DO kkkk = 1 , 50
+                     READ (13,*) CNOR1(mmmm,kkkk)
+                  ENDDO
                ENDDO
 C---- gosia2 changes end
                rem = LOG(remax)
                LOCKS = 0
                LOCKF = 0
-               JENTR = 1
+               JENTR = 1 ! Flag to indicate we are in OP,ERRO
                sh = 1.
                ifbp = 0
                inpo = 1
@@ -854,8 +786,8 @@ C---- gosia2 changes end
                      DO inn = 1 , MEMAX
                         WRITE (IUNIT3,*) inn , ELM(inn)
                      ENDDO
-                  ENDIF
-               ENDIF
+                  ENDIF ! IF ( irep.NE.2 )
+               ENDIF ! IF ( iosr.NE.0 .AND. idf.NE.0 )
                IF ( irep.NE.0 ) THEN
                   REWIND 15
                   READ (15,*) (DEVD(kh1),DEVU(kh1),kh1=1,MEMAX)
@@ -866,7 +798,7 @@ C---- gosia2 changes end
                   ENDDO
                ENDIF
                IF ( IMIN.EQ.0 ) CALL CMLAB(0,dsig,ttttt)
-               IF ( ERR ) GOTO 2000
+               IF ( ERR ) GOTO 2000 ! Error
                IF ( IMIN.NE.0 ) GOTO 400
                GOTO 1300 ! End of OP,ERRO
 
@@ -882,7 +814,7 @@ C           Treat OP,TITL (title)
 99009          FORMAT (20A4)
                WRITE (22,99010) (title(k),k=1,20)
 99010          FORMAT (10X,20A4/10X,100('-'))
-               GOTO 100 ! End of OP,TITL
+               GOTO 100 ! End of OP,TITL - back to input loop
 
             ELSE
 
@@ -908,10 +840,9 @@ C              Treat OP,MINI
 C              Treat OP,THEO
                ELSEIF ( op2.EQ.'THEO' ) THEN
                   irix = 12
-                  IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for target, 32 for beam
                   REWIND (irix)
                   ibaf = 1
-                  DO jb = 1 , LP1 ! LP1 = 50
+                  DO jb = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
                      DO lb = 1 , 2
                         xlevb(jb,lb) = 0
                      ENDDO
@@ -971,19 +902,19 @@ C              Treat OP,THEO
                         WRITE (irix,*) ELM(kb)
                      ENDIF
                   ENDDO
-                  GOTO 100 ! End of OP,THEO
+                  GOTO 100 ! End of OP,THEO - back to input loop
 
 C              Treat OP,YIEL
                ELSEIF ( op2.EQ.'YIEL' ) THEN
                   CALL ADHOC(oph,idr,nfd,ntap,iyr)
-                  GOTO 100 ! End of OP,YIEL
+                  GOTO 100 ! End of OP,YIEL - back to input loop
 
 C              Treat OP,INTG
                ELSEIF ( op2.EQ.'INTG' ) THEN
                   REWIND 14
                   lfagg = 1
                   IF ( SPIN(1).LT..25 ) ISO = 0
-                  DO lx = 1 , NEXPT
+                  DO lx = 1 , NEXPT ! For each experiment
                      lpin = 1
                      IF ( ipinf.NE.0 ) THEN
                         IF ( jpin(lx).NE.0 ) lpin = jpin(lx)
@@ -991,7 +922,7 @@ C              Treat OP,INTG
                      IEXP = lx
                      tth = TLBDG(lx)
                      enh = EP(lx)
-                     DO mpin = 1 , lpin
+                     DO mpin = 1 , lpin ! For each pin diode
                         IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
                            READ (JZB,*) ne , ntt , emn , emx , wth , 
      &                          wph , wthh
@@ -1019,20 +950,20 @@ C              Treat OP,INTG
      &                       (YV(i),i=1,ntt)
                         IF ( tth.LT.0. ) ELMH(2*lx-1) = YV(1)
                         IF ( tth.LT.0. ) ELMH(2*lx) = YV(ntt)
-                        DO kloop = 1 , ne
+                        DO kloop = 1 , ne ! For each energy meshpoint
                            enb = XV(kloop)
                            EP(lx) = enb
                            DO ktt = 1 , ntt
                               tta = SIGN(YV(ktt),tth)
-                              IF ( IAXS(lx).NE.0 ) THEN
+                              IF ( IAXS(lx).NE.0 ) THEN ! If not axial symmetry
                                  IF ( iecd(lx).NE.1 ) THEN
                                     IF ( kloop.EQ.1 ) THEN
-                                       READ (JZB,*) nfi
+                                       READ (JZB,*) nfi ! Number of phi ranges
                                        READ (JZB,*) 
      &                                    (fiex1(ktt,jfi,1),fiex1(ktt,
      &                                    jfi,2),jfi=1,nfi)
                                        IF ( tth.LT.0. ) THEN
-                                         DO jfi = 1 , nfi
+                                         DO jfi = 1 , nfi ! For each phi angle
                                          fiex1(ktt,jfi,1)
      &                                      = fiex1(ktt,jfi,1) + 180.
                                          fiex1(ktt,jfi,2)
@@ -1041,24 +972,24 @@ C              Treat OP,INTG
                                        ENDIF
                                     ENDIF
                                  ENDIF
-                              ENDIF
+                              ENDIF ! If not axial symmetry
                               TLBDG(lx) = tta
                               IF ( kloop.EQ.1 ) THEN
                                  IF ( iecd(lx).NE.0 ) THEN
                                     nfi = 1
-                                    fiex1(ktt,1,1) = wpi(ktt,1)
-                                    fiex1(ktt,1,2) = wpi(ktt,2)
+                                    fiex1(ktt,1,1) = wpi(ktt,1) ! Lower phi limit
+                                    fiex1(ktt,1,2) = wpi(ktt,2) ! Upper phi limit
                                  ENDIF
                               ENDIF
                               CALL CMLAB(lx,dsig,tetrc)
-                              IF ( ERR ) GOTO 2000
+                              IF ( ERR ) GOTO 2000 ! Error
                               tting = TLBDG(lx)
-                              IF ( ERR ) GOTO 1900
+                              IF ( ERR ) GOTO 1900 ! Troubleshoot
                               CALL LOAD(lx,1,1,0.D0,jj)
                               CALL ALLOC(ACCUR)
                               CALL SNAKE(lx,ZPOL)
                               CALL SETIN
-                              DO j = 1 , LMAX
+                              DO j = 1 , LMAX ! For each spin up to ground-state spin + 1
                                  polm = DBLE(j-1) - SPIN(1)
                                  CALL LOAD(lx,2,1,polm,jj)
                                  CALL STING(jj)
@@ -1068,29 +999,29 @@ C              Treat OP,INTG
                               ENDDO
                               CALL TENS(bten)
                               CALL DECAY(ccd,0,ccc)
-                              DO j = 1 , LP2
+                              DO j = 1 , LP2 ! LP2 = 1500 (maximum number of matrix elements)
                                  DO ijan = 1 , 20
                                     SUMCL(ijan,j) = 0.
                                  ENDDO
                               ENDDO
                               ija0 = 0
-                              DO ijan = 1 , jan
+                              DO ijan = 1 , jan ! For each detector angle
                                  IF ( IAXS(lx).EQ.0 ) nfi = 1
                                  DO jyi = 1 , idr
                                     GRAD(jyi) = 0.
                                  ENDDO
                                  todfi = 0.
-                                 DO jfi = 1 , nfi
+                                 DO jfi = 1 , nfi ! For each phi angle
                                     fi0 = fiex1(ktt,jfi,1)/57.2957795
                                     fi1 = fiex1(ktt,jfi,2)/57.2957795
                                     gth = AGELI(IEXP,ijan,1)
                                     fm = (fi0+fi1)/2.
                                     figl = AGELI(IEXP,ijan,2)
                                     CALL ANGULA(YGN,idr,1,fi0,fi1,tetrc,
-     &                                 gth,figl,ijan)
-                                    IF ( IFMO.NE.0 ) THEN
-                                       id = ITMA(IEXP,ijan)
-                                       d = ODL(id)
+     &                                 gth,figl,ijan,op2)
+                                    IF ( IFMO.NE.0 ) THEN ! If correction due to recoil
+                                       id = ITMA(IEXP,ijan) ! Get detector identity
+                                       d = ODL(id) ! Get result of OP,GDET calculation
                                        rx = d*SIN(gth)*COS(figl-fm)
      &                                    - .25*SIN(tetrc)*COS(fm)
                                        ry = d*SIN(gth)*SIN(figl-fm)
@@ -1101,18 +1032,18 @@ C              Treat OP,INTG
                                        thc = TACOS(rz/rl)
                                        fic = ATAN2(ry,rx)
                                        CALL ANGULA(YGP,idr,1,fi0,fi1,
-     &                                    tetrc,thc,fic,ijan)
-                                       DO ixl = 1 , idr
+     &                                    tetrc,thc,fic,ijan,op2)
+                                       DO ixl = 1 , idr ! For each decay
                                          ixm = KSEQ(ixl,3)
                                          tfac = TAU(ixm)
                                          YGN(ixl) = YGN(ixl)
      &                                      + .01199182*tfac*BETAR(IEXP)
      &                                      *(sf*YGP(ixl)-YGN(ixl))
-                                       ENDDO
-                                    ENDIF
+                                       ENDDO ! Loop on decays
+                                    ENDIF ! If correction due to recoil
                                     IF ( IRAWEX(lx).NE.0 ) THEN
-                                       ipd = ITMA(lx,ijan)
-                                       DO jyi = 1 , idr
+                                       ipd = ITMA(lx,ijan) ! Get identity of detector
+                                       DO jyi = 1 , idr ! For each decay
                                          ni = KSEQ(jyi,3)
                                          nf = KSEQ(jyi,4)
                                          decen = EN(ni) - EN(nf)
@@ -1124,26 +1055,26 @@ C              Treat OP,INTG
                                          CALL EFFIX(ipd,decen,effi)
                                          YGN(jyi) = YGN(jyi)*effi
                                        ENDDO
-                                       inclus = ICLUST(lx,ijan)
+                                       inclus = ICLUST(lx,ijan) ! Cluster number for detector ijan
                                        IF ( inclus.NE.0 ) THEN
-                                         DO jyi = 1 , idr
+                                         DO jyi = 1 , idr ! For each decay
                                          SUMCL(inclus,jyi)
      &                                      = SUMCL(inclus,jyi)
      &                                      + YGN(jyi)
                                          ENDDO
                                          IF ( ijan.NE.LASTCL(lx,inclus)
-     &                                      ) GOTO 132
-                                         DO jyi = 1 , idr
+     &                                      ) GOTO 132 ! If it is not the last detector in the cluster
+                                         DO jyi = 1 , idr ! For each decay
                                          YGN(jyi) = SUMCL(inclus,jyi)
                                          ENDDO
                                        ENDIF
                                     ENDIF
                                     IF ( jfi.EQ.1 ) ija0 = ija0 + 1
-                                    DO jyi = 1 , idr
+                                    DO jyi = 1 , idr ! For each decay
                                        GRAD(jyi) = GRAD(jyi) + YGN(jyi)
-                                    ENDDO
+                                    ENDDO ! Loop on decays jyi
                                     todfi = todfi + ABS(fi1-fi0)
-                                 ENDDO
+                                 ENDDO ! For each phi angle jfi
                                  IF ( IAXS(lx).EQ.0 ) todfi = 6.283185
                                  ax = 1.
                                  IF ( mfla.EQ.1 ) ax = 1./todfi
@@ -1170,23 +1101,28 @@ C              Treat OP,INTG
      &                                    SPIN(ni) , SPIN(nf) , 
      &                                    GRAD(jyi)*dsig*ax , GRAD(jyi)
      &                                    /GRAD(IDRN)
-                                    ENDDO
-                                 ENDIF
- 132                          ENDDO
-                           ENDDO
-                        ENDDO
-                     ENDDO
+                                    ENDDO ! Loop on decays jyi
+                                 ENDIF ! If printout of yields at meshpoints
+ 132                             CONTINUE
+                              ENDDO ! Loop on detector angles ijan
+                           ENDDO ! Loop on theta angles ktt
+                        ENDDO ! Loop on energy meshpoints kloop
+                     ENDDO ! Loop on pin diodes mpin
+                      
                      EP(lx) = enh
                      TLBDG(lx) = tth
-                  ENDDO
+                  ENDDO ! Loop on experiments lx
                   REWIND 14
                   REWIND 15
                   iske = 0
-                  DO na = 1 , LP6
+                  DO na = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
                      ILE(na) = 1
                   ENDDO
                   ilx = 0
-                  DO lx = 1 , NEXPT
+C                 We have now performed the full coulex calculation at each of the
+C                 meshpoints, so now we start the integration
+                  DO lx = 1 , NEXPT ! Loop over experiments
+C                    Read tape 17
                      REWIND 17
                      DO ijaja = 1 , 300000
                         READ (17,*,END=134) jjlx , jmpin , jkloo , 
@@ -1195,14 +1131,14 @@ C              Treat OP,INTG
                      ENDDO
  134                 na = NANG(lx)
                      IF ( lx.NE.1 ) THEN
-                        DO na1 = 1 , LP6
+                        DO na1 = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
                            ILE(na1) = ILE(na1) + NYLDE(lx-1,na1)
                         ENDDO
                      ENDIF
-                     READ (JZB,*) nptx
+                     READ (JZB,*) nptx ! Number of meshpoints for stopping powers
                      IF ( nptx.NE.0 ) THEN
-                        READ (JZB,*) (esp(i),i=1,nptx)
-                        READ (JZB,*) (dedx(i),i=1,nptx)
+                        READ (JZB,*) (esp(i),i=1,nptx) ! Energy
+                        READ (JZB,*) (dedx(i),i=1,nptx) ! Stopping power
                         npt = nptx
                      ENDIF
                      READ (JZB,*) npce , npct
@@ -1210,6 +1146,8 @@ C              Treat OP,INTG
                      IF ( npct.LT.0 ) mfla = 1
                      IF ( iecd(lx).EQ.1 ) mfla = 1
                      npct = ABS(npct)
+                     IF ( npct.GT.100 )
+     &                  STOP 'ABS(NI2) is limited to 100!'
                      npce = npce + MOD(npce,2)
                      npct = npct + MOD(npct,2)
                      mpin = 1
@@ -1217,7 +1155,7 @@ C              Treat OP,INTG
                         IF ( jpin(lx).NE.0 ) mpin = jpin(lx)
                      ENDIF
                      dst = 0.
-                     DO lpin = 1 , mpin
+                     DO lpin = 1 , mpin ! Loop over pin diodes
                         ilx = ilx + 1
                         IF ( ilx.NE.1 )
      &                       CALL TAPMA(lx,iske,isko,iskf,nflr,idr,0,
@@ -1228,7 +1166,7 @@ C              Treat OP,INTG
                         IF ( iocc.GT.izcap ) GOTO 1800
                         hen = (emx-emn)/npce
                         npce1 = npce + 1
-                        het = (tmx-tmn)/npct
+                        het = (tmx-tmn)/npct ! Step in theta in degrees
                         npct1 = npct + 1
                         IF ( iecd(lx).EQ.1 ) ! Circular detector
      &                       CALL COORD(wth,wph,wthh,npct1,1,pfi,wpi,
@@ -1237,79 +1175,131 @@ C              Treat OP,INTG
                            IF ( mfla.EQ.1 ) READ (JZB,*)
      &                          (pfi(j),j=1,npct1)
                         ENDIF
-                        het = het/57.2957795
+                        het = het/57.2957795 ! Step in theta in radians
+                        
+C                       Interpolate stopping power for each of the energies
+C                       that we need. esp is an array of energies and dedx is
+C                       an array containing the stopping powers at those
+C                       energies. Function is unweighted sqrt. The energies
+C                       are not the energies we gave for the meshpoints, but
+C                       the range over which we integrate the bombarding energy
+C                       with the number of steps specified.
                         DO j = 1 , npce1
                            xx = (j-1)*hen + emn
-                           CALL LAGRAN(esp,dedx,npt,1,xx,yy,3,1)
+                           IF ( ISPL.EQ.0 )
+     &                        CALL LAGRAN(esp,dedx,npt,1,xx,yy,3,1)
+                           IF ( ISPL.EQ.1 )
+     &                        CALL SPLNER(esp,dedx,npt,xx,yy,3)
                            HLMLM(j) = 1./yy
                         ENDDO
+                         
+C                       Now we calculate for all the mesh points. 
                         naa = NDST(lx)
                         IF ( IRAWEX(lx).EQ.0 ) naa = NANG(lx)
                         iskf = naa - 1
-                        DO ja = 1 , naa
-                           icll = 3
-                           DO je = 1 , ne
+                        DO ja = 1 , naa ! Loop over detector angles
+                           icll = 3 ! Weighting mode
+                           DO je = 1 , ne ! ne = number of energy mesh points
                               lu = ILE(ja)
                               isko = (je-1)*naa*ntt + ja - 1
                               CALL TAPMA(lx,iske,isko,iskf,ntt,idr,1,
      &                           nft,enb)
-                              IF ( nft.EQ.1 ) GOTO 1900
-                              DO jd = 1 , idr
-                                 DO jtp = 1 , ntt
+                              IF ( nft.EQ.1 ) GOTO 1900 ! Troubleshoot
+                              DO jd = 1 , idr ! For each decay
+                                 DO jtp = 1 , ntt ! ntt = number of theta meshpoints
                                     IF ( jd.EQ.1 .AND. ja.EQ.1 )
      &                                 DSG(jtp) = dsxm(lpin,je,jtp)
                                     jyv = (jtp-1)*idr + jd
-                                    YV(jtp) = ZETA(jyv)
-                                 ENDDO
-                                 DO jt = 1 , npct1
+                                    YV(jtp) = ZETA(jyv) ! Point yield
+                                 ENDDO ! Loop on theta meshpoints jtp
+                                 DO jt = 1 , npct1 ! number of equal divisions in theta for interpolation
                                     xx = (jt-1)*het + tmn/57.2957795
-                                    CALL LAGRAN(XV,YV,ntt,jt,xx,yy,2,
-     &                                 icll)
-                                    CALL LAGRAN(XV,DSG,ntt,jt,xx,zz,2,
-     &                                 icll)
+                                    IF ( ISPL.EQ.0 )
+     &                                 CALL LAGRAN(XV,YV,ntt,jt,xx,yy,2,
+     &                                 icll) ! interpolate point yield at theta = xx
+                                    IF ( ISPL.EQ.1 )
+     &                                 CALL SPLNER(XV,YV,ntt,xx,yy,2) ! interpolate point yield at theta = xx
+                                    IF ( ISPL.EQ.0 )
+     &                                 CALL LAGRAN(XV,DSG,ntt,jt,xx,zz,
+     &                                 2,icll) ! interpolate gamma yield at theta = xx
+                                    IF ( ISPL.EQ.1 )
+     &                                 CALL SPLNER(XV,DSG,ntt,xx,zz,
+     &                                 2) ! interpolate gamma yield at theta = xx
                                     IF ( mfla.EQ.1 ) yy = yy*pfi(jt)
      &                                 /57.2957795
                                     IF ( yy.LE.0. ) yy = 1.E-15
                                     IF ( mfla.EQ.1 ) zz = zz*pfi(jt)
      &                                 /57.2957795
-                                    XI(jt) = yy*SIN(xx)
+                                    XI(jt) = yy*SIN(xx) ! yy = integral of point yields over phi
                                     IF ( jd.EQ.1 .AND. ja.EQ.1 ) HLM(jt)
-     &                                 = zz*SIN(xx)
-                                 ENDDO
+     &                                 = zz*SIN(xx) ! zz = integral over phi of Rutherford cross section
+                                 ENDDO ! Loop on equal theta divisions jt
                                  icll = 4
                                  locat = ntt*idr + (je-1)*idr + jd
+C                                Integrate point yields over theta using Simpson's rule
                                  ZETA(locat) = SIMIN(npct1,het,XI)
+C                                If it is first decay and angle, integrate Rutherford cross section over theta
                                  IF ( jd.EQ.1 .AND. ja.EQ.1 ) DSE(je)
      &                                = SIMIN(npct1,het,HLM)
                                  ZV(je) = enb
-                              ENDDO
-                           ENDDO
+                              ENDDO ! Loop on decays jd
+                           ENDDO ! Loop on energy meshpoints je
+
+C    Interpolation over energy:
+C    The array ZV contains the energies of the meshpoints and the elements of the YV
+C    array are set to the angle-integrated yield for each decay at the corresponding
+C    energy, while DSE contains the Rutherford cross section for those energies. Since
+C    the energies of the meshpoints are not necessarily equally spaced, we need to
+C    interpolate to a set of equally spaced energies separated by "hen" starting from
+C    "emn". To get the contribution from each energy, dE = 1 / (stopping power). Note
+C    that we only evaluate the Rutherford cross section for the first decay and first
+C    angle, since it is the same for all.
+
                            icll = 3
-                           DO jd = 1 , idr
-                              DO jtp = 1 , ne
+                           DO jd = 1 , idr ! For each decay
+                              DO jtp = 1 , ne ! For each energy meshpoint
                                  jyv = (jtp-1)*idr + jd + ntt*idr
                                  YV(jtp) = ZETA(jyv)
-                              ENDDO
-                              DO jt = 1 , npce1
+                              ENDDO ! Loop on energy meshpoints jtp
+                              DO jt = 1 , npce1 ! npce1 is number of equal energy steps
                                  xx = (jt-1)*hen + emn
-                                 CALL LAGRAN(ZV,YV,ne,jt,xx,yy,2,icll)
-                                 IF ( jd.EQ.1 .AND. ja.EQ.1 )
-     &                                CALL LAGRAN(ZV,DSE,ne,jt,xx,zz,2,
+
+C                                Interpolate the angle-integrated yield for this energy
+                                 IF ( ISPL.EQ.0 )
+     &                                CALL LAGRAN(ZV,YV,ne,jt,xx,yy,2,
      &                                icll)
+                                 IF ( ISPL.EQ.1 )
+     &                                CALL SPLNER(ZV,YV,ne,xx,yy,2)
+
+C                                Interpolate Rutherford cross-section for this energy
+                                 IF ( jd.EQ.1 .AND. ja.EQ.1 .AND. ! Only for first decay and angle
+     &                                ISPL.EQ.0 )
+     &                                CALL LAGRAN(ZV,DSE,ne,jt,xx,zz,2,
+     &                                icll) ! Interpolate for this energy
+                                 IF ( jd.EQ.1 .AND. ja.EQ.1 .AND.
+     &                                ISPL.EQ.1 )
+     &                                CALL SPLNER(ZV,DSE,ne,xx,zz,2) ! Interpolate for this energy
                                  IF ( jd.EQ.1 .AND. ja.EQ.1 ) HLM(jt)
-     &                                = zz*HLMLM(jt)
+     &                             = zz*HLMLM(jt) ! HLMLM = 1 / stopping power
                                  XI(jt) = yy*HLMLM(jt)
-                              ENDDO
+                              ENDDO ! Loop on equal energy steps
+
+C   So now after this loop, we have XI containing the angle-integrated yield times dE for 
+C   a set of equally spaced energies, so we use Simpson's rule to integrate them and store
+C   in GRAD(jd). The first time, we also have in HLM a set of Rutherford cross-sections for
+C   equally spaced energies, which we integrate in the same way.
                               icll = 4
                               IF ( jd.EQ.1 .AND. ja.EQ.1 )
-     &                             DS = SIMIN(npce1,hen,HLM)
+     &                             DS = SIMIN(npce1,hen,HLM) ! integrate
                               GRAD(jd) = SIMIN(npce1,hen,XI)
-                           ENDDO
+                           ENDDO ! Loop over decays jd
+
                            IF ( ja.EQ.1 ) dst = dst + DS
                            IF ( ja.EQ.1 ) WRITE (22,99018) DS , lx
 99018                      FORMAT (1X/////5X,
      &                            'INTEGRATED RUTHERFORD CROSS SECTION='
      &                            ,1E9.4,2X,'FOR EXP.',1I2///)
+
                            WRITE (22,99019) lx , ja , emn , emx , tmn , 
      &                            tmx
 99019                      FORMAT (1X,//50X,'INTEGRATED YIELDS'//5X,
@@ -1328,9 +1318,10 @@ C              Treat OP,INTG
                               nf = KSEQ(jd,4)
                               WRITE (22,99049) ni , nf , SPIN(ni) , 
      &                               SPIN(nf) , GRAD(jd) , GRAD(jd)
-     &                               /GRAD(IDRN)
+     &                               /GRAD(IDRN) ! IDRN is the normalising transition
                            ENDDO
-                        ENDDO
+                        ENDDO ! Loop over detector angles ja
+
                         IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
                            IF ( jpin(lx).EQ.0 ) THEN
                               CALL COORD(wth,wph,wthh,1,2,pfi,wpi,
@@ -1344,11 +1335,11 @@ C              Treat OP,INTG
                               IF ( TLBDG(lx).LT.0 ) THEN
                                  FIEX(lx,1) = FIEX(lx,1) + 3.14159265
                                  FIEX(lx,2) = FIEX(lx,2) + 3.14159265
-                              ENDIF
-                           ENDIF
-                        ENDIF
+                              ENDIF ! If theta_lab < 0
+                           ENDIF ! If no pin diodes
+                        ENDIF ! If circular detector
                         iske = iske + ne*ntt*naa
-                     ENDDO
+                     ENDDO ! Loop over pin diodes
                      IF ( mpin.GT.1 ) WRITE (22,99021) dst , lx
 99021                FORMAT (1x//2x,
      &                      'Total integrated Rutherford cross section='
@@ -1356,18 +1347,18 @@ C              Treat OP,INTG
                   ENDDO
                   IF ( ipinf.NE.0 ) THEN
                      ngpr = 0
-                     DO lx = 1 , NEXPT
+                     DO lx = 1 , NEXPT ! For each experiment
                         nged = NDST(lx)
                         IF ( IRAWEX(lx).EQ.0 ) nged = NANG(lx)
                         IF ( lx.NE.1 ) ngpr = ngpr + idr*jpin(lx-1)
      &                       *NDST(lx-1)
                         lpin = jpin(lx)
                         IF ( lpin.EQ.0 ) lpin = 1
-                        DO jgd = 1 , nged
+                        DO jgd = 1 , nged ! For each angle or dataset
                            DO jd = 1 , idr
                               GRAD(jd) = 0.
                            ENDDO
-                           DO mpin = 1 , lpin
+                           DO mpin = 1 , lpin ! For each pin diode
                               REWIND 15
                               ndum = ngpr + (jgd-1)*idr + (mpin-1)
      &                               *jgd*idr
@@ -1376,28 +1367,499 @@ C              Treat OP,INTG
                                     READ (15,*) xx
                                  ENDDO
                               ENDIF
-                              DO jd = 1 , idr
+                              DO jd = 1 , idr ! For each decay
                                  READ (15,*) xx
                                  GRAD(jd) = GRAD(jd) + xx
-                              ENDDO
-                           ENDDO
+                              ENDDO ! Loop on decays jd
+                           ENDDO ! Loop on pin diodes mpin
                            WRITE (17,*) (GRAD(jd),jd=1,idr)
-                        ENDDO
-                     ENDDO
+                        ENDDO ! Loop on angle or dataset jgd
+                     ENDDO ! Loop on experiment lx
                      REWIND 15
                      REWIND 17
-                     DO lx = 1 , NEXPT
+                     DO lx = 1 , NEXPT ! For each experiment
                         nged = NDST(lx)
                         IF ( IRAWEX(lx).EQ.0 ) nged = NANG(lx)
-                        DO ija0 = 1 , nged
+                        DO ija0 = 1 , nged ! For each angle or dataset
                            READ (17,*) (GRAD(jdy),jdy=1,idr)
+                           DO jd = 1 , idr ! For each decay
+                              WRITE (15,*) GRAD(jd)
+                           ENDDO ! Loop on decays jd
+                        ENDDO ! Loop on angle or dataset ija0
+                     ENDDO ! Loop on experiments lx
+                  ENDIF
+                  GOTO 100 ! End of OP,INTG - back to input loop
+
+C              Treat OP,INTI
+               ELSEIF ( op2.EQ.'INTI' ) THEN
+                  DO lx = 1 , NEXPT ! For each experiment store original ISKIN
+                     iskin_protect(lx) = ISKIN(lx)
+                  ENDDO
+                  REWIND 14
+                  lfagg = 1
+                  IF ( SPIN(1).LT..25 ) ISO = 0
+                  DO lx = 1 , NEXPT ! For each experiment
+                     lpin = 1
+                     IF ( ipinf.NE.0 ) THEN
+                        IF ( jpin(lx).NE.0 ) lpin = jpin(lx)
+                     ENDIF
+                     IEXP = lx
+                     tth = TLBDG(lx)
+                     enh = EP(lx)
+                     DO mpin = 1 , lpin ! For each pin diode
+                        IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
+                           READ (JZB,*) ne , ntt , emn , emx , wth , 
+     &                          wph , wthh
+                           mfla = 1
+                           CALL COORD(wth,wph,wthh,ntt,0,pfi,wpi,tth,lx,
+     &                                tmn,tmx)
+                        ELSE
+                           READ (JZB,*) ne , ntt , emn , emx , tmn , tmx
+                           mfla = 0
+                           IF ( ntt.LT.0 ) mfla = 1
+                        ENDIF
+                        ntt = ABS(ntt)
+                        jan = NANG(lx)
+                        jan1 = NDST(lx)
+                        IF ( IRAWEX(lx).EQ.0 ) jan1 = jan
+                        IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
+                           WRITE (14,*) ne , ntt , emn , emx , tmn , 
+     &                                  tmx , jan1 , wth , wph , wthh
+                        ELSE
+                           WRITE (14,*) ne , ntt , emn , emx , tmn , 
+     &                                  tmx , jan1 , tmx , tmx , tmx
+                        ENDIF
+                        READ (JZB,*) (XV(i),i=1,ne)
+                        IF ( iecd(lx).NE.1 ) READ (JZB,*)
+     &                       (YV(i),i=1,ntt)
+                        IF ( tth.LT.0. ) ELMH(2*lx-1) = YV(1)
+                        IF ( tth.LT.0. ) ELMH(2*lx) = YV(ntt)
+                        DO kloop = 1 , ne ! For each energy meshpoint
+                           enb = XV(kloop)
+                           EP(lx) = enb
+                           DO ktt = 1 , ntt
+                              tta = YV(ktt)
+                              IF ( tth.LT.0 )
+     &                           CALL INVKIN(EP(lx),EN(NCM),IZ1(lx),
+     &                                       XA,XA1(lx),YV(ktt),tta,
+     &                                       1,ISKIN(lx))
+                              tta = SIGN(tta, tth)
+                              IF ( IAXS(lx).NE.0 ) THEN ! If not axial symmetry
+                                 IF ( iecd(lx).NE.1 ) THEN
+                                    IF ( kloop.EQ.1 ) THEN
+                                       READ (JZB,*) nfi ! Number of phi ranges
+                                       READ (JZB,*) 
+     &                                    (fiex1(ktt,jfi,1),fiex1(ktt,
+     &                                    jfi,2),jfi=1,nfi)
+                                       IF ( tth.LT.0. ) THEN
+                                         DO jfi = 1 , nfi ! For each phi angle
+                                         fiex1(ktt,jfi,1)
+     &                                      = fiex1(ktt,jfi,1) + 180.
+                                         fiex1(ktt,jfi,2)
+     &                                      = fiex1(ktt,jfi,2) + 180.
+                                         ENDDO
+                                       ENDIF
+                                    ENDIF
+                                 ENDIF
+                              ENDIF ! If not axial symmetry
+                              TLBDG(lx) = tta
+                              IF ( kloop.EQ.1 ) THEN
+                                 IF ( iecd(lx).NE.0 ) THEN
+                                    nfi = 1
+                                    fiex1(ktt,1,1) = wpi(ktt,1) ! Lower phi limit
+                                    fiex1(ktt,1,2) = wpi(ktt,2) ! Upper phi limit
+                                 ENDIF
+                              ENDIF
+                              CALL CMLAB(lx,dsig,tetrc)
+                              IF ( ERR ) GOTO 2000 ! Error
+                              tting = TLBDG(lx)
+                              IF ( ERR ) GOTO 1900 ! Troubleshoot
+                              CALL LOAD(lx,1,1,0.D0,jj)
+                              CALL ALLOC(ACCUR)
+                              CALL SNAKE(lx,ZPOL)
+                              CALL SETIN
+                              DO j = 1 , LMAX ! For each spin up to ground-state spin + 1
+                                 polm = DBLE(j-1) - SPIN(1)
+                                 CALL LOAD(lx,2,1,polm,jj)
+                                 CALL STING(jj)
+                                 CALL PATH(jj)
+                                 CALL INTG(IEXP)
+                                 CALL TENB(j,bten,LMAX)
+                              ENDDO
+                              CALL TENS(bten)
+                              CALL DECAY(ccd,0,ccc)
+                              DO j = 1 , LP2 ! LP2 = 1500 (maximum number of matrix elements)
+                                 DO ijan = 1 , 20
+                                    SUMCL(ijan,j) = 0.
+                                 ENDDO
+                              ENDDO
+                              ija0 = 0
+                              DO ijan = 1 , jan ! For each detector angle
+                                 IF ( IAXS(lx).EQ.0 ) nfi = 1
+                                 DO jyi = 1 , idr
+                                    GRAD(jyi) = 0.
+                                 ENDDO
+                                 todfi = 0.
+                                 DO jfi = 1 , nfi ! For each phi angle
+                                    fi0 = fiex1(ktt,jfi,1)/57.2957795
+                                    fi1 = fiex1(ktt,jfi,2)/57.2957795
+                                    gth = AGELI(IEXP,ijan,1)
+                                    fm = (fi0+fi1)/2.
+                                    figl = AGELI(IEXP,ijan,2)
+                                    CALL ANGULA(YGN,idr,1,fi0,fi1,tetrc,
+     &                                 gth,figl,ijan,op2)
+                                    IF ( IFMO.NE.0 ) THEN ! If correction due to recoil
+                                       id = ITMA(IEXP,ijan) ! Get detector identity
+                                       d = ODL(id) ! Get result of OP,GDET calculation
+                                       rx = d*SIN(gth)*COS(figl-fm)
+     &                                    - .25*SIN(tetrc)*COS(fm)
+                                       ry = d*SIN(gth)*SIN(figl-fm)
+     &                                    - .25*SIN(tetrc)*SIN(fm)
+                                       rz = d*COS(gth) - .25*COS(tetrc)
+                                       rl = SQRT(rx*rx+ry*ry+rz*rz)
+                                       sf = d*d/rl/rl
+                                       thc = TACOS(rz/rl)
+                                       fic = ATAN2(ry,rx)
+                                       CALL ANGULA(YGP,idr,1,fi0,fi1,
+     &                                    tetrc,thc,fic,ijan,op2)
+                                       DO ixl = 1 , idr ! For each decay
+                                         ixm = KSEQ(ixl,3)
+                                         tfac = TAU(ixm)
+                                         YGN(ixl) = YGN(ixl)
+     &                                      + .01199182*tfac*BETAR(IEXP)
+     &                                      *(sf*YGP(ixl)-YGN(ixl))
+                                       ENDDO ! Loop on decays
+                                    ENDIF ! If correction due to recoil
+                                    IF ( IRAWEX(lx).NE.0 ) THEN
+                                       ipd = ITMA(lx,ijan) ! Get identity of detector
+                                       DO jyi = 1 , idr ! For each decay
+                                         ni = KSEQ(jyi,3)
+                                         nf = KSEQ(jyi,4)
+                                         decen = EN(ni) - EN(nf)
+                                         cocos = SIN(tetrc)*SIN(gth)
+     &                                      *COS(fm-figl) + COS(tetrc)
+     &                                      *COS(gth)
+                                         decen = decen*(1.+BETAR(lx)
+     &                                      *cocos)
+                                         CALL EFFIX(ipd,decen,effi)
+                                         YGN(jyi) = YGN(jyi)*effi
+                                       ENDDO
+                                       inclus = ICLUST(lx,ijan) ! Cluster number for detector ijan
+                                       IF ( inclus.NE.0 ) THEN
+                                         DO jyi = 1 , idr ! For each decay
+                                         SUMCL(inclus,jyi)
+     &                                      = SUMCL(inclus,jyi)
+     &                                      + YGN(jyi)
+                                         ENDDO
+                                         IF ( ijan.NE.LASTCL(lx,inclus)
+     &                                      ) GOTO 432 ! If it is not the last detector in the cluster
+                                         DO jyi = 1 , idr ! For each decay
+                                         YGN(jyi) = SUMCL(inclus,jyi)
+                                         ENDDO
+                                       ENDIF
+                                    ENDIF
+                                    IF ( jfi.EQ.1 ) ija0 = ija0 + 1
+                                    DO jyi = 1 , idr ! For each decay
+                                       GRAD(jyi) = GRAD(jyi) + YGN(jyi)
+                                    ENDDO ! Loop on decays jyi
+                                    todfi = todfi + ABS(fi1-fi0)
+                                 ENDDO ! For each phi angle jfi
+                                 IF ( IAXS(lx).EQ.0 ) todfi = 6.283185
+                                 ax = 1.
+                                 IF ( mfla.EQ.1 ) ax = 1./todfi
+                                 dsx = dsig
+                                 IF ( mfla.NE.1 ) dsx = dsig*todfi
+                                 dsxm(mpin,kloop,ktt) = dsx
+                                 WRITE (17,*) lx , mpin , kloop , ktt , 
+     &                                  dsx
+                                 WRITE (14,*) lx , enb , tting , ija0 , 
+     &                                  dsx , 
+     &                                  (GRAD(jyi)*dsig*ax,jyi=1,idr)
+                                 IF ( IPRM(11).EQ.1 ) THEN
+                                    WRITE (22,99048) lx , ija0 , enb , 
+     &                                 tta
+                                    IF ( tta.LT.0. ) WRITE (22,99017)
+     &                                 tting
+                                    DO jyi = 1 , idr
+                                       ni = KSEQ(jyi,3)
+                                       nf = KSEQ(jyi,4)
+                                       WRITE (22,99049) ni , nf , 
+     &                                    SPIN(ni) , SPIN(nf) , 
+     &                                    GRAD(jyi)*dsig*ax , GRAD(jyi)
+     &                                    /GRAD(IDRN)
+                                    ENDDO ! Loop on decays jyi
+                                 ENDIF ! If printout of yields at meshpoints
+ 432                             CONTINUE
+                              ENDDO ! Loop on detector angles ijan
+                           ENDDO ! Loop on theta angles ktt
+                        ENDDO ! Loop on energy meshpoints kloop
+                     ENDDO ! Loop on pin diodes mpin
+                      
+                     EP(lx) = enh
+                     TLBDG(lx) = tth
+                  ENDDO ! Loop on experiments lx
+                  REWIND 14
+                  REWIND 15
+                  iske = 0
+                  DO na = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
+                     ILE(na) = 1
+                  ENDDO
+                  ilx = 0
+C                 We have now performed the full coulex calculation at each of the
+C                 meshpoints, so now we start the integration
+                  DO lx = 1 , NEXPT ! Loop over experiments
+C                    Read tape 17
+                     REWIND 17
+                     DO ijaja = 1 , 300000
+                        READ (17,*,END=434) jjlx , jmpin , jkloo , 
+     &                        jktt , dsx
+                        IF ( jjlx.EQ.lx ) dsxm(jmpin,jkloo,jktt) = dsx
+                     ENDDO
+ 434                 na = NANG(lx)
+                     IF ( lx.NE.1 ) THEN
+                        DO na1 = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
+                           ILE(na1) = ILE(na1) + NYLDE(lx-1,na1)
+                        ENDDO
+                     ENDIF
+                     READ (JZB,*) nptx ! Number of meshpoints for stopping powers
+                     IF ( nptx.NE.0 ) THEN
+                        READ (JZB,*) (esp(i),i=1,nptx) ! Energy
+                        READ (JZB,*) (dedx(i),i=1,nptx) ! Stopping power
+                        npt = nptx
+                     ENDIF
+                     READ (JZB,*) npce , npct
+                     mfla = 0
+                     IF ( npct.LT.0 ) mfla = 1
+                     IF ( iecd(lx).EQ.1 ) mfla = 1
+                     npct = ABS(npct)
+                     IF ( npct.GT.100 )
+     &                  STOP 'ABS(NI2) is limited to 100!'
+                     npce = npce + MOD(npce,2)
+                     npct = npct + MOD(npct,2)
+                     mpin = 1
+                     IF ( ipinf.NE.0 ) THEN
+                        IF ( jpin(lx).NE.0 ) mpin = jpin(lx)
+                     ENDIF
+                     dst = 0.
+                     DO lpin = 1 , mpin ! Loop over pin diodes
+                        ilx = ilx + 1
+                        IF ( ilx.NE.1 )
+     &                       CALL TAPMA(lx,iske,isko,iskf,nflr,idr,0,
+     &                       nft,enb)
+                        READ (14,*) ne , ntt , emn , emx , tmn , tmx , 
+     &                              jan , wth , wph , wthh
+                        iocc = (ne+ntt)*idr
+                        IF ( iocc.GT.izcap ) GOTO 1800
+                        hen = (emx-emn)/npce
+                        npce1 = npce + 1
+                        het = (tmx-tmn)/npct ! Step in theta in degrees
+                        npct1 = npct + 1
+                        IF ( iecd(lx).EQ.1 ) ! Circular detector
+     &                       CALL COORD(wth,wph,wthh,npct1,1,pfi,wpi,
+     &                       TLBDG(lx),lx,tmn,tmx)
+                        IF ( iecd(lx).NE.1 ) THEN
+                           IF ( mfla.EQ.1 ) READ (JZB,*)
+     &                          (pfi(j),j=1,npct1)
+                        ENDIF
+                        het = het/57.2957795 ! Step in theta in radians
+                        
+C                       Interpolate stopping power for each of the energies
+C                       that we need. esp is an array of energies and dedx is
+C                       an array containing the stopping powers at those
+C                       energies. Function is unweighted sqrt. The energies
+C                       are not the energies we gave for the meshpoints, but
+C                       the range over which we integrate the bombarding energy
+C                       with the number of steps specified.
+                        DO j = 1 , npce1
+                           xx = (j-1)*hen + emn
+                           IF ( ISPL.EQ.0 )
+     &                        CALL LAGRAN(esp,dedx,npt,1,xx,yy,3,1)
+                           IF ( ISPL.EQ.1 )
+     &                        CALL SPLNER(esp,dedx,npt,xx,yy,3)
+                           HLMLM(j) = 1./yy
+                        ENDDO
+                         
+C                       Now we calculate for all the mesh points. 
+                        naa = NDST(lx)
+                        IF ( IRAWEX(lx).EQ.0 ) naa = NANG(lx)
+                        iskf = naa - 1
+                        DO ja = 1 , naa ! Loop over detector angles
+                           icll = 3 ! Weighting mode
+                           DO je = 1 , ne ! ne = number of energy mesh points
+                              lu = ILE(ja)
+                              isko = (je-1)*naa*ntt + ja - 1
+                              CALL TAPMA(lx,iske,isko,iskf,ntt,idr,1,
+     &                           nft,enb)
+                              IF ( nft.EQ.1 ) GOTO 1900 ! Troubleshoot
+                              DO jd = 1 , idr ! For each decay
+                                 DO jtp = 1 , ntt ! ntt = number of theta meshpoints
+                                    IF ( jd.EQ.1 .AND. ja.EQ.1 )
+     &                                 DSG(jtp) = dsxm(lpin,je,jtp)
+                                    jyv = (jtp-1)*idr + jd
+                                    YV(jtp) = ZETA(jyv) ! Point yield
+                                 ENDDO ! Loop on theta meshpoints jtp
+                                 DO jt = 1 , npct1 ! number of equal divisions in theta for interpolation
+                                    xx = (jt-1)*het + tmn/57.2957795
+                                    IF ( ISPL.EQ.0 )
+     &                                 CALL LAGRAN(XV,YV,ntt,jt,xx,yy,2,
+     &                                 icll) ! interpolate point yield at theta = xx
+                                    IF ( ISPL.EQ.1 )
+     &                                 CALL SPLNER(XV,YV,ntt,xx,yy,2) ! interpolate point yield at theta = xx
+                                    IF ( ISPL.EQ.0 )
+     &                                 CALL LAGRAN(XV,DSG,ntt,jt,xx,zz,
+     &                                 2,icll) ! interpolate gamma yield at theta = xx
+                                    IF ( ISPL.EQ.1 )
+     &                                 CALL SPLNER(XV,DSG,ntt,xx,zz,
+     &                                 2) ! interpolate gamma yield at theta = xx
+                                    IF ( mfla.EQ.1 ) yy = yy*pfi(jt)
+     &                                 /57.2957795
+                                    IF ( yy.LE.0. ) yy = 1.E-15
+                                    IF ( mfla.EQ.1 ) zz = zz*pfi(jt)
+     &                                 /57.2957795
+                                    XI(jt) = yy*SIN(xx) ! yy = integral of point yields over phi
+                                    IF ( jd.EQ.1 .AND. ja.EQ.1 ) HLM(jt)
+     &                                 = zz*SIN(xx) ! zz = integral over phi of Rutherford cross section
+                                 ENDDO ! Loop on equal theta divisions jt
+                                 icll = 4
+                                 locat = ntt*idr + (je-1)*idr + jd
+C                                Integrate point yields over theta using Simpson's rule
+                                 ZETA(locat) = SIMIN(npct1,het,XI)
+C                                If it is first decay and angle, integrate Rutherford cross section over theta
+                                 IF ( jd.EQ.1 .AND. ja.EQ.1 ) DSE(je)
+     &                                = SIMIN(npct1,het,HLM)
+                                 ZV(je) = enb
+                              ENDDO ! Loop on decays jd
+                           ENDDO ! Loop on energy meshpoints je
+
+C    Interpolation over energy:
+C    The array ZV contains the energies of the meshpoints and the elements of the YV
+C    array are set to the angle-integrated yield for each decay at the corresponding
+C    energy, while DSE contains the Rutherford cross section for those energies. Since
+C    the energies of the meshpoints are not necessarily equally spaced, we need to
+C    interpolate to a set of equally spaced energies separated by "hen" starting from
+C    "emn". To get the contribution from each energy, dE = 1 / (stopping power). Note
+C    that we only evaluate the Rutherford cross section for the first decay and first
+C    angle, since it is the same for all.
+
+                           icll = 3
+                           DO jd = 1 , idr ! For each decay
+                              DO jtp = 1 , ne ! For each energy meshpoint
+                                 jyv = (jtp-1)*idr + jd + ntt*idr
+                                 YV(jtp) = ZETA(jyv)
+                              ENDDO ! Loop on energy meshpoints jtp
+                              DO jt = 1 , npce1 ! npce1 is number of equal energy steps
+                                 xx = (jt-1)*hen + emn
+
+C                                Interpolate the angle-integrated yield for this energy
+                                 IF ( ISPL.EQ.0 )
+     &                                CALL LAGRAN(ZV,YV,ne,jt,xx,yy,2,
+     &                                icll)
+                                 IF ( ISPL.EQ.1 )
+     &                                CALL SPLNER(ZV,YV,ne,xx,yy,2)
+
+C                                Interpolate Rutherford cross-section for this energy
+                                 IF ( jd.EQ.1 .AND. ja.EQ.1 .AND. ! Only for first decay and angle
+     &                                ISPL.EQ.0 )
+     &                                CALL LAGRAN(ZV,DSE,ne,jt,xx,zz,2,
+     &                                icll) ! Interpolate for this energy
+                                 IF ( jd.EQ.1 .AND. ja.EQ.1 .AND.
+     &                                ISPL.EQ.1 )
+     &                                CALL SPLNER(ZV,DSE,ne,xx,zz,2) ! Interpolate for this energy
+                                 IF ( jd.EQ.1 .AND. ja.EQ.1 ) HLM(jt)
+     &                             = zz*HLMLM(jt) ! HLMLM = 1 / stopping power
+                                 XI(jt) = yy*HLMLM(jt)
+                              ENDDO ! Loop on equal energy steps
+
+C   So now after this loop, we have XI containing the angle-integrated yield times dE for 
+C   a set of equally spaced energies, so we use Simpson's rule to integrate them and store
+C   in GRAD(jd). The first time, we also have in HLM a set of Rutherford cross-sections for
+C   equally spaced energies, which we integrate in the same way.
+                              icll = 4
+                              IF ( jd.EQ.1 .AND. ja.EQ.1 )
+     &                             DS = SIMIN(npce1,hen,HLM) ! integrate
+                              GRAD(jd) = SIMIN(npce1,hen,XI)
+                           ENDDO ! Loop over decays jd
+
+                           IF ( ja.EQ.1 ) dst = dst + DS
+                           IF ( ja.EQ.1 ) WRITE (22,99018) DS , lx
+
+                           WRITE (22,99019) lx , ja , emn , emx , tmn , 
+     &                            tmx
                            DO jd = 1 , idr
                               WRITE (15,*) GRAD(jd)
                            ENDDO
-                        ENDDO
-                     ENDDO
+                           DO jd = 1 , idr
+                              ni = KSEQ(jd,3)
+                              nf = KSEQ(jd,4)
+                              WRITE (22,99049) ni , nf , SPIN(ni) , 
+     &                               SPIN(nf) , GRAD(jd) , GRAD(jd)
+     &                               /GRAD(IDRN) ! IDRN is the normalising transition
+                           ENDDO
+                        ENDDO ! Loop over detector angles ja
+
+                        IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
+                           IF ( jpin(lx).EQ.0 ) THEN
+                              CALL COORD(wth,wph,wthh,1,2,pfi,wpi,
+     &                           TLBDG(lx),lx,txx,txx)
+                              WRITE (22,99020) FIEX(lx,1)*57.2957795 , 
+     &                               FIEX(lx,2)*57.2957795 , lx
+                              IF ( TLBDG(lx).LT.0 ) THEN
+                                 FIEX(lx,1) = FIEX(lx,1) + 3.14159265
+                                 FIEX(lx,2) = FIEX(lx,2) + 3.14159265
+                              ENDIF ! If theta_lab < 0
+                           ENDIF ! If no pin diodes
+                        ENDIF ! If circular detector
+                        iske = iske + ne*ntt*naa
+                     ENDDO ! Loop over pin diodes
+                     IF ( mpin.GT.1 ) WRITE (22,99021) dst , lx
+                  ENDDO
+                  IF ( ipinf.NE.0 ) THEN
+                     ngpr = 0
+                     DO lx = 1 , NEXPT ! For each experiment
+                        nged = NDST(lx)
+                        IF ( IRAWEX(lx).EQ.0 ) nged = NANG(lx)
+                        IF ( lx.NE.1 ) ngpr = ngpr + idr*jpin(lx-1)
+     &                       *NDST(lx-1)
+                        lpin = jpin(lx)
+                        IF ( lpin.EQ.0 ) lpin = 1
+                        DO jgd = 1 , nged ! For each angle or dataset
+                           DO jd = 1 , idr
+                              GRAD(jd) = 0.
+                           ENDDO
+                           DO mpin = 1 , lpin ! For each pin diode
+                              REWIND 15
+                              ndum = ngpr + (jgd-1)*idr + (mpin-1)
+     &                               *jgd*idr
+                              IF ( ndum.NE.0 ) THEN
+                                 DO jd = 1 , ndum
+                                    READ (15,*) xx
+                                 ENDDO
+                              ENDIF
+                              DO jd = 1 , idr ! For each decay
+                                 READ (15,*) xx
+                                 GRAD(jd) = GRAD(jd) + xx
+                              ENDDO ! Loop on decays jd
+                           ENDDO ! Loop on pin diodes mpin
+                           WRITE (17,*) (GRAD(jd),jd=1,idr)
+                        ENDDO ! Loop on angle or dataset jgd
+                     ENDDO ! Loop on experiment lx
+                     REWIND 15
+                     REWIND 17
+                     DO lx = 1 , NEXPT ! For each experiment
+                        nged = NDST(lx)
+                        IF ( IRAWEX(lx).EQ.0 ) nged = NANG(lx)
+                        DO ija0 = 1 , nged ! For each angle or dataset
+                           READ (17,*) (GRAD(jdy),jdy=1,idr)
+                           DO jd = 1 , idr ! For each decay
+                              WRITE (15,*) GRAD(jd)
+                           ENDDO ! Loop on decays jd
+                        ENDDO ! Loop on angle or dataset ija0
+                     ENDDO ! Loop on experiments lx
                   ENDIF
-                  GOTO 100 ! End of OP,INTG
+                  DO lx = 1 , NEXPT ! For each experiment restore original ISKIN
+                     ISKIN(lx) = iskin_protect(lx)
+                  ENDDO
+                  GOTO 100 ! End of OP,INTI - back to input loop
 
 C              Treat OP,CORR
                ELSEIF ( op2.EQ.'CORR' ) THEN
@@ -1433,7 +1895,7 @@ C                 Treat OP,SIXJ
                            ENDDO
                         ENDDO
                      ENDDO
-                     GOTO 2000 ! End of OP,SIXJ
+                     GOTO 2000 ! End of OP,SIXJ - normal end of execution
 
 C                 Treat OP,RAW (raw uncorrected gamma yields)
                   ELSEIF ( op2.EQ.'RAW ' ) THEN
@@ -1448,7 +1910,7 @@ C                    Read absorber coefficients from unit 8
                      DO l = 1 , nfd
                         READ (8,*) (THICK(l,j),j=1,7) ! thickness of absorbers
                      ENDDO
-                     DO l = 1 , LP1 ! LP1 = 50
+                     DO l = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
                         DO j = 1 , 200
                            ICLUST(l,j) = 0
                         ENDDO
@@ -1459,47 +1921,48 @@ C                    Read absorber coefficients from unit 8
                      ENDDO
 
 C                    Read input from standard input
-                     DO l = 1 , LP1 ! LP1 = 50
+                     DO l = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
                         READ (JZB,*) mexl ! experiment number
-                        IF ( mexl.EQ.0 ) GOTO 100
+                        IF ( mexl.EQ.0 ) GOTO 100 ! Back to input loop
                         IRAWEX(mexl) = 1
                         n = NANG(mexl)
                         DO j = 1 , n
-                           jj = ITMA(mexl,j)
+                           jj = ITMA(mexl,j) ! Get identity of detector
                            READ (JZB,*) (AKAVKA(k,jj),k=1,8) ! efficiency curve parameters
+                           AKAVKA(9,jj) = ideff(mexl)
                         ENDDO
                         READ (JZB,*) kclust ! number of clusters
                         IF ( kclust.NE.0 ) THEN
                            DO j = 1 , kclust
                               READ (JZB,*) numcl ! Number of detectors for this cluster
                               READ (JZB,*) (liscl(k),k=1,numcl) ! Indices of logical detectors
-                              LASTCL(l,j) = liscl(numcl)
+                              LASTCL(l,j) = liscl(numcl) ! Index of last detector in cluster
                               DO k = 1 , numcl
                                  kk = liscl(k)
-                                 ICLUST(l,kk) = j
+                                 ICLUST(l,kk) = j ! Set cluster number
                               ENDDO
                            ENDDO
                         ENDIF
                      ENDDO
-                     GOTO 100 ! End of OP,RAW
+                     GOTO 100 ! End of OP,RAW - back to input loop
 
 C                 Treat OP,MAP
                   ELSEIF ( op2.EQ.'MAP ' ) THEN
                      GOTO 1200 ! End of OP,MAP 
-                  ENDIF
+                  ENDIF ! IF ( op2.EQ.'SIXJ' )
                ENDIF
             ENDIF
          ENDIF
-       ENDIF ! End of if (op1.eq."OP, ") if statement
+      ENDIF ! End of if (op1.eq."OP, ") if statement
 
       WRITE (22,99022) op1 , op2
 99022 FORMAT (5X,'UNRECOGNIZED OPTION',1X,1A3,1A4)
-      GOTO 2000
+      GOTO 2000 ! Normal end of execution
 
 C     Treat suboptions of OP,COUL and OP,GOSI
  200  READ (JZB,99023) op1 ! Read the suboption
 99023 FORMAT (1A4)
-      IF ( op1.EQ.'    ' ) GOTO 100
+      IF ( op1.EQ.'    ' ) GOTO 100 ! Back to input loop
 
 C     Treat suboption LEVE (levels)
       IF ( op1.EQ.'LEVE' ) THEN
@@ -1509,7 +1972,7 @@ C     Treat suboption LEVE (levels)
      &           'ENERGY(MEV)')
          ndima = NDIM + 1
          DO k = 1 , ndima
-            READ (JZB,*) ipo1 , ipo2 , po2 , po1 ! leve number, parity, spin, energy
+            READ (JZB,*) ipo1 , ipo2 , po2 , po1 ! level number, parity, spin, energy
             IF ( ipo1.EQ.0 ) GOTO 200
             IF ( ipo1.EQ.1 .AND. ABS(po2).LT.1.E-6 ) ISO = 0
             NMAX = NMAX + 1
@@ -1523,7 +1986,7 @@ C     Treat suboption LEVE (levels)
             IF ( ipo2.EQ.-1 ) prp = '-'
             IF ( ABS(IPRM(1)).EQ.1 ) WRITE (22,99025) ipo1 , prp , 
      &           SPIN(ipo1) , EN(ipo1)
-99025       FORMAT (6X,1I2,11X,1A1,10X,1F4.1,8X,1F10.4)
+99025       FORMAT (5X,1I3,11X,1A1,10X,1F4.1,8X,1F10.4)
          ENDDO
 
 C     Treat suboption ME (matrix elements)
@@ -1539,7 +2002,7 @@ C     Treat suboption ME (matrix elements)
             ENDIF
             IF ( ipo1.NE.0 ) THEN
                IF ( ipo2.EQ.0 ) THEN
-                  IF ( ipo1.LE.la ) GOTO 1600
+                  IF ( ipo1.LE.la ) GOTO 1600 ! Error - wrong sequence of multipolarities
                   LAMMAX = LAMMAX + 1
                   LAMDA(LAMMAX) = ipo1
                   ipo3 = 0
@@ -1547,9 +2010,9 @@ C     Treat suboption ME (matrix elements)
                ELSE
                   MULTI(la) = MULTI(la) + 1
                   indx = indx + 1
-                  IF ( ipo1.GT.ABS(ipo2) ) GOTO 1500
+                  IF ( ipo1.GT.ABS(ipo2) ) GOTO 1500 ! Error - M.E. does not belong to the upper triangle
                   IF ( ipo1.NE.ipo3 ) THEN
-                     IF ( ipo1.LT.ipo3 ) GOTO 1700
+                     IF ( ipo1.LT.ipo3 ) GOTO 1700 ! Error - repeated appearance of the state
                      ipo3 = ipo1
                   ENDIF
                   ELM(indx) = po1
@@ -1560,8 +2023,8 @@ C     Treat suboption ME (matrix elements)
                   LEAD(2,indx) = ABS(ipo2)
                   LDNUM(la,ipo1) = LDNUM(la,ipo1) + 1
                   IF ( op2.EQ.'GOSI' ) THEN
-                    IF ( ipo2.LT.0 ) THEN ! If negative, bl and bu are indices
-                                          ! to which we fix this element
+                     IF ( ipo2.LT.0 ) THEN ! If negative, bl and bu are indices
+                                           ! to which we fix this element
                         IVAR(indx) = 10000*INT(bl) + INT(bu)
                      ELSE                 ! Otherwise they are limits
                         ELMU(indx) = bu
@@ -1605,9 +2068,10 @@ C     Treat suboption ME (matrix elements)
             IF ( ipo1.EQ.0 ) GOTO 300
  220        la = ipo1
             IF ( la.GT.LMAXE .AND. la.LE.6 ) LMAXE = la
- 250     ENDDO
+ 250        CONTINUE
+         ENDDO
  300     MEMAX = indx
-         IF ( la.GT.6 ) MAGEXC = 1
+         IF ( la.GT.6 ) MAGEXC = 1 ! Flag that we need magnetic excitations
          memx4 = MULTI(1) + MULTI(2) + MULTI(3) + MULTI(4)
          MEMX6 = memx4 + MULTI(5) + MULTI(6)
          IF ( ABS(IPRM(1)).EQ.1 ) CALL PRELM(iopri)
@@ -1626,6 +2090,13 @@ C     Treat suboption CONT (control)
          IF ( op1.EQ.'ACP,' ) ACCA = 10.**(-fipo1)
          IF ( op1.EQ.'SEL,' ) ITS = 2
          IF ( op1.EQ.'SMR,' ) iosr = 1
+         IF ( op1.EQ.'SPL,' ) ISPL = ipo1
+         IF ( op1.EQ.'EFF,' ) THEN
+            DO jjx = 1 , ipo1
+               READ (JZB,*) ipo2 , ijx
+               ideff(ipo2) = ijx
+            ENDDO
+         ENDIF
          IF ( op1.EQ.'FMI,' ) ifm = 1
          IF ( op1.EQ.'TEN,' ) itno = 1
          IF ( op1.EQ.'NCM,' ) NCM = ipo1
@@ -1679,9 +2150,9 @@ C     Treat suboption CONT (control)
                            GOTO 350
                         ELSE
                            IF ( op1.EQ.'CCF,' ) IPS1 = ipo1
-                           IF ( op1.EQ.'PIN,' ) ipine = ipo1
-                           IF ( op1.EQ.'PIN,' ) ipinf = 1
                            IF ( op1.EQ.'PIN,' ) THEN
+                              ipine = ipo1
+                              ipinf = 1
                               DO ipp = 1 , ipine
                                  READ (JZB,*) ig1 , ig2
                                  jpin(ig1) = ig2
@@ -1711,7 +2182,7 @@ C     Treat suboption CONT (control)
                ivarh(jjx) = IVAR(jjx)
             ENDDO
          ENDIF
-         GOTO 350
+         GOTO 350 ! Back to beginning of CONT loop
 
 C     Treat suboption EXPT
       ELSEIF ( op1.EQ.'EXPT' ) THEN
@@ -1725,8 +2196,7 @@ C     Treat suboption EXPT
          G(7) = .6             ! POWER
          DO k = 1 , NEXPT ! Zn, An, E_p, THETA_lab, M_c, M_A, IAX, phi1, phi2, ikin, ln
             READ (JZB,*) IZ1(k) , XA1(k) , EP(k) , TLBDG(k) , EMMA(k) ,
-     &                   MAGA(k) , IAXS(k) , fi0 , fi1 , ISKIN(k) ,
-     &                   LNORM(k)
+     &           MAGA(k) , IAXS(k) , fi0 , fi1 , ISKIN(k) , LNORM(k)
             ITTE(k) = 0
             IF ( XA1(k).LT.0. ) ITTE(k) = 1
             XA1(k) = ABS(XA1(k))
@@ -1742,7 +2212,7 @@ C     Else we don't recognize the suboption
       ELSE
          WRITE (22,99027) op1
 99027    FORMAT (5X,'UNRECOGNIZED SUBOPTION',1X,1A4)
-         GOTO 2000
+         GOTO 2000 ! Normal end of execution
       ENDIF
       GOTO 200 ! Get next suboption
 
@@ -1750,13 +2220,13 @@ C     Handle OP,ERRO
  400  IF ( ICS.EQ.1 ) THEN
          REWIND 11
          DO kh1 = 1 , LP4
-            READ (11) (CORF(kh1,kh2),kh2=1,LP6)
+            READ (11) (CORF(kh1,kh2),kh2=1,LP6) ! LP6 = 32 (maximum number of gamma detectors)
          ENDDO
       ELSE
          CALL FTBM(0,chiss,idr,0,chilo,bten)
          REWIND 11
          DO kh1 = 1 , LP4
-            WRITE (11) (CORF(kh1,kh2),kh2=1,LP6)
+            WRITE (11) (CORF(kh1,kh2),kh2=1,LP6) ! LP6 = 32 (maximum number of gamma detectors)
          ENDDO
       ENDIF
 
@@ -1797,7 +2267,7 @@ C     Handle OP,ERRO
          naxfl = 0
          IF ( ms.EQ.0 ) mend = MEMAX
          IF ( ms.EQ.0 ) ms = 1
-         DO kh = ms , mend
+         DO kh = ms , mend ! Loop over matrix elements
             DO ij = 1 , 2
                pv = (ELMU(kh)-ELML(kh))/100.
                IF ( ij.NE.1 .OR. (ELM(kh)-ELML(kh)).GE.pv ) THEN
@@ -1816,7 +2286,8 @@ C     Handle OP,ERRO
             ENDDO
             REWIND 15
             WRITE (15,*) (DEVD(ij),DEVU(ij),ij=1,MEMAX)
- 500     ENDDO
+ 500        CONTINUE
+         ENDDO
       ENDIF
  600  IF ( ifbp.EQ.1 ) THEN
          REWIND 17
@@ -1838,7 +2309,7 @@ C     Handle OP,ERRO
      &                       , DEVD(kh1) , DEVU(kh1) , DEVD(kh1)
      &                       *100./ABS(HLM(kh1)) , DEVU(kh1)
      &                       *100./ABS(HLM(kh1))
-99031       FORMAT (6X,1I3,6X,1I2,5X,1I2,5X,1F9.5,2X,'(',1F9.5,' ,',
+99031       FORMAT (6X,1I3,5X,1I3,4X,1I3,5X,1F9.5,2X,'(',1F9.5,' ,',
      &              1F9.5,')','......',1F7.1,' ,',1F7.1,1X,'PC')
          ENDIF
       ENDDO
@@ -1874,7 +2345,7 @@ C     Handle OP,ERRO
             ENDIF
          ENDIF
       ENDDO
-      GOTO 2000
+      GOTO 2000 ! Normal end of execution
 
  700  irea = 0
       IF ( ms.LT.0 ) irea = 1
@@ -1883,13 +2354,13 @@ C     Handle OP,ERRO
  800  naxfl = 1
       IF ( irea.EQ.1 ) READ (JZB,*) ms , mend
       IF ( ms.NE.0 ) THEN
-         DO kh = ms , mend
+         DO kh = ms , mend ! For matrix elements
             IF ( ifc.NE.1 ) THEN
                REWIND 18
                DO kh1 = 1 , kh
                   READ (18,*) (KVAR(jyi),jyi=1,MEMAX)
                ENDDO
-               DO kh1 = 1 , MEMAX
+               DO kh1 = 1 , MEMAX ! For each matrix element
                   ivrh = IVAR(kh1)
                   IF ( KVAR(kh1).EQ.0 ) IVAR(kh1) = 0
                   KVAR(kh1) = ivrh
@@ -1901,7 +2372,7 @@ C     Handle OP,ERRO
                IF ( ABS(sh).LT.1.E-6 ) sh = (-1)**ij*ABS(HLM(kh))/10.
                ELM(kh) = HLM(kh) + 1.5*sh
                mm = 0
-               DO kh1 = 1 , MEMAX
+               DO kh1 = 1 , MEMAX ! For each matrix element
                   IF ( ifc.EQ.1 ) KVAR(kh1) = IVAR(kh1)
                   mm = mm + IVAR(kh1)
                ENDDO
@@ -1909,30 +2380,30 @@ C     Handle OP,ERRO
 99033          FORMAT (10X,'ME=',1I3,5X,'NO FREE MATRIX ELEMENTS')
                IF ( mm.NE.0 ) THEN
                   KFERR = 1
-                  IF ( iosr.EQ.1 ) WRITE (IUNIT3,*) kh , kh
+                  IF ( iosr.EQ.1 ) WRITE (IUNIT3,*) kh , kh ! For sigma program
                   IF ( iosr.EQ.1 ) WRITE (IUNIT3,*) kh , ij , ELM(kh)
                   LOCKS = 1
                   DLOCK = .05
                   CALL MINI(chiss,-1.D0,2,.0001D0,1000,idr,100000.D0,0,
      &                      iosr,kh,bten)
-                  DO kh1 = 1 , MEMAX
+                  DO kh1 = 1 , MEMAX ! For each matrix element
                      SA(kh1) = (ELM(kh1)-HLM(kh1))/ABS(sh)
                   ENDDO
                   CALL KONTUR(idr,chis0,chisl,ifbp,inpo,kh,sh,bten,rem)
                ENDIF
-               DO kh1 = 1 , MEMAX
+               DO kh1 = 1 , MEMAX ! For each matrix element
                   IF ( ifc.EQ.1 ) IVAR(kh1) = KVAR(kh1)
                   ELM(kh1) = HLM(kh1)
                ENDDO
             ENDDO
             IF ( ifc.NE.1 ) THEN
-               DO kh1 = 1 , MEMAX
+               DO kh1 = 1 , MEMAX ! For each matrix element
                   IVAR(kh1) = KVAR(kh1)
                ENDDO
             ENDIF
             REWIND 15
             WRITE (15,*) (DEVD(kh1),DEVU(kh1),kh1=1,MEMAX)
-         ENDDO
+         ENDDO ! Loop on matrix elements kh
          IF ( irea.EQ.1 ) GOTO 800
       ENDIF
       IF ( iosr.NE.0 ) THEN
@@ -1944,7 +2415,7 @@ C     Handle OP,ERRO
  900  jfre = 0
       irfix = 0
       IF ( op2.EQ.'RE,F' ) irfix = 1
- 1000 DO jrls = 1 , MEMAX
+ 1000 DO jrls = 1 , MEMAX ! For each matrix element
          IF ( IVAR(jrls).NE.0 .OR. irfix.NE.1 ) THEN
             IF ( IVAR(jrls).GT.999 ) THEN
                IF ( jfre.EQ.1 ) GOTO 1100
@@ -1954,14 +2425,15 @@ C     Handle OP,ERRO
             ELMU(jrls) = ABS(ELMU(jrls))
             IF ( jrls.GT.MEMX6 ) IVAR(jrls) = 1
          ENDIF
- 1100 ENDDO
+ 1100    CONTINUE
+      ENDDO ! For each matrix element jrls
       DO jrls = 1 , MEMAX
          ivarh(jrls) = IVAR(jrls)
       ENDDO
-      GOTO 100
+      GOTO 100 ! Back to input loop
 
- 1200 CALL CMLAB(0,dsig,ttttt)
-      IF ( ERR ) GOTO 2000
+ 1200 CALL CMLAB(0,dsig,ttttt) ! Options MAP, STAR, POINT, MINI etc.
+      IF ( ERR ) GOTO 2000 ! Error
       IF ( op2.EQ.'POIN' ) READ (JZB,*) ifwd , slim
       ient = 1
       icg = 1
@@ -1969,29 +2441,29 @@ C     Handle OP,ERRO
       IF ( iobl.LT.1 ) THEN
          IF ( op2.NE.'GOSI' ) THEN
             iapx = 0
-            DO ii = 1 , LP6
+            DO ii = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
                ILE(ii) = 1
             ENDDO
             nch = 0
-            DO jexp = 1 , NEXPT
+            DO jexp = 1 , NEXPT ! For each experiment
                IEXP = jexp
                ttttt = TREP(IEXP)
                dsig = DSIGS(IEXP)
                IF ( op2.NE.'STAR' ) THEN
                   jmm = IEXP
                   IF ( IEXP.NE.1 ) THEN
-                     DO lli = 1 , LP6
+                     DO lli = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
                         ILE(lli) = ILE(lli) + NYLDE(IEXP-1,lli)
                      ENDDO
                   ENDIF
                ENDIF
-               fi0 = FIEX(IEXP,1)
-               fi1 = FIEX(IEXP,2)
+               fi0 = FIEX(IEXP,1) ! Lower phi limit
+               fi1 = FIEX(IEXP,2) ! Upper phi limit
                CALL LOAD(IEXP,1,icg,0.D0,jj)
                CALL ALLOC(ACCUR)
                CALL SNAKE(IEXP,ZPOL)
                CALL SETIN
-               DO j = 1 , LMAX
+               DO j = 1 , LMAX ! For each spin up to ground-state spin + 1
                   polm = DBLE(j-1) - SPIN(1)
                   CALL LOAD(IEXP,2,icg,polm,jj)
                   CALL STING(jj)
@@ -2005,20 +2477,20 @@ C     Handle OP,ERRO
      &                    1F5.1,5X,'EXPERIMENT',1X,1I2//5X,'LEVEL',2X,
      &                    'SPIN',2X,'M',5X,'REAL AMPLITUDE',2X,
      &                    'IMAGINARY AMPLITUDE'//)
-                  DO k = 1 , ISMAX
-                     pr = pr + DBLE(ARM(k,5))**2 + IMAG(ARM(k,5))**2
+                  DO k = 1 , ISMAX ! For substates
+                     pr = pr + DBLE(ARM(k,5))**2 + DIMAG(ARM(k,5))**2
                      IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
      &                    WRITE (22,99035) INT(CAT(k,1)) , CAT(k,2) , 
-     &                    CAT(k,3) , DBLE(ARM(k,5)) , IMAG(ARM(k,5))
+     &                    CAT(k,3) , DBLE(ARM(k,5)) , DIMAG(ARM(k,5))
 99035                FORMAT (7X,1I2,3X,1F4.1,2X,1F5.1,2X,1E14.6,2X,
      &                       1E14.6)
-                  ENDDO
+                  ENDDO ! Loop on substates k
                   IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
      &                 WRITE (22,99036) pr
 99036             FORMAT (1X/5X,'SUM OF PROBABILITIES=',1E14.6)
-               ENDDO
+               ENDDO ! Loop over spins j
                CALL TENS(bten)
-               IF ( itno.NE.0 ) THEN
+               IF ( itno.NE.0 ) THEN ! write statistical tensors on tape 17
                   DO k = 2 , NMAX
                      WRITE (17,*) k
                      DO kk = 1 , 4
@@ -2044,14 +2516,14 @@ C     Handle OP,ERRO
                ENDDO
                IF ( op2.NE.'STAR' ) THEN
                   CALL DECAY(ccd,0,ccc)
-                  nogeli = NANG(IEXP)
+                  nogeli = NANG(IEXP) ! Number of detector angles for expt
                   jgl1 = 0
-                  DO js = 1 , LP2
+                  DO js = 1 , LP2 ! LP2 = 1500 (maximum number of matrix elements)
                      DO jgl = 1 , 20
                         SUMCL(jgl,js) = 0.
                      ENDDO
                   ENDDO
-                  DO jgl = 1 , nogeli
+                  DO jgl = 1 , nogeli ! For each detector angle
                      IF ( IRAWEX(IEXP).NE.0 ) THEN
                         IF ( op2.EQ.'POIN' .AND. IPRM(20).EQ.1 )
      &                       WRITE (23,99037) IEXP , jgl , EP(IEXP) , 
@@ -2065,10 +2537,11 @@ C     Handle OP,ERRO
                      gth = AGELI(IEXP,jgl,1)
                      figl = AGELI(IEXP,jgl,2)
                      fm = (fi0+fi1)/2.
-                     CALL ANGULA(YGN,idr,1,fi0,fi1,ttttt,gth,figl,jgl)
+                     CALL ANGULA(YGN,idr,1,fi0,fi1,ttttt,gth,figl,jgl,
+     &                 op2)
                      IF ( IFMO.NE.0 ) THEN
-                        id = ITMA(IEXP,jgl)
-                        d = ODL(id)
+                        id = ITMA(IEXP,jgl) ! Get identity of detector
+                        d = ODL(id) ! Get results of OP,GDET for that detector
                         rx = d*SIN(gth)*COS(figl-fm) - .25*SIN(ttttt)
      &                       *COS(fm)
                         ry = d*SIN(gth)*SIN(figl-fm) - .25*SIN(ttttt)
@@ -2078,7 +2551,8 @@ C     Handle OP,ERRO
                         thc = TACOS(rz/rl)
                         sf = d*d/rl/rl
                         fic = ATAN2(ry,rx)
-                        CALL ANGULA(YGP,idr,1,fi0,fi1,ttttt,thc,fic,jgl)
+                        CALL ANGULA(YGP,idr,1,fi0,fi1,ttttt,thc,fic,jgl,
+     &                    op2)
                         DO ixl = 1 , idr
                            ixm = KSEQ(ixl,3)
                            tfac = TAU(ixm)
@@ -2088,8 +2562,8 @@ C     Handle OP,ERRO
                         ENDDO
                      ENDIF
                      IF ( IRAWEX(IEXP).NE.0 ) THEN
-                        ipd = ITMA(IEXP,jgl)
-                        DO jyi = 1 , idr
+                        ipd = ITMA(IEXP,jgl) ! Get identity of detector
+                        DO jyi = 1 , idr ! For each decay
                            ni = KSEQ(jyi,3)
                            nf = KSEQ(jyi,4)
                            decen = EN(ni) - EN(nf)
@@ -2102,14 +2576,14 @@ C     Handle OP,ERRO
      &                                 SPIN(nf) , decen , effi
                            YGN(jyi) = YGN(jyi)*effi
                         ENDDO
-                        inclus = ICLUST(IEXP,jgl)
+                        inclus = ICLUST(IEXP,jgl) ! Cluster number for detector jgl
                         IF ( inclus.NE.0 ) THEN
-                           DO jyi = 1 , idr
+                           DO jyi = 1 , idr ! For each decay
                               SUMCL(inclus,jyi) = SUMCL(inclus,jyi)
      &                           + YGN(jyi)
                            ENDDO
-                           IF ( jgl.NE.LASTCL(IEXP,inclus) ) GOTO 1205
-                           DO jyi = 1 , idr
+                           IF ( jgl.NE.LASTCL(IEXP,inclus) ) GOTO 1205 ! If it is not the last detector in the cluster
+                           DO jyi = 1 , idr ! For each decay
                               YGN(jyi) = SUMCL(inclus,jyi)
                            ENDDO
                         ENDIF
@@ -2120,12 +2594,6 @@ C     Handle OP,ERRO
      &                    WRITE (22,99048) IEXP , jgl1 , EP(IEXP) , 
      &                    TLBDG(IEXP)
                      jmm = 0
-                     ttttx = TLBDG(IEXP)/57.2957795
-                     YGN(IDRN) = YGN(IDRN)*dsig*SIN(ttttx)
-                     DO jyi = 1 , idr
-                        IF ( jyi.NE.IDRN ) YGN(jyi) = YGN(jyi)
-     &                       *dsig*SIN(ttttx)
-                     ENDDO
                      DO jyi = 1 , idr
                         ni = KSEQ(jyi,3)
                         nf = KSEQ(jyi,4)
@@ -2177,7 +2645,8 @@ C     Handle OP,ERRO
                               lu = lu + 1
                            ENDIF
                         ENDIF
- 1202                ENDDO
+ 1202                   CONTINUE
+                     ENDDO
                      IF ( ifwd.EQ.1 ) THEN
                         xw = 1.
                         WRITE (4,*) IEXP , jgl1 , ABS(IZ1(IEXP)) , 
@@ -2189,14 +2658,15 @@ C     Handle OP,ERRO
      &                                 CORF(jyi,4)
                         ENDDO
                      ENDIF
- 1205             ENDDO
+ 1205                CONTINUE
+                  ENDDO ! Loop on detector angles jgl
                   IF ( op2.EQ.'CORR' ) THEN
                      jgl1 = 0
-                     DO jgl = 1 , nogeli
+                     DO jgl = 1 , nogeli ! For each detector
                         IF ( IRAWEX(jexp).NE.0 ) THEN
-                           inclus = ICLUST(jexp,jgl)
+                           inclus = ICLUST(jexp,jgl) ! Cluster number for detector jgl
                            IF ( inclus.NE.0 ) THEN
-                              IF ( jgl.NE.LASTCL(jexp,inclus) )
+                              IF ( jgl.NE.LASTCL(jexp,inclus) ) ! If detector is not the last in the cluster
      &                             GOTO 1206
                            ENDIF
                         ENDIF
@@ -2211,7 +2681,7 @@ C     Handle OP,ERRO
                         ile1 = ILE(jgl1)
                         DO itp = 1 , nval
                            READ (3,*) ns1 , ns2 , fiex1(1,1,1) , 
-     &                                     fiex1(1,1,2)
+     &                                fiex1(1,1,2)
                            ltrn = IY(ile1+itp-1,jgl1)
                            IF ( ltrn.LT.1000 ) THEN
                               ns1 = KSEQ(ltrn,3)
@@ -2224,15 +2694,16 @@ C     Handle OP,ERRO
                               ns1 = ns1 + KSEQ(ltrn2,3)
                               ns2 = ns2 + KSEQ(ltrn2,4)
                            ENDIF
-                           ycorr = YEXP(jgl1,ile1+itp-1)*cnst
+                           ycorr = YEXP(jgl1,ile1+itp-1) ! Changed in gosia2
                            WRITE (4,*) ns1 , ns2 , ycorr , 
-     &                                 DYEX(jgl1,ile1+itp-1)*cnst
+     &                                 DYEX(jgl1,ile1+itp-1) ! Changed in gosia2
                            WRITE (22,99039) ns1 , ns2 , 
      &                            CORF(ile1+itp-1,jgl1) , ycorr , 
      &                            ycorr/CORF(ile1+itp-1,jgl1)
 99039                      FORMAT (5X,I4,5X,I4,3X,E8.3,4X,E8.3,4X,E8.3)
                         ENDDO ! Loop over itp
- 1206                ENDDO ! Loop over jgl
+ 1206                   CONTINUE
+                     ENDDO ! Loop over jgl
                   ENDIF ! if ( op2.EQ. 'CORR')
                ENDIF
             ENDDO ! Loop over jexp
@@ -2244,17 +2715,17 @@ C     Handle OP,ERRO
                   REWIND ntap
                ENDIF
             ENDIF
-            GOTO 100
+            GOTO 100 ! Back to input loop
          ENDIF ! if (op2 .NE. 'GOSI') if statement
       ENDIF ! if ( iobl.LT.1 ) if statement
 
- 1300 IF ( iobl.GE.1 ) THEN
+ 1300 IF ( iobl.GE.1 ) THEN ! OP,ERRO
          ient = 1
          icg = 2
          nmaxh = NMAX
          lmax1 = LMAX
-         sh1 = SPIN(1)
-         sh2 = SPIN(2)
+         sh1 = SPIN(1) ! Save ground-state spin
+         sh2 = SPIN(2) ! Save spin of first excited state
          ih1 = IFAC(1)
          ih2 = IFAC(2)
          magh = MAGEXC
@@ -2266,13 +2737,13 @@ C     Handle OP,ERRO
          lh2 = LEAD(2,1)
          lamh = LAMMAX
          memh = MEMAX
-         DO kh = 1 , 8
+         DO kh = 1 , 8 ! For each multipolarity
             ihlm(kh) = MULTI(kh)
             ihlm(kh+24) = LDNUM(kh,2)
             ihlm(kh+8) = LAMDA(kh)
             ihlm(kh+16) = LDNUM(kh,1)
          ENDDO
-         DO jexp = 1 , NEXPT
+         DO jexp = 1 , NEXPT ! For each experiment
             IEXP = jexp
             intvh = INTERV(IEXP)
             DO jgs = 1 , MEMAX
@@ -2292,7 +2763,7 @@ C     Handle OP,ERRO
                zmir(iuy,2,IEXP) = 0.
             ENDDO
             CALL LOAD(IEXP,1,2,0.D0,jj)
-            DO jgs = 1 , LMAX
+            DO jgs = 1 , LMAX ! For each spin up to ground-state spin + 1
                polm = DBLE(jgs-1) - SPIN(1)
                CALL LOAD(IEXP,3,2,polm,jj)
                CALL PATH(jj)
@@ -2358,7 +2829,7 @@ C     Handle OP,ERRO
                   CALL LOAD(IEXP,1,icg,0.D0,jj)
                   CALL LOAD(IEXP,2,icg,0.D0,jj)
                   CALL PATH(1)
-                  sz1 = MIN(zmir(kk,1,IEXP),10.)
+                  sz1 = MIN(zmir(kk,1,IEXP),10.D0)
                   sz2 = zmir(kk,2,IEXP)/50.
                   acof = 2.4009604E-3/zmir(kk,2,IEXP)
                   bcof = 8.163265E-4
@@ -2404,9 +2875,9 @@ C     Handle OP,ERRO
                            jp = 2
                            IF ( MAGA(IEXP).NE.0 .AND. jd.EQ.2 ) jp = 3
                            p = DBLE(ARM(1,5))
-                           r = IMAG(ARM(1,5))
+                           r = DIMAG(ARM(1,5))
                            qr = DBLE(ARM(jp,5))
-                           s = IMAG(ARM(jp,5))
+                           s = DIMAG(ARM(jp,5))
                            test = p*p + r*r + qr*qr + s*s
                            p = p/SQRT(test)
                            s = ABS(r/s)
@@ -2455,8 +2926,8 @@ C     Handle OP,ERRO
             ENDDO ! Loop over kk
             EMMA(IEXP) = emhl1
             NMAX = nmaxh
-            SPIN(1) = sh1
-            SPIN(2) = sh2
+            SPIN(1) = sh1 ! Restore ground-state spin
+            SPIN(2) = sh2 ! Restore spin of first excited state
             IFAC(1) = ih1
             IFAC(2) = ih2
             MAGEXC = magh
@@ -2466,14 +2937,15 @@ C     Handle OP,ERRO
             LEAD(2,1) = lh2
             LAMMAX = lamh
             MEMAX = memh
-            DO kh = 1 , 8
+            DO kh = 1 , 8 ! For each multipolarity
                LDNUM(kh,2) = ihlm(kh+24)
                MULTI(kh) = ihlm(kh)
                LAMDA(kh) = ihlm(kh+8)
                LDNUM(kh,1) = ihlm(kh+16)
             ENDDO
             INTERV(IEXP) = intvh
-         ENDDO
+         ENDDO ! Loop over experiments jexp
+
          irix = 7
          IF ( IBPS.EQ.1 ) irix = 27 ! unit 7 for target, 27 for beam
          REWIND irix
@@ -2481,7 +2953,7 @@ C     Handle OP,ERRO
             WRITE (irix,*) (XIR(iuy,jj),jj=1,NEXPT)
             WRITE (irix,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
          ENDDO
-         DO jj = 1 , NEXPT
+         DO jj = 1 , NEXPT ! For each experiment
             DO jk = 1 , 4
                DO kuku = 1 , 6
                   WRITE (irix,*) (PARXM(jj,jk,jl,kuku),jl=1,10)
@@ -2500,7 +2972,7 @@ C        Added for gosia2
          ENDDO
 C---- gosia2 changes end
          DO jj = 1 , 2
-            DO jj1 = 1 , LP1 ! LP1 = 50
+            DO jj1 = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
                IDIVE(jj1,jj) = 1
             ENDDO
          ENDDO
@@ -2512,7 +2984,7 @@ C---- gosia2 changes end
             READ (irix,*) (XIR(iuy,jj),jj=1,NEXPT)
             READ (irix,*) (zmir(iuy,1,jj),zmir(iuy,2,jj),jj=1,NEXPT)
          ENDDO
-         DO jj = 1 , NEXPT
+         DO jj = 1 , NEXPT ! For each experiment
             DO jk = 1 , 4
                DO kuku = 1 , 6
                   READ (irix,*) (PARXM(jj,jk,jl,kuku),jl=1,10)
@@ -2522,7 +2994,7 @@ C---- gosia2 changes end
                READ (irix,*) (PARX(jj,jk,jl),jl=1,5)
             ENDDO
          ENDDO
-         DO jgs = 1 , MEMAX
+         DO jgs = 1 , MEMAX ! For each matrix element
             DO jgr = 1 , 7
                QAPR(jgs,1,jgr) = 0.
             ENDDO
@@ -2564,7 +3036,7 @@ C     Handle map
          ENDDO ! Loop on jex
       ENDIF ! IPRM(12).ne.0 .or. op2.eq.'MAP '
 
-      IF ( op2.NE.'GOSI' .AND. op2.NE.'ERRO' ) GOTO 100
+      IF ( op2.NE.'GOSI' .AND. op2.NE.'ERRO' ) GOTO 100 ! Back to input loop
       IF ( op2.EQ.'ERRO' ) GOTO 400
 
  1400 mret = ABS(mret) ! Added for gosia2
@@ -2577,20 +3049,20 @@ C     Handle map
       ENDDO
 C---- gosia2 changes start
       IF ( nawr.EQ.1 ) THEN
-        MCFIX = 0 ! Calculate chisq using CNOR1 not CNOR
-        CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
+         MCFIX = 0 ! Calculate chisq using CNOR1 not CNOR
+         CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
 
          IF ( IBPS.EQ.0 ) THEN
-           JZB = 25
-           mrepf = 1
+            JZB = 25
+            mrepf = 1
          ELSE ! i.e. IBPS is 1
-           IBPS = IBPS + 1
-           IF ( IBPS.EQ.1 ) JZB = 26 ! But IBPS must be 2 here! Ooops!
-           IF ( IBPS.EQ.1 ) GOTO 2200
+            IBPS = IBPS + 1
+            IF ( IBPS.EQ.1 ) JZB = 26 ! But IBPS must be 2 here! Ooops!
+            IF ( IBPS.EQ.1 ) GOTO 2200
          ENDIF
          IF ( IPS1.EQ.0 ) GOTO 2000
          IMIN = IMIN + 1
-         DO iva = 1 , LP1 ! LP1 = 50
+         DO iva = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
             JSKIP(iva) = 1
          ENDDO
          irix = 12
@@ -2607,19 +3079,19 @@ C---- gosia2 changes start
 C     Calculate chi squared and normalization without minimizing
       MCFIX = 1
 C---- gosia2 changes end
-      CALL MINI(chisq,chiok,nptl,conu,imode,idr,xtest,0,0,0,bten)
+      CALL MINI(chisq,1.D+38,nptl,conu,imode,idr,xtest,0,0,0,bten)
 C---- gosia2 changes start
       
 C     Set CNOR1 to the average of CNOR1 and CNOR2
-      DO kh1 = 1 , LP6 ! LP6 = 32
-        DO kh2 = 1 , LP3 ! LP3 = 75
-          IF ( JZB.EQ.25 ) THEN ! If it is the second nucleus
-            CNOR1(kh1,kh2) = CNOR(kh1,kh2)
-          ELSE
-            CNOR2(kh1,kh2) = CNOR(kh1,kh2)
-            CNOR1(kh1,kh2) = (CNOR1(kh1,kh2)+CNOR2(kh1,kh2))/2.
-          ENDIF
-        ENDDO
+      DO kh1 = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
+         DO kh2 = 1 , LP3 ! LP3 = 75 (maximum number of levels)
+            IF ( JZB.EQ.25 ) THEN ! If it is the second nucleus
+               CNOR1(kh1,kh2) = CNOR(kh1,kh2)
+            ELSE
+               CNOR2(kh1,kh2) = CNOR(kh1,kh2)
+               CNOR1(kh1,kh2) = (CNOR1(kh1,kh2)+CNOR2(kh1,kh2))/2.
+            ENDIF
+         ENDDO
       ENDDO
       
 C     Increment iteration counter
@@ -2635,8 +3107,7 @@ C     Store chisq
 C     Decide whether to terminate here
       IF ( JZB.EQ.26 ) THEN
          cht = ABS(chir-chp) ! Difference in old and new chisq
-         chp = chir
-         IF ( cht.LT.0.1 .OR. mawr.GE.20) mret = 0 ! terminate
+         IF ( cht.LT.0.1 .OR. mawr.GE.20 ) mret = 0 ! terminate
          nawr = 1
       ENDIF
 
@@ -2645,38 +3116,43 @@ C     Decide whether to terminate here
       GOTO 2200 ! Back to beginning
 C---- gosia2 changes end
 
-
+C.............................................................................
  1500 WRITE (22,99043)
 99043 FORMAT (5X,'ERROR-M.E. DOES NOT BELONG TO THE UPPER TRIANGLE')
-      GOTO 1900
+      GOTO 1900 ! Troubleshoot
 
+C.............................................................................
  1600 WRITE (22,99044)
 99044 FORMAT (5X,'ERROR-WRONG SEQUENCE OF MULTIPOLARITIES')
-      GOTO 1900
+      GOTO 1900 ! Troubleshoot
 
+C.............................................................................
  1700 WRITE (22,99045)
 99045 FORMAT (5X,'ERROR-REPEATED APPEARANCE OF THE STATE')
-      GOTO 1900
+      GOTO 1900 ! Troubleshoot
 
+C.............................................................................
  1800 WRITE (22,99046)
 99046 FORMAT (1X///10X,'ERROR-INSUFFICIENT SPACE FOR E-THETA INTEGR ',
      &        'ATION')
+      GOTO 1900 ! Troubleshoot
 
+C.............................................................................
+C     Troubleshooting
  1900 IF ( ITS.NE.0 ) THEN
          iva = 0
          WRITE (18,*) iva , iva , iva , chisq
          IF ( ITS.NE.2 ) THEN
             WRITE (15,*) iva , chisq , chisq , chisq , chisq
-            CALL KLOPOT(kmat,rlr)
+            CALL KLOPOT(kmat,rlr) ! Troubleshooting
          ENDIF
       ENDIF
 
+C     End of execution
  2000 WRITE (22,99047)
 99047 FORMAT (15X,'********* END OF EXECUTION **********')
 
 C---- gosia2 addition start
-      GOTO 2100
-
 C     Decide if we have to loop again for beam/projectile
  2100 IF ( mrepf.EQ.1 ) THEN
          mrepf = 2
@@ -2690,9 +3166,9 @@ C     Decide if we have to loop again for beam/projectile
       ENDIF
 
 C     Write normalization coefficients
-      DO mmmm = 1 , 32
-         DO kkkk = 1 , 50
-            WRITE (13,*) cnor1(mmmm,kkkk)
+      DO mmmm = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
+         DO kkkk = 1 , LP1 ! LP1 is 50 (maximum number of experiments)
+            WRITE (13,*) CNOR1(mmmm,kkkk)
          ENDDO
       ENDDO
 C---- gosia2 addition end
@@ -2729,15 +3205,15 @@ C---- gosia2 changes end
 99011          FORMAT (1X//20X,'CALCULATED LIFETIMES'//5X,'LEVEL',5X,
      &                 'LIFETIME(PSEC)',5X,'EXP',8X,'ERROR'/)
                DO iva = 2 , NMAX
-                  DO iva1 = 1 , 10
+                  DO iva1 = 1 , NLIFT
                      IF ( LIFCT(iva1).EQ.iva ) GOTO 122
                   ENDDO
                   WRITE (22,99012) iva , TAU(iva)
-99012             FORMAT (7X,1I2,7X,1E10.4)
+99012             FORMAT (6X,1I3,7X,1E10.4)
                   GOTO 124
  122              WRITE (22,99013) iva , TAU(iva) , TIMEL(1,iva1) , 
      &                   TIMEL(2,iva1)
-99013             FORMAT (7X,1I2,7X,1E10.4,5X,1E10.4,4X,1E10.4)
+99013             FORMAT (6X,1I3,7X,1E10.4,5X,1E10.4,4X,1E10.4)
  124              IF ( iva.EQ.NMAX ) THEN
                      IF ( NAMX.GE.1 ) THEN
                         WRITE (22,99014)
@@ -2756,7 +3232,7 @@ C---- gosia2 changes end
                            dsd = EAMX(kq,2)
                            WRITE (22,99016) ni , nf , esd , ess , 
      &                        (ess-esd)/dsd
-99016                      FORMAT (5x,1I2,1x,1I2,1x,1F9.4,1x,1F9.4,1x,
+99016                      FORMAT (4x,1I3,1x,1I3,1x,1F9.4,1x,1F9.4,1x,
      &                              1F9.4)
                         ENDDO
                      ENDIF
@@ -2766,20 +3242,19 @@ C---- gosia2 changes end
             IF ( IMIN.NE.0 ) CALL PRELM(3)
          ENDIF
       ENDIF
-      GOTO 1900 ! End of OP,EXIT
+      GOTO 1900 ! End of OP,EXIT - troubleshoot
 
 99048 FORMAT (1X//50X,'CALCULATED YIELDS'//5X,'EXPERIMENT ',1I2,2X,
      &        'DETECTOR ',1I2/5X,'ENERGY ',1F10.3,1X,'MEV',2X,'THETA ',
      &        1F7.3,1X,'DEG'//5X,'NI',5X,'NF',5X,'II',5X,'IF',5X,
      &        'YIELD',5X,'NORMALIZED YIELD'/)
-99049 FORMAT (5X,1I2,5X,1I2,3X,1F4.1,3X,1F4.1,3X,1E11.5,3X,1E11.5)
+99049 FORMAT (4X,1I3,4X,1I3,3X,1F4.1,3X,1F4.1,3X,1E11.5,3X,1E11.5)
 99050 FORMAT (1X///44X,'OVERALL')
 99051 FORMAT (1X///43X,'DIAGONAL')
-99052 FORMAT (6X,1I3,6X,1I2,5X,1I2,5X,1F10.5,2X,'(',1F10.5,' ,',1F10.5,
+99052 FORMAT (6X,1I3,5X,1I3,4X,1I3,5X,1F10.5,2X,'(',1F10.5,' ,',1F10.5,
      &        ')')
 99053 FORMAT (2X,'LEVEL',1X,1I2,10X,'POPULATION',1X,1E14.6)
 99054 FORMAT (5X,'XI',13X,'Q1',22X,'Q2'///13X,'SLOPE',2X,'INTERCEPT',7X,
      &        'SLOPE',5X,'INTERCEPT'//)
 99055 FORMAT (2X,1F6.4,3X,1E8.2,2X,1E8.2,6X,1E8.2,2X,1E8.2)
-
       END

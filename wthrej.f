@@ -29,16 +29,16 @@ C WTHREJ(2 * J1, 2 * J2, 2 * J3, 2 * M1, 2 * M2, 2 * M3).
  
       REAL*8 FUNCTION WTHREJ(J1,J2,J3,M1,M2,M3)
       IMPLICIT NONE
-      INTEGER*4 IP , IPI , iz , iza , izb , izc , izd , ize , izexp , 
+      INTEGER*4 iz , iza , izb , izc , izd , ize , izexp , 
      &          izf , izmax , izmin , J1 , J2 , J3 , jabc , jabm , 
      &          jbma , jj1 , jj2
       INTEGER*4 jj3 , jjha , jjhb , jjhc , jjhd , jlp , jma , jmax , 
      &          jmb , jmc , jmd , jme , jmf , jta , jtb , jtc , jvo , 
-     &          jvora , KF , M1
+     &          jvora , M1
       INTEGER*4 M2 , M3 , mm1 , mm2 , mm3 , n , nmax
-      REAL*8 PILOG , qsumlo , sumlo , vorz , wthrep , zuthre
+      REAL*8 qsumlo , sumlo , vorz , wthrep , zuthre
       DIMENSION jvora(26)
-      COMMON /FAKUL / IP(26) , IPI(26) , KF(101,26) , PILOG(26)
+      INCLUDE 'fakul.inc'
       
       wthrep = 0.E+00
       jjha = (J1+J2-J3)/2 + 1

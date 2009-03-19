@@ -1,0 +1,3 @@
+      REAL*8 FP , GKP
+      INTEGER*4 KLEC
+      COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(100)

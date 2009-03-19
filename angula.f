@@ -9,67 +9,70 @@ C Purpose: calculate angular distribution of emitted gamma rays
 C
 C Uses global variables:
 C      BETAR  - recoil beta
-C      DELLA  -
-C      ENDEC  -
-C      ENZ    -
-C      FP     -
+C      DELLA  - products of matrix elements: e1^2, e2^2, e1*e2
+C      ENDEC  - energy difference for each matrix element
+C      ENZ    - something to do with the absorption
+C      FP     - F coefficient * DELTA^2
 C      IAXS   - axial symmetry flag
 C      IEXP   - experiment number
 C      ITMA   - identify detectors according to OP,GDET
 C      ITTE   - thick target experiment flag
 C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
-C      TAU    - 
+C      TAU    - lifetime in picoseconds
 C      ZETA   - various coefficients
 C
 C Formal parameters:
-C      Ygn    -
+C      Ygn    - Gamma-ray yield
 C      Idr    - number of decays
 C      Iful   - flag to select full basis or not
 C      Fi0    - phi_0
 C      Fi1    - phi_1
 C      Trec   - Theta of recoiling nucleus
-C      Gth    -
-C      Figl   -
+C      Gth    - Theta of gamma
+C      Figl   - Phi of gamma
 C      Ngl    - detector number
+C      Op2    - The part after the OP, for the option we are processing
       
-      SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl)
+      SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
-      REAL*8 AGELI , alab , arg , at , attl , BETAR , bt , CC , DELLA , 
-     &       DELTA , EG , ENDEC , ENZ , EPS , EROOT , f , Fi0 , fi01 , 
-     &       Fi1 , fi11
-      REAL*8 FIEX , Figl , FP , GKP , Gth , Q , qv , sm , TAU , Trec , 
-     &       Ygn , ylmr , ZETA
-      INTEGER*4 IAXS , Idr , IEXP , ifn , Iful , ig , il , inat , inx1 , 
-     &          ipd , is , ITMA , ITTE , iu , ixs , j , ji , jj , jm , k
-      INTEGER*4 KLEC , kq , KSEQ , l , lf , lf1 , LZETA , mind , NANG , 
-     &          Ngl , NICC , nlv
+      REAL*8 alab , arg , at , attl , bt , f , Fi0 , fi01 , Fi1 ,
+     &       fi11 , Figl , Gth , qv , sm , Trec , Ygn , ylmr
+      INTEGER*4 Idr , ifn , Iful , ig , il , inat , inx1 , 
+     &          ipd , is , iu , ixs , j , ji , jj , jm , k
+      INTEGER*4 kq , l , lf , lf1 , mind , Ngl , nlv
+      REAL*8 dsig, ttx ! For gosia2
+      CHARACTER*4 Op2
       DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
-     &          Ygn(500)
-      COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /TRA   / DELTA(500,3) , ENDEC(500) , ITMA(50,200) , 
-     &                ENZ(200)
-      COMMON /LEV   / TAU(75) , KSEQ(500,4)
-      COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
-     &                NICC , NANG(200)
-      COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
-      COMMON /LCDL  / DELLA(500,3)
-      COMMON /CATLF / FP(4,500,3) , GKP(4,500,2) , KLEC(75)
-      COMMON /BREC  / BETAR(50)
-      COMMON /THTAR / ITTE(50)
+     &          Ygn(*)
+      INCLUDE 'ccoup.inc'
+      INCLUDE 'tra.inc'
+      INCLUDE 'lev.inc'
+      INCLUDE 'ccc.inc'
+      INCLUDE 'kin.inc'
+      INCLUDE 'lcdl.inc'
+      INCLUDE 'catlf.inc'
+      INCLUDE 'brec.inc'
+      INCLUDE 'thtar.inc'
+      INCLUDE 'tcm.inc' ! For gosia2
+      INCLUDE 'cx.inc' ! For gosia2
       
-      DO l = 1 , Idr
+      DO l = 1 , Idr ! For each decay
+
          nlv = KSEQ(l,3) ! Level number of l'th decay
          il = (nlv-1)*28
          inx1 = KSEQ(l,2) ! Index of l'th decay
+
          DO j = 1 , 4
             f(j) = FP(j,l,1)*DELLA(l,1)
          ENDDO
+
          IF ( inx1.NE.0 ) THEN
             DO j = 1 , 4
                f(j) = f(j) + 2.*FP(j,l,3)*DELLA(l,3) + FP(j,l,2)
      &                *DELLA(l,2)
             ENDDO
          ENDIF
+
          DO j = 1 , 4
             f(j) = f(j)*TAU(nlv)
             iu = (j-1)*7
@@ -81,6 +84,7 @@ C      Ngl    - detector number
                at(is) = ZETA(ig)*f(j)
             ENDDO
          ENDDO
+
          IF ( Iful.EQ.1 ) THEN
             DO j = 1 , 9
                DO k = 1 , 9
@@ -97,13 +101,13 @@ C      Ngl    - detector number
                   alab(lf,k) = at(inat)
                ENDDO
             ENDDO
-            bt = BETAR(IEXP)
+            bt = BETAR(IEXP) ! Get beta
             IF ( ITTE(IEXP).NE.1 ) CALL RECOIL(alab,attl,bt,Trec)
             IF ( l.EQ.1 ) CALL YLM1(Gth,ylmr)
-            ixs = IAXS(IEXP)
-            fi01 = Fi0 - Figl
-            fi11 = Fi1 - Figl
-            CALL FIINT1(fi01,fi11,alab,ixs)
+            ixs = IAXS(IEXP) ! Get axial symmetry flag
+            fi01 = Fi0 - Figl ! Get lower phi limit
+            fi11 = Fi1 - Figl ! Get upper phi limit
+            CALL FIINT1(fi01,fi11,alab,ixs) ! Integrate over phi in lab frame
             Ygn(l) = alab(1,1)*.0795774715 ! 0.0795774715 = 1 / (4 pi)
             DO j = 2 , 9
                sm = ylmr(j,1)*alab(j,1)
@@ -112,17 +116,17 @@ C      Ngl    - detector number
                      sm = sm + 2.*ylmr(j,k)*alab(j,k)
                   ENDDO
                ENDIF
-               ipd = ITMA(IEXP,Ngl)
+               ipd = ITMA(IEXP,Ngl) ! Detector ID
                arg = (ENDEC(l)-ENZ(ipd))**2
                qv = (Q(3,ipd,j-1)*Q(2,ipd,j-1)+Q(1,ipd,j-1)*arg)
      &              /(Q(2,ipd,j-1)+arg)
                Ygn(l) = Ygn(l) + sm*qv
             ENDDO
          ELSE
-            ixs = IAXS(IEXP)
-            fi01 = Fi0 - Figl
-            fi11 = Fi1 - Figl
-            CALL FIINT(fi01,fi11,at,ixs)
+            ixs = IAXS(IEXP) ! Get axial symmetry flag
+            fi01 = Fi0 - Figl ! Get lower phi limit
+            fi11 = Fi1 - Figl ! Get upper phi limit
+            CALL FIINT(fi01,fi11,at,ixs) ! Integrate over phi in recoiling nucleus frame, result in at
             IF ( l.EQ.1 ) CALL YLM(Gth,ylmr)
             Ygn(l) = at(1)*.0795774715 ! 0.0795774715 = 1 / (4 pi)
             DO jj = 1 , 3
@@ -142,5 +146,15 @@ C      Ngl    - detector number
                Ygn(l) = Ygn(l) + sm*qv
             ENDDO
          ENDIF
-      ENDDO
+      ENDDO ! Loop over decays
+
+      IF ( Op2.EQ.'INTG' .OR. Op2.EQ.'INTI' ) RETURN
+
+C     Added for gosia2
+      dsig = DSIGS(IEXP)
+      ttx = TLBDG(IEXP)/57.2957795 ! Theta in lab frame in radians
+      DO j = 1 , Idr  ! For each decay
+         Ygn(j) = Ygn(j)*dsig*SIN(ttx)
+      ENDDO ! Loop on decays Idr
+C     End of addition for gosia2
       END
