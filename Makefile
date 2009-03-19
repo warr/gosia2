@@ -4,8 +4,8 @@ MANDIR=$(ROOT)/usr/share/man/man1
 UID=0
 GID=0
 
-EXE=gosia
-MAN=gosia.1
+EXE=gosia2
+MAN=gosia2.1
 
 FC=g77
 
@@ -61,7 +61,7 @@ OBJS += gcf.o
 OBJS += gf.o
 OBJS += gkk.o
 OBJS += gkvac.o
-OBJS += gosia.o
+OBJS += gosia2.o
 OBJS += half.o
 OBJS += intg.o
 OBJS += klopot.o
@@ -120,10 +120,10 @@ OBJS += xstatic.o
 OBJS += ylm.o
 OBJS += ylm1.o
 
-SINGLE_FILE = gosia_single_file.f
+SINGLE_FILE = gosia2_single_file.f
 
-gosia: $(OBJS) $(DEPS)
-	$(FC) $(LDFLAGS) -o gosia $(OBJS)
+gosia2: $(OBJS) $(DEPS)
+	$(FC) $(LDFLAGS) -o gosia2 $(OBJS)
 
 clean:
 	rm -f *~ *.o $(EXE) $(SINGLE_FILE)
@@ -136,7 +136,7 @@ install: $(EXE) $(MAN)
 	gzip -f $(MANDIR)/$(MAN)
 
 single_file:
-	cat gosia.f arccos.f arctg.f load.f lsloop.f leadf.f \
+	cat gosia2.f arccos.f arctg.f load.f lsloop.f leadf.f \
 	mem.f cmlab.f qe.f qm.f snake.f fhip.f alloc.f \
 	rangel.f qrange.f ampder.f laisum.f expon.f faza.f \
 	setin.f sting.f laiamp.f faza1.f trint.f pol4.f \
