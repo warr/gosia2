@@ -17,7 +17,7 @@ FC=g77
 #FFLAGS = -g -Wall
 
 # Turn on optimisation
-FFLAGS += -O2 -funroll-loops
+FFLAGS += -O -funroll-loops
 
 DEPS=Makefile
 

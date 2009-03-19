@@ -14,11 +14,11 @@ C      DQ     - width of gaussian distribution
 C      FILE   - K          (this is G(6) in GOSIA)
 C      GAMMA  - Gamma      (this is G(2) in GOSIA)
 C      GFAC   - g          (this is G(5) in GOSIA)
-C      GKI    -
+C      GKI    - G_k
 C      IBYP   -
 C      POWER  - x          (this is G(7) in GOSIA)
 C      QCEN   - center of gaussian distribution
-C      SUM    -
+C      SUM    - sum over 6-j symbol squared
 C      TIMEC  - Tau_C      (this is G(4) in GOSIA)
 C      XLAMB  - Lambda*    (this is G(3) in GOSIA)
 C      XNOR   - normalisation factor
@@ -52,7 +52,8 @@ C
 C Note that WSIXJ requires all its parameters to be doubled, so it can handle
 C half-integers properly.
 C
-C The function ATS is used to determine the truncation for the sum.
+C The function ATS is used to determine the ground-state spin for a given
+C element.
 
       SUBROUTINE GKK(Iz,Beta,Spin,Time,Il)
       IMPLICIT NONE
@@ -81,7 +82,7 @@ C The function ATS is used to determine the truncation for the sum.
          DO j = inq , ifq
             l = l + 1
             nz = Iz - j
-            xji = ATS(nz)
+            xji = ATS(nz) ! Ground-state spin of nucleus
             sm = Spin
             IF ( imean.EQ.1 ) xji = AVJI
             IF ( Spin.GT.xji ) sm = xji
@@ -116,7 +117,7 @@ C The function ATS is used to determine the truncation for the sum.
                k1 = 2*k
                AKS(k1,Il) = AKS(k1,Il) + SUM(k)
             ENDDO
- 100     ENDDO
+ 100     ENDDO ! Loop on j
          imean = imean + 1
          IF ( imean.EQ.1 ) GOTO 50
       ENDIF

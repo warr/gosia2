@@ -10,7 +10,7 @@ C GKI array of common GVAC
 C
 C Uses global variables:
 C      BETAR  - recoil beta
-C      GKI    -
+C      GKI    - G_k
 C      IEXP   - experiment number
 C      ITTE   - thick target experiment flag
 C      SPIN   - spin of level

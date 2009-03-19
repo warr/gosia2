@@ -4,10 +4,10 @@ C FUNCTION ATS
 C
 C Called by: GKK
 C
-C Purpose: determine the truncation for the sum in GKK.
+C Purpose: determine the atomic ground-state spin
 C
 C Formal parameters:
-C      N      - 
+C      N      - Z of nucleus
 C
 C Return value:
 C      truncation point

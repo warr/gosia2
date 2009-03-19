@@ -15,6 +15,8 @@ C
 C Note the factor of 1 / \sqrt{4 \pi} compared to the orthonormal spherical
 C harmonics.
 C
+C Note also that YLM1 and YLM have some values in common.
+C e.g. YLM1(5,3) = YLM(2,3)
  
       SUBROUTINE YLM1(Theta,Ylmr)
       IMPLICIT NONE

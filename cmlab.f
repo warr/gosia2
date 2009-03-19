@@ -16,10 +16,10 @@ C      EPS    - epsilon
 C      EROOT  - sqrt(epsilon^2 - 1)
 C      ERR    - error flag
 C      IPRM   - printing flags (see suboption PRT of OP,CONT)
-C      ISKIN  - kinematic flag
+C      ISKIN  - kinematic flag (0,1)
 C      IZ     - Z of investigated nucleus
 C      IZ1    - Z of not-investated nucleus
-C      NCM    -
+C      NCM    - calculate kinematics assuming this spin for final state (default = 2.0)
 C      NEXPT  - number of experiments
 C      NMAX   - number of level energies
 C      TETACM - theta of particle detector in center of mass frame
@@ -27,7 +27,7 @@ C      TLBDG  - theta of particle detector
 C      VINF   - speed of projectile at infinity
 C      XA     - A of investigated nucleus
 C      XA1    - A of not-investated nucleus
-C      TREP   -
+C      TREP   - theta of recoiling nucleus
 C
 C Formal parameters:
 C      Ii     - experiment number (or zero for all experiments)

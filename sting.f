@@ -12,7 +12,7 @@ C      ARM    - reduced matrix elements
 C      ELM    - matrix elements
 C      EXPO   - adiabatic exponential
 C      IFAC   -
-C      IFLG   -
+C      IFLG   - flag to determine whether to calculate exponential (so we don't calculate twice)
 C      IRA    - limit of omega for integration for each multipolarity
 C      ISG    -
 C      ISMAX  -

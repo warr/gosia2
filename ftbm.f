@@ -10,7 +10,7 @@ C Purpose: main routine to perform the calculation with a given set of matrix
 C          elements.
 C
 C Uses global variables:
-C      ACCA   -
+C      ACCA   - accuracy
 C      ACCUR  - accuracy required
 C      ARM    - the reduced matrix elements
 C      CAT    -
@@ -28,7 +28,7 @@ C      ISMAX  -
 C      ISO    -
 C      ITAK2  -
 C      IY     - index of experimental yields
-C      JSKIP  -
+C      JSKIP  - Experiments to skip during minimisation.
 C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
 C      LFL    -
 C      LFL1   -

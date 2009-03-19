@@ -11,6 +11,7 @@ C Uses global variables:
 C      AGELI  - angles of the Ge detectors
 C      BETAR  - recoil beta
 C      CNOR   - normalization factors
+C      CNOR1  - normalization factors (added for gosia2)
 C      CORF   - internal correction factors
 C      DEV    -
 C      DYEX   - error on experimental yield
@@ -20,19 +21,19 @@ C      FIEX   - phi range of particle detector
 C      ICLUST -
 C      IDRN   -
 C      IEXP   - number of experiment
-C      IFMO
+C      IFMO   - include correction to angular distance for finite recoil distance.
 C      IGRD   -
 C      ILE    -
 C      IMIN   -
 C      INM    -
-C      INNR   -
+C      INNR   - independent normalisation switch (see OP,CONT INR,)
 C      IPRM   - printing flags (see suboption PRT of OP,CONT)
 C      IRAWEX -
 C      ITMA   - identify detectors according to OP,GDET
-C      ITS    -
+C      ITS    - create tape 18 file (OP,CONT switch SEL,)
 C      IWF    -
 C      IY     - index for yields
-C      JSKIP  -
+C      JSKIP  - Experiments to skip during minimisation.
 C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
 C      KVAR   -
 C      LASTCL -
@@ -41,15 +42,14 @@ C      LNORM  - normalization constant control
 C      LP2    - maximum number of matrix elements (500)
 C      LP6    - 32
 C      LP10   - 600
+C      MCFIX  - fixing parameter (added for gosia2)
 C      NANG   - number of gamma-ray detectors for each experiment
 C      NDST   - number of data sets
 C      NEXPT  - number of experiments
 C      NLIFT  - number of lifetimes
 C      NMAX   - number of levels
 C      NYLDE  - number of yields
-C      ODL    - distance from target to front face of detector
-C      PART   -
-C      PARTL  -
+C      ODL    - results of OP,GDET calculation
 C      SPIN   - spin of level
 C      SUBCH1 -
 C      SUBCH2 -
@@ -59,8 +59,8 @@ C      TREP   -
 C      UPL    - upper limits for all gamma detectors
 C      VACDP  -
 C      YEXP   - experimental yield
-C      YGN    -
-C      YGP    -
+C      YGN    - gamma yield calculated without correction to angular distribution from finite recoil distance
+C      YGP    - gamma yield calculated with correction to angular distribution from finite recoil distance
 C      YNRM   - relative normalization factors for gamma detectors
 C
 C Formal parameters:
@@ -88,6 +88,7 @@ C      Iredv  -
      &       TREP , UPL , VACDP , VINF , wf , XA , XA1 , XNOR , YEXP , 
      &       YGN , YGP , YNRM
       REAL*8 ZPOL
+      REAL*8 CNOR1 , CNOR2 ! For gosia2
       INTEGER*4 iabc , IAXS , IBYP , Icall , ICLUST , id , idc , Idr , 
      &          IDRN , IEXP , ifdu , IFMO , ifxd , IGRD , ii , ILE , 
      &          ile2 , IMIN , inclus , INM
@@ -102,6 +103,7 @@ C      Iredv  -
      &          na , NANG , NDIM
       INTEGER*4 NDST , NEXPT , nf , nf1 , ni , ni1 , NICC , NLIFT , 
      &          NMAX , NMAX1 , Nwyr , NYLDE
+      INTEGER*4 MCFIX ! For gosia2
       CHARACTER*4 wupl , war
       DIMENSION part(32,50,2) , lic(32) , lth(500) , cnr(32,50) , 
      &          partl(32,50,2)
@@ -114,7 +116,8 @@ C      Iredv  -
       COMMON /BREC  / BETAR(50)
       COMMON /DIMX  / DIX(4) , ODL(200)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP
-      COMMON /CINIT / CNOR(32,75) , INNR
+      COMMON /CINIT / CNOR(32,75) , CNOR1(32,75) , CNOR2(32,75) , INNR ,
+     &                MCFIX ! Changed in gosia2
       COMMON /PRT   / IPRM(20)
       COMMON /LIFE  / NLIFT
       COMMON /LEV   / TAU(75) , KSEQ(500,4)
@@ -166,6 +169,7 @@ C      Iredv  -
       DO jpc = 1 , LP6
          lic(jpc) = 0
       ENDDO
+
       IF ( Icall.NE.7 ) THEN
          IF ( Itemp.EQ.0 ) THEN
             Nwyr = 0
@@ -281,6 +285,7 @@ C      Iredv  -
                            war = '    '
                            sgm = (YEXP(k9,lu)-YGN(l)*CNOR(k9,IEXP))
      &                           /DYEX(k9,lu)
+                           IF ( ABS(sgm).GE.SGW ) war = '*?!*'
                            ni1 = KSEQ(l1,3) ! Initial level of l1'th decay
                            nf1 = KSEQ(l1,4) ! Final level of l1'th decay
                            WRITE (22,99007) ni , ni1 , nf , nf1 , 
@@ -302,6 +307,7 @@ C      Iredv  -
                            war = '    '
                            sgm = (YEXP(k9,lu)-YGN(l)*CNOR(k9,IEXP))
      &                           /DYEX(k9,lu)
+                           IF ( ABS(sgm).GE.SGW ) war = '*?!*'
                            WRITE (22,99013) ni , nf , SPIN(ni) , 
      &                            SPIN(nf) , ENDEC(l) , YGN(l)
      &                            *CNOR(k9,IEXP) , YEXP(k9,lu) , 
@@ -384,7 +390,7 @@ C      Iredv  -
                         IF ( IWF.NE.0 ) THEN
                            WRITE (22,99009) IEXP , ni , nf , 
      &                            ry/UPL(k9,IEXP)
-99009                      FORMAT (5X,'WARNINIG-EXP.',1I2,2X,'TRANS. ',
+99009                      FORMAT (5X,'WARNING-EXP.',1I2,2X,'TRANS. ',
      &                             1I2,'--',1I2,5X,
      &                             'EXCEEDS UPPER LIMIT (RATIO=',1E14.6,
      &                             ')')
@@ -540,6 +546,7 @@ C     Calculate chi squared
       DO jj = 1 , NEXPT
          k = NDST(jj)
          DO jk = 1 , k
+            IF ( MCFIX .EQ. 0) CNOR(jk,jj) = CNOR1(jk,jj)
             Chilo = Chilo + partl(jk,jj,1)*LOG(CNOR(jk,jj))
      &              **2 + partl(jk,jj,2)*2.*LOG(CNOR(jk,jj))
             Chisq = Chisq + CNOR(jk,jj)*CNOR(jk,jj)*part(jk,jj,1)
@@ -551,7 +558,7 @@ C     Calculate chi squared
       Chilo = Chilo + sum3
       RETURN
 
-99012 FORMAT (1X,1I2,2X,32(1E8.2,1X))
+99012 FORMAT (1X,1I2,2X,32(1E10.4,1X))
 99013 FORMAT (6X,1I2,5X,1I2,7X,1F4.1,6X,1F4.1,9X,1F6.4,6X,1E9.4,6X,
      &        1E9.4,3X,1F6.1,5X,1F4.1,10X,1A4)
       END

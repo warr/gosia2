@@ -11,7 +11,7 @@ C
 C Uses global variables:
 C      CAT    -
 C      DIPOL  -
-C      EMMA   -
+C      EMMA   - Controls number of magnetic substates in full coulex calc.
 C      EN     - energy of level
 C      EP     - bombarding energy
 C      ERR    -
@@ -21,12 +21,12 @@ C      ISHA   -
 C      ISMAX  -
 C      IZ     - Z of investigated nucleus
 C      IZ1    - Z of not-investated nucleus
-C      LAMBDA - list of multipolarities to calculate
+C      LAMDA  - list of multipolarities to calculate
 C      LAMMAX - number of multipolarities to calculate
 C      LDNUM  - number of matrix elements with each multipolarity populating level
 C      LEAD   - pair of levels involved in each matrix element
 C      LMAX   -
-C      LMAXE  -
+C      LMAXE  - maximum multipolarity needed for calculation
 C      LP7    - maximum number of zeta coefficients (45100)
 C      LP10   - 600
 C      LZETA  - index into ZETA array for zeta for a given multipolarity
@@ -45,7 +45,7 @@ C      XI     - xi coupling constants
 C      ZPOL   -
 C
 C Formal parameters:
-C      Iexp   -
+C      Iexp   - Number of experiment
 C      Ient   -
 C      Icg    -
 C      Polm   -
@@ -113,6 +113,8 @@ C      Joj    -
          ENDIF
 
 C        Calculate xi and store it in XI in common CXI
+C        The value 6.349770 is 197.33/1.44*sqrt(2/931.49).
+C        i.e. hbar c / e^2 * sqrt(2 / amu).
          eta = z1*z2*SQRT(a1/EP(Iexp))/6.349770
          DO m = 1 , NMAX
             dep = (1.0+a1/a2)*EN(m)

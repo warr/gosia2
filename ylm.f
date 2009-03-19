@@ -19,11 +19,11 @@ C
 C Note the factor of 1 / \sqrt{4 \pi} compared to the orthonormal spherical
 C harmonics.
 C
-C 0.0889703179  = sqrt(20) / (8 pi)
+C 0.0889703179  = sqrt(5) / (8 pi)
 C 0.0298415518  = 3 / (32 pi)
-C 0.0179325408  = sqrt(52) / (128 pi)
+C 0.0179325408  = sqrt(13) / (64 pi)
 C 0.1089659406  = sqrt(30) / (16 pi)
-C -0.2179318812 = -1 * sqrt(30) / (8 pi) * cos(theta)
+C -0.2179318812 = -1 * sqrt(30) / (8 pi)
 C 0.1248361677  = 3 * sqrt(70) / (64 pi)
 C -0.3530900028 = -3 * sqrt(140) / (32 pi)
 C 0.0943672726  = 3 * sqrt(10) / (32 pi)

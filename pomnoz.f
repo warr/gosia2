@@ -22,9 +22,9 @@ C Formal parameters:
 C      Acca   - accuracy required
 C      L
 C      Iw
-C      Ktoto  - number of iterations needed
 C      Img
 C      Jidim
+C      Ktoto  - number of iterations needed
  
       SUBROUTINE POMNOZ(Acca,L,Iw,Ktoto,Img,Jidim)
       IMPLICIT NONE

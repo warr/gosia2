@@ -4,12 +4,13 @@ C SUBROUTINE GCF
 C
 C Called by: GAMATT
 C
-C Purpose:
+C Purpose: calculate detection probability (probability that gamma of a given
+C          energy is absorbed in the Ge but not in one of the absorbers).
 C
 C Formal parameters:
-C      Tau    -
-C      Thing  -
-C      Q      -
+C      Tau    - Absorption coefficient for Ge at this energy (input)
+C      Thing  - Absorption coefficient for absorbers at this energy (input)
+C      Q      - Attenuation coefficient (output)
  
       SUBROUTINE GCF(Tau,Thing,Q)
       IMPLICIT NONE
@@ -23,7 +24,7 @@ C      Q      -
       b(2) = ATAN2(A,D)
       b(3) = ATAN2(R,D+XL)
       b(4) = ATAN2(R,D)
-      DO k = 1 , 9
+      DO k = 1 , 9 ! Loop over order of Legendre polynomial order
          Q(k) = 0.0
          DO j = 1 , 3
             yl = b(j)
@@ -40,7 +41,7 @@ C      Q      -
                ENDIF
                f(m) = SIN(xm)*(1-EXP(ex))*EXP(Thing/COS(xm))
                IF ( j.EQ.1 ) f(m) = f(m)*EXP(-Tau*(A/SIN(xm)-D/COS(xm)))
-               IF ( k.EQ.1 ) THEN
+               IF ( k.EQ.1 ) THEN ! Legendre polynomials order k
                ELSEIF ( k.EQ.3 ) THEN
                   f(m) = f(m)*(1.5*COS(xm)**2-0.5)
                ELSEIF ( k.EQ.4 ) THEN

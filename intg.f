@@ -12,8 +12,8 @@ C      ACC50  - accuracy required for integration
 C      ARM    - reduced matrix elements
 C      CAT    -
 C      D2W    - step in omega (= 0.03)
-C      IFLG   -
-C      INTERV -
+C      IFLG   - flag to determine whether to calculate exponential (so we don't calculate twice)
+C      INTERV - default accuracy check parameter (see OP,CONT:INT)
 C      IPATH  -
 C      IRA    - limit of omega for integration for each multipolarity
 C      ISG    -
@@ -34,9 +34,37 @@ C
 C Note that if it finds that the step size for the integral is too small, it
 C calls DOUBLE to increase it by a factor of two, or if it finds that the
 C step size is too big, it decreases it by a factor of two by calling HALF.
-C The function RESET may also be called to reset the step size.
 C
-C We use the Adams-Moulton predictor-corrector model.
+C We use the the 4th order Adams-Moulton predictor-corrector method for
+C solving an ordinary differential equation. We use an adaptive version, which
+C can change the step size (increase or decrease) in order to get the desired
+C accuracy.
+C
+C The predictor is given as:
+C
+C y(n+1)_p = y(n) + h/24 * {55*f(n) - 59*f(n-1) + 37*f(n-2) - 9*f(n-3)}
+C
+C and the corrector is:
+C
+C y(n+1)_c = y(n) * h/24 * {9*f_p(n+1) + 19*f(n) - 5*f(n-1) + f(n-2)}
+C
+C The error is |E(n+1)| ~ 19/270 * {y_p(n+1) - y_c(n+1)}
+C
+C In this function:
+C                   D2W        = h
+C                   ARM(ir, 1) = f(n-3)
+C                   ARM(ir, 2) = f(n-2)
+C                   ARM(ir, 3) = f(n-1)
+C                   ARM(ir, 4) = f(n)
+C                   ARM(ir, 5) = y(n) initially
+C                   ARM(ir, 5) = y_c(n+1) finally
+C                   ARM(ir, 6) is not used
+C                   ARM(ir, 7) = y_p(n+1)
+C
+C The function RESET is called to advance n by one. i.e. f(n-3) is set to the
+C old value of f(n-2), f(n-2) to the old value of f(n-1) and f(n-1) to the old
+C value of f(n).
+
  
       SUBROUTINE INTG(Ien)
       IMPLICIT NONE
@@ -63,7 +91,7 @@ C We use the Adams-Moulton predictor-corrector model.
       COMMON /PTH   / IPATH(75) , MAGA(75)
       COMMON /CEXC9 / INTERV(50)
       
-      intend = INTERV(Ien)
+      intend = INTERV(Ien) ! Default accuracy set by INT option of OP,CONT
       D2W = .03 ! We use steps of 0.03 in omega
       NSW = 1
       kast = 0
@@ -153,7 +181,9 @@ C     Calculate derivatives of amplitudes
                ENDIF
             ENDDO
 
-C           Decide if we have appropriate accuracy
+C           Decide if we have appropriate accuracy (strictly it should be
+C           f = SQRT(f)*19./270. but the difference is not all that large).
+C
             f = SQRT(f)/14.
             IF ( f.GT.ACCUR .OR. f.LT.ACC50 ) THEN
                IF ( f.LT.ACC50 ) THEN
