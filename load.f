@@ -91,8 +91,6 @@ C      Joj    - index of substate (write only)
          a1 = XA1(Iexp)
          a2 = XA
          ZPOL = DIPOL*EP(Iexp)*a2/(z2*z2*(1.+a1/a2))
-         IF ( IZ1(Iexp).LT.0 ) ZPOL = DIPOL*EP(Iexp)
-     &                                *a1/(z1*z1*(1.+a2/a1))
          IF ( IZ1(Iexp).LE.0 ) THEN
             ah = a1
             a1 = a2
