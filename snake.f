@@ -121,5 +121,8 @@ C     Calculate some parameters, which we will pass to QE or QM
             ENDDO
          ENDIF
       ENDDO
+      IF ( icnt.EQ.365) THEN
+        STOP 'Sorry, I can only do 365 steps in omega. You need more!'
+      ENDIF
       GOTO 100
       END
