@@ -42,7 +42,7 @@ C      VINF   - speed of projectile at infinity
 C      XA     - A of investigated nucleus
 C      XA1    - A of not-investated nucleus
 C      XI     - xi coupling constants
-C      ZPOL   - dipole term
+C      ZPOL   - dipole term (GDR excitation)
 C
 C Formal parameters:
 C      Iexp   - Number of experiment
@@ -90,8 +90,10 @@ C      Joj    - index of substate (write only)
          z2 = DBLE(IZ)
          a1 = XA1(Iexp)
          a2 = XA
-         ZPOL = DIPOL*EP(Iexp)*a2/(z2*z2*(1.+a1/a2))
-         IF ( IZ1(Iexp).LE.0 ) THEN
+         IF ( IZ1(Iexp).GT.0 ) THEN
+            ZPOL = DIPOL*EP(Iexp)*a2/(z2*z2*(1.+a1/a2))
+         ELSE
+            ZPOL = DIPOL*EP(Iexp)*a2/(z2*z2*(1.+a2/a1))
             ah = a1
             a1 = a2
             a2 = ah
