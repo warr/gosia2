@@ -3,7 +3,6 @@ C----------------------------------------------------------------------
 C SUBROUTINE PRELM
 C
 C Called by: GOSIA
-C Calls:     KONTUR, MINI
 C
 C Purpose: print matrix elements
 C
