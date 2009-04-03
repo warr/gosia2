@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE EFFIX
 C
-C Called by: CEGRY, GOSIA2
+C Called by: CEGRY, GOSIA
 C Calls:     LAGRAN, SPLNER
 C
 C Purpose: calculate the efficiency of the detector at a given energy.
