@@ -9,6 +9,7 @@ C Purpose: calculate and store excitation amplitudes,
 C
 C Uses global variables:
 C      ARM    - excitation amplitudes of substates.
+C      DOMEGA - Initial step in omega (default = 0.03)
 C      ELM    - matrix elements
 C      EXPO   - adiabatic exponential
 C      IFLG   - flag to determine whether to calculate exponential (so we don't calculate twice)
@@ -26,7 +27,7 @@ C      LZETA  - index in ZETA to coupling coefficients for a given multipolarity
 C      MAXLA  - multipolarity to calculate here
 C      MSTORE - index of final level number and index of matrix element
 C      NDIV   - number of divisions
-C      NPT    - index in ADB array (this is omega / 0.03)
+C      NPT    - index in ADB array (this is omega / DOMEGA)
 C
 C Formal parameters:
 C      Irld   - index into ARM array
@@ -46,13 +47,14 @@ C      Irld   - index into ARM array
       INCLUDE 'caux.inc'
       INCLUDE 'clcom8.inc'
       INCLUDE 'rng.inc'
+      INCLUDE 'wvary.inc'
 
       maxh = MAXLA ! Save MAXLA, so we can restore it later
  100  ISG = -1
       n = 1
       rsg = -1.
       IFLG = 1
-      w0 = IRA(MAXLA)*.03 + .03 ! Maximum omega to calculate for (steps of 0.03)
+      w0 = IRA(MAXLA)*DOMEGA + DOMEGA ! Maximum omega to calculate for (steps of DOMEGA)
       
       DO j = 1 , ISMAX ! For substate used, zero ARM array
          DO jj = 1 , 6
@@ -71,7 +73,7 @@ C      Irld   - index into ARM array
       IF ( MAXLA.EQ.7 .AND. IRA(2).NE.0 ) THEN ! Special case of M1
          LAMR(2) = 1
          NPT = NPT - 1
-         w0 = w0 - .03
+         w0 = w0 - DOMEGA
       ENDIF
 
       NDIV = 0

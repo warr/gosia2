@@ -15,7 +15,7 @@ C      XI     - xi coupling coefficients
 C
 C Formal parameters:
 C      Inx    - index in XI array
-C      Npt    - index in ADB array (this is omega / 0.03)
+C      Npt    - index in ADB array (this is omega / DOMEGA)
 C      Isg    - phase
 C      Isg1   - index for sigma
 C      Ndiv   - number of divisions

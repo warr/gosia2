@@ -20,7 +20,7 @@ C      KDIV   - index for division
 C      LDNUM  - number of matrix elements with each multipolarity populating level
 C      MSTORE - index of final level number and index of matrix element
 C      NDIV   - number of divisions
-C      NPT    - index in ADB array (this is omega / 0.03)
+C      NPT    - index in ADB array (this is omega / DOMEGA)
 C      NSTART - index in CAT of first substate associated with a level
 C      NSTOP  - index in CAT of last substate associated with a level
 C

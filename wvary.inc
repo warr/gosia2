@@ -1,0 +1,2 @@
+      REAL*8 DOMEGA
+      COMMON /WVARY / DOMEGA

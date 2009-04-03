@@ -23,7 +23,7 @@ C      LOCQ   - location of collision functions in ZETA array
 C      LP7    - start of collision functions in ZETA (45100)
 C      MSTORE - index of final level number and index of matrix element
 C      NDIV   - number of divisions
-C      NPT    - index in ADB array (this is omega / 0.03)
+C      NPT    - index in ADB array (this is omega / DOMEGA)
 C      NSTART - index in CAT of first substate associated with a level
 C      NSTOP  - index in CAT of last substate associated with a level
 C      ZETA   - various coefficients

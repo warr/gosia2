@@ -11,7 +11,8 @@ C Uses global variables:
 C      ACC50  - accuracy required for integration
 C      ARM    - excitation amplitudes of substates.
 C      CAT    - substates of levels (n_level, J, m)
-C      D2W    - step in omega (= 0.03)
+C      D2W    - step in omega (= DOMEGA)
+C      DOMEGA - Initial step in omega (default = 0.03)
 C      IFAC   - spin/parity phase factor
 C      IFLG   - flag to determine whether to calculate exponential (so we don't calculate twice)
 C      INTERV - default accuracy check parameter (see OP,CONT:INT)
@@ -25,7 +26,7 @@ C      LAMR   - flag = 1 if we should calculate this multipolarity
 C      MAXLA  - multipolarity to calculate
 C      NDIV   - number of divisions
 C      NMAX   - number of levels
-C      NPT    - index in ADB array (this is omega / 0.03)
+C      NPT    - index in ADB array (this is omega / DOMEGA)
 C      NSTART - index in CAT of first substate associated with a level
 C      NSW    -
 C
@@ -85,9 +86,10 @@ C value of f(n).
       INCLUDE 'cexc0.inc'
       INCLUDE 'pth.inc'
       INCLUDE 'cexc9.inc'
+      INCLUDE 'wvary.inc'
       
       intend = INTERV(Ien) ! Default accuracy set by INT option of OP,CONT
-      D2W = .03 ! We use steps of 0.03 in omega
+      D2W = DOMEGA ! We use steps of DOMEGA in omega initially
       NSW = 1
       kast = 0
       NDIV = 0
@@ -206,7 +208,7 @@ C
                ENDIF
             ENDIF
              
-         ENDIF
+         ENDIF                                         ! if kast>=intend
       ENDIF
       GOTO 100
       END

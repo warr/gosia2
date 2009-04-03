@@ -11,7 +11,7 @@ C Formal parameters:
 C      Epsi   - epsilon for this experiment
 C      Errt   - sqrt(epsilon^2 - 1) for this experiment
 C      Xiv    - value of xi
-C      Dw     - step in omega (0.03)
+C      Dw     - step in omega (initially DOMEGA)
 C      W0     - value of omega
 C      Lmda   - lambda (1...6 for E1...6 and 1,2 for M1,2)
 C      Mua    - mu

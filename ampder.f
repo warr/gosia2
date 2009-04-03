@@ -24,7 +24,7 @@ C      LAMR   - flag = 1 if we should calculate this multipolarity
 C      LZETA  - index in ZETA to coupling coefficients for given multipolarity
 C      MSTORE - index of final level number and index of matrix element
 C      NMAX   - number of levels
-C      NPT    - index in ADB array (this is omega / 0.03)
+C      NPT    - index in ADB array (this is omega / DOMEGA)
 C      NSTART - index in CAT of first substate associated with a level
 C      NSTOP  - index in CAT of last substate associated with a level
 C

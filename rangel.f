@@ -8,6 +8,7 @@ C Purpose: to determine the range of the integration over omega.
 C
 C Uses global variables:
 C      ACC50  - accuracy required for integration
+C      DOMEGA - Initial step in omega (default = 0.03)
 C      IRA    - range for omega for each multipolarity
 C      MULTI  - number of matrix elements with each multipolarity populating levels
 C
@@ -22,7 +23,7 @@ C E2 = 0.203, E3 = 0.536, E4 = 0.716, E5 = 0.829, E6 = 0.962, M1 = 0.203,
 C M2 = 0.536.
 C
 C Note that first we work out omega, but then we work out the appropriate
-C index, knowing that we are always using steps of 0.03.
+C index, knowing that we are always using steps of DOMEGA.
 
  
       SUBROUTINE RANGEL(Acc1)
@@ -32,6 +33,7 @@ C index, knowing that we are always using steps of 0.03.
       INCLUDE 'a50.inc'
       INCLUDE 'rng.inc'
       INCLUDE 'clcom.inc'
+      INCLUDE 'wvary.inc'
 
       acl = -LOG(Acc1)
       ACC50 = Acc1/50.
@@ -50,7 +52,7 @@ C index, knowing that we are always using steps of 0.03.
             ELSE
                w = acl - .693 ! E1
             ENDIF
-            w = w/.03        ! We step in steps of \Delta\omega = 0.03
+            w = w/DOMEGA        ! We step in steps of \Delta\omega = DOMEGA
             IRA(i) = INT(w+1.5)
          ELSE
             IRA(i) = 0

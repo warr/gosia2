@@ -5,11 +5,12 @@ C
 C Called by: GOSIA
 C
 C Purpose: generates a table of the hyperbolic funcions sinh and cosh for
-C later use. Note that these are in steps of \Delta\omega = 0.03. These are
+C later use. Note that these are in steps of \Delta\omega = DOMEGA. These are
 C stored in the common block HIPER.
 C
 C Uses global variables:
 C      CH     - table of cosh values
+C      DOMEGA - Initial step in omega (default = 0.03)
 C      LP12   - number of steps of omega (365)
 C      SH     - table of sinh values
 C
@@ -22,10 +23,11 @@ C 365  in GOSIA, which is the dimension of the arrays.
       INTEGER*4 j
       INCLUDE 'mgn.inc'
       INCLUDE 'hiper.inc'
+      INCLUDE 'wvary.inc'
       
-      w = -.03
+      w = -DOMEGA
       DO j = 1 , LP12
-         w = w + .03
+         w = w + DOMEGA
          ex = EXP(w)
          er = 1./ex
          SH(j) = (ex-er)/2.
