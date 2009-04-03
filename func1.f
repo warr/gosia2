@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C FUNCTION FUNC1
 C
-C Called by: LAGRAN
+C Called by: LAGRAN, SPLNER
 C
 C Purpose: evaluates f(y) = y, f(y) = e^y or f(y) = y^2, depending on the
 C flag I

@@ -64,6 +64,9 @@ C     f = 1./Arg and g=1./a is a good approximation.
       f = 1.
       g = 1.
 
+C See Abramowitz and Segun - Handbook of Mathematical Functions with Formulas, Graphs
+C and Mathematical Tables, National Bureau of Standards, 8th Ed. P 233 for the following
+C coefficients.
       IF ( a.LE.1.D+8 ) THEN
          f = POL4(1.D0,38.027246D0,265.187033D0,335.67732D0,38.102495D0,
      &       a)

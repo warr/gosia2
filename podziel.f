@@ -6,6 +6,8 @@ C Called by: APRAM
 C
 C Purpose: subdivide matrix operators if the summation doesn't converge.
 C
+C Note: podziel is Polish for "split"
+C
 C Uses global variables:
 C      IDIVE  - number of subdivisions
 C      LP2    - maximum number of matrix elements (1500)

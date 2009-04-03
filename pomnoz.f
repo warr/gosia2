@@ -8,6 +8,8 @@ C
 C Purpose: perform the expansion to calculate the approximate Coulomb
 C          amplitudes
 C
+C Note: pomnoz is Polish for multiply
+C
 C Uses global variables:
 C      ARM    - excitation amplitudes of substates.
 C      IAPR   - index of initial and final levels for each matrix element

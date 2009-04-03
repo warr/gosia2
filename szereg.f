@@ -6,6 +6,8 @@ C Called by: READY
 C
 C Purpose: sort out the decay sequence
 C
+C Note: szereg is Polish for "series"
+C
 C Uses global variables:
 C      DYEX   - error on experimental yield
 C      IY     - index for yields

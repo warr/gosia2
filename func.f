@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C FUNCTION FUNC
 C
-C Called by: LAGRAN
+C Called by: LAGRAN, SPLNER
 C
 C Purpose: evaluates f(y) = y, f(y) = log_e(y) or f(y) = sqrt(y), depending
 C on the flag I

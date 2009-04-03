@@ -7,7 +7,7 @@ C
 C Purpose: determine the atomic ground-state spin
 C
 C Formal parameters:
-C      N      - Z of nucleus
+C      N      - number of electrons (Z - charge state)
 C
 C Return value:
 C      truncation point

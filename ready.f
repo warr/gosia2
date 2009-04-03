@@ -3,7 +3,7 @@ C----------------------------------------------------------------------
 C SUBROUTINE READY
 C
 C Called by: ADHOC
-C Calls:     DECAY, SZEREG
+C Calls:     SZEREG
 C
 C Purpose: To read experimental yields from a file.
 C

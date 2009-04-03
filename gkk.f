@@ -11,7 +11,7 @@ C Uses global variables:
 C      AKS    - <\alpha_k> values
 C      AVJI   - average J  (this is G(1) in GOSIA)
 C      DQ     - width of gaussian distribution
-C      FILE   - K          (this is G(6) in GOSIA)
+C      FIEL   - K          (this is G(6) in GOSIA)
 C      GAMMA  - Gamma      (this is G(2) in GOSIA)
 C      GFAC   - g          (this is G(5) in GOSIA)
 C      GKI    - G_k for a single level
@@ -44,7 +44,7 @@ C which are comparable to the mean time between random reorientations \tau_c.
 C
 C Note that certain values have defaults:
 C AVJI = 3, GAMMA = 0.02, XLAMB = 0.0345, TIMEC = 3.5, GFAC = Z/A,
-C FIEL = 6E-6 and POWER = 0.7, which are set in GOSIA, where they are treated
+C FIEL = 6E-6 and POWER = 0.6, which are set in GOSIA, where they are treated
 C as an array called G in the order of the values in the GGG common block.
 C However, the user may change them using the VAC suboption of the CONT option
 C of OP,COUL or OP,GOSI.

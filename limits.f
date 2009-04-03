@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE LIMITS
 C
-C Called by: KONTUR, MINI, PRELM
+C Called by: KONTUR, MINI
 C
 C Purpose: to constrain the matrix elements to within the limits specified by
 C the user.

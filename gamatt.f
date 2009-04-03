@@ -23,6 +23,7 @@ C Note the absorbers are: Al, C, Fe, Cu, Ag/Cd/Sn, Ta and Pb, respectively.
       DIMENSION Tau1(10) , Tau2(10,7) , Xl1(7) , thing3(10) , q(9) , 
      &          Qui(8,10)
 
+C     Treat absorbers
       DO i = 1 , 10 ! Loop over energies
          i1 = 1
          thing3(i) = 0.
@@ -32,6 +33,7 @@ C Note the absorbers are: Al, C, Fe, Cu, Ag/Cd/Sn, Ta and Pb, respectively.
          IF ( i1.LE.Nl ) GOTO 50 ! Loop over Nl absorbers
       ENDDO
 
+C     Treat germanium
       DO i = 1 , 10 ! Loop over energies
          tau = Tau1(i)
          thing = thing3(i)

@@ -55,7 +55,7 @@ C      NWR    - number of datapoints used in fit
 C      NYLDE  - number of yields
 C      SPIN   - spin of level
 C      ZETA   - the coupling constants
-C      ZPOL   - dipole term
+C      ZPOL   - dipole term (GDR excitation)
 C
 C Formal parameters:
 C      Icll   -

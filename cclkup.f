@@ -1,7 +1,7 @@
 C FUNCTION CCLKUP
 C
 C Called by: BRICC
-C Calls:     CCLKUP
+C Calls:     SPLNER
 C
 C Purpose: looks up a single conversion coefficient for given Z, energy and
 C          multipolarity in the BrIcc database, interpolating for the right
