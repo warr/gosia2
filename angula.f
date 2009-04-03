@@ -102,7 +102,7 @@ C      Op2    - The part after the OP, for the option we are processing
                ENDDO
             ENDDO
             bt = BETAR(IEXP) ! Get beta
-            IF ( ITTE(IEXP).NE.1 ) CALL RECOIL(alab,attl,bt,Trec)
+            IF ( ITTE(IEXP).NE.1 ) CALL RECOIL(alab,attl,bt,Trec) ! Relativistic correction
             IF ( l.EQ.1 ) CALL YLM1(Gth,ylmr)
             ixs = IAXS(IEXP) ! Get axial symmetry flag
             fi01 = Fi0 - Figl ! Get lower phi limit
