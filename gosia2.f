@@ -1348,6 +1348,7 @@ C   equally spaced energies, which we integrate in the same way.
      &                      'Total integrated Rutherford cross section='
      &                      ,1E8.3,' for exp. ',1I2/)
                   ENDDO
+                  REWIND 17 ! Added PJN (17Jul2009)
                   IF ( ipinf.NE.0 ) THEN
                      ngpr = 0
                      DO lx = 1 , NEXPT ! For each experiment
@@ -1364,7 +1365,7 @@ C   equally spaced energies, which we integrate in the same way.
                            DO mpin = 1 , lpin ! For each pin diode
                               REWIND 15
                               ndum = ngpr + (jgd-1)*idr + (mpin-1)
-     &                               *jgd*idr
+     &                          *nged*idr ! Was jgd instead of nged (PJN 17Jul2009)
                               IF ( ndum.NE.0 ) THEN
                                  DO jd = 1 , ndum
                                     READ (15,*) xx
@@ -1816,6 +1817,7 @@ C   equally spaced energies, which we integrate in the same way.
                      ENDDO ! Loop over pin diodes
                      IF ( mpin.GT.1 ) WRITE (22,99021) dst , lx
                   ENDDO
+                  REWIND 17 ! Added (PJN 17Jul2009)
                   IF ( ipinf.NE.0 ) THEN
                      ngpr = 0
                      DO lx = 1 , NEXPT ! For each experiment
@@ -1832,7 +1834,7 @@ C   equally spaced energies, which we integrate in the same way.
                            DO mpin = 1 , lpin ! For each pin diode
                               REWIND 15
                               ndum = ngpr + (jgd-1)*idr + (mpin-1)
-     &                               *jgd*idr
+     &                          *nged*idr ! Was jgd instead of nged (PJN 17Jul2009)
                               IF ( ndum.NE.0 ) THEN
                                  DO jd = 1 , ndum
                                     READ (15,*) xx
