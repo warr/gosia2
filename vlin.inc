@@ -1,3 +1,3 @@
       REAL*8 XV, YV, ZV, DSG, DSE, DS
-      COMMON /VLIN  / XV(101) , YV(101) , ZV(100) , DSG(100) ,
-     &                DSE(100) , DS
+      COMMON /VLIN  / XV(101) , YV(101) , ZV(101) , DSG(101) ,
+     &                DSE(101) , DS
