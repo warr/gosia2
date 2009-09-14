@@ -14,7 +14,7 @@ C      ELM    - matrix elements
 C      EXPO   - adiabatic exponential
 C      IFLG   - flag to determine whether to calculate exponential (so we don't calculate twice)
 C      IRA    - limit of omega for integration for each multipolarity
-C      ISG    - phase
+C      ISG    - sign of omega
 C      ISMAX  - number of substates used
 C      ISSTAR - first substate for given level
 C      ISSTO  - last substate for given level
