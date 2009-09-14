@@ -39,7 +39,7 @@ C      LP6    - maximum number of Ge detectors (32)
 C      LP8    - (104)
 C      LP9    - last 2100 words of ZETA array (47900)
 C      LP10   - maximum number of magnetic substates (1200)
-C      LP11   - LP8 - 1 (103)
+C      LP11   - LP8 - 1 (2800)
 C      LP13   - LP9 + 1 (47901)
 C      LP14   - maximum space for collision functions (4900)
 C      MEMAX  - number of matrix elements
@@ -113,7 +113,10 @@ C      Bten   -
       Chisq = 0.
       LFL = 0
       chis1 = 0.
-      ixx = NDIM*MEMAX + LP11 ! LP11 is 103
+      ixx = NDIM*MEMAX + LP11 ! LP11 is 2800
+      IF ( ixx.GT.LP7 ) THEN
+         STOP 'Too many matrix elements for the ZETA array'
+      ENDIF
 
       DO i1 = 1 , ixx
          ZETA(i1) = 0.
@@ -150,7 +153,7 @@ C      Bten   -
          IF ( MAGA(IEXP).EQ.0 ) lp = 1
          IF ( Ncall.EQ.0 ) GOTO 150
          IF ( Icll.EQ.4 ) GOTO 100
- 50      loch = LP3*(MEMAX-1) + NMAX + LP11 ! LP3 is 100, LP11 is 103
+ 50      loch = LP3*(MEMAX-1) + NMAX + LP11 ! LP3 is 100, LP11 is 2800
          DO k = 1 , loch
             ZETA(k) = 0.
          ENDDO
