@@ -1818,7 +1818,7 @@ C   equally spaced energies, which we integrate in the same way.
                      ENDDO ! Loop over pin diodes
                      IF ( mpin.GT.1 ) WRITE (22,99021) dst , lx
                   ENDDO
-                  REWIND 17 ! Added (PJN 17Jul2009)
+                  REWIND 17 ! Added PJN (17Jul2009)
                   IF ( ipinf.NE.0 ) THEN
                      ngpr = 0
                      DO lx = 1 , NEXPT ! For each experiment
