@@ -12,7 +12,7 @@ C      ARM    - excitation amplitudes of substates.
 C      CAT    - substates of levels (n_level, J, m)
 C      ELM    - matrix elements
 C      EXPO   - adiabatic exponential
-C      ISG    - index for sigma
+C      ISG    - sign of omega
 C      ISG1   -
 C      ISHA   - is half-integer spin
 C      ISO    - isotropic flag
