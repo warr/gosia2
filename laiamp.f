@@ -15,7 +15,7 @@ C      ELM    - matrix elements
 C      EPS    - epsilon
 C      EROOT  - sqrt(epsilon^2 - 1)
 C      IEXP   - number of experiment
-C      ISG    - index for sigma
+C      ISG    - sign of omega
 C      LAMDA  - list of multipolarities to calculate
 C      LAMMAX - number of multipolarities to calculate
 C      LAMR   - flag = 1 if we should calculate this multipolarity
