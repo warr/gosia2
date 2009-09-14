@@ -18,7 +18,7 @@ C      IFLG   - flag to determine whether to calculate exponential (so we don't 
 C      INTERV - default accuracy check parameter (see OP,CONT:INT)
 C      IPATH  - index of substate in level with same m as substate Irld
 C      IRA    - limit of omega for integration for each multipolarity
-C      ISG    - index for sigma
+C      ISG    - sign of omega
 C      ISMAX  - number of substates used
 C      ISO    - Isotropic flag
 C      KDIV   - index for division
@@ -28,7 +28,7 @@ C      NDIV   - number of divisions
 C      NMAX   - number of levels
 C      NPT    - index in ADB array (this is omega / DOMEGA)
 C      NSTART - index in CAT of first substate associated with a level
-C      NSW    -
+C      NSW    - step in omega
 C
 C Formal parameters:
 C      Ien    - experiment number
@@ -119,7 +119,7 @@ C     Predictor
      &                  +37.0*ARM(ir,2)-9.0*ARM(ir,1))
          ENDDO
       ENDIF
-      NPT = NPT + NSW*ISG
+      NPT = NPT + NSW*ISG ! NPT loops over omega values, ISG is -1 at first then +1
       IF ( NPT.GT.0 ) THEN
          IF ( NDIV.EQ.0 ) GOTO 200
          KDIV = KDIV + 1
@@ -128,7 +128,7 @@ C     Predictor
          NPT = NPT + ISG
          IF ( NPT.GT.0 ) GOTO 200
       ENDIF
-      NPT = -NPT + 2
+      NPT = -NPT + 2 ! We decreased omega to zero, so now start increasing
       ISG = 1
  200  CALL RESET(ISO)
       IFLG = 1
