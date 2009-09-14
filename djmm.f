@@ -34,7 +34,7 @@ C which is created freshly each time the function is called.
       DIMENSION djm(525) , iczy(525)
       INCLUDE 'ident.inc'
       INCLUDE 'cb.inc'
-      SAVE djm ! Added N. Warr Jul2007
+      SAVE djm , iczy ! Added N. Warr Jul2007
       
       ifza = 1
       IF ( Beta.LT.0. ) ifza = (-1)**(Kp+Kpp)
