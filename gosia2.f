@@ -172,7 +172,7 @@ C      YGP    - gamma yield calculated with correction to angular distribution f
 C      YNRM   - relative normalisation for gamma detectors
 C      YV     - scattering angle meshpoints where we calculate exact Coulex
 C      ZETA   - various coefficients
-C      ZPOL   - dipole term
+C      ZPOL   - dipole term (GDR excitation)
 C      ZV     - energy meshpoints
 
       PROGRAM GOSIA2
