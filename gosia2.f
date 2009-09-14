@@ -576,6 +576,7 @@ C---- gosia2 changes end
          ENDDO
       ENDDO
       ERR = .FALSE.
+      opcja = '    '
       intend = 0 ! End of initialization
 
 C.............................................................................
