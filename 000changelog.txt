@@ -1,86 +1,89 @@
+20100222
+° Fix discontinuity in TRINT.
+
 20090330
-� Fix bug in E1 polarization correction
+° Fix bug in E1 polarization correction.
 
 20081208 (synchronized with gosia1)
-� New option OP,INTI which works like OP,INTG but the theta values for the
+° New option OP,INTI which works like OP,INTG but the theta values for the
   meshpoints are given as angles for the recoiling target nuclei in the
   laboratory frame. This should help in inverse kinematics cases.
 
 20080630 (synchronized with gosia1)
-� Reordering of all variable declarations so variables in common blocks are
+° Reordering of all variable declarations so variables in common blocks are
   together.
-� Increased size of arrays for levels from 75 to 100.
-� Change in many format statements to accomodate 100 levels (I2 -> I3).
-� Increased size of arrays for substates from 600 to 1200.
-� Restructure function EFFIX to allow more flexible selection of efficiency
+° Increased size of arrays for levels from 75 to 100.
+° Change in many format statements to accomodate 100 levels (I2 -> I3).
+° Increased size of arrays for substates from 600 to 1200.
+° Restructure function EFFIX to allow more flexible selection of efficiency
   calbration type.
-� Added Radware efficiency calibration (Pawel J. Napiorkowski).
-� Added EFF, option to CONT to make it easier to select efficiency method.
-� Bugfix in gremlin efficiency method: a sign was wrong in Woods-Saxon term.
-� Bugfix in initialisation of conversion coefficients for interpolation
+° Added Radware efficiency calibration (Pawel J. Napiorkowski).
+° Added EFF, option to CONT to make it easier to select efficiency method.
+° Bugfix in gremlin efficiency method: a sign was wrong in Woods-Saxon term.
+° Bugfix in initialisation of conversion coefficients for interpolation
   method (only part of array was initialized).
-� Add CONTINUE statements to prevent GOTO the ENDDO of a loop. This is
+° Add CONTINUE statements to prevent GOTO the ENDDO of a loop. This is
   deprecated and will be removed in future.
-� Call either LAGRAN or SPLNER to do interpolation according to ISPL variable.
-� Approximation in TRINT  if Arg is very large (then ratio is one) as in
+° Call either LAGRAN or SPLNER to do interpolation according to ISPL variable.
+° Approximation in TRINT  if Arg is very large (then ratio is one) as in
   pawel.
-� Replaced OPEN(NAME=xxx) with OPEN(FILE=xxx) as the former is an extension
+° Replaced OPEN(NAME=xxx) with OPEN(FILE=xxx) as the former is an extension
   to the language, while the latter is standard.
-� Bugfix in BRICC: we need the absolute value of the difference in energy
+° Bugfix in BRICC: we need the absolute value of the difference in energy
   levels not the signed difference.
-� Bugfix for dimension of bten, which should have been 1600 and was
+° Bugfix for dimension of bten, which should have been 1600 and was
   different in different places.
-� Use DCMPLX instead of CMPLX for portability.
-� Use DIMAG instead of IMAG for portability.
-� Reorder DATA statement in NEWCNV for portability.
-� Use LAGRAN for interpolation if less than three data points even if ISPL = 1
+° Use DCMPLX instead of CMPLX for portability.
+° Use DIMAG instead of IMAG for portability.
+° Reorder DATA statement in NEWCNV for portability.
+° Use LAGRAN for interpolation if less than three data points even if ISPL = 1
 
 20080519 (synchronized with gosia1)
-� Add spline support (Pawel J. Napiorkowski)
-� Add CONT option SPL,
-� Add OP,SELE
-� Add OP,BRIC
-� Add new method of reading conversion coefficients
-� Replaced constant 10 with NLIFT in loop (this was a bug)
-� Correct inaccurate constants in SEQ
-� Initialized some variables explicitly to remove compiler warnings
-� Increased AKAVKA dimensions from 8 to 9 to prepare for merge of Pawel
+° Add spline support (Pawel J. Napiorkowski)
+° Add CONT option SPL,
+° Add OP,SELE
+° Add OP,BRIC
+° Add new method of reading conversion coefficients
+° Replaced constant 10 with NLIFT in loop (this was a bug)
+° Correct inaccurate constants in SEQ
+° Initialized some variables explicitly to remove compiler warnings
+° Increased AKAVKA dimensions from 8 to 9 to prepare for merge of Pawel
   Napiorkowski's efficiency code
-� Added ISPL variable in CCC common to prepare for merge of Pawel
+° Added ISPL variable in CCC common to prepare for merge of Pawel
   Napiorkowski's spline code and SPL, option in CONT
-� Restructured a repeated IF with the same condition to use IF/THEN
+° Restructured a repeated IF with the same condition to use IF/THEN
 
 20080418
-� Change default printing options to match gosia1
-� Split CINIT into CINIT (same as gosia1) and CINIT2 (new for gosia2)
+° Change default printing options to match gosia1
+° Split CINIT into CINIT (same as gosia1) and CINIT2 (new for gosia2)
 
 20080417
-� STOP if NI2 > 50
-� Increase fiex1 and wpi dimensions
-� Increase arrays in VLIN
+° STOP if NI2 > 50
+° Increase fiex1 and wpi dimensions
+° Increase arrays in VLIN
 
 20080414
-� Save DJM in DJMM
-� Replace IFIX with INT
-� Replace FLOAT with REAL
-� Replace IABS with ABS
-� Replace MAX0 with MAX
-� Replace AMAX1 with MAX
-� Replace MIN0 with MIN
-� Replace AMIN1 with MIN
-� Replace ALOG10 with LOG10
-� Replace ALOG with LOG
-� Remove unused common blocks in main routine
-� Add PROGRAM statement at start
-� Run spag
-� Reorder common blocks ME2D, CCC, KIN, COEX, CAUX0, LCZP
-� Convert to REAL*8 and COMPLEX*16
-� Fix precision of constants
-� Restructure IF in MINI
-� Add IUNIT3 to SWITCH common block
-� Replace unit 33 with variable IUNIT33
-� Change some IF logic to match gosia1
-� Store matrix elements so that percentage change works
+° Save DJM in DJMM
+° Replace IFIX with INT
+° Replace FLOAT with REAL
+° Replace IABS with ABS
+° Replace MAX0 with MAX
+° Replace AMAX1 with MAX
+° Replace MIN0 with MIN
+° Replace AMIN1 with MIN
+° Replace ALOG10 with LOG10
+° Replace ALOG with LOG
+° Remove unused common blocks in main routine
+° Add PROGRAM statement at start
+° Run spag
+° Reorder common blocks ME2D, CCC, KIN, COEX, CAUX0, LCZP
+° Convert to REAL*8 and COMPLEX*16
+° Fix precision of constants
+° Restructure IF in MINI
+° Add IUNIT3 to SWITCH common block
+° Replace unit 33 with variable IUNIT33
+° Change some IF logic to match gosia1
+° Store matrix elements so that percentage change works
 
 20080412
-� Import pristine version of gosia2 from Rochester
+° Import pristine version of gosia2 from Rochester
