@@ -3071,7 +3071,7 @@ C---- gosia2 changes start
             IF ( IBPS.EQ.1 ) JZB = 26 ! But IBPS must be 2 here! Ooops!
             IF ( IBPS.EQ.1 ) GOTO 2200
          ENDIF
-         IF ( IPS1.EQ.0 ) GOTO 2000
+         IF ( IPS1.EQ.0 ) GOTO 2000 ! Normal end of execution
          IMIN = IMIN + 1
          DO iva = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
             JSKIP(iva) = 1
