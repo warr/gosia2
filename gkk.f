@@ -11,7 +11,7 @@ C Uses global variables:
 C      AKS    - <\alpha_k> values
 C      AVJI   - average J  (this is G(1) in GOSIA)
 C      DQ     - width of gaussian distribution
-C      FILE   - K          (this is G(6) in GOSIA)
+C      FIEL   - K          (this is G(6) in GOSIA)
 C      GAMMA  - Gamma      (this is G(2) in GOSIA)
 C      GFAC   - g          (this is G(5) in GOSIA)
 C      GKI    - G_k for a single level
