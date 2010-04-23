@@ -5,7 +5,7 @@ C
 C Called by: GOSIA
 C Calls:     FTBM, LIMITS, RK4
 C
-C Purpose:
+C Purpose: scans the chi^2 hypersurface in OP,ERRO
 C
 C Uses global variables:
 C      DEVU   -
