@@ -54,7 +54,7 @@ C      NSTOP  - index in CAT of last substate associated with a level
 C      NWR    - number of datapoints used in fit
 C      NYLDE  - number of yields
 C      SPIN   - spin of level
-C      ZETA   - the coupling constants
+C      ZETA   - statistical tensors, not really zeta
 C      ZPOL   - dipole term (GDR excitation)
 C
 C Formal parameters:
