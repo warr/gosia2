@@ -14,7 +14,7 @@ C      ELM    - matrix elements
 C      EPS    - epsilon
 C      EROOT  - sqrt(epsilon^2 - 1)
 C      IEXP   - number of experiment
-C      ISG    - index for sigma
+C      ISG    - sign of omega
 C      LAMDA  - list of multipolarities to calculate
 C      LAMMAX - number of multipolarities to calculate
 C      LAMR   - flag = 1 if we should calculate this multipolarity
@@ -62,7 +62,7 @@ C      W0     - omega limit
             IF ( ld.NE.0 ) THEN
                DO i2 = 1 , ld ! Loop on matrix elements of that multipolarity connected to ground state
                   m = LEADF(1,i2,la) ! m is level index connected to ground state by element i2, mul. la
-                  indx = MEM(1,m,la)
+                  indx = MEM(1,m,la) ! indx is the index of the matrix element connecting this level to the ground state with this multipolarity
                   xiv = XI(indx) ! xi value
                   ismin = 0
                   is1 = NSTART(m) ! Index of first substate for level m
