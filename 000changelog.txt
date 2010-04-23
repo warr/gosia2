@@ -1,3 +1,7 @@
+20100423
+° Fix LCK, bug in MINI.
+° Always start with unit 25.
+
 20100222
 ° Fix discontinuity in TRINT.
 
