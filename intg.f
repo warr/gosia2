@@ -48,7 +48,7 @@ C y(n+1)_p = y(n) + h/24 * {55*f(n) - 59*f(n-1) + 37*f(n-2) - 9*f(n-3)}
 C
 C and the corrector is:
 C
-C y(n+1)_c = y(n) * h/24 * {9*f_p(n+1) + 19*f(n) - 5*f(n-1) + f(n-2)}
+C y(n+1)_c = y(n) + h/24 * {9*f_p(n+1) + 19*f(n) - 5*f(n-1) + f(n-2)}
 C
 C The error is |E(n+1)| ~ 19/270 * {y_p(n+1) - y_c(n+1)}
 C
