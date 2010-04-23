@@ -3,13 +3,13 @@ C----------------------------------------------------------------------
 C SUBROUTINE ROTATE
 C
 C Called by: RECOIL
-C Calls:     GOSIA, ROTATE, TENS
+C Calls:     DJMM
 C
 C Purpose: rotate the frame of reference
 C
 C Formal parameters:
-c      Alab   - matrix in lab frame
-C      Attl   - matrix rotated
+c      Alab   - statistical tensor in lab frame
+C      Attl   - statistical tensor rotated
 C      Theta  - angle to rotate by
 C      K2     - maximum dimension to rotate
 C      Kd     - step over dimension
