@@ -5,17 +5,23 @@ C
 C Called by: FTBM, GOSIA
 C Calls:     DJMM
 C
-C Purpose:
+C Purpose: For each level, we take the stastical tensor describing the
+C          polarization of the level (Bten) and rotate it into the new
+C          coordinate system with the z-axis along the beam direction
+C          and the x-axis in the plane of the orbit in such a way, that
+C          the x-component of the impact parameter is positive. The y-
+C          axis is defined to form a right-handed system. The results
+C          are written to ZETA.
 C
 C Uses global variables:
 C      IAXS   - axial symmetry flag (readonly)
 C      IEXP   - experiment number (readonly)
 C      NMAX   - number of levels (readonly)
 C      TETACM - theta of particle detector in center of mass frame (readonly)
-C      ZETA   - various coefficients (read/write)
+C      ZETA   - statistical tensors (write only)
 C
 C Formal parameter:
-C      Bten   - 
+C      Bten   - 16 values for each level (read)
  
       SUBROUTINE TENS(Bten)
       IMPLICIT NONE
