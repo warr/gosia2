@@ -22,7 +22,7 @@ C      NMAX1  - number of levels with decays
 C      TAU    - lifetime in picoseconds
 C      TIMEL  - lifetimes and their errors
 C      VACDP  - G_k for each level
-C      ZETA   - various coefficients
+C      ZETA   - here this is not zeta, but the statistical tensors calculated in TENS
 C
 C Formal parameters:
 C      Chisq  - chi squared
