@@ -19,7 +19,7 @@ C      Isko   -
 C      Iskf   -
 C      Nflr   -
 C      Idr    - number of decays
-C      Nco    -
+C      Nco    - flag: 0 = no extra data to read, 1 = extra data to read
 C      Nft    - error flag: 0 = no error, 1 = error
 C      Enb    - energy of meshpoint read from file
 C
