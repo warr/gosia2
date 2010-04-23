@@ -3096,7 +3096,7 @@ C---- gosia2 changes start
 C     Set CNOR1 to the average of CNOR1 and CNOR2
       DO kh1 = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
          DO kh2 = 1 , LP3 ! LP3 = 75 (maximum number of levels)
-            IF ( JZB.EQ.25 ) THEN ! If it is the second nucleus
+            IF ( JZB.EQ.25 ) THEN ! If it is the first nucleus
                CNOR1(kh1,kh2) = CNOR(kh1,kh2)
             ELSE
                CNOR2(kh1,kh2) = CNOR(kh1,kh2)
