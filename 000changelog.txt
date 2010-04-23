@@ -1,6 +1,7 @@
 20100423
 ° Fix LCK, bug in MINI.
 ° Always start with unit 25.
+° Replace ATS function with an array as in gosia.
 
 20100222
 ° Fix discontinuity in TRINT.
