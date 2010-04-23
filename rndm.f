@@ -17,6 +17,7 @@ C when OP,RAND is called. The parameter to OP,RAND is the seed here.
       REAL*8 ai , p , r , rxdm , Se , t , u
       INTEGER*4 i
       DATA t/0./
+      SAVE t
 
       IF ( Se.GT.32000. ) Se = 100.*t + .511
       Se = Se*Se
