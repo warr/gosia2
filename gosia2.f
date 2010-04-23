@@ -368,7 +368,7 @@ C     Initialize prime numbers
       IP(26) = 101
 
 C     Initialize pointers
-      lp0 = 107600 ! Size of ZETA array
+      lp0 = 155600 ! Size of ZETA array
       LP1 = 50 ! Maximum number of experiments
       LP2 = 1500 ! Maximum number of matrix elements
       LP3 = 100 ! Maximum number of levels
