@@ -22,7 +22,7 @@ C      NSTOP  - index in CAT of last substate associated with a level
 C      PSI    - psi coefficients
 C      QAPR   - approximate Coulomb amplitudes
 C      SPIN   - spin of level
-C      ZETA   -
+C      ZETA   - zeta coupling coefficients
 C
 C Formal parameters:
 C      Ir     - index of first substate of level
