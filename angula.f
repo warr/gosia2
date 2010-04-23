@@ -19,7 +19,7 @@ C      ITMA   - identify detectors according to OP,GDET
 C      ITTE   - thick target experiment flag
 C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
 C      TAU    - lifetime in picoseconds
-C      ZETA   - various coefficients
+C      ZETA   - statistical tensors (not really zeta)
 C
 C Formal parameters:
 C      Ygn    - Gamma-ray yield
@@ -81,7 +81,7 @@ C      Op2    - The part after the OP, for the option we are processing
             DO kq = 1 , ifn
                is = iu + kq
                ig = is + il
-               at(is) = ZETA(ig)*f(j)
+               at(is) = ZETA(ig)*f(j) ! Here ZETA are statistical tensors
             ENDDO
          ENDDO
 
