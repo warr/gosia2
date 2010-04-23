@@ -30,7 +30,6 @@ OBJS += angula.o
 OBJS += apram.o
 OBJS += arccos.o
 OBJS += arctg.o
-OBJS += ats.o
 OBJS += branr.o
 OBJS += bricc.o
 OBJS += cclkup.o
@@ -132,7 +131,7 @@ snake.f fhip.f alloc.f rangel.f qrange.f ampder.f laisum.f expon.f faza.f \
 setin.f sting.f laiamp.f faza1.f trint.f pol4.f stamp.f reset.f half.f \
 double.f path.f intg.f newlv.f code7.f apram.f newcat.f pomnoz.f tenb.f \
 tens.f djmm.f ftbm.f mini.f cegry.f fakp.f prim.f seq.f gf.f f.f conv.f \
-wthrej.f wsixj.f lagran.f func.f func1.f gkvac.f gkk.f xstatic.f ats.f ylm.f \
+wthrej.f wsixj.f lagran.f func.f func1.f gkvac.f gkk.f xstatic.f ylm.f \
 decay.f angula.f ready.f branr.f limits.f szereg.f sixel.f prelm.f recoil.f \
 rotate.f ylm1.f fiint.f fiint1.f tapma.f simin.f mixup.f fxis1.f fxis2.f \
 podziel.f klopot.f mixr.f coord.f chmem.f pticc.f rndm.f kontur.f rk4.f \

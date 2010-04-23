@@ -3,7 +3,7 @@ C----------------------------------------------------------------------
 C SUBROUTINE GKK
 C
 C Called by: GKVAC
-C Calls:     ATS, WSIXJ, XSTATIC
+C Calls:     WSIXJ, XSTATIC
 C
 C Purpose: calculate time-dependent deorientation coefficients
 C
@@ -52,12 +52,12 @@ C
 C Note that WSIXJ requires all its parameters to be doubled, so it can handle
 C half-integers properly.
 C
-C The function ATS is used to determine the ground-state spin for a given
+C The array ATS is used to determine the ground-state spin for a given
 C element.
 
       SUBROUTINE GKK(Iz,Beta,Spin,Time,Il)
       IMPLICIT NONE
-      REAL*8 alp , ATS , Beta , ccf , down , dwc , f , hmean , rk , sm , 
+      REAL*8 alp , Beta , ccf , down , dwc , f , hmean , rk , sm , 
      &       Spin , Time , up , upc , valmi , w2 , wrt , WSIXJ , wsp , 
      &       xji , xlam
       INTEGER*4 i , if2 , ifq , Il , imean , inq , irk2 , ispin2 , 
@@ -65,6 +65,7 @@ C element.
       INCLUDE 'gvac.inc'
       INCLUDE 'vac.inc'
       INCLUDE 'ggg.inc'
+      INCLUDE 'ats.inc'
 
       IF ( IBYP.NE.1 ) THEN
          imean = 0
@@ -79,6 +80,10 @@ C element.
          DO j = inq , ifq
             l = l + 1
             nz = Iz - j
+            IF ( nz.GT.103 ) then
+              WRITE (*,*) 'Error: maximum atomic charge allowed is 103'
+              STOP 'giving up'
+            ENDIF
             xji = ATS(nz) ! Ground-state spin of atom
             sm = Spin
             IF ( imean.EQ.1 ) xji = AVJI
