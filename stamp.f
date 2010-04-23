@@ -16,6 +16,9 @@ C      W0     - value of omega
 C      Lmda   - lambda (1...6 for E1...6 and 1,2 for M1,2)
 C      Mua    - mu
 C
+C Note that the pre-factors in the fct values correspond to those of the
+C collision functions.
+C
 C Return value:
 C      Estimated amplitude
  
@@ -32,7 +35,7 @@ C      Estimated amplitude
       la = Lmda
       IF ( Lmda.EQ.7 ) la = 3
 
-      IF ( axi.LT.1.E-5 ) THEN
+      IF ( axi.LT.1.E-5 ) THEN ! Small absolute values of xi
          a = -2.*W0
          IF ( la.EQ.3 ) a = -W0
          exa = EXP(a)
@@ -41,8 +44,8 @@ C      Estimated amplitude
          STAMP = DCMPLX(cic,0.D0)
          IF ( la.EQ.2 ) THEN
             IF ( mi.EQ.0 ) fct = 3.*(3.-Epsi*Epsi)/Epsi/Epsi/Epsi/Epsi
-            IF ( mi.EQ.1 ) fct = 1.837117307*Errt/Epsi/Epsi/Epsi/Epsi ! 1.837117307 = sqrt(27/8)
-            IF ( mi.EQ.2 ) fct = -3.674234613*Errt*Errt/Epsi/Epsi/ ! 3.674234613 = sqrt(27/2)
+            IF ( mi.EQ.1 ) fct = 1.837117307*Errt/Epsi/Epsi/Epsi/Epsi ! 1.837117307 = 3/2 * sqrt(3/2)
+            IF ( mi.EQ.2 ) fct = -3.674234613*Errt*Errt/Epsi/Epsi/ ! 3.674234613 = 3 * sqrt(3/2)
      &                           Epsi/Epsi
          ELSEIF ( la.EQ.3 ) THEN
             fct = -1.414213562*Errt/Epsi/Epsi ! 1.414213562 = sqrt(2)
@@ -50,7 +53,7 @@ C      Estimated amplitude
             IF ( mi.EQ.0 ) fct = 1./Epsi/Epsi
             IF ( mi.EQ.1 ) fct = 1.414213562*Errt/Epsi/Epsi ! 1.414213562 = sqrt(2)
          ENDIF
-      ELSE
+      ELSE ! Larger absolute values of xi
          ex = EXP(W0)/2.
          b = axi*(Epsi*ex+W0)
          CALL TRINT(b,sib,cib)
@@ -77,14 +80,14 @@ C      Estimated amplitude
          ENDIF
          IF ( la.EQ.2 ) THEN
             IF ( mi.EQ.0 ) fct = .75*(3.-Epsi*Epsi)*axi*axi/Epsi/Epsi
-            IF ( mi.EQ.1 ) fct = 1.837117307*Errt*axi*axi/Epsi/Epsi ! 1.837117307 = sqrt(27/8)
-            IF ( mi.EQ.2 ) fct = -.9185586535*Errt*Errt*axi*axi/Epsi/ ! 0.9185586535 = sqrt(27/32)
+            IF ( mi.EQ.1 ) fct = 1.837117307*Errt*axi*axi/Epsi/Epsi ! 1.837117307 = 3/2 * sqrt(3/2)
+            IF ( mi.EQ.2 ) fct = -.9185586535*Errt*Errt*axi*axi/Epsi/ ! 0.9185586535 = 3/4 * sqrt(3/2)
      &                           Epsi
          ELSEIF ( la.EQ.3 ) THEN
-            fct = -.3535533905*Errt*axi*axi ! 0.3535533907 = sqrt(1/8)
+           fct = -.3535533905*Errt*axi*axi ! 0.3535533907 = 1/4 * sqrt(2)
          ELSE
             IF ( mi.EQ.0 ) fct = .5*axi/Epsi
-            IF ( mi.EQ.1 ) fct = .3535533907*Errt*axi/Epsi ! 0.3535533907 = sqrt(1/8)
+            IF ( mi.EQ.1 ) fct = .3535533907*Errt*axi/Epsi ! 0.3535533907 = 1/2 * sqrt(1/2)
          ENDIF
       ENDIF
 
