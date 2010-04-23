@@ -6,6 +6,8 @@ C Called by: GOSIA
 C
 C Purpose: trouble shooting (see OP,TROU)
 C
+C Note: Klopot (with a slash through the "l" is Polish for trouble
+C
 C Uses global variables:
 C      CORF   - internal correction factors
 C      ELM    - matrix elements
