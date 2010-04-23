@@ -171,7 +171,7 @@ C      YGP    - gamma yield calculated with correction to angular distribution f
 C      YNRM   - relative normalisation for gamma detectors
 C      YV     - scattering angle meshpoints where we calculate exact Coulex
 C      ZETA   - various coefficients
-C      ZPOL   - dipole term
+C      ZPOL   - dipole term (GDR excitation)
 C      ZV     - energy meshpoints
 
       PROGRAM GOSIA2
@@ -1346,7 +1346,7 @@ C   equally spaced energies, which we integrate in the same way.
      &                      'Total integrated Rutherford cross section='
      &                      ,1E8.3,' for exp. ',1I2/)
                   ENDDO
-                  REWIND 17 ! Added (PJN 17Jul2009)
+                  REWIND 17 ! Added PJN (17Jul2009)
                   IF ( ipinf.NE.0 ) THEN
                      ngpr = 0
                      DO lx = 1 , NEXPT ! For each experiment
@@ -1815,7 +1815,7 @@ C   equally spaced energies, which we integrate in the same way.
                      ENDDO ! Loop over pin diodes
                      IF ( mpin.GT.1 ) WRITE (22,99021) dst , lx
                   ENDDO
-                  REWIND 17 ! Added (PJN 17Jul2009)
+                  REWIND 17 ! Added PJN (17Jul2009)
                   IF ( ipinf.NE.0 ) THEN
                      ngpr = 0
                      DO lx = 1 , NEXPT ! For each experiment
