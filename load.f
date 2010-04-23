@@ -42,7 +42,7 @@ C      VINF   - speed of projectile at infinity
 C      XA     - A of investigated nucleus
 C      XA1    - A of not-investated nucleus
 C      XI     - xi coupling constants
-C      ZPOL   - dipole term
+C      ZPOL   - dipole term (GDR excitation)
 C
 C Formal parameters:
 C      Iexp   - Number of experiment
