@@ -11,8 +11,8 @@ C      IEXP   - experiment number
 C      IAXS   - axial symmetry flag
 C
 C Formal parameters:
-C      Theta  - theta for which to evaluate
-C      Ylmr   - return value for that theta
+C      Theta  - theta for which to evaluate (read only)
+C      Ylmr   - return value for that theta (write only)
 C
 C Ylmr(l,m) = 1 / \sqrt{4 \pi} Y_{2l}^{m - 1}
 C
@@ -39,7 +39,7 @@ C etc.
       
       ct = COS(Theta)
       ctsq = ct*ct
-      IF ( IAXS(IEXP).EQ.0 ) THEN
+      IF ( IAXS(IEXP).EQ.0 ) THEN ! If axially symmetric
          Ylmr(1,1) = .0889703179*(3.*ctsq-1.)
          Ylmr(2,1) = .0298415518*((35.*ctsq-30.)*ctsq+3.)
          Ylmr(3,1) = .0179325408*(((231.*ctsq-315.)*ctsq+105.)*ctsq-5.)
