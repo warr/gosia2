@@ -17,7 +17,7 @@ C      IFLG   - flag to determine whether to calculate exponential (so we don't 
 C      INTERV - default accuracy check parameter (see OP,CONT:INT)
 C      IPATH  - index of substate in level with same m as substate Irld
 C      IRA    - limit of omega for integration for each multipolarity
-C      ISG    - index for sigma
+C      ISG    - sign of omega
 C      ISMAX  - number of substates used
 C      ISO    - Isotropic flag
 C      KDIV   - index for division
@@ -27,7 +27,7 @@ C      NDIV   - number of divisions
 C      NMAX   - number of levels
 C      NPT    - index in ADB array (this is omega / 0.03)
 C      NSTART - index in CAT of first substate associated with a level
-C      NSW    -
+C      NSW    - step in omega
 C
 C Formal parameters:
 C      Ien    - experiment number
@@ -47,7 +47,7 @@ C y(n+1)_p = y(n) + h/24 * {55*f(n) - 59*f(n-1) + 37*f(n-2) - 9*f(n-3)}
 C
 C and the corrector is:
 C
-C y(n+1)_c = y(n) * h/24 * {9*f_p(n+1) + 19*f(n) - 5*f(n-1) + f(n-2)}
+C y(n+1)_c = y(n) + h/24 * {9*f_p(n+1) + 19*f(n) - 5*f(n-1) + f(n-2)}
 C
 C The error is |E(n+1)| ~ 19/270 * {y_p(n+1) - y_c(n+1)}
 C
@@ -117,7 +117,7 @@ C     Predictor
      &                  +37.0*ARM(ir,2)-9.0*ARM(ir,1))
          ENDDO
       ENDIF
-      NPT = NPT + NSW*ISG
+      NPT = NPT + NSW*ISG ! NPT loops over omega values, ISG is -1 at first then +1
       IF ( NPT.GT.0 ) THEN
          IF ( NDIV.EQ.0 ) GOTO 200
          KDIV = KDIV + 1
@@ -126,7 +126,7 @@ C     Predictor
          NPT = NPT + ISG
          IF ( NPT.GT.0 ) GOTO 200
       ENDIF
-      NPT = -NPT + 2
+      NPT = -NPT + 2 ! We decreased omega to zero, so now start increasing
       ISG = 1
  200  CALL RESET(ISO)
       IFLG = 1
@@ -206,7 +206,7 @@ C
                ENDIF
             ENDIF
              
-         ENDIF
+         ENDIF ! if kast>=intend
       ENDIF
       GOTO 100
       END
