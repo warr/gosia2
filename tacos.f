@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C FUNCTION TACOS
 C
-C Called by: ARCCOS, CEGRY, COORD, GOSIA2
+C Called by: ARCCOS, CEGRY, COORD, GOSIA
 C Calls:     TASIN
 C
 C Purpose: evaluate arccosine(x)
