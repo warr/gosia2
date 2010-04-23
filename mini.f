@@ -95,7 +95,7 @@ C     Initialise gradp to zero for each matrix element
          gradp(i) = 0.
       ENDDO
 
-C     Initialise some parameters to zero
+C     Initialise some parameters
       icount = 0
       lnm = 0
       LNY = 0
@@ -104,6 +104,7 @@ C     Initialise some parameters to zero
       LFL1 = 0
       ncall = 0
       ITAK2 = 0
+      chil = 1.D38
 
 C     Handle the different modes
 C     Imode = IJKL, where
