@@ -14,11 +14,11 @@ C
 C Formal parameters:
 C      Icnt   - index of omega to calculate
 C      Nlm    - returns the number of l,m values
-C      Lloc   -
+C      Lloc   - array of l values to calculate
 C      Ibm    -
 C      Icm    -
 C      Idm    -
-C      Irl    -
+C      Irl    - range to integrate over omega for each multipolarity
  
       SUBROUTINE QRANGE(Icnt,Nlm,Lloc,Ibm,Icm,Idm,Irl)
       IMPLICIT NONE
