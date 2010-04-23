@@ -399,7 +399,9 @@ C     Open files
 C     Use input unit 25 for target and 26 for projectile
       IBPS = IBPS - 1
       JZB = 25
-c      IF ( IBPS.EQ.1 ) JZB = 26 ! Changed by Nigel - always start with unit 25
+C      IF ( IBPS.EQ.1 ) JZB = 26 ! This seems to be the wrong thing to do. It means
+C                                ! that if you use the projectile file on standard input
+C                                ! you get the wrong results!
 C---- gosia2 changes end
 
 C     Initialize normalization to 1.
