@@ -32,7 +32,7 @@ C      Ld     - number of matrix elements with this multipolarity
 C      Lam    - lambda
 C      La     - 1...6 for E1...6 or 7,8 for M1,2
 C      Ssqrt  - sqrt(2 * lambda + 1)
-C      Icg    - (read only)
+C      Icg    - 1 = full coulex, 2 = approximate coulex (read only)
 C      Iexp   - experiment number
 C
 C \zeta_{kn}^{(\lambda n)} = \sqrt{2 \lambda + 1} *
