@@ -113,7 +113,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
             ENDDO
             bt = BETAR(IEXP) ! Get beta
             trec2 = SIGN(Trec, DBLE(IZ1(IEXP)))
-            IF ( ITTE(IEXP).NE.1 ) CALL RECOIL(alab,attl,bt,Trec)
+            IF ( ITTE(IEXP).NE.1 ) CALL RECOIL(alab,attl,bt,trec2)
             IF ( l.EQ.1 ) CALL YLM1(Gth,ylmr)
             ixs = IAXS(IEXP) ! Get axial symmetry flag
             fi01 = Fi0 - Figl ! Get lower phi limit
