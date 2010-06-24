@@ -36,7 +36,7 @@ C      Op2    - The part after the OP, for the option we are processing
       SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
       REAL*8 alab , arg , at , attl , bt , f , Fi0 , fi01 , Fi1 ,
-     &       fi11 , Figl , Gth , qv , sm , Trec , Ygn , ylmr
+     &       fi11 , Figl , Gth , qv , sm , Trec , trec2 , Ygn , ylmr
       INTEGER*4 Idr , ifn , Iful , ig , il , inat , inx1 , 
      &          ipd , is , iu , ixs , j , ji , jj , jm , k
       INTEGER*4 kq , l , lf , lf1 , mind , Ngl , nlv
@@ -54,7 +54,7 @@ C      Op2    - The part after the OP, for the option we are processing
       INCLUDE 'brec.inc'
       INCLUDE 'thtar.inc'
       INCLUDE 'tcm.inc' ! For gosia2
-      INCLUDE 'cx.inc' ! For gosia2
+      INCLUDE 'cx.inc'
       
       DO l = 1 , Idr ! For each decay
 
@@ -102,7 +102,8 @@ C      Op2    - The part after the OP, for the option we are processing
                ENDDO
             ENDDO
             bt = BETAR(IEXP) ! Get beta
-            IF ( ITTE(IEXP).NE.1 ) CALL RECOIL(alab,attl,bt,Trec) ! Relativistic correction
+            trec2 = SIGN(Trec, DBLE(IZ1(IEXP)))
+            IF ( ITTE(IEXP).NE.1 ) CALL RECOIL(alab,attl,bt,trec2) ! Relativistic correction
             IF ( l.EQ.1 ) CALL YLM1(Gth,ylmr)
             ixs = IAXS(IEXP) ! Get axial symmetry flag
             fi01 = Fi0 - Figl ! Get lower phi limit
