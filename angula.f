@@ -38,8 +38,8 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       REAL*8 AGELI , alab , arg , at , attl , BETAR , bt , CC , DELLA , 
      &       DELTA , EG , ENDEC , ENZ , EPS , EROOT , f , Fi0 , fi01 , 
      &       Fi1 , fi11
-      REAL*8 FIEX , Figl , FP , GKP , Gth , Q , qv , sm , TAU , Trec , 
-     &       Ygn , ylmr , ZETA
+      REAL*8 FIEX , Figl , FP , GKP , Gth , Q , qv , sm , TAU , Trec ,
+     &       trec2 , Ygn , ylmr , ZETA
       INTEGER*4 IAXS , Idr , IEXP , ifn , Iful , ig , il , inat , inx1 , 
      &          ipd , is , ITMA , ITTE , iu , ixs , j , ji , jj , jm , k
       INTEGER*4 KLEC , kq , KSEQ , l , lf , lf1 , LZETA , mind , NANG , 
@@ -64,7 +64,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       COMMON /THTAR / ITTE(50)
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50) ! For gosia2
       COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
-     &                TLBDG(50) , VINF(50) ! For gosia2
+     &                TLBDG(50) , VINF(50)
       
       DO l = 1 , Idr ! For each decay
 
@@ -112,6 +112,7 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
                ENDDO
             ENDDO
             bt = BETAR(IEXP) ! Get beta
+            trec2 = SIGN(Trec, DBLE(IZ1(IEXP)))
             IF ( ITTE(IEXP).NE.1 ) CALL RECOIL(alab,attl,bt,Trec)
             IF ( l.EQ.1 ) CALL YLM1(Gth,ylmr)
             ixs = IAXS(IEXP) ! Get axial symmetry flag
