@@ -69,11 +69,11 @@ C      Bten   -
       IMPLICIT NONE
       REAL*8 aval , Bten , Chilo , chis1 , chish , Chisq , chisx , 
      &       chx , fc , fx , polm , pr , prop , val , wz
-      INTEGER*4 i1 , i11 , iapx , Icll , idec , Idr , iflg , ii , ile1 , 
+      INTEGER*4 i1 , i11 , iapx , Icll , idec , Idr , iflg , ii , ile1 ,
      &          ile2 , ile3 , ilin , indx , inko
       INTEGER*4 inp , inpo , inpx , inzz , inzzz , issp , itemp , ixx , 
      &          izzz
-      INTEGER*4 j , jj , jjgg , jjj , jk , jkl , jm , jmf , jmt , jmte , 
+      INTEGER*4 j , jj , jjgg , jjj , jk , jkl , jm , jmf , jmt , jmte ,
      &          jpp , jpz , jy , k , karm , kk , kk6 , kkx , kmt
       INTEGER*4 knm , kx , larm , lcc , lcou , licz , lix , llx , lm , 
      &          lmh , loc , loch , loct
@@ -226,7 +226,7 @@ C      Bten   -
             CALL TENB(k,Bten,LMAX)
             IF ( IPRM(7).EQ.-1 ) THEN
                DO j = 1 , ISMAX
-                  WRITE (22,99002) INT(CAT(j,1)) , CAT(j,2) , CAT(j,3) , 
+                  WRITE (22,99002) INT(CAT(j,1)) , CAT(j,2) , CAT(j,3) ,
      &                             DBLE(ARM(j,5)) , DIMAG(ARM(j,5))
 99002             FORMAT (7X,1I2,3X,1F4.1,2X,1F4.1,2X,1E14.6,2X,1E14.6)
                ENDDO

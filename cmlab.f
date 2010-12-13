@@ -37,7 +37,7 @@ C      Tetrn  - theta of recoiling nucleus in lab frame (in radians)
       SUBROUTINE CMLAB(Ii,Dsig,Tetrn)
       IMPLICIT NONE
       REAL*8 a1 , a2 , ared , d2a , dista , dists , Dsig , emax , epmin
-      REAL*8 r3 , TASIN , tau , taup , tcmdg , tcmrad , Tetrn , tlbrad , 
+      REAL*8 r3 , TASIN , tau , taup , tcmdg , tcmrad , Tetrn , tlbrad ,
      &       tmxdg , z1 , z2 , zcmdg , zcmrad , zlbrad
       INTEGER*4 iflaa , Ii , lexp , lexp0 , lexp1 , n
       INCLUDE 'clcom9.inc'
