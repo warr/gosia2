@@ -35,7 +35,7 @@ C WSIXJ(2 * J1, 2 * J2, 2 * J3, 2 * L1, 2 * L2, 2 * L3).
       INTEGER*4 izg , izh , izmax , izmin , J1 , J2 , J3 , kqa , 
      &          kqb , kqc , kqd , kra , krb , krc , krd , ksa , ksb , 
      &          ksc , ksd
-      INTEGER*4 kta , ktb , ktc , ktd , kua , kub , kuc , L1 , L2 , L3 , 
+      INTEGER*4 kta , ktb , ktc , ktd , kua , kub , kuc , L1 , L2 , L3 ,
      &          n , nmax
       REAL*8 qsumfa , qsumlo , sumlo , vorz , wsixp , zusix
       DIMENSION isumfa(26) , ivorfa(26)

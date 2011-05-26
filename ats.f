@@ -33,12 +33,12 @@ C      truncation point
                ATS = .5
                RETURN
             ELSEIF ( m.EQ.4 .OR. m.EQ.5 .OR. m.EQ.8 .OR. m.EQ.9 .OR. 
-     &               m.EQ.11 .OR. m.EQ.17 .OR. m.EQ.18 .OR. m.EQ.20 .OR. 
-     &               m.EQ.26 .OR. m.EQ.27 .OR. m.EQ.36 .OR. m.EQ.42 .OR. 
+     &               m.EQ.11 .OR. m.EQ.17 .OR. m.EQ.18 .OR. m.EQ.20 .OR.
+     &               m.EQ.26 .OR. m.EQ.27 .OR. m.EQ.36 .OR. m.EQ.42 .OR.
      &               m.EQ.43 .OR. m.EQ.45 ) THEN
                ATS = 1.5
                RETURN
-            ELSEIF ( m.EQ.12 .OR. m.EQ.14 .OR. m.EQ.21 .OR. m.EQ.23 .OR. 
+            ELSEIF ( m.EQ.12 .OR. m.EQ.14 .OR. m.EQ.21 .OR. m.EQ.23 .OR.
      &               m.EQ.32 .OR. m.EQ.39 ) THEN
                ATS = 2.5
                RETURN

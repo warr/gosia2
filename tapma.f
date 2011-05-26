@@ -42,7 +42,7 @@ C maps.
 
 C     Skip over unwanted records
       IF ( Iske.NE.0 ) THEN
- 50      READ (14,*) ne , ntt , emn , emx , tmn , tmx , na , tmx , tmx , 
+ 50      READ (14,*) ne , ntt , emn , emx , tmn , tmx , na , tmx , tmx ,
      &               tmx
          nfil = ne*ntt*na
          nfilt = nfilt + nfil

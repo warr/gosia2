@@ -90,7 +90,7 @@ C     If printing option is on, print something
          u = (ch1/ch2-BRAT(k,1))/BRAT(k,2)
          Chisq = Chisq + u*u
          Chilo = Chilo + (BRAT(k,1)*LOG(ch1/ch2/BRAT(k,1))/BRAT(k,2))**2
-         IF ( IPRM(3).EQ.-1 ) WRITE (22,99002) KSEQ(n1,3) , KSEQ(n1,4) , 
+         IF ( IPRM(3).EQ.-1 ) WRITE (22,99002) KSEQ(n1,3) , KSEQ(n1,4) ,
      &                               KSEQ(n2,3) , KSEQ(n2,4) , BRAT(k,1)
      &                               , BRAT(k,2) , ch1/ch2 , -u
 99002    FORMAT (5X,3(1I2,6X),1I2,5X,3(1F10.5,5X),5X,1F4.1)

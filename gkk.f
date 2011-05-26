@@ -57,7 +57,7 @@ C element.
 
       SUBROUTINE GKK(Iz,Beta,Spin,Time,Il)
       IMPLICIT NONE
-      REAL*8 alp , ATS , Beta , ccf , down , dwc , f , hmean , rk , sm , 
+      REAL*8 alp , ATS , Beta , ccf , down , dwc , f , hmean , rk , sm ,
      &       Spin , Time , up , upc , valmi , w2 , wrt , WSIXJ , wsp , 
      &       xji , xlam
       INTEGER*4 i , if2 , ifq , Il , imean , inq , irk2 , ispin2 , 
