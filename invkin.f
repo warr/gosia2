@@ -28,7 +28,7 @@ C      Ikin    - kinematic flag (writeonly)
      &                  Theta_p , Iflag , Ikin)
 
       REAL*8 E_p , M_inv , M_non , Theta_t , Theta_p , E_x , M_p , M_t
-      REAL*8 ared , epmin , t , x(2), y , thres
+      REAL*8 ared , epmin , t , x(2), y , thres , tau , taup
       INTEGER*4 Iflag , Ikin , I_z
 
 C     Sort out which is the projectile and which is the target
