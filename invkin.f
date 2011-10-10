@@ -29,7 +29,7 @@ C      Ikin    - kinematic flag (writeonly)
 
       IMPLICIT NONE
       REAL*8 E_p , M_inv , M_non , Theta_t , Theta_p , E_x , M_p , M_t
-      REAL*8 ared , epmin , t , x(2), y , thres , tau , taup
+      REAL*8 ared , epmin , t , x(2), y , thres , tau , taup , TASIN
       INTEGER*4 Iflag , Ikin , I_z
 
 C     Sort out which is the projectile and which is the target
@@ -76,6 +76,11 @@ C     are probably undetectable.
       ELSE
          theta_p = MIN(x(1),x(2))*57.2957795
       ENDIF
+
+C     Trap spurious values where tau * sin(theta_p/57.2957795) is greater
+C     than unity due to floating point rounding errors
+      if (tau * SIN(theta_p/57.2957795) .gt. 1.0d0) 
+     &  theta_p = 57.2957795 * TASIN(1.d0/tau)
       
 C     Calculate angle of scattered projectile in centre of mass frame, for
 C     which the maximum laboratory scattering angle is reached.
