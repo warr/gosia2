@@ -141,7 +141,7 @@ adhoc.f elmt.f select.f bricc.f newcnv.f splner.f spline.f splint.f cclkup.f
 include: include.c
 	gcc -o $@ $<
 
-DATE=$(shell date +%04Y%02m%02d)
+DATE=$(shell git describe --tags --abbrev=0)
 SINGLE_FILE = $(EXE)_$(DATE).f
 
 $(EXE): $(OBJS) $(DEPS)
