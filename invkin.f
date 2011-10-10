@@ -27,6 +27,7 @@ C      Ikin    - kinematic flag (writeonly)
       SUBROUTINE INVKIN(E_p, E_x , I_z , M_inv , M_non , Theta_t ,
      &                  Theta_p , Iflag , Ikin)
 
+      IMPLICIT NONE
       REAL*8 E_p , M_inv , M_non , Theta_t , Theta_p , E_x , M_p , M_t
       REAL*8 ared , epmin , t , x(2), y , thres , tau , taup
       INTEGER*4 Iflag , Ikin , I_z
