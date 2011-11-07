@@ -141,7 +141,7 @@ install: $(EXE) $(MAN)
 	gzip -f $(MANDIR)/$(MAN)
 
 single_file:
-	cat gosia2.f arccos.f arctg.f load.f lsloop.f leadf.f \
+	cat header.txt gosia2.f arccos.f arctg.f load.f lsloop.f leadf.f \
 	mem.f cmlab.f qe.f qm.f snake.f fhip.f alloc.f \
 	rangel.f qrange.f ampder.f laisum.f expon.f faza.f \
 	setin.f sting.f laiamp.f faza1.f trint.f pol4.f \
