@@ -10,7 +10,6 @@ Group: Applications/Analysis
 Source: /usr/src/redhat/SOURCES/gosia2.tar.gz
 Prefix:/usr
 BuildRoot: /tmp/package_%{name}-%{version}.%{release}
-Requires: gosia_doc
 
 %description
 gosia2 is a code for calculating cross-sections for Coulomb excitation
