@@ -31,6 +31,6 @@ C 365  in GOSIA, which is the dimension of the array.
       INCLUDE 'kin.inc'
       
       DO k = 1 , LP12
-         ADB(k) = EPS(IEXP)*SH(k) + .03*(k-1)
+         ADB(k) = EPS(IEXP)*SH(k) + .03d0*(k-1)
       ENDDO
       END

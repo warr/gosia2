@@ -23,9 +23,9 @@ C 365  in GOSIA, which is the dimension of the arrays.
       INCLUDE 'mgn.inc'
       INCLUDE 'hiper.inc'
       
-      w = -.03
+      w = -.03d0
       DO j = 1 , LP12
-         w = w + .03
+         w = w + .03d0
          ex = EXP(w)
          er = 1./ex
          SH(j) = (ex-er)/2.
