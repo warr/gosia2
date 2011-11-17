@@ -34,6 +34,6 @@ C 365  in GOSIA, which is the dimension of the array.
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       
       DO k = 1 , LP12
-         ADB(k) = EPS(IEXP)*SH(k) + .03*(k-1)
+         ADB(k) = EPS(IEXP)*SH(k) + .03d0*(k-1)
       ENDDO
       END

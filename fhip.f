@@ -25,9 +25,9 @@ C 365  in GOSIA, which is the dimension of the arrays.
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /HIPER / SH(365) , CH(365)
       
-      w = -.03
+      w = -.03d0
       DO j = 1 , LP12
-         w = w + .03
+         w = w + .03d0
          ex = EXP(w)
          er = 1./ex
          SH(j) = (ex-er)/2.
