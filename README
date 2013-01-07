@@ -1,0 +1,6 @@
+This is the git repository for the Coulomb-excitation code gosia2. It
+is based on the original code of Tomasz Czosnyka. Gosia2 differs from
+gosia in that it treats projectile and target excitation
+simultanaeously. The home page for gosia is:
+
+http://www.pas.rochester.edu/~cline/Gosia/
