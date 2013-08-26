@@ -19,10 +19,10 @@ experiments.
 %setup
 
 %build
-make
+make %{?_smp_mflags}
 
 %install
-make ROOT="$RPM_BUILD_ROOT" install
+make DESTDIR="$RPM_BUILD_ROOT" install
 
 %files
 %defattr(-,root,root)
