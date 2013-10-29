@@ -5,7 +5,7 @@ Name: gosia2
 Version: %{version}
 Release: %{release}%{dist}
 License: public domain
-Vendor: Nigel Warr
+Vendor: D. cline, T. Czosnyka, A.B. Hayes, P. Napiorkowski, N. Warr, C.Y. Wu
 Group: Applications/Analysis
 Source: /usr/src/redhat/SOURCES/gosia2.tar.gz
 Prefix:/usr
