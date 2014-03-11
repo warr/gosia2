@@ -96,7 +96,7 @@ C     So now, if y = tan(theta_t_lab) > thres, we are above the maximum and
 C     need the larger value of theta_p_cm, so we set Ikin to 1. Otherwise we
 C     are below the maximum and need the smaller value so we choose Ikin = 0.
       
-      IF ( y.GT.thres ) THEN
+      IF ( ABS(y).GT.ABS(thres) ) THEN
          Ikin = 1
       ELSE
          Ikin = 0
