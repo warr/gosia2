@@ -154,7 +154,7 @@ clean:
 
 install: $(EXE) $(MAN)
 	install -m 755 -d $(BINDIR)
-	install -m 755 -s $(EXE) $(BINDIR)
+	install -m 755 $(EXE) $(BINDIR)
 	install -m 755 -d $(MANDIR)
 	install -m 644 $(MAN) $(MANDIR)
 	gzip -f $(MANDIR)/$(MAN)

@@ -27,5 +27,5 @@ make DESTDIR="$RPM_BUILD_ROOT" install
 
 %files
 %defattr(-,root,root,-)
-/usr/bin/gosia2
-/usr/share/man/man1/gosia2.1.gz
+/usr/bin/*
+/usr/share/man/man1/*
