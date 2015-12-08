@@ -23,7 +23,7 @@ experiments.
 make %{?_smp_mflags}
 
 %install
-make DESTDIR="$RPM_BUILD_ROOT" install
+%make_install
 
 %files
 %defattr(-,root,root,-)
