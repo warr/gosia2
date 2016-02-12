@@ -1053,7 +1053,7 @@ C              Treat OP,INTG
      &                                      *COS(gth)
                                          decen = decen*(1.+BETAR(lx)
      &                                      *cocos)
-                                         CALL EFFIX(ipd,decen,effi)
+                                         CALL EFFIX(IEXP,ipd,decen,effi)
                                          YGN(jyi) = YGN(jyi)*effi
                                        ENDDO
                                        inclus = ICLUST(lx,ijan) ! Cluster number for detector ijan
@@ -1543,7 +1543,7 @@ C              Treat OP,INTI
      &                                      *COS(gth)
                                          decen = decen*(1.+BETAR(lx)
      &                                      *cocos)
-                                         CALL EFFIX(ipd,decen,effi)
+                                         CALL EFFIX(IEXP,ipd,decen,effi)
                                          YGN(jyi) = YGN(jyi)*effi
                                        ENDDO
                                        inclus = ICLUST(lx,ijan) ! Cluster number for detector ijan
@@ -1931,8 +1931,8 @@ C                    Read input from standard input
                         n = NANG(mexl)
                         DO j = 1 , n
                            jj = ITMA(mexl,j) ! Get identity of detector
-                           READ (JZB,*) (AKAVKA(k,jj),k=1,8) ! efficiency curve parameters
-                           AKAVKA(9,jj) = ideff(mexl)
+                           READ (JZB,*) (AKAVKA(mexl,k,jj),k=1,8) ! efficiency curve parameters
+                           AKAVKA(mexl,9,jj) = ideff(mexl)
                         ENDDO
                         READ (JZB,*) kclust ! number of clusters
                         IF ( kclust.NE.0 ) THEN
@@ -2573,7 +2573,7 @@ C     Handle OP,ERRO
                            cocos = SIN(ttttt)*SIN(gth)*COS(fm-figl)
      &                             + COS(ttttt)*COS(gth)
                            decen = decen*(1.+BETAR(IEXP)*cocos)
-                           CALL EFFIX(ipd,decen,effi)
+                           CALL EFFIX(IEXP,ipd,decen,effi)
                            IF ( op2.EQ.'POIN' .AND. IPRM(20).EQ.1 )
      &                          WRITE (23,99049) ni , nf , SPIN(ni) , 
      &                                 SPIN(nf) , decen , effi

@@ -39,14 +39,14 @@ C     2  - Fiteff
 C     3  - Leuven
 C     4  - Radware
       
-      SUBROUTINE EFFIX(Ipd,En,Effi)
+      SUBROUTINE EFFIX(Iexp,Ipd,En,Effi)
       IMPLICIT NONE
       REAL*8 d , Effi , En , enl , pw , s , t , w , xx , yy
-      INTEGER*4 i , Ipd , j , l , ll , n
+      INTEGER*4 i , Iexp , Ipd , j , l , ll , n
       DIMENSION xx(101) , yy(101)
       INCLUDE 'efcal.inc'
       INCLUDE 'ccc.inc'
-      
+
       Effi = 1.E-6
       En = En + 1.E-24
       enl = LOG(En)
@@ -98,14 +98,17 @@ C     4  - Radware
       Effi = EXP(-s)
 
 C     Branch according to type of calibration
-      IF ( (AKAVKA(8,Ipd).LE.-999.) .OR. (AKAVKA(9,Ipd).EQ.3.) ) THEN
+      IF ( (AKAVKA(Iexp,8,Ipd).LE.-999.) .OR.
+     &    (AKAVKA(Iexp,9,Ipd).EQ.3.) ) THEN
          GOTO 1003 ! Leuven
-      ELSEIF ( AKAVKA(9,Ipd).EQ.4. ) THEN
+      ELSEIF ( AKAVKA(Iexp,9,Ipd).EQ.4. ) THEN
          GOTO 1004 ! Radware
-      ELSEIF ( (AKAVKA(5,Ipd).GT.0. .AND. AKAVKA(5,Ipd).LT.10.) .OR. 
-     &         (AKAVKA(9,Ipd).EQ.2.) ) THEN
+      ELSEIF ( (AKAVKA(Iexp,5,Ipd).GT.0. .AND.
+     &       AKAVKA(Iexp,5,Ipd).LT.10.) .OR. 
+     &    (AKAVKA(Iexp,9,Ipd).EQ.2.) ) THEN
          GOTO 1002 ! Fiteff
-      ELSEIF ( (AKAVKA(5,Ipd).LT.10.) .AND. (AKAVKA(9,Ipd).NE.1.) ) THEN
+      ELSEIF ( (AKAVKA(Iexp,5,Ipd).LT.10.) .AND.
+     &       (AKAVKA(Iexp,9,Ipd).NE.1.) ) THEN
          GOTO 1000 ! Gremlin
       ENDIF
       GOTO 1001 ! Jaeri
@@ -113,17 +116,17 @@ C     Branch according to type of calibration
 C-----------------------------------------------------------------
 C     GREMLIN efficiency calibration
  1000 w = LOG(20.*En) ! E0 = 50 keV, so w = LOG(En/E0) with En in MeV
-      pw = AKAVKA(1,Ipd) + AKAVKA(2,Ipd)*w + AKAVKA(3,Ipd)
-     &     *w*w + AKAVKA(4,Ipd)*w*w*w
+      pw = AKAVKA(Iexp,1,Ipd) + AKAVKA(Iexp,2,Ipd)*w +
+     &  AKAVKA(Iexp,3,Ipd)*w*w + AKAVKA(Iexp,4,Ipd)*w*w*w
       Effi = Effi*EXP(pw)
-      IF ( ABS(AKAVKA(5,Ipd)).GE.1.E-9 ) THEN ! F-factor
-         n = INT(AKAVKA(6,Ipd)+.1)
+      IF ( ABS(AKAVKA(Iexp,5,Ipd)).GE.1.E-9 ) THEN ! F-factor
+         n = INT(AKAVKA(Iexp,6,Ipd)+.1)
          pw = w**n
-         w = AKAVKA(5,Ipd)/pw
+         w = AKAVKA(Iexp,5,Ipd)/pw
          Effi = Effi*EXP(w)
       ENDIF
-      IF ( ABS(AKAVKA(8,Ipd)).LT.1.E-9 ) RETURN
-      w = (AKAVKA(7,Ipd)-1000.*En)/AKAVKA(8,Ipd) ! Woods-saxon factor
+      IF ( ABS(AKAVKA(Iexp,8,Ipd)).LT.1.E-9 ) RETURN
+      w = (AKAVKA(Iexp,7,Ipd)-1000.*En)/AKAVKA(Iexp,8,Ipd) ! Woods-saxon factor
       pw = EXP(w)
       IF ( ABS(pw-1.).LT.1.E-6 ) WRITE (22,99001)
 99001 FORMAT (5x,'***** CRASH - EFFIX *****')
@@ -134,26 +137,26 @@ C     GREMLIN efficiency calibration
 C-----------------------------------------------------------------
 C     JAERI efficiency calibration - TC, Nov.2000
  1001 w = LOG(En/.511)
-      Effi = EXP(AKAVKA(1,Ipd)+AKAVKA(2,Ipd)
-     &       *w-EXP(AKAVKA(3,Ipd)+AKAVKA(4,Ipd)*w))
+      Effi = EXP(AKAVKA(Iexp,1,Ipd)+AKAVKA(Iexp,2,Ipd)
+     &       *w-EXP(AKAVKA(Iexp,3,Ipd)+AKAVKA(Iexp,4,Ipd)*w))
       RETURN
 
 C-----------------------------------------------------------------
 C     FITEFF efficiency calibration by P.Olbratowski use
 C     PJN@2000
- 1002 w = LOG(En/AKAVKA(5,Ipd))
-      pw = AKAVKA(2,Ipd)*w
-      IF ( En.LT.AKAVKA(5,Ipd) ) pw = pw + 
-     &     w*w*(AKAVKA(3,Ipd)+w*AKAVKA(4,Ipd))
-      Effi = Effi*EXP(pw)*AKAVKA(1,Ipd)
+ 1002 w = LOG(En/AKAVKA(Iexp,5,Ipd))
+      pw = AKAVKA(Iexp,2,Ipd)*w
+      IF ( En.LT.AKAVKA(Iexp,5,Ipd) ) pw = pw + 
+     &     w*w*(AKAVKA(Iexp,3,Ipd)+w*AKAVKA(Iexp,4,Ipd))
+      Effi = Effi*EXP(pw)*AKAVKA(Iexp,1,Ipd)
       RETURN
 
 C-----------------------------------------------------------------
 C     Leuven efficiency calibration
- 1003 Effi = AKAVKA(1,Ipd)
+ 1003 Effi = AKAVKA(Iexp,1,Ipd)
       w = LOG(1000.*En)
       DO i = 1 , 6
-         Effi = Effi + AKAVKA(i+1,Ipd)*w**i
+         Effi = Effi + AKAVKA(Iexp,i+1,Ipd)*w**i
       ENDDO
       Effi = EXP(Effi)
       RETURN
@@ -162,12 +165,12 @@ C-----------------------------------------------------------------
 C     Radware efficiency calibration
 C     PJN@2008
  1004 w = LOG(En/.1)
-      Effi = (AKAVKA(2,Ipd)+(AKAVKA(3,Ipd)+AKAVKA(4,Ipd)*w)*w)
-     &       **(-AKAVKA(8,Ipd))
+      Effi = (AKAVKA(Iexp,2,Ipd)+(AKAVKA(Iexp,3,Ipd)+
+     &  AKAVKA(Iexp,4,Ipd)*w)*w)**(-AKAVKA(Iexp,8,Ipd))
       w = LOG(En)
-      Effi = (AKAVKA(5,Ipd)+(AKAVKA(6,Ipd)+AKAVKA(7,Ipd)*w)*w)
-     &       **(-AKAVKA(8,Ipd)) + Effi
-      Effi = AKAVKA(1,Ipd)*EXP(Effi**(-1/AKAVKA(8,Ipd)))
+      Effi = (AKAVKA(Iexp,5,Ipd)+(AKAVKA(Iexp,6,Ipd)+
+     &  AKAVKA(Iexp,7,Ipd)*w)*w)**(-AKAVKA(Iexp,8,Ipd)) + Effi
+      Effi = AKAVKA(Iexp,1,Ipd)*EXP(Effi**(-1/AKAVKA(Iexp,8,Ipd)))
       RETURN
 
       END
