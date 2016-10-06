@@ -3110,7 +3110,7 @@ C     Store chisq
 C     Decide whether to terminate here
       IF ( JZB.EQ.26 ) THEN
          cht = ABS(chir-chp) ! Difference in old and new chisq
-         IF ( cht.LT.0.1 .OR. mawr.GE.20 ) mret = 0 ! terminate
+         IF ( cht.LT.0.1 .OR. mawr.GE.100 ) mret = 0 ! terminate
          nawr = 1
       ENDIF
 
