@@ -93,10 +93,10 @@ C element.
                f = valmi + DBLE(m) - 1.
                DO k = 1 , 3
                   rk = 2.*DBLE(k)
-                  if2 = f*2. + 0.0001
-                  irk2 = rk*2. + 0.0001
-                  ispin2 = Spin*2. + 0.0001
-                  ixji2 = xji*2. + 0.0001
+                  if2 = INT(f*2. + 0.0001)
+                  irk2 = INT(rk*2. + 0.0001)
+                  ispin2 = INT(Spin*2. + 0.0001)
+                  ixji2 = INT(xji*2. + 0.0001)
                   SUM(k) = SUM(k)
      &                     + ((2.*f+1.)*WSIXJ(if2,if2,irk2,ispin2,
      &                     ispin2,ixji2))**2/(2.*xji+1.)
