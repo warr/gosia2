@@ -45,8 +45,8 @@ C the values to calculate, so that they can handle half-integers correctly.
       phase = 1.
       IF ( l/2*2.NE.l ) phase = -1.
       kz = K*2
-      jiz = Sji*2
-      jfz = Sjf*2
+      jiz = INT(Sji*2)
+      jfz = INT(Sjf*2)
       l1z = L1*2
       l2z = L2*2
       F = phase*SQRT((l1z+1.)*(l2z+1.)*(jiz+1.)*(kz+1.))

@@ -83,7 +83,7 @@ C      W0     - omega limit
                            z = ZETA(nz) ! zeta coefficient
                            rmis = CAT(is,3) ! m quantum number of substate is
                            rmu = rmis - rmir
-                           mua = ABS(rmu) + 1.1 ! delta-mu + 1
+                           mua = INT(ABS(rmu) + 1.1) ! delta-mu + 1
 
 C                          Only consider electromagnetic and delta-mu = 0 magnetic
 C                          contribution
