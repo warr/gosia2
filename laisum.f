@@ -95,7 +95,7 @@ C z is the coupling parameter zeta, calculated in the function LSLOOP.
                   rmis = CAT(is,3) ! m quantum number of substate is
                   IF ( ISO.NE.0 .OR. rmir.LE..1 .OR. rmis.LE..1 ) THEN
                      rmu = rmis - rmir
-                     mua = ABS(rmu) + 1.1 ! delta-m + 1
+                     mua = INT(ABS(rmu) + 1.1) ! delta-m + 1
 C                    Only consider electromagnetic and delta-mu = 0 magnetic
 C                    contribution
                      IF ( la.LE.6 .OR. mua.NE.1 ) THEN

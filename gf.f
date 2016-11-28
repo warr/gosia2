@@ -32,8 +32,8 @@ C can handle half-integers.
       phase = 1.
       IF ( i/2*2.NE.i ) phase = -1.
       kz = K*2
-      jiz = Sji*2
-      jfz = Sjf*2
+      jiz = INT(Sji*2)
+      jfz = INT(Sjf*2)
       lz = L*2
       GF = phase*SQRT((jiz+1.)*(jfz+1.))*WSIXJ(jiz,jiz,kz,jfz,jfz,lz)
       END

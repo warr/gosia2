@@ -64,16 +64,16 @@ C half-integers.
       INCLUDE 'clcom0.inc'
       
       lam2 = 2*Lam
-      inr = CAT(Ir,2)*2. ! 2 * Spin of substate Ir
+      inr = INT(CAT(Ir,2)*2.) ! 2 * Spin of substate Ir
       rmir = CAT(Ir,3)   ! m quantum number of substate Ir
-      jrmir = 2.*rmir
+      jrmir = INT(2.*rmir)
       DO i2 = 1 , Ld
          m = LEADF(N,i2,La) ! Index of final level
          indx = MEM(N,m,La) ! Index of matrix element
          IAPR(indx,1) = N   ! Index of initial level
          IAPR(indx,2) = m   ! Index of final level
          ismin = 0
-         ins = SPIN(m)*2.
+         ins = INT(SPIN(m)*2.)
          is1 = NSTART(m) ! Index of first substate of level m
          IF ( is1.NE.0 ) THEN
             isplus = INT(rmir-CAT(is1,3)) - Lam
@@ -89,8 +89,8 @@ C half-integers.
                   is = is2 + i3
                   rmis = CAT(is,3) ! m quantum number of substate is
                   IF ( ISO.NE.0 .OR. rmis.LE..1 .OR. rmir.LE..1 ) THEN
-                     jg1 = -rmis*2.
-                     jg2 = (rmis-rmir)*2.
+                     jg1 = INT(-rmis*2.)
+                     jg2 = INT((rmis-rmir)*2.)
                      IF ( Icg.NE.2 .OR. ABS(jg2).LE.2*MAGA(Iexp) ) THEN
                         IF ( La.LE.6 .OR. jg2.NE.0 ) THEN
                            Nz = Nz + 1
@@ -101,7 +101,7 @@ C half-integers.
      &                           *Ssqrt*WTHREJ(ins,lam2,inr,jg1,jg2,
      &                           jrmir)
                               IF ( Icg.NE.1 ) THEN
-                                 mt = CAT(is,1) ! level number of substate is
+                                 mt = INT(CAT(is,1)) ! level number of substate is
                                  CALL CODE7(Ir,is,N,mt,inqa,indx)
                                  IF ( ABS(ELM(indx)).LT.1.E-6 )
      &                                ELM(indx) = 1.E-6

@@ -233,7 +233,7 @@ C        Initialise pointers to ZETA array
                ir = 0
  10            ir = ir + 1
                IF ( ir.LE.ISMAX ) THEN
-                  n = CAT(ir,1) ! number of level for substate ir
+                  n = INT(CAT(ir,1)) ! number of level for substate ir
                   IF ( Icg.NE.1 ) THEN
                      IF ( MAGA(Iexp).EQ.0 .AND. ir.NE.IPATH(n) ) GOTO 10
                      IF ( ABS(ir-IPATH(n)).GT.1 ) GOTO 10

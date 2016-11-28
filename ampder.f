@@ -73,7 +73,7 @@ C     Zero ARM(k,4) and ARM(k,6) for each substate used
                ir = NSTART(nhold) - 1 ! Get first substate - 1 for this level
  40            ir = ir + 1 ! ir is a substate
                IF ( ir.LE.ISMAX ) THEN
-                  n = CAT(ir,1) ! Level number of substate ir
+                  n = INT(CAT(ir,1)) ! Level number of substate ir
                   IF ( n.NE.nhold ) THEN
                      DO mm = 1 , ld ! Loop over matrix elements
                         m = MSTORE(1,mm) ! Index of final level

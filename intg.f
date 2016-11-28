@@ -107,7 +107,7 @@ C     Predictor
             ARM(ir,7) = ARM(ir,5)
      &                  + D2W/24.*(55.0*ARM(ir,4)-59.0*ARM(ir,3)
      &                  +37.0*ARM(ir,2)-9.0*ARM(ir,1))
-            mir = CAT(ir,3) ! m quantum number of substate ir
+            mir = INT(CAT(ir,3)) ! m quantum number of substate ir
             ir1 = ir - 2*mir
             ARM(ir1,7) = IFAC(n)*ARM(ir,7)
             IF ( DBLE(mir).LT.-0.1 ) GOTO 120
@@ -145,7 +145,7 @@ C     Corrector
             ARM(ir,5) = ARM(ir,5)
      &                  + D2W/24.*(9.0*ARM(ir,4)+19.0*ARM(ir,3)
      &                  -5.0*ARM(ir,2)+ARM(ir,1))
-            mir = CAT(ir,3) ! m quantum number of substate ir
+            mir = INT(CAT(ir,3)) ! m quantum number of substate ir
             ir1 = ir - 2*mir
             ARM(ir1,5) = IFAC(n)*ARM(ir,5)
             IF ( DBLE(mir).LT.-0.1 ) GOTO 220
@@ -187,10 +187,10 @@ C
                   CALL DOUBLE(ISO) ! Double step size
                   D2W = 2.*D2W
                   NSW = 2*NSW
-                  intend = (DBLE(intend)+.01)/2.
+                  intend = INT((DBLE(intend)+.01)/2.)
                   IF ( intend.EQ.0 ) intend = 1
                   IF ( NSW.LT.1 ) THEN
-                     NDIV = (DBLE(NDIV)+.01)/2.
+                     NDIV = INT((DBLE(NDIV)+.01)/2.)
                      IF ( NDIV.LT.2 ) THEN
                         NDIV = 0
                         NSW = 1
@@ -199,7 +199,7 @@ C
                ELSE
                   CALL HALF(ISO) ! Halve step size
                   D2W = D2W/2.
-                  NSW = (DBLE(NSW)+.01)/2.
+                  NSW = INT((DBLE(NSW)+.01)/2.)
                   intend = 2*intend
                   IF ( NSW.LT.1 ) THEN
                      NDIV = 2*NDIV
