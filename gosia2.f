@@ -1991,6 +1991,8 @@ C     Treat suboption LEVE (levels)
      &           SPIN(ipo1) , EN(ipo1)
 99025       FORMAT (5X,1I3,11X,1A1,10X,1F4.1,8X,1F10.4)
          ENDDO
+         WRITE(*,*) 'Too many levels! - limit is ',NDIM
+         STOP 'ERROR'
 
 C     Treat suboption ME (matrix elements)
       ELSEIF ( op1.EQ.'ME  ' ) THEN
