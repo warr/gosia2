@@ -238,7 +238,7 @@ C      ZV     - energy meshpoints
      &          nogeli , npce , npce1 , npct , npct1 , 
      &          npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , nz
-      INTEGER*4 iskin_protect
+      INTEGER*4 iskin_protect, levmax
       CHARACTER*4 oph , op1 , opcja , op2
       CHARACTER*1 prp
       REAL*8 chir , chp , ccch1 ,ccch2 , cht ! For gosia2
@@ -575,6 +575,7 @@ C---- gosia2 changes end
       ENDDO
       ERR = .FALSE.
       opcja = '    '
+      levmax = 0
       intend = 0 ! End of initialization
 
 C.............................................................................
@@ -1966,7 +1967,14 @@ C                 Treat OP,MAP
 C     Treat suboptions of OP,COUL and OP,GOSI
  200  READ (JZB,99023) op1 ! Read the suboption
 99023 FORMAT (1A4)
-      IF ( op1.EQ.'    ' ) GOTO 100 ! Back to input loop
+      IF ( op1.EQ.'    ' ) THEN
+        IF (levmax .ne. NMAX) THEN
+          WRITE(*,*) 'ERROR: Max. level index (',levmax,
+     &      ') .NE. number of levels (',NMAX,')'
+          STOP 'INPUT ERROR'
+        ENDIF
+        GOTO 100 ! Back to input loop
+      ENDIF
 
 C     Treat suboption LEVE (levels)
       IF ( op1.EQ.'LEVE' ) THEN
@@ -1988,6 +1996,7 @@ C     Treat suboption LEVE (levels)
             EN(ipo1) = po1
             prp = '+'
             IF ( ipo2.EQ.-1 ) prp = '-'
+            if (ipo1 .GT. levmax) levmax = ipo1
             IF ( ABS(IPRM(1)).EQ.1 ) WRITE (22,99025) ipo1 , prp , 
      &           SPIN(ipo1) , EN(ipo1)
 99025       FORMAT (5X,1I3,11X,1A1,10X,1F4.1,8X,1F10.4)
