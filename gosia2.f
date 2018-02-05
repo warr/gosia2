@@ -571,6 +571,7 @@ C---- gosia2 changes end
                QAPR(j,k,l) = 0.
             ENDDO
          ENDDO
+         ivari(j) = 0
       ENDDO
       ERR = .FALSE.
       opcja = '    '
