@@ -65,6 +65,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
      &          ns3 , ns4 , Ntap , nvare
       CHARACTER*4 Oph
       INCLUDE 'cccds.inc'
+      INCLUDE 'coex2.inc'
       INCLUDE 'dimx.inc'
       INCLUDE 'tra.inc'
       INCLUDE 'life.inc'
@@ -253,6 +254,10 @@ C     Read lifetimes
      &           5X,'ERROR'/)
          DO ilft = 1 , NLIFT ! INDEX, T, DT repeated NL times
             READ (JZB,*) LIFCT(ilft) , TIMEL(1,ilft) , TIMEL(2,ilft)
+            IF ( LIFCT(ilft).LE.0 .OR. LIFCT(ilft).GT.NMAX ) THEN
+              WRITE(*,*) 'ERROR: Invalid level for lifetime ',
+     &          LIFCT(ilft)
+            ENDIF
             TIMEL(2,ilft) = TIMEL(2,ilft)/(SQRT(wlf)+1.E-10) ! Relative error
             WRITE (22,99006) LIFCT(ilft) , TIMEL(1,ilft) , TIMEL(2,ilft)
 99006       FORMAT (6X,1I3,6X,1F10.2,3X,1F10.2)
