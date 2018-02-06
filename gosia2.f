@@ -2025,6 +2025,14 @@ C     Treat suboption ME (matrix elements)
                ELSE
                   MULTI(la) = MULTI(la) + 1
                   indx = indx + 1
+                  IF ( ipo1.GT.NMAX ) THEN
+                    WRITE(*,*) 'ERROR: Invalid initial state ',ipo1
+                    STOP 'INPUT ERROR'
+                  ENDIF
+                  IF ( ABS(ipo2).GT.NMAX ) THEN
+                    WRITE(*,*) 'ERROR: Invalid final state ',ipo2
+                    STOP 'INPUT ERROR'
+                  ENDIF
                   IF ( ipo1.GT.ABS(ipo2) ) GOTO 1500 ! Error - M.E. does not belong to the upper triangle
                   IF ( ipo1.NE.ipo3 ) THEN
                      IF ( ipo1.LT.ipo3 ) GOTO 1700 ! Error - repeated appearance of the state
