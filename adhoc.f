@@ -216,6 +216,19 @@ C     Read branching ratios
                   IBRC(1,lb) = li ! Decay index for second pair
                ENDIF
             ENDDO
+            IF ( IBRC(1,lb).EQ.0 ) THEN
+              WRITE(*,*)
+     &          'ERROR: no matrix element defined between states ',
+     &          ns1, ' and ', ns2, ' which are used in b.r.'
+            ENDIF
+            IF ( IBRC(2,lb).EQ.0 ) THEN
+              WRITE(*,*)
+     &          'ERROR: no matrix element defined between states ',
+     &          ns3, ' and ', ns4, ' which are used in b.r.'
+            ENDIF
+            IF ( IBRC(1,lb).EQ.0 .OR. IBRC(2,lb).EQ.0 ) THEN
+              STOP 'BRANCHING RATIO ERROR'
+            ENDIF
             IF ( ITS.EQ.2 ) THEN
                n1 = IBRC(1,lb) ! Decay of first pair
                n2 = IBRC(2,lb) ! Decay of second pair
