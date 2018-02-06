@@ -1136,103 +1136,99 @@ C     Treat suboption ME (matrix elements)
 
 C     Treat suboption CONT (control)
       ELSEIF ( op1.EQ.'CONT' ) THEN
- 350     READ (JZB,99026) op1 , fipo1
-99026    FORMAT (1A4,1F7.1)
-         ipo1 = INT(fipo1)
-         IF ( op1.EQ.'ACP,' ) ACCA = 10.**(-fipo1)
-         IF ( op1.EQ.'SEL,' ) ITS = 2
-         IF ( op1.EQ.'SMR,' ) iosr = 1
-         IF ( op1.EQ.'SPL,' ) ISPL = ipo1
-         IF ( op1.EQ.'EFF,' ) THEN
-            DO jjx = 1 , ipo1
-               READ (JZB,*) ipo2 , ijx
-               ideff(ipo2) = ijx
-            ENDDO
-         ENDIF
-         IF ( op1.EQ.'FMI,' ) ifm = 1
-         IF ( op1.EQ.'TEN,' ) itno = 1
-         IF ( op1.EQ.'NCM,' ) NCM = ipo1
-         IF ( op1.EQ.'WRN,' ) SGW = fipo1
-         IF ( op1.EQ.'INT,' ) THEN
-            DO jjx = 1 , ipo1
-               READ (JZB,*) ipo2 , ijx
-               INTERV(ipo2) = ijx
-            ENDDO
-         ELSE
-            IF ( op1.EQ.'VAC,' ) THEN
-               DO jjx = 1 , 7
-                  READ (JZB,*) ijx , val
-                  IF ( ijx.EQ.0 ) GOTO 350
-                  G(ijx) = val
-               ENDDO
-            ELSE
-               IF ( op1.EQ.'DIP,' ) DIPOL = 0.001*fipo1
-               IF ( op1.EQ.'ACC,' ) ACCUR = 10.**(-fipo1)
-               IF ( op1.EQ.'PRT,' ) THEN
-                  DO jjx = 1 , 20
-                     READ (JZB,*) inm1 , inm2
-                     IF ( inm1.EQ.0 ) GOTO 350
-                     IPRM(inm1) = inm2
-                  ENDDO
-                  GOTO 350
-               ELSEIF ( op1.NE.'FIX,' ) THEN
-                  IF ( op1.EQ.'SKP,' ) THEN
-                     DO jjx = 1 , ipo1
-                        READ (JZB,*) ijx
-                        JSKIP(ijx) = 0
-                     ENDDO
-                     GOTO 350
-                  ELSE
-                     IF ( op1.EQ.'CRF,' ) ICS = 1
-                     IF ( op1.EQ.'LCK,' ) THEN
- 352                    READ (JZB,*) lck1 , lck2
-                        IF ( lck1.EQ.0 ) GOTO 350
-                        DO jjx = lck1 , lck2
-                           ivarh(jjx) = 0
-                           IVAR(jjx) = 0
-                        ENDDO
-                        GOTO 352
-                     ELSE
-                        IF ( op1.EQ.'INR,' ) INNR = 1
-                        IF ( op1.EQ.'CRD,' ) THEN
-                           DO jjx = 1 , ipo1
-                              READ (JZB,*) ipo2
-                              iecd(ipo2) = 1
-                           ENDDO
-                           GOTO 350
-                        ELSE
-                           IF ( op1.EQ.'CCF,' ) IPS1 = ipo1
-                           IF ( op1.EQ.'PIN,' ) THEN
-                              ipine = ipo1
-                              ipinf = 1
-                              DO ipp = 1 , ipine
-                                 READ (JZB,*) ig1 , ig2
-                                 jpin(ig1) = ig2
-                              ENDDO
-                              GOTO 350
-                           ELSE
-                              IF ( op1.NE.'END,' ) GOTO 350
-                              GOTO 70002
-                           ENDIF
-                        ENDIF
-                     ENDIF
-                  ENDIF
-               ENDIF
-            ENDIF
-            READ (JZB,*) nallow
-            DO jjx = 1 , nallow
-               READ (JZB,*) ijk
-               IVAR(ijk) = -IVAR(ijk)
-            ENDDO
-            DO jjx = 1 , MEMAX
-               IF ( IVAR(jjx).GE.0 ) THEN
-                  IF ( IVAR(jjx).LE.999 ) IVAR(jjx) = 0
-               ENDIF
-            ENDDO
-            DO jjx = 1 , MEMAX
-               IF ( IVAR(jjx).LT.0 ) IVAR(jjx) = -IVAR(jjx)
-               ivarh(jjx) = IVAR(jjx)
-            ENDDO
+ 350    READ (JZB,99026) op1 , fipo1
+99026   FORMAT (1A4,1F7.1)
+        ipo1 = INT(fipo1)
+         IF ( op1.EQ.'ACC,' ) THEN
+           ACCUR = 10.**(-fipo1)
+         ELSE IF ( op1.EQ.'ACP,' ) THEN
+           ACCA = 10.**(-fipo1)
+         ELSE IF ( op1.EQ.'CCF,' ) THEN
+           IPS1 = ipo1
+         ELSE IF ( op1.EQ.'CRF,' ) THEN
+           ICS = 1
+         ELSE IF ( op1.EQ.'CRD,' ) THEN
+           DO jjx = 1 , ipo1
+             READ (JZB,*) ipo2
+             iecd(ipo2) = 1
+           ENDDO
+         ELSE IF ( op1.EQ.'DIP,' ) THEN
+           DIPOL = 0.001*fipo1
+         ELSE IF ( op1.EQ.'EFF,' ) THEN
+           DO jjx = 1 , ipo1
+             READ (JZB,*) ipo2 , ijx
+             ideff(ipo2) = ijx
+           ENDDO
+         ELSE IF ( op1.EQ.'END,' ) THEN
+           GOTO 70002
+         ELSE IF ( op1.EQ.'FIX,' ) THEN
+           READ (JZB,*) nallow
+           DO jjx = 1 , nallow
+             READ (JZB,*) ijk
+             IVAR(ijk) = -IVAR(ijk)
+           ENDDO
+           DO jjx = 1 , MEMAX
+             IF ( IVAR(jjx).GE.0 ) THEN
+               IF ( IVAR(jjx).LE.999 ) IVAR(jjx) = 0
+             ENDIF
+           ENDDO
+           DO jjx = 1 , MEMAX
+             IF ( IVAR(jjx).LT.0 ) IVAR(jjx) = -IVAR(jjx)
+             ivarh(jjx) = IVAR(jjx)
+           ENDDO
+         ELSE IF ( op1.EQ.'FMI,' ) THEN
+           ifm = 1
+         ELSE IF ( op1.EQ.'INR,' ) THEN
+           INNR = 1
+         ELSE IF ( op1.EQ.'INT,' ) THEN
+           DO jjx = 1 , ipo1
+             READ (JZB,*) ipo2 , ijx
+             INTERV(ipo2) = ijx
+           ENDDO
+         ELSE IF ( op1.EQ.'LCK,' ) THEN
+ 352       READ (JZB,*) lck1 , lck2
+           IF ( lck1.EQ.0 ) GOTO 350
+           DO jjx = lck1 , lck2
+             ivarh(jjx) = 0
+             IVAR(jjx) = 0
+           ENDDO
+           GOTO 352
+         ELSE IF ( op1.EQ.'NCM,' ) THEN
+           NCM = ipo1
+         ELSE IF ( op1.EQ.'PIN,' ) THEN
+           ipine = ipo1
+           ipinf = 1
+           DO ipp = 1 , ipine
+             READ (JZB,*) ig1 , ig2
+             jpin(ig1) = ig2
+           ENDDO
+         ELSE IF ( op1.EQ.'PRT,' ) THEN
+           DO jjx = 1 , 20
+             READ (JZB,*) inm1 , inm2
+             IF ( inm1.EQ.0 ) GOTO 350
+             IPRM(inm1) = inm2
+           ENDDO
+         ELSE IF ( op1.EQ.'SEL,' ) THEN
+           ITS = 2
+         ELSE IF ( op1.EQ.'SKP,' ) THEN
+           DO jjx = 1 , ipo1
+             READ (JZB,*) ijx
+             JSKIP(ijx) = 0
+           ENDDO
+         ELSE IF ( op1.EQ.'SMR,' ) THEN
+           iosr = 1
+         ELSE IF ( op1.EQ.'SPL,' ) THEN
+           ISPL = ipo1
+         ELSE IF ( op1.EQ.'TEN,' ) THEN
+           itno = 1
+         ELSE IF ( op1.EQ.'VAC,' ) THEN
+           DO jjx = 1 , 7
+             READ (JZB,*) ijx , val
+             IF ( ijx.EQ.0 ) GOTO 350
+             G(ijx) = val
+           ENDDO
+         ELSE IF ( op1.EQ.'WRN,' ) THEN
+           SGW = fipo1           
          ENDIF
          GOTO 350 ! Back to beginning of CONT loop
 
