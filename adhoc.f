@@ -283,6 +283,20 @@ C     Read known mixing ratios
                   IF ( ITS.EQ.2 ) WRITE (18,*) KSEQ(lb,1) , KSEQ(lb,2)
                ENDIF
             ENDDO
+            IF ( IMIX(li).EQ.0 ) THEN
+              WRITE(*,*) 'ERROR: No decay found for mixing ratio ',
+     &          ns1,ns2
+              STOP 'MIXING RATIO ERROR'
+            ENDIF
+            IF ( KSEQ(IMIX(li),1).EQ.0 ) THEN
+              WRITE(*,*) 'ERROR: no E2 component for mixing ratio'
+            ENDIF
+            IF ( KSEQ(IMIX(li),2).EQ.0 ) THEN
+              WRITE(*,*) 'ERROR: no M1 component for mixing ratio'
+            ENDIF
+            IF ( KSEQ(IMIX(li),1).EQ.0 .OR. KSEQ(IMIX(li),2).EQ.0 ) THEN
+              STOP 'MIXING RATIO ERROR'
+            ENDIF
          ENDDO
          WRITE (22,99009) wdl
 99009    FORMAT (/10X,'E2/M1 MIXING RATIOS ARE TAKEN WITH WEIGHT',2X,
