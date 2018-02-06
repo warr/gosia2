@@ -240,6 +240,7 @@ C      ZV     - energy meshpoints
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , nz
       INTEGER*4 iskin_protect , levmax
       CHARACTER*4 oph , op1 , opcja , op2
+      CHARACTER*80 line
       CHARACTER*1 prp
       REAL*8 chir , chp , ccch1 ,ccch2 , cht ! For gosia2
       INTEGER*4 nawr , mmmm , kkkk , mres1 , mrepf  ! For gosia2
@@ -1136,9 +1137,13 @@ C     Treat suboption ME (matrix elements)
 
 C     Treat suboption CONT (control)
       ELSEIF ( op1.EQ.'CONT' ) THEN
- 350    READ (JZB,99026) op1 , fipo1
-99026   FORMAT (1A4,1F7.1)
-        ipo1 = INT(fipo1)
+ 350     READ (JZB,'(A80)') line
+         READ (line,99026,ERR=353) op1 , fipo1
+ 353     READ (line,99056,ERR=354) op1 , ipo1
+         fipo1 = ipo1
+99026    FORMAT (1A4,1F7.1)
+99056    FORMAT (1A4,I5)
+ 354     ipo1 = INT(fipo1)
          IF ( op1.EQ.'ACC,' ) THEN
            ACCUR = 10.**(-fipo1)
          ELSE IF ( op1.EQ.'ACP,' ) THEN
@@ -1228,7 +1233,9 @@ C     Treat suboption CONT (control)
              G(ijx) = val
            ENDDO
          ELSE IF ( op1.EQ.'WRN,' ) THEN
-           SGW = fipo1           
+           SGW = fipo1
+         ELSE
+           WRITE(*,*) 'Did not understand CONT option ',op1
          ENDIF
          GOTO 350 ! Back to beginning of CONT loop
 
