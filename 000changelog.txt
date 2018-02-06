@@ -5,6 +5,7 @@
 * Trap invalid branching ratios
 * Trap invalid lifetimes
 * Trap invalid mixing ratios
+* Trap invalid experimental yields
 
 20081208 (synchronized with gosia1)
 * Allow different efficiencies for different experiments.

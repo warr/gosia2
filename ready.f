@@ -64,7 +64,7 @@ C     Rewind yield file
 99003       FORMAT (4X,'DECAY',1X,'IS',2X,'IF',1(9X,'YIELD+/-ERROR',9X)
      &              /)
             DO j = 1 , nval
-               READ (Ntap,*) ns1 , ns2 , u , w ! ii, if, y, dy
+               READ (Ntap,*,END=50,ERR=50) ns1 , ns2 , u , w ! ii, if, y, dy
                nsxh = ns1
                nsyh = ns2
                IF ( ns1.GE.100 ) THEN
@@ -76,7 +76,9 @@ C     Rewind yield file
      &                 GOTO 10
                ENDDO
                IF ( Ipri.EQ.1 ) WRITE (22,99005) ns1 , ns2
-               GOTO 40
+               WRITE(*,*) 'ERROR in yield file: transition between ',
+     &           ns1,ns2,' does not exist'
+               STOP 'YIELD FILE ERROR'
  10            idc = nde
                iytot(kk) = iytot(kk) + 1
                idc1 = 0
@@ -102,7 +104,7 @@ C     Rewind yield file
                YEXP(kk,iytt) = u
                DYEX(kk,iytt) = w/(SQRT(waga)+1.E-4)
                IY(iytt,kk) = idc
- 40            CONTINUE
+               CONTINUE
             ENDDO
             iytt = iytot(kk)
             lbg = iytt - nval + 1
@@ -110,6 +112,8 @@ C     Rewind yield file
             NYLDE(lxp,kk) = nval
          ENDDO ! For each dataset kk
       ENDDO ! Loop on experiments lxp
+      RETURN
+ 50   STOP 'ERROR READING YIELD FILE'
 99005 FORMAT (1X///5X,'ERROR-NO MATRIX ELEMENT BETWEEN STATES',1X,1I3,
      &        ' AND ',1I3,/10X,'THIS TRANSITION IGNORED',//)
       END
