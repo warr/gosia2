@@ -313,6 +313,11 @@ C     Read known matrix elements
 
       DO iax = 1 , NAMX ! LAMBDA, INDEX1, INDEX2, ME, DME repeated NAMX times
          READ (JZB,*) llia , ns1 , ns2 , EAMX(iax,1) , EAMX(iax,2)
+         IF ( ns1.GT.ns2 ) THEN
+           WRITE(*,*) 'ERROR: In OP,YIEL known matrix element must be',
+     &       ' given with INDEX1.LE.INDEX2'
+           STOP 'INVALID MATRIX ELEMENT'
+         ENDIF
          IAMY(iax,1) = ns1 ! Level index
          IAMY(iax,2) = ns2 ! Level index
          EAMX(iax,2) = EAMX(iax,2)/(SQRT(wamx)+1.E-10) ! Relative error of ME
