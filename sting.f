@@ -50,9 +50,9 @@ C      Irld   - index into ARM array
       maxh = MAXLA ! Save MAXLA, so we can restore it later
  100  ISG = -1
       n = 1
-      rsg = -1.
+      rsg = -1.d0
       IFLG = 1
-      w0 = IRA(MAXLA)*.03 + .03 ! Maximum omega to calculate for (steps of 0.03)
+      w0 = IRA(MAXLA)*.03d0 + .03d0 ! Maximum omega to calculate for (steps of 0.03)
       
       DO j = 1 , ISMAX ! For substate used, zero ARM array
          DO jj = 1 , 6
@@ -71,7 +71,7 @@ C      Irld   - index into ARM array
       IF ( MAXLA.EQ.7 .AND. IRA(2).NE.0 ) THEN ! Special case of M1
          LAMR(2) = 1
          NPT = NPT - 1
-         w0 = w0 - .03
+         w0 = w0 - .03d0
       ENDIF
 
       NDIV = 0

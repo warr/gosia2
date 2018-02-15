@@ -102,7 +102,7 @@ C      Joj    - index of substate (write only)
 C        Calculate xi and store it in XI in common CXI
 C        The value 6.349770 is 197.33/1.44*sqrt(2/931.49).
 C        i.e. hbar c / e^2 * sqrt(2 / amu).
-         eta = z1*z2*SQRT(a1/EP(Iexp))/6.349770
+         eta = z1*z2*SQRT(a1/EP(Iexp))/6.349770d0
          DO m = 1 , NMAX
             dep = (1.0+a1/a2)*EN(m)
             zet = dep/EP(Iexp)
@@ -117,24 +117,24 @@ C        i.e. hbar c / e^2 * sqrt(2 / amu).
 
 C        Calculate C_\lambda \over (s Z_1 Z_2)^\lambda 
          aazz = 1./(1.+a1/a2)/z1/z2
-         cpsi(1) = 5.169286*aazz
+         cpsi(1) = 5.169286d0*aazz
 
 C        Electric excitations up to LMAXE
          IF ( LMAXE.NE.1 ) THEN
             aaz2 = aazz*aazz
-            cpsi(2) = 14.359366*aaz2
+            cpsi(2) = 14.359366d0*aaz2
             IF ( LMAXE.NE.2 ) THEN
                aaz3 = aazz*aaz2
-               cpsi(3) = 56.982577*aaz3
+               cpsi(3) = 56.982577d0*aaz3
                IF ( LMAXE.NE.3 ) THEN
                   aazz = aaz2*aaz2
-                  cpsi(4) = 263.812653*aazz
+                  cpsi(4) = 263.812653d0*aazz
                   IF ( LMAXE.NE.4 ) THEN
                      aaz2 = aaz3*aaz2
-                     cpsi(5) = 1332.409500*aaz2
+                     cpsi(5) = 1332.409500d0*aaz2
                      IF ( LMAXE.NE.5 ) THEN
                         aazz = aaz3*aaz3
-                        cpsi(6) = 7117.691577*aazz
+                        cpsi(6) = 7117.691577d0*aazz
                      ENDIF
                   ENDIF
                ENDIF
@@ -143,7 +143,7 @@ C        Electric excitations up to LMAXE
 
 C        Magnetic excitations
          IF ( MAGEXC.NE.0 ) THEN ! If magnetic excitations are required
-            aazz = VINF(Iexp)/95.0981942
+            aazz = VINF(Iexp)/95.0981942d0
             cpsi(7) = aazz*cpsi(1)
             IF ( LAMMAX.NE.8 ) cpsi(8) = aazz*cpsi(2)
          ENDIF
