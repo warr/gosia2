@@ -13,8 +13,8 @@ C      Errt   - sqrt(epsilon^2 - 1) for this experiment
 C      Xiv    - value of xi
 C      Dw     - step in omega (0.03)
 C      W0     - value of omega
-C      Lmda   - lambda (1...6 for E1...6 and 1,2 for M1,2)
-C      Mua    - mu
+C      Lmda   - lambda (1...2 for E1...2 and 7 for M1 - other multipolarites forbidden)
+C      Mua    - mu + 1
 C
 C Note that the pre-factors in the fct values correspond to those of the
 C collision functions.
