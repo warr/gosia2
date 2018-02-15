@@ -35,7 +35,10 @@ C can cope with half-integers.
       INCLUDE 'coex2.inc'
       INCLUDE 'cexc0.inc'
       INCLUDE 'az.inc'
-      
+      INCLUDE 'prt.inc'
+      INCLUDE 'kin.inc'
+
+      IF ( IPRM(21) .EQ. 1 ) WRITE(22,100) IEXP
       iha = (-1)**INT(2.*SPIN(1)+.01)
       IF ( Icl.EQ.1 ) THEN
          ms = 16*(NMAX-1)
@@ -90,12 +93,18 @@ C can cope with half-integers.
                            ENDIF
                         ENDIF
  6                      CONTINUE
-                     ENDDO
-                     IF ( Icl.EQ.Lmax ) Bten(ind) = Bten(ind)
-     &                    *ce/(2.*SPIN(1)+1.)
+                     ENDDO ! Loop over m
+                     IF ( Icl.EQ.Lmax ) THEN
+                       Bten(ind) = Bten(ind) *ce/(2.*SPIN(1)+1.)
+                       IF ( IPRM(21) .EQ. 1 ) THEN
+                         WRITE (22,101) i, k, l , Bten(ind)
+                       ENDIF
+                     ENDIF
                   ENDDO ! Loop over lp
                ENDIF ! If isi.GE.k
             ENDDO ! Loop over kp
          ENDIF ! If ms.NE.0
       ENDDO ! Loop over level i
+ 100  FORMAT(//,5X,'POLARISATION FOR EXPERIMENT ',I3)
+ 101  FORMAT (5X,'FOR LEVEL ',I3,4X,'BTEN(',I2,',',I2,') = ',E15.8)
       END

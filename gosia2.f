@@ -462,6 +462,7 @@ C---- gosia2 changes end
       IPRM(18) = 0
       IPRM(19) = 0
       IPRM(20) = 0
+      IPRM(21) = 0
       DO i = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
          DO j = 1 , 5
             IF ( j.NE.5 ) THEN
