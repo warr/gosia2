@@ -81,6 +81,10 @@ C     Trap spurious values where tau * sin(theta_p/57.2957795) is greater
 C     than unity due to floating point rounding errors
       if (tau * SIN(theta_p/57.2957795) .gt. 1.0d0) 
      &  theta_p = 57.2957795 * TASIN(1.d0/tau)
+
+C     In normal kinematics, Ikin is not meaningful, but set to 1 anyway
+      Ikin = 1
+      IF ( tau.LT.1 ) RETURN
       
 C     Calculate angle of scattered projectile in centre of mass frame, for
 C     which the maximum laboratory scattering angle is reached.
