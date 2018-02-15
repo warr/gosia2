@@ -178,11 +178,11 @@ C      ZV     - energy meshpoints
       IMPLICIT NONE
       REAL*8 acof , ap , ARCCOS , ARCTG , arg , ax , bcof , be2 , 
      &       be2a , be2b , be2c
-      REAL*8 bk , bl , bm , bmx , bten , bu , ccc , 
+      REAL*8 bl , bmx , bten , bu , ccc , 
      &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
      &       cnst
       REAL*8 cocos , conu , d , decen , dedx , dsd , dsig , dst
-      REAL*8 dsx , dsxm , effi , eh1 , elmi , ELMT , emhl1 , emn , emx ,
+      REAL*8 dsx , dsxm , effi , eh1 , elmi , emhl1 , emn , emx ,
      &       enb
       REAL*8 eng , enh , esd , esp , ess , 
      &       fi0 , fi1 , fic , fiex1 , figl , fipo1 , fm , gth
@@ -197,44 +197,42 @@ C      ZV     - energy meshpoints
       REAL*8 tta , tth , tting , ttttt , txx , u , 
      &       val , waga , wph , wpi , WSIXJ , wth , wthh , 
      &       WTHREJ
-      REAL*8 xep , xi1 , xi2 , xk1 , xk2 , xl1 , xlevb , 
-     &       xlk , xm1 , xm2 , xm3 , xtest , xw , xx , xxi , 
+      REAL*8 xep , xl1 , xlk , xtest , xw , xx , xxi , 
      &       ycorr
       REAL*8 yy , yyd1 , yydd , yyy , zmir , zp , zz
-      INTEGER*4 i , i122 , iapx , ib , ibaf , icg , icll , ict , ictl , 
+      INTEGER*4 i , i122 , iapx , icg , icll , ict , ictl , 
      &          id , ideff , idf
       INTEGER*4 idr , iecd , ient , ifbp , ifc , ifm , ifwd , 
      &          ig1 , ig2 , ih1 , ih2 , ihlm , ihuj , ii , ij
-      INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ile1 , ilevls , 
+      INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ile1 , 
      &          ilx , im , imode , in1 , in2 , inclus , ind , 
-     &          ind1 , ind2 , indx
+     &          indx
       INTEGER*4 inko , inm1 , inm2 , inn , inpo , intend , intvh , 
-     &          inva , inx1 , iobl , iocc , iopri , iosr , ipd , iph
+     &          inx1 , iobl , iocc , iopri , iosr , ipd , iph
       INTEGER*4 ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
      &          ipri , irea , irep , irfix , irix , isip , iske , iskf
       INTEGER*4 isko , iskok , isoh , ispa , ispb , itno , 
      &          itp , iuy , iva , iva1 , ivarh , ivari , ivrh
       INTEGER*4 ixj , ixl , ixm , iyr , izcap , j , ja , 
-     &          jan , jan1 , jb , jb1 , jb2 , jd , jde , jdy , je
+     &          jan , jan1 , jd , jde , jdy , je
       INTEGER*4 jex , jexp , jfi , jfre , jgd , jgl , jgl1 , jgr , jgs ,
      &          jj , jj1 , jjjj , jjlx , jjx , jk , jkloo , jktt , jl , 
      &          jmm , jmpin
       INTEGER*4 jp , jphd , jpin , jrls , js , jt , jtp , jyi , jyi1 , 
-     &          jyi2 , jyv , jz , k , kb , kclust , kerf , kex
-      INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kl , kloop , 
-     &          kmat , kq , ktt , kuku , l , la , la1 , lam , lamd
-      INTEGER*4 lamh , lb , lck1 , lck2 , levl , lex , lexp , 
+     &          jyi2 , jyv , jz , k , kclust , kerf , kex
+      INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kloop , 
+     &          kmat , kq , ktt , kuku , l , la , la1 , lam
+      INTEGER*4 lamh , lck1 , lck2 , lex , lexp , 
      &          lfagg , lfini , lh1 , lh2 , liscl , lkj
       INTEGER*4 lkj1 , ll , lli , lll , lmax1 , lmaxh , locat , 
      &          loct , lp0 , lpin
       INTEGER*4 ltrn , ltrn1 , ltrn2 , lu , lx , lxd , magh , MEM
       INTEGER*4 memax1 , memh , memx4 , mend , mexl , 
-     &          mfla , mlt , mm , mpin , ms , n , na , na1 , naa , 
+     &          mfla , mm , mpin , ms , n , na , na1 , naa , 
      &          nallow
-      INTEGER*4 naxfl , nb1 , nb2 , nbands , nch , ndima , ndum , 
-     &          ne , nf , nfd , nfdd , 
+      INTEGER*4 naxfl , nch , ndima , ndum , ne , nf , nfd , nfdd , 
      &          nfi , nflr , nft , nged
-      INTEGER*4 ngpr , ni , nksi , nl , nmaxh , nmemx , nnl , 
+      INTEGER*4 ngpr , ni , nksi , nl , nmaxh , nmemx , 
      &          nogeli , npce , npce1 , npct , npct1 , 
      &          npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , nz
@@ -250,7 +248,6 @@ C      ZV     - energy meshpoints
      &          iecd(50) , wpi(100,2) , tau1(10) , eng(10) , 
      &          tau2(10,7) , xl1(7) , qui(8,10) , cf(8,2) , 
      &          ivarh(1500) , liscl(200) , dsxm(100,100,100) , 
-     &          levl(50) , xlevb(50,2) , bm(8,20,20,3) , mlt(1500) , 
      &          ivari(1500) , jpin(50) , ideff(50) , iskin_protect(50)
       INCLUDE 'clust.inc'
       INCLUDE 'cccds.inc'
@@ -1071,7 +1068,7 @@ C     Treat suboption ME (matrix elements)
                   ELM(indx) = po1
                   IF ( JZB.EQ.25 ) ELM25(indx) = po1 ! Added for gosia2
                   IF ( JZB.EQ.26 ) ELM26(indx) = po1 ! Added for gosia2
-                  mlt(indx) = la
+                  MLT(indx) = la
                   LEAD(1,indx) = ipo1
                   LEAD(2,indx) = ABS(ipo2)
                   LDNUM(la,ipo1) = LDNUM(la,ipo1) + 1
@@ -3157,7 +3154,7 @@ C---- gosia2 changes start
       IF ( JZB.EQ.26 ) mres1 = 1
 C---- gosia2 changes end
       DO kk = 1 , MEMAX
-        la = mlt(kk)
+        la = MLT(kk)
         IF ( ivari(kk).GE.10000 ) THEN
           kk1 = ivari(kk)/10000
           kk2 = ivari(kk) - 10000*kk1
@@ -3206,68 +3203,7 @@ C OP,SIXJ
 
 C--------------------------------
 C OP,THEO
-70016 irix = 12
-      REWIND (irix)
-      ibaf = 1
-      DO jb = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
-        DO lb = 1 , 2
-          xlevb(jb,lb) = 0
-        ENDDO
-      ENDDO
-      READ (JZB,*) nbands ! Number of bands
-      IF ( nbands.LE.0 ) ibaf = 0
-      nbands = ABS(nbands)
-      DO nl = 1 , 8
-        DO jb = 1 , nbands
-          DO jl = 1 , nbands
-            DO kl = 1 , 3
-              bm(nl,jb,jl,kl) = 0.
-            ENDDO
-          ENDDO
-        ENDDO
-      ENDDO
-      DO jb = 1 , nbands
-        READ (JZB,*) bk , ilevls ! K of band, number of levels in band
-        READ (JZB,*) (levl(ib),ib=1,ilevls) ! Level list for band
-        DO kb = 1 , ilevls
-          inva = levl(kb)
-          xlevb(inva,2) = bk
-          xlevb(inva,1) = DBLE(jb)
-        ENDDO
-      ENDDO
-      DO nl = 1 , 8
-        READ (JZB,*) nnl ! Multipolarity
- 126    IF ( nnl.LE.0 ) GOTO 130
-        READ (JZB,*) jb1 , jb2 ! band indices
-        IF ( jb1.NE.0 ) THEN
-          READ (JZB,*) (bm(nnl,jb1,jb2,j),j=1,3) ! intrinsic moments
-          DO j = 1 , 3
-            bm(nnl,jb2,jb1,j) = bm(nnl,jb1,jb2,j)
-          ENDDO
-          GOTO 126
-        ENDIF
-      ENDDO
- 130  DO kb = 1 , MEMAX
-        IF ( ibaf.NE.0 ) THEN
-          ind1 = LEAD(1,kb)
-          ind2 = LEAD(2,kb)
-          xi1 = SPIN(ind1)
-          xi2 = SPIN(ind2)
-          lamd = mlt(kb)
-          nb1 = INT(xlevb(ind1,1)+.1)
-          nb2 = INT(xlevb(ind2,1)+.1)
-          xk1 = xlevb(ind1,2)
-          xk2 = xlevb(ind2,2)
-          xm1 = bm(lamd,nb1,nb2,1)
-          xm2 = bm(lamd,nb1,nb2,2)
-          xm3 = bm(lamd,nb1,nb2,3)
-          ELM(kb) = ELMT(xi1,xi2,lamd,nb1,nb2,xk1,xk2,xm1,xm2,xm3)
-          IF ( ABS(ELM(kb)).LT.1E-6 ) ELM(kb) = 1.E-6
-          irix = 12
-          IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for target, 32 for beam
-          WRITE (irix,*) ELM(kb)
-        ENDIF
-      ENDDO
+70016 CALL OP_THEO
       GOTO 100 ! End of OP,THEO - back to input loop
 
 C--------------------------------

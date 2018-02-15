@@ -7,6 +7,7 @@
 * Trap invalid mixing ratios
 * Trap invalid experimental yields
 * Trap invalid known matrix elements
+* Move OP,THEO code into a separate function
 
 20081208 (synchronized with gosia1)
 * Allow different efficiencies for different experiments.
