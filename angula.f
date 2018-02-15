@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE ANGULA
 C
-C Called by: GOSIA, CEGRY
+C Called by: GOSIA, CEGRY, OP_INTGI
 C Calls:     FIINT, FIINT1, RECOIL, YLM, YLM1
 C
 C Purpose: calculate angular distribution of emitted gamma rays
@@ -18,6 +18,7 @@ C      IEXP   - experiment number
 C      ITMA   - identify detectors according to OP,GDET
 C      ITTE   - thick target experiment flag
 C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
+C      Q      - solid angle attenuation coefficients
 C      TAU    - lifetime in picoseconds
 C      ZETA   - various coefficients
 C

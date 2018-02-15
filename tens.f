@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE TENS
 C
-C Called by: FTBM, GOSIA
+C Called by: FTBM, GOSIA, OP_INTGI
 C Calls:     DJMM
 C
 C Purpose:

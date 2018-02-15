@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE DECAY
 C
-C Called by: CEGRY, GOSIA
+C Called by: CEGRY, GOSIA, OP_INTGI
 C Calls:     GKVAC
 C
 C Purpose: Calculate the gamma decay following excitation.

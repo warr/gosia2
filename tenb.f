@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE TENB
 C
-C Called by: FTBM, GOSIA
+C Called by: FTBM, GOSIA, OP_INTGI
 C Calls:     WTHREJ
 C
 C Purpose: calculate the state of polarization of the decaying level

@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE COORD
 C
-C Called by: GOSIA
+C Called by: OP_INTGI
 C Calls:     TACOS, TASIN
 C
 C Purpose: calculate geometry for circular detector

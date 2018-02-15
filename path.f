@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE PATH
 C
-C Called by: GOSIA
+C Called by: GOSIA, OP_INTGI
 C
 C Purpose: Calculate path for each level
 C

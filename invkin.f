@@ -1,7 +1,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE INVKIN
 C
-C Called by: GOSIA
+C Called by: OP_INTGI
 C
 C Purpose: calculate the angle of the scattered projectile in the lab frame
 C          when the user gave the angle of the recoiling target nucleus in

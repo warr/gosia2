@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE TAPMA
 C
-C Called by: GOSIA
+C Called by: OP_INTGI
 C
 C Purpose: read parameters for sensitivity maps
 C

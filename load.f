@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE LOAD
 C
-C Called by: FTBM, GOSIA
+C Called by: FTBM, GOSIA, OP_INTGI
 C Calls:     LSLOOP
 C
 C Purpose: calculates various parameters, xi, psi which are stored in
@@ -47,7 +47,7 @@ C
 C Formal parameters:
 C      Iexp   - Number of experiment
 C      Ient   - Flag : 1, 2, 3 (read only)
-C      Icg    - Flag : 1, 2 (read only)
+C      Icg    - Flag : 1 = full coulex, 2 = approximate coulex (read only)
 C      Polm   - (read only)
 C      Joj    - index of substate (write only)
  

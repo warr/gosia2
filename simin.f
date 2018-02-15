@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C FUNCTION SIMIN
 C
-C Called by: GOSIA
+C Called by: OP_INTGI
 C
 C Purpose: Integrate under a curve defined by an array.
 C

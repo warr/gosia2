@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE SETIN
 C
-C Called by FTBM, GOSIA
+C Called by FTBM, GOSIA, OP_INTGI
 C
 C Purpose: calculate the adiabatic parameter:
 C \epsilon \sinh(\omega) + \omega

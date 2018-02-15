@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE INTG
 C
-C Called by: FTBM, GOSIA
+C Called by: FTBM, GOSIA, OP_INTGI
 C Calls:     AMPDER, DOUBLE, HALF, RESET
 C
 C Purpose: the main integration routine.

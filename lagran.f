@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE LAGRAN
 C
-C Called by: CONV, EFFIX, GOSIA
+C Called by: CONV, EFFIX, OP_INTGI
 C Calls:     FUNC, FUNC1
 C
 C Purpose: perform a Lagrangian interpolation

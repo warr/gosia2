@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE ALLOC
 C
-C Called by: FTBM, GOSIA
+C Called by: FTBM, GOSIA, OP_INTGI
 C Calls:     RANGEL
 C
 C Purpose: to calculate and store the ranges of the integration over omega
