@@ -87,6 +87,12 @@ C      Ktoto  - number of iterations needed
 C        Calculate accuracy we have achieved
          test = 0.
          DO m = 1 , Jidim
+           IF (ABS(ARM(m,2)) .gt.1.0d50) then
+               WRITE(*,*) 'WARNING FLOATING POINT OVERFLOW ARM(',
+     &          m,',2) = ',ARM(m,2)
+               ARM(m,2) = ARM(m,2)/1.0d10 ! Try to prevent exception
+               RETURN
+            ENDIF
             ARM(m,1) = ARM(m,2)/k
             ARM(m,2) = (0.,0.)
             IF ( L.NE.1 ) ARM(m,1) = ARM(m,1)*ci
