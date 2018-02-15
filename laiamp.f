@@ -85,7 +85,7 @@ C      W0     - omega limit
                            rmu = rmis - rmir
                            mua = INT(ABS(rmu) + 1.1) ! delta-mu + 1
 
-C                          Only consider electromagnetic and delta-mu = 0 magnetic
+C                          Only consider electromagnetic and delta-mu .NE. 0 magnetic
 C                          contribution
                            IF ( lam.LE.6 .OR. mua.NE.1 ) THEN
 C                             calculate complex phase (dis)

@@ -25,18 +25,20 @@ C      Q      - Attenuation coefficient (output)
       XL = DIX(3)
       D = DIX(4)
       
-      b(1) = ATAN2(A,D+XL)
-      b(2) = ATAN2(A,D)
-      b(3) = ATAN2(R,D+XL)
-      b(4) = ATAN2(R,D)
-      DO k = 1 , 9 ! Loop over order of Legendre polynomial order
+      b(1) = ATAN2(A,D+XL) ! Region 0 from 0 to b(1) - all gammas in core
+      b(2) = ATAN2(A,D)    ! Region 1 from b(1) to b(2) - gammas partially in core
+      b(3) = ATAN2(R,D+XL) ! Region 2 from b(2) to b(3) - gammas going to back face
+      b(4) = ATAN2(R,D)    ! Region 3 from b(3) to b(4) - gammas going to side
+      DO k = 1 , 9 ! Loop over order of Legendre polynomial order + 1 (i.e. 0 to 8)
          Q(k) = 0.0
-         DO j = 1 , 3
+         DO j = 1 , 3 ! Loop over regions
             yl = b(j)
-            yu = b(j+1)
+            yu = b(j+1) ! Region between angles yl and yu
             dl = (yu-yl)/100.
-            DO m = 1 , 101
-               xm = yl + dl*(m-1)
+            DO m = 1 , 101 ! Divide region into 100 slices
+               xm = yl + dl*(m-1) ! Angle of slice
+C Calculate ex, which is e^(-tau * path), where path is the path length in the active
+C part of the detector (i.e. excluding the core) for angle xm
                IF ( j.EQ.2 ) THEN
                   ex = -Tau*XL/COS(xm)
                ELSEIF ( j.EQ.3 ) THEN
@@ -45,7 +47,7 @@ C      Q      - Attenuation coefficient (output)
                   ex = Tau*(A-(D+XL)*TAN(xm))/SIN(xm)
                ENDIF
                f(m) = SIN(xm)*(1-EXP(ex))*EXP(Thing/COS(xm))
-               IF ( j.EQ.1 ) f(m) = f(m)*EXP(-Tau*(A/SIN(xm)-D/COS(xm)))
+               IF ( j.EQ.1 ) f(m) = f(m)*EXP(-Tau*(A/SIN(xm)-D/COS(xm))) ! Absorption in core
                IF ( k.EQ.1 ) THEN ! Legendre polynomials order k
                ELSEIF ( k.EQ.3 ) THEN
                   f(m) = f(m)*(1.5*COS(xm)**2-0.5)
@@ -70,7 +72,8 @@ C      Q      - Attenuation coefficient (output)
                ELSE
                   f(m) = f(m)*COS(xm)
                ENDIF
-            ENDDO
+            ENDDO ! Loop on slices
+C Integrate slices using Simpson's rule
             ev = 0.0
             od = 0.0
             DO m = 2 , 98 , 2
@@ -81,6 +84,8 @@ C      Q      - Attenuation coefficient (output)
             Q(k) = Q(k) + fint
          ENDDO
       ENDDO
+C We have evaluated J_k0 (note k in the code is actually k+1) so now we want to
+C evaluate Q_k = J_k0/J_00
       DO i = 1 , 8
          Q(i+1) = Q(i+1)/Q(1)
       ENDDO

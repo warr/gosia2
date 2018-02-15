@@ -16,8 +16,8 @@ C
 C Formal parameters:
 C      Inx    - index in XI array
 C      Npt    - index in ADB array (this is omega / 0.03)
-C      Isg    - phase
-C      Isg1   - index for sigma
+C      Isg    - sign of omega
+C      Isg1   - index of omega
 C      Ndiv   - number of divisions
 C      Kdiv   - index for division
 C

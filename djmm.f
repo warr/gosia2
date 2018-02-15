@@ -11,7 +11,7 @@ C      B      - array of factorials
 C      BEQ    - identifier for angle for rotations
 C
 C Formal parameters:
-C      Beta   - v/c
+C      Beta   - rotation angle
 C      K      - K
 C      Kpp    - \xi
 C      Kp     - \xi^\prime
