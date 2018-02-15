@@ -160,6 +160,11 @@ C      Rem    - natural log of the largest value the computer can represent
       IF ( ix.NE.2 ) GOTO 200
       GOTO 400
  600  c = YV(i)
+      IF ( c.eq.0 ) THEN
+        WRITE(22,99005) Jj
+        WRITE(*,99005) Jj
+        RETURN
+      ENDIF
       m = 0
       DO l = 1 , i
          YV(l) = 1.00001 - YV(l)/c
@@ -177,4 +182,6 @@ C      Rem    - natural log of the largest value the computer can represent
 99003 FORMAT (5X,'ELM(',1I3,')=',1F10.6,5X,'CHISQ=',1E12.4)
 99004 FORMAT (10X,'BETTER POINT FOUND...MATRIX ELEMENTS WRITTEN ON 17',
      &        3X,'CHISQ=',1E12.4)
+99005 FORMAT(5X,'** ERROR **',2X,'ME=',I13,2X,
+     &  'LIMITS SMALLER THAN ERROR ON ME - INCREASE LIMITS!')
       END
