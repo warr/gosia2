@@ -1997,7 +1997,7 @@ C---- gosia2 changes end
          ENDDO
       ELSE ! iobl .lt. 1
          irix = 7
-         IF ( IBPS.EQ.1 ) irix = 27 ! unit 7 for target, 27 for beam
+         IF ( IBPS.EQ.1 ) irix = 27 ! unit 7 for target, 27 for beam (gosia2 only)
          REWIND irix
          DO iuy = 1 , 6
             READ (irix,*) (XIR(iuy,jj),jj=1,NEXPT)
@@ -2223,7 +2223,7 @@ C OP,RE
 C--------------------------------
 C OP,REST
 70013 irix = 12
-      IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for target, 32 for beam
+      IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for target, 32 for beam (gosia2 only)
       REWIND irix
       memax1 = MEMAX + 1
       DO lkj = 1 , MEMAX
