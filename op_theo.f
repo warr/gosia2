@@ -100,7 +100,7 @@ C     Now do the calculation loop. The work is done by the ELMT function
           ELM(kb) = ELMT(xi1,xi2,lamd,nb1,nb2,xk1,xk2,xm1,xm2,xm3)
           IF ( ABS(ELM(kb)).LT.1E-6 ) ELM(kb) = 1.E-6
           irix = 12
-          IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for target, 32 for beam
+          IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for target, 32 for beam (only gosia2)
           WRITE (irix,*) ELM(kb)
         ENDIF
       ENDDO
