@@ -557,7 +557,7 @@ C     Start reading input file.
       
 C     If line doesn't start with OP,XXXX, we have a syntax error, so stop
       IF ( op1.NE.'OP, ' ) THEN
-         WRITE(*,*) 'Line does not have the OP,XXXX syntax'
+         WRITE(*,*) 'Line does not have the OP,XXXX syntax: ', op1, op2
          STOP 'SYNTAX ERROR'
       ENDIF
 
