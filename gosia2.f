@@ -531,7 +531,7 @@ C---- gosia2 changes end
          ISEX(j) = 1111
       ENDDO
       ISEX(1) = 0
-      ACCA = .00001
+      ACCA = .00001d0
       oph = '    '
       nmemx = LP2 + 9 ! LP2 = 1500 (maximum number of matrix elements)
       IEXP = 1
