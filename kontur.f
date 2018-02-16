@@ -85,6 +85,7 @@ C      Rem    - natural log of the largest value the computer can represent
       ENDIF
  300  ww = .5*(Chis0-chis1)*NWR
       IF ( ww.GE.Rem ) GOTO 700
+      IF ( ww.LT.-400 ) ww = -400 ! Prevent floating point underflow: Nigel 16Feb2018
       f(2) = EXP(ww)
       IF ( i.EQ.2 .AND. f(2).LT..1 .AND. ABS(XV(1)-HLM(Jj)).LT.1E-9 )
      &     THEN
