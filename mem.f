@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C FUNCTION MEM
 C
-C Called by: SEQ, NEWLV
+C Called by: SEQ, NEWLV, LSLOOP, ADHOC, INTG
 C
 C Purpose: calculates an index to a matrix element given two level indices
 C      and the multipolarity.
