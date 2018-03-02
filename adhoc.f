@@ -65,6 +65,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
      &          ns3 , ns4 , Ntap , nvare
       CHARACTER*4 Oph
       INCLUDE 'cccds.inc'
+      INCLUDE 'clcom.inc'
       INCLUDE 'coex2.inc'
       INCLUDE 'dimx.inc'
       INCLUDE 'tra.inc'
@@ -323,9 +324,15 @@ C     Read known matrix elements
          EAMX(iax,2) = EAMX(iax,2)/(SQRT(wamx)+1.E-10) ! Relative error of ME
          WRITE (22,99012) ns1 , ns2 , EAMX(iax,1) , EAMX(iax,2)
          IAMX(iax) = MEM(ns1,ns2,llia) ! Index to matrix element
+         IF ( ns1.NE.LEAD(1,IAMX(iax)) .OR. ns2.NE.LEAD(2,IAMX(iax)))
+     &     GOTO 101
       ENDDO
       WRITE (22,99011) wamx
+      RETURN
 99011 FORMAT (/10X,' MATRIX ELEMENT(S) ARE TAKEN WITH WEIGHT',2X,1E14.6)
-
 99012 FORMAT (9X,1I3,'---',1I3,13X,1F9.4,8X,1F9.4)
+
+ 101  WRITE(*,*) 'Invalid matrix element from level ', ns1,
+     &  ' to level ',ns2, ' with multipolarity ',llia
+      STOP ''
       END

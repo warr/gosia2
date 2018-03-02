@@ -52,9 +52,4 @@ C     msum is now an index to the start of the matrix elements for the appropria
       ENDDO
 
  100  MEM = msum ! MEM is now the index to the matrix element we want
-      IF ( LEAD(1,k).NE.N1 ) THEN
-        WRITE(*,*) 'ERROR: Known matrix element of multipolarity ',N3,
-     &    ' between level ', N1, ' and level ', N2, ' not found'
-        STOP 'INVALID MATRIX ELEMENT'
-      ENDIF
       END
