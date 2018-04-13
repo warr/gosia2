@@ -44,7 +44,7 @@ C     Write to output
      &  '           M1           M2'
 
 C     Make sure we are at start of file that we want to write
-      rewind(29)
+      rewind(28+IBPS)
       
 C     Open the BrIcc database files
       OPEN (UNIT=30,FILE=idx_name,ACCESS='direct',RECL=2048,ERR=999,
@@ -74,7 +74,7 @@ C        We get here if we don't have it, so add it to the list
          mycc(4) = CCLKUP(IZ, temp * 1E3, 6)
          mycc(5) = CCLKUP(IZ, temp * 1E3, 7)
          WRITE(22,'(F7.4,3X,1P,5E13.3)') temp, (mycc(j),j=1,5)
-         WRITE(29,'(F7.4,3X,1P,5E13.3)') temp, (mycc(j),j=1,5)
+         WRITE(28+IBPS,'(F7.4,3X,1P,5E13.3)') temp, (mycc(j),j=1,5)
  100     CONTINUE
       ENDDO
 
