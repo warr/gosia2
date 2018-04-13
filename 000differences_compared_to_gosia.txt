@@ -31,3 +31,7 @@ prelm.f
 There is some extra code for dealing with matrix elements from two nuclei
 instead of one.
 
+bricc.f & newcnv.f
+------------------
+
+Use units 28 and 29 for projectile and target rather than just 29.
