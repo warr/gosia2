@@ -28,7 +28,7 @@ C      conversion coefficient interpolated to energy Ega
       INCLUDE 'ccc.inc'
 
 C     If the number of conversion coefficients entered by the user is negative
-C     then use read the conversion coefficients from a file on unit 29.
+C     then use read the conversion coefficients from a file on unit 28/29.
       IF ( NICC.LE.0 ) THEN
          CONV=NEWCNV(Ega,N)
          RETURN
