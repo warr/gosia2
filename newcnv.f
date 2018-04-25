@@ -29,7 +29,7 @@ C     The first time, we need to read the data
         rewind(28+IBPS)
         isfirst(IBPS+1)= 0
         DO i = 1, 1500
-          nenergies(IBPS+1) = i
+          nenergies(IBPS+1) = i - 1
           READ(28+IBPS,*,END=100) energies(IBPS+1,i),
      &      (bricc(IBPS+1,i,j),j=1,5)
         ENDDO
