@@ -3,6 +3,7 @@
 - New option OP,INTI which works like OP,INTG but the theta values for the
   meshpoints are given as angles for the recoiling target nuclei in the
   laboratory frame. This should help in inverse kinematics cases.
+- Rewind matrix element file before writing.
 
 20080630 (synchronized with gosia1)
 - Reordering of all variable declarations so variables in common blocks are
