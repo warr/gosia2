@@ -2473,6 +2473,7 @@ C---- gosia2 changes start
 C        Added for gosia2
          irix = 12
          IF ( IBPS.EQ.1 ) irix = 32
+         REWIND irix
          DO kuku = 1 , MEMAX
             WRITE (irix,*) ELM(kuku)
          ENDDO
