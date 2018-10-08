@@ -9,22 +9,22 @@ C
 C Formal parameters:
 C      A      - argument
 C      F      - range
-C      Pi     - Pi must be set to 3.14159... before calling ARCTG
 C
 C Return value:
 C      arctangent(A) within range of F
  
-      REAL*8 FUNCTION ARCTG(A,F,Pi)
+      REAL*8 FUNCTION ARCTG(A,F)
       IMPLICIT NONE
-      REAL*8 A , an , F , Pi , q , qa , qap
+      REAL*8 A , an , F , q , qa , qap
       INTEGER*4 ie , j , k
+      INCLUDE 'fconst.inc'
 
       q = ATAN(A)
       qa = q
       qap = q
       IF ( q.LE.F ) THEN
          DO j = 1 , 40
-            an = j*Pi
+            an = j*pi
             DO k = 1 , 2
                qap = qa
                ie = (-1)**k
@@ -34,5 +34,5 @@ C      arctangent(A) within range of F
          ENDDO
       ENDIF
  100  ARCTG = qa
-      IF ( (qa-F).GT.Pi/4. ) ARCTG = qap
+      IF ( (qa-F).GT.pi/4.D0 ) ARCTG = qap
       END

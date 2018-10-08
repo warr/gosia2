@@ -1910,7 +1910,7 @@ C OP,POIN
                                  GOTO 1302
                               ENDIF
                            ENDIF
-                           q1 = ARCTG(s,ph1,pi)
+                           q1 = ARCTG(s,ph1)
                            ph1 = q1
  1302                      IF ( jk.EQ.1 ) THEN
                               IF ( jd.EQ.1 .AND. MAGA(IEXP).NE.0 ) THEN
