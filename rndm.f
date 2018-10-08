@@ -19,15 +19,15 @@ C when OP,RAND is called. The parameter to OP,RAND is the seed here.
       DATA t/0./
       SAVE t
 
-      IF ( Se.GT.32000. ) Se = 100.*t + .511
+      IF ( Se.GT.32000.D0 ) Se = 100.D0*t + .511D0
       Se = Se*Se
       u = LOG10(Se)
       i = INT(u) + 1
-      t = Se/(10.**i)
+      t = Se/(10.D0**i)
       r = SQRT(SQRT(SQRT(t)))
-      p = SQRT(SQRT(SQRT(.1)))
-      rxdm = (r-p)/(1.-p)
-      rxdm = 10.*rxdm
+      p = SQRT(SQRT(SQRT(.1D0)))
+      rxdm = (r-p)/(1.D0-p)
+      rxdm = 10.D0*rxdm
       ai = DBLE(INT(rxdm))
       RNDM = rxdm - ai
       END
