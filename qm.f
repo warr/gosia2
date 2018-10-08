@@ -28,9 +28,9 @@ C Lmda = lambda + 6. i.e. Lmda = 7 is M1, Lmda = 8 is M2.
       DIMENSION Cq(7)
 
       IF ( Lmda.EQ.8 ) THEN
-         Cq(1) = -.9185586536*C*Ert/B4
+         Cq(1) = -3.D0/8.D0*SQRT(6.D0)*C*Ert/B4
          Cq(2) = -Cq(1)*D/C
          GOTO 99999
       ENDIF
-      Cq(1) = -.3535533905*Ert/B2
+      Cq(1) = -SQRT(2.D0)/4.D0*Ert/B2
 99999 END
