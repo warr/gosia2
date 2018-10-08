@@ -35,7 +35,7 @@ C      Il     - level index
       INCLUDE 'coex.inc'
       INCLUDE 'thtar.inc'
 
-      IF ( ABS(XLAMB).GE.1.E-9 ) THEN
+      IF ( ABS(XLAMB).GE.1.D-9 ) THEN
          IF ( ITTE(IEXP).EQ.0 ) THEN
             sp = SPIN(Il) ! Spin of level
             beta = BETAR(IEXP)
@@ -48,6 +48,6 @@ C      Il     - level index
          ENDIF
       ENDIF
       DO i = 1 , 3
-         VACDP(i,Il) = 1.
+         VACDP(i,Il) = 1.D0
       ENDDO
 99999 END
