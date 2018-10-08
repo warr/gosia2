@@ -32,6 +32,9 @@ C      Jj     - matrix element
 C      Sh     -
 C      Bten   -
 C      Rem    - natural log of the largest value the computer can represent
+C
+C Note that 0.3173015 is the fraction of a gaussian outside +/- sigma =
+C 1 - erf(1/sqrt(2)) = 0.3173105
  
       SUBROUTINE KONTUR(Idr,Chis0,Chil,Ifbf,Inpo,Jj,Sh,Bten,Rem)
       IMPLICIT NONE
@@ -49,7 +52,7 @@ C      Rem    - natural log of the largest value the computer can represent
       INCLUDE 'logy.inc'
 
       LNY = 0
-      h = .05*ABS(HLM(Jj))
+      h = .05D0*ABS(HLM(Jj))
       IF ( Inpo.NE.-1 ) h = ABS(Sh)
  100  INTR = 0
       sajj = ABS(SA(Jj)) ! ratio of matrix elements for correlation
@@ -59,7 +62,7 @@ C      Rem    - natural log of the largest value the computer can represent
       ENDDO
       YV(1) = 0.
       XV(1) = HLM(Jj)
-      f(3) = 1.
+      f(3) = 1.D0
       i = 1
  200  itl = 0
       v = ELMU(Jj) - ELM(Jj)
@@ -69,7 +72,7 @@ C      Rem    - natural log of the largest value the computer can represent
       i = i + 1
       f(1) = f(3)
       DO j = 1 , MEMAX
-         ELM(j) = .5*h*SA(j) + ELM(j)
+         ELM(j) = .5D0*h*SA(j) + ELM(j)
       ENDDO
       CALL LIMITS ! Constrain matrix elements within limits
       CALL FTBM(3,chis1,Idr,1,chilo,Bten)
@@ -83,21 +86,21 @@ C      Rem    - natural log of the largest value the computer can represent
             GOTO 500
          ENDIF
       ENDIF
- 300  ww = .5*(Chis0-chis1)*NWR
+ 300  ww = .5D0*(Chis0-chis1)*NWR
       IF ( ww.GE.Rem ) GOTO 700
       IF ( ww.LT.-400 ) ww = -400 ! Prevent floating point underflow: Nigel 16Feb2018
       f(2) = EXP(ww)
-      IF ( i.EQ.2 .AND. f(2).LT..1 .AND. ABS(XV(1)-HLM(Jj)).LT.1E-9 )
+      IF ( i.EQ.2 .AND. f(2).LT..1D0 .AND. ABS(XV(1)-HLM(Jj)).LT.1D-9 )
      &     THEN
-         h = h/2.
+         h = h/2.D0
          GOTO 100
       ELSE
          DO j = 1 , MEMAX ! For each matrix element
-            ELM(j) = ELM(j) + .5*SA(j)*h
+            ELM(j) = ELM(j) + .5D0*SA(j)*h
          ENDDO
          v = ELM(Jj)
          CALL LIMITS ! Constrain matrix elements within limits
-         IF ( ABS(v-ELM(Jj)).GT.1.E-6 ) itl = 1
+         IF ( ABS(v-ELM(Jj)).GT.1.D-6 ) itl = 1
          CALL FTBM(3,chis2,Idr,1,chilo,Bten)
          IF ( chis2.LE.Chis0 ) THEN
             IF ( Inpo.EQ.-1 ) WRITE (22,99003) Jj , ELM(Jj) , chis2
@@ -110,7 +113,7 @@ C      Rem    - natural log of the largest value the computer can represent
             ENDIF
          ENDIF
       ENDIF
- 400  ww = .5*(Chis0-chis2)*NWR
+ 400  ww = .5D0*(Chis0-chis2)*NWR
       IF ( ww.GT.Rem ) GOTO 700
       f(3) = EXP(ww)
       IF ( itl.EQ.1 ) WRITE (22,99001) Jj
@@ -118,14 +121,14 @@ C      Rem    - natural log of the largest value the computer can represent
      &        'INTEGRATION STOPPED AT THE LIMIT')
       IF ( i.EQ.2 ) THEN
          IF ( itl.NE.1 ) THEN
-            IF ( f(3).LT..1 .AND. ABS(XV(1)-HLM(Jj)).LT.1.E-9 ) THEN
-               h = h/2.
+            IF ( f(3).LT..1D0 .AND. ABS(XV(1)-HLM(Jj)).LT.1.D-9 ) THEN
+               h = h/2.D0
                GOTO 100
             ELSEIF ( f(1).LE.f(2) .OR. f(2).LE.f(3) ) THEN
                IF ( f(1).LT.f(2) .AND. f(2).GT.f(3) ) THEN
                   d1 = f(2) - f(1)
                   d2 = f(3) - f(1)
-                  ac = (d2-4.*d1)*h/(d2-2.*d1)/4.
+                  ac = (d2-4.D0*d1)*h/(d2-2.D0*d1)/4.D0
                   DO l = 1 , MEMAX
                      ELM(l) = (ELM(l)-h*SA(l)) + ac*SA(l)
                   ENDDO
@@ -133,14 +136,14 @@ C      Rem    - natural log of the largest value the computer can represent
                   XV(1) = ELM(Jj)
                   i = 1
                   CALL FTBM(3,chis1,Idr,1,chilo,Bten)
-                  ww = .5*(Chis0-chis1)*NWR
+                  ww = .5D0*(Chis0-chis1)*NWR
                   IF ( ww.GE.Rem ) GOTO 700
                   f(3) = EXP(ww)
                   GOTO 200
                ELSE
                   i = 1
                   XV(1) = ELM(Jj)
-                  IF ( Inpo.EQ.-1 ) h = 2.*h
+                  IF ( Inpo.EQ.-1 ) h = 2.D0*h
                   GOTO 200
                ENDIF
             ENDIF
@@ -149,9 +152,9 @@ C      Rem    - natural log of the largest value the computer can represent
       y = YV(i-1)
       YV(i) = RK4(y,h,f)
       XV(i) = ELM(Jj)
-      IF ( NWR*(chis2-Chis0).LT.2. .AND. Inpo.EQ.-1 ) h = 2.*h
+      IF ( NWR*(chis2-Chis0).LT.2.D0 .AND. Inpo.EQ.-1 ) h = 2.D0*h
       IF ( itl.EQ.1 ) GOTO 600
-      IF ( f(3).GE.1.E-3 ) GOTO 200
+      IF ( f(3).GE.1.D-3 ) GOTO 200
       GOTO 600
  500  REWIND 17
       DO l = 1 , MEMAX ! For each matrix element
@@ -168,10 +171,10 @@ C      Rem    - natural log of the largest value the computer can represent
       ENDIF
       m = 0
       DO l = 1 , i
-         YV(l) = 1.00001 - YV(l)/c
-         IF ( m.EQ.0 .AND. YV(l).LT..317 ) m = l
+         YV(l) = 1.00001D0 - YV(l)/c
+         IF ( m.EQ.0 .AND. YV(l).LT..3173105D0 ) m = l
       ENDDO
-      x = (XV(m)-XV(m-1))*(.317-YV(m))/(YV(m-1)-YV(m))
+      x = (XV(m)-XV(m-1))*(.3173105D0-YV(m))/(YV(m-1)-YV(m))
       t = XV(m) - x - HLM(Jj)
       IF ( t.GE.0. ) DEVU(Jj) = t
       IF ( t.LT.0. ) DEVD(Jj) = t
