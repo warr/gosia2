@@ -41,7 +41,7 @@ C WSIXJ(2 * J1, 2 * J2, 2 * J3, 2 * L1, 2 * L2, 2 * L3).
       DIMENSION isumfa(26) , ivorfa(26)
       INCLUDE 'fakul.inc'
       
-      wsixp = 0.E+00
+      wsixp = 0.D+00
       IF ( ((J1+J2-J3).GE.0) .AND. ((J1-J2+J3).GE.0) .AND. 
      &     ((-J1+J2+J3).GE.0) ) THEN
          IF ( ((J1+L2-L3).GE.0) .AND. ((J1-L2+L3).GE.0) .AND. 
@@ -78,8 +78,8 @@ C WSIXJ(2 * J1, 2 * J2, 2 * J3, 2 * L1, 2 * L2, 2 * L3).
                      ENDDO
                   ENDIF
                   GOTO 100
- 5                vorz = -1.E+00
-                  IF ( 2*(izmin/2).EQ.izmin ) vorz = +1.E+00
+ 5                vorz = -1.D+00
+                  IF ( 2*(izmin/2).EQ.izmin ) vorz = +1.D+00
                   DO irl = 1 , n
                      iva = KF(kqa+1,irl) + KF(kqb+1,irl) + KF(kqc+1,irl)
      &                     - KF(kqd+2,irl)
@@ -92,7 +92,7 @@ C WSIXJ(2 * J1, 2 * J2, 2 * J3, 2 * L1, 2 * L2, 2 * L3).
                      ivorfa(irl) = iva + ivb + ivc + ivd
                   ENDDO
                   DO iz = izmin , izmax
-                     sumlo = 0.E+00
+                     sumlo = 0.D+00
                      iza = iz + 2
                      izb = iz - kqd + 1
                      izc = iz - krd + 1
@@ -112,7 +112,7 @@ C WSIXJ(2 * J1, 2 * J2, 2 * J3, 2 * L1, 2 * L2, 2 * L3).
                         qsumfa = isumfa(irj)
                         sumlo = sumlo + qsumfa*PILOG(irj)
                      ENDDO
-                     qsumlo = (.5E+00)*sumlo
+                     qsumlo = (.5D+00)*sumlo
                      zusix = EXP(qsumlo)*vorz
                      wsixp = wsixp + zusix
                      vorz = -vorz
