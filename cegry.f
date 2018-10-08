@@ -146,7 +146,7 @@ C     with CONT:PRT, and then does OP,EXIT
 99002    FORMAT (1X//20X,'RECOMMENDED RELATIVE GE(LI) EFFICIENCIES'//2X,
      &           'EXPERIMENT')
          DO jpc = 1 , NEXPT
-            IF ( ABS(cnr(1,jpc)).LT.1.E-9 ) cnr(1,jpc) = 1.
+            IF ( ABS(cnr(1,jpc)).LT.1.D-9 ) cnr(1,jpc) = 1.D0
             k = NDST(jpc)
             WRITE (22,99012) jpc , (cnr(l,jpc)/cnr(1,jpc),l=1,k)
          ENDDO ! Loop on experiments
@@ -208,9 +208,11 @@ C              Correct for finite recoil
                IF ( IFMO.NE.0 ) THEN
                   id = ITMA(IEXP,k) ! Get identity for detector
                   d = ODL(id) ! Results of OP,GDET for this detector
-                  rx = d*SIN(gth)*COS(figl-fm) - .25*SIN(tetrc)*COS(fm)
-                  ry = d*SIN(gth)*SIN(figl-fm) - .25*SIN(tetrc)*SIN(fm)
-                  rz = d*COS(gth) - .25*COS(tetrc)
+                  rx = d*SIN(gth)*COS(figl-fm) -
+     &                 .25D0*SIN(tetrc)*COS(fm)
+                  ry = d*SIN(gth)*SIN(figl-fm) -
+     &                 .25D0*SIN(tetrc)*SIN(fm)
+                  rz = d*COS(gth) - .25D0*COS(tetrc)
                   rl = SQRT(rx*rx+ry*ry+rz*rz)
                   sf = d*d/rl/rl
                   thc = TACOS(rz/rl)
@@ -219,7 +221,7 @@ C              Correct for finite recoil
                   DO ixl = 1 , Idr ! For each decay
                      ixm = KSEQ(ixl,3) ! Initial level of ixl'th decay
                      tfac = TAU(ixm) ! Get lifetime
-                     YGN(ixl) = YGN(ixl) + .01199182*tfac*BETAR(IEXP)
+                     YGN(ixl) = YGN(ixl) + .01199182D0*tfac*BETAR(IEXP)
      &                          *(sf*YGP(ixl)-YGN(ixl))
                   ENDDO ! Loop on decays ixl
                ENDIF ! If correction for finite recoil
@@ -230,7 +232,7 @@ C              Correct for finite recoil
                      decen = ENDEC(l)
                      cocos = SIN(tetrc)*SIN(gth)*COS(fm-figl)
      &                       + COS(tetrc)*COS(gth)
-                     decen = decen*(1.+BETAR(IEXP)*cocos)
+                     decen = decen*(1.D0+BETAR(IEXP)*cocos)
                      CALL EFFIX(IEXP,ipd,decen,effi)
                      YGN(l) = YGN(l)*effi
                   ENDDO
@@ -267,8 +269,8 @@ C              Correct for finite recoil
                      licz = lic(k9)
                      Nwyr = Nwyr + 1
                      wf = CORF(lu,k9)
-                     IF ( Icall.EQ.4 ) wf = 1.
-                     IF ( Icall.EQ.1 .AND. Issp.EQ.1 ) wf = 1.
+                     IF ( Icall.EQ.4 ) wf = 1.D0
+                     IF ( Icall.EQ.1 .AND. Issp.EQ.1 ) wf = 1.D0
                      IF ( IY(lu,k9).GE.1000 ) THEN
                         ifdu = 1
                         l1 = IY(lu,k9)/1000
@@ -286,8 +288,8 @@ C              Correct for finite recoil
      &                            SPIN(ni) , SPIN(ni1) , SPIN(nf) , 
      &                            SPIN(nf1) , ENDEC(l) , ENDEC(l1) , 
      &                            YGN(l)*CNOR(k9,IEXP) , YEXP(k9,lu) , 
-     &                            100.*(YEXP(k9,lu)-YGN(l)*CNOR(k9,IEXP)
-     &                            )/YEXP(k9,lu) , sgm , war
+     &                            100.D0*(YEXP(k9,lu)-YGN(l)*
+     &                            CNOR(k9,IEXP))/YEXP(k9,lu) , sgm , war
 99007                      FORMAT (4X,1I2,'+',1I2,'--',1I2,'+',1I2,3X,
      &                             1F4.1,'+',1F4.1,'--',1F4.1,'+',1F4.1,
      &                             3X,1F6.4,'+',1F6.4,2X,1E9.4,6X,1E9.4,
@@ -305,8 +307,8 @@ C              Correct for finite recoil
                            WRITE (22,99013) ni , nf , SPIN(ni) , 
      &                            SPIN(nf) , ENDEC(l) , YGN(l)
      &                            *CNOR(k9,IEXP) , YEXP(k9,lu) , 
-     &                            100.*(YEXP(k9,lu)-YGN(l)*CNOR(k9,IEXP)
-     &                            )/YEXP(k9,lu) , sgm , war
+     &                            100.D0*(YEXP(k9,lu)-YGN(l)*
+     &                            CNOR(k9,IEXP))/YEXP(k9,lu) , sgm , war
                            SUBCH1 = SUBCH1 + sgm*sgm
                         ENDIF
                      ENDIF
@@ -352,7 +354,7 @@ C              Correct for finite recoil
                      ENDIF
                      lu = lu + 1
                   ELSE
-                     IF ( JSKIP(IEXP).EQ.0 ) YGN(IDRN) = 1.E+10
+                     IF ( JSKIP(IEXP).EQ.0 ) YGN(IDRN) = 1.D+10
                      ry = YGN(l)/YGN(IDRN)
                      IF ( Icall.EQ.4 .AND. IPRM(8).EQ.-2 ) THEN
                         wupl = '    '
@@ -429,9 +431,11 @@ C              Correct for finite recoil
                IF ( IFMO.NE.0 ) THEN
                   id = ITMA(IEXP,k) ! Get identity for detector
                   d = ODL(id) ! Get results of OP,GDET for detector
-                  rx = d*SIN(gth)*COS(figl-fm) - .25*SIN(tetrc)*COS(fm)
-                  ry = d*SIN(gth)*SIN(figl-fm) - .25*SIN(tetrc)*SIN(fm)
-                  rz = d*COS(gth) - .25*COS(tetrc)
+                  rx = d*SIN(gth)*COS(figl-fm) -
+     &                 .25D0*SIN(tetrc)*COS(fm)
+                  ry = d*SIN(gth)*SIN(figl-fm) -
+     &                 .25D0*SIN(tetrc)*SIN(fm)
+                  rz = d*COS(gth) - .25D0*COS(tetrc)
                   rl = SQRT(rx*rx+ry*ry+rz*rz)
                   sf = d*d/rl/rl
                   thc = TACOS(rz/rl)
@@ -440,8 +444,8 @@ C              Correct for finite recoil
                   DO ixl = 1 , Idr
                      ixm = KSEQ(ixl,3) ! Initial level of ixl'th decay
                      tfac = TAU(ixm)
-                     IF ( tfac.GT.1.E+4 ) GOTO 25
-                     YGN(ixl) = YGN(ixl) + .01199182*tfac*BETAR(IEXP)
+                     IF ( tfac.GT.1.D+4 ) GOTO 25
+                     YGN(ixl) = YGN(ixl) + .01199182D0*tfac*BETAR(IEXP)
      &                          *(sf*YGP(ixl)-YGN(ixl))
                   ENDDO
  25               IFMO = 0
@@ -484,7 +488,7 @@ C              Correct for finite recoil
                         YGN(idc) = YGN(idc) + YGN(ll1)
                      ENDIF
                      IF ( Itemp.EQ.1 ) THEN
-                        CORF(l,k9) = CORF(l,k9)/(YGN(idc)+1.E-24)
+                        CORF(l,k9) = CORF(l,k9)/(YGN(idc)+1.D-24)
                      ELSE
                         CORF(l,k9) = YGN(idc)
                         IF ( IMIN.LE.1 .AND. l.EQ.iyex ) CNOR(k9,IEXP)
@@ -503,7 +507,7 @@ C     Sort out normalisation coefficients
          IF ( JSKIP(jj).NE.0 ) THEN
             kc = NDST(jj) ! Number of datasets
             DO jk = 1 , kc ! For each dataset
-               cnr(jk,jj) = -.5*part(jk,jj,2)/part(jk,jj,1)
+               cnr(jk,jj) = -.5D0*part(jk,jj,2)/part(jk,jj,1)
                IF ( INNR.NE.0 ) CNOR(jk,jj) = cnr(jk,jj)
             ENDDO ! Loop on datasets
 
@@ -516,7 +520,7 @@ C           If we want a common normalisation, sort it out here
                      k = NDST(jj1) ! Number of datasets
                      DO jk = 1 , k ! For each dataset
                         d = d + YNRM(jk,jj1)*part(jk,jj1,1)*YNRM(jk,jj1)
-                        g = g - .5*YNRM(jk,jj1)*part(jk,jj1,2)
+                        g = g - .5D0*YNRM(jk,jj1)*part(jk,jj1,2)
                      ENDDO ! Loop on datasets
                   ENDIF ! IF ( LNORM(jj1).EQ.jj )
                ENDDO ! Loop on experiment
