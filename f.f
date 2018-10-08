@@ -40,15 +40,15 @@ C the values to calculate, so that they can handle half-integers correctly.
       
       F = 0.
       IF ( (L1*L2).EQ.0 ) RETURN
-      ix = INT(Sji+Sjf+.0001)
+      ix = INT(Sji+Sjf+.0001D0)
       l = ix - 1
-      phase = 1.
-      IF ( l/2*2.NE.l ) phase = -1.
+      phase = 1.D0
+      IF ( l/2*2.NE.l ) phase = -1.D0
       kz = K*2
       jiz = INT(Sji*2)
       jfz = INT(Sjf*2)
       l1z = L1*2
       l2z = L2*2
-      F = phase*SQRT((l1z+1.)*(l2z+1.)*(jiz+1.)*(kz+1.))
+      F = phase*SQRT((l1z+1.D0)*(l2z+1.D0)*(jiz+1.D0)*(kz+1.D0))
      &    *WTHREJ(l1z,l2z,kz,2,-2,0)*WSIXJ(jiz,jiz,kz,l2z,l1z,jfz)
       END
