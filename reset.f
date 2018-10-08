@@ -33,7 +33,7 @@ C      Iso    - isotropic flag
             ARM(ir,1) = ARM(ir,2)
             ARM(ir,2) = ARM(ir,3)
             ARM(ir,3) = ARM(ir,4)
-            IF ( CAT(ir,3).LT.-.1 ) GOTO 20 ! m quantum number of substate ir
+            IF ( CAT(ir,3).LT.-.1D0 ) GOTO 20 ! m quantum number of substate ir
          ENDDO
          GOTO 99999
       ENDIF
