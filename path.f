@@ -33,7 +33,7 @@ C      Irld   - index into ARM array
             isp = NSTOP(i) ! Index of last substate for level
             DO j = ist , isp ! For each substate of level
                vl = CAT(j,3) ! m quantum number for substate j
-               IF ( ABS(vl-spm).LT.1.E-6 ) GOTO 50 ! Jump if they have the same m
+               IF ( ABS(vl-spm).LT.1.D-6 ) GOTO 50 ! Jump if they have the same m
             ENDDO
          ENDIF
          GOTO 100
