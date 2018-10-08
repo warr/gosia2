@@ -43,7 +43,7 @@ C      Ktoto  - number of iterations needed
       DATA ci/(0.,-1.)/ ! -sqrt(-1)
 
       sig = 1.
-      IF ( L.NE.2 ) sig = -1.
+      IF ( L.NE.2 ) sig = -1.D0
       DO kk = 1 , Jidim
          ARM(kk,1) = ARM(kk,Iw)
       ENDDO
@@ -87,10 +87,10 @@ C      Ktoto  - number of iterations needed
 C        Calculate accuracy we have achieved
          test = 0.
          DO m = 1 , Jidim
-           IF (ABS(ARM(m,2)) .gt.1.0d50) then
+           IF (ABS(ARM(m,2)) .gt.1.0D50) then
                WRITE(*,*) 'WARNING FLOATING POINT OVERFLOW ARM(',
      &          m,',2) = ',ARM(m,2)
-               ARM(m,2) = ARM(m,2)/1.0d10 ! Try to prevent exception
+               ARM(m,2) = ARM(m,2)/1.0D10 ! Try to prevent exception
                RETURN
             ENDIF
             ARM(m,1) = ARM(m,2)/k
