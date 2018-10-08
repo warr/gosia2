@@ -30,7 +30,7 @@ C      Tzz    - upper limit of theta (degrees) - read/write
  
       SUBROUTINE COORD(Wth,Wph,Wthh,Naa,Ifw,Pfi,Wpi,Wtlb,Lz,Tyy,Tzz)
       IMPLICIT NONE
-      REAL*8 ga , gi , Pfi , rade , rmass , TACOS , TASIN , thetb , 
+      REAL*8 ga , gi , Pfi , rmass , TACOS , TASIN , thetb ,
      &       ttcm , Tyy , Tzz
       REAL*8 wpa , Wph , Wpi , ws , Wth , Wthh , Wtlb , xaa , xph , 
      &       xth , xthh , za , za1 , zb , zl
@@ -40,7 +40,7 @@ C      Tzz    - upper limit of theta (degrees) - read/write
       INCLUDE 'kin.inc'
       INCLUDE 'cx.inc'
       INCLUDE 'seck.inc'
-      DATA rade/57.2957795/ ! 180 / pi
+      INCLUDE 'fconst.inc'
       DATA ws/0./
 
       IF ( Ifw.EQ.0 ) THEN ! For meshpoints
@@ -49,9 +49,9 @@ C      Tzz    - upper limit of theta (degrees) - read/write
       ENDIF
 
 C     Convert to radians
-      xth = Wth/rade ! theta of centre of detector in radians
-      xph = Wph/rade ! phi of centre of detector in radians
-      xthh = Wthh/rade ! half angle subtended in radians
+      xth = Wth*pi/180.D0 ! theta of centre of detector in radians
+      xph = Wph*pi/180.D0 ! phi of centre of detector in radians
+      xthh = Wthh*pi/180.D0 ! half angle subtended in radians
 
 C     pre-calculate trigonometric functions
       zl = TAN(xthh)
@@ -60,7 +60,7 @@ C     pre-calculate trigonometric functions
       zb = COS(xthh)
 
       rmass = XA1(Lz)/XA ! Mass ratio for this experiment
-      IF ( IZ1(Lz).LT.0 ) rmass = 1./rmass
+      IF ( IZ1(Lz).LT.0 ) rmass = 1.D0/rmass
 
 C     Calculate size of each division (ws)
       IF ( Ifw.NE.2 ) THEN ! Unless we are using the pin diode option
@@ -71,15 +71,15 @@ C     Calculate size of each division (ws)
       DO i = 1 , Naa ! Loop over theta divisions
          IF ( Ifw.NE.2 ) THEN ! Not pin diode option
             IF ( Ifw.EQ.0 ) YV(i) = Tyy + i*ws ! theta value for this step in degrees
-            xaa = (Tyy+ws*(i-1))/rade ! and in radians
+            xaa = (Tyy+ws*(i-1))*pi/180.D0 ! and in radians
             IF ( Ifw.EQ.1 .AND. (i.EQ.1 .OR. i.EQ.Naa) ) THEN
                Pfi(i) = 0.
                GOTO 100
             ELSE
-               IF ( Ifw.EQ.0 ) xaa = YV(i)/rade
+               IF ( Ifw.EQ.0 ) xaa = YV(i)*pi/180.D0
             ENDIF
          ELSE ! Pin diode option
-            xaa = ABS(Wtlb)/rade ! Detector angle theta in lab frame in radians
+            xaa = ABS(Wtlb)*pi/180.D0 ! Detector angle theta in lab frame in radians
             IF ( Wtlb.GT.0. ) GOTO 50
             IF ( IZ1(Lz).LT.0 ) THEN
                IF ( XA.LE.XA1(Lz) ) GOTO 20
@@ -88,11 +88,11 @@ C     Calculate size of each division (ws)
             ENDIF
             IF ( ISKIN(Lz).EQ.0 ) THEN ! ISKIN = 0 means take lower CM angle
                ttcm = xaa - TASIN(rmass*SIN(xaa))
-               xaa = ABS(ttcm)/2.
+               xaa = ABS(ttcm)/2.D0
                GOTO 50
             ENDIF
  20         ttcm = xaa + TASIN(rmass*SIN(xaa)) ! Take higher CM angle
-            xaa = (3.14159265-ttcm)/2.
+            xaa = (pi-ttcm)/2.D0
          ENDIF ! End of pin diode option
 
  50      gi = (za-COS(xaa)/zb)/(zl*za1)
@@ -103,10 +103,10 @@ C     Calculate size of each division (ws)
             FIEX(Lz,1) = (xph-wpa) ! phi min
             FIEX(Lz,2) = (xph+wpa) ! phi max
          ELSEIF ( Ifw.EQ.1 ) THEN ! Interpolation option
-            Pfi(i) = 2.*wpa*rade
+            Pfi(i) = 2.*wpa*180.D0/pi
          ELSE ! Meshpoint option
-            Wpi(i,1) = (xph-wpa)*rade ! Lower phi limit
-            Wpi(i,2) = (xph+wpa)*rade ! Upper phi limit
+            Wpi(i,1) = (xph-wpa)*180.D0/pi ! Lower phi limit
+            Wpi(i,2) = (xph+wpa)*180.D0/pi ! Upper phi limit
          ENDIF
  100     CONTINUE
       ENDDO ! Loop on theta divisions i
@@ -115,12 +115,12 @@ C     If a negative value of theta was specified for a meshpoint value,
 C     we use the target angle
       IF ( Wtlb.LT.0. .AND. Ifw.EQ.0 ) THEN
          DO i = 1 , Naa ! For each theta division
-            xaa = YV(i)/rade ! theta in radians
-            thetb = ATAN(SIN(2.*xaa)/(rmass-COS(2.*xaa)))*rade
-            IF ( thetb.LT.0. ) thetb = 180. + thetb
+            xaa = YV(i)*pi/180.D0 ! theta in radians
+            thetb = ATAN(SIN(2.*xaa)/(rmass-COS(2.*xaa)))*180.D0/pi
+            IF ( thetb.LT.0. ) thetb = 180.D0 + thetb
             YV(i) = -1.*thetb
-            Wpi(i,1) = Wpi(i,1) + 180.
-            Wpi(i,2) = Wpi(i,2) + 180.
+            Wpi(i,1) = Wpi(i,1) + 180.D0
+            Wpi(i,2) = Wpi(i,2) + 180.D0
          ENDDO
       ENDIF
       END
