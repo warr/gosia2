@@ -177,7 +177,7 @@ C     multipolarity
          ENDIF
  100     la = la - 6
          IF ( la.EQ.2 ) THEN
-            DELTA(Idr,2) = 60.D0/75.D0*SQRT(3.D0*pi/hbar)/
+            DELTA(Idr,2) = 4.D0/5.D0*SQRT(3.D0*pi/hbar)/
      &        hbarc**1.5D0/mprot*ega*ega*egs ! M2 0.036806836
             mulm = 2
             istr2 = 5 ! In array CC and N parameter of CONV -> M2
