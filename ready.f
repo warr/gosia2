@@ -102,7 +102,7 @@ C     Rewind yield file
 99004          FORMAT (2X,1I6,1X,1I3,1X,1I3,1(1E14.6,3X,1E14.6))
                iytt = iytot(kk)
                YEXP(kk,iytt) = u
-               DYEX(kk,iytt) = w/(SQRT(waga)+1.E-4)
+               DYEX(kk,iytt) = w/(SQRT(waga)+1.D-4)
                IY(iytt,kk) = idc
                CONTINUE
             ENDDO
