@@ -50,6 +50,7 @@ C      Tetrn  - theta of recoiling nucleus in lab frame (in radians)
       INCLUDE 'cx.inc'
       INCLUDE 'kin.inc'
       INCLUDE 'coex.inc'
+      INCLUDE 'fconst.inc'
       DATA r3/0./
 
       lexp0 = 1
@@ -82,16 +83,17 @@ C      Tetrn  - theta of recoiling nucleus in lab frame (in radians)
          ENDIF
 C
 C        dists is Cline's estimate of the maximum safe bombarding energy
-         dists = 1.44*(a1+a2)*z1*z2/((a1**.33333+a2**.33333)*1.25+5.)/a2
+         dists = e2*(a1+a2)*z1*z2/((a1**(1.D0/3.D0)+
+     &           a2**(1.D0/3.D0))*1.25D0+5.D0)/a2
 C        dista is 0.05 * distance of closest approach for head-on collisions
-         dista = 0.0719949*(1.0+a1/a2)*z1*z2/EP(lexp)
+         dista = e2/20.0D0*(1.0D0+a1/a2)*z1*z2/EP(lexp)
 C        d2a is the distance of closest approach for head-on collisions in fm
 C        q^2/4/pi/epsilon_0 * (1+a1/a2) * Z1 * Z2 / Ep. For Ep in MeV and d2a
 C        in fm, q^2/4/pi/epsilon_0 = 1.44
-         d2a = 20.0*dista ! = 1.44 * (1.0+a1/a2)*z1*z2/EP(lexp)
+         d2a = 20.0D0*dista ! = e2 * (1.0+a1/a2)*z1*z2/EP(lexp)
 C        VINF is the initial velocity of the incoming projectile (at infinity)
 C        VINF = sqrt(2 * EP / 931.494028 * A1) : 931.494028 = 1 AMU
-         VINF(lexp) = 0.0463365*SQRT(EP(lexp)/a1)
+         VINF(lexp) = SQRT(2.D0/amu*EP(lexp)/a1)
 
 C        If IPRM(1) we want extra printout
          IF ( IPRM(1).EQ.1 ) THEN
@@ -115,8 +117,8 @@ C        The maximum excitation energy corresponds to \v{E} = 0, so
 C        \DeltaE = E_P \over {1 + m_P / m_T) = E_P/ared
 C        We check that there are no states defined which are higher than this.
 
-         tlbrad = TLBDG(lexp)/57.2957795 ! Theta of detector to radians
-         ared = 1.0 + a1/a2 ! reduced mass
+         tlbrad = TLBDG(lexp)*pi/180.D0 ! Theta of detector to radians
+         ared = 1.0D0 + a1/a2 ! reduced mass
          emax = EP(lexp)/ared ! Maximum excitation energy
          DO n = 1 , NMAX ! For each level
             IF ( EN(n).GT.emax ) GOTO 50 ! Give error if energy of state too high
@@ -136,8 +138,8 @@ C        by SIN(tmxdg) = 1 / tau.
          epmin = EP(lexp) - EN(NCM)*ared
          taup = SQRT(EP(lexp)/epmin)
          tau = taup*a1/a2
-         IF ( tau.LE.1.0 ) GOTO 100 ! No limit on scattering angle
-         tmxdg = TASIN(1.0/tau)*57.2957795 ! Maximum lab angle in degrees
+         IF ( tau.LE.1.0D0 ) GOTO 100 ! No limit on scattering angle
+         tmxdg = TASIN(1.0D0/tau)*180.D0/pi ! Maximum lab angle in degrees
          IF ( tmxdg.GE.TLBDG(lexp) ) GOTO 100 ! Within limit of scattering angle
 
          WRITE (22,99007) tmxdg , lexp
@@ -152,11 +154,11 @@ C        by SIN(tmxdg) = 1 / tau.
 
 C        Calculate centre of mass angle
  100     tcmrad = tlbrad + TASIN(tau*SIN(tlbrad)) ! In radians
-         tcmdg = tcmrad*57.2957795 ! and in degrees
+         tcmdg = tcmrad*180.D0/pi ! and in degrees
 
 C        In inverse kinematics, for a given lab angle, there are two solutions
 C        for the centre of mass angle.
-         IF ( tau.GT.1.0 ) THEN ! Inverse kinematics
+         IF ( tau.GT.1.0D0 ) THEN ! Inverse kinematics
             IF ( IPRM(1).EQ.1 ) THEN
                IF ( Ii.EQ.0 .AND. IPRM(10).EQ.1 ) WRITE (22,99009)
      &              tcmdg , lexp
@@ -164,8 +166,8 @@ C        for the centre of mass angle.
      &                 ' DEGREES FOR EXPERIMENT ',1I2)
             ENDIF
             IF ( ISKIN(lexp).NE.1 ) THEN ! If ISKIN is set, take the second solution
-               tcmdg = 180. + 2.*TLBDG(lexp) - tcmdg
-               tcmrad = tcmdg/57.2957795
+               tcmdg = 180.D0 + 2.D0*TLBDG(lexp) - tcmdg
+               tcmrad = tcmdg*pi/180.D0
             ENDIF
          ENDIF
 
@@ -197,13 +199,13 @@ C        More additional printout
 
 C        This is the beta of the recoiling particle of interest (target or projectile
 C        depending on sign of Z1, which is used as a flag)
-         BETAR(lexp) = .0463365*SQRT(BETAR(lexp)/XA) ! 0.0463365 = sqrt(2/931.494028)
+         BETAR(lexp) = SQRT(2.D0/amu*BETAR(lexp)/XA) ! 0.0463365 = sqrt(2/931.494028)
          IF ( IPRM(1).EQ.1 ) THEN
             IF ( Ii.EQ.0 .AND. IPRM(10).EQ.1 ) WRITE (22,99012)
      &           BETAR(lexp)
 99012       FORMAT (5X,'RECOIL BETA',2X,1E14.6)
             IF ( Ii.EQ.0 .AND. IPRM(10).EQ.1 ) WRITE (22,99013) EP(lexp)
-     &           /(dists*.5*(1.+EPS(lexp)))
+     &           /(dists*.5D0*(1.D0+EPS(lexp)))
 99013       FORMAT (5X,'BOMBARDING ENERGY=',1F10.3,1X,
      &              'OF SAFE BOMBARDING ENERGY AT THIS ANGLE')
          ENDIF
@@ -211,40 +213,40 @@ C        depending on sign of Z1, which is used as a flag)
 C        iflaa = 0 when projectile detected, = 1 when target detected
 C        r3 is the Jacobian dOmega/domega
          IF ( iflaa.NE.1 ) THEN ! Projectile detected
-            IF ( ABS(tcmdg-180.).LT.1.E-5 ) THEN
-               r3 = (1.-tau)**2
+            IF ( ABS(tcmdg-180.D0).LT.1.D-5 ) THEN
+               r3 = (1.D0-tau)**2
             ELSE
                r3 = SIN(tlbrad)/SIN(tcmrad)
                r3 = r3*r3*ABS(COS(tcmrad-tlbrad))
-               r3 = 1./r3
+               r3 = 1.D0/r3
             ENDIF
          ENDIF
 
 C        Calculate the values for the target. In the centre of mass system, the
 C        target and projectile angles differ by 180 degrees
-         zcmdg = 180. - tcmdg ! Target angle in degrees in cm system
-         zcmrad = zcmdg/57.2957795 ! and in radians
+         zcmdg = 180.D0 - tcmdg ! Target angle in degrees in cm system
+         zcmrad = zcmdg*pi/180.D0 ! and in radians
          zlbrad = ATAN(SIN(zcmrad)/(COS(zcmrad)+taup)) ! target theta in lab (radians)
 
 C        iflaa = 0 when projectile detected, = 1 when target detected
 C        r3 is the Jacobian dOmega/domega
          IF ( iflaa.NE.0 ) THEN ! Target detected, but theta is for projectile!
-            IF ( ABS(tcmdg-180.).LT.1.E-5 ) THEN
-               r3 = (1.+taup)**2
+            IF ( ABS(tcmdg-180.D0).LT.1.D-5 ) THEN
+               r3 = (1.D0+taup)**2
                TLBDG(lexp) = 0.
             ELSE
                r3 = SIN(zlbrad)/SIN(zcmrad)
                r3 = r3*r3
                r3 = r3*ABS(COS(zcmrad-zlbrad))
-               r3 = 1./r3
-               TLBDG(lexp) = zlbrad*57.2955795
+               r3 = 1.D0/r3
+               TLBDG(lexp) = zlbrad*180.D0/pi
             ENDIF
          ENDIF
 
 C        Now calculate dsigma
-         Dsig = 250.*r3*SQRT(EP(lexp)/(EP(lexp)-ared*EN(NCM)))
+         Dsig = 250.D0*r3*SQRT(EP(lexp)/(EP(lexp)-ared*EN(NCM)))
      &          *dista*dista*(EPS(lexp))**4
-         EROOT(lexp) = SQRT(EPS(lexp)*EPS(lexp)-1.)
+         EROOT(lexp) = SQRT(EPS(lexp)*EPS(lexp)-1.D0)
          DSIGS(lexp) = Dsig
          Tetrn = zlbrad
          IF ( IZ1(lexp).LT.0. ) Tetrn = tlbrad
