@@ -18,6 +18,7 @@ C We use: arccos(x) = pi/2 - arcsin(x)
       REAL*8 FUNCTION TACOS(X)
       IMPLICIT NONE
       REAL*8 TASIN , X
+      INCLUDE 'fconst.inc'
       
-      TACOS = 1.570796327 - TASIN(X) ! 1.570796327 = pi / 2
+      TACOS = pi/2.D0 - TASIN(X)
       END
