@@ -181,7 +181,7 @@ C      ZV     - energy meshpoints
      &       cf , chilo , chiok , chis0 , chisl , chisq , chiss , cnst ,
      &       cocos , conu , d , decen , dsd , dsig , effi , eh1 , elmi ,
      &       emhl1 , eng , esd , ess , fi0 , fi1 , fic , fiex1 , figl ,
-     &       fipo1 , fm , gth , p , ph1 , ph2 , pi , po1 , po2 , polm ,
+     &       fipo1 , fm , gth , p , ph1 , ph2 , po1 , po2 , polm ,
      &       pop1 , pr , pv , q1 , q2 , qc , qfac , qr , qui , r , r1 ,
      &       r2 , r3 , r4 , rem , remax , rl , rlr , rm , rx , ry , rz ,
      &       s , s11 , s12 , s21 , s22 , sbe , sf , sh , sh1 , sh2 ,
@@ -284,30 +284,31 @@ C      ZV     - energy meshpoints
       INCLUDE 'fakul.inc'
       INCLUDE 'life.inc'
       INCLUDE 'switch.inc'
+      INCLUDE 'fconst.inc'
       INCLUDE 'cinit2.inc' ! For gosia2
       INCLUDE 'resc.inc' ! For gosia2
-      DATA (eng(k),k=1,10)/.05 , .06 , .08 , .1 , .15 , .2 , .3 , .5 , 
-     &      1. , 1.5/
+      DATA (eng(k),k=1,10)/.05D0, .06D0, .08D0, .1D0, .15D0, .2D0, .3D0,
+     &  .5D0, 1.D0, 1.5D0/
 C     Absorption coefficients in units of 1/cm for Ge
-      DATA (tau1(k),k=1,10)/17.656 , 10.726 , 5.076 , 2.931 , 1.3065 , 
-     &      .8828 , .5959 , .4357 , .3041 , .2472/
+      DATA (tau1(k),k=1,10)/17.656D0, 10.726D0, 5.076D0, 2.931D0,
+     &     1.3065D0, .8828D0, .5959D0, .4357D0, .3041D0, .2472D0/
 C     Absorption coefficients in units of 1/cm for Al, C, Fe, Cu, Ag/Cd/Sn, Ta
 C     and Pb at the energies 0.05, 0.06, 0.08, 0.1, 0.15, 0.2, 0.3, 0.5, 1, 1.5
 C     MeV
-      DATA (tau2(k,1),k=1,10)/.9883 , .7473 , .5442 , .4592 , .3718 , 
-     &      .3302 , .2814 , .2278 , .1657 , .1350/
-      DATA (tau2(k,2),k=1,10)/1.014 , .7443 , .5195 , .4261 , .3362 , 
-     &      .2967 , .2518 , .2038 , .1479 , .1204/
-      DATA (tau2(k,3),k=1,10)/15.167 , 9.405 , 4.652 , 2.889 , 1.525 , 
-     &      1.135 , .8643 , .6592 , .4703 , .3830/
-      DATA (tau2(k,4),k=1,10)/23.184 , 14.182 , 6.777 , 4.059 , 1.970 , 
-     &      1.384 , .9936 , .7473 , .5274 , .4297/
-      DATA (tau2(k,5),k=1,10)/84.351 , 51.445 , 23.822 , 13.070 , 
-     &      4.774 , 2.605 , 1.339 , .7925 , .5005 , .4032/
-      DATA (tau2(k,6),k=1,10)/93.364 , 58.559 , 125.96 , 70.713 , 
-     &      25.302 , 12.541 , 5.193 , 2.215 , 1.077 , .8176/
-      DATA (tau2(k,7),k=1,10)/89.809 , 56.338 , 27.009 , 62.966 , 
-     &      22.933 , 11.334 , 4.540 , 1.813 , .8020 , .5900/
+      DATA (tau2(k,1),k=1,10)/.9883D0, .7473D0, .5442D0, .4592D0,
+     &      .3718D0, .3302D0, .2814D0, .2278D0, .1657D0, .1350D0/
+      DATA (tau2(k,2),k=1,10)/1.014D0, .7443D0, .5195D0, .4261D0,
+     &      .3362D0, .2967D0, .2518D0, .2038D0, .1479D0, .1204D0/
+      DATA (tau2(k,3),k=1,10)/15.167D0, 9.405D0, 4.652D0, 2.889D0,
+     &      1.525D0, 1.135D0, .8643D0, .6592D0, .4703D0, .3830D0/
+      DATA (tau2(k,4),k=1,10)/23.184D0, 14.182D0, 6.777D0, 4.059D0,
+     &      1.970D0, 1.384D0, .9936D0, .7473D0, .5274D0, .4297D0/
+      DATA (tau2(k,5),k=1,10)/84.351D0, 51.445D0, 23.822D0, 13.070D0,
+     &      4.774D0, 2.605D0, 1.339D0, .7925D0, .5005D0, .4032D0/
+      DATA (tau2(k,6),k=1,10)/93.364D0, 58.559D0, 125.96D0, 70.713D0,
+     &      25.302D0, 12.541D0, 5.193D0, 2.215D0, 1.077D0, .8176D0/
+      DATA (tau2(k,7),k=1,10)/89.809D0, 56.338D0, 27.009D0, 62.966D0,
+     &      22.933D0, 11.334D0, 4.540D0, 1.813D0, .8020D0, .5900D0/
       DATA q1/0./,q2/0./,iph/0/
 
 C     Initialize prime numbers
@@ -405,10 +406,10 @@ C---- gosia2 changes end
 
       IBYP = 0
       INHB = 0
-      BEQ = -983872.
+      BEQ = -983872.D0 ! This is just a magic value to indicate it was not
+                       ! yet initialised
       ipinf = 0
       iyr = 0
-      pi = 3.141592654
       INNR = 0
       itno = 0
       chisq = 0.
@@ -429,20 +430,20 @@ C---- gosia2 changes end
          iecd(i) = 0
       ENDDO
       txx = 0.
-      SGW = 3.
+      SGW = 3.D0
       SUBCH1 = 0.
       SUBCH2 = 0.
       ITS = 0 ! Create tape 18 flag
       iosr = 0
       LOCKS = 0
-      DLOCK = 1.1
+      DLOCK = 1.1D0
       kerf = 0
       IFBFL = 0
       NLOCK = 0
       LOCKF = 0
       DO i = 1 , LP4 ! LP4 = 1500
          DO j = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
-            CORF(i,j) = 1.
+            CORF(i,j) = 1.D0
          ENDDO
       ENDDO
       DO i = 1 , 20
@@ -490,7 +491,7 @@ C---- gosia2 changes end
       KFERR = 0
       NDIM = LP3 ! LP3 = 100 (maximum number of levels)
       ISO = 1
-      B(1) = 1.
+      B(1) = 1.D0
       DO i = 2 , 20
          B(i) = B(i-1)*(i-1)
       ENDDO
@@ -504,11 +505,11 @@ C---- gosia2 changes end
       la = 0
       ipo3 = 1
       indx = 0
-      ACCUR = .00001
+      ACCUR = .00001D0
       icg = 1
       ient = 1
       jphd = 1 ! Print header flag
-      DIPOL = 0.005
+      DIPOL = 0.005D0
       MAGEXC = 0 ! Initially flag that we don't need magnetic excitations
       LAMMAX = 0
       DO lam = 1 , 8
@@ -531,7 +532,7 @@ C---- gosia2 changes end
          ISEX(j) = 1111
       ENDDO
       ISEX(1) = 0
-      ACCA = .00001d0
+      ACCA = .00001D0
       oph = '    '
       nmemx = LP2 + 9 ! LP2 = 1500 (maximum number of matrix elements)
       IEXP = 1
@@ -750,14 +751,14 @@ C     Handle OP,ERRO
          IF ( ms.EQ.0 ) ms = 1
          DO kh = ms , mend ! Loop over matrix elements
             DO ij = 1 , 2
-               pv = (ELMU(kh)-ELML(kh))/100.
+               pv = (ELMU(kh)-ELML(kh))/100.D0
                IF ( ij.NE.1 .OR. (ELM(kh)-ELML(kh)).GE.pv ) THEN
                   IF ( ij.NE.2 .OR. (ELMU(kh)-ELM(kh)).GE.pv ) THEN
                      DO kh1 = 1 , MEMAX
                         SA(kh1) = 0.
                      ENDDO
                      IF ( IVAR(kh).EQ.0 ) GOTO 500
-                     SA(kh) = 1.*(-1)**ij
+                     SA(kh) = 1.D0*(-1)**ij
                      kh1 = kh
                      CALL KONTUR(idr,chis0,chisl,ifbp,-1,kh1,sh,bten,
      &                           rem)
@@ -810,7 +811,7 @@ C     Handle OP,ERRO
                be2b = HLM(kh2) + DEVU(kh2)
                be2c = be2b
                IF ( ABS(be2a).GT.ABS(be2b) ) be2b = be2a
-               IF ( ABS(be2a-be2c).LT.1.E-6 ) be2a = be2c
+               IF ( ABS(be2a-be2c).LT.1.D-6 ) be2a = be2c
                IF ( be2a/HLM(kh2).LE.0. .OR. be2b/HLM(kh2).LE.0. )
      &              be2a = 0.
                be2a = be2a**2/sbe
@@ -819,7 +820,9 @@ C     Handle OP,ERRO
      &                          be2a - be2 , be2b - be2
             ELSE
                ispb = INT(SPIN(ispa))*2
-               qfac = 3.170662*WTHREJ(ispb,4,ispb,-ispb,0,ispb)
+C 3.170662D0 = sqrt(16 pi / 5)
+               qfac = SQRT(16.D0*pi/5.D0)*
+     &                WTHREJ(ispb,4,ispb,-ispb,0,ispb)
                WRITE (22,99052) kh2 , LEAD(2,kh2) , LEAD(1,kh2) , 
      &                          HLM(kh2)*qfac , DEVD(kh2)*qfac , 
      &                          DEVU(kh2)*qfac
@@ -850,8 +853,8 @@ C     Handle OP,ERRO
             DO ij = 1 , 2 ! Lower and upper
                sh = DEVU(kh)
                IF ( ij.EQ.1 ) sh = DEVD(kh)
-               IF ( ABS(sh).LT.1.E-6 ) sh = (-1)**ij*ABS(HLM(kh))/10.
-               ELM(kh) = HLM(kh) + 1.5*sh
+               IF ( ABS(sh).LT.1.D-6 ) sh = (-1)**ij*ABS(HLM(kh))/10.D0
+               ELM(kh) = HLM(kh) + 1.5D0*sh
                mm = 0
                DO kh1 = 1 , MEMAX ! For each matrix element
                   IF ( ifc.EQ.1 ) KVAR(kh1) = IVAR(kh1)
@@ -864,7 +867,7 @@ C     Handle OP,ERRO
                   IF ( iosr.EQ.1 ) WRITE (IUNIT3,*) kh , kh ! For sigma program
                   IF ( iosr.EQ.1 ) WRITE (IUNIT3,*) kh , ij , ELM(kh)
                   LOCKS = 1
-                  DLOCK = .05
+                  DLOCK = .05D0
                   CALL MINI(chiss,-1.D0,2,.0001D0,1000,idr,100000.D0,0,
      &                      iosr,kh,bten)
                   DO kh1 = 1 , MEMAX ! For each matrix element
@@ -987,7 +990,7 @@ C     Treat suboption LEVE (levels)
          DO k = 1 , ndima
             READ (JZB,*) ipo1 , ipo2 , po2 , po1 ! level number, parity, spin, energy
             IF ( ipo1.EQ.0 ) GOTO 70002
-            IF ( ipo1.EQ.1 .AND. ABS(po2).LT.1.E-6 ) ISO = 0
+            IF ( ipo1.EQ.1 .AND. ABS(po2).LT.1.D-6 ) ISO = 0
             NMAX = NMAX + 1
             SPIN(ipo1) = po2
             IF ( k.EQ.1 ) iph = ipo2
@@ -1053,7 +1056,7 @@ C     Treat suboption ME (matrix elements)
                      ELSE                 ! Otherwise they are limits
                         ELMU(indx) = bu
                         ELML(indx) = bl
-                        IF ( ABS(bl-bu).LT.1.E-6 ) THEN
+                        IF ( ABS(bl-bu).LT.1.D-6 ) THEN
                            IVAR(indx) = 0 ! Fixed
                         ELSE
                            IVAR(indx) = 2
@@ -1067,7 +1070,7 @@ C     Treat suboption ME (matrix elements)
                ENDIF
             ENDIF
             DO kk = 1 , indx
-               IF ( ABS(ELM(kk)).LE.1.E-6 ) ELM(kk) = 1.E-6
+               IF ( ABS(ELM(kk)).LE.1.D-6 ) ELM(kk) = 1.D-6
                IF ( IVAR(kk).GE.10000 ) THEN ! Correlated
                   kk1 = IVAR(kk)/10000
                   kk2 = IVAR(kk) - 10000*kk1
@@ -1116,9 +1119,9 @@ C     Treat suboption CONT (control)
 99056    FORMAT (1A4,I5)
  354     ipo1 = INT(fipo1)
          IF ( op1.EQ.'ACC,' ) THEN
-           ACCUR = 10.**(-fipo1)
+           ACCUR = 10.D0**(-fipo1)
          ELSE IF ( op1.EQ.'ACP,' ) THEN
-           ACCA = 10.**(-fipo1)
+           ACCA = 10.D0**(-fipo1)
          ELSE IF ( op1.EQ.'CCF,' ) THEN
            IPS1 = ipo1
          ELSE IF ( op1.EQ.'CRF,' ) THEN
@@ -1129,7 +1132,7 @@ C     Treat suboption CONT (control)
              iecd(ipo2) = 1
            ENDDO
          ELSE IF ( op1.EQ.'DIP,' ) THEN
-           DIPOL = 0.001*fipo1
+           DIPOL = 0.001D0*fipo1
          ELSE IF ( op1.EQ.'EFF,' ) THEN
            DO jjx = 1 , ipo1
              READ (JZB,*) ipo2 , ijx
@@ -1213,24 +1216,24 @@ C     Treat suboption CONT (control)
 C     Treat suboption EXPT
       ELSEIF ( op1.EQ.'EXPT' ) THEN
          READ (JZB,*) NEXPT , IZ , XA
-         G(1) = 3.             ! AVJI
-         G(2) = .02            ! GAMMA
-         G(3) = .0345          ! XLAMB
-         G(4) = 3.5            ! TIMEC
+         G(1) = 3.D0           ! AVJI
+         G(2) = .02D0          ! GAMMA
+         G(3) = .0345D0        ! XLAMB
+         G(4) = 3.5D0          ! TIMEC
          G(5) = DBLE(IZ)/XA    ! GFAC
-         G(6) = 6.E-06         ! FIEL
-         G(7) = .6             ! POWER
+         G(6) = 6.D-06         ! FIEL
+         G(7) = .6D0           ! POWER
          DO k = 1 , NEXPT ! Zn, An, E_p, THETA_lab, M_c, M_A, IAX, phi1, phi2, ikin, ln
             READ (JZB,*) IZ1(k) , XA1(k) , EP(k) , TLBDG(k) , EMMA(k) ,
      &           MAGA(k) , IAXS(k) , fi0 , fi1 , ISKIN(k) , LNORM(k)
             ITTE(k) = 0
             IF ( XA1(k).LT.0. ) ITTE(k) = 1
             XA1(k) = ABS(XA1(k))
-            FIEX(k,1) = fi0/57.2957795 ! Convert to radians
-            FIEX(k,2) = fi1/57.2957795
+            FIEX(k,1) = fi0*pi/180.D0 ! Convert to radians
+            FIEX(k,2) = fi1*pi/180.D0
             IF ( TLBDG(k).LT.0. ) THEN
-               FIEX(k,1) = FIEX(k,1) + 3.14159265
-               FIEX(k,2) = FIEX(k,2) + 3.14159265
+               FIEX(k,1) = FIEX(k,1) + pi
+               FIEX(k,2) = FIEX(k,2) + pi
             ENDIF
          ENDDO
 
@@ -1403,7 +1406,7 @@ C     attenuation coefficients
       DO i = 1 , nfd ! For each detector
         READ (JZB,*) (DIX(k),k=1,4) ! radius of core, outer radius, length, distance
         READ (JZB,*) (xl1(k),k=1,nl) ! thicknesses of 7 kinds of absorber
-        IF ( DIX(1).LE.0. ) DIX(1) = .01
+        IF ( DIX(1).LE.0. ) DIX(1) = .01D0
         WRITE (9,*) DIX(4) ! length
         IF ( nfdd.LE.0 ) WRITE (8,*) (xl1(k),k=1,nl)
         ind = 1
@@ -1424,7 +1427,7 @@ C     attenuation coefficients
             arg = (eng(l)-eng(ind))**2
             qc = (qui(k,ind)*cf(k,2)+cf(k,1)*arg)/(cf(k,2)+arg)
             WRITE (22,99006) eng(l) , qc , qui(k,l) , 
-     &        100.*(qc-qui(k,l))/qui(k,l)
+     &        100.D0*(qc-qui(k,l))/qui(k,l)
 99006       FORMAT (8X,1F4.2,6X,1F9.4,5X,1F9.4,3X,1E10.2)
           ENDDO
         ENDDO
@@ -1456,7 +1459,7 @@ C OP,POIN
       IF ( op2.EQ.'POIN' ) READ (JZB,*) ifwd , slim
       ient = 1
       icg = 1
-      IF ( SPIN(1).LT.1.E-6 ) ISO = 0
+      IF ( SPIN(1).LT.1.D-6 ) ISO = 0
       IF ( iobl.LT.1 ) THEN
          IF ( op2.NE.'GOSI' ) THEN
             iapx = 0
@@ -1561,11 +1564,11 @@ C OP,POIN
                      IF ( IFMO.NE.0 ) THEN
                         id = ITMA(IEXP,jgl) ! Get identity of detector
                         d = ODL(id) ! Get results of OP,GDET for that detector
-                        rx = d*SIN(gth)*COS(figl-fm) - .25*SIN(ttttt)
-     &                       *COS(fm)
-                        ry = d*SIN(gth)*SIN(figl-fm) - .25*SIN(ttttt)
-     &                       *SIN(fm)
-                        rz = d*COS(gth) - .25*COS(ttttt)
+                        rx = d*SIN(gth)*COS(figl-fm) -
+     &                       .25D0*SIN(ttttt)*COS(fm)
+                        ry = d*SIN(gth)*SIN(figl-fm) -
+     &                       .25D0*SIN(ttttt)*SIN(fm)
+                        rz = d*COS(gth) - .25D0*COS(ttttt)
                         rl = SQRT(rx*rx+ry*ry+rz*rz)
                         thc = TACOS(rz/rl)
                         sf = d*d/rl/rl
@@ -1576,7 +1579,7 @@ C OP,POIN
                            ixm = KSEQ(ixl,3)
                            tfac = TAU(ixm)
                            YGN(ixl) = YGN(ixl)
-     &                                + .01199182*tfac*BETAR(IEXP)
+     &                                + .01199182D0*tfac*BETAR(IEXP)
      &                                *(sf*YGP(ixl)-YGN(ixl))
                         ENDDO
                      ENDIF
@@ -1588,7 +1591,7 @@ C OP,POIN
                            decen = EN(ni) - EN(nf)
                            cocos = SIN(ttttt)*SIN(gth)*COS(fm-figl)
      &                             + COS(ttttt)*COS(gth)
-                           decen = decen*(1.+BETAR(IEXP)*cocos)
+                           decen = decen*(1.D0+BETAR(IEXP)*cocos)
                            CALL EFFIX(IEXP,ipd,decen,effi)
                            IF ( op2.EQ.'POIN' .AND. IPRM(20).EQ.1 )
      &                          WRITE (23,99049) ni , nf , SPIN(ni) , 
@@ -1627,10 +1630,11 @@ C OP,POIN
                               CORF(jmm,2) = DBLE(nf)
                               CORF(jmm,3) = YGN(jyi) ! Was divided by sh1 in gosia
                               IF ( YGN(jyi).GE.YGN(IDRN) ) CORF(jmm,4)
-     &                             = CORF(jmm,3)/20.
+     &                             = CORF(jmm,3)/20.D0
                               IF ( YGN(jyi).LT.YGN(IDRN) ) CORF(jmm,4)
      &                             = CORF(jmm,3)
-     &                             *(.05+.2*(1.-YGN(jyi)/YGN(IDRN)))
+     &                               *(.05D0+.2D0*(1.D0-YGN(jyi)/
+     &                               YGN(IDRN)))
                            ENDIF
                         ENDIF
                         IF ( op2.EQ.'CORR' ) THEN
@@ -1814,13 +1818,15 @@ C OP,POIN
      &                     = MAX(zmir(kk,1,IEXP),rm*bmx/ABS(ELM(lll)),
      &                     rm)
                      ENDDO
-                     IF ( zmir(kk,1,IEXP).LT..5 ) zmir(kk,1,IEXP) = .5
-                     IF ( zmir(kk,2,IEXP).LT..5 ) zmir(kk,2,IEXP) = .5
+                     IF ( zmir(kk,1,IEXP).LT..5D0 )
+     &                 zmir(kk,1,IEXP) = .5D0
+                     IF ( zmir(kk,2,IEXP).LT..5D0 )
+     &                 zmir(kk,2,IEXP) = .5D0
                   ENDIF
                ENDDO
             ENDDO
             DO kk = 1 , 6
-               XIR(kk,IEXP) = XIR(kk,IEXP)*1.01
+               XIR(kk,IEXP) = XIR(kk,IEXP)*1.01D0
                DO kh = 1 , 8
                   MULTI(kh) = 0
                   LAMDA(kh) = 0
@@ -1849,9 +1855,11 @@ C OP,POIN
                   CALL LOAD(IEXP,2,icg,0.D0,jj)
                   CALL PATH(1)
                   sz1 = MIN(zmir(kk,1,IEXP),10.D0)
-                  sz2 = zmir(kk,2,IEXP)/50.
-                  acof = 2.4009604E-3/zmir(kk,2,IEXP)
-                  bcof = 8.163265E-4
+                  sz2 = zmir(kk,2,IEXP)/50.D0
+C 2.4009604D-3 = 2 / 833
+                  acof = 2.D0/833.D0/zmir(kk,2,IEXP)
+C 8.163265D-4 = 1 / 1225
+                  bcof = 1.D0/1225.D0
                   DO jd = 1 , jde
                      nksi = 5
                      IF ( jd.EQ.2 ) nksi = 10
@@ -1863,7 +1871,7 @@ C OP,POIN
                      IF ( jd.EQ.1 .AND. MAGA(IEXP).NE.0 ) nz = 1
                      DO jk = 1 , nksi
                         XI(1) = XIR(kk,IEXP)*(jk-1)/(nksi-1)
-                        IF ( jk.EQ.1 ) XI(1) = .02
+                        IF ( jk.EQ.1 ) XI(1) = .02D0
                         s11 = 0.
                         s21 = 0.
                         s12 = 0.
@@ -1881,13 +1889,13 @@ C OP,POIN
                            CALL SETIN
                            CALL STING(1)
                            IF ( kk.GT.2 ) THEN
-                              ARM(1,5) = (.9999999,0.)
-                              ARM(2,5) = (1.2E-6,0.)
-                              ARM(1,6) = (.9999998,0.)
-                              ARM(2,6) = (.9E-6,0.)
+                              ARM(1,5) = (.9999999D0,0.)
+                              ARM(2,5) = (1.2D-6,0.)
+                              ARM(1,6) = (.9999998D0,0.)
+                              ARM(2,6) = (.9D-6,0.)
                               DO kh = 1 , 4
-                                 ARM(1,kh) = (-1.E-6,0.)
-                                 ARM(2,kh) = (1.E-6,0.)
+                                 ARM(1,kh) = (-1.D-6,0.)
+                                 ARM(2,kh) = (1.D-6,0.)
                               ENDDO
                            ENDIF
                            CALL INTG(IEXP)
@@ -1934,10 +1942,14 @@ C OP,POIN
                            PARX(IEXP,2*kk-1,jk) = q1
                            PARX(IEXP,2*kk,jk) = q2
                         ELSE
-                           PARXM(IEXP,1,jk,kk) = acof*(2.*s12-51.*s11)
-                           PARXM(IEXP,2,jk,kk) = bcof*(101.*s11-3.*s12)
-                           PARXM(IEXP,3,jk,kk) = acof*(2.*s22-51.*s21)
-                           PARXM(IEXP,4,jk,kk) = bcof*(101.*s21-3.*s22)
+                           PARXM(IEXP,1,jk,kk) =
+     &                       acof*(2.D0*s12-51.D0*s11)
+                           PARXM(IEXP,2,jk,kk) =
+     &                       bcof*(101.D0*s11-3.D0*s12)
+                           PARXM(IEXP,3,jk,kk) =
+     &                       acof*(2.D0*s22-51.D0*s21)
+                           PARXM(IEXP,4,jk,kk) =
+     &                       bcof*(101.D0*s21-3.D0*s22)
                         ENDIF
                      ENDDO ! Loop over jk
                   ENDDO ! Loop over jd
@@ -2035,7 +2047,7 @@ C     Handle map
      &                    1F6.3//)
                   WRITE (22,99054)
                   DO kex = 1 , 10
-                     xxi = XIR(lex,jex)*(kex-1)/9.
+                     xxi = XIR(lex,jex)*(kex-1)/9.D0
                      WRITE (22,99055) xxi , 
      &                                (PARXM(jex,ilx,kex,lex),ilx=1,4)
                   ENDDO
@@ -2045,7 +2057,7 @@ C     Handle map
      &                       'MAX.ZETA=',1F6.3//)
                      WRITE (22,99054)
                      DO kex = 1 , 5
-                        xxi = XIR(lex,jex)*(kex-1)/4.
+                        xxi = XIR(lex,jex)*(kex-1)/4.D0
                         u = 0.
                         WRITE (22,99055) xxi , u , PARX(jex,2*lex-1,kex)
      &                         , u , PARX(jex,2*lex,kex)
