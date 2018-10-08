@@ -35,26 +35,29 @@ C      Estimated amplitude
       la = Lmda
       IF ( Lmda.EQ.7 ) la = 3
 
-      IF ( axi.LT.1.E-5 ) THEN ! Small absolute values of xi
+      IF ( axi.LT.1.D-5 ) THEN ! Small absolute values of xi
          a = -2.*W0
          IF ( la.EQ.3 ) a = -W0
          exa = EXP(a)
-         dwi = 3*Dw
-         cic = exa*(EXP(dwi)-1.)
+         dwi = 3.D0*Dw
+         cic = exa*(EXP(dwi)-1.D0)
          STAMP = DCMPLX(cic,0.D0)
          IF ( la.EQ.2 ) THEN
-            IF ( mi.EQ.0 ) fct = 3.*(3.-Epsi*Epsi)/Epsi/Epsi/Epsi/Epsi
-            IF ( mi.EQ.1 ) fct = 1.837117307*Errt/Epsi/Epsi/Epsi/Epsi ! 1.837117307 = 3/2 * sqrt(3/2)
-            IF ( mi.EQ.2 ) fct = -3.674234613*Errt*Errt/Epsi/Epsi/ ! 3.674234613 = 3 * sqrt(3/2)
+            IF ( mi.EQ.0 )
+     &       fct = 3.D0*(3.D0-Epsi*Epsi)/Epsi/Epsi/Epsi/Epsi
+            IF ( mi.EQ.1 )
+     &        fct = 3.D0/2.D0*SQRT(3.D0/2.D0)*Errt/Epsi/Epsi/Epsi/Epsi ! 1.837117307 = 3/2 * sqrt(3/2)
+            IF ( mi.EQ.2 )
+     &        fct = -3.D0*SQRT(3.D0/2.D0)*Errt*Errt/Epsi/Epsi/ ! 3.674234613 = 3 * sqrt(3/2)
      &                           Epsi/Epsi
          ELSEIF ( la.EQ.3 ) THEN
-            fct = -1.414213562*Errt/Epsi/Epsi ! 1.414213562 = sqrt(2)
+            fct = -SQRT(2.D0)*Errt/Epsi/Epsi ! 1.414213562 = sqrt(2)
          ELSE
-            IF ( mi.EQ.0 ) fct = 1./Epsi/Epsi
-            IF ( mi.EQ.1 ) fct = 1.414213562*Errt/Epsi/Epsi ! 1.414213562 = sqrt(2)
+            IF ( mi.EQ.0 ) fct = 1.D0/Epsi/Epsi
+            IF ( mi.EQ.1 ) fct = SQRT(2.D0)*Errt/Epsi/Epsi ! 1.414213562 = sqrt(2)
          ENDIF
       ELSE ! Larger absolute values of xi
-         ex = EXP(W0)/2.
+         ex = EXP(W0)/2.D0
          b = axi*(Epsi*ex+W0)
          CALL TRINT(b,sib,cib)
          sb = SIN(b)/b
@@ -63,7 +66,7 @@ C      Estimated amplitude
          bic = cb - sib
          bis2 = -sb/b
          bic2 = -cb/b
-         dwi = -3.*Dw
+         dwi = -3.D0*Dw
          exa = EXP(dwi)
          a = axi*(Epsi*ex*exa+W0+dwi)
          sa = SIN(a)/a
@@ -79,15 +82,18 @@ C      Estimated amplitude
             STAMP = DCMPLX(dwi,exa)
          ENDIF
          IF ( la.EQ.2 ) THEN
-            IF ( mi.EQ.0 ) fct = .75*(3.-Epsi*Epsi)*axi*axi/Epsi/Epsi
-            IF ( mi.EQ.1 ) fct = 1.837117307*Errt*axi*axi/Epsi/Epsi ! 1.837117307 = 3/2 * sqrt(3/2)
-            IF ( mi.EQ.2 ) fct = -.9185586535*Errt*Errt*axi*axi/Epsi/ ! 0.9185586535 = 3/4 * sqrt(3/2)
-     &                           Epsi
+            IF ( mi.EQ.0 )
+     &        fct = 3.D0/4.D0*(3.D0-Epsi*Epsi)*axi*axi/Epsi/Epsi
+            IF ( mi.EQ.1 )
+     &        fct = 3.D0/2.D0*SQRT(3.D0/2.D0)*Errt*axi*axi/Epsi/Epsi ! 1.837117307 = 3/2 * sqrt(3/2)
+            IF ( mi.EQ.2 )
+     &        fct = -3.D0/4.D0*SQRT(3.D0/2.D0)*Errt*Errt*axi*axi/Epsi/
+     &        Epsi ! 0.9185586535 = 3/4 * sqrt(3/2)
          ELSEIF ( la.EQ.3 ) THEN
-           fct = -.3535533905*Errt*axi*axi ! 0.3535533907 = 1/4 * sqrt(2)
+           fct = -SQRT(2.D0)/4.D0*Errt*axi*axi ! 0.3535533907 = 1/4 * sqrt(2)
          ELSE
-            IF ( mi.EQ.0 ) fct = .5*axi/Epsi
-            IF ( mi.EQ.1 ) fct = .3535533907*Errt*axi/Epsi ! 0.3535533907 = 1/2 * sqrt(1/2)
+            IF ( mi.EQ.0 ) fct = .5D0*axi/Epsi
+            IF ( mi.EQ.1 ) fct = SQRT(2.D0)/4.D0*Errt*axi/Epsi ! 0.3535533907 = 1/4 * sqrt(2)
          ENDIF
       ENDIF
 
