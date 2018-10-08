@@ -78,6 +78,7 @@ C      Joj    - index of substate (write only)
       INCLUDE 'caux0.inc'
       INCLUDE 'aprcat.inc'
       INCLUDE 'pth.inc'
+      INCLUDE 'fconst.inc'
       DIMENSION etan(100) , cpsi(8)
       
       LMAX = INT(SPIN(1)+1.1) ! ground-state spin + 1
@@ -102,11 +103,11 @@ C      Joj    - index of substate (write only)
 C        Calculate xi and store it in XI in common CXI
 C        The value 6.349770 is 197.33/1.44*sqrt(2/931.49).
 C        i.e. hbar c / e^2 * sqrt(2 / amu).
-         eta = z1*z2*SQRT(a1/EP(Iexp))/6.349770d0
+         eta = z1*z2*SQRT(a1/EP(Iexp))*e2/hbarc*sqrt(amu/2.D0)
          DO m = 1 , NMAX
-            dep = (1.0+a1/a2)*EN(m)
+            dep = (1.0D0+a1/a2)*EN(m)
             zet = dep/EP(Iexp)
-            szet = SQRT(1.0-zet)
+            szet = SQRT(1.0D0-zet)
             etan(m) = eta/szet
          ENDDO
          DO n = 1 , MEMAX
@@ -116,25 +117,27 @@ C        i.e. hbar c / e^2 * sqrt(2 / amu).
          ENDDO
 
 C        Calculate C_\lambda \over (s Z_1 Z_2)^\lambda 
-         aazz = 1./(1.+a1/a2)/z1/z2
-         cpsi(1) = 5.169286d0*aazz
+         aazz = 1.D0/(1.D0+a1/a2)/z1/z2
+         cpsi(1) = 5.169286D0*aazz
 
 C        Electric excitations up to LMAXE
+C 1.116547 * 13.889122**lambda * (lambda-1)! / (2lambda+1)!!
+C 13.889122 is 20 / (e^2/4 pi epsilon_0)
          IF ( LMAXE.NE.1 ) THEN
             aaz2 = aazz*aazz
-            cpsi(2) = 14.359366d0*aaz2
+            cpsi(2) = 14.359366D0*aaz2
             IF ( LMAXE.NE.2 ) THEN
                aaz3 = aazz*aaz2
-               cpsi(3) = 56.982577d0*aaz3
+               cpsi(3) = 56.982577D0*aaz3
                IF ( LMAXE.NE.3 ) THEN
                   aazz = aaz2*aaz2
-                  cpsi(4) = 263.812653d0*aazz
+                  cpsi(4) = 263.812653D0*aazz
                   IF ( LMAXE.NE.4 ) THEN
                      aaz2 = aaz3*aaz2
-                     cpsi(5) = 1332.409500d0*aaz2
+                     cpsi(5) = 1332.409500D0*aaz2
                      IF ( LMAXE.NE.5 ) THEN
                         aazz = aaz3*aaz3
-                        cpsi(6) = 7117.691577d0*aazz
+                        cpsi(6) = 7117.691577D0*aazz
                      ENDIF
                   ENDIF
                ENDIF
@@ -143,7 +146,7 @@ C        Electric excitations up to LMAXE
 
 C        Magnetic excitations
          IF ( MAGEXC.NE.0 ) THEN ! If magnetic excitations are required
-            aazz = VINF(Iexp)/95.0981942d0
+            aazz = VINF(Iexp)*hbarc/20.D0/mprot ! 20 * mprot / hbarc = 95.0981942
             cpsi(7) = aazz*cpsi(1)
             IF ( LAMMAX.NE.8 ) cpsi(8) = aazz*cpsi(2)
          ENDIF
@@ -167,7 +170,7 @@ C        Calculate psi and store in PSI in common PCOM
                      i3 = i3 + 1
                      pp2 = EP(Iexp) - ppp*EN(m2)
                      PSI(i2) = cpsi(lam)*zsqa*(pp1*pp2)
-     &                         **((2.*DBLE(lam1)-1.)/4.)
+     &                         **((2.D0*DBLE(lam1)-1.D0)/4.D0)
                   ENDDO
                ENDIF
             ENDDO
@@ -198,7 +201,7 @@ C     Initialise NSTART and NSTOP arrays
                CAT(is,1) = n               ! Number of level
                CAT(is,2) = SPIN(n)         ! Spin of level
                CAT(is,3) = wrt + DBLE(i-1) ! m quantum number of substate
-               IF ( n.EQ.1 .AND. ABS(CAT(is,3)-Polm).LT.1.E-6 ) Joj = is
+               IF ( n.EQ.1 .AND. ABS(CAT(is,3)-Polm).LT.1.D-6 ) Joj = is
                is = is + 1
             ENDDO ! Loop on substates i
          ENDIF
@@ -228,7 +231,7 @@ C        Initialise pointers to ZETA array
                la = lam
                IF ( lam.GT.6 ) lam = lam - 6
                rlam = DBLE(lam)
-               ssqrt = SQRT(2.*rlam+1.)
+               ssqrt = SQRT(2.D0*rlam+1.D0)
                LZETA(la) = nz
                ir = 0
  10            ir = ir + 1
