@@ -19,7 +19,7 @@ C where a_c is Acc1 here.
 C
 C The gosia documentation gives a table for \alpha_\lambda: E1 = -0.693,
 C E2 = 0.203, E3 = 0.536, E4 = 0.716, E5 = 0.829, E6 = 0.962, M1 = 0.203,
-C M2 = 0.536.
+C M2 = 0.536. The value for E6 is wrong. It should be 0.907.
 C
 C Note that first we work out omega, but then we work out the appropriate
 C index, knowing that we are always using steps of 0.03.
@@ -34,24 +34,24 @@ C index, knowing that we are always using steps of 0.03.
       INCLUDE 'clcom.inc'
 
       acl = -LOG(Acc1)
-      ACC50 = Acc1/50.
+      ACC50 = Acc1/50.D0
       DO i = 1 , 8 ! Loop over multipolarity 1..6 = E1..6, 7,8 = M1,M2
          IF ( MULTI(i).NE.0 ) THEN
             IF ( i.EQ.2 .OR. i.EQ.7 ) THEN ! E2 or M1
-               w = acl/2. + .203
+               w = acl/2.D0 + LOG(1.5D0)/2.D0 ! = 0.203
             ELSEIF ( i.EQ.3 .OR. i.EQ.8 ) THEN ! E3 or M2
-               w = acl/3. + .536
+               w = acl/3.D0 + LOG(5.D0)/3.D0 ! = 0.536
             ELSEIF ( i.EQ.4 ) THEN ! E4
-               w = acl/4. + .716
+               w = acl/4.D0 + LOG(17.5D0)/4.D0 ! = 0.716
             ELSEIF ( i.EQ.5 ) THEN ! E5
-               w = acl/5. + .829
+               w = acl/5.D0 + LOG(63.D0)/5.D0 ! = 0.829
             ELSEIF ( i.EQ.6 ) THEN ! E6
-               w = acl/6. + .962
-            ELSE
-               w = acl - .693 ! E1
+               w = acl/6.D0 + LOG(231.D0)/6.D0 ! = 0.907
+            ELSE ! E1
+               w = acl + LOG(0.5) ! = -0.693
             ENDIF
-            w = w/.03        ! We step in steps of \Delta\omega = 0.03
-            IRA(i) = INT(w+1.5)
+            w = w/.03D0        ! We step in steps of \Delta\omega = 0.03
+            IRA(i) = INT(w+1.5D0)
          ELSE
             IRA(i) = 0
          ENDIF
