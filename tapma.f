@@ -35,6 +35,7 @@ C maps.
       INCLUDE 'vlin.inc'
       INCLUDE 'ccoup.inc'
       INCLUDE 'yteor.inc'
+      INCLUDE 'fconst.inc'
 
       Nft = 0
       nfilt = 0
@@ -69,7 +70,7 @@ C     Read record
          READ (14,*) lx1 , Enb , tta , ng1 , DS , (ZETA(k),k=js,jf)
          IF ( lx1.NE.Lx ) Nft = 1
          IF ( Nft.EQ.1 ) GOTO 100
-         XV(j) = tta/57.2957795
+         XV(j) = tta*pi/180.D0
          IF ( Iskf.NE.0 .AND. j.NE.Nflr ) THEN
             DO jj = 1 , Iskf
                READ (14,*) lx1 , en0 , tta , ng , DS , (YGN(k),k=1,Idr)
