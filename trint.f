@@ -42,19 +42,20 @@ C obtain the values of pi/2 - Si and -Ci from f and g.
       SUBROUTINE TRINT(Arg,Si,Ci)
       IMPLICIT NONE
       REAL*8 a , Arg , c , Ci , f , g , POL4 , s , Si
+      INCLUDE 'fconst.inc'
 
       a = Arg*Arg
 
 C     If Arg is small, use the polynomial expansion. The coefficients are
 C     evaluated from Abramowitz and Stegun 5.2.14 and 5.2.16 as shown above:
       IF ( Arg.LT.1. ) THEN
-         Si = POL4(0.D0,2.83446712D-5,-1.66666667D-3,.055555555D0,-1.D0,
+        Si = POL4(0.D0,1.D0/35280.D0,-1.D0/600.D0,1.D0/18.D0,-1.D0,
      &        a)
          Si = Si*Arg
-         Si = Si + 1.57079632679D0 ! This is actually pi/2 - Si
-         Ci = POL4(-3.100198413D-6,2.314814815D-4,-.0104166667D0,.25D0,
+         Si = Si + pi/2.D0 ! This is actually pi/2 - Si
+         Ci = POL4(-1.D0/322560.D0,1.D0/4320.D0,-1.D0/96.D0,.25D0,
      &        0.D0,a)
-         Ci = Ci - LOG(Arg) - 0.577215664902D0 ! This is actually -Ci
+         Ci = Ci - LOG(Arg) - euler ! This is actually -Ci
          GOTO 99999
       ENDIF
 
