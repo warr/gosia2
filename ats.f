@@ -24,7 +24,7 @@ C      truncation point
          x = N/2. + 1
          m = N/2 + 1
          xm = DBLE(m)
-         IF ( ABS(x-xm).GE.1.E-9 ) THEN
+         IF ( ABS(x-xm).GE.1.D-9 ) THEN
             IF ( m.EQ.1 .OR. m.EQ.2 .OR. m.EQ.3 .OR. m.EQ.6 .OR. 
      &           m.EQ.7 .OR. m.EQ.10 .OR. m.EQ.15 .OR. m.EQ.16 .OR. 
      &           m.EQ.19 .OR. m.EQ.24 .OR. m.EQ.25 .OR. m.EQ.28 .OR. 
