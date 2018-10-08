@@ -36,7 +36,7 @@ C     then use read the conversion coefficients from a file on unit 29.
 
       IF ( N.EQ.0 ) THEN ! If no multipolarity defined
          CONV = 0.0
-      ELSEIF ( ABS(CC(1,N)).LT.1.E-9 ) THEN ! If no conversion coefficients given for this multipolarity
+      ELSEIF ( ABS(CC(1,N)).LT.1.D-9 ) THEN ! If no conversion coefficients given for this multipolarity
          CONV = 0.0
       ELSE
          nen = 4
