@@ -57,8 +57,8 @@ C     Calculate range over which we will want Qe and Qm
 C     Calculate some parameters, which we will pass to QE or QM
       chi = CH(icnt) ! \cosh(\omega)
       shi = SH(icnt) ! \sinh(\omega)
-      b2 = EPS(Nexp)*chi + 1.
-      pol = 1. - Zpol/b2 ! E1 polarisation term
+      b2 = EPS(Nexp)*chi + 1.D0
+      pol = 1.D0 - Zpol/b2 ! E1 polarisation term
       b2 = b2*b2 ! b^2 = (\epsilon \cosh(\omega) + 1)^2
       IF ( ibm.NE.2 ) THEN
          b4 = b2*b2
