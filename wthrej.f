@@ -40,7 +40,7 @@ C WTHREJ(2 * J1, 2 * J2, 2 * J3, 2 * M1, 2 * M2, 2 * M3).
       DIMENSION jvora(26)
       INCLUDE 'fakul.inc'
       
-      wthrep = 0.E+00
+      wthrep = 0.D+00
       jjha = (J1+J2-J3)/2 + 1
       jjhb = (J1-J2+J3)/2 + 1
       jjhc = (-J1+J2+J3)/2 + 1
@@ -104,11 +104,11 @@ C WTHREJ(2 * J1, 2 * J2, 2 * J3, 2 * M1, 2 * M2, 2 * M3).
          jvora(jlp) = jta + jtb + jtc
       ENDDO
 
-      vorz = -1.E+00
-      IF ( 2*(izmin/2).EQ.izmin ) vorz = +1.E+00
+      vorz = -1.D+00
+      IF ( 2*(izmin/2).EQ.izmin ) vorz = +1.D+00
       IF ( izmin.LE.izmax ) THEN
          DO iz = izmin , izmax
-            qsumlo = 0.E+00
+            qsumlo = 0.D+00
             iza = iz + 1
             izb = jabc + 1 - iz
             izc = jmb + 1 - iz
@@ -120,7 +120,7 @@ C WTHREJ(2 * J1, 2 * J2, 2 * J3, 2 * M1, 2 * M2, 2 * M3).
      &                 - 2*KF(izc,jlp) - 2*KF(izd,jlp) - 2*KF(ize,jlp)
      &                 - 2*KF(izf,jlp)
                sumlo = izexp
-               qsumlo = qsumlo + sumlo*PILOG(jlp)*(.5E+00)
+               qsumlo = qsumlo + sumlo*PILOG(jlp)*(.5D+00)
             ENDDO
             zuthre = vorz*EXP(qsumlo)
             wthrep = wthrep + zuthre
