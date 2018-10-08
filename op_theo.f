@@ -98,7 +98,7 @@ C     Now do the calculation loop. The work is done by the ELMT function
           xm2 = bm(lamd,nb1,nb2,2)
           xm3 = bm(lamd,nb1,nb2,3)
           ELM(kb) = ELMT(xi1,xi2,lamd,nb1,nb2,xk1,xk2,xm1,xm2,xm3)
-          IF ( ABS(ELM(kb)).LT.1E-6 ) ELM(kb) = 1.E-6
+          IF ( ABS(ELM(kb)).LT.1D-6 ) ELM(kb) = 1.D-6
           irix = 12
           IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for target, 32 for beam (only gosia2)
           WRITE (irix,*) ELM(kb)
