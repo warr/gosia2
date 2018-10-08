@@ -84,6 +84,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       INCLUDE 'prt.inc'
       INCLUDE 'trb.inc'
       INCLUDE 'switch.inc'
+      INCLUDE 'fconst.inc'
       
 C     Read OP,YIEL parameters
       iosr = 0
@@ -138,13 +139,13 @@ C     Convert angles into radians
          juf = ABS(juf) ! Number of detector angles
          DO jicc = 1 , juf ! For each detector angle
             DO lxt = 1 , 2 ! 1 is theta, 2 is phi
-               AGELI(jic,jicc,lxt) = AGELI(jic,jicc,lxt)*.0174532925 ! 0.017452925 = pi / 180
+               AGELI(jic,jicc,lxt) = AGELI(jic,jicc,lxt)*pi/180.D0 ! 0.017452925 = pi / 180
             ENDDO
          ENDDO
       ENDDO ! Loop jic on experiments
 
 C     Set normalising transition
-      TAU(1) = 1.E+25 ! Initialise ground-state lifetime to 1E25 picoseconds
+      TAU(1) = 1.D25 ! Initialise ground-state lifetime to 1E25 picoseconds
       READ (JZB,*) ns1 , ns2 ! NS1, NS2
       DO li = 1 , Idr ! Search through decays for right pair of levels
          IF ( KSEQ(li,3).EQ.ns1 .AND. KSEQ(li,4).EQ.ns2 ) GOTO 100
@@ -207,7 +208,7 @@ C     Read branching ratios
      &           'NF2',5X,'RATIO(1:2)',9X,'ERROR')
          DO lb = 1 , NBRA ! I1,I2,I3,I4,B,DB repeated NBRA times
             READ (JZB,*) ns1 , ns2 , ns3 , ns4 , BRAT(lb,1) , BRAT(lb,2)
-            BRAT(lb,2) = BRAT(lb,2)/(SQRT(wbra)+1.E-10) ! Relative error
+            BRAT(lb,2) = BRAT(lb,2)/(SQRT(wbra)+1.D-10) ! Relative error
             WRITE (22,99003) ns1 , ns2 , ns3 , ns4 , BRAT(lb,1) , 
      &                       BRAT(lb,2)
 99003       FORMAT (4X,1I3,5X,1I3,5X,1I3,5X,1I3,5X,1F10.5,5X,1F10.5)
@@ -259,7 +260,7 @@ C     Read lifetimes
               WRITE(*,*) 'ERROR: Invalid level for lifetime ',
      &          LIFCT(ilft)
             ENDIF
-            TIMEL(2,ilft) = TIMEL(2,ilft)/(SQRT(wlf)+1.E-10) ! Relative error
+            TIMEL(2,ilft) = TIMEL(2,ilft)/(SQRT(wlf)+1.D-10) ! Relative error
             WRITE (22,99006) LIFCT(ilft) , TIMEL(1,ilft) , TIMEL(2,ilft)
 99006       FORMAT (6X,1I3,6X,1F10.2,3X,1F10.2)
          ENDDO
@@ -275,12 +276,12 @@ C     Read known mixing ratios
      &           'TRANSITION',12X,'DELTA',10X,'ERROR'/)
          DO li = 1 , NDL ! IS, IF, DELTA, ERROR repeated NDL times
             READ (JZB,*) ns1 , ns2 , DMIXE(li,1) , DMIXE(li,2)
-            DMIXE(li,2) = DMIXE(li,2)/(SQRT(wdl)+1.E-10)
+            DMIXE(li,2) = DMIXE(li,2)/(SQRT(wdl)+1.D-10)
             WRITE (22,99012) ns1 , ns2 , DMIXE(li,1) , DMIXE(li,2)
             DO lb = 1 , Idr ! Search through decays for right pair of levels
                IF ( KSEQ(lb,3).EQ.ns1 .AND. KSEQ(lb,4).EQ.ns2 ) THEN
                   IMIX(li) = lb ! Decay index
-                  DMIX(li) = .8326*(EN(ns1)-EN(ns2)) ! 0.8326 * energy of gamma
+                  DMIX(li) = .8326D0*(EN(ns1)-EN(ns2)) ! 0.8326 * energy of gamma
                   IF ( ITS.EQ.2 ) WRITE (18,*) KSEQ(lb,1) , KSEQ(lb,2)
                ENDIF
             ENDDO
@@ -321,7 +322,7 @@ C     Read known matrix elements
          ENDIF
          IAMY(iax,1) = ns1 ! Level index
          IAMY(iax,2) = ns2 ! Level index
-         EAMX(iax,2) = EAMX(iax,2)/(SQRT(wamx)+1.E-10) ! Relative error of ME
+         EAMX(iax,2) = EAMX(iax,2)/(SQRT(wamx)+1.D-10) ! Relative error of ME
          WRITE (22,99012) ns1 , ns2 , EAMX(iax,1) , EAMX(iax,2)
          IAMX(iax) = MEM(ns1,ns2,llia) ! Index to matrix element
          IF ( ns1.NE.LEAD(1,IAMX(iax)) .OR. ns2.NE.LEAD(2,IAMX(iax)))
