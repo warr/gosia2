@@ -220,8 +220,8 @@ C     Write correction factors
                         IF ( jcp.NE.jnm ) GOTO 355
                         IF ( IVAR(jnm).EQ.0 ) GOTO 355
                      ENDIF
-                     flt = 1.01
-                     IF ( jjj.EQ.2 ) flt = .99
+                     flt = 1.01D0
+                     IF ( jjj.EQ.2 ) flt = .99D0
                      ELM(jcoup) = ELMH(jcoup)*flt
  355                 CONTINUE
                   ENDDO
@@ -230,7 +230,7 @@ C     Write correction factors
                   IF ( IFBFL.NE.1 .OR. jjj.NE.1 ) THEN
                      IF ( jjj.EQ.2 ) chis12 = chis13
                      GRAD(jnm) = 100.*(HLMLM(jnm)-chis12)/ELMH(jnm)
-                     IF ( IFBFL.EQ.1 ) GRAD(jnm) = GRAD(jnm)/2. ! Forward-backward
+                     IF ( IFBFL.EQ.1 ) GRAD(jnm) = GRAD(jnm)/2.D0 ! Forward-backward
                      IF ( lnm.EQ.1 ) GRAD(jnm) = GRAD(jnm)
      &                    *ABS(ELMH(jnm))
                   ENDIF
@@ -249,7 +249,7 @@ C     Write correction factors
             DO jnm = 1 , MEMAX
                ELM(jnm) = DEVU(jnm)
             ENDDO
-            shl = dm/20./sumg2
+            shl = dm/20.D0/sumg2
             sumg1 = 0.
             DO jnm = 1 , MEMAX
                GRAD(jnm) = (DEVD(jnm)*sumg2-GRAD(jnm))/shl
@@ -260,23 +260,23 @@ C     Write correction factors
             DO jnm = 1 , MEMAX
                GRAD(jnm) = GRAD(jnm)/sumg1
                DEVU(jnm) = ELM(jnm)
-               sel = dm*GRAD(jnm)/100.
+               sel = dm*GRAD(jnm)/100.D0
                IF ( lnm.EQ.1 ) sel = sel*ABS(DEVU(jnm))
                p = p + DEVD(jnm)*GRAD(jnm)
                ELM(jnm) = ELM(jnm) + sel
             ENDDO
             CALL FTBM(3,chis13,Idr,ncall,chx,Bten)
-            shl = dm/100.
+            shl = dm/100.D0
             DO jnm = 1 , MEMAX
-               sel = dm*GRAD(jnm)/50.
+               sel = dm*GRAD(jnm)/50.D0
                IF ( lnm.EQ.1 ) sel = sel*ABS(DEVU(jnm))
                ELM(jnm) = ELM(jnm) - sel
             ENDDO
             CALL FTBM(3,chis12,Idr,ncall,chx,Bten)
             q = (chis12+chis13-2.*Chisq)/shl/shl
             a0 = q*sumg2/sumg1 - p
-            a1 = p*p - 1.
-            sumg1 = SQRT(a0*a0+a1*a1+2.*a0*a1*p)
+            a1 = p*p - 1.D0
+            sumg1 = SQRT(a0*a0+a1*a1+2.D0*a0*a1*p)
             DO jnm = 1 , MEMAX
                ELM(jnm) = DEVU(jnm)
                GRAD(jnm) = (GRAD(jnm)*a1+DEVD(jnm)*a0)/sumg1
@@ -287,7 +287,7 @@ C     Write correction factors
                IF ( IVAR(jnm).EQ.1 .OR. IVAR(jnm).EQ.2 ) sumg2 = sumg2 +
      &              GRAD(jnm)*GRAD(jnm)
             ENDDO
-            IF ( sumg2.LT.1.E-10 ) GOTO 700
+            IF ( sumg2.LT.1.D-10 ) GOTO 700
             sumg2 = SQRT(sumg2)
             DO jnm = 1 , MEMAX
                GRAD(jnm) = GRAD(jnm)/sumg2
@@ -302,7 +302,7 @@ C     Write correction factors
                DO jnm = 1 , MEMAX
                   DEVD(jnm) = GRAD(jnm)
                   DEVU(jnm) = ELM(jnm)
-                  sel = dm*GRAD(jnm)/20.
+                  sel = dm*GRAD(jnm)/20.D0
                   IF ( lnm.EQ.1 ) sel = sel*ABS(ELM(jnm))
                   ELM(jnm) = ELM(jnm) - sel
                ENDDO
@@ -384,7 +384,7 @@ C     Find steepest gradient
          ENDIF
       ENDDO
        
-      ht = .01*ABS(ELM(inmx))/cmax
+      ht = .01D0*ABS(ELM(inmx))/cmax
       mvfl = 0
       IF ( icount.NE.1 .AND. istec.EQ.1 ) THEN
          xkat = 0.
@@ -399,7 +399,7 @@ C     Find steepest gradient
             DO j = 1 , MEMAX
                IF ( IVAR(j).NE.0 .AND. IVAR(j).LE.999 ) THEN
                   a = MAX(a,ABS(GRAD(j)))
-                  IF ( ABS(a-ABS(GRAD(j))).LT.1.E-9 ) iin = j
+                  IF ( ABS(a-ABS(GRAD(j))).LT.1.D-9 ) iin = j
                ENDIF
             ENDDO
             WRITE (22,99011) iin
@@ -423,12 +423,12 @@ C     Find steepest gradient
       IF ( mvfl.EQ.0 ) THEN
          CALL FTBM(icl2,chisp,Idr,ncall,chilo,Bten)
          DO j = 1 , MEMAX
-            ELM(j) = 2.*ELMH(j) - ELM(j)
+            ELM(j) = 2.D0*ELMH(j) - ELM(j)
          ENDDO
          CALL FTBM(icl2,chisf,Idr,ncall,chilo,Bten)
-         c = (chisp+chisf-2.*chil)/ht/ht
-         b = (chisp-chisf)/ht/2.
-         dl = b*b - 2.*c*chil
+         c = (chisp+chisf-2.D0*chil)/ht/ht
+         b = (chisp-chisf)/ht/2.D0
+         dl = b*b - 2.D0*c*chil
          IF ( dl.GT.0. ) THEN
             f1 = chil
             f2 = b
@@ -437,7 +437,7 @@ C     Find steepest gradient
             f2 = c
          ENDIF
          mvfl = 1
-         IF ( ABS(f2).LT.1.E-10 ) THEN
+         IF ( ABS(f2).LT.1.D-10 ) THEN
             ht = 1.
          ELSE
             ht = -f1/f2
@@ -491,7 +491,7 @@ C     Required chi square achieved
             DO jjj = 1 , MEMAX
                IF ( IVAR(jjj).NE.0 .AND. IVAR(jjj).LE.999 ) THEN
                   a = MAX(a,ABS(GRAD(jjj)))
-                  IF ( ABS(a-ABS(GRAD(jjj))).LT.1.E-9 ) iin = jjj
+                  IF ( ABS(a-ABS(GRAD(jjj))).LT.1.D-9 ) iin = jjj
                ENDIF
             ENDDO
             IVAR(iin) = 0
