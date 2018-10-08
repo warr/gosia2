@@ -34,7 +34,7 @@ C      Q      - Attenuation coefficient (output)
          DO j = 1 , 3 ! Loop over regions
             yl = b(j)
             yu = b(j+1) ! Region between angles yl and yu
-            dl = (yu-yl)/100.
+            dl = (yu-yl)/100.D0
             DO m = 1 , 101 ! Divide region into 100 slices
                xm = yl + dl*(m-1) ! Angle of slice
 C Calculate ex, which is e^(-tau * path), where path is the path length in the active
@@ -50,25 +50,28 @@ C part of the detector (i.e. excluding the core) for angle xm
                IF ( j.EQ.1 ) f(m) = f(m)*EXP(-Tau*(A/SIN(xm)-D/COS(xm))) ! Absorption in core
                IF ( k.EQ.1 ) THEN ! Legendre polynomials order k
                ELSEIF ( k.EQ.3 ) THEN
-                  f(m) = f(m)*(1.5*COS(xm)**2-0.5)
+                  f(m) = f(m)*(1.5D0*COS(xm)**2-0.5D0)
                ELSEIF ( k.EQ.4 ) THEN
-                  f(m) = f(m)*(2.5*COS(xm)**3-1.5*COS(xm))
+                  f(m) = f(m)*(2.5D0*COS(xm)**3-1.5D0*COS(xm))
                ELSEIF ( k.EQ.5 ) THEN
-                  f(m) = f(m)*(4.375*COS(xm)**4-3.75*COS(xm)**2+.375)
+                  f(m) = f(m)*(4.375D0*COS(xm)**4-3.75D0*COS(xm)**2+
+     &                   .375D0)
                ELSEIF ( k.EQ.6 ) THEN
-                  f(m) = f(m)*((63.*COS(xm)**5-70.*COS(xm)**3+15.)/8.)
+                  f(m) = f(m)*((63.D0*COS(xm)**5-70.D0*COS(xm)**3+
+     &                   15.D0)/8.D0)
                ELSEIF ( k.EQ.7 ) THEN
                   f(m) = f(m)
-     &                   *((21.*COS(xm)**2*(11.*COS(xm)**4-15.*COS(xm)
-     &                   **2+5.)-5.)/16.)
+     &                   *((21.D0*COS(xm)**2*(11.D0*COS(xm)**4-
+     &                   15.D0*COS(xm)**2+5.D0)-5.D0)/16.D0)
                ELSEIF ( k.EQ.8 ) THEN
                   f(m) = f(m)
-     &                   *(429.*COS(xm)**7-693.*COS(xm)**5+315.*COS(xm)
-     &                   **3-35.*COS(xm))/16.
+     &                   *(429.D0*COS(xm)**7-693.D0*COS(xm)**5+
+     &                   315.D0*COS(xm)**3-35.D0*COS(xm))/16.D0
                ELSEIF ( k.EQ.9 ) THEN
                   f(m) = f(m)
-     &                   *(6435.*COS(xm)**8-12012.*COS(xm)**6+6930.*COS
-     &                   (xm)**4-1260.*COS(xm)**2+35.)/128.
+     &                   *(6435.D0*COS(xm)**8-12012.D0*COS(xm)**6+
+     &                   6930.D0*COS(xm)**4-1260.D0*COS(xm)**2+
+     &                   35.D0)/128.D0
                ELSE
                   f(m) = f(m)*COS(xm)
                ENDIF
@@ -80,7 +83,7 @@ C Integrate slices using Simpson's rule
                ev = ev + f(m)
                od = od + f(m+1)
             ENDDO
-            fint = dl/3.*(f(1)+4.*(ev+f(100))+2.*od+f(101))
+            fint = dl/3.D0*(f(1)+4.D0*(ev+f(100))+2.D0*od+f(101))
             Q(k) = Q(k) + fint
          ENDDO
       ENDDO
@@ -89,5 +92,5 @@ C evaluate Q_k = J_k0/J_00
       DO i = 1 , 8
          Q(i+1) = Q(i+1)/Q(1)
       ENDDO
-      Q(1) = Q(1)/2.
+      Q(1) = Q(1)/2.D0
       END
