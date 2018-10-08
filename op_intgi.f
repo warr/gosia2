@@ -96,6 +96,7 @@ C interpolating over the meshpoints
       INCLUDE 'vlin.inc'
       INCLUDE 'yexpt.inc'
       INCLUDE 'yteor.inc'
+      INCLUDE 'fconst.inc'
 
       CHARACTER*4 Op2
       REAL*8 ax , Bten(1600), ccc , ccd , cocos , d , decen , dedx(20) ,
@@ -170,8 +171,8 @@ C interpolating over the meshpoints
      &                jfi=1,nfi)
                     IF ( tth.LT.0. ) THEN
                       DO jfi = 1 , nfi ! For each phi angle
-                        Fiex1(ktt,jfi,1) = Fiex1(ktt,jfi,1) + 180.
-                        Fiex1(ktt,jfi,2) = Fiex1(ktt,jfi,2) + 180.
+                        Fiex1(ktt,jfi,1) = Fiex1(ktt,jfi,1) + 180.D0
+                        Fiex1(ktt,jfi,2) = Fiex1(ktt,jfi,2) + 180.D0
                       ENDDO
                     ENDIF
                   ENDIF
@@ -222,8 +223,8 @@ C interpolating over the meshpoints
                 ENDDO
                 todfi = 0.
                 DO jfi = 1 , nfi ! For each phi angle
-                  fi0 = Fiex1(ktt,jfi,1)/57.2957795
-                  fi1 = Fiex1(ktt,jfi,2)/57.2957795
+                  fi0 = Fiex1(ktt,jfi,1)*pi/180.D0
+                  fi1 = Fiex1(ktt,jfi,2)*pi/180.D0
                   gth = AGELI(IEXP,ijan,1)
                   fm = (fi0+fi1)/2.
                   figl = AGELI(IEXP,ijan,2)
@@ -232,10 +233,10 @@ C interpolating over the meshpoints
                     id = ITMA(IEXP,ijan) ! Get detector identity
                     d = ODL(id) ! Get result of OP,GDET calculation
                     rx = d*SIN(gth)*COS(figl-fm)
-     &                - .25*SIN(tetrc)*COS(fm)
+     &                - .25D0*SIN(tetrc)*COS(fm)
                     ry = d*SIN(gth)*SIN(figl-fm)
-     &                - .25*SIN(tetrc)*SIN(fm)
-                    rz = d*COS(gth) - .25*COS(tetrc)
+     &                - .25D0*SIN(tetrc)*SIN(fm)
+                    rz = d*COS(gth) - .25D0*COS(tetrc)
                     rl = SQRT(rx*rx+ry*ry+rz*rz)
                     sf = d*d/rl/rl
                     thc = TACOS(rz/rl)
@@ -245,7 +246,7 @@ C interpolating over the meshpoints
                     DO ixl = 1 , Idr ! For each decay
                       ixm = KSEQ(ixl,3)
                       tfac = TAU(ixm)
-                      YGN(ixl) = YGN(ixl) + .01199182*tfac*BETAR(IEXP)
+                      YGN(ixl) = YGN(ixl) + .01199182D0*tfac*BETAR(IEXP)
      &                  *(sf*YGP(ixl)-YGN(ixl))
                     ENDDO ! Loop on decays
                   ENDIF ! If correction due to recoil
@@ -278,7 +279,7 @@ C interpolating over the meshpoints
                   ENDDO ! Loop on decays jyi
                   todfi = todfi + ABS(fi1-fi0)
                 ENDDO ! For each phi angle jfi
-                IF ( IAXS(lx).EQ.0 ) todfi = 6.283185
+                IF ( IAXS(lx).EQ.0 ) todfi = pi * 2.D0
                 ax = 1.
                 IF ( mfla.EQ.1 ) ax = 1./todfi
                 dsx = dsig
@@ -373,7 +374,7 @@ C       Read tape 17
             IF ( mfla.EQ.1 ) READ (JZB,*)
      &        (pfi(j),j=1,npct1)
           ENDIF
-          het = het/57.2957795 ! Step in theta in radians
+          het = het*pi/180.D0 ! Step in theta in radians
           
 C         Interpolate stopping power for each of the energies
 C         that we need. esp is an array of energies and dedx is
@@ -388,7 +389,7 @@ C         with the number of steps specified.
      &        CALL LAGRAN(esp,dedx,npt,1,xx,yy,3,1)
             IF ( ISPL.EQ.1 )
      &        CALL SPLNER(esp,dedx,npt,xx,yy,3)
-            HLMLM(j) = 1./yy
+            HLMLM(j) = 1.D0/yy
           ENDDO
           
 C         Now we calculate for all the mesh points. 
@@ -413,7 +414,7 @@ C         Now we calculate for all the mesh points.
                   YV(jtp) = ZETA(jyv) ! Point yield
                 ENDDO ! Loop on theta meshpoints jtp
                 DO jt = 1 , npct1 ! number of equal divisions in theta for interpolation
-                  xx = (jt-1)*het + tmn/57.2957795
+                  xx = (jt-1)*het + tmn*pi/180.D0
                   IF ( ISPL.EQ.0 )
      &              CALL LAGRAN(XV,YV,ntt,jt,xx,yy,2,icll) ! interpolate point yield at theta = xx
                   IF ( ISPL.EQ.1 )
@@ -422,9 +423,9 @@ C         Now we calculate for all the mesh points.
      &              CALL LAGRAN(XV,DSG,ntt,jt,xx,zz,2,icll) ! interpolate gamma yield at theta = xx
                   IF ( ISPL.EQ.1 )
      &              CALL SPLNER(XV,DSG,ntt,xx,zz,2) ! interpolate gamma yield at theta = xx
-                  IF ( mfla.EQ.1 ) yy = yy*pfi(jt)/57.2957795
-                  IF ( yy.LE.0. ) yy = 1.E-15
-                  IF ( mfla.EQ.1 ) zz = zz*pfi(jt)/57.2957795
+                  IF ( mfla.EQ.1 ) yy = yy*pfi(jt)*pi/180.D0
+                  IF ( yy.LE.0. ) yy = 1.D-15
+                  IF ( mfla.EQ.1 ) zz = zz*pfi(jt)*pi/180.D0
                   XI(jt) = yy*SIN(xx) ! yy = integral of point yields over phi
                   IF ( jd.EQ.1 .AND. ja.EQ.1 ) HLM(jt)
      &              = zz*SIN(xx) ! zz = integral over phi of Rutherford cross section
@@ -515,13 +516,13 @@ C   equally spaced energies, which we integrate in the same way.
           IF ( Iecd(lx).EQ.1 ) THEN ! Circular detector
             IF ( Jpin(lx).EQ.0 ) THEN
               CALL COORD(wth,wph,wthh,1,2,pfi,wpi,TLBDG(lx),lx,txx,txx)
-              WRITE (22,99020) FIEX(lx,1)*57.2957795 , 
-     &          FIEX(lx,2)*57.2957795 , lx
+              WRITE (22,99020) FIEX(lx,1)*180.D0/pi ,
+     &          FIEX(lx,2)*180.D0/pi , lx
 99020         FORMAT (//5X,'WARNING: THE PHI ANGLE WAS REPLACED BY'
      &          ,1X,F8.3,1X,'TO',F8.3,3X,'FOR EXPERIMENT',2X,I3)
               IF ( TLBDG(lx).LT.0 ) THEN
-                FIEX(lx,1) = FIEX(lx,1) + 3.14159265
-                FIEX(lx,2) = FIEX(lx,2) + 3.14159265
+                FIEX(lx,1) = FIEX(lx,1) + pi
+                FIEX(lx,2) = FIEX(lx,2) + pi
               ENDIF ! If theta_lab < 0
             ENDIF ! If no pin diodes
           ENDIF ! If circular detector
