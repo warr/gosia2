@@ -20,7 +20,7 @@ C
       INTEGER*4 i , k
       REAL*8 p , qn , sig , un , u(1500)
  
-      IF ( Yp1.GT..99E30 ) THEN
+      IF ( Yp1.GT..99D30 ) THEN
          Y2(1) = 0.
          u(1) = 0.
       ELSE
@@ -34,7 +34,7 @@ C
          u(i) = (6.*((Y(i+1)-Y(i))/(X(i+1)-X(i))-(Y(i)-Y(i-1))/(X(i)-X(i
      &          -1)))/(X(i+1)-X(i-1))-sig*u(i-1))/p
       ENDDO
-      IF ( Ypn.GT..99E30 ) THEN
+      IF ( Ypn.GT..99D30 ) THEN
          qn = 0.
          un = 0.
       ELSE
