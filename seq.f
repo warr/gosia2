@@ -49,6 +49,7 @@ C 8 = M2.
       INCLUDE 'coex.inc'
       INCLUDE 'lev.inc'
       INCLUDE 'catlf.inc'
+      INCLUDE 'fconst.inc'
       DATA jsave/0/
       
       m6 = 0
@@ -131,8 +132,8 @@ C     multipolarity
          la = KSEQ(l,4) - 10 ! Multipolarity
          ega = EN(n) - EN(m)    ! ega = E_\gamma
          twoi = 1./SQRT(2.*SPIN(n)+1.)
-         spini = SPIN(n) + .001
-         spinf = SPIN(m) + .001
+         spini = SPIN(n) + .001D0
+         spinf = SPIN(m) + .001D0
          egs = SQRT(ega)*twoi   ! egs = \sqrt{E_\gamma \over 2 I_1 + 1}
          js = l + 1
          la1 = 0
@@ -155,15 +156,18 @@ C     multipolarity
          nob = 1
  50      IF ( la.LE.3 ) THEN
             IF ( la.EQ.1 ) THEN
-               DELTA(Idr,1) = 398.77393*ega*egs ! E1
+               DELTA(Idr,1) = 16.D0*SQRT(pi/hbar)/hbarc**1.5D0*ega*
+     &           egs ! E1 398.77393
                mule = 1
                istr1 = 1 ! In array CC and N parameter of CONV -> E1
             ELSEIF ( la.EQ.2 ) THEN
-               DELTA(Idr,1) = 3.5002636*egs*ega*ega ! E2
+               DELTA(Idr,1) = 16.D0*SQRT(3.D0*pi/hbar)/hbarc**2.5D0*
+     &           egs*ega*ega ! E2 3.5002636
                mule = 2
                istr1 = 2 ! In array CC and N parameter of CONV -> E2
             ELSEIF ( la.EQ.3 ) THEN
-               DELTA(Idr,1) = 0.023891302*ega*ega*ega*egs ! E3
+               DELTA(Idr,1) = 320.D0/7.D0*SQRT(2.D0/3.D0*pi/hbar)/
+     &           hbarc**3.5D0*ega*ega*ega*egs ! E3 0.023891302
                mule = 3
                istr1 = 3 ! In array CC and N parameter of CONV -> E3
             ELSE
@@ -173,11 +177,13 @@ C     multipolarity
          ENDIF
  100     la = la - 6
          IF ( la.EQ.2 ) THEN
-            DELTA(Idr,2) = 0.036806836*ega*ega*egs ! M2
+            DELTA(Idr,2) = 60.D0/75.D0*SQRT(3.D0*pi/hbar)/
+     &        hbarc**1.5D0/mprot*ega*ega*egs ! M2 0.036806836
             mulm = 2
             istr2 = 5 ! In array CC and N parameter of CONV -> M2
          ELSE
-            DELTA(Idr,2) = 4.1932861*ega*egs ! M1
+            DELTA(Idr,2) = 4.D0/5.D0*SQRT(pi/hbar)/hbarc**0.5D0/
+     &        mprot*ega*egs ! M1 4.1932861
             mulm = 1
             istr2 = 4 ! In array CC and N parameter of CONV -> M1
          ENDIF
