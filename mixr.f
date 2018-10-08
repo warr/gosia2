@@ -38,7 +38,7 @@ C      Chilo  - chi squared using logs
          it = IMIX(i) ! Decay for this mixing ratio
          inx = KSEQ(it,1) ! Index 1 of it'th decay
          inx1 = KSEQ(it,2) ! Index 2 of it'th decay
-         IF ( ABS(ELM(inx1)).LT.1.E-5 ) ELM(inx1) = 1.E-5
+         IF ( ABS(ELM(inx1)).LT.1.D-5 ) ELM(inx1) = 1.D-5
          dl = DMIX(i)*ELM(inx)/ELM(inx1)
          IF ( Ipsw.EQ.1 ) DMIX(i) = dl
          Chi = Chi + (dl-DMIXE(i,1))**2/DMIXE(i,2)/DMIXE(i,2)
