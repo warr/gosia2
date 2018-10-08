@@ -30,19 +30,21 @@ C      Iso    - isotropic flag
             ir = NSTART(j) - 1 ! Index of first substate of level - 1
  20         ir = ir + 1
             fpom = ARM(ir,2)
-            ARM(ir,2) = -8.*ARM(ir,3) + 6.*ARM(ir,2) + 3.*ARM(ir,4)
-            ARM(ir,1) = -16.*ARM(ir,1) + 9.*ARM(ir,2) + 9.*fpom - 
+            ARM(ir,2) = -8.D0*ARM(ir,3) + 6.D0*ARM(ir,2) +
+     &                  3.D0*ARM(ir,4)
+            ARM(ir,1) = -16.D0*ARM(ir,1) + 9.D0*ARM(ir,2) + 9.D0*fpom -
      &                  ARM(ir,4)
             ARM(ir,3) = fpom
-            IF ( CAT(ir,3).LT.-.1 ) GOTO 20
+            IF ( CAT(ir,3).LT.-.1D0 ) GOTO 20
          ENDDO
          GOTO 99999
       ENDIF
        
       DO j = 1 , ISMAX ! Loop over substates
          fpom = ARM(j,2)
-         ARM(j,2) = -8.*ARM(j,3) + 6.*ARM(j,2) + 3.*ARM(j,4)
-         ARM(j,1) = -16.*ARM(j,1) + 9.*ARM(j,2) + 9.*fpom - ARM(j,4)
+         ARM(j,2) = -8.D0*ARM(j,3) + 6.D0*ARM(j,2) + 3.D0*ARM(j,4)
+         ARM(j,1) = -16.D0*ARM(j,1) + 9.D0*ARM(j,2) + 9.D0*fpom -
+     &              ARM(j,4)
          ARM(j,3) = fpom
       ENDDO
 99999 END
