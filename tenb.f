@@ -39,7 +39,7 @@ C can cope with half-integers.
       INCLUDE 'kin.inc'
 
       IF ( IPRM(21) .EQ. 1 ) WRITE(22,100) IEXP
-      iha = (-1)**INT(2.*SPIN(1)+.01)
+      iha = (-1)**INT(2.D0*SPIN(1)+.01D0)
       IF ( Icl.EQ.1 ) THEN
          ms = 16*(NMAX-1)
          DO i = 1 , ms
@@ -52,8 +52,8 @@ C can cope with half-integers.
          IF ( ms.NE.0 ) THEN
             msp = NSTOP(i) ! Last substate of level
             si = SPIN(i) ! Spin of level
-            isi = INT(2.*si+.01)
-            ce = SQRT(2.*si+1.)
+            isi = INT(2.D0*si+.01D0)
+            ce = SQRT(2.D0*si+1.D0)
             DO kp = 1 , 7 , 2
                k = kp - 1
                kk = 2*k
@@ -67,10 +67,10 @@ C can cope with half-integers.
                      DO m = ms , msp
                         mm = m
                         mp = m + l
-                        jm = INT(2.01*CAT(mm,3)) ! 2 * m quantum number of substate mm
+                        jm = INT(2.01D0*CAT(mm,3)) ! 2 * m quantum number of substate mm
                         IF ( mp.GT.NSTOP(i) ) GOTO 4
                         ilg = (-1)**INT(si-CAT(mp,3)) ! 2 * m quantum number of substate mp
-                        jmp = -INT(2.01*CAT(mp,3))
+                        jmp = -INT(2.01D0*CAT(mp,3))
                         fc = WTHREJ(isi,kk,isi,jmp,ll,jm)
                         ite = 1
  2                      IF ( ila.EQ.1 ) x = DBLE(ARM(mp,5))
@@ -85,7 +85,7 @@ C can cope with half-integers.
                            ite = 2
                            mp = mp - 2*l
                            IF ( mp.GE.NSTART(i) ) THEN
-                              jmp = INT(2.01*CAT(mp,3)) ! 2 * m quantum number of substate mp
+                              jmp = INT(2.01D0*CAT(mp,3)) ! 2 * m quantum number of substate mp
                               jm = -jm
                               fc = WTHREJ(isi,kk,isi,jmp,ll,jm)
                               ilg = (-1)**INT(si+CAT(mp,3))
@@ -95,7 +95,7 @@ C can cope with half-integers.
  6                      CONTINUE
                      ENDDO ! Loop over m
                      IF ( Icl.EQ.Lmax ) THEN
-                       Bten(ind) = Bten(ind) *ce/(2.*SPIN(1)+1.)
+                       Bten(ind) = Bten(ind) *ce/(2.D0*SPIN(1)+1.D0)
                        IF ( IPRM(21) .EQ. 1 ) THEN
                          WRITE (22,101) i, k, l , Bten(ind)
                        ENDIF
