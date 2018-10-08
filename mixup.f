@@ -42,7 +42,7 @@ C     element to which it is correlated.
       DO k = 1 , MEMAX
          IF ( IVAR(k).GE.999 ) THEN ! Correlated
             k1 = IVAR(k) - 1000 ! Index to which it is correlated
-            IF ( ABS(ELMU(k1)).LT.1.E-9 ) THEN
+            IF ( ABS(ELMU(k1)).LT.1.D-9 ) THEN
                ELM(k) = 0.
             ELSE
                ELM(k) = ELM(k1)*SA(k) ! SA is the ratio we require
