@@ -161,7 +161,7 @@ C      Bten   -
          DO k = 1 , LMAX ! For each multipolarity up to ground-state spin + 1
             fc = 2.
             IF ( k.EQ.LMAX ) fc = 1.
-            IF ( DBLE(INT(SPIN(1))).LT.SPIN(1) ) fc = 2.
+            IF ( DBLE(INT(SPIN(1))).LT.SPIN(1) ) fc = 2.D0
             loc = 0
             polm = DBLE(k-1) - SPIN(1) ! Multipolarity - ground-state spin
             CALL LOAD(IEXP,3,2,polm,jj) ! Calculate parameters
@@ -282,19 +282,20 @@ C      Bten   -
                   INM = knm
                   chisx = 0.
                   EMH = ELM(INM)
-                  ELM(INM) = 1.05*EMH
+                  ELM(INM) = 1.05D0*EMH
                   lcc = LP3*(INM-1) + LP11
                   DO lst = 2 , NMAX ! For all states except ground state
                      wz = ZETA(lst+lcc)
                      inpx = (lst-1)*28
                      DO jy = 1 , 4
                         inp = inpx + (jy-1)*7
-                        IF ( jy.EQ.1 ) pr = ZETA(LP13+inp) + 1.E-12
+                        IF ( jy.EQ.1 ) pr = ZETA(LP13+inp) + 1.D-12
                         jmf = 2*jy - 1
                         IF ( IAXS(IEXP).EQ.0 ) jmf = 1
                         DO jm = 1 , jmf
                            inp = inp + 1
-                           ZETA(inp) = ZETA(inp+LP9)*(1.+.1*EMH*wz/pr)
+                           ZETA(inp) = ZETA(inp+LP9)*
+     &                                 (1.D0+.1D0*EMH*wz/pr)
                         ENDDO
                      ENDDO
                   ENDDO
@@ -332,9 +333,10 @@ C      Bten   -
                               DO lm = 1 , MEMX6
                                  inzz = ls + LP3*(lm-1) + LP11
                                  inzzz = LP13 + (ls-1)*28
-                                 IF ( ABS(ZETA(inzzz)).LT.1.E-20 )
-     &                                ZETA(inzzz) = 1.E-20
-                                 val = 2.*ELM(lm)*ZETA(inzz)/ZETA(inzzz)
+                                 IF ( ABS(ZETA(inzzz)).LT.1.D-20 )
+     &                                ZETA(inzzz) = 1.D-20
+                                 val = 2.D0*ELM(lm)*ZETA(inzz)/
+     &                                 ZETA(inzzz)
                                  aval = ABS(val)
                                  IF ( aval.GT.ABS(prop(lput)) ) THEN
                                     prop(lput) = val
