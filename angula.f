@@ -56,6 +56,7 @@ C      Op2    - The part after the OP, for the option we are processing
       INCLUDE 'thtar.inc'
       INCLUDE 'tcm.inc' ! For gosia2
       INCLUDE 'cx.inc'
+      INCLUDE 'fconst.inc'
       
       DO l = 1 , Idr ! For each decay
 
@@ -110,7 +111,7 @@ C      Op2    - The part after the OP, for the option we are processing
             fi01 = Fi0 - Figl ! Get lower phi limit
             fi11 = Fi1 - Figl ! Get upper phi limit
             CALL FIINT1(fi01,fi11,alab,ixs) ! Integrate over phi in lab frame
-            Ygn(l) = alab(1,1)*.0795774715 ! 0.0795774715 = 1 / (4 pi)
+            Ygn(l) = alab(1,1)/4.0D0/pi ! 0.0795774715 = 1 / (4 pi)
             DO j = 2 , 9
                sm = ylmr(j,1)*alab(j,1)
                IF ( IAXS(IEXP).NE.0 ) THEN
@@ -130,7 +131,7 @@ C      Op2    - The part after the OP, for the option we are processing
             fi11 = Fi1 - Figl ! Get upper phi limit
             CALL FIINT(fi01,fi11,at,ixs) ! Integrate over phi in recoiling nucleus frame, result in at
             IF ( l.EQ.1 ) CALL YLM(Gth,ylmr)
-            Ygn(l) = at(1)*.0795774715 ! 0.0795774715 = 1 / (4 pi)
+            Ygn(l) = at(1)/4.0D0/pi ! 0.0795774715 = 1 / (4 pi)
             DO jj = 1 , 3
                ji = jj*7 + 1
                sm = ylmr(jj,1)*at(ji)
@@ -154,7 +155,7 @@ C      Op2    - The part after the OP, for the option we are processing
 
 C     Added for gosia2
       dsig = DSIGS(IEXP)
-      ttx = TLBDG(IEXP)/57.2957795 ! Theta in lab frame in radians
+      ttx = TLBDG(IEXP)*pi/180.D0 ! Theta in lab frame in radians
       DO j = 1 , Idr  ! For each decay
          Ygn(j) = Ygn(j)*dsig*SIN(ttx)
       ENDDO ! Loop on decays Idr
