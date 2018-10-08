@@ -86,7 +86,7 @@ C      Acca   - accuracy required
       ENDDO
 
       DO l3 = 1 , l1
-         Acca = accah*2. + accah*l3/l1
+         Acca = accah*2.D0 + accah*l3/l1
          CALL POMNOZ(Acca,1,i56,ktoto,img,jidim) ! Expansion for L=1
       ENDDO
 
@@ -105,7 +105,7 @@ C      Acca   - accuracy required
             ENDDO
             DO l = 1 , 2
                DO j = i1 , i7
-                  QAPR(Indx,l,j) = QAPR(Indx,l,j)/.99
+                  QAPR(Indx,l,j) = QAPR(Indx,l,j)/.99D0
                ENDDO
             ENDDO
             DO jj = 2 , jidim
@@ -128,7 +128,7 @@ C     Initialise (Inc = 0)
       ENDDO
 
       ARM(Irld+1,i56) = (1.,0.)
-      uwa = -itm*.0298019802 + 1.01
+      uwa = -itm*(1.01D0-0.99D0/1.01D0) + 1.01D0
       DO l = 1 , 2
          DO j = i1 , i7
             QAPR(Indx,l,j) = QAPR(Indx,l,j)*uwa
