@@ -18,14 +18,15 @@ C arctan(x / sqrt(1 - x^2).
       REAL*8 FUNCTION TASIN(X)
       IMPLICIT NONE
       REAL*8 dol , test , war , X
+      INCLUDE 'fconst.inc'
       
       test = ABS(X) - 1.
-      IF ( ABS(test).LT.1.E-9 ) THEN
-         TASIN = 1.570796327 ! 1.570796327 is pi / 2
-         IF ( X.LT.0. ) TASIN = -1.570796327
+      IF ( ABS(test).LT.1.D-9 ) THEN
+         TASIN = pi/2.D0
+         IF ( X.LT.0. ) TASIN = -pi/2.D0
          GOTO 99999
       ENDIF
-      dol = SQRT(1.-X*X)
+      dol = SQRT(1.D0-X*X)
       war = X/dol
       TASIN = ATAN(war)
 99999 END
