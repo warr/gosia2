@@ -35,14 +35,16 @@ C etc.
       REAL*8 ct , ctsq , st , Theta , Ylmr
       INTEGER*4 i , j , l , lf , m
       INCLUDE 'kin.inc'
+      INCLUDE 'fconst.inc'
       DIMENSION Ylmr(9,9) , st(7)
       
       ct = COS(Theta)
       ctsq = ct*ct
       IF ( IAXS(IEXP).EQ.0 ) THEN ! If axially symmetric
-         Ylmr(1,1) = .0889703179*(3.*ctsq-1.)
-         Ylmr(2,1) = .0298415518*((35.*ctsq-30.)*ctsq+3.)
-         Ylmr(3,1) = .0179325408*(((231.*ctsq-315.)*ctsq+105.)*ctsq-5.)
+         Ylmr(1,1) = SQRT(5.D0)/8.D0/pi*(3.D0*ctsq-1.D0)
+         Ylmr(2,1) = 3.D0/32.D0/pi*((35.D0*ctsq-30.D0)*ctsq+3.D0)
+         Ylmr(3,1) = SQRT(13.D0)/64.D0/pi*(((231.D0*ctsq-315.D0)*ctsq+
+     &               105.D0)*ctsq-5.D0)
          GOTO 99999
       ENDIF
       st(1) = SIN(Theta)
@@ -50,21 +52,23 @@ C etc.
          j = i - 1
          st(i) = st(j)*st(1)
       ENDDO
-      Ylmr(1,3) = .1089659406
-      Ylmr(1,2) = -.2179318812*ct
-      Ylmr(1,1) = .0889703179*(3.*ctsq-1.)
-      Ylmr(2,5) = .1248361677
-      Ylmr(2,4) = -.3530900028*ct
-      Ylmr(2,3) = .0943672726*(7.*ctsq-1.)
-      Ylmr(2,2) = -.1334554768*ct*(7.*ctsq-3.)
-      Ylmr(2,1) = .0298415518*((35.*ctsq-30.)*ctsq+3.)
-      Ylmr(3,7) = .1362755124
-      Ylmr(3,6) = -.4720722226*ct
-      Ylmr(3,5) = .100646136*(11.*ctsq-1.)
-      Ylmr(3,4) = -.1837538634*ct*(11.*ctsq-3.)
-      Ylmr(3,3) = .0918769316*((33.*ctsq-18.)*ctsq+1.)
-      Ylmr(3,2) = -.1162161475*ct*((33.*ctsq-30.)*ctsq+5.)
-      Ylmr(3,1) = .0179325408*(((231.*ctsq-315.)*ctsq+105.)*ctsq-5.)
+      Ylmr(1,3) = SQRT(30.D0)/16.D0/pi
+      Ylmr(1,2) = -SQRT(30.D0)/8.D0/pi*ct
+      Ylmr(1,1) = SQRT(5.D0)/8.D0/pi*(3.D0*ctsq-1.D0)
+      Ylmr(2,5) = 3.D0*SQRT(70.D0)/64.D0/pi
+      Ylmr(2,4) = -3.D0*SQRT(140.D0)/32.D0/pi*ct
+      Ylmr(2,3) = 3.D0*SQRT(10.D0)/32.D0/pi*(7.D0*ctsq-1.D0)
+      Ylmr(2,2) = -3.D0*SQRT(20.D0)/32.D0/pi*ct*(7.D0*ctsq-3.D0)
+      Ylmr(2,1) = 3.0D0/32.D0/pi*((35.D0*ctsq-30.D0)*ctsq+3.D0)
+      Ylmr(3,7) = SQRT(3003.D0)/128.D0/pi
+      Ylmr(3,6) = -SQRT(9009.D0)/64.D0/pi*ct
+      Ylmr(3,5) = 3.D0*SQRT(182.D0)/128.D0/pi*(11.D0*ctsq-1.D0)
+      Ylmr(3,4) = -SQRT(1365.D0)/64.D0/pi*ct*(11.D0*ctsq-3.D0)
+      Ylmr(3,3) = SQRT(1365.D0)/128.D0/pi*((33.D0*ctsq-18.D0)*ctsq+1.D0)
+      Ylmr(3,2) = -SQRT(546.D0)/64.D0/pi*ct*((33.D0*ctsq-30.D0)*ctsq+
+     &            5.D0)
+      Ylmr(3,1) = SQRT(13.D0)/64.D0/pi*(((231.D0*ctsq-315.D0)*ctsq+
+     &            105.D0)*ctsq-5.D0)
       DO l = 1 , 3
          lf = 2*l + 1
          DO m = 2 , lf
