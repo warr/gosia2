@@ -62,17 +62,17 @@ C     Open the BrIcc database files
 
 C        Now look to see if we have it already
          DO j = 1, ngamma
-            IF ( ABS(temp - egamma(j)).LT.1E-6 ) GOTO 100
+            IF ( ABS(temp - egamma(j)).LT.1D-6 ) GOTO 100
          ENDDO
 
 C        We get here if we don't have it, so add it to the list
          ngamma = ngamma + 1
          egamma(ngamma) = temp
-         mycc(1) = CCLKUP(IZ, temp * 1E3, 1)
-         mycc(2) = CCLKUP(IZ, temp * 1E3, 2)
-         mycc(3) = CCLKUP(IZ, temp * 1E3, 3)
-         mycc(4) = CCLKUP(IZ, temp * 1E3, 6)
-         mycc(5) = CCLKUP(IZ, temp * 1E3, 7)
+         mycc(1) = CCLKUP(IZ, temp * 1D3, 1)
+         mycc(2) = CCLKUP(IZ, temp * 1D3, 2)
+         mycc(3) = CCLKUP(IZ, temp * 1D3, 3)
+         mycc(4) = CCLKUP(IZ, temp * 1D3, 6)
+         mycc(5) = CCLKUP(IZ, temp * 1D3, 7)
          WRITE(22,'(F7.4,3X,1P,5E13.3)') temp, (mycc(j),j=1,5)
          WRITE(28+IBPS,'(F7.4,3X,1P,5E13.3)') temp, (mycc(j),j=1,5)
  100     CONTINUE
