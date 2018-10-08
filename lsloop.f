@@ -89,22 +89,22 @@ C half-integers.
                   is = is2 + i3
                   rmis = CAT(is,3) ! m quantum number of substate is
                   IF ( ISO.NE.0 .OR. rmis.LE..1 .OR. rmir.LE..1 ) THEN
-                     jg1 = INT(-rmis*2.)
-                     jg2 = INT((rmis-rmir)*2.)
+                     jg1 = INT(-rmis*2.D0)
+                     jg2 = INT((rmis-rmir)*2.D0)
                      IF ( Icg.NE.2 .OR. ABS(jg2).LE.2*MAGA(Iexp) ) THEN
                         IF ( La.LE.6 .OR. jg2.NE.0 ) THEN
                            Nz = Nz + 1
                            IF ( Nz.LE.LP7 ) THEN
                               iiex = (ins+jg1)/2
-                              phz = (-1.0)**iiex
+                              phz = (-1.0D0)**iiex
                               ZETA(Nz) = phz*PSI(indx) ! This is really zeta
      &                           *Ssqrt*WTHREJ(ins,lam2,inr,jg1,jg2,
      &                           jrmir)
                               IF ( Icg.NE.1 ) THEN
                                  mt = INT(CAT(is,1)) ! level number of substate is
                                  CALL CODE7(Ir,is,N,mt,inqa,indx)
-                                 IF ( ABS(ELM(indx)).LT.1.E-6 )
-     &                                ELM(indx) = 1.E-6
+                                 IF ( ABS(ELM(indx)).LT.1.D-6 )
+     &                                ELM(indx) = 1.D-6
                                  IF ( inqa.NE.-1 ) THEN
                                     QAPR(indx,1,inqa) = ZETA(Nz)
      &                                 *ELM(indx)
