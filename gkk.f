@@ -49,6 +49,9 @@ C as an array called G in the order of the values in the GGG common block.
 C However, the user may change them using the VAC suboption of the CONT option
 C of OP,COUL or OP,GOSI.
 C
+C Note also that FIEL is in Gauss divided by 1E12. i.e. FIEL=6E-6 is 6E6 Gauss
+C which is 600 Tesla.
+C
 C Note that WSIXJ requires all its parameters to be doubled, so it can handle
 C half-integers properly.
 C
@@ -65,6 +68,7 @@ C element.
       INCLUDE 'gvac.inc'
       INCLUDE 'vac.inc'
       INCLUDE 'ggg.inc'
+      INCLUDE 'fconst.inc'
 
       IF ( IBYP.NE.1 ) THEN
          imean = 0
@@ -83,30 +87,30 @@ C element.
             sm = Spin
             IF ( imean.EQ.1 ) xji = AVJI
             IF ( Spin.GT.xji ) sm = xji
-            ncoup = INT(2.*sm+.5) + 1
+            ncoup = INT(2.D0*sm+.5D0) + 1
             SUM(1) = 0.
             SUM(2) = 0.
             SUM(3) = 0.
             valmi = Spin - xji
             IF ( valmi.LT.0. ) valmi = -valmi
             DO m = 1 , ncoup
-               f = valmi + DBLE(m) - 1.
+               f = valmi + DBLE(m) - 1.D0
                DO k = 1 , 3
                   rk = 2.*DBLE(k)
-                  if2 = INT(f*2. + 0.0001)
-                  irk2 = INT(rk*2. + 0.0001)
-                  ispin2 = INT(Spin*2. + 0.0001)
-                  ixji2 = INT(xji*2. + 0.0001)
+                  if2 = INT(f*2.D0 + 0.0001D0)
+                  irk2 = INT(rk*2.D0 + 0.0001D0)
+                  ispin2 = INT(Spin*2.D0 + 0.0001D0)
+                  ixji2 = INT(xji*2.D0 + 0.0001D0)
                   SUM(k) = SUM(k)
-     &                     + ((2.*f+1.)*WSIXJ(if2,if2,irk2,ispin2,
-     &                     ispin2,ixji2))**2/(2.*xji+1.)
+     &                     + ((2.D0*f+1.D0)*WSIXJ(if2,if2,irk2,ispin2,
+     &                     ispin2,ixji2))**2/(2.D0*xji+1.D0)
                ENDDO
             ENDDO
             IF ( imean.NE.1 ) THEN
                DO k = 1 , 3
                   k1 = 2*k - 1
                   AKS(k1,Il) = AKS(k1,Il) + SUM(k)
-     &                         *EXP(-((QCEN-DBLE(j))/DQ)**2/2.)/XNOR
+     &                         *EXP(-((QCEN-DBLE(j))/DQ)**2/2.D0)/XNOR
                ENDDO
                IF ( imean.EQ.0 ) GOTO 100
             ENDIF
@@ -120,27 +124,29 @@ C element.
          IF ( imean.EQ.1 ) GOTO 50
       ENDIF
 
+C FIEL is the field in Gauss multiplied by 1E-12. The nuclear magneton is
+C 4789.418/s/gauss, but with the factor 1E-12, we get wsp in ps^-1
       hmean = FIEL*Iz*(Beta**POWER) ! Mean magnetic field in fluctuating state
-      wsp = 4789.*GFAC*hmean/AVJI ! 4789 is the nuclear magneton
+      wsp = mu_n*GFAC*hmean/AVJI
       wsp = wsp*TIMEC
-      wsp = wsp*wsp*AVJI*(AVJI+1.)/3.
+      wsp = wsp*wsp*AVJI*(AVJI+1.D0)/3.D0
       DO k = 1 , 3
          k2 = 2*k
          k1 = 2*k - 1
          wrt = wsp*k2*(k2+1)
          w2 = wrt
-         wrt = -wrt/(1.-AKS(k2,Il))
-         xlam = (1.-AKS(k2,Il))*(1.-EXP(wrt))/TIMEC
-         up = (GAMMA*Time*AKS(k1,Il)+1.)/(Time*GAMMA+1.)
-         up = up*XLAMB*Time + 1.       ! numerator
-         down = Time*(xlam+XLAMB) + 1. ! denominator = r
+         wrt = -wrt/(1.D0-AKS(k2,Il))
+         xlam = (1.D0-AKS(k2,Il))*(1.D0-EXP(wrt))/TIMEC
+         up = (GAMMA*Time*AKS(k1,Il)+1.D0)/(Time*GAMMA+1.D0)
+         up = up*XLAMB*Time + 1.D0       ! numerator
+         down = Time*(xlam+XLAMB) + 1.D0 ! denominator = r
          GKI(k) = up/down
-         alp = 9.*xlam*xlam + 8.*xlam*TIMEC*(w2-xlam*xlam)
-         alp = SQRT(alp) - 3.*xlam
-         alp = alp/4./xlam/TIMEC                      ! alp is p
-         upc = xlam*Time*(down-2.*alp*alp*Time*TIMEC) ! numerator
-         dwc = (down+alp*Time)*(down+2.*alp*Time)     ! denominator
-         ccf = 1. + upc/dwc                           ! ccf is correction factor
+         alp = 9.D0*xlam*xlam + 8.D0*xlam*TIMEC*(w2-xlam*xlam)
+         alp = SQRT(alp) - 3.D0*xlam
+         alp = alp/4.D0/xlam/TIMEC                      ! alp is p
+         upc = xlam*Time*(down-2.D0*alp*alp*Time*TIMEC) ! numerator
+         dwc = (down+alp*Time)*(down+2.D0*alp*Time)     ! denominator
+         ccf = 1.D0 + upc/dwc                           ! ccf is correction factor
          GKI(k) = GKI(k)*ccf
       ENDDO
       END
