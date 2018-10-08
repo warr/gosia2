@@ -43,7 +43,7 @@ c
 C
 C  Linear extrapolation
 C
-      IF ( ABS(h).LT.1E-9 ) THEN
+      IF ( ABS(h).LT.1D-9 ) THEN
          IF ( Xx.LT.Xa(1) ) h = 1
          IF ( Xx.GT.Xa(N) ) k = N - 1
          a = (Ya(k)-Ya(k+1))/(Xa(k)-Xa(k+1))
