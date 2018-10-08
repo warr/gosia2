@@ -34,18 +34,19 @@ C which is created freshly each time the function is called.
       DIMENSION djm(525) , iczy(525)
       INCLUDE 'ident.inc'
       INCLUDE 'cb.inc'
+      INCLUDE 'fconst.inc'
       SAVE djm , iczy ! Added N. Warr Jul2007
       
       ifza = 1
       IF ( Beta.LT.0. ) ifza = (-1)**(Kp+Kpp)
       sk = DBLE(K)
-      ul = sk*((sk-1.)*(4.*sk+7)/6.+1.)
-      lca = INT(ul+.1)
+      ul = sk*((sk-1.D0)*(4.D0*sk+7.D0)/6.D0+1.D0)
+      lca = INT(ul+.1D0)
 
 C     Calculate position in djm and iczy arrays
       loc = lca + (2*K+1)*Kp + Kpp + K + 1
 
-      IF ( ABS(BEQ-ABS(Beta)).GT.1.E-6 ) THEN ! If beta doesn't match the identifier, initialise
+      IF ( ABS(BEQ-ABS(Beta)).GT.1.D-6 ) THEN ! If beta doesn't match the identifier, initialise
          BEQ = ABS(Beta)
          DO ill = 1 , 525
             iczy(ill) = 0
@@ -56,14 +57,14 @@ C     Calculate position in djm and iczy arrays
       ENDIF
 
 C     We have to calculate it
-      be = BEQ/2.
+      be = BEQ/2.D0
       cb = COS(be)
       sb = SIN(be)
       ifla = 0
-      IF ( BEQ.GT..01 .AND. ABS(BEQ-6.2832).GT..01 ) ifla = 1
+      IF ( BEQ.GT..01D0 .AND. ABS(BEQ-2.D0*pi).GT..01D0 ) ifla = 1
       IF ( ifla.NE.1 ) THEN
          IF ( Kp.EQ.Kpp ) THEN
-            sb = 1.
+            sb = 1.D0
          ELSE
             DJMM = 0.
             RETURN
@@ -79,7 +80,7 @@ C     We have to calculate it
 
       ja = Kp + Kpp
       jb = 2*K - Kp - Kpp
-      IF ( ABS(BEQ-3.141592654).LT..01 .AND. ja.LT.0 ) ifla = 3
+      IF ( ABS(BEQ-pi).LT..01D0 .AND. ja.LT.0 ) ifla = 3
       IF ( ifla.EQ.3 ) cb = 1.
       f = (-1)**(K-Kp)*(cb**ja)*(sb**jb)*SQRT(b1)
       mis = 0
