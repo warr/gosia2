@@ -10,22 +10,22 @@ C
 C Formal parameters:
 C      A      - argument
 C      F      - range
-C      Pi     - Pi must be set to 3.14159... before calling ARCCOS
 C
 C Return value:
 C      arccosine(A) within range of F
  
-      REAL*8 FUNCTION ARCCOS(A,F,Pi)
+      REAL*8 FUNCTION ARCCOS(A,F)
       IMPLICIT NONE
-      REAL*8 A , an , F , Pi , q , qa , qap , TACOS
+      REAL*8 A , an , F , q , qa , qap , TACOS
       INTEGER*4 ie , j , k
+      INCLUDE 'fconst.inc'
 
       q = TACOS(A)
       qa = q
       qap = q
       IF ( q.LE.F ) THEN
          DO j = 1 , 20
-            an = 2*j*Pi
+            an = 2*j*pi
             DO k = 1 , 2
                qap = qa
                ie = (-1)**k
@@ -35,5 +35,5 @@ C      arccosine(A) within range of F
          ENDDO
       ENDIF
  100  ARCCOS = qa
-      IF ( (qa-F).GT.Pi/2. ) ARCCOS = qap
+      IF ( (qa-F).GT.pi/2.D0 ) ARCCOS = qap
       END

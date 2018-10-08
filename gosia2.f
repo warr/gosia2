@@ -1918,7 +1918,7 @@ C OP,POIN
                                  GOTO 1304
                               ENDIF
                            ENDIF
-                           q2 = ARCCOS(p,ph2,pi)
+                           q2 = ARCCOS(p,ph2)
                            ph2 = q2
  1304                      q1 = q1/ZETA(jd)/2.
                            q2 = q2/ZETA(jd)
