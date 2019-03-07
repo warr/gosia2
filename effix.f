@@ -154,7 +154,11 @@ C     PJN@2000
 C-----------------------------------------------------------------
 C     Leuven efficiency calibration
  1003 Effi = AKAVKA(Iexp,1,Ipd)
-      w = LOG(1000.*En)
+      IF ( AKAVKA(Iexp,8,Ipd).LE.0.01 ) THEN
+        w = LOG(1000.D0*En)
+      ELSE
+        w = LOG(1000.D0*En/AKAVKA(Iexp,8,Ipd))
+      ENDIF
       DO i = 1 , 6
          Effi = Effi + AKAVKA(Iexp,i+1,Ipd)*w**i
       ENDDO
