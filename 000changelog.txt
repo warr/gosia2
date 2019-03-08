@@ -26,6 +26,7 @@
 ° Use DIMAG instead of IMAG for portability.
 ° Reorder DATA statement in NEWCNV for portability.
 ° Use LAGRAN for interpolation if less than three data points even if ISPL = 1
+° Add E0 parameter to Leuven efficiency
 
 20080519 (synchronized with gosia1)
 ° Add spline support (Pawel J. Napiorkowski)
