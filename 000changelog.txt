@@ -4,6 +4,7 @@
   meshpoints are given as angles for the recoiling target nuclei in the
   laboratory frame. This should help in inverse kinematics cases.
 - Rewind matrix element file before writing.
+- Add E0 parameter to Leuven efficiency
 
 20080630 (synchronized with gosia1)
 - Reordering of all variable declarations so variables in common blocks are
