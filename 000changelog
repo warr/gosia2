@@ -12,6 +12,7 @@
 ° Added ISPL variable in CCC common to prepare for merge of Pawel
   Napiorkowski's spline code and SPL, option in CONT
 ° Restructured a repeated IF with the same condition to use IF/THEN
+° Add E0 parameter to Leuven efficiency
 
 20080418
 ° Change default printing options to match gosia1
