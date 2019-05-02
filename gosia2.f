@@ -287,28 +287,7 @@ C      ZV     - energy meshpoints
       INCLUDE 'fconst.inc'
       INCLUDE 'cinit2.inc' ! For gosia2
       INCLUDE 'resc.inc' ! For gosia2
-      DATA (eng(k),k=1,10)/.05D0, .06D0, .08D0, .1D0, .15D0, .2D0, .3D0,
-     &  .5D0, 1.D0, 1.5D0/
-C     Absorption coefficients in units of 1/cm for Ge
-      DATA (tau1(k),k=1,10)/17.656D0, 10.726D0, 5.076D0, 2.931D0,
-     &     1.3065D0, .8828D0, .5959D0, .4357D0, .3041D0, .2472D0/
-C     Absorption coefficients in units of 1/cm for Al, C, Fe, Cu, Ag/Cd/Sn, Ta
-C     and Pb at the energies 0.05, 0.06, 0.08, 0.1, 0.15, 0.2, 0.3, 0.5, 1, 1.5
-C     MeV
-      DATA (tau2(k,1),k=1,10)/.9883D0, .7473D0, .5442D0, .4592D0,
-     &      .3718D0, .3302D0, .2814D0, .2278D0, .1657D0, .1350D0/
-      DATA (tau2(k,2),k=1,10)/1.014D0, .7443D0, .5195D0, .4261D0,
-     &      .3362D0, .2967D0, .2518D0, .2038D0, .1479D0, .1204D0/
-      DATA (tau2(k,3),k=1,10)/15.167D0, 9.405D0, 4.652D0, 2.889D0,
-     &      1.525D0, 1.135D0, .8643D0, .6592D0, .4703D0, .3830D0/
-      DATA (tau2(k,4),k=1,10)/23.184D0, 14.182D0, 6.777D0, 4.059D0,
-     &      1.970D0, 1.384D0, .9936D0, .7473D0, .5274D0, .4297D0/
-      DATA (tau2(k,5),k=1,10)/84.351D0, 51.445D0, 23.822D0, 13.070D0,
-     &      4.774D0, 2.605D0, 1.339D0, .7925D0, .5005D0, .4032D0/
-      DATA (tau2(k,6),k=1,10)/93.364D0, 58.559D0, 125.96D0, 70.713D0,
-     &      25.302D0, 12.541D0, 5.193D0, 2.215D0, 1.077D0, .8176D0/
-      DATA (tau2(k,7),k=1,10)/89.809D0, 56.338D0, 27.009D0, 62.966D0,
-     &      22.933D0, 11.334D0, 4.540D0, 1.813D0, .8020D0, .5900D0/
+      INCLUDE 'nist.inc'
       DATA q1/0./,q2/0./,iph/0/
 
 C     Initialize prime numbers
