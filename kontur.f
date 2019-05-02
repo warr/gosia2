@@ -116,6 +116,7 @@ C extension to the language, so we should not use it.
       ENDIF
  400  ww = .5D0*(Chis0-chis2)*NWR
       IF ( ww.GT.Rem ) GOTO 700
+      IF ( ww.LT.-400 ) ww = -400 ! Prevent floating point underflow: Nigel 24Apr2019
       f(3) = EXP(ww)
       IF ( itl.EQ.1 ) WRITE (22,99001) Jj
 99001 FORMAT (5X,'WARNING-ME(',1I3,')',5X,
