@@ -120,7 +120,7 @@ C      Iredv  -
       INCLUDE 'cccds.inc'
       INCLUDE 'tcm.inc'
       INCLUDE 'cinit2.inc' ! For gosia2
-      SAVE part, partl ! For gosia2
+      SAVE part, partl
       DATA sum3/0./,sumpr/0./
 
       op2 = '    '
