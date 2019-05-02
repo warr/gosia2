@@ -16,7 +16,7 @@ C when OP,RAND is called. The parameter to OP,RAND is the seed here.
       IMPLICIT NONE
       REAL*8 ai , p , r , rxdm , Se , t , u
       INTEGER*4 i
-      DATA t/0./
+      DATA t/1./
       SAVE t
 
       IF ( Se.GT.32000.D0 ) Se = 100.D0*t + .511D0
