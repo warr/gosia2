@@ -3122,16 +3122,19 @@ C     Increment iteration counter
       mawr = mawr + 1
 
 C     Store chisq
-      IF ( JZB.EQ.25 ) ccch1 = chisq ! But we never use ccch1
-      IF ( JZB.EQ.26 ) ccch2 = chisq ! But we never use ccch2
+      IF ( JZB.EQ.25 ) ccch1 = chisq
+      IF ( JZB.EQ.26 ) ccch2 = chisq
       WRITE (*,*) 'ITER = ' , mawr , ' CHISQ1 = ' , ccch1 , 
      &  ' CHISQ2 = ' , ccch2
-      chir = chir + chisq
+      chir = ccch1 + ccch2
 
 C     Decide whether to terminate here
       IF ( JZB.EQ.26 ) THEN
          cht = ABS(chir-chp) ! Difference in old and new chisq
-         IF ( cht.LT.0.1 .OR. mawr.GE.100 ) mret = 0 ! terminate
+         WRITE (*,*) 'CHISQ DIFF = ' , chir , ' - ' , chp ,
+     &     ' = ' , cht
+         IF ( (cht.LT.0.00001 .AND. mawr.GE.2) .OR. mawr.GE.100 )
+     &     mret = 0 ! terminate
          nawr = 1
       ENDIF
 
