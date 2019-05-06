@@ -1,5 +1,5 @@
 Summary: Gosia 2 coulex cross-section code
-%global version 20180201.3
+%global version 20180201.4
 %global release 1
 Name: gosia2
 Version: %{version}
