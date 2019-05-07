@@ -12,6 +12,12 @@
 * Rewind matrix element file before writing
 * Replace REAL*4 constants with REAL*8 ones
 * Add E0 parameter to Leuven efficiency
+* Replace many constants with more accurate ones
+* Replaced Si absorption coefficients with C ones in order to agree
+  with manual, which has always said C.
+* Correct prefactor for E2/M1 mixing ratio (was 0.8326, now 0.8347)
+* Correct order of magnitude for finite-recoil correction
+* Better convergence criterion for OP,MINI
 
 20081208 (synchronized with gosia1)
 * Allow different efficiencies for different experiments.
