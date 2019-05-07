@@ -11,7 +11,7 @@ C Uses global variables:
 C      AGELI  - angles of the Ge detectors
 C      BRAT   - branching ratio and its error
 C      CC     - conversion coefficients for different energies and multipolarities
-C      DMIX   - 0.8326 * gamma energy
+C      DMIX   - 0.8347 * gamma energy
 C      DMIXE  - mixing ratio and its error
 C      EAMX   - known matrix elements and their error
 C      EG     - energies for conversion coefficients
@@ -281,7 +281,8 @@ C     Read known mixing ratios
             DO lb = 1 , Idr ! Search through decays for right pair of levels
                IF ( KSEQ(lb,3).EQ.ns1 .AND. KSEQ(lb,4).EQ.ns2 ) THEN
                   IMIX(li) = lb ! Decay index
-                  DMIX(li) = .8326D0*(EN(ns1)-EN(ns2)) ! 0.8326 * energy of gamma
+                  DMIX(li) = 20.D0*sqrt(3.D0)*mprot/hbarc/hbarc *
+     &              (EN(ns1)-EN(ns2)) ! 0.8347 * energy of gamma
                   IF ( ITS.EQ.2 ) WRITE (18,*) KSEQ(lb,1) , KSEQ(lb,2)
                ENDIF
             ENDDO
