@@ -1559,8 +1559,9 @@ C OP,POIN
                         DO ixl = 1 , idr
                            ixm = KSEQ(ixl,3)
                            tfac = TAU(ixm)
+C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
                            YGN(ixl) = YGN(ixl)
-     &                                + .01199182D0*tfac*BETAR(IEXP)
+     &                       + .11991698D0*tfac*BETAR(IEXP)
      &                                *(sf*YGP(ixl)-YGN(ixl))
                         ENDDO
                      ENDIF

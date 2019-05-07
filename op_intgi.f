@@ -246,7 +246,8 @@ C interpolating over the meshpoints
                     DO ixl = 1 , Idr ! For each decay
                       ixm = KSEQ(ixl,3)
                       tfac = TAU(ixm)
-                      YGN(ixl) = YGN(ixl) + .01199182D0*tfac*BETAR(IEXP)
+C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
+                      YGN(ixl) = YGN(ixl) + .11991698D0*tfac*BETAR(IEXP)
      &                  *(sf*YGP(ixl)-YGN(ixl))
                     ENDDO ! Loop on decays
                   ENDIF ! If correction due to recoil
