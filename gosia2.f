@@ -1560,9 +1560,14 @@ C OP,POIN
                            ixm = KSEQ(ixl,3)
                            tfac = TAU(ixm)
 C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
-                           YGN(ixl) = YGN(ixl)
-     &                       + .11991698D0*tfac*BETAR(IEXP)
-     &                                *(sf*YGP(ixl)-YGN(ixl))
+                           IF ( tfac*BETAR(IEXP).GT. 25.D0 ) THEN
+                             IFMO = 0
+                             WRITE (22,99057) IEXP,KSEQ(ixl,3),tfac
+                           ELSE
+                             YGN(ixl) = YGN(ixl)
+     &                         + .11991698D0*tfac*BETAR(IEXP)
+     &                         *(sf*YGP(ixl)-YGN(ixl))
+                           ENDIF
                         ENDDO
                      ENDIF
                      IF ( IRAWEX(IEXP).NE.0 ) THEN
@@ -2329,4 +2334,7 @@ C--------------------------------
 99054 FORMAT (5X,'XI',13X,'Q1',22X,'Q2'///13X,'SLOPE',2X,'INTERCEPT',7X,
      &        'SLOPE',5X,'INTERCEPT'//)
 99055 FORMAT (2X,1F6.4,3X,1E8.2,2X,1E8.2,6X,1E8.2,2X,1E8.2)
+99057 FORMAT (1X,/,2X,'DURING THE INTEGRATION',1X,
+     &  'IT WAS NECESSARY TO SWITCH OFF THE TIME-OF-FLIGHT CORRECTION '
+     &  'FOR EXPT ',I3,' LEVEL ', I3, ' TAU=',1E9.4)
       END

@@ -19,6 +19,7 @@
 * Correct order of magnitude for finite-recoil correction
 * Better convergence criterion for OP,MINI
 * Use Lehmer random-number generator for OP,RAND
+* Turn off finite-recoil correction if tau*beta>25 (about 0.75 cm)
 
 20081208 (synchronized with gosia1)
 * Allow different efficiencies for different experiments.

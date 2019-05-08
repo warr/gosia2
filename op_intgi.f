@@ -247,8 +247,13 @@ C interpolating over the meshpoints
                       ixm = KSEQ(ixl,3)
                       tfac = TAU(ixm)
 C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
-                      YGN(ixl) = YGN(ixl) + .11991698D0*tfac*BETAR(IEXP)
-     &                  *(sf*YGP(ixl)-YGN(ixl))
+                      IF ( tfac*BETAR(IEXP).GT. 25.D0) THEN
+                        WRITE(22,99011) IEXP,KSEQ(ixl,3),tfac
+                        IFMO = 0
+                      ELSE
+                        YGN(ixl) = YGN(ixl) + .11991698D0*tfac*
+     &                    BETAR(IEXP)*(sf*YGP(ixl)-YGN(ixl))
+                      ENDIF
                     ENDDO ! Loop on decays
                   ENDIF ! If correction due to recoil
                   IF ( IRAWEX(lx).NE.0 ) THEN
@@ -579,6 +584,9 @@ C   equally spaced energies, which we integrate in the same way.
       DO lx = 1 , NEXPT ! For each experiment restore original ISKIN
         ISKIN(lx) = iskin_protect(lx)
       ENDDO
+99011 FORMAT (1X,/,2X,'DURING THE INTEGRATION',1X,
+     &  'IT WAS NECESSARY TO SWITCH OFF THE TIME-OF-FLIGHT CORRECTION '
+     &  'FOR EXPT ',I3,' LEVEL ', I3, ' TAU=',1E9.4)
 99048 FORMAT (1X//50X,'CALCULATED YIELDS'//5X,'EXPERIMENT ',1I2,2X,
      &        'DETECTOR ',1I2/5X,'ENERGY ',1F10.3,1X,'MEV',2X,'THETA ',
      &        1F7.3,1X,'DEG'//5X,'NI',5X,'NF',5X,'II',5X,'IF',5X,

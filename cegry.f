@@ -222,8 +222,13 @@ C              Correct for finite recoil
                      ixm = KSEQ(ixl,3) ! Initial level of ixl'th decay
                      tfac = TAU(ixm) ! Get lifetime
 C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
-                     YGN(ixl) = YGN(ixl) + .11991698D0*tfac*BETAR(IEXP)
-     &                          *(sf*YGP(ixl)-YGN(ixl))
+                     IF ( tfac*BETAR(IEXP).GT. 25.D0 ) THEN
+                       WRITE(22,99011) IEXP,KSEQ(ixl,3),tfac
+                       IFMO = 0
+                     ELSE
+                       YGN(ixl) = YGN(ixl) + .11991698D0*tfac*
+     &                   BETAR(IEXP)*(sf*YGP(ixl)-YGN(ixl))
+                     ENDIF
                   ENDDO ! Loop on decays ixl
                ENDIF ! If correction for finite recoil
 
@@ -445,16 +450,15 @@ C              Correct for finite recoil
                   DO ixl = 1 , Idr
                      ixm = KSEQ(ixl,3) ! Initial level of ixl'th decay
                      tfac = TAU(ixm)
-                     IF ( tfac.GT.1.D+4 ) GOTO 25
 C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
-                     YGN(ixl) = YGN(ixl) + .11991698D0*tfac*BETAR(IEXP)
-     &                          *(sf*YGP(ixl)-YGN(ixl))
+                     IF ( tfac*BETAR(IEXP).GT. 25.D0 ) THEN
+                       IFMO = 0
+                       WRITE (22,99011) IEXP,KSEQ(ixl,3),tfac
+                     ELSE
+                       YGN(ixl) = YGN(ixl) + .11991698D0*tfac*
+     &                   BETAR(IEXP)*(sf*YGP(ixl)-YGN(ixl))
+                     ENDIF
                   ENDDO
- 25               IFMO = 0
-                  WRITE (22,99011)
-99011             FORMAT (1X,/,2X,'DURING THE MINIMIZATION',1X,
-     &    'IT WAS NECESSARY TO SWITCH OFF THE TIME-OF-FLIGHT CORRECTION'
-     &    )
                ENDIF ! if correction for finite recoil
 
                IF ( IRAWEX(IEXP).NE.0 ) THEN
@@ -570,6 +574,9 @@ C     Calculate chi squared
       Chilo = Chilo + sum3
       RETURN
 
+99011 FORMAT (1X,/,2X,'DURING THE MINIMIZATION',1X,
+     &  'IT WAS NECESSARY TO SWITCH OFF THE TIME-OF-FLIGHT CORRECTION '
+     &  'FOR EXPT ',I3,' LEVEL ', I3, ' TAU=',1E9.4)
 99012 FORMAT (1X,1I2,2X,32(1E10.4,1X))
 99013 FORMAT (6X,1I2,5X,1I2,7X,1F4.1,6X,1F4.1,9X,1F6.4,6X,1E9.4,6X,
      &        1E9.4,3X,1F6.1,5X,1F4.1,10X,1A4)
