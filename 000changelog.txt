@@ -18,6 +18,7 @@
 * Correct prefactor for E2/M1 mixing ratio (was 0.8326, now 0.8347)
 * Correct order of magnitude for finite-recoil correction
 * Better convergence criterion for OP,MINI
+* Use Lehmer random-number generator for OP,RAND
 
 20081208 (synchronized with gosia1)
 * Allow different efficiencies for different experiments.
