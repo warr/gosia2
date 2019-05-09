@@ -47,7 +47,7 @@ C
 C Formal parameters:
 C      Iexp   - Number of experiment
 C      Ient   - Flag : 1, 2, 3 (read only)
-C      Icg    - Flag : 1, 2 (read only)
+C      Icg    - Flag : 1 = full coulex, 2 = approximate coulex (read only)
 C      Polm   - (read only)
 C      Joj    - index of substate (write only)
  
