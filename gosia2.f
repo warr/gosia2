@@ -181,15 +181,15 @@ C      ZV     - energy meshpoints
      &       be2b , be2c , bl , bmx , bten , bu , ccc , ccd ,
      &       cf , chilo , chiok , chis0 , chisl , chisq , chiss , cnst ,
      &       cocos , conu , d , decen , dsd , dsig , effi , eh1 , elmi ,
-     &       emhl1 , eng , esd , ess , fi0 , fi1 , fic , fiex1 , figl ,
+     &       emhl1 , esd , ess , fi0 , fi1 , fic , fiex1 , figl ,
      &       fipo1 , fm , gth , p , ph1 , ph2 , po1 , po2 , polm ,
      &       pop1 , pr , pv , q1 , q2 , qc , qfac , qr , qui , r , r1 ,
      &       r2 , r3 , r4 , rem , remax , rl , rlr , rm , rx , ry , rz ,
      &       s , s11 , s12 , s21 , s22 , sbe , sf , sh , sh1 , sh2 ,
-     &       slim , summm , sz1 , sz2 , TACOS , tau1 , tau2 , test ,
-     &       tfac , thc , title , ttttt , txx , u , val , waga , WSIXJ ,
-     &       WTHREJ , xep , xl1 , xlk , xtest , xw , xxi , ycorr ,
-     &       yyd1 , yydd , yyy , zmir , zp , zz
+     &       slim , summm , sz1 , sz2 , TACOS , test , tfac , thc ,
+     &       title , ttttt , txx , u , val , waga , WSIXJ , WTHREJ ,
+     &       xep , xl1 , xlk , xtest , xw , xxi , ycorr , yyd1 , yydd ,
+     &       yyy , zmir , zp , zz
       INTEGER*4 i , i122 , iapx , icg , ict , ictl , id , ideff , idf ,
      &          idr , iecd , ient , ifbp , ifc , ifm , ifwd , ig1 ,
      &          ig2 , ih1 , ih2 , ihlm , ihuj , ii , ij , ijk , ijx ,
@@ -220,9 +220,8 @@ C      ZV     - energy meshpoints
       INTEGER*4 mret , mawr ! For gosia2
       DIMENSION ihlm(32) , bten(1600) , ! bten dimension = 16 * maxlevels
      &          fiex1(100,100,2) , title(20) , zmir(6,2,50) ,
-     &          iecd(50) , tau1(10) , eng(10) , tau2(10,7) , xl1(7) ,
-     &          qui(8,10) , cf(8,2) , ivarh(1500) , liscl(200) , 
-     &          ivari(1500) , jpin(50) , ideff(50)
+     &          iecd(50) , xl1(7) , qui(8,10) , cf(8,2) , ivarh(1500) ,
+     &          liscl(200) , ivari(1500) , jpin(50) , ideff(50)
       INCLUDE 'clust.inc'
       INCLUDE 'cccds.inc'
       INCLUDE 'inhi.inc'
