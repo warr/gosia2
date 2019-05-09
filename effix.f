@@ -104,7 +104,7 @@ C     Branch according to type of calibration
       ELSEIF ( AKAVKA(Iexp,9,Ipd).EQ.4. ) THEN
          GOTO 1004 ! Radware
       ELSEIF ( (AKAVKA(Iexp,5,Ipd).GT.0. .AND.
-     &       AKAVKA(Iexp,5,Ipd).LT.10.) .OR. 
+     &       AKAVKA(Iexp,5,Ipd).LT.10.) .OR.
      &    (AKAVKA(Iexp,9,Ipd).EQ.2.) ) THEN
          GOTO 1002 ! Fiteff
       ELSEIF ( (AKAVKA(Iexp,5,Ipd).LT.10.) .AND.
@@ -146,7 +146,7 @@ C     FITEFF efficiency calibration by P.Olbratowski use
 C     PJN@2000
  1002 w = LOG(En/AKAVKA(Iexp,5,Ipd))
       pw = AKAVKA(Iexp,2,Ipd)*w
-      IF ( En.LT.AKAVKA(Iexp,5,Ipd) ) pw = pw + 
+      IF ( En.LT.AKAVKA(Iexp,5,Ipd) ) pw = pw +
      &     w*w*(AKAVKA(Iexp,3,Ipd)+w*AKAVKA(Iexp,4,Ipd))
       Effi = Effi*EXP(pw)*AKAVKA(Iexp,1,Ipd)
       RETURN
