@@ -109,9 +109,16 @@ C      Chilo  - chi squared of logs
       IF ( Nlift.NE.0 .AND. IEXP.EQ.1 ) THEN
          DO jlt = 1 , Nlift ! For each lifetime
             kl = LIFCT(jlt) ! Get level for this lifetime
-            df = (TAU(kl)-TIMEL(1,jlt))/TIMEL(2,jlt) ! TIMEL(1,X) is lifetime and TIMEL(2,X) is the error
+            df = TAU(kl)-TIMEL(1,jlt) ! TIMEL(1,X) is lifetime
+            IF ( df .LT. 0 ) THEN
+              df = df / TIMEL(2,jlt) ! TIMEL(2,X) is lower limit
             Chilo = Chilo + (LOG(TAU(kl)/TIMEL(1,jlt))*TIMEL(1,jlt)
      &              /TIMEL(2,jlt))**2 ! Log chisqr
+            ELSE
+              df = df / TIMEL(3,jlt) ! TIMEL(3,X) is upper limit
+            Chilo = Chilo + (LOG(TAU(kl)/TIMEL(1,jlt))*TIMEL(1,jlt)
+     &              /TIMEL(3,jlt))**2 ! Log chisqr
+            ENDIF
             Chisq = Chisq + df*df ! Chisqr
          ENDDO
       ENDIF
