@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE XSTATIC
 C
@@ -33,11 +33,11 @@ C paper.
       REAL*8 Beta , h
       INTEGER*4 Ido , Iup , Iz , lq
       INCLUDE 'vac.inc'
-      
+
       h = 1./(1.+(Iz**.45*.012008/Beta)**1.666667)
       QCEN = Iz*h**.6
       DQ = SQRT(QCEN*(1.-h))/2.
-      
+
       Iup = INT(QCEN+3.*DQ+.5)
       Ido = INT(QCEN-3.*DQ-.5)
       IF ( Iup.GT.Iz ) Iup = Iz

@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE YLM1
 C
@@ -17,13 +17,13 @@ C harmonics.
 C
 C Note also that YLM1 and YLM have some values in common.
 C e.g. YLM1(5,3) = YLM(2,3)
- 
+
       SUBROUTINE YLM1(Theta,Ylmr)
       IMPLICIT NONE
       REAL*8 ct , ctsq , st , Theta , Ylmr
       INTEGER*4 i , j , l , m
       DIMENSION Ylmr(9,9) , st(9)
-      
+
       ct = COS(Theta)
       ctsq = ct*ct
       st(1) = SIN(Theta)

@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE INTG
 C
@@ -66,11 +66,11 @@ C The function RESET is called to advance n by one. i.e. f(n-3) is set to the
 C old value of f(n-2), f(n-2) to the old value of f(n-1) and f(n-1) to the old
 C value of f(n).
 
- 
+
       SUBROUTINE INTG(Ien)
       IMPLICIT NONE
       REAL*8 f , rim , rl , srt
-      INTEGER*4 i , i57 , Ien , ihold , intend , ir , ir1 , k , kast , 
+      INTEGER*4 i , i57 , Ien , ihold , intend , ir , ir1 , k , kast ,
      &          mir , n
       COMPLEX*16 hold
       INCLUDE 'coex.inc'
@@ -85,7 +85,7 @@ C value of f(n).
       INCLUDE 'cexc0.inc'
       INCLUDE 'pth.inc'
       INCLUDE 'cexc9.inc'
-      
+
       intend = INTERV(Ien) ! Default accuracy set by INT option of OP,CONT
       D2W = .03 ! We use steps of 0.03 in omega
       NSW = 1
@@ -97,7 +97,7 @@ C value of f(n).
          LAMR(i) = 0
          IF ( (NPT+NSW).LT.IRA(i) ) LAMR(i) = 1
       ENDDO
-C     Predictor 
+C     Predictor
       IF ( ISO.EQ.0 ) THEN
          DO n = 1 , NMAX ! For each level
             ir = NSTART(n) - 1 ! First substate - 1
@@ -134,7 +134,7 @@ C     Predictor
 
 C     Calculate derivatives of amplitudes
       CALL AMPDER(i57)
-      
+
 C     Corrector
       IF ( ISO.EQ.0 ) THEN
          DO n = 1 , NMAX ! For each level
@@ -205,7 +205,7 @@ C
                   ENDIF
                ENDIF
             ENDIF
-             
+
          ENDIF ! if kast>=intend
       ENDIF
       GOTO 100

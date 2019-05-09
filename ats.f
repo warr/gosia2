@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION ATS
 C
@@ -11,12 +11,12 @@ C      N      - number of electrons (Z - charge state)
 C
 C Return value:
 C      truncation point
- 
+
       REAL*8 FUNCTION ATS(N)
       IMPLICIT NONE
       INTEGER*4 m , N
       REAL*8 x , xm
-      
+
       IF ( N.LE.0 .OR. N.GT.96 ) THEN
          ATS = 0.
          RETURN
@@ -25,14 +25,14 @@ C      truncation point
          m = N/2 + 1
          xm = DBLE(m)
          IF ( ABS(x-xm).GE.1.E-9 ) THEN
-            IF ( m.EQ.1 .OR. m.EQ.2 .OR. m.EQ.3 .OR. m.EQ.6 .OR. 
-     &           m.EQ.7 .OR. m.EQ.10 .OR. m.EQ.15 .OR. m.EQ.16 .OR. 
-     &           m.EQ.19 .OR. m.EQ.24 .OR. m.EQ.25 .OR. m.EQ.28 .OR. 
-     &           m.EQ.31 .OR. m.EQ.35 .OR. m.EQ.37 .OR. m.EQ.40 .OR. 
+            IF ( m.EQ.1 .OR. m.EQ.2 .OR. m.EQ.3 .OR. m.EQ.6 .OR.
+     &           m.EQ.7 .OR. m.EQ.10 .OR. m.EQ.15 .OR. m.EQ.16 .OR.
+     &           m.EQ.19 .OR. m.EQ.24 .OR. m.EQ.25 .OR. m.EQ.28 .OR.
+     &           m.EQ.31 .OR. m.EQ.35 .OR. m.EQ.37 .OR. m.EQ.40 .OR.
      &           m.EQ.41 .OR. m.EQ.44 ) THEN
                ATS = .5
                RETURN
-            ELSEIF ( m.EQ.4 .OR. m.EQ.5 .OR. m.EQ.8 .OR. m.EQ.9 .OR. 
+            ELSEIF ( m.EQ.4 .OR. m.EQ.5 .OR. m.EQ.8 .OR. m.EQ.9 .OR.
      &               m.EQ.11 .OR. m.EQ.17 .OR. m.EQ.18 .OR. m.EQ.20 .OR.
      &               m.EQ.26 .OR. m.EQ.27 .OR. m.EQ.36 .OR. m.EQ.42 .OR.
      &               m.EQ.43 .OR. m.EQ.45 ) THEN
@@ -60,8 +60,8 @@ C      truncation point
             ENDIF
          ENDIF
          m = m - 1
-         IF ( m.EQ.4 .OR. m.EQ.8 .OR. m.EQ.17 .OR. m.EQ.26 .OR. 
-     &        m.EQ.28 .OR. m.EQ.30 .OR. m.EQ.32 .OR. m.EQ.42 .OR. 
+         IF ( m.EQ.4 .OR. m.EQ.8 .OR. m.EQ.17 .OR. m.EQ.26 .OR.
+     &        m.EQ.28 .OR. m.EQ.30 .OR. m.EQ.32 .OR. m.EQ.42 .OR.
      &        m.EQ.45 .OR. m.EQ.48 ) THEN
             ATS = 2.
             RETURN
@@ -69,7 +69,7 @@ C      truncation point
          ELSEIF ( m.EQ.12 .OR. m.EQ.21 .OR. m.EQ.37 ) THEN
             ATS = 3.
             RETURN
-         ELSEIF ( m.EQ.13 .OR. m.EQ.22 .OR. m.EQ.29 .OR. m.EQ.31 .OR. 
+         ELSEIF ( m.EQ.13 .OR. m.EQ.22 .OR. m.EQ.29 .OR. m.EQ.31 .OR.
      &            m.EQ.34 .OR. m.EQ.38 .OR. m.EQ.47 ) THEN
             ATS = 4.
             RETURN

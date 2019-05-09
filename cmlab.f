@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE CMLAB
 C
@@ -173,7 +173,7 @@ C        EPS is "epsilon" the eccentricity parameter.
          EPS(lexp) = 1./SIN(tcmrad/2.)
          TETACM(lexp) = tcmrad
          IF ( IPRM(1).EQ.1 ) THEN
-            IF ( Ii.EQ.0 .AND. IPRM(10).EQ.1 ) WRITE (22,99010) tcmdg , 
+            IF ( Ii.EQ.0 .AND. IPRM(10).EQ.1 ) WRITE (22,99010) tcmdg ,
      &           EPS(lexp)
 99010       FORMAT (5X,'CM SCATTERING ANGLE',1X,1F10.3,1X,'DEG',5X,
      &              'EPSILON',1X,1F10.4)

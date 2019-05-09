@@ -37,7 +37,7 @@ C in the function SETIN.
       INCLUDE 'adx.inc'
       INCLUDE 'cxi.inc'
       DATA ci/(0.,1.)/
-      
+
       expox = TCEXP(ci*XI(Inx)*ADB(Npt)*Isg)
       EXPON = expox
       IF ( Ndiv.NE.0 ) THEN

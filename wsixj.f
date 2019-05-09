@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION WSIXJ
 C
@@ -26,29 +26,29 @@ C Note that the values of the parameters are doubled, so that this function
 C can handle half-integers. In other words if you want to evaluate
 C \sixj(J1 J2 J3 L1 L2 L3) you need to use call the function as:
 C WSIXJ(2 * J1, 2 * J2, 2 * J3, 2 * L1, 2 * L2, 2 * L3).
- 
+
       REAL*8 FUNCTION WSIXJ(J1,J2,J3,L1,L2,L3)
       IMPLICIT NONE
-      INTEGER*4 irj , irl , isa , isb , isc , isumfa , iva , ivb , 
-     &          ivc , ivd , ivorfa , iz , iza , izb , izc , izd , 
+      INTEGER*4 irj , irl , isa , isb , isc , isumfa , iva , ivb ,
+     &          ivc , ivd , ivorfa , iz , iza , izb , izc , izd ,
      &          ize , izf
-      INTEGER*4 izg , izh , izmax , izmin , J1 , J2 , J3 , kqa , 
-     &          kqb , kqc , kqd , kra , krb , krc , krd , ksa , ksb , 
+      INTEGER*4 izg , izh , izmax , izmin , J1 , J2 , J3 , kqa ,
+     &          kqb , kqc , kqd , kra , krb , krc , krd , ksa , ksb ,
      &          ksc , ksd
       INTEGER*4 kta , ktb , ktc , ktd , kua , kub , kuc , L1 , L2 , L3 ,
      &          n , nmax
       REAL*8 qsumfa , qsumlo , sumlo , vorz , wsixp , zusix
       DIMENSION isumfa(26) , ivorfa(26)
       INCLUDE 'fakul.inc'
-      
+
       wsixp = 0.E+00
-      IF ( ((J1+J2-J3).GE.0) .AND. ((J1-J2+J3).GE.0) .AND. 
+      IF ( ((J1+J2-J3).GE.0) .AND. ((J1-J2+J3).GE.0) .AND.
      &     ((-J1+J2+J3).GE.0) ) THEN
-         IF ( ((J1+L2-L3).GE.0) .AND. ((J1-L2+L3).GE.0) .AND. 
+         IF ( ((J1+L2-L3).GE.0) .AND. ((J1-L2+L3).GE.0) .AND.
      &        ((-J1+L2+L3).GE.0) ) THEN
-            IF ( ((L1+J2-L3).GE.0) .AND. ((L1-J2+L3).GE.0) .AND. 
+            IF ( ((L1+J2-L3).GE.0) .AND. ((L1-J2+L3).GE.0) .AND.
      &           ((-L1+J2+L3).GE.0) ) THEN
-               IF ( ((L1+L2-J3).GE.0) .AND. ((L1-L2+J3).GE.0) .AND. 
+               IF ( ((L1+L2-J3).GE.0) .AND. ((L1-L2+J3).GE.0) .AND.
      &              ((-L1+L2+J3).GE.0) ) THEN
                   kqa = (J1+J2-J3)/2
                   kqb = (J1-J2+J3)/2

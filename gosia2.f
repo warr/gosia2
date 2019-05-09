@@ -177,66 +177,66 @@ C      ZV     - energy meshpoints
 
       PROGRAM GOSIA2
       IMPLICIT NONE
-      REAL*8 acof , ap , ARCCOS , ARCTG , arg , ax , bcof , be2 , 
+      REAL*8 acof , ap , ARCCOS , ARCTG , arg , ax , bcof , be2 ,
      &       be2a , be2b , be2c
-      REAL*8 bk , bl , bm , bmx , bten , bu , ccc , 
-     &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss , 
+      REAL*8 bk , bl , bm , bmx , bten , bu , ccc ,
+     &       ccd , cf , chilo , chiok , chis0 , chisl , chisq , chiss ,
      &       cnst
       REAL*8 cocos , conu , d , decen , dedx , dsd , dsig , dst
       REAL*8 dsx , dsxm , effi , eh1 , elmi , ELMT , emhl1 , emn , emx ,
      &       enb
       REAL*8 enh , esd , esp , ess , fi0 , fi1 , fic , fiex1 , figl ,
      &       fipo1 , fm , gth
-      REAL*8 hen , het , p , pfi , 
+      REAL*8 hen , het , p , pfi ,
      &       ph1 , ph2 , pi , po1 , po2 , polm , pop1 , pr , pv
-      REAL*8 q1 , q2 , qc , qfac , qr , qui , r , r1 , r2 , r3 , r4 , 
+      REAL*8 q1 , q2 , qc , qfac , qr , qui , r , r1 , r2 , r3 , r4 ,
      &       rem , remax , rl , rlr , rm , rx , ry
-      REAL*8 rz , s , s11 , s12 , s21 , s22 , sbe , sf , sh , sh1 , 
+      REAL*8 rz , s , s11 , s12 , s21 , s22 , sbe , sf , sh , sh1 ,
      &       sh2 , SIMIN , slim
       REAL*8 summm , sz1 , sz2 , TACOS , test , tetrc , tfac , thc ,
      &       title , tmn , tmx , todfi
-      REAL*8 tta , tth , tting , ttttt , txx , u , 
-     &       val , waga , wph , wpi , WSIXJ , wth , wthh , 
+      REAL*8 tta , tth , tting , ttttt , txx , u ,
+     &       val , waga , wph , wpi , WSIXJ , wth , wthh ,
      &       WTHREJ
-      REAL*8 xep , xi1 , xi2 , xk1 , xk2 , xl1 , xlevb , 
-     &       xlk , xm1 , xm2 , xm3 , xtest , xw , xx , xxi , 
+      REAL*8 xep , xi1 , xi2 , xk1 , xk2 , xl1 , xlevb ,
+     &       xlk , xm1 , xm2 , xm3 , xtest , xw , xx , xxi ,
      &       ycorr
       REAL*8 yy , yyd1 , yydd , yyy , zmir , zp , zz
-      INTEGER*4 i , i122 , iapx , ib , ibaf , icg , icll , ict , ictl , 
+      INTEGER*4 i , i122 , iapx , ib , ibaf , icg , icll , ict , ictl ,
      &          id , ideff , idf
-      INTEGER*4 idr , iecd , ient , ifbp , ifc , ifm , ifwd , 
+      INTEGER*4 idr , iecd , ient , ifbp , ifc , ifm , ifwd ,
      &          ig1 , ig2 , ih1 , ih2 , ihlm , ihuj , ii , ij
-      INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ile1 , ilevls , 
-     &          ilx , im , imode , in1 , in2 , inclus , ind , 
+      INTEGER*4 ija0 , ijaja , ijan , ijk , ijx , ile1 , ilevls ,
+     &          ilx , im , imode , in1 , in2 , inclus , ind ,
      &          ind1 , ind2 , indx
-      INTEGER*4 inko , inm1 , inm2 , inn , inpo , intend , intvh , 
+      INTEGER*4 inko , inm1 , inm2 , inn , inpo , intend , intvh ,
      &          inva , inx1 , iobl , iocc , iopri , iosr , ipd , iph
-      INTEGER*4 ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc , 
+      INTEGER*4 ipine , ipinf , ipo1 , ipo2 , ipo3 , ipp , iprc ,
      &          ipri , irea , irep , irfix , irix , isip , iske , iskf
-      INTEGER*4 isko , iskok , isoh , ispa , ispb , itno , 
+      INTEGER*4 isko , iskok , isoh , ispa , ispb , itno ,
      &          itp , iuy , iva , iva1 , ivarh , ivari , ivrh
-      INTEGER*4 ixj , ixl , ixm , iyr , izcap , j , ja , 
+      INTEGER*4 ixj , ixl , ixm , iyr , izcap , j , ja ,
      &          jan , jan1 , jb , jb1 , jb2 , jd , jde , jdy , je
       INTEGER*4 jex , jexp , jfi , jfre , jgd , jgl , jgl1 , jgr , jgs ,
-     &          jj , jj1 , jjjj , jjlx , jjx , jk , jkloo , jktt , jl , 
+     &          jj , jj1 , jjjj , jjlx , jjx , jk , jkloo , jktt , jl ,
      &          jmm , jmpin
-      INTEGER*4 jp , jphd , jpin , jrls , js , jt , jtp , jyi , jyi1 , 
+      INTEGER*4 jp , jphd , jpin , jrls , js , jt , jtp , jyi , jyi1 ,
      &          jyi2 , jyv , jz , k , kb , kclust , kerf , kex
-      INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kl , kloop , 
+      INTEGER*4 kh , kh1 , kh2 , kk , kk1 , kk2 , kkk , kl , kloop ,
      &          kmat , kq , ktt , kuku , l , la , la1 , lam , lamd
-      INTEGER*4 lamh , lb , lck1 , lck2 , levl , lex , lexp , 
+      INTEGER*4 lamh , lb , lck1 , lck2 , levl , lex , lexp ,
      &          lfagg , lfini , lh1 , lh2 , liscl , lkj
-      INTEGER*4 lkj1 , ll , lli , lll , lmax1 , lmaxh , locat , 
+      INTEGER*4 lkj1 , ll , lli , lll , lmax1 , lmaxh , locat ,
      &          loct , lp0 , lpin
       INTEGER*4 ltrn , ltrn1 , ltrn2 , lu , lx , lxd , magh , MEM
-      INTEGER*4 memax1 , memh , memx4 , mend , mexl , 
-     &          mfla , mlt , mm , mpin , ms , n , na , na1 , naa , 
+      INTEGER*4 memax1 , memh , memx4 , mend , mexl ,
+     &          mfla , mlt , mm , mpin , ms , n , na , na1 , naa ,
      &          nallow
-      INTEGER*4 naxfl , nb1 , nb2 , nbands , nch , ndima , ndum , 
-     &          ne , nf , nfd , nfdd , 
+      INTEGER*4 naxfl , nb1 , nb2 , nbands , nch , ndima , ndum ,
+     &          ne , nf , nfd , nfdd ,
      &          nfi , nflr , nft , nged
-      INTEGER*4 ngpr , ni , nksi , nl , nmaxh , nmemx , nnl , 
-     &          nogeli , npce , npce1 , npct , npct1 , 
+      INTEGER*4 ngpr , ni , nksi , nl , nmaxh , nmemx , nnl ,
+     &          nogeli , npce , npce1 , npct , npct1 ,
      &          npt , nptl , nptx , ns1
       INTEGER*4 ns2 , ntap , ntt , numcl , nval , nz
       INTEGER*4 iskin_protect, levmax
@@ -562,7 +562,7 @@ C.............................................................................
 C     Start reading input file.
  100  READ (JZB,99001) op1 , op2
 99001 FORMAT (1A3,1A4)
-      
+
       IF ( op1.EQ.'OP, ' ) THEN
          IF ( op2.EQ.'GOSI' ) oph = op2
          IF ( op2.EQ.'GOSI' ) opcja = op2
@@ -573,7 +573,7 @@ C        Treat OP,FILE (attach files to fortran units)
             GOTO 100 ! End of OP,FILE - back to input loop
          ENDIF
 
-C        Print header         
+C        Print header
          IF ( jphd.EQ.1 ) WRITE (22,99002)
 99002    FORMAT ('1'/1X,125('*')/1X,125('*')/1X,50('*'),25X,50('*')/1X,
      &           50('*'),10X,'GOSIA2',9X,50('*')/1X,50('*'),25X,50('*')
@@ -625,7 +625,7 @@ C           attenuation coefficients
                   DO l = 1 , 10
                      arg = (eng(l)-eng(ind))**2
                      qc = (qui(k,ind)*cf(k,2)+cf(k,1)*arg)/(cf(k,2)+arg)
-                     WRITE (22,99006) eng(l) , qc , qui(k,l) , 
+                     WRITE (22,99006) eng(l) , qc , qui(k,l) ,
      &                                100.*(qc-qui(k,l))/qui(k,l)
 99006                FORMAT (8X,1F4.2,6X,1F9.4,5X,1F9.4,3X,1E10.2)
                   ENDDO
@@ -712,7 +712,7 @@ C        Treat other options
 
 C           Treat OP,RE,A (release A)
             IF ( op2.EQ.'RE,A' ) GOTO 900
-           
+
 C           Treat OP,RE,F (release F)
             IF ( op2.EQ.'RE,F' ) GOTO 900
 
@@ -813,7 +813,7 @@ C              Treat OP,EXIT
 
 C              Treat OP,MINI
                ELSEIF ( op2.EQ.'MINI' ) THEN
-                  READ (JZB,*) imode , nptl , chiok , conu , xtest , 
+                  READ (JZB,*) imode , nptl , chiok , conu , xtest ,
      &                 LOCKF , NLOCK , IFBFL , LOCKS , DLOCK
                   op2 = opcja
                   IMIN = IMIN + 1
@@ -907,7 +907,7 @@ C              Treat OP,INTG
                      enh = EP(lx)
                      DO mpin = 1 , lpin ! For each pin diode
                         IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
-                           READ (JZB,*) ne , ntt , emn , emx , wth , 
+                           READ (JZB,*) ne , ntt , emn , emx , wth ,
      &                          wph , wthh
                            mfla = 1
                            CALL COORD(wth,wph,wthh,ntt,0,pfi,wpi,tth,lx,
@@ -922,10 +922,10 @@ C              Treat OP,INTG
                         jan1 = NDST(lx)
                         IF ( IRAWEX(lx).EQ.0 ) jan1 = jan
                         IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
-                           WRITE (14,*) ne , ntt , emn , emx , tmn , 
+                           WRITE (14,*) ne , ntt , emn , emx , tmn ,
      &                                  tmx , jan1 , wth , wph , wthh
                         ELSE
-                           WRITE (14,*) ne , ntt , emn , emx , tmn , 
+                           WRITE (14,*) ne , ntt , emn , emx , tmn ,
      &                                  tmx , jan1 , tmx , tmx , tmx
                         ENDIF
                         READ (JZB,*) (XV(i),i=1,ne)
@@ -942,7 +942,7 @@ C              Treat OP,INTG
                                  IF ( iecd(lx).NE.1 ) THEN
                                     IF ( kloop.EQ.1 ) THEN
                                        READ (JZB,*) nfi ! Number of phi ranges
-                                       READ (JZB,*) 
+                                       READ (JZB,*)
      &                                    (fiex1(ktt,jfi,1),fiex1(ktt,
      &                                    jfi,2),jfi=1,nfi)
                                        IF ( tth.LT.0. ) THEN
@@ -1072,13 +1072,13 @@ C              Treat OP,INTG
                                  dsx = dsig
                                  IF ( mfla.NE.1 ) dsx = dsig*todfi
                                  dsxm(mpin,kloop,ktt) = dsx
-                                 WRITE (17,*) lx , mpin , kloop , ktt , 
+                                 WRITE (17,*) lx , mpin , kloop , ktt ,
      &                                  dsx
-                                 WRITE (14,*) lx , enb , tting , ija0 , 
-     &                                  dsx , 
+                                 WRITE (14,*) lx , enb , tting , ija0 ,
+     &                                  dsx ,
      &                                  (GRAD(jyi)*dsig*ax,jyi=1,idr)
                                  IF ( IPRM(11).EQ.1 ) THEN
-                                    WRITE (22,99048) lx , ija0 , enb , 
+                                    WRITE (22,99048) lx , ija0 , enb ,
      &                                 tta
                                     IF ( tta.LT.0. ) WRITE (22,99017)
      &                                 tting
@@ -1088,8 +1088,8 @@ C              Treat OP,INTG
                                     DO jyi = 1 , idr
                                        ni = KSEQ(jyi,3)
                                        nf = KSEQ(jyi,4)
-                                       WRITE (22,99049) ni , nf , 
-     &                                    SPIN(ni) , SPIN(nf) , 
+                                       WRITE (22,99049) ni , nf ,
+     &                                    SPIN(ni) , SPIN(nf) ,
      &                                    GRAD(jyi)*dsig*ax , GRAD(jyi)
      &                                    /GRAD(IDRN)
                                     ENDDO ! Loop on decays jyi
@@ -1099,7 +1099,7 @@ C              Treat OP,INTG
                            ENDDO ! Loop on theta angles ktt
                         ENDDO ! Loop on energy meshpoints kloop
                      ENDDO ! Loop on pin diodes mpin
-                      
+
                      EP(lx) = enh
                      TLBDG(lx) = tth
                   ENDDO ! Loop on experiments lx
@@ -1116,7 +1116,7 @@ C                 meshpoints, so now we start the integration
 C                    Read tape 17
                      REWIND 17
                      DO ijaja = 1 , 300000
-                        READ (17,*,END=134) jjlx , jmpin , jkloo , 
+                        READ (17,*,END=134) jjlx , jmpin , jkloo ,
      &                        jktt , dsx
                         IF ( jjlx.EQ.lx ) dsxm(jmpin,jkloo,jktt) = dsx
                      ENDDO
@@ -1151,7 +1151,7 @@ C                    Read tape 17
                         IF ( ilx.NE.1 )
      &                       CALL TAPMA(lx,iske,isko,iskf,nflr,idr,0,
      &                       nft,enb)
-                        READ (14,*) ne , ntt , emn , emx , tmn , tmx , 
+                        READ (14,*) ne , ntt , emn , emx , tmn , tmx ,
      &                              jan , wth , wph , wthh
                         iocc = (ne+ntt)*idr
                         IF ( iocc.GT.izcap ) GOTO 1800
@@ -1167,7 +1167,7 @@ C                    Read tape 17
      &                          (pfi(j),j=1,npct1)
                         ENDIF
                         het = het/57.2957795 ! Step in theta in radians
-                        
+
 C                       Interpolate stopping power for each of the energies
 C                       that we need. esp is an array of energies and dedx is
 C                       an array containing the stopping powers at those
@@ -1183,8 +1183,8 @@ C                       with the number of steps specified.
      &                        CALL SPLNER(esp,dedx,npt,xx,yy,3)
                            HLMLM(j) = 1./yy
                         ENDDO
-                         
-C                       Now we calculate for all the mesh points. 
+
+C                       Now we calculate for all the mesh points.
                         naa = NDST(lx)
                         IF ( IRAWEX(lx).EQ.0 ) naa = NANG(lx)
                         iskf = naa - 1
@@ -1275,7 +1275,7 @@ C                                Interpolate Rutherford cross-section for this e
                                  XI(jt) = yy*HLMLM(jt)
                               ENDDO ! Loop on equal energy steps
 
-C   So now after this loop, we have XI containing the angle-integrated yield times dE for 
+C   So now after this loop, we have XI containing the angle-integrated yield times dE for
 C   a set of equally spaced energies, so we use Simpson's rule to integrate them and store
 C   in GRAD(jd). The first time, we also have in HLM a set of Rutherford cross-sections for
 C   equally spaced energies, which we integrate in the same way.
@@ -1291,7 +1291,7 @@ C   equally spaced energies, which we integrate in the same way.
      &                            'INTEGRATED RUTHERFORD CROSS SECTION='
      &                            ,1E9.4,2X,'FOR EXP.',1I2///)
 
-                           WRITE (22,99019) lx , ja , emn , emx , tmn , 
+                           WRITE (22,99019) lx , ja , emn , emx , tmn ,
      &                            tmx
 99019                      FORMAT (1X,//50X,'INTEGRATED YIELDS'//5X,
      &                             'EXPERIMENT ',1I2,2X,'DETECTOR ',
@@ -1307,7 +1307,7 @@ C   equally spaced energies, which we integrate in the same way.
                            DO jd = 1 , idr
                               ni = KSEQ(jd,3)
                               nf = KSEQ(jd,4)
-                              WRITE (22,99049) ni , nf , SPIN(ni) , 
+                              WRITE (22,99049) ni , nf , SPIN(ni) ,
      &                               SPIN(nf) , GRAD(jd) , GRAD(jd)
      &                               /GRAD(IDRN) ! IDRN is the normalising transition
                            ENDDO
@@ -1317,7 +1317,7 @@ C   equally spaced energies, which we integrate in the same way.
                            IF ( jpin(lx).EQ.0 ) THEN
                               CALL COORD(wth,wph,wthh,1,2,pfi,wpi,
      &                           TLBDG(lx),lx,txx,txx)
-                              WRITE (22,99020) FIEX(lx,1)*57.2957795 , 
+                              WRITE (22,99020) FIEX(lx,1)*57.2957795 ,
      &                               FIEX(lx,2)*57.2957795 , lx
 99020                         FORMAT (//5X,
      &                          'WARNING: THE PHI ANGLE WAS REPLACED BY'
@@ -1400,7 +1400,7 @@ C              Treat OP,INTI
                      enh = EP(lx)
                      DO mpin = 1 , lpin ! For each pin diode
                         IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
-                           READ (JZB,*) ne , ntt , emn , emx , wth , 
+                           READ (JZB,*) ne , ntt , emn , emx , wth ,
      &                          wph , wthh
                            mfla = 1
                            CALL COORD(wth,wph,wthh,ntt,0,pfi,wpi,tth,lx,
@@ -1415,10 +1415,10 @@ C              Treat OP,INTI
                         jan1 = NDST(lx)
                         IF ( IRAWEX(lx).EQ.0 ) jan1 = jan
                         IF ( iecd(lx).EQ.1 ) THEN ! Circular detector
-                           WRITE (14,*) ne , ntt , emn , emx , tmn , 
+                           WRITE (14,*) ne , ntt , emn , emx , tmn ,
      &                                  tmx , jan1 , wth , wph , wthh
                         ELSE
-                           WRITE (14,*) ne , ntt , emn , emx , tmn , 
+                           WRITE (14,*) ne , ntt , emn , emx , tmn ,
      &                                  tmx , jan1 , tmx , tmx , tmx
                         ENDIF
                         READ (JZB,*) (XV(i),i=1,ne)
@@ -1440,7 +1440,7 @@ C              Treat OP,INTI
                                  IF ( iecd(lx).NE.1 ) THEN
                                     IF ( kloop.EQ.1 ) THEN
                                        READ (JZB,*) nfi ! Number of phi ranges
-                                       READ (JZB,*) 
+                                       READ (JZB,*)
      &                                    (fiex1(ktt,jfi,1),fiex1(ktt,
      &                                    jfi,2),jfi=1,nfi)
                                        IF ( tth.LT.0. ) THEN
@@ -1570,21 +1570,21 @@ C              Treat OP,INTI
                                  dsx = dsig
                                  IF ( mfla.NE.1 ) dsx = dsig*todfi
                                  dsxm(mpin,kloop,ktt) = dsx
-                                 WRITE (17,*) lx , mpin , kloop , ktt , 
+                                 WRITE (17,*) lx , mpin , kloop , ktt ,
      &                                  dsx
-                                 WRITE (14,*) lx , enb , tting , ija0 , 
-     &                                  dsx , 
+                                 WRITE (14,*) lx , enb , tting , ija0 ,
+     &                                  dsx ,
      &                                  (GRAD(jyi)*dsig*ax,jyi=1,idr)
                                  IF ( IPRM(11).EQ.1 ) THEN
-                                    WRITE (22,99048) lx , ija0 , enb , 
+                                    WRITE (22,99048) lx , ija0 , enb ,
      &                                 tta
                                     IF ( tta.LT.0. ) WRITE (22,99017)
      &                                 tting
                                     DO jyi = 1 , idr
                                        ni = KSEQ(jyi,3)
                                        nf = KSEQ(jyi,4)
-                                       WRITE (22,99049) ni , nf , 
-     &                                    SPIN(ni) , SPIN(nf) , 
+                                       WRITE (22,99049) ni , nf ,
+     &                                    SPIN(ni) , SPIN(nf) ,
      &                                    GRAD(jyi)*dsig*ax , GRAD(jyi)
      &                                    /GRAD(IDRN)
                                     ENDDO ! Loop on decays jyi
@@ -1594,7 +1594,7 @@ C              Treat OP,INTI
                            ENDDO ! Loop on theta angles ktt
                         ENDDO ! Loop on energy meshpoints kloop
                      ENDDO ! Loop on pin diodes mpin
-                      
+
                      EP(lx) = enh
                      TLBDG(lx) = tth
                   ENDDO ! Loop on experiments lx
@@ -1611,7 +1611,7 @@ C                 meshpoints, so now we start the integration
 C                    Read tape 17
                      REWIND 17
                      DO ijaja = 1 , 300000
-                        READ (17,*,END=434) jjlx , jmpin , jkloo , 
+                        READ (17,*,END=434) jjlx , jmpin , jkloo ,
      &                        jktt , dsx
                         IF ( jjlx.EQ.lx ) dsxm(jmpin,jkloo,jktt) = dsx
                      ENDDO
@@ -1646,7 +1646,7 @@ C                    Read tape 17
                         IF ( ilx.NE.1 )
      &                       CALL TAPMA(lx,iske,isko,iskf,nflr,idr,0,
      &                       nft,enb)
-                        READ (14,*) ne , ntt , emn , emx , tmn , tmx , 
+                        READ (14,*) ne , ntt , emn , emx , tmn , tmx ,
      &                              jan , wth , wph , wthh
                         iocc = (ne+ntt)*idr
                         IF ( iocc.GT.izcap ) GOTO 1800
@@ -1662,7 +1662,7 @@ C                    Read tape 17
      &                          (pfi(j),j=1,npct1)
                         ENDIF
                         het = het/57.2957795 ! Step in theta in radians
-                        
+
 C                       Interpolate stopping power for each of the energies
 C                       that we need. esp is an array of energies and dedx is
 C                       an array containing the stopping powers at those
@@ -1678,8 +1678,8 @@ C                       with the number of steps specified.
      &                        CALL SPLNER(esp,dedx,npt,xx,yy,3)
                            HLMLM(j) = 1./yy
                         ENDDO
-                         
-C                       Now we calculate for all the mesh points. 
+
+C                       Now we calculate for all the mesh points.
                         naa = NDST(lx)
                         IF ( IRAWEX(lx).EQ.0 ) naa = NANG(lx)
                         iskf = naa - 1
@@ -1770,7 +1770,7 @@ C                                Interpolate Rutherford cross-section for this e
                                  XI(jt) = yy*HLMLM(jt)
                               ENDDO ! Loop on equal energy steps
 
-C   So now after this loop, we have XI containing the angle-integrated yield times dE for 
+C   So now after this loop, we have XI containing the angle-integrated yield times dE for
 C   a set of equally spaced energies, so we use Simpson's rule to integrate them and store
 C   in GRAD(jd). The first time, we also have in HLM a set of Rutherford cross-sections for
 C   equally spaced energies, which we integrate in the same way.
@@ -1783,7 +1783,7 @@ C   equally spaced energies, which we integrate in the same way.
                            IF ( ja.EQ.1 ) dst = dst + DS
                            IF ( ja.EQ.1 ) WRITE (22,99018) DS , lx
 
-                           WRITE (22,99019) lx , ja , emn , emx , tmn , 
+                           WRITE (22,99019) lx , ja , emn , emx , tmn ,
      &                            tmx
                            DO jd = 1 , idr
                               WRITE (15,*) GRAD(jd)
@@ -1791,7 +1791,7 @@ C   equally spaced energies, which we integrate in the same way.
                            DO jd = 1 , idr
                               ni = KSEQ(jd,3)
                               nf = KSEQ(jd,4)
-                              WRITE (22,99049) ni , nf , SPIN(ni) , 
+                              WRITE (22,99049) ni , nf , SPIN(ni) ,
      &                               SPIN(nf) , GRAD(jd) , GRAD(jd)
      &                               /GRAD(IDRN) ! IDRN is the normalising transition
                            ENDDO
@@ -1801,7 +1801,7 @@ C   equally spaced energies, which we integrate in the same way.
                            IF ( jpin(lx).EQ.0 ) THEN
                               CALL COORD(wth,wph,wthh,1,2,pfi,wpi,
      &                           TLBDG(lx),lx,txx,txx)
-                              WRITE (22,99020) FIEX(lx,1)*57.2957795 , 
+                              WRITE (22,99020) FIEX(lx,1)*57.2957795 ,
      &                               FIEX(lx,2)*57.2957795 , lx
                               IF ( TLBDG(lx).LT.0 ) THEN
                                  FIEX(lx,1) = FIEX(lx,1) + 3.14159265
@@ -1889,9 +1889,9 @@ C                 Treat OP,SIXJ
                            DO ms = 1 , 5
                               mend = 2*(ms-3) + ixj
                               WRITE (14,*) WSIXJ(l,4,4,ixj,mend,ixj-4) ,
-     &                               WSIXJ(l,4,4,ixj,mend,ixj-2) , 
-     &                               WSIXJ(l,4,4,ixj,mend,ixj) , 
-     &                               WSIXJ(l,4,4,ixj,mend,ixj+2) , 
+     &                               WSIXJ(l,4,4,ixj,mend,ixj-2) ,
+     &                               WSIXJ(l,4,4,ixj,mend,ixj) ,
+     &                               WSIXJ(l,4,4,ixj,mend,ixj+2) ,
      &                               WSIXJ(l,4,4,ixj,mend,ixj+4)
                            ENDDO
                         ENDDO
@@ -1949,7 +1949,7 @@ C                    Read input from standard input
 
 C                 Treat OP,MAP
                   ELSEIF ( op2.EQ.'MAP ' ) THEN
-                     GOTO 1200 ! End of OP,MAP 
+                     GOTO 1200 ! End of OP,MAP
                   ENDIF ! IF ( op2.EQ.'SIXJ' )
                ENDIF
             ENDIF
@@ -1993,7 +1993,7 @@ C     Treat suboption LEVE (levels)
             prp = '+'
             IF ( ipo2.EQ.-1 ) prp = '-'
             if (ipo1 .GT. levmax) levmax = ipo1
-            IF ( ABS(IPRM(1)).EQ.1 ) WRITE (22,99025) ipo1 , prp , 
+            IF ( ABS(IPRM(1)).EQ.1 ) WRITE (22,99025) ipo1 , prp ,
      &           SPIN(ipo1) , EN(ipo1)
 99025       FORMAT (5X,1I3,11X,1A1,10X,1F4.1,8X,1F10.4)
          ENDDO
@@ -2235,7 +2235,7 @@ C     Else we don't recognize the suboption
       ENDIF
       GOTO 200 ! Get next suboption
 
-C     Handle OP,ERRO      
+C     Handle OP,ERRO
  400  IF ( ICS.EQ.1 ) THEN
          REWIND 11
          DO kh1 = 1 , LP4
@@ -2353,13 +2353,13 @@ C     Handle OP,ERRO
      &              be2a = 0.
                be2a = be2a**2/sbe
                be2b = be2b**2/sbe
-               WRITE (22,99052) kh2 , LEAD(2,kh2) , LEAD(1,kh2) , be2 , 
+               WRITE (22,99052) kh2 , LEAD(2,kh2) , LEAD(1,kh2) , be2 ,
      &                          be2a - be2 , be2b - be2
             ELSE
                ispb = INT(SPIN(ispa))*2
                qfac = 3.170662*WTHREJ(ispb,4,ispb,-ispb,0,ispb)
-               WRITE (22,99052) kh2 , LEAD(2,kh2) , LEAD(1,kh2) , 
-     &                          HLM(kh2)*qfac , DEVD(kh2)*qfac , 
+               WRITE (22,99052) kh2 , LEAD(2,kh2) , LEAD(1,kh2) ,
+     &                          HLM(kh2)*qfac , DEVD(kh2)*qfac ,
      &                          DEVU(kh2)*qfac
             ENDIF
          ENDIF
@@ -2499,7 +2499,7 @@ C     Handle OP,ERRO
                   DO k = 1 , ISMAX ! For substates
                      pr = pr + DBLE(ARM(k,5))**2 + DIMAG(ARM(k,5))**2
                      IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
-     &                    WRITE (22,99035) INT(CAT(k,1)) , CAT(k,2) , 
+     &                    WRITE (22,99035) INT(CAT(k,1)) , CAT(k,2) ,
      &                    CAT(k,3) , DBLE(ARM(k,5)) , DIMAG(ARM(k,5))
 99035                FORMAT (7X,1I2,3X,1F4.1,2X,1F5.1,2X,1E14.6,2X,
      &                       1E14.6)
@@ -2545,7 +2545,7 @@ C     Handle OP,ERRO
                   DO jgl = 1 , nogeli ! For each detector angle
                      IF ( IRAWEX(IEXP).NE.0 ) THEN
                         IF ( op2.EQ.'POIN' .AND. IPRM(20).EQ.1 )
-     &                       WRITE (23,99037) IEXP , jgl , EP(IEXP) , 
+     &                       WRITE (23,99037) IEXP , jgl , EP(IEXP) ,
      &                       TLBDG(IEXP)
 99037                   FORMAT (1x//50x,'CALCULATED YIELDS'//5x,
      &                          'EXPERIMENT ',1I2,2x,'DETECTOR ',1I2/5x,
@@ -2595,7 +2595,7 @@ C     Handle OP,ERRO
                            decen = decen*(1.+BETAR(IEXP)*cocos)
                            CALL EFFIX(IEXP,ipd,decen,effi)
                            IF ( op2.EQ.'POIN' .AND. IPRM(20).EQ.1 )
-     &                          WRITE (23,99049) ni , nf , SPIN(ni) , 
+     &                          WRITE (23,99049) ni , nf , SPIN(ni) ,
      &                                 SPIN(nf) , decen , effi
                            YGN(jyi) = YGN(jyi)*effi
                         ENDDO
@@ -2614,14 +2614,14 @@ C     Handle OP,ERRO
                      jgl1 = jgl1 + 1
                      lu = ILE(jgl1)
                      IF ( op2.EQ.'POIN' .OR. IPRM(11).EQ.1 )
-     &                    WRITE (22,99048) IEXP , jgl1 , EP(IEXP) , 
+     &                    WRITE (22,99048) IEXP , jgl1 , EP(IEXP) ,
      &                    TLBDG(IEXP)
                      jmm = 0
                      DO jyi = 1 , idr
                         ni = KSEQ(jyi,3)
                         nf = KSEQ(jyi,4)
                         IF ( op2.EQ.'POIN' .OR. IPRM(11).EQ.1 )
-     &                       WRITE (22,99049) ni , nf , SPIN(ni) , 
+     &                       WRITE (22,99049) ni , nf , SPIN(ni) ,
      &                       SPIN(nf) , YGN(jyi) , YGN(jyi)/YGN(IDRN)
                         IF ( ifwd.EQ.1 ) THEN
                            IF ( (YGN(jyi)/YGN(IDRN)).GE.slim ) THEN
@@ -2672,12 +2672,12 @@ C     Handle OP,ERRO
                      ENDDO
                      IF ( ifwd.EQ.1 ) THEN
                         xw = 1.
-                        WRITE (4,*) IEXP , jgl1 , ABS(IZ1(IEXP)) , 
-     &                              ABS(XA1(IEXP)) , ABS(EP(IEXP)) , 
+                        WRITE (4,*) IEXP , jgl1 , ABS(IZ1(IEXP)) ,
+     &                              ABS(XA1(IEXP)) , ABS(EP(IEXP)) ,
      &                              jmm , xw
                         DO jyi = 1 , jmm
-                           WRITE (4,*) INT(CORF(jyi,1)) , 
-     &                                 INT(CORF(jyi,2)) , CORF(jyi,3) , 
+                           WRITE (4,*) INT(CORF(jyi,1)) ,
+     &                                 INT(CORF(jyi,2)) , CORF(jyi,3) ,
      &                                 CORF(jyi,4)
                         ENDDO
                      ENDIF
@@ -2695,7 +2695,7 @@ C     Handle OP,ERRO
                         ENDIF
                         jgl1 = jgl1 + 1
                         READ (3,*) ne , na , zp , ap , xep , nval , waga
-                        WRITE (4,*) ne , na , zp , ap , EP(IEXP) , 
+                        WRITE (4,*) ne , na , zp , ap , EP(IEXP) ,
      &                              nval , waga
                         WRITE (22,99038) IEXP , jgl1
 99038                   FORMAT (///10X,'EXPERIMENT',1X,I2,8X,'DETECTOR',
@@ -2703,7 +2703,7 @@ C     Handle OP,ERRO
      &                          'YCOR',8X,'COR.F'/)
                         ile1 = ILE(jgl1)
                         DO itp = 1 , nval
-                           READ (3,*) ns1 , ns2 , fiex1(1,1,1) , 
+                           READ (3,*) ns1 , ns2 , fiex1(1,1,1) ,
      &                                fiex1(1,1,2)
                            ltrn = IY(ile1+itp-1,jgl1)
                            IF ( ltrn.LT.1000 ) THEN
@@ -2718,10 +2718,10 @@ C     Handle OP,ERRO
                               ns2 = ns2 + KSEQ(ltrn2,4)
                            ENDIF
                            ycorr = YEXP(jgl1,ile1+itp-1) ! Changed in gosia2
-                           WRITE (4,*) ns1 , ns2 , ycorr , 
+                           WRITE (4,*) ns1 , ns2 , ycorr ,
      &                                 DYEX(jgl1,ile1+itp-1) ! Changed in gosia2
-                           WRITE (22,99039) ns1 , ns2 , 
-     &                            CORF(ile1+itp-1,jgl1) , ycorr , 
+                           WRITE (22,99039) ns1 , ns2 ,
+     &                            CORF(ile1+itp-1,jgl1) , ycorr ,
      &                            ycorr/CORF(ile1+itp-1,jgl1)
 99039                      FORMAT (5X,I4,5X,I4,3X,E8.3,4X,E8.3,4X,E8.3)
                         ENDDO ! Loop over itp
@@ -3040,7 +3040,7 @@ C     Handle map
                   WRITE (22,99054)
                   DO kex = 1 , 10
                      xxi = XIR(lex,jex)*(kex-1)/9.
-                     WRITE (22,99055) xxi , 
+                     WRITE (22,99055) xxi ,
      &                                (PARXM(jex,ilx,kex,lex),ilx=1,4)
                   ENDDO
                   IF ( MAGA(jex).NE.0 ) THEN
@@ -3105,7 +3105,7 @@ C     Calculate chi squared and normalization without minimizing
 C---- gosia2 changes end
       CALL MINI(chisq,1.D+38,nptl,conu,imode,idr,xtest,0,0,0,bten)
 C---- gosia2 changes start
-      
+
 C     Set CNOR1 to the weighted average of CNOR1 and CNOR2
       DO kh1 = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
          DO kh2 = 1 , LP3 ! LP3 = 75 (maximum number of levels)
@@ -3118,14 +3118,14 @@ C     Set CNOR1 to the weighted average of CNOR1 and CNOR2
             ENDIF
          ENDDO
       ENDDO
-      
+
 C     Increment iteration counter
       mawr = mawr + 1
 
 C     Store chisq
       IF ( JZB.EQ.25 ) ccch1 = chisq
       IF ( JZB.EQ.26 ) ccch2 = chisq
-      WRITE (*,*) 'ITER = ' , mawr , ' CHISQ1 = ' , ccch1 , 
+      WRITE (*,*) 'ITER = ' , mawr , ' CHISQ1 = ' , ccch1 ,
      &  ' CHISQ2 = ' , ccch2
       chir = ccch1 + ccch2
 
@@ -3239,7 +3239,7 @@ C---- gosia2 changes end
                   WRITE (22,99012) iva , TAU(iva)
 99012             FORMAT (6X,1I3,7X,1E10.4)
                   GOTO 124
- 122              WRITE (22,99013) iva , TAU(iva) , TIMEL(1,iva1) , 
+ 122              WRITE (22,99013) iva , TAU(iva) , TIMEL(1,iva1) ,
      &                   -TIMEL(2,iva1) , TIMEL(3,iva1)
 99013             FORMAT (6X,1I3,7X,1E10.4,5X,1E10.4,4X,1E10.4,4X,
      &              1E10.4)
@@ -3263,7 +3263,7 @@ C---- gosia2 changes end
                            ELSE
                              dsd = EAMX(kq,3)
                            ENDIF
-                           WRITE (22,99016) ni , nf , esd , ess , 
+                           WRITE (22,99016) ni , nf , esd , ess ,
      &                        (ess-esd)/dsd
 99016                      FORMAT (4x,1I3,1x,1I3,1x,1F9.4,1x,1F9.4,1x,
      &                              1F9.4)

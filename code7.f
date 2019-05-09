@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE CODE7
 C
@@ -17,13 +17,13 @@ C      N      - index of initial level
 C      Mt     - index of final level
 C      Inqa   - result of operation
 C      Indx   - Index of matrix element
- 
+
       SUBROUTINE CODE7(Ir,Is,N,Mt,Inqa,Indx)
       IMPLICIT NONE
       INTEGER*4 idm , idn , Indx , Inqa , Ir , Is , ism , Mt , N
       INCLUDE 'pth.inc'
       INCLUDE 'aprcat.inc'
-      
+
       IAPR(Indx,1) = N  ! Index of initial level
       IAPR(Indx,2) = Mt ! Index of final level
       IF ( IPATH(N).EQ.0 .OR. IPATH(Mt).EQ.0 ) THEN

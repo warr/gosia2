@@ -33,7 +33,7 @@ C     Lagrangian method instead
       IF ( N.LE. 3 ) THEN
         CALL LAGRAN(X,Yr,N,1,Xx,Yy,Iscal,1)
         RETURN
-      ENDIF 
+      ENDIF
 
 C     Apply the scaling function
       DO i = 1 , N
@@ -54,4 +54,4 @@ C     Apply the inverse scaling function
       Yy = FUNC1(ys,Iscal)
       RETURN
       END
- 
+

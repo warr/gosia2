@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE STING
 C
@@ -30,11 +30,11 @@ C      NPT    - index in ADB array (this is omega / 0.03)
 C
 C Formal parameters:
 C      Irld   - index into ARM array
- 
+
       SUBROUTINE STING(Irld)
       IMPLICIT NONE
       REAL*8 rsg , w0
-      INTEGER*4 i , i57 , ibg , iend , indx , Irld , is2 , j , j1 , 
+      INTEGER*4 i , i57 , ibg , iend , indx , Irld , is2 , j , j1 ,
      &          jj , lam , ld , maxh , mm , n , nz
       INCLUDE 'clcom.inc'
       INCLUDE 'az.inc'
@@ -53,7 +53,7 @@ C      Irld   - index into ARM array
       rsg = -1.
       IFLG = 1
       w0 = IRA(MAXLA)*.03 + .03 ! Maximum omega to calculate for (steps of 0.03)
-      
+
       DO j = 1 , ISMAX ! For substate used, zero ARM array
          DO jj = 1 , 6
             ARM(j,jj) = (0.,0.)
@@ -65,9 +65,9 @@ C      Irld   - index into ARM array
          LAMR(j) = 0 ! Initially mark that we shouldn't calculate any multipolarity
       ENDDO
       LAMR(MAXLA) = 1 ! Mark that we should calculate this multipolarity
-      
+
       NPT = IRA(MAXLA) + 1 ! Number of omega values to calculate for this multipolarity
-      
+
       IF ( MAXLA.EQ.7 .AND. IRA(2).NE.0 ) THEN ! Special case of M1
          LAMR(2) = 1
          NPT = NPT - 1
@@ -115,7 +115,7 @@ C                 Calculate sum over matrix elements
             ENDIF ! If we should calculate this multipolarity
          ENDDO ! Loop over multipolarities
          IF ( j.EQ.4 ) GOTO 200 ! We've set everything up, so finish
-         
+
          DO i = 1 , ISMAX ! Shift terms up one
             ARM(i,j) = ARM(i,4)
             ARM(i,4) = (0.,0.)
@@ -125,7 +125,7 @@ C                 Calculate sum over matrix elements
 
 C     Calculate amplitude
  200  CALL LAIAMP(Irld,w0)
-      
+
       MAXLA = maxh ! Restore MAXLA
 
       DO jj = 1 , 8

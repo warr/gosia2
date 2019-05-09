@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION TASIN
 C
@@ -18,7 +18,7 @@ C arctan(x / sqrt(1 - x^2).
       REAL*8 FUNCTION TASIN(X)
       IMPLICIT NONE
       REAL*8 dol , test , war , X
-      
+
       test = ABS(X) - 1.
       IF ( ABS(test).LT.1.E-9 ) THEN
          TASIN = 1.570796327 ! 1.570796327 is pi / 2

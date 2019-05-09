@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE GKK
 C
@@ -58,9 +58,9 @@ C element.
       SUBROUTINE GKK(Iz,Beta,Spin,Time,Il)
       IMPLICIT NONE
       REAL*8 alp , ATS , Beta , ccf , down , dwc , f , hmean , rk , sm ,
-     &       Spin , Time , up , upc , valmi , w2 , wrt , WSIXJ , wsp , 
+     &       Spin , Time , up , upc , valmi , w2 , wrt , WSIXJ , wsp ,
      &       xji , xlam
-      INTEGER*4 i , if2 , ifq , Il , imean , inq , irk2 , ispin2 , 
+      INTEGER*4 i , if2 , ifq , Il , imean , inq , irk2 , ispin2 ,
      &          ixji2 , Iz , j , k , k1 , k2 , l , m , ncoup , nz
       INCLUDE 'gvac.inc'
       INCLUDE 'vac.inc'

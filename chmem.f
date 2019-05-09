@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE CHMEM
 C
@@ -13,7 +13,7 @@ C      EAMX   - known matrix elements and their error
 C      NAMX   - number of known matrix elements
 C      IAMX   - index of matrix element for known matrix element
 C      IAMY   - level indices of pair of levels for which matrix element is known
- 
+
       SUBROUTINE CHMEM(Nw,Chi,Chilo)
       IMPLICIT NONE
       REAL*8 Chi , Chilo , di

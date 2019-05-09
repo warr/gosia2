@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE BRANR
 C
@@ -27,7 +27,7 @@ C      Chilo  - chi squared of logs
       SUBROUTINE BRANR(Chisq,Nwyr,Chilo)
       IMPLICIT NONE
       REAL*8 ch1 , ch2 , Chilo , Chisq , CONV , eng1 , eng2 , u
-      INTEGER*4 i1 , i2 , iflg , iout , itt , j1 , j2 , 
+      INTEGER*4 i1 , i2 , iflg , iout , itt , j1 , j2 ,
      &          k , lab1 , lab2 , mul2
       INTEGER*4 n1 , n2 , Nwyr
       INCLUDE 'coex.inc'
@@ -41,7 +41,7 @@ C      Chilo  - chi squared of logs
 C     If no branching ratios were defined, return doing nothing
       IF ( NBRA.EQ.0 ) RETURN
 
-C     If printing option is on, print something      
+C     If printing option is on, print something
       IF ( IPRM(3).EQ.-1 ) WRITE (22,99001)
 99001 FORMAT (1X,///10X,'EXP. AND CALCULATED BRANCHING RATIOS',//5X,
      &        'NS1',5X,'NF1',5X,'NS2',5X,'NF2',5X,'RATIO(1:2)',9X,
@@ -104,6 +104,6 @@ C     If printing option is on, print something
      &                               ch1/ch2 , -u
 99002    FORMAT (5X,3(1I2,6X),1I2,5X,4(1F10.5,5X),5X,1F4.1)
       ENDDO ! Loop on branching ratios
-       
+
       IF ( IPRM(3).EQ.-1 ) IPRM(3) = 0 ! Turn off printing option, so we don't print twice
       END

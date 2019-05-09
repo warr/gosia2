@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE LIMITS
 C
@@ -13,7 +13,7 @@ C      ELML   - lower limit on matrix elements
 C      ELMU   - upper limit on matrix elements
 C      IVAR   - indicates a limit or correlation is set
 C      MEMAX  - number of matrix elements
- 
+
       SUBROUTINE LIMITS
       IMPLICIT NONE
       INTEGER*4 j

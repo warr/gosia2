@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE MINI
 C
@@ -58,17 +58,17 @@ C don't go outside the limits specified by the user.
       SUBROUTINE MINI(Chisq,Chiok,Nptl,Conv,Imode,Idr,Xtest,Ips,Is,Jjh,
      &                Bten)
       IMPLICIT NONE
-      REAL*8 a , a0 , a1 , b , Bten , c , ccd , chd , chil , chilo , 
-     &       Chiok , chirf , chis12 , chis13 , chisf , chisp , Chisq , 
+      REAL*8 a , a0 , a1 , b , Bten , c , ccd , chd , chil , chilo ,
+     &       Chiok , chirf , chis12 , chis13 , chisf , chisp , Chisq ,
      &       chiss , chl
       REAL*8 chx , cmax , Conv , crit , dl , dm , f1 , f2 , flt
-      REAL*8 gradp , ht , p , q , rfk , sel , shl , sumg1 , 
+      REAL*8 gradp , ht , p , q , rfk , sel , shl , sumg1 ,
      &       sumg2 , sumht , uxa , xkat , Xtest
-      INTEGER*4 i , icl1 , icl2 , icount , Idr , iht , iin , Imode , 
+      INTEGER*4 i , icl1 , icl2 , icount , Idr , iht , iin , Imode ,
      &          indx1 , inmx , ino , ipas , ipm
-      INTEGER*4 Ips , Is , istec , itf , j , jcoup , jcp , jin , 
+      INTEGER*4 Ips , Is , istec , itf , j , jcoup , jcp , jin ,
      &          Jjh , jjj , jlin , jnm , jpr , jsa , jst
-      INTEGER*4 kh2 , kkk , l , lnm , metf , mvfl , ncall , nlinn , 
+      INTEGER*4 kh2 , kkk , l , lnm , metf , mvfl , ncall , nlinn ,
      &          noflg , Nptl
       DIMENSION ipm(10) , Bten(*) , gradp(1500)
       INCLUDE 'dumm.inc'
@@ -160,9 +160,9 @@ C     Write correction factors
       DO jnm = 1 , LP4
          WRITE (11) (CORF(jnm,kh2),kh2=1,LP6)
       ENDDO
-       
+
       IF ( IPS1.EQ.0 ) RETURN ! If IPS1 = 0, terminate after writing correction factors
-       
+
  200  noflg = 0
       ncall = 1
  300  sumht = 0.
@@ -295,7 +295,7 @@ C     Write correction factors
             IF ( metf.NE.0 ) THEN
                dm = 0.
                DO jnm = 1 , MEMAX
-                  IF ( IVAR(jnm).EQ.2 .OR. IVAR(jnm).EQ.1 ) dm = dm + 
+                  IF ( IVAR(jnm).EQ.2 .OR. IVAR(jnm).EQ.1 ) dm = dm +
      &                 ELM(jnm)*ELM(jnm)*GRAD(jnm)*GRAD(jnm)
                ENDDO
                dm = SQRT(dm)
@@ -355,7 +355,7 @@ C     Write correction factors
             HLMLM(l) = ELM(l)
          ENDDO
          DO l = 1 , MEMAX
-            IF ( ABS(GRAD(l)).LE.DLOCK .AND. LOCKS.EQ.1 .AND. 
+            IF ( ABS(GRAD(l)).LE.DLOCK .AND. LOCKS.EQ.1 .AND.
      &           icount.EQ.1 .AND. IVAR(l).LE.999 .AND. IVAR(l).NE.0 )
      &           THEN
                IF ( KFERR.NE.1 ) KVAR(l) = 0
@@ -367,7 +367,7 @@ C     Write correction factors
          ENDDO
          istec = 0
       ENDIF
-       
+
  400  DO j = 1 , MEMAX
          ELMH(j) = ELM(j)
       ENDDO
@@ -383,7 +383,7 @@ C     Find steepest gradient
             inmx = iht
          ENDIF
       ENDDO
-       
+
       ht = .01*ABS(ELM(inmx))/cmax
       mvfl = 0
       IF ( icount.NE.1 .AND. istec.EQ.1 ) THEN
@@ -408,7 +408,7 @@ C     Find steepest gradient
             gradp(iin) = 0.
          ENDIF
       ENDIF
-       
+
  500  DO j = 1 , MEMAX
          ELM(j) = ELMH(j) - ht*GRAD(j)
       ENDDO
@@ -467,13 +467,13 @@ C     Find steepest gradient
          ENDIF
       ENDIF
 
-C     Required chi square achieved       
+C     Required chi square achieved
  600  chil = Chisq
       IF ( Ips.EQ.0 ) WRITE (22,99006) icount
 99006 FORMAT (5X,'AT STEP',1X,1I5,1X,'CHISQ CRITERION FULFILLED')
       IF ( Ips.EQ.0 ) WRITE (22,99010) chil
       RETURN
-      
+
  700  IF ( LOCKF.EQ.0 ) THEN ! Terminate if convergence satisfied
          IF ( Chisq.GE.chil ) THEN
             DO jjj = 1 , MEMAX
@@ -517,7 +517,7 @@ C     Required chi square achieved
       ENDIF
       INTR = 0
       RETURN
-       
+
 99010 FORMAT (5X,'*** CHISQ=',1E14.6,1X,'***')
 99011 FORMAT (1X/5X,'MATRIX ELEMENT',1X,1I3,1X,'LOCKED!')
       END

@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE ALLOC
 C
@@ -29,7 +29,7 @@ C 2 * IRA(1) values for E1, 3 * IRA(2) values for E2, 4 * IRA(3) values for
 C E3... 3 * IRA(8) values for M2 in that order.
 C
 C We are limited to a maximum of LP14 (=4900) values in total.
- 
+
       SUBROUTINE ALLOC(Accur)
       IMPLICIT NONE
       REAL*8 Accur
@@ -50,7 +50,7 @@ C     First zero all the elements
             LOCQ(j,k) = 0
          ENDDO
       ENDDO
-      
+
 C     Now store values for E1...E6
       DO k = 1 , 6
          k1 = k + 1
@@ -59,7 +59,7 @@ C     Now store values for E1...E6
             load = load + IRA(k)
          ENDDO
       ENDDO
-      
+
 C     And for M1, M2
       DO k = 7 , 8
          k1 = k - 6

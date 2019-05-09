@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE POMNOZ
 C
@@ -27,11 +27,11 @@ C      Iw
 C      Img
 C      Jidim
 C      Ktoto  - number of iterations needed
- 
+
       SUBROUTINE POMNOZ(Acca,L,Iw,Ktoto,Img,Jidim)
       IMPLICIT NONE
       REAL*8 Acca , sig , TCABS , test , u
-      INTEGER*4 Img , Iw , Jidim , k , kk , Ktoto , L , m , mc , mc1 , 
+      INTEGER*4 Img , Iw , Jidim , k , kk , Ktoto , L , m , mc , mc1 ,
      &          mw , mw1
       COMPLEX*16 ci
       INCLUDE 'inhi.inc'

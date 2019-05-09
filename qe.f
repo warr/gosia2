@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE QE
 C
@@ -35,7 +35,7 @@ C quadrupole, but the operator has the same form as the E2 operator, so it
 C is easiest to consider the effect as a correction to this operator.
 C
 C Lmda = lambda (1 = E1, 2 = E2... 6 = E6)
- 
+
       SUBROUTINE QE(C,D,B2,C2,D2,B4,B6,D3,B8,C4,D4,B10,D5,B12,D6,Lmda,
      &              Pol,Cq)
       IMPLICIT NONE

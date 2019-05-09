@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION LEADF
 C
@@ -16,7 +16,7 @@ C      N3     - multipolarity
 C
 C Purpose: calculate the level number for the final level associated with the
 C      matrix element index N2, initial level index N1 and multipolarity N3.
- 
+
       INTEGER*4 FUNCTION LEADF(N1,N2,N3)
       IMPLICIT NONE
       INTEGER*4 k , lsum , N1 , n1m , N2 , N3 , n3m
@@ -31,7 +31,7 @@ C      matrix element index N2, initial level index N1 and multipolarity N3.
       ENDIF
 
 C     lsum now points to start of the multipolarity N3
-       
+
       n1m = N1 - 1
       IF ( n1m.NE.0 ) THEN
          DO k = 1 , n1m ! Loop over levels below the selected one
@@ -40,11 +40,11 @@ C     lsum now points to start of the multipolarity N3
       ENDIF
 
 C     lsum now points to start of level N1 for multipolarity N3
-      
+
       n1m = lsum + N2
 
 C     n1m now points to the appropriate matrix element N2 for initial level N1
 C     and multipolarity N3
-      
+
       LEADF = LEAD(2,n1m) ! Get the final level for this matrix element
       END

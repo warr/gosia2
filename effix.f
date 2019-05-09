@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE EFFIX
 C
@@ -38,7 +38,7 @@ C     1  - Jaeri
 C     2  - Fiteff
 C     3  - Leuven
 C     4  - Radware
-      
+
       SUBROUTINE EFFIX(Iexp,Ipd,En,Effi)
       IMPLICIT NONE
       REAL*8 d , Effi , En , enl , pw , s , t , w , xx , yy

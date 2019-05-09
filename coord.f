@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE COORD
 C
@@ -27,12 +27,12 @@ C      Wtlb   - angle of particle detector in theta (degrees) in lab frame - rea
 C      Lz     - experiment number - readonly
 C      Tyy    - lower limit of theta (degrees) - read/write
 C      Tzz    - upper limit of theta (degrees) - read/write
- 
+
       SUBROUTINE COORD(Wth,Wph,Wthh,Naa,Ifw,Pfi,Wpi,Wtlb,Lz,Tyy,Tzz)
       IMPLICIT NONE
-      REAL*8 ga , gi , Pfi , rade , rmass , TACOS , TASIN , thetb , 
+      REAL*8 ga , gi , Pfi , rade , rmass , TACOS , TASIN , thetb ,
      &       ttcm , Tyy , Tzz
-      REAL*8 wpa , Wph , Wpi , ws , Wth , Wthh , Wtlb , xaa , xph , 
+      REAL*8 wpa , Wph , Wpi , ws , Wth , Wthh , Wtlb , xaa , xph ,
      &       xth , xthh , za , za1 , zb , zl
       INTEGER*4 i , Ifw , Lz , Naa
       DIMENSION Pfi(101) , Wpi(100,2)
