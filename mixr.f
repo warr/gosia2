@@ -7,7 +7,7 @@ C
 C Purpose: calculate theoretical mixing ratio and compare to experimental one.
 C
 C Uses global variables:
-C      DMIX   - 0.8326 * gamma energy
+C      DMIX   - 0.8347 * gamma energy
 C      DMIXE  - mixing ratio and its error
 C      IMIX   - decay associated with known mixing ratio
 C      KSEQ   - index into ELM for pair of levels, and into EN or SPIN
