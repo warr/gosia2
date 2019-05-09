@@ -35,7 +35,7 @@ C can cope with half-integers.
       INCLUDE 'coex2.inc'
       INCLUDE 'cexc0.inc'
       INCLUDE 'az.inc'
-      
+
       iha = (-1)**INT(2.*SPIN(1)+.01)
       IF ( Icl.EQ.1 ) THEN
          ms = 16*(NMAX-1)
