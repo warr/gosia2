@@ -3,7 +3,7 @@ C----------------------------------------------------------------------
 C SUBROUTINE SEQ
 C
 C Called by: ADHOC
-C Calls:     CONV, DECAY, F, GF, LEADF, MEM
+C Calls:     CONV, F, GF, LEADF, MEM
 C
 C Purpose: in order to calculate the yields, we need to start with the highest
 C level and calculate its yield, so as to work out the feeding for the lower
