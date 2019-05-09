@@ -185,16 +185,16 @@ C      ZV     - energy meshpoints
       REAL*8 cocos , conu , d , decen , dedx , dsd , dsig , dst
       REAL*8 dsx , dsxm , effi , eh1 , elmi , ELMT , emhl1 , emn , emx ,
      &       enb
-      REAL*8 eng , enh , esd , esp , ess , 
-     &       fi0 , fi1 , fic , fiex1 , figl , fipo1 , fm , gth
+      REAL*8 enh , esd , esp , ess , fi0 , fi1 , fic , fiex1 , figl ,
+     &       fipo1 , fm , gth
       REAL*8 hen , het , p , pfi , 
      &       ph1 , ph2 , pi , po1 , po2 , polm , pop1 , pr , pv
       REAL*8 q1 , q2 , qc , qfac , qr , qui , r , r1 , r2 , r3 , r4 , 
      &       rem , remax , rl , rlr , rm , rx , ry
       REAL*8 rz , s , s11 , s12 , s21 , s22 , sbe , sf , sh , sh1 , 
      &       sh2 , SIMIN , slim
-      REAL*8 summm , sz1 , sz2 , TACOS , tau1 , tau2 , test , 
-     &       tetrc , tfac , thc , title , tmn , tmx , todfi
+      REAL*8 summm , sz1 , sz2 , TACOS , test , tetrc , tfac , thc ,
+     &       title , tmn , tmx , todfi
       REAL*8 tta , tth , tting , ttttt , txx , u , 
      &       val , waga , wph , wpi , WSIXJ , wth , wthh , 
      &       WTHREJ
@@ -247,10 +247,9 @@ C      ZV     - energy meshpoints
       INTEGER*4 mret , mawr ! For gosia2
       DIMENSION ihlm(32) , esp(20) , dedx(20) , bten(1600) , ! bten dimension = 16 * maxlevels
      &          fiex1(100,100,2) , title(20) , pfi(101) , zmir(6,2,50) ,
-     &          iecd(50) , wpi(100,2) , tau1(10) , eng(10) , 
-     &          tau2(10,7) , xl1(7) , qui(8,10) , cf(8,2) , 
-     &          ivarh(1500) , liscl(200) , dsxm(100,100,100) , 
-     &          levl(50) , xlevb(50,2) , bm(8,20,20,3) , mlt(1500) , 
+     &          iecd(50) , wpi(100,2) , xl1(7) , qui(8,10) , cf(8,2) ,
+     &          ivarh(1500) , liscl(200) , dsxm(100,100,100) ,
+     &          levl(50) , xlevb(50,2) , bm(8,20,20,3) , mlt(1500) ,
      &          ivari(1500) , jpin(50) , ideff(50) , iskin_protect(50)
       INCLUDE 'clust.inc'
       INCLUDE 'cccds.inc'

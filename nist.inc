@@ -1,3 +1,4 @@
+      REAL*8 eng(10), tau1(10), tau2(10,7)
       DATA (eng(k),k=1,10)/.05D0, .06D0, .08D0, .1D0, .15D0, .2D0, .3D0,
      &  .5D0, 1.D0, 1.5D0/
 C     Absorption coefficients in units of 1/cm for Ge (NIST)
