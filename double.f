@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE DOUBLE
 C
@@ -15,7 +15,7 @@ C      NSTART - index in CAT of first substate associated with a level
 C
 C Formal parameters:
 C      Iso    - isotropic flag
- 
+
       SUBROUTINE DOUBLE(Iso)
       IMPLICIT NONE
       INTEGER*4 ir , Iso , j
@@ -24,7 +24,7 @@ C      Iso    - isotropic flag
       INCLUDE 'az.inc'
       INCLUDE 'clcom8.inc'
       INCLUDE 'coex2.inc'
-      
+
       IF ( Iso.EQ.0 ) THEN
          DO j = 1 , NMAX ! Loop over levels
             ir = NSTART(j) - 1 ! Index of first substate of level - 1
@@ -39,7 +39,7 @@ C      Iso    - isotropic flag
          ENDDO
          GOTO 99999
       ENDIF
-       
+
       DO j = 1 , ISMAX ! Loop over substates
          fpom = ARM(j,2)
          ARM(j,2) = -8.D0*ARM(j,3) + 6.D0*ARM(j,2) + 3.D0*ARM(j,4)

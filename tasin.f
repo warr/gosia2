@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION TASIN
 C
@@ -19,7 +19,7 @@ C arctan(x / sqrt(1 - x^2).
       IMPLICIT NONE
       REAL*8 dol , test , war , X
       INCLUDE 'fconst.inc'
-      
+
       test = ABS(X) - 1.
       IF ( ABS(test).LT.1.D-9 ) THEN
          TASIN = pi/2.D0

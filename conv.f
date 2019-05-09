@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION CONV
 C
@@ -54,7 +54,7 @@ C     then use read the conversion coefficients from a file on unit 29.
             cpo(j) = CC(n1+j-1,N)
             cpo1(j) = EG(n1+j-1)
          ENDDO
-C        Interpolate 
+C        Interpolate
          IF ( ISPL.EQ. 0 ) CALL LAGRAN(cpo1,cpo,4,1,Ega,cv,2,1)
          IF ( ISPL.EQ. 1 ) CALL SPLNER(cpo1,cpo,4,Ega,cv,2)
          CONV = cv

@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE FTBM
 C
@@ -67,15 +67,15 @@ C      Bten   -
 
       SUBROUTINE FTBM(Icll,Chisq,Idr,Ncall,Chilo,Bten)
       IMPLICIT NONE
-      REAL*8 aval , Bten , Chilo , chis1 , chish , Chisq , chisx , 
+      REAL*8 aval , Bten , Chilo , chis1 , chish , Chisq , chisx ,
      &       chx , fc , fx , polm , pr , prop , val , wz
       INTEGER*4 i1 , i11 , iapx , Icll , idec , Idr , iflg , ii , ile1 ,
      &          ile2 , ile3 , ilin , indx , inko
-      INTEGER*4 inp , inpo , inpx , inzz , inzzz , issp , itemp , ixx , 
+      INTEGER*4 inp , inpo , inpx , inzz , inzzz , issp , itemp , ixx ,
      &          izzz
       INTEGER*4 j , jj , jjgg , jjj , jk , jkl , jm , jmf , jmt , jmte ,
      &          jpp , jpz , jy , k , karm , kk , kk6 , kkx , kmt
-      INTEGER*4 knm , kx , larm , lcc , lcou , licz , lix , llx , lm , 
+      INTEGER*4 knm , kx , larm , lcc , lcou , licz , lix , llx , lm ,
      &          lmh , loc , loch , loct
       INTEGER*4 lp , lpit , lput , lpx , lpxd , ls , lst
       INTEGER*4 luu , lx , Ncall , nlin , nowr , npoz , nrest , nwyr

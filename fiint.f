@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE FIINT
 C
@@ -18,7 +18,7 @@ C      Ixs    - axial symmetry flag
       INTEGER*4 Ixs , j , jf , js , m , mm
       DIMENSION At(28)
       INCLUDE 'fconst.inc'
-      
+
       IF ( Ixs.NE.0 ) THEN
          DO m = 2 , 7
             js = m/2

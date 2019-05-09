@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE ROTATE
 C
@@ -24,7 +24,7 @@ C     ({\pi + \theta \over 2}) \rho_{k \xi^\prime}}
       REAL*8 Alab , Attl , djarg , DJMM , dkkk , sum , Theta
       INTEGER*4 idj , idm , idmp , j , k , K2 , ka , kappa , kapri , Kd
       DIMENSION Alab(9,9) , Attl(9,9)
-      
+
       IF ( ABS(Theta).GT..01 ) THEN
          djarg = Theta
          DO ka = 1 , K2 , Kd

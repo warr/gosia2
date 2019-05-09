@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION ARCOS
 C
@@ -13,7 +13,7 @@ C      F      - range
 C
 C Return value:
 C      arccosine(A) within range of F
- 
+
       REAL*8 FUNCTION ARCCOS(A,F)
       IMPLICIT NONE
       REAL*8 A , an , F , q , qa , qap , TACOS

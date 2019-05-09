@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION FXIS1
 C
@@ -11,11 +11,11 @@ C      XI     - xi coupling coefficients
 C
 C Formal parameters:
 C      I      - index into XI array
-C      N      - 
+C      N      -
 C
 C Return value:
 C      sign of xi
-      
+
       REAL*8 FUNCTION FXIS1(I,N)
       IMPLICIT NONE
       INTEGER*4 I , N

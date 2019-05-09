@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE LAISUM
 C
@@ -48,11 +48,11 @@ C ARM are the excitation amplitudes of the substates.
 C q is the Qe or Qm calculated by the functions QE and QM, respectively and
 C stored in ZETA array in the function SNAKE.
 C z is the coupling parameter zeta, calculated in the function LSLOOP.
-      
+
       SUBROUTINE LAISUM(Ir,N,Rsg,Lam,Ld,Nz,I57)
       IMPLICIT NONE
       REAL*8 q , rmir , rmis , rmu , Rsg , z
-      INTEGER*4 i2 , i3 , I57 , iii , indq , indx , Ir , irs , is , 
+      INTEGER*4 i2 , i3 , I57 , iii , indq , indx , Ir , irs , is ,
      &          is1 , is2 , ismin , isplus
       INTEGER*4 la , Lam , Ld , m , mrange , mua , N , Nz
       COMPLEX*16 FAZA , pamp , pamp1
@@ -68,7 +68,7 @@ C z is the coupling parameter zeta, calculated in the function LSLOOP.
       INCLUDE 'comme.inc'
       INCLUDE 'allc.inc'
       INCLUDE 'cexc0.inc'
-      
+
       rmir = CAT(Ir,3) ! m quantum number of substate Ir
       iii = 0
       IF ( Lam.GT.6 ) iii = 1

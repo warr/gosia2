@@ -45,7 +45,7 @@ C     Write to output
 
 C     Make sure we are at start of file that we want to write
       rewind(28+IBPS)
-      
+
 C     Open the BrIcc database files
       OPEN (UNIT=30,FILE=idx_name,ACCESS='direct',RECL=2048,ERR=999,
      &      STATUS='OLD')

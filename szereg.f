@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE SZEREG
 C
@@ -17,7 +17,7 @@ C Formal parameters:
 C      Lst    - first yield in set
 C      Ls     - last yield in set
 C      L      - number of dataset
- 
+
       SUBROUTINE SZEREG(Lst,Ls,L)
       IMPLICIT NONE
       REAL*8 dyh , yh

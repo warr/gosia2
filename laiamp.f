@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE LAIAMP
 C
@@ -28,12 +28,12 @@ C
 C Formal parameters:
 C      Ir     - index of substate
 C      W0     - omega limit
-      
+
       SUBROUTINE LAIAMP(Ir,W0)
       IMPLICIT NONE
-      REAL*8 epsi , errt , pm , ppp , rmir , rmis , rmu , TCABS , W0 , 
+      REAL*8 epsi , errt , pm , ppp , rmir , rmis , rmu , TCABS , W0 ,
      &       xiv , z
-      INTEGER*4 i1 , i2 , i3 , indx , Ir , is , is1 , is2 , ismin , 
+      INTEGER*4 i1 , i2 , i3 , indx , Ir , is , is1 , is2 , ismin ,
      &          isplus , la , lam
       INTEGER*4 ld , LEADF , m , MEM , mrange , mua , nz
       COMPLEX*16 STAMP , dis , uhuj
@@ -51,7 +51,7 @@ C      W0     - omega limit
       epsi = EPS(IEXP) ! epsilon
       errt = EROOT(IEXP) ! sqrt(epsilon^2 - 1)
       rmir = CAT(Ir,3) ! m quantum number of substate Ir
-      
+
       DO i1 = 1 , LAMMAX ! Loop on multipolarity
          lam = LAMDA(i1) ! Get multipolarity
          nz = LZETA(lam) ! nz is an index into ZETA array for this multipolarity

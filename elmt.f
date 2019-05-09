@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION ELMT
 C
@@ -24,12 +24,12 @@ C      Collective model matrix element
 C
 C Note that the parameters to WTHREJ are doubled to allow it to handle half
 C integers.
- 
+
       REAL*8 FUNCTION ELMT(Xi1,Xi2,Lam,Nb1,Nb2,Xk1,Xk2,Xm1,Xm2,Xm3)
       IMPLICIT NONE
-      REAL*8 addt , fac , fct , pha1 , pha2 , s1 , s2 , WTHREJ , Xi1 , 
+      REAL*8 addt , fac , fct , pha1 , pha2 , s1 , s2 , WTHREJ , Xi1 ,
      &       Xi2 , Xk1 , Xk2 , xlam , Xm1 , Xm2 , Xm3 , xn
-      INTEGER*4 i1 , i2 , ipha , k1 , k2 , l , la , Lam , llam , n , 
+      INTEGER*4 i1 , i2 , ipha , k1 , k2 , l , la , Lam , llam , n ,
      &          Nb1 , Nb2
 
       la = Lam

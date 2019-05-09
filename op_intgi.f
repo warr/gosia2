@@ -292,7 +292,7 @@ C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
                 IF ( mfla.NE.1 ) dsx = dsig*todfi
                 dsxm(mpin,kloop,ktt) = dsx
                 WRITE (17,*) lx , mpin , kloop , ktt , dsx
-                WRITE (14,*) lx , enb , tting , ija0 , dsx , 
+                WRITE (14,*) lx , enb , tting , ija0 , dsx ,
      &            (GRAD(jyi)*dsig*ax,jyi=1,Idr)
                 IF ( IPRM(11).EQ.1 ) THEN
                   WRITE (22,99048) lx , ija0 , enb , tta
@@ -312,7 +312,7 @@ C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
           ENDDO ! Loop on theta angles ktt
         ENDDO ! Loop on energy meshpoints kloop
       ENDDO ! Loop on pin diodes mpin
-      
+
       EP(lx) = enh
       TLBDG(lx) = tth
       ENDDO ! Loop on experiments lx
@@ -381,7 +381,7 @@ C       Read tape 17
      &        (pfi(j),j=1,npct1)
           ENDIF
           het = het*pi/180.D0 ! Step in theta in radians
-          
+
 C         Interpolate stopping power for each of the energies
 C         that we need. esp is an array of energies and dedx is
 C         an array containing the stopping powers at those
@@ -397,8 +397,8 @@ C         with the number of steps specified.
      &        CALL SPLNER(esp,dedx,npt,xx,yy,3)
             HLMLM(j) = 1.D0/yy
           ENDDO
-          
-C         Now we calculate for all the mesh points. 
+
+C         Now we calculate for all the mesh points.
           naa = NDST(lx)
           IF ( IRAWEX(lx).EQ.0 ) naa = NANG(lx)
           iskf = naa - 1
@@ -446,7 +446,7 @@ C               If it is first decay and angle, integrate Rutherford cross secti
                 ZV(je) = enb
               ENDDO ! Loop on decays jd
             ENDDO ! Loop on energy meshpoints je
-            
+
 C    Interpolation over energy:
 C    The array ZV contains the energies of the meshpoints and the elements of the YV
 C    array are set to the angle-integrated yield for each decay at the corresponding
@@ -465,13 +465,13 @@ C    angle, since it is the same for all.
               ENDDO ! Loop on energy meshpoints jtp
               DO jt = 1 , npce1 ! npce1 is number of equal energy steps
                 xx = (jt-1)*hen + emn
-                
+
 C               Interpolate the angle-integrated yield for this energy
                 IF ( ISPL.EQ.0 )
      &            CALL LAGRAN(ZV,YV,ne,jt,xx,yy,2,icll)
                 IF ( ISPL.EQ.1 )
      &            CALL SPLNER(ZV,YV,ne,xx,yy,2)
-                
+
 C               Interpolate Rutherford cross-section for this energy
                 IF ( jd.EQ.1 .AND. ja.EQ.1 .AND. ! Only for first decay and angle
      &            ISPL.EQ.0 )
@@ -482,8 +482,8 @@ C               Interpolate Rutherford cross-section for this energy
      &            = zz*HLMLM(jt) ! HLMLM = 1 / stopping power
                 XI(jt) = yy*HLMLM(jt)
               ENDDO ! Loop on equal energy steps
-              
-C   So now after this loop, we have XI containing the angle-integrated yield times dE for 
+
+C   So now after this loop, we have XI containing the angle-integrated yield times dE for
 C   a set of equally spaced energies, so we use Simpson's rule to integrate them and store
 C   in GRAD(jd). The first time, we also have in HLM a set of Rutherford cross-sections for
 C   equally spaced energies, which we integrate in the same way.
@@ -492,13 +492,13 @@ C   equally spaced energies, which we integrate in the same way.
      &          DS = SIMIN(npce1,hen,HLM) ! integrate
               GRAD(jd) = SIMIN(npce1,hen,XI)
             ENDDO ! Loop over decays jd
-            
+
             IF ( ja.EQ.1 ) dst = dst + DS
             IF ( ja.EQ.1 ) WRITE (22,99018) DS , lx
 99018       FORMAT (1X/////5X,
      &        'INTEGRATED RUTHERFORD CROSS SECTION='
      &        ,1E9.4,2X,'FOR EXP.',1I2///)
-            
+
             WRITE (22,99019) lx , ja , emn , emx , tmn , tmx
 99019       FORMAT (1X,//50X,'INTEGRATED YIELDS'//5X,
      &        'EXPERIMENT ',1I2,2X,'DETECTOR ',
@@ -518,7 +518,7 @@ C   equally spaced energies, which we integrate in the same way.
      &          GRAD(jd) , GRAD(jd)/GRAD(IDRN) ! IDRN is the normalising transition
             ENDDO
           ENDDO ! Loop over detector angles ja
-          
+
           IF ( Iecd(lx).EQ.1 ) THEN ! Circular detector
             IF ( Jpin(lx).EQ.0 ) THEN
               CALL COORD(wth,wph,wthh,1,2,pfi,wpi,TLBDG(lx),lx,txx,txx)

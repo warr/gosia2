@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE EFFIX
 C
@@ -38,7 +38,7 @@ C     1  - Jaeri
 C     2  - Fiteff
 C     3  - Leuven
 C     4  - Radware
-      
+
       SUBROUTINE EFFIX(Iexp,Ipd,En,Effi)
       IMPLICIT NONE
       REAL*8 d , Effi , En , enl , pw , s , t , w , xx , yy
@@ -146,7 +146,7 @@ C     FITEFF efficiency calibration by P.Olbratowski use
 C     PJN@2000
  1002 w = LOG(En/AKAVKA(Iexp,5,Ipd))
       pw = AKAVKA(Iexp,2,Ipd)*w
-      IF ( En.LT.AKAVKA(Iexp,5,Ipd) ) pw = pw + 
+      IF ( En.LT.AKAVKA(Iexp,5,Ipd) ) pw = pw +
      &     w*w*(AKAVKA(Iexp,3,Ipd)+w*AKAVKA(Iexp,4,Ipd))
       Effi = Effi*EXP(pw)*AKAVKA(Iexp,1,Ipd)
       RETURN

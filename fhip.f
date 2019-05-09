@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE FHIP
 C
@@ -15,14 +15,14 @@ C      SH     - table of sinh values
 C
 C LP12 (from common MGN) is the number of values to calculate. This is set to
 C 365  in GOSIA, which is the dimension of the arrays.
- 
+
       SUBROUTINE FHIP
       IMPLICIT NONE
       REAL*8 er , ex , w
       INTEGER*4 j
       INCLUDE 'mgn.inc'
       INCLUDE 'hiper.inc'
-      
+
       w = -.03d0
       DO j = 1 , LP12
          w = w + .03d0

@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE SETIN
 C
@@ -21,7 +21,7 @@ C adiabatic parameters are stored in ADB in common block ADX.
 C
 C LP12 (from common MGN) is the number of values to calculate. This is set to
 C 365  in GOSIA, which is the dimension of the array.
- 
+
       SUBROUTINE SETIN
       IMPLICIT NONE
       INTEGER*4 k
@@ -29,7 +29,7 @@ C 365  in GOSIA, which is the dimension of the array.
       INCLUDE 'hiper.inc'
       INCLUDE 'adx.inc'
       INCLUDE 'kin.inc'
-      
+
       DO k = 1 , LP12
          ADB(k) = EPS(IEXP)*SH(k) + .03d0*(k-1)
       ENDDO

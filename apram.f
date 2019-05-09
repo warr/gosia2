@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE APRAM
 C
@@ -26,7 +26,7 @@ C      Acca   - accuracy required
       SUBROUTINE APRAM(Iexp,Inc,Indx,Irld,Acca)
       IMPLICIT NONE
       REAL*8 Acca , accah , uwa
-      INTEGER*4 i1 , i56 , i7 , Iexp , img , Inc , Indx , Irld , itm , 
+      INTEGER*4 i1 , i56 , i7 , Iexp , img , Inc , Indx , Irld , itm ,
      &          j , jidim , jj , k , ktoto , l , l1 , l2 , l3 , m
       INCLUDE 'az.inc'
       INCLUDE 'aprcat.inc'

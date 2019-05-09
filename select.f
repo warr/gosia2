@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE SELECT
 C
@@ -12,7 +12,7 @@ C
       SUBROUTINE SELECT
       IMPLICIT NONE
       REAL*8 a , al , am , y
-      INTEGER*4 i , ie , iexp , indx , ixf , j , l , lm , lu , lum , 
+      INTEGER*4 i , ie , iexp , indx , ixf , j , l , lm , lu , lum ,
      &        lx , memax
       DIMENSION lm(1500) , y(175,1500) , a(1500,1500)
 

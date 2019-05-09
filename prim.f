@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE PRIM
 C
@@ -12,7 +12,7 @@ C      IPI    - multipliers for each prime
 C
 C Formal parameters:
 C      N      - number N
- 
+
       SUBROUTINE PRIM(N)
       IMPLICIT NONE
       INTEGER*4 i , N , nni , nnk

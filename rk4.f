@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION RK4
 C
@@ -7,12 +7,12 @@ C
 C Purpose:
 C
 C Formal parameters:
-C      Y      - 
+C      Y      -
 C      H      -
 C      F      - array of three coefficients
 C
 C Return value:
- 
+
       REAL*8 FUNCTION RK4(Y,H,F)
       IMPLICIT NONE
       REAL*8 F , H , Y

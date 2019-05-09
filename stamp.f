@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION STAMP
 C
@@ -21,10 +21,10 @@ C collision functions.
 C
 C Return value:
 C      Estimated amplitude
- 
+
       COMPLEX*16 FUNCTION STAMP(Epsi,Errt,Xiv,Dw,W0,Lmda,Mua)
       IMPLICIT NONE
-      REAL*8 a , axi , b , bic , bic2 , bis , bis2 , ca , cb , cia , 
+      REAL*8 a , axi , b , bic , bic2 , bis , bis2 , ca , cb , cia ,
      &       cib , cic , cis , Dw , dwi , Epsi , Errt , ex , exa , fct
       INTEGER*4 la , Lmda , mi , Mua
       REAL*8 sa , sb , sia , sib , W0 , Xiv

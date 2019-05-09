@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE KONTUR
 C
@@ -36,7 +36,7 @@ C
 C Note that 0.3173015 is the fraction of a gaussian outside +/- sigma =
 C erfc(1/sqrt(2)) = 0.3173105. Note, however, that erfc is a gfortran
 C extension to the language, so we should not use it.
- 
+
       SUBROUTINE KONTUR(Idr,Chis0,Chil,Ifbf,Inpo,Jj,Sh,Bten,Rem)
       IMPLICIT NONE
       REAL*8 ac , Bten , c , Chil , chilo , Chis0 , chis1 , chis2 , d1 ,

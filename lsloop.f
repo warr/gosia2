@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE LSLOOP
 C
@@ -44,13 +44,13 @@ C For the evaluation of the 3-j symbol, ins = 2 I_n, lam2 = 2 \lambda,
 C inr = 2 I_k, jg1 = -2 M_n, jg2 = 2 * \mu, jrmir = 2 * M_k. Note that the
 C parameters to WTHREJ are all doubled, so that this routine can cope with
 C half-integers.
- 
+
       SUBROUTINE LSLOOP(Ir,N,Nz,Ld,Lam,La,Ssqrt,Icg,Iexp)
       IMPLICIT NONE
       REAL*8 phz , rmir , rmis , Ssqrt , WTHREJ
-      INTEGER*4 i2 , i3 , Icg , Iexp , iiex , indx , inqa , inr , 
+      INTEGER*4 i2 , i3 , Icg , Iexp , iiex , indx , inqa , inr ,
      &          ins , Ir , is , is1 , is2 , ismin
-      INTEGER*4 isplus , jg1 , jg2 , jrmir , La , Lam , lam2 , Ld , 
+      INTEGER*4 isplus , jg1 , jg2 , jrmir , La , Lam , lam2 , Ld ,
      &          LEADF , m , MEM , mrange , mt , N , Nz
       INCLUDE 'coex.inc'
       INCLUDE 'pcom.inc'
@@ -62,7 +62,7 @@ C half-integers.
       INCLUDE 'mgn.inc'
       INCLUDE 'comme.inc'
       INCLUDE 'clcom0.inc'
-      
+
       lam2 = 2*Lam
       inr = INT(CAT(Ir,2)*2.) ! 2 * Spin of substate Ir
       rmir = CAT(Ir,3)   ! m quantum number of substate Ir

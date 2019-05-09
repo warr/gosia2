@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE NEWLV
 C
@@ -31,7 +31,7 @@ C      La     - multipolarity
 C
 C Note that the exponential is calculated by EXPON. This file does the
 C storage part.
-      
+
       SUBROUTINE NEWLV(N,Ld,La)
       IMPLICIT NONE
       INTEGER*4 i2 , indx , La , Ld , LEADF , m , MEM , N

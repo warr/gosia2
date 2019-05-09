@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION ARCTG
 C
@@ -12,7 +12,7 @@ C      F      - range
 C
 C Return value:
 C      arctangent(A) within range of F
- 
+
       REAL*8 FUNCTION ARCTG(A,F)
       IMPLICIT NONE
       REAL*8 A , an , F , q , qa , qap

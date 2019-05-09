@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION FUNC1
 C
@@ -20,7 +20,7 @@ C Note that this is the inverse of FUNC
       IMPLICIT NONE
       INTEGER*4 I
       REAL*8 Y
-      
+
       IF ( I.EQ.2 ) THEN
          FUNC1 = EXP(Y)
          RETURN

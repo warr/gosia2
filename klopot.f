@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE KLOPOT
 C
@@ -30,10 +30,10 @@ C      Rlr    - print out if matrix element exceeds Rlr.
 
       SUBROUTINE KLOPOT(K,Rlr)
       IMPLICIT NONE
-      REAL*8 a , al , al1 , b , c , ch , d , dy , e , g , g1 , g2 , 
+      REAL*8 a , al , al1 , b , c , ch , d , dy , e , g , g1 , g2 ,
      &       rl , Rlr , sgm , u , umm , ump , ux
-      INTEGER*4 i , iex , iexh , iexp , indx , inh , ipf , j , jm , 
-     &          jp , K , l , lc , ll , lngt , loc , lu , nf , ni , nm , 
+      INTEGER*4 i , iex , iexh , iexp , indx , inh , ipf , j , jm ,
+     &          jp , K , l , lc , ll , lngt , loc , lu , nf , ni , nm ,
      &          np
       INCLUDE 'comme.inc'
       INCLUDE 'yexpt.inc'
@@ -181,8 +181,8 @@ C      Rlr    - print out if matrix element exceeds Rlr.
                                  jp = j
                               ENDIF
                            ENDDO
-                           WRITE (22,99008) IY(jp,1) , IY(jp,2) , 
-     &                            IY(jp,3) , CORF(jp,1) , CORF(jp,2) , 
+                           WRITE (22,99008) IY(jp,1) , IY(jp,2) ,
+     &                            IY(jp,3) , CORF(jp,1) , CORF(jp,2) ,
      &                            ump , IY(jm,1) , IY(jm,2) , IY(jm,3) ,
      &                            CORF(jm,1) , CORF(jm,2) , umm
 99008                      FORMAT (5X,1I3,2X,1I3,'--',1I3,4X,1F4.1,4X,

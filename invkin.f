@@ -23,7 +23,7 @@ C      Theta_t - theta of recoiling target nucleus in lab frame (readonly)
 C      Theta_p - theta of scattered projectile in lab frame (writeonly)
 C      Iflag   - flag to select one of two possible solutions (readonly)
 C      Ikin    - kinematic flag (writeonly)
-      
+
       SUBROUTINE INVKIN(E_p, E_x , I_z , M_inv , M_non , Theta_t ,
      &                  Theta_p , Iflag , Ikin)
 
@@ -34,7 +34,7 @@ C      Ikin    - kinematic flag (writeonly)
       INCLUDE 'fconst.inc'
 
 C     Sort out which is the projectile and which is the target
-      
+
       IF ( I_z.LT.0 ) THEN
          M_p = M_inv ! Projectile is investigated
          M_t = M_non ! Target is non investigated
@@ -44,21 +44,21 @@ C     Sort out which is the projectile and which is the target
       ENDIF
 
 C     Reduced mass
-      
+
       ared = 1 + M_p / M_t
-      
+
 C     Excitation energy of inelastically scattered particle when state at
 C     energy E_x is excited
-      
+
       epmin = E_p - E_x * ared
-      
+
 C     Tau
-      
+
       taup = sqrt(E_p / epmin)
       tau = taup * M_p / M_t
-      
+
 C     Calculate the two solutions
-      
+
       y = tan(theta_t*pi/180.D0)
       t = taup * taup * y * y * y * y -
      &      (1 + y * y) * (taup * taup * y * y - 1)
@@ -67,11 +67,11 @@ C     Calculate the two solutions
       x(1) = atan2(sqrt(1 - x(1) * x(1)), tau + x(1))
       x(2) = (taup * y * y - t) / (1 + y * y)
       x(2) = atan2(sqrt(1 - x(2) * x(2)), tau + x(2))
-      
+
 C     Select the solution we want according to the flag. Note that the
 C     solution with the lower angle corresponds to target recoils which
 C     are probably undetectable.
-      
+
       IF ( Iflag.EQ.1 ) THEN
          theta_p = MAX(x(1),x(2))*180.D0/pi
       ELSE
@@ -86,25 +86,25 @@ C     than unity due to floating point rounding errors
 C     In normal kinematics, Ikin is not meaningful, but set to 1 anyway
       Ikin = 1
       IF ( tau.LT.1 ) RETURN
-      
+
 C     Calculate angle of scattered projectile in centre of mass frame, for
 C     which the maximum laboratory scattering angle is reached.
-      
+
       t = acos(-1.D0/tau)
-      
+
 C     Now calculate the arctangent of the corresponding angle for the
 C     recoiling target nuclei in the laboratory frame
-      
+
       thres = sin(t)/(taup-cos(t))
-      
+
 C     So now, if y = tan(theta_t_lab) > thres, we are above the maximum and
 C     need the larger value of theta_p_cm, so we set Ikin to 1. Otherwise we
 C     are below the maximum and need the smaller value so we choose Ikin = 0.
-      
+
       IF ( ABS(y).GT.ABS(thres) ) THEN
          Ikin = 1
       ELSE
          Ikin = 0
       ENDIF
-      
+
       END

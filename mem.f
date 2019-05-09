@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION MEM
 C
@@ -19,7 +19,7 @@ C      N3     - multipolarity
 C
 C Return value:
 C      Index of matrix element
- 
+
       INTEGER*4 FUNCTION MEM(N1,N2,N3)
       IMPLICIT NONE
       INTEGER*4 k , msum , N1 , n1m , N2 , N3 , n3m

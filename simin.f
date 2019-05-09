@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION SIMIN
 C
@@ -14,7 +14,7 @@ C
 C Return value:
 C      Integral under the array
 C
- 
+
       REAL*8 FUNCTION SIMIN(Np,H,Y)
       IMPLICIT NONE
       REAL*8 ee , H , sm , Y

@@ -535,7 +535,7 @@ C.............................................................................
 C     Start reading input file.
  100  READ (JZB,99001) op1 , op2
 99001 FORMAT (1A3,1A4)
-      
+
 C     If line doesn't start with OP,XXXX, we have a syntax error, so stop
       IF ( op1.NE.'OP, ' ) THEN
          WRITE(*,*) 'Line does not have the OP,XXXX syntax: ', op1, op2
@@ -553,7 +553,7 @@ C     Treat OP,FILE (attach files to fortran units)
         GOTO 100 ! End of OP,FILE - back to input loop
       ENDIF
 
-C     Print header         
+C     Print header
       IF ( jphd.EQ.1 ) WRITE (22,99002)
 99002 FORMAT ('1'/1X,125('*')/1X,125('*')/1X,50('*'),25X,50('*')/1X,
      &  50('*'),10X,'GOSIA2',9X,50('*')/1X,50('*'),25X,50('*')
@@ -567,56 +567,56 @@ C     Print header
 C     Treat OP,BRIC
       IF ( op2.EQ.'BRIC' ) THEN
         GOTO 70000
-        
+
 C     Treat OP,CORR
       ELSE IF ( op2.EQ.'CORR' ) THEN
         GOTO 70001
-        
+
 C     Treat OP,COUL
       ELSE IF ( op2.EQ.'COUL' ) THEN
         GOTO 70002
-        
+
 C     Treat OP,ERRO (calculate errors)
       ELSE IF ( op2.EQ.'ERRO' ) THEN
         GOTO 70003
-        
+
 C     Treat OP,EXIT
       ELSE IF ( op2.EQ.'EXIT' ) THEN
         GOTO 70004
-        
+
 C     Treat OP,GDET (germanium detectors)
       ELSE IF ( op2.EQ.'GDET' ) THEN
         GOTO 70005
-        
+
 C     Treat OP,GOSI
       ELSE IF ( op2.EQ.'GOSI' ) THEN
         GOTO 70002
-        
+
 C     Treat OP,INTG
       ELSE IF ( op2.EQ.'INTG' ) THEN
         GOTO 70006
-        
+
 C     Treat OP,INTI
       ELSE IF ( op2.EQ.'INTI' ) THEN
         GOTO 70007
-        
+
 C     Treat OP,MAP
       ELSE IF ( op2.EQ.'MAP ' ) THEN
         iobl = 1
         GOTO 70008 ! End of OP,MAP
-        
+
 C     Treat OP,MINI
       ELSE IF ( op2.EQ.'MINI' ) THEN
         GOTO 70009
-        
+
 C     Treat OP,POIN
       ELSE IF ( op2.EQ.'POIN' ) THEN
         GOTO 70008
-        
+
 C     Treat OP,RAND (randomise matrix elements)
       ELSE IF ( op2.EQ.'RAND' ) THEN
         GOTO 70010
-        
+
 C     Treat OP,RAW (raw uncorrected gamma yields)
       ELSE IF ( op2.EQ.'RAW ' ) THEN
         GOTO 70011
@@ -626,59 +626,59 @@ C     Treat OP,RE,A (release A)
         jfre = 0
         irfix = 0
         GOTO 70012
-        
+
 C     Treat OP,RE,C (release C)
       ELSE IF ( op2.EQ.'RE,C' ) THEN
         jfre = 1
         irfix = 0
         GOTO 70012 ! End of OP,RE,C
-        
+
 C     Treat OP,RE,F (release F)
       ELSE IF ( op2.EQ.'RE,F' ) THEN
         jfre = 0
         irfix = 1
         GOTO 70012
-        
+
 C     Treat OP,REST (restart)
       ELSE IF ( op2.EQ.'REST' ) THEN
         GOTO 70013
-        
+
 C     Treat OP,SELE
       ELSE IF ( op2.EQ.'SELE' ) THEN
         GOTO 70014
-        
+
 C     Treat OP,SIXJ
       ELSE IF ( op2.EQ.'SIXJ' ) THEN
         GOTO 70015
-        
+
 C     Treat OP,STAR
       ELSE IF ( op2.EQ.'STAR' ) THEN
         GOTO 70008
-        
+
 C     Treat OP,THEO
       ELSE IF ( op2.EQ.'THEO' ) THEN
         GOTO 70016
-        
+
 C     Treat OP,TITL (title)
       ELSE IF ( op2.EQ.'TITL' ) THEN
         GOTO 70017
-        
+
 C     Treat OP,TROU (troubleshooting)
       ELSE IF ( op2.EQ.'TROU' ) THEN
         GOTO 70018
-        
+
 C     Treat OP,YIEL
       ELSE IF ( op2.EQ.'YIEL' ) THEN
         GOTO 70019
-        
+
       ENDIF ! End cases for different options
-      
+
       WRITE (22,99022) op1 , op2
 99022 FORMAT (5X,'UNRECOGNIZED OPTION',1X,1A3,1A4)
       GOTO 2000 ! Normal end of execution
 C.............................................................................
-      
-C     Handle OP,ERRO      
+
+C     Handle OP,ERRO
  400  IF ( ICS.EQ.1 ) THEN
          REWIND 11
          DO kh1 = 1 , LP4
@@ -796,15 +796,15 @@ C     Handle OP,ERRO
      &              be2a = 0.
                be2a = be2a**2/sbe
                be2b = be2b**2/sbe
-               WRITE (22,99052) kh2 , LEAD(2,kh2) , LEAD(1,kh2) , be2 , 
+               WRITE (22,99052) kh2 , LEAD(2,kh2) , LEAD(1,kh2) , be2 ,
      &                          be2a - be2 , be2b - be2
             ELSE
                ispb = INT(SPIN(ispa))*2
 C 3.170662D0 = sqrt(16 pi / 5)
                qfac = SQRT(16.D0*pi/5.D0)*
      &                WTHREJ(ispb,4,ispb,-ispb,0,ispb)
-               WRITE (22,99052) kh2 , LEAD(2,kh2) , LEAD(1,kh2) , 
-     &                          HLM(kh2)*qfac , DEVD(kh2)*qfac , 
+               WRITE (22,99052) kh2 , LEAD(2,kh2) , LEAD(1,kh2) ,
+     &                          HLM(kh2)*qfac , DEVD(kh2)*qfac ,
      &                          DEVU(kh2)*qfac
             ENDIF
          ENDIF
@@ -981,7 +981,7 @@ C     Treat suboption LEVE (levels)
             prp = '+'
             IF ( ipo2.EQ.-1 ) prp = '-'
             if (ipo1 .GT. levmax) levmax = ipo1
-            IF ( ABS(IPRM(1)).EQ.1 ) WRITE (22,99025) ipo1 , prp , 
+            IF ( ABS(IPRM(1)).EQ.1 ) WRITE (22,99025) ipo1 , prp ,
      &           SPIN(ipo1) , EN(ipo1)
 99025       FORMAT (5X,1I3,11X,1A1,10X,1F4.1,8X,1F10.4)
          ENDDO
@@ -1332,7 +1332,7 @@ C---- gosia2 changes end
                   WRITE (22,99012) iva , TAU(iva)
 99012             FORMAT (6X,1I3,7X,1E10.4)
                   GOTO 124
- 122              WRITE (22,99013) iva , TAU(iva) , TIMEL(1,iva1) , 
+ 122              WRITE (22,99013) iva , TAU(iva) , TIMEL(1,iva1) ,
      &                   -TIMEL(2,iva1) , TIMEL(3,iva1)
 99013             FORMAT (6X,1I3,7X,1E10.4,5X,1E10.4,4X,1E10.4,4X,
      &              1E10.4)
@@ -1356,7 +1356,7 @@ C---- gosia2 changes end
                            ELSE
                              dsd = EAMX(kq,3)
                            ENDIF
-                           WRITE (22,99016) ni , nf , esd , ess , 
+                           WRITE (22,99016) ni , nf , esd , ess ,
      &                        (ess-esd)/dsd
 99016                      FORMAT (4x,1I3,1x,1I3,1x,1F9.4,1x,1F9.4,1x,
      &                              1F9.4)
@@ -1383,7 +1383,7 @@ C OP,GDET
         ENDDO
         WRITE (8,*) (eng(l),l=1,10)
       ENDIF
-      
+
 C     Write file for gamma-ray energy dependence of Ge solid-angle
 C     attenuation coefficients
       REWIND 9
@@ -1411,7 +1411,7 @@ C     attenuation coefficients
           DO l = 1 , 10
             arg = (eng(l)-eng(ind))**2
             qc = (qui(k,ind)*cf(k,2)+cf(k,1)*arg)/(cf(k,2)+arg)
-            WRITE (22,99006) eng(l) , qc , qui(k,l) , 
+            WRITE (22,99006) eng(l) , qc , qui(k,l) ,
      &        100.D0*(qc-qui(k,l))/qui(k,l)
 99006       FORMAT (8X,1F4.2,6X,1F9.4,5X,1F9.4,3X,1E10.2)
           ENDDO
@@ -1436,7 +1436,7 @@ C OP,INTI
       IF ( iretval.eq.1900 ) GOTO 1900
       IF ( iretval.eq.2000 ) GOTO 2000
       GOTO 100 ! End of OP,INTI - back to input loop
-      
+
 C--------------------------------
 C OP,POIN
 70008 CALL CMLAB(0,dsig,ttttt) ! Options MAP, STAR, POINT, MINI etc.
@@ -1487,7 +1487,7 @@ C OP,POIN
                   DO k = 1 , ISMAX ! For substates
                      pr = pr + DBLE(ARM(k,5))**2 + DIMAG(ARM(k,5))**2
                      IF ( op2.EQ.'STAR' .OR. IPRM(19).EQ.1 )
-     &                    WRITE (22,99035) INT(CAT(k,1)) , CAT(k,2) , 
+     &                    WRITE (22,99035) INT(CAT(k,1)) , CAT(k,2) ,
      &                    CAT(k,3) , DBLE(ARM(k,5)) , DIMAG(ARM(k,5))
 99035                FORMAT (7X,1I2,3X,1F4.1,2X,1F5.1,2X,1E14.6,2X,
      &                       1E14.6)
@@ -1533,7 +1533,7 @@ C OP,POIN
                   DO jgl = 1 , nogeli ! For each detector angle
                      IF ( IRAWEX(IEXP).NE.0 ) THEN
                         IF ( op2.EQ.'POIN' .AND. IPRM(20).EQ.1 )
-     &                       WRITE (23,99037) IEXP , jgl , EP(IEXP) , 
+     &                       WRITE (23,99037) IEXP , jgl , EP(IEXP) ,
      &                       TLBDG(IEXP)
 99037                   FORMAT (1x//50x,'CALCULATED YIELDS'//5x,
      &                          'EXPERIMENT ',1I2,2x,'DETECTOR ',1I2/5x,
@@ -1585,7 +1585,7 @@ C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
                            decen = decen*(1.D0+BETAR(IEXP)*cocos)
                            CALL EFFIX(IEXP,ipd,decen,effi)
                            IF ( op2.EQ.'POIN' .AND. IPRM(20).EQ.1 )
-     &                          WRITE (23,99049) ni , nf , SPIN(ni) , 
+     &                          WRITE (23,99049) ni , nf , SPIN(ni) ,
      &                                 SPIN(nf) , decen , effi
                            YGN(jyi) = YGN(jyi)*effi
                         ENDDO
@@ -1604,14 +1604,14 @@ C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
                      jgl1 = jgl1 + 1
                      lu = ILE(jgl1)
                      IF ( op2.EQ.'POIN' .OR. IPRM(11).EQ.1 )
-     &                    WRITE (22,99048) IEXP , jgl1 , EP(IEXP) , 
+     &                    WRITE (22,99048) IEXP , jgl1 , EP(IEXP) ,
      &                    TLBDG(IEXP)
                      jmm = 0
                      DO jyi = 1 , idr
                         ni = KSEQ(jyi,3)
                         nf = KSEQ(jyi,4)
                         IF ( op2.EQ.'POIN' .OR. IPRM(11).EQ.1 )
-     &                       WRITE (22,99049) ni , nf , SPIN(ni) , 
+     &                       WRITE (22,99049) ni , nf , SPIN(ni) ,
      &                       SPIN(nf) , YGN(jyi) , YGN(jyi)/YGN(IDRN)
                         IF ( ifwd.EQ.1 ) THEN
                            IF ( (YGN(jyi)/YGN(IDRN)).GE.slim ) THEN
@@ -1663,12 +1663,12 @@ C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
                      ENDDO
                      IF ( ifwd.EQ.1 ) THEN
                         xw = 1.
-                        WRITE (4,*) IEXP , jgl1 , ABS(IZ1(IEXP)) , 
-     &                              ABS(XA1(IEXP)) , ABS(EP(IEXP)) , 
+                        WRITE (4,*) IEXP , jgl1 , ABS(IZ1(IEXP)) ,
+     &                              ABS(XA1(IEXP)) , ABS(EP(IEXP)) ,
      &                              jmm , xw
                         DO jyi = 1 , jmm
-                           WRITE (4,*) INT(CORF(jyi,1)) , 
-     &                                 INT(CORF(jyi,2)) , CORF(jyi,3) , 
+                           WRITE (4,*) INT(CORF(jyi,1)) ,
+     &                                 INT(CORF(jyi,2)) , CORF(jyi,3) ,
      &                                 CORF(jyi,4)
                         ENDDO
                      ENDIF
@@ -1686,7 +1686,7 @@ C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
                         ENDIF
                         jgl1 = jgl1 + 1
                         READ (3,*) ne , na , zp , ap , xep , nval , waga
-                        WRITE (4,*) ne , na , zp , ap , EP(IEXP) , 
+                        WRITE (4,*) ne , na , zp , ap , EP(IEXP) ,
      &                              nval , waga
                         WRITE (22,99038) IEXP , jgl1
 99038                   FORMAT (///10X,'EXPERIMENT',1X,I2,8X,'DETECTOR',
@@ -1694,7 +1694,7 @@ C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
      &                          'YCOR',8X,'COR.F'/)
                         ile1 = ILE(jgl1)
                         DO itp = 1 , nval
-                           READ (3,*) ns1 , ns2 , fiex1(1,1,1) , 
+                           READ (3,*) ns1 , ns2 , fiex1(1,1,1) ,
      &                                fiex1(1,1,2)
                            ltrn = IY(ile1+itp-1,jgl1)
                            IF ( ltrn.LT.1000 ) THEN
@@ -1709,10 +1709,10 @@ C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
                               ns2 = ns2 + KSEQ(ltrn2,4)
                            ENDIF
                            ycorr = YEXP(jgl1,ile1+itp-1) ! Changed in gosia2
-                           WRITE (4,*) ns1 , ns2 , ycorr , 
+                           WRITE (4,*) ns1 , ns2 , ycorr ,
      &                                 DYEX(jgl1,ile1+itp-1) ! Changed in gosia2
-                           WRITE (22,99039) ns1 , ns2 , 
-     &                            CORF(ile1+itp-1,jgl1) , ycorr , 
+                           WRITE (22,99039) ns1 , ns2 ,
+     &                            CORF(ile1+itp-1,jgl1) , ycorr ,
      &                            ycorr/CORF(ile1+itp-1,jgl1)
 99039                      FORMAT (5X,I4,5X,I4,3X,E8.3,4X,E8.3,4X,E8.3)
                         ENDDO ! Loop over itp
@@ -2039,7 +2039,7 @@ C     Handle map
                   WRITE (22,99054)
                   DO kex = 1 , 10
                      xxi = XIR(lex,jex)*(kex-1)/9.D0
-                     WRITE (22,99055) xxi , 
+                     WRITE (22,99055) xxi ,
      &                                (PARXM(jex,ilx,kex,lex),ilx=1,4)
                   ENDDO
                   IF ( MAGA(jex).NE.0 ) THEN
@@ -2103,7 +2103,7 @@ C     Calculate chi squared and normalization without minimizing
 C---- gosia2 changes end
       CALL MINI(chisq,1.D+38,nptl,conu,imode,idr,xtest,0,0,0,bten)
 C---- gosia2 changes start
-      
+
 C     Set CNOR1 to the weighted average of CNOR1 and CNOR2
       DO kh1 = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
          DO kh2 = 1 , LP3 ! LP3 = 75 (maximum number of levels)
@@ -2116,14 +2116,14 @@ C     Set CNOR1 to the weighted average of CNOR1 and CNOR2
             ENDIF
          ENDDO
       ENDDO
-      
+
 C     Increment iteration counter
       mawr = mawr + 1
 
 C     Store chisq
       IF ( JZB.EQ.25 ) ccch1 = chisq
       IF ( JZB.EQ.26 ) ccch2 = chisq
-      WRITE (*,*) 'ITER = ' , mawr , ' CHISQ1 = ' , ccch1 , 
+      WRITE (*,*) 'ITER = ' , mawr , ' CHISQ1 = ' , ccch1 ,
      &  ' CHISQ2 = ' , ccch2
       chir = ccch1 + ccch2
 
@@ -2182,7 +2182,7 @@ C     Read absorber coefficients from unit 8
         ENDDO
         IRAWEX(l) = 0
       ENDDO
-      
+
 C     Read input from standard input
       DO l = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
         READ (JZB,*) mexl ! experiment number
@@ -2208,7 +2208,7 @@ C     Read input from standard input
         ENDIF
       ENDDO
       GOTO 100 ! End of OP,RAW - back to input loop
-      
+
 C--------------------------------
 C OP,RE
 70012 DO jrls = 1 , MEMAX ! For each matrix element
@@ -2291,9 +2291,9 @@ C OP,SIXJ
           DO ms = 1 , 5
             mend = 2*(ms-3) + ixj
             WRITE (14,*) WSIXJ(l,4,4,ixj,mend,ixj-4) ,
-     &        WSIXJ(l,4,4,ixj,mend,ixj-2) , 
-     &        WSIXJ(l,4,4,ixj,mend,ixj) , 
-     &        WSIXJ(l,4,4,ixj,mend,ixj+2) , 
+     &        WSIXJ(l,4,4,ixj,mend,ixj-2) ,
+     &        WSIXJ(l,4,4,ixj,mend,ixj) ,
+     &        WSIXJ(l,4,4,ixj,mend,ixj+2) ,
      &        WSIXJ(l,4,4,ixj,mend,ixj+4)
           ENDDO
         ENDDO

@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE PATH
 C
@@ -15,7 +15,7 @@ C      NSTOP  - index in CAT of last substate associated with a level
 C
 C Formal parameters:
 C      Irld   - index into ARM array
- 
+
       SUBROUTINE PATH(Irld)
       IMPLICIT NONE
       REAL*8 spm , vl
