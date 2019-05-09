@@ -3220,8 +3220,9 @@ C---- gosia2 changes end
 99012             FORMAT (6X,1I3,7X,1E10.4)
                   GOTO 124
  122              WRITE (22,99013) iva , TAU(iva) , TIMEL(1,iva1) , 
-     &                   TIMEL(2,iva1)
-99013             FORMAT (6X,1I3,7X,1E10.4,5X,1E10.4,4X,1E10.4)
+     &                   -TIMEL(2,iva1) , TIMEL(3,iva1)
+99013             FORMAT (6X,1I3,7X,1E10.4,5X,1E10.4,4X,1E10.4,4X,
+     &              1E10.4)
  124              IF ( iva.EQ.NMAX ) THEN
                      IF ( NAMX.GE.1 ) THEN
                         WRITE (22,99014)

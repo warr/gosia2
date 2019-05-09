@@ -64,6 +64,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
      &          MEM , n1 , n2 , ndas , ndtp , Nfd , nistr , ns1 , ns2 , 
      &          ns3 , ns4 , Ntap , nvare
       CHARACTER*4 Oph
+      CHARACTER*80 line
       INCLUDE 'cccds.inc'
       INCLUDE 'dimx.inc'
       INCLUDE 'tra.inc'
@@ -239,10 +240,17 @@ C     Read lifetimes
 99005    FORMAT (1X///30X,'LIFETIMES(PSEC)'///5X,'LEVEL',9X,'LIFETIME',
      &           5X,'ERROR'/)
          DO ilft = 1 , NLIFT ! INDEX, T, DT repeated NL times
-            READ (JZB,*) LIFCT(ilft) , TIMEL(1,ilft) , TIMEL(2,ilft)
-            TIMEL(2,ilft) = TIMEL(2,ilft)/(SQRT(wlf)+1.E-10) ! Relative error
-            WRITE (22,99006) LIFCT(ilft) , TIMEL(1,ilft) , TIMEL(2,ilft)
-99006       FORMAT (6X,1I3,6X,1F10.2,3X,1F10.2)
+            READ (JZB,'(A)') line
+            READ (line,*,END=200,ERR=200) LIFCT(ilft) , TIMEL(1,ilft) ,
+     &        TIMEL(2,ilft) , TIMEL(3,ilft)
+            GOTO 300
+  200       READ (line,*) LIFCT(ilft) , TIMEL(1,ilft) , TIMEL(2,ilft)
+            TIMEL(3,ilft) = TIMEL(2,ilft)
+  300       TIMEL(2,ilft) = TIMEL(2,ilft)/(SQRT(wlf)+1.E-10) ! Relative error
+            TIMEL(3,ilft) = TIMEL(3,ilft)/(SQRT(wlf)+1.E-10) ! Relative error
+            WRITE (22,99006) LIFCT(ilft) , TIMEL(1,ilft) ,
+     &        -TIMEL(2,ilft) , TIMEL(3,ilft)
+99006       FORMAT (6X,1I3,6X,1F10.2,3X,1F10.2,3X,1F10.2)
          ENDDO
          WRITE (22,99007) wlf
 99007    FORMAT (1X/10X,'LIFETIMES ARE TAKEN WITH WEIGHT',2X,1E14.6)
