@@ -1566,8 +1566,8 @@ C OP,POIN
                            tfac = TAU(ixm)
 C c/s = 0.11991698 /ps, where s = 0.25 cm, c = speed of light in cm/ps
                            IF ( tfac*BETAR(IEXP).GT. 25.D0 ) THEN
+                             WRITE(22,99057) IEXP,KSEQ(ixl,3),tfac
                              IFMO = 0
-                             WRITE (22,99057) IEXP,KSEQ(ixl,3),tfac
                            ELSE
                              YGN(ixl) = YGN(ixl)
      &                         + .11991698D0*tfac*BETAR(IEXP)
