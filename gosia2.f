@@ -3238,7 +3238,11 @@ C---- gosia2 changes end
                            ind = IAMX(kq)
                            ess = ELM(ind)
                            esd = EAMX(kq,1)
-                           dsd = EAMX(kq,2)
+                           IF ( ess.LT.esd) THEN
+                             dsd = EAMX(kq,2)
+                           ELSE
+                             dsd = EAMX(kq,3)
+                           ENDIF
                            WRITE (22,99016) ni , nf , esd , ess , 
      &                        (ess-esd)/dsd
 99016                      FORMAT (4x,1I3,1x,1I3,1x,1F9.4,1x,1F9.4,1x,

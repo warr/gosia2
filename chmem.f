@@ -26,16 +26,32 @@ C      IAMY   - level indices of pair of levels for which matrix element is know
       DO ia = 1 , NAMX
          ib = IAMX(ia)
          IF ( IAMY(ia,1).NE.IAMY(ia,2) ) THEN
-            di = (ELM(ib)-EAMX(ia,1))/EAMX(ia,2)
-            Chilo = Chilo + 
-     &              (LOG(ABS(ELM(ib)/EAMX(ia,1)))*ABS(EAMX(ia,1))
-     &              /EAMX(ia,2))**2
+            di = (ELM(ib)-EAMX(ia,1))
+            IF ( di.LT.0 ) THEN
+               di=di/EAMX(ia,2)
+               Chilo = Chilo +
+     &                 (LOG(ABS(ELM(ib)/EAMX(ia,1)))*ABS(EAMX(ia,1))
+     &                 /EAMX(ia,2))**2
+            ELSE
+               di=di/EAMX(ia,3)
+               Chilo = Chilo +
+     &                 (LOG(ABS(ELM(ib)/EAMX(ia,1)))*ABS(EAMX(ia,1))
+     &                 /EAMX(ia,3))**2
+            ENDIF
             Chi = Chi + di*di
          ELSE
-            di = (ELM(ib)-EAMX(ia,1))/EAMX(ia,2)
-            Chilo = Chilo + 
-     &              (LOG(ABS(ELM(ib)/EAMX(ia,1)))*ABS(EAMX(ia,1))
-     &              /EAMX(ia,2))**2
+            di = (ELM(ib)-EAMX(ia,1))
+            IF ( di.LT.0 ) THEN
+              di=di/EAMX(ia,2)
+              Chilo = Chilo +
+     &                (LOG(ABS(ELM(ib)/EAMX(ia,1)))*ABS(EAMX(ia,1))
+     &                /EAMX(ia,2))**2
+            ELSE
+              di=di/EAMX(ia,3)
+              Chilo = Chilo +
+     &                (LOG(ABS(ELM(ib)/EAMX(ia,1)))*ABS(EAMX(ia,1))
+     &                /EAMX(ia,3))**2
+            ENDIF
             Chi = Chi + di*di
          ENDIF
       ENDDO

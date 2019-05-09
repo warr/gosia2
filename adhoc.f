@@ -288,15 +288,22 @@ C     Read known matrix elements
      &        'TRANSITION',10X,'MAT.EL.',10X,'ERROR'/)
 
       DO iax = 1 , NAMX ! LAMBDA, INDEX1, INDEX2, ME, DME repeated NAMX times
-         READ (JZB,*) llia , ns1 , ns2 , EAMX(iax,1) , EAMX(iax,2)
-         IAMY(iax,1) = ns1 ! Level index
+         READ (JZB,'(A)') line
+         READ (line,*,END=201,ERR=201) llia , ns1 , ns2 , EAMX(iax,1) ,
+     &     EAMX(iax,2) , EAMX(iax,3)
+         GOTO 301
+  201    READ (line,*) llia , ns1 , ns2 , EAMX(iax,1) , EAMX(iax,2)
+         EAMX(iax,3) = EAMX(iax,2)
+  301    IAMY(iax,1) = ns1 ! Level index
          IAMY(iax,2) = ns2 ! Level index
          EAMX(iax,2) = EAMX(iax,2)/(SQRT(wamx)+1.E-10) ! Relative error of ME
-         WRITE (22,99012) ns1 , ns2 , EAMX(iax,1) , EAMX(iax,2)
+         EAMX(iax,3) = EAMX(iax,3)/(SQRT(wamx)+1.E-10) ! Relative error of ME
+         WRITE (22,99012) ns1 , ns2 , EAMX(iax,1) , -EAMX(iax,2) ,
+     &     EAMX(iax,3)
          IAMX(iax) = MEM(ns1,ns2,llia) ! Index to matrix element
       ENDDO
       WRITE (22,99011) wamx
 99011 FORMAT (/10X,' MATRIX ELEMENT(S) ARE TAKEN WITH WEIGHT',2X,1E14.6)
 
-99012 FORMAT (9X,1I3,'---',1I3,13X,1F9.4,8X,1F9.4)
+99012 FORMAT (9X,1I3,'---',1I3,13X,1F9.4,8X,1F9.4,3X,1F9.4)
       END
