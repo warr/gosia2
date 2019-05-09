@@ -529,7 +529,7 @@ C---- gosia2 changes end
       CALL FHIP
       NCM = 2 ! Default final state for kinematics calculation (OP,CONT NCM,)
       DO ijx = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
-         INTERV(ijx) = 1
+        INTERV(ijx) = 1000
       ENDDO
       la = 0
       ipo3 = 1
