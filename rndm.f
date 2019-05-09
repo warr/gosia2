@@ -11,23 +11,16 @@ C      Se     - seed for random number
 C
 C It is used to generate random matrix elements as a starting position,
 C when OP,RAND is called. The parameter to OP,RAND is the seed here.
+C
+C This function uses the Lehmer method
  
       REAL*8 FUNCTION RNDM(Se)
       IMPLICIT NONE
-      REAL*8 ai , p , r , rxdm , Se , t , u
-      INTEGER*4 i
-      DATA t/0./
-      SAVE t
+      REAL*8 a, b, Se
 
-      IF ( Se.GT.32000. ) Se = 100.*t + .511
-      Se = Se*Se
-      u = LOG10(Se)
-      i = INT(u) + 1
-      t = Se/(10.**i)
-      r = SQRT(SQRT(SQRT(t)))
-      p = SQRT(SQRT(SQRT(.1)))
-      rxdm = (r-p)/(1.-p)
-      rxdm = 10.*rxdm
-      ai = DBLE(INT(rxdm))
-      RNDM = rxdm - ai
+      If ( Se.LE.0 ) Se = 1.0D0
+      a = 16807.D0
+      b = 2147483647.D0
+      Se = MOD(a * Se, b)
+      RNDM = MOD(a * Se, b) / b
       END
