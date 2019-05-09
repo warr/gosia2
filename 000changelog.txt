@@ -8,6 +8,10 @@
 - Use NIST absorption coefficients and really use C (as documented in
   manual) not Si
 - Use Lehmer random-number generator for OP,RAND
+- Allow asymmetric errors in OP,YIEL
+- Increase default for CONT option INT from 1 to 1000 (as recommended)
+- Correct coefficient for multipole mixing ratio
+- Correct finite-distance recoil (order of magnitude was wrong)
 
 20080630 (synchronized with gosia1)
 - Reordering of all variable declarations so variables in common blocks are
