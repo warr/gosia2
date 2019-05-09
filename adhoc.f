@@ -263,9 +263,16 @@ C     Read known mixing ratios
 99008    FORMAT (1X//20X,'EXPERIMENTAL E2/M1 MIXING RATIOS'///10X,
      &           'TRANSITION',12X,'DELTA',10X,'ERROR'/)
          DO li = 1 , NDL ! IS, IF, DELTA, ERROR repeated NDL times
-            READ (JZB,*) ns1 , ns2 , DMIXE(li,1) , DMIXE(li,2)
-            DMIXE(li,2) = DMIXE(li,2)/(SQRT(wdl)+1.E-10)
-            WRITE (22,99012) ns1 , ns2 , DMIXE(li,1) , DMIXE(li,2)
+            READ (JZB,'(A)') line
+            READ (line,*,END=202,ERR=202) ns1 , ns2 , DMIXE(li,1) ,
+     &        DMIXE(li,2) , DMIXE(li,3)
+            GOTO 302
+  202       READ (line,*) ns1 , ns2 , DMIXE(li,1) , DMIXE(li,2)
+            DMIXE(li,3) = DMIXE(li,2)
+  302       DMIXE(li,2) = DMIXE(li,2)/(SQRT(wdl)+1.E-10)
+            DMIXE(li,3) = DMIXE(li,3)/(SQRT(wdl)+1.E-10)
+            WRITE (22,99012) ns1 , ns2 , DMIXE(li,1) , -DMIXE(li,2) ,
+     &        DMIXE(li,3)
             DO lb = 1 , Idr ! Search through decays for right pair of levels
                IF ( KSEQ(lb,3).EQ.ns1 .AND. KSEQ(lb,4).EQ.ns2 ) THEN
                   IMIX(li) = lb ! Decay index

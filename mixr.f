@@ -41,10 +41,17 @@ C      Chilo  - chi squared using logs
          IF ( ABS(ELM(inx1)).LT.1.E-5 ) ELM(inx1) = 1.E-5
          dl = DMIX(i)*ELM(inx)/ELM(inx1)
          IF ( Ipsw.EQ.1 ) DMIX(i) = dl
-         Chi = Chi + (dl-DMIXE(i,1))**2/DMIXE(i,2)/DMIXE(i,2)
-         IF ( LNY.EQ.1 ) Chilo = Chilo + 
-     &                           (DMIXE(i,1)*LOG(ABS(dl/DMIXE(i,1)))
-     &                           /DMIXE(i,2))**2
+         IF ( dl.LT.DMIXE(i,1) ) THEN
+           Chi = Chi + (dl-DMIXE(i,1))**2/DMIXE(i,2)/DMIXE(i,2)
+           IF ( LNY.EQ.1 ) Chilo = Chilo +
+     &                             (DMIXE(i,1)*LOG(ABS(dl/DMIXE(i,1)))
+     &                             /DMIXE(i,2))**2
+         ELSE
+           Chi = Chi + (dl-DMIXE(i,1))**2/DMIXE(i,3)/DMIXE(i,3)
+           IF ( LNY.EQ.1 ) Chilo = Chilo +
+     &                             (DMIXE(i,1)*LOG(ABS(dl/DMIXE(i,1)))
+     &                             /DMIXE(i,3))**2
+         ENDIF
       ENDDO ! Loop on mixing ratios i
 
       IF ( Ipsw.EQ.0 ) RETURN
@@ -54,7 +61,12 @@ C      Chilo  - chi squared using logs
      &        'EXP.DELTA',10X,'CALC.DELTA',10X,'SIGMA'/)
 
       DO i = 1 , NDL ! For each mixing ratio
-         dl = (DMIX(i)-DMIXE(i,1))/DMIXE(i,2) ! Relative error
+         dl = DMIX(i)-DMIXE(i,1)
+         IF ( dl.LT.0 ) THEN
+           dl=dl/DMIXE(i,2) ! Relative error
+         ELSE
+           dl=dl/DMIXE(i,3) ! Relative error
+         ENDIF
          it = IMIX(i) ! Matrix element for this mixing ratio
          WRITE (22,99002) KSEQ(it,3) , KSEQ(it,4) , DMIXE(i,1) , DMIX(i)
      &                    , dl ! KSEQs are level numbers
