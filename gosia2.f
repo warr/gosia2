@@ -1019,9 +1019,17 @@ C              Treat OP,INTG
                                        DO ixl = 1 , idr ! For each decay
                                          ixm = KSEQ(ixl,3)
                                          tfac = TAU(ixm)
-                                         YGN(ixl) = YGN(ixl)
-     &                                      + .11991698*tfac*BETAR(IEXP)
-     &                                      *(sf*YGP(ixl)-YGN(ixl))
+                                         IF ( tfac*BETAR(IEXP).GT.
+     &                                       25.D0 ) THEN
+                                           WRITE(22,99056) IEXP,
+     &                                       KSEQ(ixl,3),tfac
+                                           IFMO = 0
+                                         ELSE
+                                           YGN(ixl) = YGN(ixl)
+     &                                       + .11991698*tfac*
+     &                                       BETAR(IEXP)
+     &                                       *(sf*YGP(ixl)-YGN(ixl))
+                                         ENDIF
                                        ENDDO ! Loop on decays
                                     ENDIF ! If correction due to recoil
                                     IF ( IRAWEX(lx).NE.0 ) THEN
@@ -1509,9 +1517,17 @@ C              Treat OP,INTI
                                        DO ixl = 1 , idr ! For each decay
                                          ixm = KSEQ(ixl,3)
                                          tfac = TAU(ixm)
-                                         YGN(ixl) = YGN(ixl)
-     &                                      + .11991698*tfac*BETAR(IEXP)
-     &                                      *(sf*YGP(ixl)-YGN(ixl))
+                                         IF ( tfac*BETAR(IEXP).GT.
+     &                                       25.D0 ) THEN
+                                           WRITE(22,99056) IEXP,
+     &                                       KSEQ(ixl,3),tfac
+                                           IFMO = 0
+                                         ELSE
+                                           YGN(ixl) = YGN(ixl)
+     &                                       + .11991698*tfac*
+     &                                       BETAR(IEXP)
+     &                                       *(sf*YGP(ixl)-YGN(ixl))
+                                         ENDIF
                                        ENDDO ! Loop on decays
                                     ENDIF ! If correction due to recoil
                                     IF ( IRAWEX(lx).NE.0 ) THEN
@@ -2559,9 +2575,13 @@ C     Handle OP,ERRO
                         DO ixl = 1 , idr
                            ixm = KSEQ(ixl,3)
                            tfac = TAU(ixm)
-                           YGN(ixl) = YGN(ixl)
-     &                                + .11991698*tfac*BETAR(IEXP)
-     &                                *(sf*YGP(ixl)-YGN(ixl))
+                           IF ( tfac*BETAR(IEXP).GT.25.D0 ) THEN
+                             WRITE(22,99056) IEXP,KSEQ(ixl,3),tfac
+                             IFMO = 0
+                           ELSE
+                             YGN(ixl) = YGN(ixl) + .11991698*tfac*
+     &                         BETAR(IEXP)*(sf*YGP(ixl)-YGN(ixl))
+                           ENDIF
                         ENDDO
                      ENDIF
                      IF ( IRAWEX(IEXP).NE.0 ) THEN
@@ -3270,4 +3290,7 @@ C---- gosia2 changes end
 99054 FORMAT (5X,'XI',13X,'Q1',22X,'Q2'///13X,'SLOPE',2X,'INTERCEPT',7X,
      &        'SLOPE',5X,'INTERCEPT'//)
 99055 FORMAT (2X,1F6.4,3X,1E8.2,2X,1E8.2,6X,1E8.2,2X,1E8.2)
+99056 FORMAT (1X,/,2X,'DURING THE INTEGRATION',1X,
+     &  'IT WAS NECESSARY TO SWITCH OFF THE TIME-OF-FLIGHT CORRECTION '
+     &  'FOR EXPT ',I3,' LEVEL ', I3, ' TAU=',1E9.4)
       END
