@@ -2,7 +2,7 @@
 C----------------------------------------------------------------------
 C SUBROUTINE RECOIL
 C
-C Called by: ANGULA, CMLAB
+C Called by: ANGULA
 C Calls:     ROTATE
 C
 C Purpose: correct for relativistic effects of recoiling nucleus.
