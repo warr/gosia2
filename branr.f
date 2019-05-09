@@ -87,13 +87,21 @@ C     If printing option is on, print something
             lab2 = lab2 + 2
             ch2 = ch2 + ELM(j2)*ELM(j2)*DELTA(n2,2)/(1.+CONV(eng2,lab2))
          ENDIF
-         u = (ch1/ch2-BRAT(k,1))/BRAT(k,2)
+         u = (ch1/ch2-BRAT(k,1))
+         IF ( u.LT.0 ) THEN
+           u=u/BRAT(k,2)
+           Chilo = Chilo + (BRAT(k,1)*LOG(ch1/ch2/BRAT(k,1))/
+     &       BRAT(k,2))**2
+         ELSE
+           u=u/BRAT(k,3)
+           Chilo = Chilo + (BRAT(k,1)*LOG(ch1/ch2/BRAT(k,1))/
+     &       BRAT(k,3))**2
+         ENDIF
          Chisq = Chisq + u*u
-         Chilo = Chilo + (BRAT(k,1)*LOG(ch1/ch2/BRAT(k,1))/BRAT(k,2))**2
          IF ( IPRM(3).EQ.-1 ) WRITE (22,99002) KSEQ(n1,3) , KSEQ(n1,4) ,
      &                               KSEQ(n2,3) , KSEQ(n2,4) , BRAT(k,1)
      &                               , BRAT(k,2) , ch1/ch2 , -u
-99002    FORMAT (5X,3(1I2,6X),1I2,5X,3(1F10.5,5X),5X,1F4.1)
+99002    FORMAT (5X,3(1I2,6X),1I2,5X,4(1F10.5,5X),5X,1F4.1)
       ENDDO ! Loop on branching ratios
        
       IF ( IPRM(3).EQ.-1 ) IPRM(3) = 0 ! Turn off printing option, so we don't print twice
