@@ -13,7 +13,7 @@ C      CAT    - substates of levels (n_level, J, m)
 C      ELM    - matrix elements
 C      EXPO   - adiabatic exponential
 C      ISG    - sign of omega
-C      ISG1   -
+C      ISG1   - index of omega
 C      ISHA   - is half-integer spin
 C      ISO    - isotropic flag
 C      ISSTAR - first substate for given matrix element index
@@ -31,9 +31,9 @@ C
 C Formal parameters:
 C      Ir     - index of substate
 C      N      - index of level
-C      Rsg    -
+C      Rsg    - sign of omega
 C      Lam    - multipolarity
-C      Ld     - number of matrix elements for level with given multipolarity
+C      Ld     - number of levels connected to level N by this multipolarity Lam
 C      Nz     - index into ZETA array for this multipolarity
 C      I57    - switch which is either 5 or 7 so we access ARM(I,5) or ARM(I,7)
 C
@@ -96,7 +96,7 @@ C z is the coupling parameter zeta, calculated in the function LSLOOP.
                   IF ( ISO.NE.0 .OR. rmir.LE..1 .OR. rmis.LE..1 ) THEN
                      rmu = rmis - rmir
                      mua = INT(ABS(rmu) + 1.1) ! delta-m + 1
-C                    Only consider electromagnetic and delta-mu = 0 magnetic
+C                    Only consider electromagnetic and delta-m .NE. 0 magnetic
 C                    contribution
                      IF ( la.LE.6 .OR. mua.NE.1 ) THEN
                         indq = LOCQ(Lam,mua) + NPT ! Index to Q function
@@ -111,23 +111,23 @@ C                    contribution
                            pamp = pamp1*ARM(is,I57) + pamp
                            IF ( ISO.EQ.0 .AND. rmis.GT..1 ) GOTO 10
                         ENDIF
-                        IF ( N.NE.m ) THEN
-                           irs = (-1)**(INT(rmir+rmis)-ISHA+iii) ! ISHA = 1 if half-integer spins
+                        IF ( N.NE.m ) THEN ! Not same level
+                           irs = (-1)**(INT(rmir+rmis)-ISHA+iii) ! ISHA = 1 if half-integer spins, iii=0 for E, 1 for M
                            ARM(is,6) = ARM(is,6) + irs*pamp1*ARM(Ir,I57)
                            ISSTAR(i2) = MIN(is,ISSTAR(i2))
                            ISSTO(i2) = MAX(is,ISSTO(i2))
                         ENDIF
                      ENDIF
-                  ENDIF
+                  ENDIF ! If ISO.NE. 0 or either substate is spin 1
  10               CONTINUE
-               ENDDO
-               IF ( N.EQ.m ) THEN
+               ENDDO ! Loop on mrange
+               IF ( N.EQ.m ) THEN ! N and m are level numbers, so if it is the same level, EXPO = 1
                   ARM(Ir,4) = ARM(Ir,4) + pamp*ELM(indx)
                ELSE
                   ARM(Ir,4) = ARM(Ir,4) + pamp*ELM(indx)*EXPO(indx)
                ENDIF
             ENDIF
          ENDIF
-      ENDDO
+      ENDDO ! Loop on levels
       Lam = la
       END
