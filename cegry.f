@@ -219,7 +219,7 @@ C              Correct for finite recoil
                   DO ixl = 1 , Idr ! For each decay
                      ixm = KSEQ(ixl,3) ! Initial level of ixl'th decay
                      tfac = TAU(ixm) ! Get lifetime
-                     YGN(ixl) = YGN(ixl) + .01199182*tfac*BETAR(IEXP)
+                     YGN(ixl) = YGN(ixl) + .11991698*tfac*BETAR(IEXP)
      &                          *(sf*YGP(ixl)-YGN(ixl))
                   ENDDO ! Loop on decays ixl
                ENDIF ! If correction for finite recoil
@@ -441,7 +441,7 @@ C              Correct for finite recoil
                      ixm = KSEQ(ixl,3) ! Initial level of ixl'th decay
                      tfac = TAU(ixm)
                      IF ( tfac.GT.1.E+4 ) GOTO 25
-                     YGN(ixl) = YGN(ixl) + .01199182*tfac*BETAR(IEXP)
+                     YGN(ixl) = YGN(ixl) + .11991698*tfac*BETAR(IEXP)
      &                          *(sf*YGP(ixl)-YGN(ixl))
                   ENDDO
  25               IFMO = 0
