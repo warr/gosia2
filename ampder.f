@@ -14,7 +14,7 @@ C      CAT    - substates of levels (n_level, J, m)
 C      ELM    - matrix elements
 C      EXPO   - exponents of adiabatic term
 C      ISG    - sign of omega
-C      ISG1   - index of sigma
+C      ISG1   - index of omega
 C      ISMAX  - number of substates used
 C      ISSTAR - first substate for given level
 C      ISSTO  - last substate for given level
