@@ -205,11 +205,19 @@ C     Read branching ratios
 99002    FORMAT (40X,'BRANCHING RATIOS',//5X,'NS1',5X,'NF1',5X,'NS2',5X,
      &           'NF2',5X,'RATIO(1:2)',9X,'ERROR')
          DO lb = 1 , NBRA ! I1,I2,I3,I4,B,DB repeated NBRA times
-            READ (JZB,*) ns1 , ns2 , ns3 , ns4 , BRAT(lb,1) , BRAT(lb,2)
-            BRAT(lb,2) = BRAT(lb,2)/(SQRT(wbra)+1.E-10) ! Relative error
+            READ(JZB,'(A)') line
+            READ (line,*,END=203,ERR=203) ns1 , ns2 , ns3 , ns4 ,
+     &        BRAT(lb,1) , BRAT(lb,2) , BRAT(lb,3)
+            GOTO 303
+  203       READ (line,*) ns1 , ns2 , ns3 , ns4 , BRAT(lb,1) ,
+     &        BRAT(lb,2)
+            BRAT(lb,3) = BRAT(lb,2)
+  303       BRAT(lb,2) = BRAT(lb,2)/(SQRT(wbra)+1.E-10) ! Relative error
+            BRAT(lb,3) = BRAT(lb,3)/(SQRT(wbra)+1.E-10) ! Relative error
             WRITE (22,99003) ns1 , ns2 , ns3 , ns4 , BRAT(lb,1) , 
-     &                       BRAT(lb,2)
-99003       FORMAT (4X,1I3,5X,1I3,5X,1I3,5X,1I3,5X,1F10.5,5X,1F10.5)
+     &                       -BRAT(lb,2) , BRAT(lb,3)
+99003       FORMAT (4X,1I3,5X,1I3,5X,1I3,5X,1I3,5X,1F10.5,5X,1F10.5,3X,
+     &        1F10.5)
             DO li = 1 , Idr ! Search decays for these pairs of levels
                IF ( KSEQ(li,3).EQ.ns3 .AND. KSEQ(li,4).EQ.ns4 ) THEN
                   IBRC(2,lb) = li ! Decay index for first pair
