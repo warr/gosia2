@@ -100,7 +100,8 @@ C     If printing option is on, print something
          Chisq = Chisq + u*u
          IF ( IPRM(3).EQ.-1 ) WRITE (22,99002) KSEQ(n1,3) , KSEQ(n1,4) ,
      &                               KSEQ(n2,3) , KSEQ(n2,4) , BRAT(k,1)
-     &                               , BRAT(k,2) , ch1/ch2 , -u
+     &                               , -BRAT(k,2) , BRAT(k,3) ,
+     &                               ch1/ch2 , -u
 99002    FORMAT (5X,3(1I2,6X),1I2,5X,4(1F10.5,5X),5X,1F4.1)
       ENDDO ! Loop on branching ratios
        
