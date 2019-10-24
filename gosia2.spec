@@ -27,5 +27,5 @@ make %{?_smp_mflags}
 
 %files
 %defattr(-,root,root,-)
-/usr/bin/*
-/usr/share/man/man1/*
+%{_bindir}/*
+%{_mandir}/*/*
