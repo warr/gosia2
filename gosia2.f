@@ -345,7 +345,7 @@ C     Open files
       CALL OPENF
       nawr = 0
 
-C     Use input unit 25 for target and 26 for projectile
+C     Use input unit 25 for particle 1 and 26 for particle 2
       IBPS = IBPS - 1
       JZB = 25
       IF ( IBPS.EQ.1 ) JZB = 26
@@ -1969,7 +1969,7 @@ C 8.163265D-4 = 1 / 1225
          ENDDO ! Loop over experiments jexp
 
          irix = 7
-         IF ( IBPS.EQ.1 ) irix = 27 ! unit 7 for target, 27 for beam
+         IF ( IBPS.EQ.1 ) irix = 27 ! unit 7 for particle 1, 27 for particle 2
          REWIND irix
          DO iuy = 1 , 6
             WRITE (irix,*) (XIR(iuy,jj),jj=1,NEXPT)
@@ -2001,7 +2001,7 @@ C---- gosia2 changes end
          ENDDO
       ELSE ! iobl .lt. 1
          irix = 7
-         IF ( IBPS.EQ.1 ) irix = 27 ! unit 7 for target, 27 for beam (gosia2 only)
+         IF ( IBPS.EQ.1 ) irix = 27 ! unit 7 for particle 1, 27 for particle 2 (gosia2 only)
          REWIND irix
          DO iuy = 1 , 6
             READ (irix,*) (XIR(iuy,jj),jj=1,NEXPT)
@@ -2088,7 +2088,7 @@ C---- gosia2 changes start
             JSKIP(iva) = 1
          ENDDO
          irix = 12
-         IF ( IBPS.EQ.2 ) irix = 32 ! unit 12 for target, 32 for beam
+         IF ( IBPS.EQ.2 ) irix = 32 ! unit 12 for particle 1, 32 for particle 2
          REWIND irix
          DO lkj = 1 , MEMAX
             WRITE (irix,*) ELM(lkj)
@@ -2231,7 +2231,7 @@ C OP,RE
 C--------------------------------
 C OP,REST
 70013 irix = 12
-      IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for target, 32 for beam (gosia2 only)
+      IF ( IBPS.EQ.1 ) irix = 32 ! unit 12 for particle 1, 32 for particle 2 (gosia2 only)
       REWIND irix
       memax1 = MEMAX + 1
       DO lkj = 1 , MEMAX
