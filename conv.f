@@ -25,6 +25,7 @@ C      conversion coefficient interpolated to energy Ega
       REAL*8 cpo , cpo1 , cv , Ega , NEWCNV
       INTEGER*4 j , N , n1 , nen
       DIMENSION cpo(101) , cpo1(101)
+      SAVE cpo , cpo1
       INCLUDE 'ccc.inc'
 
 C     If the number of conversion coefficients entered by the user is negative
