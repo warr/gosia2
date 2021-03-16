@@ -37,8 +37,8 @@ C      DSIGS  - dsigma for each experiment
 C      DYEX   - error on experimental yield
 C      EAMX   - known matrix elements and their errors
 C      ELM    - matrix elements
-C      ELM25  - matrix elements storage for target (for gosia2)
-C      ELM26  - matrix elements storage for projectile (for gosia2)
+C      ELM25  - matrix elements storage for particle1 (for gosia2)
+C      ELM26  - matrix elements storage for particle2 (for gosia2)
 C      ELMH   -
 C      ELML   - lower limit on matrix elements
 C      ELMU   - upper limit on matrix elements
