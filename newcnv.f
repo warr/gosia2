@@ -29,7 +29,7 @@ C     The first time, we need to read the data
         rewind(JZB+3)
         isfirst(JZB-24)= 0
         DO i = 1, 1500
-          nenergies(JZB-24) = i
+          nenergies(JZB-24) = i - 1
           READ(JZB+3,*,END=100) energies(JZB-24,i),
      &      (bricc(JZB-24,i,j),j=1,5)
         ENDDO
