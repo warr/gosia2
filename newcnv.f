@@ -11,7 +11,7 @@ C      Ega    - gamma energy
 C      N      - multipolarity N=1,2,3 = E1,2,3 and N=4,5 = M1,2 (not as elsewhere!)
 C
 C Uses global variables:
-C      IBPS   - target/projectile switch (gosia2)
+C      JZB    - unit to read from
 C Return value:
 C      conversion coefficient interpolated to energy Ega
 
@@ -25,13 +25,13 @@ C      conversion coefficient interpolated to energy Ega
       INCLUDE 'switch.inc'
 
 C     The first time, we need to read the data
-      IF ( isfirst(IBPS+1).eq.1 ) THEN
-        rewind(28+IBPS)
-        isfirst(IBPS+1)= 0
+      IF ( isfirst(JZB-24).eq.1 ) THEN
+        rewind(JZB+3)
+        isfirst(JZB-24)= 0
         DO i = 1, 1500
-          nenergies(IBPS+1) = i - 1
-          READ(28+IBPS,*,END=100) energies(IBPS+1,i),
-     &      (bricc(IBPS+1,i,j),j=1,5)
+          nenergies(JZB-24) = i - 1
+          READ(JZB+3,*,END=100) energies(JZB-24,i),
+     &      (bricc(JZB-24,i,j),j=1,5)
         ENDDO
       ENDIF
 
@@ -43,9 +43,9 @@ C     Check multipolarity is valid
 
 C     Search for the energy in the list
 
-      DO i = 1, nenergies(IBPS+1)
-        IF (ABS(Ega - energies(IBPS+1,i)) .LT. 1E-3) THEN
-           NEWCNV = bricc(IBPS+1,i,N)
+      DO i = 1, nenergies(JZB-24)
+        IF (ABS(Ega - energies(JZB-24,i)) .LT. 1E-3) THEN
+           NEWCNV = bricc(JZB-24,i,N)
            return
         ENDIF
       ENDDO
