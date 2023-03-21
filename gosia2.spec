@@ -29,3 +29,7 @@ make %{?_smp_mflags}
 %defattr(-,root,root,-)
 %{_bindir}/*
 %{_mandir}/*/*
+
+%changelog
+* Tue Sep 06 2022 Nigel Warr <warr@ikp.uni-koeln.de> 20180201.5
+- Added changelog
