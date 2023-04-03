@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION CONV
 C
@@ -26,7 +26,7 @@ C      conversion coefficient interpolated to energy Ega
       INTEGER*4 j , N , n1 , NANG , nen , NICC
       INTEGER*4 ISPL ! Added for spline
       DIMENSION cpo(51) , cpo1(51)
-      COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
+      COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) ,
      &                NICC , NANG(200) , ISPL
 
 C     If the number of conversion coefficients entered by the user is negative
@@ -56,7 +56,7 @@ C     then use read the conversion coefficients from a file on unit 29.
             cpo(j) = CC(n1+j-1,N)
             cpo1(j) = EG(n1+j-1)
          ENDDO
-C        Interpolate 
+C        Interpolate
          CALL LAGRAN(cpo1,cpo,4,1,Ega,cv,2,1)
          CONV = cv
          RETURN

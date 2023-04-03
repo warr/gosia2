@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE LAISUM
 C
@@ -48,36 +48,36 @@ C ARM are the excitation amplitudes of the substates.
 C q is the Qe or Qm calculated by the functions QE and QM, respectively and
 C stored in ZETA array in the function SNAKE.
 C z is the coupling parameter zeta, calculated in the function LSLOOP.
-      
+
       SUBROUTINE LAISUM(Ir,N,Rsg,Lam,Ld,Nz,I57)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , CAT , D2W , DIPOL , ELM , ELML , ELMU , EN , 
+      REAL*8 ACCA , ACCUR , CAT , D2W , DIPOL , ELM , ELML , ELMU , EN ,
      &       q , rmir , rmis , rmu , Rsg , SA , SPIN , z , ZETA , ZPOL
-      INTEGER*4 i2 , i3 , I57 , iii , indq , indx , Ir , irs , is , 
-     &          is1 , is2 , ISG , ISG1 , ISHA , ISMAX , ismin , ISO , 
+      INTEGER*4 i2 , i3 , I57 , iii , indq , indx , Ir , irs , is ,
+     &          is1 , is2 , ISG , ISG1 , ISHA , ISMAX , ismin , ISO ,
      &          isplus , ISSTAR , ISSTO
-      INTEGER*4 KDIV , la , Lam , LAMR , Ld , LOCQ , LP1 , LP10 , LP11 , 
-     &          LP12 , LP13 , LP14 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , 
+      INTEGER*4 KDIV , la , Lam , LAMR , Ld , LOCQ , LP1 , LP10 , LP11 ,
+     &          LP12 , LP13 , LP14 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 ,
      &          LP9 , LZETA
-      INTEGER*4 m , mrange , MSTORE , mua , N , NDIV , NPT , NSTART , 
+      INTEGER*4 m , mrange , MSTORE , mua , N , NDIV , NPT , NSTART ,
      &          NSTOP , NSW , Nz
       COMPLEX*16 ARM , FAZA , pamp , EXPO , pamp1
       COMMON /PSPIN / ISHA
       COMMON /AZ    / ARM(600,7)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
      &                ISO
-      COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
+      COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW ,
      &                ISG1
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
       COMMON /ADBXI / EXPO(1500)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
+      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 ,
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /ALLC  / LOCQ(8,7)
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
-      
+
       rmir = CAT(Ir,3) ! m quantum number of substate Ir
       iii = 0
       IF ( Lam.GT.6 ) iii = 1

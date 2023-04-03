@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE INTG
 C
@@ -66,18 +66,18 @@ C The function RESET is called to advance n by one. i.e. f(n-3) is set to the
 C old value of f(n-2), f(n-2) to the old value of f(n-1) and f(n-1) to the old
 C value of f(n).
 
- 
+
       SUBROUTINE INTG(Ien)
       IMPLICIT NONE
-      REAL*8 ACC50 , ACCA , ACCUR , CAT , D2W , DIPOL , EN , f , rim , 
+      REAL*8 ACC50 , ACCA , ACCUR , CAT , D2W , DIPOL , EN , f , rim ,
      &       rl , SPIN , srt , ZPOL
-      INTEGER*4 i , i57 , Ien , IFAC , IFLG , ihold , intend , INTERV , 
-     &          IPATH , ir , ir1 , IRA , ISG , ISG1 , ISMAX , ISO , k , 
+      INTEGER*4 i , i57 , Ien , IFAC , IFLG , ihold , intend , INTERV ,
+     &          IPATH , ir , ir1 , IRA , ISG , ISG1 , ISMAX , ISO , k ,
      &          kast , KDIV , LAMR
-      INTEGER*4 MAGA , MAXLA , mir , n , NDIM , NDIV , NMAX , NMAX1 , 
+      INTEGER*4 MAGA , MAXLA , mir , n , NDIM , NDIV , NMAX , NMAX1 ,
      &          NPT , NSTART , NSTOP , NSW
       COMPLEX*16 ARM , hold
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
      &                ISO
       COMMON /AZ    / ARM(600,7)
       COMMON /RNG   / IRA(8) , MAXLA
@@ -85,13 +85,13 @@ C value of f(n).
       COMMON /CLCOM0/ IFAC(75)
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
+      COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW ,
      &                ISG1
       COMMON /FLA   / IFLG
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)
       COMMON /CEXC9 / INTERV(50)
-      
+
       intend = INTERV(Ien) ! Default accuracy set by INT option of OP,CONT
       D2W = .03 ! We use steps of 0.03 in omega
       NSW = 1
@@ -103,7 +103,7 @@ C value of f(n).
          LAMR(i) = 0
          IF ( (NPT+NSW).LT.IRA(i) ) LAMR(i) = 1
       ENDDO
-C     Predictor 
+C     Predictor
       IF ( ISO.EQ.0 ) THEN
          DO n = 1 , NMAX ! For each level
             ir = NSTART(n) - 1 ! First substate - 1
@@ -140,7 +140,7 @@ C     Predictor
 
 C     Calculate derivatives of amplitudes
       CALL AMPDER(i57)
-      
+
 C     Corrector
       IF ( ISO.EQ.0 ) THEN
          DO n = 1 , NMAX ! For each level
@@ -211,7 +211,7 @@ C
                   ENDIF
                ENDIF
             ENDIF
-             
+
          ENDIF
       ENDIF
       GOTO 100

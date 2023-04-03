@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION FUNC
 C
@@ -15,12 +15,12 @@ C Return value:
 C      returns either y, log(y) or sqrt(y) depending on mode
 C
 C Note that this is the inverse of FUNC1
-      
+
       REAL*8 FUNCTION FUNC(Y,I)
       IMPLICIT NONE
       INTEGER*4 I
       REAL*8 Y
-      
+
       IF ( I.EQ.2 ) THEN
          IF ( Y.LT.1.E-12 ) Y = 1.E-12
          FUNC = LOG(Y)

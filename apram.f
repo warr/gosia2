@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE APRAM
 C
@@ -26,10 +26,10 @@ C      Acca   - accuracy required
       SUBROUTINE APRAM(Iexp,Inc,Indx,Irld,Acca)
       IMPLICIT NONE
       REAL*8 Acca , accah , ELM , ELML , ELMU , QAPR , SA , uwa
-      INTEGER*4 i1 , i56 , i7 , IAPR , IDIVE , Iexp , img , Inc , Indx , 
-     &          IPATH , Irld , ISEX , itm , IVAR , j , jidim , jj , k , 
+      INTEGER*4 i1 , i56 , i7 , IAPR , IDIVE , Iexp , img , Inc , Indx ,
+     &          IPATH , Irld , ISEX , itm , IVAR , j , jidim , jj , k ,
      &          ktoto , l
-      INTEGER*4 l1 , l2 , l3 , LERF , LMAXE , m , MAGA , MAGEXC , 
+      INTEGER*4 l1 , l2 , l3 , LERF , LMAXE , m , MAGA , MAGEXC ,
      &          MEMAX , MEMX6
       COMPLEX*16 ARM
       COMMON /AZ    / ARM(600,7)

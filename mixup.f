@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE MIXUP
 C
@@ -22,7 +22,7 @@ C Note that if IVAR = 0, then the matrix element is fixed, so we don't do
 C anything here. If it is >= 10000, this means it is correlated to another
 C matrix element, so use the correlation to determine the new value, which
 C may have been changed when we randomized.
- 
+
       SUBROUTINE MIXUP
       IMPLICIT NONE
       REAL*8 ELM , ELML , ELMU , RNDM , SA , SE

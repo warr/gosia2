@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE QE
 C
@@ -30,11 +30,11 @@ C We used different formulae depending on lambda (see the table of electric
 C collision functions in the gosia manual).
 C
 C Lmda = lambda (1 = E1, 2 = E2... 6 = E6)
- 
+
       SUBROUTINE QE(C,D,B2,C2,D2,B4,B6,D3,B8,C4,D4,B10,D5,B12,D6,Lmda,
      &              Pol,Cq)
       IMPLICIT NONE
-      REAL*8 B10 , B12 , B2 , B4 , B6 , B8 , C , C2 , C4 , Cq , D , D2 , 
+      REAL*8 B10 , B12 , B2 , B4 , B6 , B8 , C , C2 , C4 , Cq , D , D2 ,
      &       D3 , D4 , D5 , D6 , Pol
       INTEGER*4 Lmda
       DIMENSION Cq(7)

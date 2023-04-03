@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE TENB
 C
@@ -25,21 +25,21 @@ C can cope with half-integers.
 
       SUBROUTINE TENB(Icl,Bten,Lmax)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , Bten , CAT , ce , DIPOL , EN , fc , si , 
+      REAL*8 ACCA , ACCUR , Bten , CAT , ce , DIPOL , EN , fc , si ,
      &       SPIN , WTHREJ , x , ZPOL
-      INTEGER*4 i , Icl , iha , ila , ilg , ind , isi , ISMAX , ISO , 
+      INTEGER*4 i , Icl , iha , ila , ilg , ind , isi , ISMAX , ISO ,
      &          ite , jm , jmp , k , kk , kp , l , ll , Lmax , lp , m
-      INTEGER*4 mm , mp , ms , msp , NDIM , NMAX , NMAX1 , NSTART , 
+      INTEGER*4 mm , mp , ms , msp , NDIM , NMAX , NMAX1 , NSTART ,
      &          NSTOP
       COMPLEX*16 ARM
       DIMENSION Bten(1200)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
      &                ISO
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /AZ    / ARM(600,7)
-      
+
       iha = (-1)**INT(2.*SPIN(1)+.01)
       IF ( Icl.EQ.1 ) THEN
          ms = 16*(NMAX-1)

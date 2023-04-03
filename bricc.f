@@ -22,17 +22,17 @@ C
       INTEGER*4 NEXPT, IZ, IZ1
       INTEGER*4 ISO , NMAX , NDIM , NMAX1 , i , j , ngamma
       DIMENSION egamma(1500)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
      &                ISO
       COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
+      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) ,
      &                TLBDG(50) , VINF(50)
 
       INTEGER*4 MAGEXC, MEMAX, LMAXE, MEMX6, IVAR
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
 
       INTEGER*4 LAMDA, LEAD, LDNUM, LAMMAX, MULTI
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX ,
      &                MULTI(8)
 
       INTEGER*4 n1, n2
@@ -54,7 +54,7 @@ C     Write to output
 
 C     Make sure we are at start of file that we want to write
       rewind(29)
-      
+
 C     Open the BrIcc database files
       OPEN (UNIT=30,FILE=idx_name,ACCESS='direct',RECL=2048,ERR=999)
       OPEN (UNIT=31,FILE=icc_name, ACCESS='direct',RECL=44,ERR=999,

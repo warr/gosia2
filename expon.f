@@ -38,7 +38,7 @@ C in the function SETIN.
       COMMON /ADX   / ADB(365)
       COMMON /CXI   / XI(1500)
       DATA ci/(0.,1.)/
-      
+
       expox = TCEXP(ci*XI(Inx)*ADB(Npt)*Isg)
       EXPON = expox
       IF ( Ndiv.NE.0 ) THEN

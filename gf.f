@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION GF
 C
@@ -24,7 +24,7 @@ C can handle half-integers.
       IMPLICIT NONE
       INTEGER*4 i , ix , jfz , jiz , K , kz , L , lz
       REAL*8 phase , Sjf , Sji , WSIXJ
-      
+
       GF = 0.
       IF ( L.EQ.0 ) RETURN
       ix = INT(Sji+Sjf+.0001)

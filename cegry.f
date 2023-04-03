@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE CEGRY
 C
@@ -73,48 +73,48 @@ C      Nwyr   - number of data points contributing to chi squared
 C      Icall  -
 C      Issp   -
 C      Iredv  -
- 
+
       SUBROUTINE CEGRY(Chisq,Itemp,Chilo,Idr,Nwyr,Icall,Issp,Iredv)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , AGELI , AKS , BETAR , CC , ccc , ccd , 
-     &       Chilo , Chisq , CNOR , cnr , cocos , CORF , d , decen , 
+      REAL*8 ACCA , ACCUR , AGELI , AKS , BETAR , CC , ccc , ccd ,
+     &       Chilo , Chisq , CNOR , cnr , cocos , CORF , d , decen ,
      &       DELTA , DEV , DIPOL , DIX
-      REAL*8 dl , DQ , DSIGS , DYEX , effi , EG , EMH , EN , ENDEC , 
-     &       ENZ , EP , EPS , EROOT , fi0 , fi1 , fic , FIEX , figl , 
+      REAL*8 dl , DQ , DSIGS , DYEX , effi , EG , EMH , EN , ENDEC ,
+     &       ENZ , EP , EPS , EROOT , fi0 , fi1 , fic , FIEX , figl ,
      &       fm , g
-      REAL*8 gth , ODL , part , partl , Q , QCEN , rik , rl , rx , ry , 
-     &       rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , SUBCH2 , sum3 , 
+      REAL*8 gth , ODL , part , partl , Q , QCEN , rik , rl , rx , ry ,
+     &       rys , rz , sf , sgm , SGW , SPIN , SUBCH1 , SUBCH2 , sum3 ,
      &       SUMCL
-      REAL*8 sumpr , TACOS , TAU , TETACM , tetrc , tfac , thc , TLBDG , 
-     &       TREP , UPL , VACDP , VINF , wf , XA , XA1 , XNOR , YEXP , 
+      REAL*8 sumpr , TACOS , TAU , TETACM , tetrc , tfac , thc , TLBDG ,
+     &       TREP , UPL , VACDP , VINF , wf , XA , XA1 , XNOR , YEXP ,
      &       YGN , YGP , YNRM
       REAL*8 ZPOL
-      INTEGER*4 iabc , IAXS , IBYP , Icall , ICLUST , id , idc , Idr , 
-     &          IDRN , IEXP , ifdu , IFMO , ifxd , IGRD , ii , ILE , 
+      INTEGER*4 iabc , IAXS , IBYP , Icall , ICLUST , id , idc , Idr ,
+     &          IDRN , IEXP , ifdu , IFMO , ifxd , IGRD , ii , ILE ,
      &          ile2 , IMIN , inclus , INM
-      INTEGER*4 INNR , ipd , IPRM , IRAWEX , Iredv , ISO , Issp , 
-     &          Itemp , ITMA , ITS , iva , iw , IWF , ixl , ixm , IY , 
+      INTEGER*4 INNR , ipd , IPRM , IRAWEX , Iredv , ISO , Issp ,
+     &          Itemp , ITMA , ITS , iva , iw , IWF , ixl , ixm , IY ,
      &          iyex , IZ , IZ1 , jj
-      INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , KSEQ , 
-     &          KVAR , l , l1 , LASTCL , LFL , LFL1 , LFL2 , lic , 
+      INTEGER*4 jj1 , jk , jpc , JSKIP , k , k9 , kc , kj , kk , KSEQ ,
+     &          KVAR , l , l1 , LASTCL , LFL , LFL1 , LFL2 , lic ,
      &          licz , ll1
-      INTEGER*4 LNORM , LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , 
-     &          LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , lth , lu , luu , 
+      INTEGER*4 LNORM , LP1 , LP10 , LP11 , LP12 , LP13 , LP14 , LP2 ,
+     &          LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , lth , lu , luu ,
      &          na , NANG , NDIM
-      INTEGER*4 NDST , NEXPT , nf , nf1 , ni , ni1 , NICC , NLIFT , 
+      INTEGER*4 NDST , NEXPT , nf , nf1 , ni , ni1 , NICC , NLIFT ,
      &          NMAX , NMAX1 , Nwyr , NYLDE
       INTEGER*4 ISPL ! Added for spline
       CHARACTER*4 wupl , war
       REAL*8 CNOR1 , CNOR2 ! For gosia2
       INTEGER*4 MCFIX ! For gosia2
       CHARACTER*4 op2 ! For gosia2
-      DIMENSION part(32,50,2) , lic(32) , lth(1500) , cnr(32,50) , 
+      DIMENSION part(32,50,2) , lic(32) , lth(1500) , cnr(32,50) ,
      &          partl(32,50,2)
-      COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,1500) , 
+      COMMON /CLUST / ICLUST(50,200) , LASTCL(50,20) , SUMCL(20,1500) ,
      &                IRAWEX(50)
       COMMON /ODCH  / DEV(1500)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
+      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) ,
      &                ENZ(200)
       COMMON /BREC  / BETAR(50)
       COMMON /DIMX  / DIX(4) , ODL(200)
@@ -124,22 +124,22 @@ C      Iredv  -
       COMMON /LIFE  / NLIFT
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /IGRAD / IGRD
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
+      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) ,
      &                TLBDG(50) , VINF(50)
       COMMON /MINNI / IMIN , LNORM(50)
       COMMON /LCZP  / EMH , INM , LFL1 , LFL2 , LFL
       COMMON /YTEOR / YGN(1500) , YGP(1500) , IFMO
       COMMON /SEL   / KVAR(1500)
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
+      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 ,
      &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
+      COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) ,
      &                NICC , NANG(200) , ISPL
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
+      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) ,
+     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) ,
      &                YNRM(32,50) , IDRN , ILE(32)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /WARN  / SGW , SUBCH1 , SUBCH2 , IWF
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
      &                ISO
       COMMON /SKP   / JSKIP(50)
       COMMON /TRB   / ITS
@@ -308,10 +308,10 @@ C              Correct for finite recoil
                            IF ( ABS(sgm).GE.SGW ) war = '*?!*'
                            ni1 = KSEQ(l1,3) ! Initial level of l1'th decay
                            nf1 = KSEQ(l1,4) ! Final level of l1'th decay
-                           WRITE (22,99007) ni , ni1 , nf , nf1 , 
-     &                            SPIN(ni) , SPIN(ni1) , SPIN(nf) , 
-     &                            SPIN(nf1) , ENDEC(l) , ENDEC(l1) , 
-     &                            YGN(l)*CNOR(k9,IEXP) , YEXP(k9,lu) , 
+                           WRITE (22,99007) ni , ni1 , nf , nf1 ,
+     &                            SPIN(ni) , SPIN(ni1) , SPIN(nf) ,
+     &                            SPIN(nf1) , ENDEC(l) , ENDEC(l1) ,
+     &                            YGN(l)*CNOR(k9,IEXP) , YEXP(k9,lu) ,
      &                            100.*(YEXP(k9,lu)-YGN(l)*CNOR(k9,IEXP)
      &                            )/YEXP(k9,lu) , sgm , war
 99007                      FORMAT (4X,1I2,'+',1I2,'--',1I2,'+',1I2,3X,
@@ -328,9 +328,9 @@ C              Correct for finite recoil
                            sgm = (YEXP(k9,lu)-YGN(l)*CNOR(k9,IEXP))
      &                           /DYEX(k9,lu)
                            IF ( ABS(sgm).GE.SGW ) war = '*?!*'
-                           WRITE (22,99013) ni , nf , SPIN(ni) , 
+                           WRITE (22,99013) ni , nf , SPIN(ni) ,
      &                            SPIN(nf) , ENDEC(l) , YGN(l)
-     &                            *CNOR(k9,IEXP) , YEXP(k9,lu) , 
+     &                            *CNOR(k9,IEXP) , YEXP(k9,lu) ,
      &                            100.*(YEXP(k9,lu)-YGN(l)*CNOR(k9,IEXP)
      &                            )/YEXP(k9,lu) , sgm , war
                            SUBCH1 = SUBCH1 + sgm*sgm
@@ -353,7 +353,7 @@ C              Correct for finite recoil
      &                             *CNOR(k9,IEXP)/DYEX(k9,lu)
                               IF ( ITS.EQ.1 .AND. INM.EQ.1 )
      &                             WRITE (15,*) IEXP , rik/CNOR(1,IEXP)
-     &                             , CNOR(1,IEXP) , DYEX(k9,lu) , 
+     &                             , CNOR(1,IEXP) , DYEX(k9,lu) ,
      &                             YEXP(k9,lu)
                               CALL SIXEL(rik,ry,EMH,jk,kk,INM,licz)
                            ENDIF
@@ -385,17 +385,17 @@ C              Correct for finite recoil
                         IF ( ry.GT.UPL(k9,IEXP) .AND. lth(l).EQ.0 )
      &                       wupl = 'UPL!'
                         IF ( IPRM(16).NE.0 .OR. wupl.NE.'    ' ) THEN
-                           IF ( wupl.EQ.'    ' ) WRITE (22,99008) ni , 
-     &                          nf , SPIN(ni) , SPIN(nf) , ENDEC(l) , 
+                           IF ( wupl.EQ.'    ' ) WRITE (22,99008) ni ,
+     &                          nf , SPIN(ni) , SPIN(nf) , ENDEC(l) ,
      &                          YGN(l)*CNOR(k9,IEXP) , wupl
 99008                      FORMAT (6X,1I2,5X,1I2,7X,1F4.1,6X,1F4.1,9X,
      &                             1F6.4,6X,1E9.4,10X,1A4)
                            IF ( wupl.NE.'    ' ) THEN
                               sgm = (ry-UPL(k9,IEXP))/UPL(k9,IEXP)
-                              WRITE (22,99013) ni , nf , SPIN(ni) , 
+                              WRITE (22,99013) ni , nf , SPIN(ni) ,
      &                               SPIN(nf) , ENDEC(l) , YGN(l)
      &                               *CNOR(k9,IEXP) , UPL(k9,IEXP)
-     &                               *CNOR(k9,IEXP)*YGN(IDRN) , 
+     &                               *CNOR(k9,IEXP)*YGN(IDRN) ,
      &                               100.*(1.-YGN(l)/UPL(k9,IEXP)
      &                               /YGN(IDRN)) , sgm , wupl
                               SUBCH1 = SUBCH1 + sgm*sgm
@@ -408,7 +408,7 @@ C              Correct for finite recoil
      &                          /UPL(k9,IEXP)
                         Chilo = Chilo + LOG(ry/UPL(k9,IEXP))**2
                         IF ( IWF.NE.0 ) THEN ! If warning flag is set
-                           WRITE (22,99009) IEXP , ni , nf , 
+                           WRITE (22,99009) IEXP , ni , nf ,
      &                            ry/UPL(k9,IEXP)
 99009                      FORMAT (5X,'WARNING-EXP.',1I2,2X,'TRANS. ',
      &                             1I2,'--',1I2,5X,
@@ -554,7 +554,7 @@ C           If we want a common normalisation, sort it out here
                   ENDIF ! IF ( k.NE.1 )
                ENDIF ! IF ( LNORM(jj).EQ.jj )
             ENDIF ! IF ( INNR.NE.1 )
-             
+
          ENDIF ! IF ( JSKIP(jj).NE.0 )
       ENDDO ! Loop on experiment
 

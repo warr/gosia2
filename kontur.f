@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE KONTUR
 C
@@ -32,16 +32,16 @@ C      Jj     - matrix element
 C      Sh     -
 C      Bten   -
 C      Rem    - natural log of the largest value the computer can represent
- 
+
       SUBROUTINE KONTUR(Idr,Chis0,Chil,Ifbf,Inpo,Jj,Sh,Bten,Rem)
       IMPLICIT NONE
-      REAL*8 ac , Bten , c , Chil , chilo , Chis0 , chis1 , chis2 , d1 , 
-     &       d2 , DEVD , DEVU , DS , DSE , DSG , ELM , ELML , ELMU , f , 
+      REAL*8 ac , Bten , c , Chil , chilo , Chis0 , chis1 , chis2 , d1 ,
+     &       d2 , DEVD , DEVU , DS , DSE , DSG , ELM , ELML , ELMU , f ,
      &       h
-      REAL*8 HLM , Rem , RK4 , SA , sajj , Sh , t , v , ww , x , XV , 
+      REAL*8 HLM , Rem , RK4 , SA , sajj , Sh , t , v , ww , x , XV ,
      &       y , YV , ZV
-      INTEGER*4 i , Idr , Ifbf , Inpo , INTR , IPS1 , itl , IVAR , ix , 
-     &          j , Jj , l , LMAXE , LNY , m , MAGEXC , MEMAX , MEMX6 , 
+      INTEGER*4 i , Idr , Ifbf , Inpo , INTR , IPS1 , itl , IVAR , ix ,
+     &          j , Jj , l , LMAXE , LNY , m , MAGEXC , MEMAX , MEMX6 ,
      &          NWR
       DIMENSION f(3) , Bten(1200)
       COMMON /VLIN  / XV(101) , YV(101) , ZV(101) , DSG(101) ,

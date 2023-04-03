@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE SIXEL
 C
@@ -21,12 +21,12 @@ C      Jk     -
 C      Kk     -
 C      Indx   - index of matrix element
 C      Lu     -
- 
+
       SUBROUTINE SIXEL(Rik,Rv,Em,Jk,Kk,Indx,Lu)
       IMPLICIT NONE
-      REAL*8 a1 , al , al1 , c1 , c2 , DEV , Em , EPS , EROOT , FIEX , 
+      REAL*8 a1 , al , al1 , c1 , c2 , DEV , Em , EPS , EROOT , FIEX ,
      &       Rik , rn , Rv , rx
-      INTEGER*4 IAXS , IEXP , Indx , ITS , j , j1 , Jk , Kk , kk6 , 
+      INTEGER*4 IAXS , IEXP , Indx , ITS , j , j1 , Jk , Kk , kk6 ,
      &          KVAR , l , l1 , Lu
       COMPLEX*16 ARM
       COMMON /AZ    / ARM(600,7)
@@ -38,7 +38,7 @@ C      Lu     -
       kk6 = Kk + 5
       rn = DEV(Lu)
       al = (Rv-rn)*20./Rik
-      IF ( ITS.EQ.1 .AND. KVAR(Indx).NE.0 ) WRITE (18,*) Lu , Indx , 
+      IF ( ITS.EQ.1 .AND. KVAR(Indx).NE.0 ) WRITE (18,*) Lu , Indx ,
      &     IEXP , al/Em
       al1 = ABS(al)
       IF ( ITS.EQ.2 ) WRITE (18,*) Lu , Indx , IEXP , al1

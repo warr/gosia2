@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE MINI
 C
@@ -58,36 +58,36 @@ C don't go outside the limits specified by the user.
       SUBROUTINE MINI(Chisq,Chiok,Nptl,Conv,Imode,Idr,Xtest,Ips,Is,Jjh,
      &                Bten)
       IMPLICIT NONE
-      REAL*8 a , a0 , a1 , b , Bten , c , ccd , chd , chil , chilo , 
-     &       Chiok , chirf , CHIS11 , chis12 , chis13 , chisf , chisp , 
+      REAL*8 a , a0 , a1 , b , Bten , c , ccd , chd , chil , chilo ,
+     &       Chiok , chirf , CHIS11 , chis12 , chis13 , chisf , chisp ,
      &       Chisq , chiss , chl
-      REAL*8 chx , cmax , Conv , CORF , crit , DEVD , DEVU , dl , 
-     &       DLOCK , dm , DYEX , ELM , ELMH , ELML , ELMU , EMH , f1 , 
+      REAL*8 chx , cmax , Conv , CORF , crit , DEVD , DEVU , dl ,
+     &       DLOCK , dm , DYEX , ELM , ELMH , ELML , ELMU , EMH , f1 ,
      &       f2 , flt , GRAD
-      REAL*8 gradp , HLMLM , ht , p , q , rfk , SA , sel , shl , sumg1 , 
+      REAL*8 gradp , HLMLM , ht , p , q , rfk , SA , sel , shl , sumg1 ,
      &       sumg2 , sumht , UPL , uxa , xkat , Xtest , YEXP , YNRM
-      INTEGER*4 i , icl1 , icl2 , icount , ICS , Idr , IDRN , IFBFL , 
-     &          iht , iin , ILE , Imode , indx1 , INM , inmx , ino , 
+      INTEGER*4 i , icl1 , icl2 , icount , ICS , Idr , IDRN , IFBFL ,
+     &          iht , iin , ILE , Imode , indx1 , INM , inmx , ino ,
      &          INTR , ipas , ipm , IPRM
-      INTEGER*4 Ips , IPS1 , Is , istec , ITAK2 , itf , IVAR , IY , j , 
-     &          jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , jnm , 
+      INTEGER*4 Ips , IPS1 , Is , istec , ITAK2 , itf , IVAR , IY , j ,
+     &          jcoup , jcp , JENTR , jin , Jjh , jjj , jlin , jnm ,
      &          jpr , jsa , jst
-      INTEGER*4 KFERR , kh2 , kkk , KVAR , l , LFL , LFL1 , LFL2 , 
-     &          LMAXE , lnm , LNY , LOCKF , LOCKS , LP1 , LP10 , LP11 , 
+      INTEGER*4 KFERR , kh2 , kkk , KVAR , l , LFL , LFL1 , LFL2 ,
+     &          LMAXE , lnm , LNY , LOCKF , LOCKS , LP1 , LP10 , LP11 ,
      &          LP12 , LP13 , LP14 , LP2
-      INTEGER*4 LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , MAGEXC , MEMAX , 
-     &          MEMX6 , metf , mvfl , ncall , nlinn , NLOCK , noflg , 
+      INTEGER*4 LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , MAGEXC , MEMAX ,
+     &          MEMX6 , metf , mvfl , ncall , nlinn , NLOCK , noflg ,
      &          Nptl , NWR , NYLDE
       INTEGER*4 IBPS, IUNIT3, JZB ! For gosia2
       DIMENSION ipm(10) , Bten(1200) , gradp(1500)
       COMMON /DUMM  / GRAD(1500) , HLMLM(1500) , ELMH(1500)
       COMMON /ILEWY / NWR
       COMMON /CH1T  / CHIS11
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
+      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 ,
      &                LP10 , LP11 , LP12 , LP13 , LP14
       COMMON /UWAGA / ITAK2
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
+      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) ,
+     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) ,
      &                YNRM(32,50) , IDRN , ILE(32)
       COMMON /DFTB  / DEVD(1500) , DEVU(1500)
       COMMON /PRT   / IPRM(20)
@@ -172,9 +172,9 @@ C     Write correction factors
       DO jnm = 1 , LP4
          WRITE (11) (CORF(jnm,kh2),kh2=1,LP6)
       ENDDO
-       
+
       IF ( IPS1.EQ.0 ) RETURN ! If IPS1 = 0, terminate after writing correction factors
-       
+
  200  noflg = 0
       ncall = 1
  300  sumht = 0.
@@ -295,7 +295,7 @@ C     Write correction factors
          ELSE
             sumg2 = 0.
             DO jnm = 1 , MEMAX
-               IF ( IVAR(jnm).EQ.1 .OR. IVAR(jnm).EQ.2 ) sumg2 = sumg2 + 
+               IF ( IVAR(jnm).EQ.1 .OR. IVAR(jnm).EQ.2 ) sumg2 = sumg2 +
      &              GRAD(jnm)*GRAD(jnm)
             ENDDO
             IF ( sumg2.LT.1.E-10 ) GOTO 700
@@ -306,7 +306,7 @@ C     Write correction factors
             IF ( metf.NE.0 ) THEN
                dm = 0.
                DO jnm = 1 , MEMAX
-                  IF ( IVAR(jnm).EQ.2 .OR. IVAR(jnm).EQ.1 ) dm = dm + 
+                  IF ( IVAR(jnm).EQ.2 .OR. IVAR(jnm).EQ.1 ) dm = dm +
      &                 ELM(jnm)*ELM(jnm)*GRAD(jnm)*GRAD(jnm)
                ENDDO
                dm = SQRT(dm)
@@ -366,7 +366,7 @@ C     Write correction factors
             HLMLM(l) = ELM(l)
          ENDDO
          DO l = 1 , MEMAX
-            IF ( ABS(GRAD(l)).LE.DLOCK .AND. LOCKS.EQ.1 .AND. 
+            IF ( ABS(GRAD(l)).LE.DLOCK .AND. LOCKS.EQ.1 .AND.
      &           icount.EQ.1 .AND. IVAR(l).LE.999 .AND. IVAR(l).NE.0 )
      &           THEN
                IF ( KFERR.NE.1 ) KVAR(l) = 0
@@ -378,7 +378,7 @@ C     Write correction factors
          ENDDO
          istec = 0
       ENDIF
-       
+
  400  DO j = 1 , MEMAX
          ELMH(j) = ELM(j)
       ENDDO
@@ -394,7 +394,7 @@ C     Find steepest gradient
             inmx = iht
          ENDIF
       ENDDO
-       
+
       ht = .01*ABS(ELM(inmx))/cmax
       mvfl = 0
       IF ( icount.NE.1 .AND. istec.EQ.1 ) THEN
@@ -419,7 +419,7 @@ C     Find steepest gradient
             gradp(iin) = 0.
          ENDIF
       ENDIF
-       
+
  500  DO j = 1 , MEMAX
          ELM(j) = ELMH(j) - ht*GRAD(j)
       ENDDO
@@ -478,13 +478,13 @@ C     Find steepest gradient
          ENDIF
       ENDIF
 
-C     Required chi square achieved       
+C     Required chi square achieved
  600  chil = Chisq
       IF ( Ips.EQ.0 ) WRITE (22,99006) icount
 99006 FORMAT (5X,'AT STEP',1X,1I5,1X,'CHISQ CRITERION FULFILLED')
       IF ( Ips.EQ.0 ) WRITE (22,99010) chil
       RETURN
-      
+
  700  IF ( LOCKF.EQ.0 ) THEN ! Terminate if convergence satisfied
          IF ( Chisq.GE.chil ) THEN
             DO jjj = 1 , MEMAX
@@ -528,7 +528,7 @@ C     Required chi square achieved
       ENDIF
       INTR = 0
       RETURN
-       
+
 99010 FORMAT (5X,'*** CHISQ=',1E14.6,1X,'***')
 99011 FORMAT (1X/5X,'MATRIX ELEMENT',1X,1I3,1X,'LOCKED!')
       END

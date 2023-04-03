@@ -29,15 +29,15 @@ C
       REAL*8 yp1 , ypn , y(1500) , ys
       INTEGER*4 i , Iscal , Irc , Ipc
       REAL*8 Xx , Yy
- 
+
       IF ( Irc.EQ.2 ) THEN
       ELSEIF ( Irc.EQ.3 ) THEN
- 
+
          DO i = 1 , N
             y(i) = FUNC(Yr(i),Iscal)
 c      print*,iscal,x(i),yr(i),y(i),irc,ipc
          ENDDO
- 
+
          yp1 = (y(2)-y(1))/(X(2)-X(1))
          ypn = (y(N)-y(N-1))/(X(N)-X(N-1))
          CALL SPLINE(X,y,N,yp1,ypn,w)
@@ -49,23 +49,23 @@ c      print*,iscal,x(i),yr(i),y(i),irc,ipc
 c         PRINT * , 'Spline' , Xx , ys , Yy , Iscal , Irc , Ipc
          RETURN
       ELSEIF ( Irc.EQ.4 ) THEN
- 
+
          DO i = 1 , N
             w(i) = arh(Ipc,i)
          ENDDO
- 
+
          CALL SPLINT(X,y,w,N,Xx,ys)
          Yy = FUNC1(ys,Iscal)
          PRINT * , 'Spline' , Xx , ys , Yy , Iscal , Irc , Ipc
          GOTO 99999
       ELSE
- 
- 
+
+
          DO i = 1 , N
             y(i) = FUNC(Yr(i),Iscal)
 c      print*,iscal,x(i),yr(i),y(i),irc
          ENDDO
- 
+
          yp1 = (y(2)-y(1))/(X(2)-X(1))
          ypn = (y(N)-y(N-1))/(X(N)-X(N-1))
          CALL SPLINE(X,y,N,yp1,ypn,w)
@@ -75,4 +75,4 @@ c      print*,iscal,x(i),yr(i),y(i),irc
 c      PRINT * , 'Spline' , Xx , ys , Yy , Iscal , Irc , Ipc
       RETURN
 99999 END
- 
+

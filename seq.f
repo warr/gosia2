@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE SEQ
 C
@@ -34,34 +34,34 @@ C We store the order in the KSEQ array of common block LEV.
 C
 C Note that in the code, a multipolarity 1 = E1, 2 = E2 ... 6 = E6, 7 = M1,
 C 8 = M2.
- 
+
       SUBROUTINE SEQ(Idr)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , CONV , DELTA , DIPOL , ega , egs , emax , 
-     &       EN , ENDEC , ENZ , F , FP , GF , GKP , SPIN , spinf , 
+      REAL*8 ACCA , ACCUR , CONV , DELTA , DIPOL , ega , egs , emax ,
+     &       EN , ENDEC , ENZ , F , FP , GF , GKP , SPIN , spinf ,
      &       spini , TAU , twoi
       REAL*8 ZPOL
-      INTEGER*4 idecay , Idr , indx , inx , inx1 , ir , is , ISO , 
-     &          istr1 , istr2 , ITMA , j , js , jsave , k , KLEC , kpa , 
+      INTEGER*4 idecay , Idr , indx , inx , inx1 , ir , is , ISO ,
+     &          istr1 , istr2 , ITMA , j , js , jsave , k , KLEC , kpa ,
      &          KSEQ , l , la
-      INTEGER*4 la1 , LAMDA , LAMMAX , ld , LDNUM , LEAD , LEADF , LP1 , 
-     &          LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , LP4 , 
+      INTEGER*4 la1 , LAMDA , LAMMAX , ld , LDNUM , LEAD , LEADF , LP1 ,
+     &          LP10 , LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , LP4 ,
      &          LP6 , LP7 , LP8 , LP9
-      INTEGER*4 m , m1 , m6 , MEM , mk , mule , mulm , MULTI , n , n1 , 
+      INTEGER*4 m , m1 , m6 , MEM , mk , mule , mulm , MULTI , n , n1 ,
      &          NDIM , NMAX , NMAX1 , nob
       COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
+      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) ,
      &                ENZ(200)
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX ,
      &                MULTI(8)
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
+      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 ,
      &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
      &                ISO
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /CATLF / FP(4,1500,3) , GKP(4,1500,2) , KLEC(75)
       DATA jsave/0/
-      
+
       m6 = 0
       DO l = 1 , 6
          m6 = m6 + MULTI(l)

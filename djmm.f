@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION DJMM
 C
@@ -24,18 +24,18 @@ C previously calculated. For this to work, the variable djm has to be
 C declared with a SAVE statement, otherwise the variable is an automatic one,
 C which is created freshly each time the function is called.
 
- 
+
       REAL*8 FUNCTION DJMM(Beta,K,Kpp,Kp)
       IMPLICIT NONE
-      REAL*8 B , b1 , b2 , be , BEQ , Beta , cb , ctb , djm , f , g , 
+      REAL*8 B , b1 , b2 , be , BEQ , Beta , cb , ctb , djm , f , g ,
      &       sb , sk , ul
-      INTEGER*4 iczy , ifla , ifza , ill , j , ja , jb , jc , jd , K , 
+      INTEGER*4 iczy , ifla , ifza , ill , j , ja , jb , jc , jd , K ,
      &          Kp , Kpp , lca , loc , mas , mis
       DIMENSION djm(525) , iczy(525)
       COMMON /IDENT / BEQ
       COMMON /CB    / B(20)
       SAVE djm ! Added N. Warr Jul2007
-      
+
       ifza = 1
       IF ( Beta.LT.0. ) ifza = (-1)**(Kp+Kpp)
       sk = DBLE(K)
@@ -69,7 +69,7 @@ C     We have to calculate it
             RETURN
          ENDIF
       ENDIF
-       
+
       ctb = cb*cb/sb/sb
       ja = K + Kp + 1 ! K + \xi^\prime (+1 for indexing array)
       jb = K - Kp + 1 ! K - \xi^\prime (+1 for indexing array)

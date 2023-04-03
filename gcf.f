@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE GCF
 C
@@ -11,10 +11,10 @@ C Formal parameters:
 C      Tau    - Absorption coefficient for Ge at this energy (input)
 C      Thing  - Absorption coefficient for absorbers at this energy (input)
 C      Q      - Attenuation coefficient (output)
- 
+
       SUBROUTINE GCF(Tau,Thing,Q)
       IMPLICIT NONE
-      REAL*8 A , b , D , dl , ev , ex , f , fint , od , ODL , Q , R , 
+      REAL*8 A , b , D , dl , ev , ex , f , fint , od , ODL , Q , R ,
      &       Tau , Thing , XL , xm , yl , yu
       INTEGER*4 i , j , k , m
       COMMON /DIMX  / A , R , XL , D , ODL(200)

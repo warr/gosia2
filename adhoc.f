@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE ADHOC
 C
@@ -55,51 +55,51 @@ C      Ntap   - unit of yield file
 C      Iyr    - flag set here
 C
 C Here we parse the input of the OP,YIEL command and store the values.
- 
+
       SUBROUTINE ADHOC(Oph,Idr,Nfd,Ntap,Iyr)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , AGELI , BRAT , CC , CORF , DELTA , DIPOL , 
-     &       DIX , DMIX , DMIXE , DYEX , EAMX , EG , EN , ENDEC , ENZ , 
+      REAL*8 ACCA , ACCUR , AGELI , BRAT , CC , CORF , DELTA , DIPOL ,
+     &       DIX , DMIX , DMIXE , DYEX , EAMX , EG , EN , ENDEC , ENZ ,
      &       EP , ODL , Q
-      REAL*8 SPIN , TAU , TIMEL , TLBDG , UPL , VINF , wamx , wbra , 
+      REAL*8 SPIN , TAU , TIMEL , TLBDG , UPL , VINF , wamx , wbra ,
      &       wdl , wlf , XA , XA1 , YEXP , YGN , YGP , YNRM , ZPOL
-      INTEGER*4 IAMX , IAMY , iax , IBRC , Idr , IDRN , iexp1 , IFMO , 
-     &          ILE , ilft , IMIX , iosr , ipri , IPRM , ISO , isrt1 , 
+      INTEGER*4 IAMX , IAMY , iax , IBRC , Idr , IDRN , iexp1 , IFMO ,
+     &          ILE , ilft , IMIX , iosr , ipri , IPRM , ISO , isrt1 ,
      &          ITMA , ITS , iuf , IVAR
-      INTEGER*4 IY , Iyr , IZ , IZ1 , jic , jicc , juf , KSEQ , lb , 
-     &          li , licc , LIFCT , llia , LMAXE , lxt , MAGEXC , MEM , 
+      INTEGER*4 IY , Iyr , IZ , IZ1 , jic , jicc , juf , KSEQ , lb ,
+     &          li , licc , LIFCT , llia , LMAXE , lxt , MAGEXC , MEM ,
      &          MEMAX , MEMX6 , n1
-      INTEGER*4 n2 , NAMX , NANG , NBRA , ndas , NDL , NDST , ndtp , 
-     &          NEXPT , Nfd , NICC , nistr , NLIFT , ns1 , ns2 , ns3 , 
+      INTEGER*4 n2 , NAMX , NANG , NBRA , ndas , NDL , NDST , ndtp ,
+     &          NEXPT , Nfd , NICC , nistr , NLIFT , ns1 , ns2 , ns3 ,
      &          ns4 , Ntap , nvare , NYLDE
       INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
       INTEGER*4 ISPL ! Added for spline
       CHARACTER*4 Oph
       COMMON /CCCDS / NDST(50)
       COMMON /DIMX  / DIX(4) , ODL(200)
-      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
+      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) ,
      &                ENZ(200)
       COMMON /LIFE  / NLIFT
       COMMON /MIXD  / DMIXE(20,2) , DMIX(20) , IMIX(20) , NDL
       COMMON /ME2D  / EAMX(100,2) , NAMX , IAMX(100) , IAMY(100,2)
       COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
       COMMON /BRNCH / BRAT(50,2) , IBRC(2,50) , NBRA
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
+      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) ,
+     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) ,
      &                YNRM(32,50) , IDRN , ILE(32)
       COMMON /YTEOR / YGN(1500) , YGP(1500) , IFMO
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
-      COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
+      COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) ,
      &                NICC , NANG(200) , ISPL
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
      &                ISO
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
+      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) ,
      &                TLBDG(50) , VINF(50)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
       COMMON /PRT   / IPRM(20)
       COMMON /TRB   / ITS
       COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2
-      
+
 C     Read OP,YIEL parameters
       iosr = 0
       READ (JZB,*) IFMO ! IFLAG
@@ -186,7 +186,7 @@ C     Read upper limits and relative normalisation factors
          ENDIF
       ENDDO ! Loop li on experiments
 
-C     Read file for experimental yields       
+C     Read file for experimental yields
       READ (JZB,*) Ntap ! NTAP
       IF ( Ntap.NE.0 ) THEN
          ipri = IPRM(2)
@@ -223,7 +223,7 @@ C     Read branching ratios
          DO lb = 1 , NBRA ! I1,I2,I3,I4,B,DB repeated NBRA times
             READ (JZB,*) ns1 , ns2 , ns3 , ns4 , BRAT(lb,1) , BRAT(lb,2)
             BRAT(lb,2) = BRAT(lb,2)/(SQRT(wbra)+1.E-10) ! Relative error
-            WRITE (22,99003) ns1 , ns2 , ns3 , ns4 , BRAT(lb,1) , 
+            WRITE (22,99003) ns1 , ns2 , ns3 , ns4 , BRAT(lb,1) ,
      &                       BRAT(lb,2)
 99003       FORMAT (5X,1I2,6X,1I2,6X,1I2,6X,1I2,5X,1F10.5,5X,1F10.5)
             DO li = 1 , Idr ! Search decays for these pairs of levels

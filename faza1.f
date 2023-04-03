@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE FAZA1
 C
@@ -8,7 +8,7 @@ C Purpose: calculate complex phase.
 C
 C Formal parameters:
 C      La     - lambda 1...6 = E1...6, 7,8 = M1,M2
-C      Mi     - mu 
+C      Mi     - mu
 C      Rmir   -
 C      Rmis   -
 C      Dis    - complex phase

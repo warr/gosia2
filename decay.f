@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE DECAY
 C
@@ -28,20 +28,20 @@ C Formal parameters:
 C      Chisq  - chi squared
 C      Nlift  - number of lifetimes
 C      Chilo  - chi squared of logs
-      
+
       SUBROUTINE DECAY(Chisq,Nlift,Chilo)
       IMPLICIT NONE
-      REAL*8 AKS , bsum , Chilo , Chisq , DELLA , DELTA , df , DQ , 
-     &       el1 , ELM , ELML , ELMU , emt , emt1 , ENDEC , ENZ , EPS , 
+      REAL*8 AKS , bsum , Chilo , Chisq , DELLA , DELTA , df , DQ ,
+     &       el1 , ELM , ELML , ELMU , emt , emt1 , ENDEC , ENZ , EPS ,
      &       EROOT , FIEX , FP
-      REAL*8 gk , GKP , QCEN , SA , TAU , TIMEL , VACDP , vcd , XNOR , 
+      REAL*8 gk , GKP , QCEN , SA , TAU , TIMEL , VACDP , vcd , XNOR ,
      &       ZETA
-      INTEGER*4 i , IAXS , ibra , IBYP , idr , idrh , IEXP , ifn , il , 
-     &          inx , inx1 , ITMA , iu , j , jlt , k , kl , KLEC , kq , 
+      INTEGER*4 i , IAXS , ibra , IBYP , idr , idrh , IEXP , ifn , il ,
+     &          inx , inx1 , ITMA , iu , j , jlt , k , kl , KLEC , kq ,
      &          KSEQ
-      INTEGER*4 l , l1 , lc1 , lc2 , LIFCT , LZETA , n1 , n2 , NDIM , 
+      INTEGER*4 l , l1 , lc1 , lc2 , LIFCT , LZETA , n1 , n2 , NDIM ,
      &          Nlift , NMAX , NMAX1
-      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
+      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) ,
      &                ENZ(200)
       COMMON /LIFE1 / LIFCT(50) , TIMEL(2,50)
       COMMON /VAC   / VACDP(3,75) , QCEN , DQ , XNOR , AKS(6,75) , IBYP

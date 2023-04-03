@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE HALF
 C
@@ -15,11 +15,11 @@ C      NSTART - index in CAT of first substate associated with a level
 C
 C Formal parameters:
 C      Iso    - isotropic flag
- 
+
       SUBROUTINE HALF(Iso)
       IMPLICIT NONE
       REAL*8 CAT
-      INTEGER*4 ir , ISMAX , Iso , j , NDIM , NMAX , NMAX1 , NSTART , 
+      INTEGER*4 ir , ISMAX , Iso , j , NDIM , NMAX , NMAX1 , NSTART ,
      &          NSTOP
       COMPLEX*16 ARM , fpom
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
@@ -40,7 +40,7 @@ C      Iso    - isotropic flag
          ENDDO
          GOTO 99999
       ENDIF
-       
+
       DO j = 1 , ISMAX ! Loop over substates
          fpom = ARM(j,3)
          ARM(j,1) = -.0625*(ARM(j,4)+ARM(j,1))

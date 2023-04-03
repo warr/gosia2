@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE ALLOC
 C
@@ -29,17 +29,17 @@ C 2 * IRA(1) values for E1, 3 * IRA(2) values for E2, 4 * IRA(3) values for
 C E3... 3 * IRA(8) values for M2 in that order.
 C
 C We are limited to a maximum of LP14 (=4900) values in total.
- 
+
       SUBROUTINE ALLOC(Accur)
       IMPLICIT NONE
       REAL*8 Accur
-      INTEGER*4 iflag , IRA , j , k , k1 , load , LOCQ , LP1 , LP10 , 
-     &          LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , LP4 , LP6 , 
+      INTEGER*4 iflag , IRA , j , k , k1 , load , LOCQ , LP1 , LP10 ,
+     &          LP11 , LP12 , LP13 , LP14 , LP2 , LP3 , LP4 , LP6 ,
      &          LP7 , LP8 , LP9
       INTEGER*4 MAXLA
       COMMON /ALLC  / LOCQ(8,7)
       COMMON /RNG   / IRA(8) , MAXLA
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
+      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 ,
      &                LP10 , LP11 , LP12 , LP13 , LP14
 
 C     Call RANGEL to determine the range of the integration over omega, which
@@ -54,7 +54,7 @@ C     First zero all the elements
             LOCQ(j,k) = 0
          ENDDO
       ENDDO
-      
+
 C     Now store values for E1...E6
       DO k = 1 , 6
          k1 = k + 1
@@ -63,7 +63,7 @@ C     Now store values for E1...E6
             load = load + IRA(k)
          ENDDO
       ENDDO
-      
+
 C     And for M1, M2
       DO k = 7 , 8
          k1 = k - 6

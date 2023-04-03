@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE CHMEM
 C
@@ -13,7 +13,7 @@ C      EAMX   - known matrix elements and their error
 C      NAMX   - number of known matrix elements
 C      IAMX   - index of matrix element for known matrix element
 C      IAMY   - level indices of pair of levels for which matrix element is known
- 
+
       SUBROUTINE CHMEM(Nw,Chi,Chilo)
       IMPLICIT NONE
       REAL*8 Chi , Chilo , di , EAMX , ELM , ELML , ELMU , SA
@@ -27,13 +27,13 @@ C      IAMY   - level indices of pair of levels for which matrix element is know
          ib = IAMX(ia)
          IF ( IAMY(ia,1).NE.IAMY(ia,2) ) THEN
             di = (ELM(ib)-EAMX(ia,1))/EAMX(ia,2)
-            Chilo = Chilo + 
+            Chilo = Chilo +
      &              (LOG(ABS(ELM(ib)/EAMX(ia,1)))*ABS(EAMX(ia,1))
      &              /EAMX(ia,2))**2
             Chi = Chi + di*di
          ELSE
             di = (ELM(ib)-EAMX(ia,1))/EAMX(ia,2)
-            Chilo = Chilo + 
+            Chilo = Chilo +
      &              (LOG(ABS(ELM(ib)/EAMX(ia,1)))*ABS(EAMX(ia,1))
      &              /EAMX(ia,2))**2
             Chi = Chi + di*di

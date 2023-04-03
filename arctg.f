@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION ARCTG
 C
@@ -13,7 +13,7 @@ C      Pi     - Pi must be set to 3.14159... before calling ARCTG
 C
 C Return value:
 C      arctangent(A) within range of F
- 
+
       REAL*8 FUNCTION ARCTG(A,F,Pi)
       IMPLICIT NONE
       REAL*8 A , an , F , Pi , q , qa , qap

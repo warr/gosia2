@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE TENS
 C
@@ -15,13 +15,13 @@ C      TETACM - theta of particle detector in center of mass frame
 C      ZETA   - various coefficients
 C
 C Formal parameter:
-C      Bten   - 
- 
+C      Bten   -
+
       SUBROUTINE TENS(Bten)
       IMPLICIT NONE
-      REAL*8 arg , Bten , DJMM , DSIGS , EPS , EROOT , FIEX , TETACM , 
+      REAL*8 arg , Bten , DJMM , DSIGS , EPS , EROOT , FIEX , TETACM ,
      &       TREP , ZETA
-      INTEGER*4 i , IAXS , IEXP , ind , inz , iph , ix , k , k1 , kp , 
+      INTEGER*4 i , IAXS , IEXP , ind , inz , iph , ix , k , k1 , kp ,
      &          l , lp , lpp , lx , lxx , LZETA , NDIM , NMAX , NMAX1
       DIMENSION Bten(1200)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)

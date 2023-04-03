@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE CMLAB
 C
@@ -36,14 +36,14 @@ C      Tetrn  - theta of recoiling nucleus
 
       SUBROUTINE CMLAB(Ii,Dsig,Tetrn)
       IMPLICIT NONE
-      REAL*8 a1 , a2 , ACCA , ACCUR , ared , BETAR , d2a , DIPOL , 
-     &       dista , dists , Dsig , DSIGS , emax , EMMA , EN , EP , 
+      REAL*8 a1 , a2 , ACCA , ACCUR , ared , BETAR , d2a , DIPOL ,
+     &       dista , dists , Dsig , DSIGS , emax , EMMA , EN , EP ,
      &       epmin , EPS , EROOT , FIEX
-      INTEGER*4 IAXS , IEXP , iflaa , Ii , IPRM , ISKIN , ISO , IZ , 
-     &          IZ1 , lexp , lexp0 , lexp1 , n , NCM , NDIM , NEXPT , 
+      INTEGER*4 IAXS , IEXP , iflaa , Ii , IPRM , ISKIN , ISO , IZ ,
+     &          IZ1 , lexp , lexp0 , lexp1 , n , NCM , NDIM , NEXPT ,
      &          NMAX , NMAX1
-      REAL*8 r3 , SPIN , TASIN , tau , taup , tcmdg , tcmrad , TETACM , 
-     &       Tetrn , TLBDG , tlbrad , tmxdg , TREP , VINF , XA , XA1 , 
+      REAL*8 r3 , SPIN , TASIN , tau , taup , tcmdg , tcmrad , TETACM ,
+     &       Tetrn , TLBDG , tlbrad , tmxdg , TREP , VINF , XA , XA1 ,
      &       z1 , z2 , zcmdg , zcmrad
       REAL*8 zlbrad , ZPOL
       LOGICAL ERR
@@ -54,10 +54,10 @@ C      Tetrn  - theta of recoiling nucleus
       COMMON /BREC  / BETAR(50)
       COMMON /CAUX0 / EMMA(75) , NCM
       COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
+      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) ,
      &                TLBDG(50) , VINF(50)
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
      &                ISO
       DATA r3/0./
 
@@ -154,7 +154,7 @@ C        If IPRM(1) we want extra printout
          EPS(lexp) = 1./SIN(tcmrad/2.)
          TETACM(lexp) = tcmrad
          IF ( IPRM(1).EQ.1 ) THEN
-            IF ( Ii.EQ.0 .AND. IPRM(10).EQ.1 ) WRITE (22,99010) tcmdg , 
+            IF ( Ii.EQ.0 .AND. IPRM(10).EQ.1 ) WRITE (22,99010) tcmdg ,
      &           EPS(lexp)
 99010       FORMAT (5X,'CM SCATTERING ANGLE',1X,1F10.3,1X,'DEG',5X,
      &              'EPSILON',1X,1F10.4)

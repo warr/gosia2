@@ -12,7 +12,7 @@ c
       INTEGER*4 k , khi , klo
       REAL*8 a , b , h
       DATA k/0/
- 
+
       klo = 1
       khi = N
  100  IF ( khi-klo.GT.1 ) THEN

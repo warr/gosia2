@@ -4,7 +4,7 @@
       REAL*8 Yp1 , Ypn , X(*) , Y(*) , Y2(*)
       INTEGER*4 i , k
       REAL*8 p , qn , sig , un , u(1500)
- 
+
       IF ( Yp1.GT..99E30 ) THEN
          Y2(1) = 0.
          u(1) = 0.

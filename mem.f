@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION MEM
 C
@@ -19,12 +19,12 @@ C      N3     - multipolarity
 C
 C Return value:
 C      Index of matrix element
- 
+
       INTEGER*4 FUNCTION MEM(N1,N2,N3)
       IMPLICIT NONE
-      INTEGER*4 k , LAMDA , LAMMAX , LDNUM , LEAD , msum , MULTI , N1 , 
+      INTEGER*4 k , LAMDA , LAMMAX , LDNUM , LEAD , msum , MULTI , N1 ,
      &          n1m , N2 , N3 , n3m
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX ,
      &                MULTI(8)
 
       msum = 0

@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE LOAD
 C
@@ -50,31 +50,31 @@ C      Ient   - Flag : 1, 2, 3 (read only)
 C      Icg    - Flag : 1, 2 (read only)
 C      Polm   - (read only)
 C      Joj    - index of substate (write only)
- 
+
       SUBROUTINE LOAD(Iexp,Ient,Icg,Polm,Joj)
       IMPLICIT NONE
-      REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ACCA , ACCUR , ah , CAT , 
-     &       cpsi , dep , DIPOL , EMMA , EN , EP , eta , etan , Polm , 
+      REAL*8 a1 , a2 , aaz2 , aaz3 , aazz , ACCA , ACCUR , ah , CAT ,
+     &       cpsi , dep , DIPOL , EMMA , EN , EP , eta , etan , Polm ,
      &       pp1 , pp2
-      REAL*8 ppp , PSI , QAPR , rlam , SPIN , ssqrt , szet , TLBDG , 
-     &       VINF , wrt , wrtm , XA , XA1 , XI , z1 , z2 , zet , ZETA , 
+      REAL*8 ppp , PSI , QAPR , rlam , SPIN , ssqrt , szet , TLBDG ,
+     &       VINF , wrt , wrtm , XA , XA1 , XI , z1 , z2 , zet , ZETA ,
      &       ZPOL , zsqa
-      INTEGER*4 i , i1 , i2 , i3 , IAPR , Icg , Ient , Iexp , IPATH , 
-     &          ir , is , ISEX , ISHA , ISMAX , ISO , ispi , ispo , 
+      INTEGER*4 i , i1 , i2 , i3 , IAPR , Icg , Ient , Iexp , IPATH ,
+     &          ir , is , ISEX , ISHA , ISMAX , ISO , ispi , ispo ,
      &          IVAR , IZ , IZ1
-      INTEGER*4 jj , jjj , Joj , la , lam , lam1 , LAMDA , LAMMAX , ld , 
-     &          LDNUM , LEAD , LMAX , LMAXE , LP1 , LP10 , LP11 , LP12 , 
+      INTEGER*4 jj , jjj , Joj , la , lam , lam1 , LAMDA , LAMMAX , ld ,
+     &          LDNUM , LEAD , LMAX , LMAXE , LP1 , LP10 , LP11 , LP12 ,
      &          LP13 , LP14 , LP2
-      INTEGER*4 LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , LZETA , m , m1 , 
-     &          m2 , MAGA , MAGEXC , MEMAX , MEMX6 , mstop , MULTI , n , 
+      INTEGER*4 LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , LZETA , m , m1 ,
+     &          m2 , MAGA , MAGEXC , MEMAX , MEMX6 , mstop , MULTI , n ,
      &          n2 , n3 , NCM
       INTEGER*4 NDIM , NEXPT , NMAX , NMAX1 , nn , NSTART , NSTOP , nz
       LOGICAL ERR
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX ,
      &                MULTI(8)
-      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 , 
+      COMMON /MGN   / LP1 , LP2 , LP3 , LP4 , LP6 , LP7 , LP8 , LP9 ,
      &                LP10 , LP11 , LP12 , LP13 , LP14
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
      &                ISO
       COMMON /PSPIN / ISHA
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
@@ -84,7 +84,7 @@ C      Joj    - index of substate (write only)
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /CLCOM9/ ERR
       COMMON /COEX2 / NMAX , NDIM , NMAX1
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
+      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) ,
      &                TLBDG(50) , VINF(50)
       COMMON /CEXC0 / NSTART(76) , NSTOP(75)
       COMMON /CXI   / XI(1500)
@@ -92,7 +92,7 @@ C      Joj    - index of substate (write only)
       COMMON /APRCAT/ QAPR(1500,2,7) , IAPR(1500,2) , ISEX(75)
       COMMON /PTH   / IPATH(75) , MAGA(75)
       DIMENSION etan(75) , cpsi(8)
-      
+
       LMAX = INT(SPIN(1)+1.1) ! ground-state spin + 1
       IF ( Ient.EQ.1 ) THEN
          ISHA = 0
@@ -128,7 +128,7 @@ C        i.e. hbar c / e^2 * sqrt(2 / amu).
             XI(n) = etan(i1) - etan(i2)
          ENDDO
 
-C        Calculate C_\lambda \over (s Z_1 Z_2)^\lambda 
+C        Calculate C_\lambda \over (s Z_1 Z_2)^\lambda
          aazz = 1./(1.+a1/a2)/z1/z2
          cpsi(1) = 5.169286*aazz
 
@@ -262,7 +262,7 @@ C        Initialise pointers to ZETA array
             ENDIF
          ENDDO ! Loop over multipolarity
 
-C        Make sure we haven't reached the limit of zeta coefficients          
+C        Make sure we haven't reached the limit of zeta coefficients
          IF ( nz.GT.LP7 ) THEN ! LP7 is 45100
             WRITE (22,99001) LP7
 99001       FORMAT (1x,

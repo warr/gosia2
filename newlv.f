@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE NEWLV
 C
@@ -13,7 +13,7 @@ C Uses global variables:
 C      EXPO   - adiabatic exponential
 C      IFLG   - flag to determine whether to calculate exponential (so we don't calculate twice)
 C      ISG    - index for sigma
-C      ISG1   - 
+C      ISG1   -
 C      ISSTAR - index of last substate for that level
 C      ISSTO  - index of first substate for that level
 C      KDIV   - index for division
@@ -31,18 +31,18 @@ C      La     - multipolarity
 C
 C Note that the exponential is calculated by EXPON. This file does the
 C storage part.
-      
+
       SUBROUTINE NEWLV(N,Ld,La)
       IMPLICIT NONE
       REAL*8 D2W
-      INTEGER*4 i2 , IFLG , indx , ISG , ISG1 , ISSTAR , ISSTO , KDIV , 
-     &          La , LAMDA , LAMMAX , LAMR , Ld , LDNUM , LEAD , LEADF , 
+      INTEGER*4 i2 , IFLG , indx , ISG , ISG1 , ISSTAR , ISSTO , KDIV ,
+     &          La , LAMDA , LAMMAX , LAMR , Ld , LDNUM , LEAD , LEADF ,
      &          m , MEM , MSTORE , MULTI
       INTEGER*4 N , NDIV , NPT , NSTART , NSTOP , NSW
       COMPLEX*16 EXPO , EXPON
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX ,
      &                MULTI(8)
-      COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
+      COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW ,
      &                ISG1
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
       COMMON /ADBXI / EXPO(1500)

@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE ANGULA
 C
@@ -32,30 +32,30 @@ C      Gth    - Theta of gamma
 C      Figl   - Phi of gamma
 C      Ngl    - detector number
 C      Op2    - The part after the OP, for the option we are processing (gosia2)
-      
+
       SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
-      REAL*8 AGELI , alab , arg , at , attl , BETAR , bt , CC , DELLA , 
-     &       DELTA , EG , ENDEC , ENZ , EPS , EROOT , f , Fi0 , fi01 , 
+      REAL*8 AGELI , alab , arg , at , attl , BETAR , bt , CC , DELLA ,
+     &       DELTA , EG , ENDEC , ENZ , EPS , EROOT , f , Fi0 , fi01 ,
      &       Fi1 , fi11
       REAL*8 FIEX , Figl , FP , GKP , Gth , Q , qv , sm , TAU , Trec ,
      &       trec2 , Ygn , ylmr , ZETA
-      INTEGER*4 IAXS , Idr , IEXP , ifn , Iful , ig , il , inat , inx1 , 
+      INTEGER*4 IAXS , Idr , IEXP , ifn , Iful , ig , il , inat , inx1 ,
      &          ipd , is , ITMA , ITTE , iu , ixs , j , ji , jj , jm , k
-      INTEGER*4 KLEC , kq , KSEQ , l , lf , lf1 , LZETA , mind , NANG , 
+      INTEGER*4 KLEC , kq , KSEQ , l , lf , lf1 , LZETA , mind , NANG ,
      &          Ngl , NICC , nlv
       REAL*8 dsig, DSIGS , EP , TETACM , TLBDG , TREP , ttx , VINF ,
      &       XA , XA1 ! For gosia2
       INTEGER*4 IZ, IZ1, NEXPT ! For gosia2
       INTEGER*4 ISPL ! Added for spline
       CHARACTER*4 Op2 ! For gosia2
-      DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
+      DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) ,
      &          Ygn(*)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) , 
+      COMMON /TRA   / DELTA(1500,3) , ENDEC(1500) , ITMA(50,200) ,
      &                ENZ(200)
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
-      COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) , 
+      COMMON /CCC   / EG(50) , CC(50,5) , AGELI(50,200,2) , Q(3,200,8) ,
      &                NICC , NANG(200) , ISPL
       COMMON /KIN   / EPS(50) , EROOT(50) , FIEX(50,2) , IEXP , IAXS(50)
       COMMON /LCDL  / DELLA(1500,3)
@@ -63,9 +63,9 @@ C      Op2    - The part after the OP, for the option we are processing (gosia2)
       COMMON /BREC  / BETAR(50)
       COMMON /THTAR / ITTE(50)
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50) ! For gosia2
-      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) , 
+      COMMON /CX    / NEXPT , IZ , XA , IZ1(50) , XA1(50) , EP(50) ,
      &                TLBDG(50) , VINF(50)
-      
+
       DO l = 1 , Idr ! For each decay
 
          nlv = KSEQ(l,3) ! Level number of l'th decay

@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE EFFIX
 C
@@ -30,15 +30,15 @@ C     AKAVKA(6) = N
 C     AKAVKA(7) = b
 C     AKAVKA(8) = c
 C     AKAVKA(9) = control flag
-      
+
       SUBROUTINE EFFIX(Ipd,En,Effi)
       IMPLICIT NONE
-      REAL*8 ABC , AKAVKA , d , Effi , En , enl , pw , s , t , THICK , 
+      REAL*8 ABC , AKAVKA , d , Effi , En , enl , pw , s , t , THICK ,
      &       w , xx , yy
       INTEGER*4 i , Ipd , j , l , ll , n
       DIMENSION xx(51) , yy(51)
       COMMON /EFCAL / ABC(8,10) , AKAVKA(9,200) , THICK(200,7)
-      
+
       Effi = 1.E-6
       En = En + 1.E-24
       enl = LOG(En)
@@ -107,7 +107,7 @@ c FITEFF eff. calib. by P.Olbratowski use
 c PJN@2000
          w = LOG(En/AKAVKA(5,Ipd))
          pw = AKAVKA(2,Ipd)*w
-         IF ( En.LT.AKAVKA(5,Ipd) ) pw = pw + 
+         IF ( En.LT.AKAVKA(5,Ipd) ) pw = pw +
      &        w*w*(AKAVKA(3,Ipd)+w*AKAVKA(4,Ipd))
          Effi = Effi*EXP(pw)*AKAVKA(1,Ipd)
          RETURN

@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE LAIAMP
 C
@@ -28,24 +28,24 @@ C
 C Formal parameters:
 C      Ir     - index of substate
 C      W0     - omega limit
-      
+
       SUBROUTINE LAIAMP(Ir,W0)
       IMPLICIT NONE
-      REAL*8 CAT , D2W , ELM , ELML , ELMU , EPS , epsi , EROOT , errt , 
-     &       FIEX , pm , ppp , rmir , rmis , rmu , SA , TCABS , W0 , 
+      REAL*8 CAT , D2W , ELM , ELML , ELMU , EPS , epsi , EROOT , errt ,
+     &       FIEX , pm , ppp , rmir , rmis , rmu , SA , TCABS , W0 ,
      &       XI , xiv
       REAL*8 z , ZETA
-      INTEGER*4 i1 , i2 , i3 , IAXS , IEXP , indx , Ir , is , is1 , 
-     &          is2 , ISG , ISG1 , ISMAX , ismin , isplus , KDIV , la , 
+      INTEGER*4 i1 , i2 , i3 , IAXS , IEXP , indx , Ir , is , is1 ,
+     &          is2 , ISG , ISG1 , ISMAX , ismin , isplus , KDIV , la ,
      &          lam , LAMDA , LAMMAX
-      INTEGER*4 LAMR , ld , LDNUM , LEAD , LEADF , LZETA , m , MEM , 
-     &          mrange , mua , MULTI , NDIV , NPT , NSTART , NSTOP , 
+      INTEGER*4 LAMR , ld , LDNUM , LEAD , LEADF , LZETA , m , MEM ,
+     &          mrange , mua , MULTI , NDIV , NPT , NSTART , NSTOP ,
      &          NSW , nz
       COMPLEX*16 ARM , STAMP , dis , uhuj
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX ,
      &                MULTI(8)
       COMMON /AZ    / ARM(600,7)
-      COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
+      COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW ,
      &                ISG1
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
@@ -58,7 +58,7 @@ C      W0     - omega limit
       epsi = EPS(IEXP) ! epsilon
       errt = EROOT(IEXP) ! sqrt(epsilon^2 - 1)
       rmir = CAT(Ir,3) ! m quantum number of substate Ir
-      
+
       DO i1 = 1 , LAMMAX ! Loop on multipolarity
          lam = LAMDA(i1) ! Get multipolarity
          nz = LZETA(lam) ! nz is an index into ZETA array for this multipolarity

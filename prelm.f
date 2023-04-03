@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE PRELM
 C
@@ -23,23 +23,23 @@ C      SPIN   - spin of level
 C
 C Formal parameters:
 C      Iop    - print flag (controls what is written to output).
- 
+
       SUBROUTINE PRELM(Iop)
       IMPLICIT NONE
-      REAL*8 ACCA , ACCUR , b , DIPOL , ELM , ELML , ELMU , EN , 
+      REAL*8 ACCA , ACCUR , b , DIPOL , ELM , ELML , ELMU , EN ,
      &       pv , SA , SPIN , ste , ZPOL
       REAL*8 ELM25 , ELM26 ! Added for gosia2
-      INTEGER*4 inx , Iop , ISO , isp , IVAR , j , k , kk , l , LAMDA , 
-     &          LAMMAX , LDNUM , LEAD , LMAXE , m , MAGEXC , MEMAX , 
+      INTEGER*4 inx , Iop , ISO , isp , IVAR , j , k , kk , l , LAMDA ,
+     &          LAMMAX , LDNUM , LEAD , LMAXE , m , MAGEXC , MEMAX ,
      &          MEMX6 , MULTI , NDIM
       INTEGER*4 NMAX , NMAX1
       CHARACTER*3 wrn
       INTEGER*4 IBPS , IUNIT3 , JZB ! For gosia2
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
       COMMON /CEXC  / MAGEXC , MEMAX , LMAXE , MEMX6 , IVAR(1500)
-      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA , 
+      COMMON /COEX  / EN(75) , SPIN(75) , ACCUR , DIPOL , ZPOL , ACCA ,
      &                ISO
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX ,
      &                MULTI(8)
       COMMON /COEX2 / NMAX , NDIM , NMAX1
       COMMON /SWITCH/ JZB , IBPS , IUNIT3 ! For gosia2
@@ -71,15 +71,15 @@ C      Iop    - print flag (controls what is written to output).
 
                      IF ( Iop.EQ.2 ) THEN ! Iop is 2
                         IF ( IVAR(inx).EQ.0 ) THEN ! Fixed
-                           WRITE (22,99006) inx , LEAD(1,inx) , 
+                           WRITE (22,99006) inx , LEAD(1,inx) ,
      &                            LEAD(2,inx) , ELM(inx)
                         ELSEIF ( IVAR(inx).GT.1000 ) THEN ! Correlation
-                           WRITE (22,99007) inx , LEAD(1,inx) , 
-     &                            LEAD(2,inx) , ELM(inx) , 
+                           WRITE (22,99007) inx , LEAD(1,inx) ,
+     &                            LEAD(2,inx) , ELM(inx) ,
      &                            (IVAR(inx)-1000)
                         ELSE ! Limit
-                           WRITE (22,99009) inx , LEAD(1,inx) , 
-     &                            LEAD(2,inx) , ELM(inx) , ELML(inx) , 
+                           WRITE (22,99009) inx , LEAD(1,inx) ,
+     &                            LEAD(2,inx) , ELM(inx) , ELML(inx) ,
      &                            ELMU(inx)
                         ENDIF
 
@@ -94,26 +94,26 @@ C      Iop    - print flag (controls what is written to output).
                         b = ELM(inx)*ELM(inx)/(2.*SPIN(isp)+1.)
                         IF ( LEAD(1,inx).EQ.LEAD(2,inx) ) b = 9999999.
                         WRITE (22,99009) inx , LEAD(1,inx) , LEAD(2,inx)
-     &                         , ELM(inx) , 100.*(ELM(inx)-ste)/ste , 
+     &                         , ELM(inx) , 100.*(ELM(inx)-ste)/ste ,
      &                         b , wrn
 
 C                    Added for gosia2
                      ELSEIF ( Iop.EQ.4 ) THEN ! Iop is 4
                         IF ( IVAR(inx).EQ.0 ) THEN ! Fixed
-                           WRITE (22,99006) inx , LEAD(1,inx) , 
+                           WRITE (22,99006) inx , LEAD(1,inx) ,
      &                            LEAD(2,inx) , ELM(inx)
                         ELSEIF ( IVAR(inx).GT.1000 ) THEN ! Correlation
-                           WRITE (22,99007) inx , LEAD(1,inx) , 
-     &                            LEAD(2,inx) , ELM(inx) , 
+                           WRITE (22,99007) inx , LEAD(1,inx) ,
+     &                            LEAD(2,inx) , ELM(inx) ,
      &                            (IVAR(inx)-1000)
                         ELSE ! Limit
                            IF ( JZB.EQ.25 ) THEN
-                             WRITE (22,99009) inx , LEAD(1,inx) , 
+                             WRITE (22,99009) inx , LEAD(1,inx) ,
      &                           LEAD(2,inx) , ELM25(inx) , ELML(inx) ,
      &                           ELMU(inx)
                            ELSEIF ( JZB.EQ.26 ) THEN
-                             WRITE (22,99009) inx , LEAD(1,inx) , 
-     &                           LEAD(2,inx) , ELM26(inx) , ELML(inx) , 
+                             WRITE (22,99009) inx , LEAD(1,inx) ,
+     &                           LEAD(2,inx) , ELM26(inx) , ELML(inx) ,
      &                           ELMU(inx)
                            ENDIF
                        ENDIF

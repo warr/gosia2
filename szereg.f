@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE SZEREG
 C
@@ -15,14 +15,14 @@ C Formal parameters:
 C      Lst    - first yield in set
 C      Ls     - last yield in set
 C      L      - number of dataset
- 
+
       SUBROUTINE SZEREG(Lst,Ls,L)
       IMPLICIT NONE
       REAL*8 CORF , DYEX , dyh , UPL , YEXP , yh , YNRM
-      INTEGER*4 ia , ib , IDRN , ih , ILE , inx , IY , k , L , Ls , 
+      INTEGER*4 ia , ib , IDRN , ih , ILE , inx , IY , k , L , Ls ,
      &          lsp , Lst , lst1 , NYLDE
-      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) , 
-     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) , 
+      COMMON /YEXPT / YEXP(32,1500) , IY(1500,32) , CORF(1500,32) ,
+     &                DYEX(32,1500) , NYLDE(50,32) , UPL(32,50) ,
      &                YNRM(32,50) , IDRN , ILE(32)
 
       IF ( Lst.EQ.Ls ) RETURN

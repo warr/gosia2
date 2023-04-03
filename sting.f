@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE STING
 C
@@ -30,17 +30,17 @@ C      NPT    - index in ADB array (this is omega / 0.03)
 C
 C Formal parameters:
 C      Irld   - index into ARM array
- 
+
       SUBROUTINE STING(Irld)
       IMPLICIT NONE
       REAL*8 CAT , D2W , ELM , ELML , ELMU , rsg , SA , w0 , ZETA
-      INTEGER*4 i , i57 , ibg , iend , IFLG , indx , IRA , Irld , is2 , 
-     &          ISG , ISG1 , ISMAX , ISSTAR , ISSTO , j , j1 , jj , 
+      INTEGER*4 i , i57 , ibg , iend , IFLG , indx , IRA , Irld , is2 ,
+     &          ISG , ISG1 , ISMAX , ISSTAR , ISSTO , j , j1 , jj ,
      &          KDIV , lam , LAMDA
-      INTEGER*4 LAMMAX , LAMR , ld , LDNUM , LEAD , LZETA , maxh , 
+      INTEGER*4 LAMMAX , LAMR , ld , LDNUM , LEAD , LZETA , maxh ,
      &          MAXLA , mm , MSTORE , MULTI , n , NDIV , NPT , NSW , nz
       COMPLEX*16 ARM , EXPO
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,75) , LAMMAX ,
      &                MULTI(8)
       COMMON /AZ    / ARM(600,7)
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
@@ -48,7 +48,7 @@ C      Irld   - index into ARM array
       COMMON /FLA   / IFLG
       COMMON /PINT  / ISSTAR(76) , ISSTO(75) , MSTORE(2,75)
       COMMON /CCOUP / ZETA(50000) , LZETA(8)
-      COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW , 
+      COMMON /CAUX  / NPT , NDIV , KDIV , LAMR(8) , ISG , D2W , NSW ,
      &                ISG1
       COMMON /CLCOM8/ CAT(600,3) , ISMAX
       COMMON /RNG   / IRA(8) , MAXLA
@@ -59,7 +59,7 @@ C      Irld   - index into ARM array
       rsg = -1.
       IFLG = 1
       w0 = IRA(MAXLA)*.03 + .03 ! Maximum omega to calculate for (steps of 0.03)
-      
+
       DO j = 1 , ISMAX ! For substate used, zero ARM array
          DO jj = 1 , 6
             ARM(j,jj) = (0.,0.)
@@ -71,9 +71,9 @@ C      Irld   - index into ARM array
          LAMR(j) = 0 ! Initially mark that we shouldn't calculate any multipolarity
       ENDDO
       LAMR(MAXLA) = 1 ! Mark that we should calculate this multipolarity
-      
+
       NPT = IRA(MAXLA) + 1 ! Number of sigma values to calculate for this multipolarity
-      
+
       IF ( MAXLA.EQ.7 .AND. IRA(2).NE.0 ) THEN ! Special case of M1
          LAMR(2) = 1
          NPT = NPT - 1
@@ -121,7 +121,7 @@ C                 Calculate sum over matrix elements
             ENDIF ! If we should calculate this multipolarity
          ENDDO ! Loop over multipolarities
          IF ( j.EQ.4 ) GOTO 200 ! We've set everything up, so finish
-         
+
          DO i = 1 , ISMAX ! Shift terms up one
             ARM(i,j) = ARM(i,4)
             ARM(i,4) = (0.,0.)
@@ -131,7 +131,7 @@ C                 Calculate sum over matrix elements
 
 C     Calculate amplitude
  200  CALL LAIAMP(Irld,w0)
-      
+
       MAXLA = maxh ! Restore MAXLA
 
       DO jj = 1 , 8

@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE MIXR
 C
@@ -19,12 +19,12 @@ C      Nw     - number of data points used to calculate chi squared
 C      Ipsw   - printing flag (0 means no print, 1 means print)
 C      Chi    - chi squared
 C      Chilo  - chi squared using logs
- 
+
       SUBROUTINE MIXR(Nw,Ipsw,Chi,Chilo)
       IMPLICIT NONE
-      REAL*8 Chi , Chilo , dl , DMIX , DMIXE , ELM , ELML , ELMU , SA , 
+      REAL*8 Chi , Chilo , dl , DMIX , DMIXE , ELM , ELML , ELMU , SA ,
      &       TAU
-      INTEGER*4 i , IMIX , INTR , inx , inx1 , IPS1 , Ipsw , it , KSEQ , 
+      INTEGER*4 i , IMIX , INTR , inx , inx1 , IPS1 , Ipsw , it , KSEQ ,
      &          LNY , NDL , Nw
       COMMON /LEV   / TAU(75) , KSEQ(1500,4)
       COMMON /COMME / ELM(1500) , ELMU(1500) , ELML(1500) , SA(1500)
@@ -42,13 +42,13 @@ C      Chilo  - chi squared using logs
          dl = DMIX(i)*ELM(inx)/ELM(inx1)
          IF ( Ipsw.EQ.1 ) DMIX(i) = dl
          Chi = Chi + (dl-DMIXE(i,1))**2/DMIXE(i,2)/DMIXE(i,2)
-         IF ( LNY.EQ.1 ) Chilo = Chilo + 
+         IF ( LNY.EQ.1 ) Chilo = Chilo +
      &                           (DMIXE(i,1)*LOG(ABS(dl/DMIXE(i,1)))
      &                           /DMIXE(i,2))**2
       ENDDO ! Loop on mixing ratios i
 
       IF ( Ipsw.EQ.0 ) RETURN
-      
+
       WRITE (22,99001)
 99001 FORMAT (1X//10X,'E2/M1 MIXING RATIOS'/10X,'TRANSITION',10X,
      &        'EXP.DELTA',10X,'CALC.DELTA',10X,'SIGMA'/)

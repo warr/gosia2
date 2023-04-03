@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE RECOIL
 C
@@ -15,14 +15,14 @@ C      Theta  - angle to rotate
 C
 C We transform into the frame of the recoiling nucleus, correct according to
 C the method of Lesser and then rotate back to the laboratory frame.
- 
+
       SUBROUTINE RECOIL(Alab,Attl,Beta,Theta)
       IMPLICIT NONE
-      REAL*8 Alab , atemp , Attl , Beta , betasq , dum , hold , test , 
+      REAL*8 Alab , atemp , Attl , Beta , betasq , dum , hold , test ,
      &       Theta
       INTEGER*4 i , i1 , j , l , m
       DIMENSION Alab(9,9) , Attl(9,9) , atemp(16)
-      
+
       hold = Alab(1,1)
       IF ( ABS(hold).LT.1.E-9 ) RETURN
 
