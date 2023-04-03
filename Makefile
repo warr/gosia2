@@ -6,12 +6,8 @@ MAN=gosia2.1
 
 FC=g77
 
-# Turn on debugging - note that -Wall and -O2 together gives warnings
-# about variables being possibly used without being initialised. These
-# cases seem to be harmless. i.e. if (condition) then a=1 else a=2 endif
-# and then using a gives this warning, but in fact a is always set to
-# something
-FFLAGS = -g -Wall
+FFLAGS += -g
+FFLAGS += -Wall
 FFLAGS += -fbounds-check
 
 # Turn on optimisation
