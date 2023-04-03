@@ -105,7 +105,7 @@ C      Iredv  -
      &          NMAX , NMAX1 , Nwyr , NYLDE
       INTEGER*4 ISPL ! Added for spline
       CHARACTER*4 wupl , war
-      REAL*8 CNOR1 , CNOR2 ! For gosia2
+      REAL*8 CNOR1 , CNOR2 , WNOR ! For gosia2
       INTEGER*4 MCFIX ! For gosia2
       CHARACTER*4 op2 ! For gosia2
       DIMENSION part(32,50,2) , lic(32) , lth(1500) , cnr(32,50) ,
@@ -145,7 +145,7 @@ C      Iredv  -
       COMMON /TRB   / ITS
       COMMON /TCM   / TETACM(50) , TREP(50) , DSIGS(50)
       COMMON /CCCDS / NDST(50)
-      COMMON /CINIT2/ CNOR1(32,75) , CNOR2(32,75) , MCFIX ! For gosia2
+      COMMON /CINIT2/ CNOR1(32,75) , CNOR2(32,75) , WNOR , MCFIX ! For gosia2
       SAVE part, partl ! For gosia2
       DATA sum3/0./,sumpr/0./
 
