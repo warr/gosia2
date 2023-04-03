@@ -258,7 +258,7 @@ C     Read lifetimes
             TIMEL(3,ilft) = TIMEL(3,ilft)/(SQRT(wlf)+1.E-10) ! Relative error
             WRITE (22,99006) LIFCT(ilft) , TIMEL(1,ilft) ,
      &        -TIMEL(2,ilft) , TIMEL(3,ilft)
-99006       FORMAT (6X,1I3,6X,1F10.2,3X,1F10.2,3X,1F10.2)
+99006       FORMAT (6X,1I3,6X,1G10.2,3X,1G10.2,3X,1G10.2)
          ENDDO
          WRITE (22,99007) wlf
 99007    FORMAT (1X/10X,'LIFETIMES ARE TAKEN WITH WEIGHT',2X,1E14.6)
