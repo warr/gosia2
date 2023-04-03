@@ -1,4 +1,6 @@
 20080630 (synchronized with gosia1)
+- Liam's patch to improve convergence
+- Weighting of normalisation
 - Explicitly initialise idr
 - Correct errorbars on B(E2) values
 - Write absolute value of lab angle
