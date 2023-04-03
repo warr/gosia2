@@ -1839,7 +1839,7 @@ C     Handle OP,ERRO
                be2b = HLM(kh2) + DEVU(kh2)
                be2c = be2b
                IF ( ABS(be2a).GT.ABS(be2b) ) be2b = be2a
-               IF ( ABS(be2a-be2c).LT.1.E-6 ) be2a = be2c
+               IF ( ABS(be2a-be2c).GT.1.E-6 ) be2a = be2c
                IF ( be2a/HLM(kh2).LE.0. .OR. be2b/HLM(kh2).LE.0. )
      &              be2a = 0.
                be2a = be2a**2/sbe
