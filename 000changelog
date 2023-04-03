@@ -1,50 +1,55 @@
 20080519 (synchronized with gosia1)
-° Add spline support (Pawel J. Napiorkowski)
-° Add CONT option SPL,
-° Add OP,SELE
-° Add OP,BRIC
-° Add new method of reading conversion coefficients
-° Replaced constant 10 with NLIFT in loop (this was a bug)
-° Correct inaccurate constants in SEQ
-° Initialized some variables explicitly to remove compiler warnings
-° Increased AKAVKA dimensions from 8 to 9 to prepare for merge of Pawel
+- Explicitly initialise idr
+- Correct errorbars on B(E2) values
+- Write absolute value of lab angle
+- Fix format for long lifetimes
+- Change default value of DIPOL
+- Add spline support (Pawel J. Napiorkowski)
+- Add CONT option SPL,
+- Add OP,SELE
+- Add OP,BRIC
+- Add new method of reading conversion coefficients
+- Replaced constant 10 with NLIFT in loop (this was a bug)
+- Correct inaccurate constants in SEQ
+- Initialized some variables explicitly to remove compiler warnings
+- Increased AKAVKA dimensions from 8 to 9 to prepare for merge of Pawel
   Napiorkowski's efficiency code
-° Added ISPL variable in CCC common to prepare for merge of Pawel
+- Added ISPL variable in CCC common to prepare for merge of Pawel
   Napiorkowski's spline code and SPL, option in CONT
-° Restructured a repeated IF with the same condition to use IF/THEN
-° Add E0 parameter to Leuven efficiency
+- Restructured a repeated IF with the same condition to use IF/THEN
+- Add E0 parameter to Leuven efficiency
 
 20080418
-° Change default printing options to match gosia1
-° Split CINIT into CINIT (same as gosia1) and CINIT2 (new for gosia2)
+- Change default printing options to match gosia1
+- Split CINIT into CINIT (same as gosia1) and CINIT2 (new for gosia2)
 
 20080417
-° STOP if NI2 > 50
-° Increase fiex1 and wpi dimensions
-° Increase arrays in VLIN
+- STOP if NI2 > 50
+- Increase fiex1 and wpi dimensions
+- Increase arrays in VLIN
 
 20080414
-° Save DJM in DJMM
-° Replace IFIX with INT
-° Replace FLOAT with REAL
-° Replace IABS with ABS
-° Replace MAX0 with MAX
-° Replace AMAX1 with MAX
-° Replace MIN0 with MIN
-° Replace AMIN1 with MIN
-° Replace ALOG10 with LOG10
-° Replace ALOG with LOG
-° Remove unused common blocks in main routine
-° Add PROGRAM statement at start
-° Run spag
-° Reorder common blocks ME2D, CCC, KIN, COEX, CAUX0, LCZP
-° Convert to REAL*8 and COMPLEX*16
-° Fix precision of constants
-° Restructure IF in MINI
-° Add IUNIT3 to SWITCH common block
-° Replace unit 33 with variable IUNIT33
-° Change some IF logic to match gosia1
-° Store matrix elements so that percentage change works
+- Save DJM in DJMM
+- Replace IFIX with INT
+- Replace FLOAT with REAL
+- Replace IABS with ABS
+- Replace MAX0 with MAX
+- Replace AMAX1 with MAX
+- Replace MIN0 with MIN
+- Replace AMIN1 with MIN
+- Replace ALOG10 with LOG10
+- Replace ALOG with LOG
+- Remove unused common blocks in main routine
+- Add PROGRAM statement at start
+- Run spag
+- Reorder common blocks ME2D, CCC, KIN, COEX, CAUX0, LCZP
+- Convert to REAL*8 and COMPLEX*16
+- Fix precision of constants
+- Restructure IF in MINI
+- Add IUNIT3 to SWITCH common block
+- Replace unit 33 with variable IUNIT33
+- Change some IF logic to match gosia1
+- Store matrix elements so that percentage change works
 
 20080412
-° Import pristine version of gosia2 from Rochester
+- Import pristine version of gosia2 from Rochester
