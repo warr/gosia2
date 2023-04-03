@@ -80,6 +80,21 @@ C      Joj    - index of substate (write only)
       INCLUDE 'pth.inc'
       DIMENSION etan(100) , cpsi(8)
 
+      IF (DIPOL.EQ.0) THEN
+        DIPOL = 3.8D-3
+        WRITE(22,*)
+        WRITE(22,*) '    WARNING DIPOL WAS NOT SET EXPLICITLY USING',
+     &    ' THE CONT OPTION DIP,'
+        WRITE(22,*) '    PREVIOUS VERSIONS OF GOSIA SET DIPOL TO 0.005',
+     &    ' BASED ON AN OLD EVALUATION.'
+        WRITE(22,*) '    NEWER EVALUATIONS SUGGEST ',
+     &    '0.0038 WOULD BE BETTER (Phys. Rev. C91 064602 (2015))'
+        WRITE(22,'(A,F8.4)') '     SETTING DIPOL = ',DIPOL
+        WRITE(22,*) '    IF YOU WANT THE OLD BEHAVIOUR, USE DIP,5.0 ',
+     &    'IN CONT'
+        WRITE(22,*)
+      ENDIF
+
       LMAX = INT(SPIN(1)+1.1) ! ground-state spin + 1
       IF ( Ient.EQ.1 ) THEN
          ISHA = 0
