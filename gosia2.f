@@ -159,6 +159,7 @@ C      TLBDG  - theta of particle detector
 C      TREP   - theta of recoiling nucleus
 C      UPL    - upper limits for all gamma detectors
 C      VINF   - speed of projectile at infinty
+C      WNOR   - weighting factor for the target normalisation (0.5 = equal weight, 1.0 = all weight to target)
 C      XA     - A of investigated nucleus
 C      XA1    - A of non-investigated nucleus
 C      XI     - xi coupling coefficients
@@ -400,7 +401,8 @@ C     Use input unit 25 for target and 26 for projectile
       IF ( IBPS.EQ.1 ) JZB = 26
 C---- gosia2 changes end
 
-C     Initialize normalization to 1.
+C     Initialize normalization to 1. and weighting to 0.5
+      WNOR = 0.5D0
       DO i = 1 , LP3 ! LP3 = 100 (maximum number of levels)
          DO j = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
             CNOR(j,i) = 1.
@@ -2592,14 +2594,15 @@ C---- gosia2 changes end
       CALL MINI(chisq,1.D+38,nptl,conu,imode,idr,xtest,0,0,0,bten)
 C---- gosia2 changes start
       
-C     Set CNOR1 to the average of CNOR1 and CNOR2
+C     Set CNOR1 to the weighted average of CNOR1 and CNOR2
       DO kh1 = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
          DO kh2 = 1 , LP3 ! LP3 = 75 (maximum number of levels)
             IF ( JZB.EQ.25 ) THEN ! If it is the second nucleus
                CNOR1(kh1,kh2) = CNOR(kh1,kh2)
             ELSE
                CNOR2(kh1,kh2) = CNOR(kh1,kh2)
-               CNOR1(kh1,kh2) = (CNOR1(kh1,kh2)+CNOR2(kh1,kh2))/2.
+               CNOR1(kh1,kh2) = CNOR1(kh1,kh2)*(1.0-WNOR)+
+     &           CNOR2(kh1,kh2)*WNOR
             ENDIF
          ENDDO
       ENDDO
