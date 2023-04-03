@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE READY
 C
@@ -24,11 +24,11 @@ C      Ipri   - printing flag (Ipri=1 gives additional output)
 C
 C NTAP is the unit number of the file from which we should read the
 C experimental yields
- 
+
       SUBROUTINE READY(Idr,Ntap,Ipri)
       IMPLICIT NONE
       REAL*8 ap , u , w , waga , xep , zp
-      INTEGER*4 idc , idc1 , idcx , Idr , ii , Ipri , 
+      INTEGER*4 idc , idc1 , idcx , Idr , ii , Ipri ,
      &          iytot , iytt , j , k , kk , kkl , lbg
       INTEGER*4 lxp , nanx , nde , nde1 , ne , ns1
       INTEGER*4 ns2 , ns3 , ns4 , nsxh , nsyh , Ntap , nval
@@ -38,7 +38,7 @@ C experimental yields
       INCLUDE 'lev.inc'
       INCLUDE 'mgn.inc'
       INCLUDE 'cccds.inc'
-      
+
 C     Rewind yield file
       REWIND Ntap
 
@@ -54,7 +54,7 @@ C     Rewind yield file
          ii = NDST(lxp) ! Number of datasets
          DO kk = 1 , ii ! iexp, ng, zp, ag, ep, nd, wt
             READ (Ntap,*) ne , nanx , zp , ap , xep , nval , waga
-            IF ( Ipri.EQ.1 ) WRITE (22,99002) ne , zp , ap , xep , 
+            IF ( Ipri.EQ.1 ) WRITE (22,99002) ne , zp , ap , xep ,
      &                              NDST(ne) , waga
 99002       FORMAT (1X,///5X,'EXPERIMENT',1X,1I2/2X,'PROJECTILE',1X,'(',
      &              1F4.0,',',1F4.0,')',1X,1F7.3,1X,'MEV',1X,'---',1I1,
@@ -95,7 +95,7 @@ C     Rewind yield file
                idc = idcx
  30            idc1 = idc
                IF ( idc1.GT.1000 ) idc1 = idc/1000
-               IF ( Ipri.EQ.1 ) WRITE (22,99004) idc , KSEQ(idc1,3) , 
+               IF ( Ipri.EQ.1 ) WRITE (22,99004) idc , KSEQ(idc1,3) ,
      &                                 KSEQ(idc1,4) , u , w
 99004          FORMAT (2X,1I6,1X,1I3,1X,1I3,1(1E14.6,3X,1E14.6))
                iytt = iytot(kk)

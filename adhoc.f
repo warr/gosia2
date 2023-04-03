@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE ADHOC
 C
@@ -55,13 +55,13 @@ C      Ntap   - unit of yield file
 C      Iyr    - flag set here
 C
 C Here we parse the input of the OP,YIEL command and store the values.
- 
+
       SUBROUTINE ADHOC(Oph,Idr,Nfd,Ntap,Iyr)
       IMPLICIT NONE
       REAL*8 wamx , wbra , wdl , wlf
       INTEGER*4 iax , Idr , iexp1 , ilft , iosr , ipri , isrt1 , iuf
-      INTEGER*4 Iyr , jic , jicc , juf , lb , li , licc , llia , lxt , 
-     &          MEM , n1 , n2 , ndas , ndtp , Nfd , nistr , ns1 , ns2 , 
+      INTEGER*4 Iyr , jic , jicc , juf , lb , li , licc , llia , lxt ,
+     &          MEM , n1 , n2 , ndas , ndtp , Nfd , nistr , ns1 , ns2 ,
      &          ns3 , ns4 , Ntap , nvare
       CHARACTER*4 Oph
       INCLUDE 'cccds.inc'
@@ -82,7 +82,7 @@ C Here we parse the input of the OP,YIEL command and store the values.
       INCLUDE 'prt.inc'
       INCLUDE 'trb.inc'
       INCLUDE 'switch.inc'
-      
+
 C     Read OP,YIEL parameters
       iosr = 0
       READ (JZB,*) IFMO ! IFLAG
@@ -206,7 +206,7 @@ C     Read branching ratios
          DO lb = 1 , NBRA ! I1,I2,I3,I4,B,DB repeated NBRA times
             READ (JZB,*) ns1 , ns2 , ns3 , ns4 , BRAT(lb,1) , BRAT(lb,2)
             BRAT(lb,2) = BRAT(lb,2)/(SQRT(wbra)+1.E-10) ! Relative error
-            WRITE (22,99003) ns1 , ns2 , ns3 , ns4 , BRAT(lb,1) , 
+            WRITE (22,99003) ns1 , ns2 , ns3 , ns4 , BRAT(lb,1) ,
      &                       BRAT(lb,2)
 99003       FORMAT (4X,1I3,5X,1I3,5X,1I3,5X,1I3,5X,1F10.5,5X,1F10.5)
             DO li = 1 , Idr ! Search decays for these pairs of levels

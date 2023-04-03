@@ -1,3 +1,3 @@
       INTEGER*4 LAMDA , LEAD , LDNUM , LAMMAX , MULTI
-      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,100) , LAMMAX , 
+      COMMON /CLCOM / LAMDA(8) , LEAD(2,1500) , LDNUM(8,100) , LAMMAX ,
      &                MULTI(8)

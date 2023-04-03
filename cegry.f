@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE CEGRY
 C
@@ -73,24 +73,24 @@ C      Nwyr   - number of data points contributing to chi squared
 C      Icall  -
 C      Issp   -
 C      Iredv  -
- 
+
       SUBROUTINE CEGRY(Chisq,Itemp,Chilo,Idr,Nwyr,Icall,Issp,Iredv)
       IMPLICIT NONE
       REAL*8 ccc , ccd , Chilo , Chisq , cnr , cocos , d , decen
       REAL*8 dl , effi , fi0 , fi1 , fic , figl , fm , g
-      REAL*8 gth , part , partl , rik , rl , rx , ry , 
+      REAL*8 gth , part , partl , rik , rl , rx , ry ,
      &       rys , rz , sf , sgm , sum3 , sumpr , TACOS
       REAL*8 tetrc , tfac , thc , wf
-      INTEGER*4 iabc , Icall , id , idc , Idr , ifdu , ifxd , ii , 
+      INTEGER*4 iabc , Icall , id , idc , Idr , ifdu , ifxd , ii ,
      &          ile2 , inclus
-      INTEGER*4 ipd , Iredv , Issp , Itemp , iva , iw , ixl , 
+      INTEGER*4 ipd , Iredv , Issp , Itemp , iva , iw , ixl ,
      &          ixm , iyex , jj
-      INTEGER*4 jj1 , jk , jpc , k , k9 , kc , kj , kk , l , l1 , 
+      INTEGER*4 jj1 , jk , jpc , k , k9 , kc , kj , kk , l , l1 ,
      &          lic , licz , ll1
       INTEGER*4 lth , lu , luu , na , nf , nf1 , ni , ni1 , Nwyr
       CHARACTER*4 wupl , war
       CHARACTER*4 op2
-      DIMENSION part(32,50,2) , lic(32) , lth(1500) , cnr(32,50) , 
+      DIMENSION part(32,50,2) , lic(32) , lth(1500) , cnr(32,50) ,
      &          partl(32,50,2)
       INCLUDE 'clust.inc'
       INCLUDE 'odch.inc'
@@ -282,10 +282,10 @@ C              Correct for finite recoil
                            IF ( ABS(sgm).GE.SGW ) war = '*?!*'
                            ni1 = KSEQ(l1,3) ! Initial level of l1'th decay
                            nf1 = KSEQ(l1,4) ! Final level of l1'th decay
-                           WRITE (22,99007) ni , ni1 , nf , nf1 , 
-     &                            SPIN(ni) , SPIN(ni1) , SPIN(nf) , 
-     &                            SPIN(nf1) , ENDEC(l) , ENDEC(l1) , 
-     &                            YGN(l)*CNOR(k9,IEXP) , YEXP(k9,lu) , 
+                           WRITE (22,99007) ni , ni1 , nf , nf1 ,
+     &                            SPIN(ni) , SPIN(ni1) , SPIN(nf) ,
+     &                            SPIN(nf1) , ENDEC(l) , ENDEC(l1) ,
+     &                            YGN(l)*CNOR(k9,IEXP) , YEXP(k9,lu) ,
      &                            100.*(YEXP(k9,lu)-YGN(l)*CNOR(k9,IEXP)
      &                            )/YEXP(k9,lu) , sgm , war
 99007                      FORMAT (4X,1I2,'+',1I2,'--',1I2,'+',1I2,3X,
@@ -302,9 +302,9 @@ C              Correct for finite recoil
                            sgm = (YEXP(k9,lu)-YGN(l)*CNOR(k9,IEXP))
      &                           /DYEX(k9,lu)
                            IF ( ABS(sgm).GE.SGW ) war = '*?!*'
-                           WRITE (22,99013) ni , nf , SPIN(ni) , 
+                           WRITE (22,99013) ni , nf , SPIN(ni) ,
      &                            SPIN(nf) , ENDEC(l) , YGN(l)
-     &                            *CNOR(k9,IEXP) , YEXP(k9,lu) , 
+     &                            *CNOR(k9,IEXP) , YEXP(k9,lu) ,
      &                            100.*(YEXP(k9,lu)-YGN(l)*CNOR(k9,IEXP)
      &                            )/YEXP(k9,lu) , sgm , war
                            SUBCH1 = SUBCH1 + sgm*sgm
@@ -327,7 +327,7 @@ C              Correct for finite recoil
      &                             *CNOR(k9,IEXP)/DYEX(k9,lu)
                               IF ( ITS.EQ.1 .AND. INM.EQ.1 )
      &                             WRITE (15,*) IEXP , rik/CNOR(1,IEXP)
-     &                             , CNOR(1,IEXP) , DYEX(k9,lu) , 
+     &                             , CNOR(1,IEXP) , DYEX(k9,lu) ,
      &                             YEXP(k9,lu)
                               CALL SIXEL(rik,ry,EMH,jk,kk,INM,licz)
                            ENDIF
@@ -359,17 +359,17 @@ C              Correct for finite recoil
                         IF ( ry.GT.UPL(k9,IEXP) .AND. lth(l).EQ.0 )
      &                       wupl = 'UPL!'
                         IF ( IPRM(16).NE.0 .OR. wupl.NE.'    ' ) THEN
-                           IF ( wupl.EQ.'    ' ) WRITE (22,99008) ni , 
-     &                          nf , SPIN(ni) , SPIN(nf) , ENDEC(l) , 
+                           IF ( wupl.EQ.'    ' ) WRITE (22,99008) ni ,
+     &                          nf , SPIN(ni) , SPIN(nf) , ENDEC(l) ,
      &                          YGN(l)*CNOR(k9,IEXP) , wupl
 99008                      FORMAT (6X,1I2,5X,1I2,7X,1F4.1,6X,1F4.1,9X,
      &                             1F6.4,6X,1E9.4,10X,1A4)
                            IF ( wupl.NE.'    ' ) THEN
                               sgm = (ry-UPL(k9,IEXP))/UPL(k9,IEXP)
-                              WRITE (22,99013) ni , nf , SPIN(ni) , 
+                              WRITE (22,99013) ni , nf , SPIN(ni) ,
      &                               SPIN(nf) , ENDEC(l) , YGN(l)
      &                               *CNOR(k9,IEXP) , UPL(k9,IEXP)
-     &                               *CNOR(k9,IEXP)*YGN(IDRN) , 
+     &                               *CNOR(k9,IEXP)*YGN(IDRN) ,
      &                               100.*(1.-YGN(l)/UPL(k9,IEXP)
      &                               /YGN(IDRN)) , sgm , wupl
                               SUBCH1 = SUBCH1 + sgm*sgm
@@ -382,7 +382,7 @@ C              Correct for finite recoil
      &                          /UPL(k9,IEXP)
                         Chilo = Chilo + LOG(ry/UPL(k9,IEXP))**2
                         IF ( IWF.NE.0 ) THEN ! If warning flag is set
-                           WRITE (22,99009) IEXP , ni , nf , 
+                           WRITE (22,99009) IEXP , ni , nf ,
      &                            ry/UPL(k9,IEXP)
 99009                      FORMAT (5X,'WARNING-EXP.',1I2,2X,'TRANS. ',
      &                             1I2,'--',1I2,5X,
@@ -530,7 +530,7 @@ C           If we want a common normalisation, sort it out here
                   ENDIF ! IF ( k.NE.1 )
                ENDIF ! IF ( LNORM(jj).EQ.jj )
             ENDIF ! IF ( INNR.NE.1 )
-             
+
          ENDIF ! IF ( JSKIP(jj).NE.0 )
       ENDDO ! Loop on experiment
 

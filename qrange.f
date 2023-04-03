@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE QRANGE
 C
@@ -19,10 +19,10 @@ C      Ibm    -
 C      Icm    -
 C      Idm    -
 C      Irl    -
- 
+
       SUBROUTINE QRANGE(Icnt,Nlm,Lloc,Ibm,Icm,Idm,Irl)
       IMPLICIT NONE
-      INTEGER*4 Ibm , Icm , Icnt , Idm , Irl , is , k , ke , km , 
+      INTEGER*4 Ibm , Icm , Icnt , Idm , Irl , is , k , ke , km ,
      &          l , ld , Lloc , ls
       INTEGER*4 nlend , Nlm
       DIMENSION Lloc(8) , Irl(8)

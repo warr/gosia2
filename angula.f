@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE ANGULA
 C
@@ -32,17 +32,17 @@ C      Gth    - Theta of gamma
 C      Figl   - Phi of gamma
 C      Ngl    - detector number
 C      Op2    - The part after the OP, for the option we are processing
-      
+
       SUBROUTINE ANGULA(Ygn,Idr,Iful,Fi0,Fi1,Trec,Gth,Figl,Ngl,Op2)
       IMPLICIT NONE
       REAL*8 alab , arg , at , attl , bt , f , Fi0 , fi01 , Fi1 ,
      &       fi11 , Figl , Gth , qv , sm , Trec , trec2 , Ygn , ylmr
-      INTEGER*4 Idr , ifn , Iful , ig , il , inat , inx1 , 
+      INTEGER*4 Idr , ifn , Iful , ig , il , inat , inx1 ,
      &          ipd , is , iu , ixs , j , ji , jj , jm , k
       INTEGER*4 kq , l , lf , lf1 , mind , Ngl , nlv
       REAL*8 dsig, ttx ! For gosia2
       CHARACTER*4 Op2
-      DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) , 
+      DIMENSION f(4) , ylmr(9,9) , at(28) , alab(9,9) , attl(9,9) ,
      &          Ygn(*)
       INCLUDE 'ccoup.inc'
       INCLUDE 'tra.inc'
@@ -55,7 +55,7 @@ C      Op2    - The part after the OP, for the option we are processing
       INCLUDE 'thtar.inc'
       INCLUDE 'tcm.inc' ! For gosia2
       INCLUDE 'cx.inc'
-      
+
       DO l = 1 , Idr ! For each decay
 
          nlv = KSEQ(l,3) ! Level number of l'th decay

@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE NEWCAT
 C
@@ -20,12 +20,12 @@ C      XIR    - [for maps]
 C
 C Formal parameters:
 C     Iexp    - experiment number
-C     Jidim   - 
-      
+C     Jidim   -
+
       SUBROUTINE NEWCAT(Iexp,Jidim)
       IMPLICIT NONE
       REAL*8 a , b , FXIS1 , FXIS2 , q1 , q2 , wg , wl , xp , xx , zt
-      INTEGER*4 Iexp , ist , istop , Jidim , k , kk , n , 
+      INTEGER*4 Iexp , ist , istop , Jidim , k , kk , n ,
      &          ng , nl
       INCLUDE 'map.inc'
       INCLUDE 'cxi.inc'

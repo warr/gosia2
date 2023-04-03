@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE CMLAB
 C
@@ -37,7 +37,7 @@ C      Tetrn  - theta of recoiling nucleus
       SUBROUTINE CMLAB(Ii,Dsig,Tetrn)
       IMPLICIT NONE
       REAL*8 a1 , a2 , ared , d2a , dista , dists , Dsig , emax , epmin
-      REAL*8 r3 , TASIN , tau , taup , tcmdg , tcmrad , Tetrn , tlbrad , 
+      REAL*8 r3 , TASIN , tau , taup , tcmdg , tcmrad , Tetrn , tlbrad ,
      &       tmxdg , z1 , z2 , zcmdg , zcmrad , zlbrad
       INTEGER*4 iflaa , Ii , lexp , lexp0 , lexp1 , n
       INCLUDE 'clcom9.inc'
@@ -145,7 +145,7 @@ C        If IPRM(1) we want extra printout
          EPS(lexp) = 1./SIN(tcmrad/2.)
          TETACM(lexp) = tcmrad
          IF ( IPRM(1).EQ.1 ) THEN
-            IF ( Ii.EQ.0 .AND. IPRM(10).EQ.1 ) WRITE (22,99010) tcmdg , 
+            IF ( Ii.EQ.0 .AND. IPRM(10).EQ.1 ) WRITE (22,99010) tcmdg ,
      &           EPS(lexp)
 99010       FORMAT (5X,'CM SCATTERING ANGLE',1X,1F10.3,1X,'DEG',5X,
      &              'EPSILON',1X,1F10.4)

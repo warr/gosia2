@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE PTICC
 C
@@ -40,7 +40,7 @@ C      Idr    - number of decays
          cone1 = 0.
          IF ( iinx.LE.MULTI(1) ) cone1 = CONV(enet,1)
          IF ( ABS(SPIN(ni)-SPIN(nf)).LT.2. ) conm1 = CONV(enet,4)
-         WRITE (22,99002) ni , nf , SPIN(ni) , SPIN(nf) , enet , cone1 , 
+         WRITE (22,99002) ni , nf , SPIN(ni) , SPIN(nf) , enet , cone1 ,
      &                    cone2 , conm1
 99002    FORMAT (4X,I3,4X,I3,7X,F4.1,6X,F4.1,9X,F6.4,8X,E9.4,6X,E9.4,6X,
      &           E9.4)

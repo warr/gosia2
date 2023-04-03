@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE AMPDER
 C
@@ -34,7 +34,7 @@ C      I57    - switch which is either 5 or 7. This tells LAISUM to access eithe
       SUBROUTINE AMPDER(I57)
       IMPLICIT NONE
       REAL*8 rsg
-      INTEGER*4 i1 , I57 , ibg , iend , iflg , indx , ir , is2 , k , 
+      INTEGER*4 i1 , I57 , ibg , iend , iflg , indx , ir , is2 , k ,
      &          lam , lax , ld , m , mm , n , nhold , nz
       INCLUDE 'az.inc'
       INCLUDE 'comme.inc'

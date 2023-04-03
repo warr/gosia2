@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE GKVAC
 C
@@ -20,7 +20,7 @@ C      XLAMB  - Lambda*       (this is G(3) in GOSIA)
 C
 C Formal parameters:
 C      Il     - level index
- 
+
       SUBROUTINE GKVAC(Il)
       IMPLICIT NONE
       REAL*8 beta , sp , time

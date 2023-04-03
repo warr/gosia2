@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE EFFIX
 C
@@ -38,7 +38,7 @@ C     1  - Jaeri
 C     2  - Fiteff
 C     3  - Leuven
 C     4  - Radware
-      
+
       SUBROUTINE EFFIX(Ipd,En,Effi)
       IMPLICIT NONE
       REAL*8 d , Effi , En , enl , pw , s , t , w , xx , yy
@@ -46,7 +46,7 @@ C     4  - Radware
       DIMENSION xx(101) , yy(101)
       INCLUDE 'efcal.inc'
       INCLUDE 'ccc.inc'
-      
+
       Effi = 1.E-6
       En = En + 1.E-24
       enl = LOG(En)
@@ -102,7 +102,7 @@ C     Branch according to type of calibration
          GOTO 1003 ! Leuven
       ELSEIF ( AKAVKA(9,Ipd).EQ.4. ) THEN
          GOTO 1004 ! Radware
-      ELSEIF ( (AKAVKA(5,Ipd).GT.0. .AND. AKAVKA(5,Ipd).LT.10.) .OR. 
+      ELSEIF ( (AKAVKA(5,Ipd).GT.0. .AND. AKAVKA(5,Ipd).LT.10.) .OR.
      &         (AKAVKA(9,Ipd).EQ.2.) ) THEN
          GOTO 1002 ! Fiteff
       ELSEIF ( (AKAVKA(5,Ipd).LT.10.) .AND. (AKAVKA(9,Ipd).NE.1.) ) THEN
@@ -143,7 +143,7 @@ C     FITEFF efficiency calibration by P.Olbratowski use
 C     PJN@2000
  1002 w = LOG(En/AKAVKA(5,Ipd))
       pw = AKAVKA(2,Ipd)*w
-      IF ( En.LT.AKAVKA(5,Ipd) ) pw = pw + 
+      IF ( En.LT.AKAVKA(5,Ipd) ) pw = pw +
      &     w*w*(AKAVKA(3,Ipd)+w*AKAVKA(4,Ipd))
       Effi = Effi*EXP(pw)*AKAVKA(1,Ipd)
       RETURN

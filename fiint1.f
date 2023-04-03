@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE FIINT1
 C
@@ -17,7 +17,7 @@ C      Ixs    - axial symmetry flag
       REAL*8 Alab , Fi0 , Fi1 , wsp
       INTEGER*4 Ixs , j , m , mm
       DIMENSION Alab(9,9)
-      
+
       IF ( Ixs.NE.0 ) THEN
          DO m = 2 , 9
             mm = m - 1

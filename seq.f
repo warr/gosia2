@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE SEQ
 C
@@ -34,12 +34,12 @@ C We store the order in the KSEQ array of common block LEV.
 C
 C Note that in the code, a multipolarity 1 = E1, 2 = E2 ... 6 = E6, 7 = M1,
 C 8 = M2.
- 
+
       SUBROUTINE SEQ(Idr)
       IMPLICIT NONE
       REAL*8 CONV , ega , egs , emax , F , GF , spinf , spini , twoi
-      INTEGER*4 idecay , Idr , indx , inx , inx1 , ir , is , istr1 , 
-     &          istr2 , j , js , jsave , k , kpa , l , la , la1 , 
+      INTEGER*4 idecay , Idr , indx , inx , inx1 , ir , is , istr1 ,
+     &          istr2 , j , js , jsave , k , kpa , l , la , la1 ,
      &          ld , LEADF
       INTEGER*4 m , m1 , m6 , MEM , mk , mule , mulm , n , n1 , nob
       INCLUDE 'coex2.inc'
@@ -50,7 +50,7 @@ C 8 = M2.
       INCLUDE 'lev.inc'
       INCLUDE 'catlf.inc'
       DATA jsave/0/
-      
+
       m6 = 0
       DO l = 1 , 6
          m6 = m6 + MULTI(l)

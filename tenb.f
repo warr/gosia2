@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE TENB
 C
@@ -26,7 +26,7 @@ C can cope with half-integers.
       SUBROUTINE TENB(Icl,Bten,Lmax)
       IMPLICIT NONE
       REAL*8 Bten , ce , fc , si , WTHREJ , x
-      INTEGER*4 i , Icl , iha , ila , ilg , ind , isi , ite , jm , 
+      INTEGER*4 i , Icl , iha , ila , ilg , ind , isi , ite , jm ,
      &          jmp , k , kk , kp , l , ll , Lmax , lp , m
       INTEGER*4 mm , mp , ms , msp
       DIMENSION Bten(*)
@@ -35,7 +35,7 @@ C can cope with half-integers.
       INCLUDE 'coex2.inc'
       INCLUDE 'cexc0.inc'
       INCLUDE 'az.inc'
-      
+
       iha = (-1)**INT(2.*SPIN(1)+.01)
       IF ( Icl.EQ.1 ) THEN
          ms = 16*(NMAX-1)

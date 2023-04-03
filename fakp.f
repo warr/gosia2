@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE FAKP
 C
@@ -12,7 +12,7 @@ C      IP     - table of primes
 C      IPI    - number of time a number is divisible by each prime in IP
 C      KF     - sum of factors of primes
 C      PILOG  - table of natural logs of primes
- 
+
       SUBROUTINE FAKP
       IMPLICIT NONE
       INTEGER*4 i , k , l
@@ -25,7 +25,7 @@ C     Calculate log of primes
          PILOG(i) = LOG(x)
       ENDDO
 
-C     Initialise KF       
+C     Initialise KF
       DO l = 1 , 26
          KF(1,l) = 0
          KF(2,l) = 0

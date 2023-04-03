@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION RNDM
 C
@@ -11,7 +11,7 @@ C      Se     - seed for random number
 C
 C It is used to generate random matrix elements as a starting position,
 C when OP,RAND is called. The parameter to OP,RAND is the seed here.
- 
+
       REAL*8 FUNCTION RNDM(Se)
       IMPLICIT NONE
       REAL*8 ai , p , r , rxdm , Se , t , u

@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE SNAKE
 C
@@ -32,13 +32,13 @@ C EROOT is set in CMLAB to \sqrt(\epsilon^2 - 1).
 C
 C Note that when we call QE and QM that lmda = 1...6 for E1...6 and 7,8 for
 C M1, M2.
- 
+
       SUBROUTINE SNAKE(Nexp,Zpol)
       IMPLICIT NONE
-      REAL*8 b10 , b12 , b2 , b4 , b6 , b8 , c , c2 , c4 , c6 , 
+      REAL*8 b10 , b12 , b2 , b4 , b6 , b8 , c , c2 , c4 , c6 ,
      &       chi , cq , d , d2 , d3 , d4 , d5 , d6
       REAL*8 ert , pol , shi , Zpol
-      INTEGER*4 ibm , icm , icnt , idm , irl , j , k , lloc , lmd , 
+      INTEGER*4 ibm , icm , icnt , idm , irl , j , k , lloc , lmd ,
      &          lmda , mimx , Nexp , nind , nlm
       DIMENSION lloc(8) , cq(7) , irl(8)
       INCLUDE 'kin.inc'
@@ -46,7 +46,7 @@ C M1, M2.
       INCLUDE 'mgn.inc'
       INCLUDE 'allc.inc'
       INCLUDE 'hiper.inc'
-      
+
       icnt = 0
  100  icnt = icnt + 1
 

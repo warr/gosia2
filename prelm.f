@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE PRELM
 C
@@ -23,7 +23,7 @@ C      SPIN   - spin of level
 C
 C Formal parameters:
 C      Iop    - print flag (controls what is written to output).
- 
+
       SUBROUTINE PRELM(Iop)
       IMPLICIT NONE
       REAL*8 b , pv , ste
@@ -63,15 +63,15 @@ C      Iop    - print flag (controls what is written to output).
 
                      IF ( Iop.EQ.2 ) THEN ! Iop is 2
                         IF ( IVAR(inx).EQ.0 ) THEN ! Fixed
-                           WRITE (22,99006) inx , LEAD(1,inx) , 
+                           WRITE (22,99006) inx , LEAD(1,inx) ,
      &                            LEAD(2,inx) , ELM(inx)
                         ELSEIF ( IVAR(inx).GT.1000 ) THEN ! Correlation
-                           WRITE (22,99007) inx , LEAD(1,inx) , 
-     &                            LEAD(2,inx) , ELM(inx) , 
+                           WRITE (22,99007) inx , LEAD(1,inx) ,
+     &                            LEAD(2,inx) , ELM(inx) ,
      &                            (IVAR(inx)-1000)
                         ELSE ! Limit
-                           WRITE (22,99009) inx , LEAD(1,inx) , 
-     &                            LEAD(2,inx) , ELM(inx) , ELML(inx) , 
+                           WRITE (22,99009) inx , LEAD(1,inx) ,
+     &                            LEAD(2,inx) , ELM(inx) , ELML(inx) ,
      &                            ELMU(inx)
                         ENDIF
 
@@ -86,26 +86,26 @@ C      Iop    - print flag (controls what is written to output).
                         b = ELM(inx)*ELM(inx)/(2.*SPIN(isp)+1.)
                         IF ( LEAD(1,inx).EQ.LEAD(2,inx) ) b = 9999999.
                         WRITE (22,99009) inx , LEAD(1,inx) , LEAD(2,inx)
-     &                         , ELM(inx) , 100.*(ELM(inx)-ste)/ste , 
+     &                         , ELM(inx) , 100.*(ELM(inx)-ste)/ste ,
      &                         b , wrn
 
 C                    Added for gosia2
                      ELSEIF ( Iop.EQ.4 ) THEN ! Iop is 4
                         IF ( IVAR(inx).EQ.0 ) THEN ! Fixed
-                           WRITE (22,99006) inx , LEAD(1,inx) , 
+                           WRITE (22,99006) inx , LEAD(1,inx) ,
      &                            LEAD(2,inx) , ELM(inx)
                         ELSEIF ( IVAR(inx).GT.1000 ) THEN ! Correlation
-                           WRITE (22,99007) inx , LEAD(1,inx) , 
-     &                            LEAD(2,inx) , ELM(inx) , 
+                           WRITE (22,99007) inx , LEAD(1,inx) ,
+     &                            LEAD(2,inx) , ELM(inx) ,
      &                            (IVAR(inx)-1000)
                         ELSE ! Limit
                            IF ( JZB.EQ.25 ) THEN
-                             WRITE (22,99009) inx , LEAD(1,inx) , 
+                             WRITE (22,99009) inx , LEAD(1,inx) ,
      &                           LEAD(2,inx) , ELM25(inx) , ELML(inx) ,
      &                           ELMU(inx)
                            ELSEIF ( JZB.EQ.26 ) THEN
-                             WRITE (22,99009) inx , LEAD(1,inx) , 
-     &                           LEAD(2,inx) , ELM26(inx) , ELML(inx) , 
+                             WRITE (22,99009) inx , LEAD(1,inx) ,
+     &                           LEAD(2,inx) , ELM26(inx) , ELML(inx) ,
      &                           ELMU(inx)
                            ENDIF
                        ENDIF

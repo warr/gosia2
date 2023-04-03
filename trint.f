@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE TRINT
 C
@@ -38,7 +38,7 @@ C Handbook of Mathematical Functions with Formulas, Graphs and Mathematical
 C Tables, National Bureau of Standards, 8th Ed. P233 Eqs. 5.2.38 and 5.2.39 to
 C calculate the auxillary functions f and g and then use 5.2.8 and 5.2.9 to
 C obtain the values of pi/2 - Si and -Ci from f and g.
-      
+
       SUBROUTINE TRINT(Arg,Si,Ci)
       IMPLICIT NONE
       REAL*8 a , Arg , c , Ci , f , g , POL4 , s , Si
@@ -62,11 +62,11 @@ C     Otherwise use the expansion in terms of sine and cosine
       s = SIN(Arg)
       c = COS(Arg)
 
-C     Here we use an approximation. If Arg is quite large, a is very large 
-C     and the four polynomials are all huge. Moreover, the four polynomials 
-C     are almost identical, so the ratios are unity. So in this case, 
+C     Here we use an approximation. If Arg is quite large, a is very large
+C     and the four polynomials are all huge. Moreover, the four polynomials
+C     are almost identical, so the ratios are unity. So in this case,
 C     f = 1./Arg and g=1./a is a good approximation.
-      
+
       f = 1.
       g = 1.
 
@@ -83,11 +83,11 @@ C     from that reference:
          g = g/POL4(1.D0,48.196927D0,482.485984D0,1114.978885D0,
      &       449.690326D0,a)
       ENDIF
-      
+
       f = f/Arg
       g = g/a
 
-C     From Abramowitz and Stegun 5.2.8 and 5.2.9:      
+C     From Abramowitz and Stegun 5.2.8 and 5.2.9:
       Si = f*c + g*s ! This is actually pi/2 - Si compared to Abramowitz and Stegun
       Ci = g*c - f*s ! This is actually -Ci compared to Abramowitz and Stegun
 99999 END

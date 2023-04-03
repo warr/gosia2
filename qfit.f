@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE QFIT
 C
@@ -18,17 +18,17 @@ C      Nl     - number of types of absorber (7)
 C      Ind    - type of absorber
 C
 C Note the absorbers are: Al, C, Fe, Cu, Ag/Cd/Sn, Ta and Pb, respectively.
-      
+
       SUBROUTINE QFIT(Qui,Tau1,Tau2,Eng,Xl1,Cf,Nl,Ind)
       IMPLICIT NONE
-      REAL*8 ca , cb , Cf , cm , cn , co , d , d1 , d2 , Eng , Qui , 
+      REAL*8 ca , cb , Cf , cm , cn , co , d , d1 , d2 , Eng , Qui ,
      &       Tau1 , Tau2 , Xl1
       INTEGER*4 Ind , ind1 , k , Nl
-      DIMENSION Tau1(10) , Eng(10) , Tau2(10,7) , Xl1(7) , Qui(8,10) , 
+      DIMENSION Tau1(10) , Eng(10) , Tau2(10,7) , Xl1(7) , Qui(8,10) ,
      &          Cf(8,2)
 
       CALL GAMATT(Qui,Tau1,Tau2,Xl1,Nl)
-      
+
       ind1 = 5
       IF ( Ind.EQ.4 ) ind1 = 6
       IF ( Ind.EQ.5 ) ind1 = 7

@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE NEWLV
 C
@@ -13,7 +13,7 @@ C Uses global variables:
 C      EXPO   - adiabatic exponential
 C      IFLG   - flag to determine whether to calculate exponential (so we don't calculate twice)
 C      ISG    - index for sigma
-C      ISG1   - 
+C      ISG1   -
 C      ISSTAR - index of last substate for that level
 C      ISSTO  - index of first substate for that level
 C      KDIV   - index for division
@@ -31,7 +31,7 @@ C      La     - multipolarity
 C
 C Note that the exponential is calculated by EXPON. This file does the
 C storage part.
-      
+
       SUBROUTINE NEWLV(N,Ld,La)
       IMPLICIT NONE
       INTEGER*4 i2 , indx , La , Ld , LEADF , m , MEM , N

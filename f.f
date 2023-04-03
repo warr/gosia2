@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C FUNCTION F
 C
@@ -37,7 +37,7 @@ C the values to calculate, so that they can handle half-integers correctly.
       IMPLICIT NONE
       INTEGER*4 ix , jfz , jiz , K , kz , l , L1 , l1z , L2 , l2z
       REAL*8 phase , Sjf , Sji , WSIXJ , WTHREJ
-      
+
       F = 0.
       IF ( (L1*L2).EQ.0 ) RETURN
       ix = INT(Sji+Sjf+.0001)

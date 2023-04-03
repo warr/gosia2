@@ -1,4 +1,4 @@
- 
+
 C----------------------------------------------------------------------
 C SUBROUTINE YLM
 C
@@ -29,14 +29,14 @@ C -0.3530900028 = -3 * sqrt(140) / (32 pi)
 C 0.0943672726  = 3 * sqrt(10) / (32 pi)
 C -0.1334554768 = -3 * sqrt(20) / (32 pi)
 C etc.
-      
+
       SUBROUTINE YLM(Theta,Ylmr)
       IMPLICIT NONE
       REAL*8 ct , ctsq , st , Theta , Ylmr
       INTEGER*4 i , j , l , lf , m
       INCLUDE 'kin.inc'
       DIMENSION Ylmr(9,9) , st(7)
-      
+
       ct = COS(Theta)
       ctsq = ct*ct
       IF ( IAXS(IEXP).EQ.0 ) THEN
