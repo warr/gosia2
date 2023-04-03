@@ -2547,7 +2547,7 @@ C     Handle OP,ERRO
                      IF ( IRAWEX(IEXP).NE.0 ) THEN
                         IF ( op2.EQ.'POIN' .AND. IPRM(20).EQ.1 )
      &                       WRITE (23,99037) IEXP , jgl , EP(IEXP) ,
-     &                       TLBDG(IEXP)
+     &                       ABS(TLBDG(IEXP))
 99037                   FORMAT (1x//50x,'CALCULATED YIELDS'//5x,
      &                          'EXPERIMENT ',1I2,2x,'DETECTOR ',1I2/5x,
      &                          'ENERGY ',1F10.3,1x,'MEV',2x,'THETA ',
