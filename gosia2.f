@@ -382,7 +382,7 @@ C---- gosia2 changes end
 
 C     Initialize normalization to 1. and weighting to 0.5
       WNOR = 0.5D0
-      DO i = 1 , LP3 ! LP3 = 100 (maximum number of levels)
+      DO i = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
          DO j = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
             CNOR(j,i) = 1.
             CNOR1(j,i) = 1. ! Added for gosia2
@@ -722,8 +722,8 @@ C           Treat OP,ERRO (calculate errors)
                READ (JZB,*) idf , ms , mend , irep , ifc , remax
 C---- gosia2 changes start
                MCFIX = 0
-               DO mmmm = 1 , 32
-                  DO kkkk = 1 , 50
+               DO mmmm = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
+                  DO kkkk = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
                      READ (13,*) CNOR1(mmmm,kkkk)
                   ENDDO
                ENDDO
@@ -3109,7 +3109,7 @@ C---- gosia2 changes start
 
 C     Set CNOR1 to the weighted average of CNOR1 and CNOR2
       DO kh1 = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
-         DO kh2 = 1 , LP3 ! LP3 = 75 (maximum number of levels)
+         DO kh2 = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
             IF ( JZB.EQ.25 ) THEN ! If it is the second nucleus
                CNOR1(kh1,kh2) = CNOR(kh1,kh2)
             ELSE
