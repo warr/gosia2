@@ -381,8 +381,8 @@ C     Use input unit 25 for target and 26 for projectile
 C---- gosia2 changes end
 
 C     Initialize normalization to 1. and weighting to 0.5
-      WNOR = 0.5D0
       DO i = 1 , LP1 ! LP1 = 50 (maximum number of experiments)
+         WNOR(i) = 0.5D0
          DO j = 1 , LP6 ! LP6 = 32 (maximum number of gamma detectors)
             CNOR(j,i) = 1.
             CNOR1(j,i) = 1. ! Added for gosia2
@@ -3114,8 +3114,8 @@ C     Set CNOR1 to the weighted average of CNOR1 and CNOR2
                CNOR1(kh1,kh2) = CNOR(kh1,kh2)
             ELSE
                CNOR2(kh1,kh2) = CNOR(kh1,kh2)
-               CNOR1(kh1,kh2) = CNOR1(kh1,kh2)*(1.0-WNOR)+
-     &           CNOR2(kh1,kh2)*WNOR
+               CNOR1(kh1,kh2) = CNOR1(kh1,kh2)*(1.0-WNOR(kh2))+
+     &           CNOR2(kh1,kh2)*WNOR(kh2)
             ENDIF
          ENDDO
       ENDDO
