@@ -7,9 +7,7 @@ Release: %{release}%{dist}
 License: public domain
 Vendor: D. cline, T. Czosnyka, A.B. Hayes, P. Napiorkowski, N. Warr, C.Y. Wu
 Group: Applications/Analysis
-Source: %{name}.tar.gz
-Prefix:/usr
-BuildRoot: /tmp/package_%{name}-%{version}.%{release}
+Source: file://%{name}.tar.gz
 BuildRequires: gcc-gfortran
 
 %description
@@ -17,7 +15,7 @@ gosia2 is a code for calculating cross-sections for Coulomb excitation
 experiments.
 
 %prep
-%setup
+%setup -q
 
 %build
 make %{?_smp_mflags}

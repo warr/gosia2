@@ -2117,6 +2117,12 @@ C     Treat suboption CONT (control)
                ideff(ipo2) = ijx
             ENDDO
          ENDIF
+         IF ( op1.EQ.'NRW,' ) THEN
+            DO jjx = 1 , ipo1
+               READ (JZB,*) ipo2 , val
+               WNOR(ipo2) = val
+            ENDDO
+         ENDIF
          IF ( op1.EQ.'FMI,' ) ifm = 1
          IF ( op1.EQ.'TEN,' ) itno = 1
          IF ( op1.EQ.'NCM,' ) NCM = ipo1
