@@ -67,7 +67,7 @@ C     Zero ARM(k,4) and ARM(k,6) for each substate used
  20         CALL NEWLV(nhold,ld,lam)
             IF ( ld.EQ.0 ) THEN ! If there are no decays
  30            nhold = nhold + 1
-               if ( nhold .eq. NMAX ) GOTO 100
+               if ( nhold .GT. NMAX ) GOTO 100
                IF ( NSTART(nhold).NE.0 ) GOTO 20
                GOTO 30
             ELSE
