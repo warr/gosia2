@@ -21,6 +21,7 @@ C      Myimult - Multipolarity (1=E1,2=E2,3=E3,6=M1,7=M2)
       REAL*4 binding_energy(500) , energy(37,500) , cc(37,500,10)
       CHARACTER*8 file(37) , name(37)
       CHARACTER*4 element
+      SAVE energy , cc
 
 C     Initialise
       CCLKUP = 0.0D0

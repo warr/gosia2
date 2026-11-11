@@ -20,6 +20,7 @@
   Napiorkowski's spline code and SPL, option in CONT
 - Restructured a repeated IF with the same condition to use IF/THEN
 - Add E0 parameter to Leuven efficiency
+- Use SAVE for very large local arrays, so they're not on stack
 
 20080418
 - Change default printing options to match gosia1
