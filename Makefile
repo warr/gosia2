@@ -10,7 +10,6 @@ FC=gfortran
 FFLAGS += -g
 FFLAGS += -Wall
 FFLAGS += -fbounds-check
-#FFLAGS += -fmax-stack-var-size=18000000 # Big enough for "a" array in select.f
 FFLAGS += -fPIC
 
 # Turn on optimisation

@@ -18,6 +18,7 @@
 - Correct coefficient for multipole mixing ratio
 - Correct finite-distance recoil (order of magnitude was wrong)
 - Fix bug in NEWCNV in minimisation
+- Use SAVE for very large local arrays, so they're not on stack
 
 20080630 (synchronized with gosia1)
 - Reordering of all variable declarations so variables in common blocks are
